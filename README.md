@@ -73,6 +73,12 @@ docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_NEUTRAL_EXTRACTION_RESULT_20260523.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_GAMERA_PHYSICS_REVIEW_20260523.md
 ```
 
+For the standing remote-update rule, see:
+
+```text
+UPDATE_WORKFLOW.md
+```
+
 Current sender implementation:
 
 ```text
