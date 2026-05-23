@@ -1,0 +1,61 @@
+digraph MAGE_WACCMX_REAL_HANDSHAKE {
+  graph [
+    rankdir=LR,
+    splines=true,
+    pad=0.25,
+    nodesep=0.5,
+    ranksep=0.8,
+    bgcolor="#f8fafc",
+    fontname="Noto Sans CJK SC"
+  ];
+
+  node [
+    shape=box,
+    style="rounded,filled",
+    fontname="Noto Sans CJK SC",
+    fontsize=11,
+    color="#334155",
+    fillcolor="#ffffff"
+  ];
+
+  edge [
+    fontname="Noto Sans CJK SC",
+    fontsize=10,
+    color="#475569",
+    arrowsize=0.8
+  ];
+
+  mage [label="MAGE / VOLTRON / REMIX\n真实求解器", fillcolor="#e0f2fe", color="#0369a1"];
+  forward_pkg [label="前向 HDF5 包\nwaccmx_voltron_forward_package.h5", fillcolor="#ecfccb", color="#4d7c0f"];
+  bridge_fwd [label="桥接脚本\nkaiju_forward_to_cesm_import.py", fillcolor="#fef3c7", color="#b45309"];
+  rank_import [label="rank 极光输入文件\nmage_waccmx_import_rank*.txt\ncid lat lon avg_eng num_flux", fillcolor="#fff7ed", color="#c2410c"];
+  epot_file [label="全局电势文件\nmage_waccmx_epot_global.txt\nflattened epot", fillcolor="#fff7ed", color="#c2410c"];
+  cesm [label="CESM / WACCM-X\n真实 cesm.exe", fillcolor="#ede9fe", color="#6d28d9"];
+  aurora_use [label="WACCM-X 内部消费\nAVG_ENG -> prescr_kev\nAVG_ENG * NUM_FLUX -> prescr_efx", fillcolor="#f5f3ff", color="#7c3aed"];
+  pot_use [label="WACCM-X 内部消费\nexternal POT -> d_pie_set_external_epot(...)", fillcolor="#f5f3ff", color="#7c3aed"];
+  fb_rank [label="反馈 rank 文件\nmage_waccmx_feedback_rank*.txt\ncid lat lon sigmap sigmah", fillcolor="#fee2e2", color="#b91c1c"];
+  bridge_back [label="桥接脚本\ncesm_feedback_to_kaiju_feedback.py", fillcolor="#fef3c7", color="#b45309"];
+  fb_pkg [label="反馈 HDF5 包\nwaccmx_cesm_feedback_package.h5", fillcolor="#fee2e2", color="#b91c1c"];
+  remix_back [label="MAGE 反馈摄入\nSIGMAP/SIGMAH -> APEX mixInput\n-> REMIX conductance", fillcolor="#dbeafe", color="#1d4ed8"];
+  neutral_zero [label="feedback_geo_*/neutral_rhs\n当前被桥接脚本写成 0 场", fillcolor="#f1f5f9", color="#64748b"];
+  neutral_note [label="原因\n1. CESM 当前只真实导出 sigmap/sigmah\n2. bridge 用 zeros_like(theta_geo)\n3. 主线 kaiju 未把它作为正式回传闭环", fillcolor="#f8fafc", color="#64748b"];
+
+  mage -> forward_pkg [label="导出\nGEO: AVG_ENG, NUM_FLUX\nAPEX: POT"];
+  forward_pkg -> bridge_fwd [label="读取前向包"];
+  bridge_fwd -> rank_import [label="采样 GEO 腿\nAVG_ENG, NUM_FLUX"];
+  bridge_fwd -> epot_file [label="采样 APEX 腿\nPOT"];
+  rank_import -> cesm [label="极光 forcing"];
+  epot_file -> cesm [label="外部高纬电势"];
+  cesm -> aurora_use [label="消费"];
+  cesm -> pot_use [label="消费"];
+
+  cesm -> fb_rank [label="真实回传\nSIGMAP, SIGMAH"];
+  fb_rank -> bridge_back [label="读取 rank 文件"];
+  bridge_back -> fb_pkg [label="重映射回 kaiju 反馈包"];
+  fb_pkg -> remix_back [label="真实生效\nfeedback_apex_*/sigmap,sigmah"];
+  remix_back -> mage [label="第二轮 REMIX 重解"];
+
+  bridge_back -> neutral_zero [style=dashed, color="#94a3b8", fontcolor="#64748b", label="同时写入\nfeedback_geo_*/neutral_rhs"];
+  neutral_zero -> remix_back [style=dashed, color="#94a3b8", fontcolor="#64748b", label="当前无真实 CESM 物理内容"];
+  neutral_zero -> neutral_note [style=dashed, arrowhead=none, color="#94a3b8"];
+}
