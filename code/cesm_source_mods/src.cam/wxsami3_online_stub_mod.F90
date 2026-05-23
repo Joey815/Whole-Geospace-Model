@@ -700,6 +700,9 @@ contains
       write(118,'(A)') '  "density_conversion": "q*mbarv/species_mw*pmid/(kB*T)*1e-6 -> cm^-3",'
       write(118,'(A)') '  "vertical_wind_policy": "W not sent; omega diagnosed only",'
       write(118,'(A,A,A)') '  "n2_negative_mode": "', trim(n2_negative_mode), '",'
+      write(118,'(A)') '  "source_flag_contract": ["WACCMX_VALID", ' // &
+                         '"SAMI3_NATIVE_ABOVE_TOP", "SAMI3_NATIVE_N2_INVALID", ' // &
+                         '"SAMI3_NATIVE_OTHER_INVALID", "SAMI3_NATIVE_HE", "SAMI3_NATIVE_W"],'
       write(118,'(A)') '  "payload_species_order": ["H","O","NO","O2","He","N2","N"],'
       write(118,'(A)') '  "fallback_policy": "above-live-top samples invalid; He payload=-1 native fallback; W payload=0",'
       write(118,'(A)') '  "species": ['
@@ -730,6 +733,16 @@ contains
       real(r8), intent(in) :: n2_min, n2_max, payload_sums(10)
 
       integer :: ios, ispc
+      integer :: waccmx_valid_count
+      integer :: n2_invalid_count
+      integer :: other_invalid_count
+
+      waccmx_valid_count = max(0, samples - invalid)
+      n2_invalid_count = 0
+      if (trim(n2_negative_mode) == 'invalid' .or. trim(n2_negative_mode) == 'INVALID') then
+         n2_invalid_count = n2_negative
+      endif
+      other_invalid_count = max(0, invalid - above_top - n2_invalid_count)
 
       open(unit=118, file=trim(meta_file), status='replace', action='write', iostat=ios)
       if (ios /= 0) then
@@ -803,6 +816,14 @@ contains
       write(118,'(A,I0,A)') '    "n2_residual_negative": ', n2_negative, ','
       write(118,'(A,ES24.16,A)') '    "n2_residual_min": ', n2_min, ','
       write(118,'(A,ES24.16)') '    "n2_residual_max": ', n2_max
+      write(118,'(A)') '  },'
+      write(118,'(A)') '  "source_flags": {'
+      write(118,'(A,I0,A)') '    "WACCMX_VALID": ', waccmx_valid_count, ','
+      write(118,'(A,I0,A)') '    "SAMI3_NATIVE_ABOVE_TOP": ', above_top, ','
+      write(118,'(A,I0,A)') '    "SAMI3_NATIVE_N2_INVALID": ', n2_invalid_count, ','
+      write(118,'(A,I0,A)') '    "SAMI3_NATIVE_OTHER_INVALID": ', other_invalid_count, ','
+      write(118,'(A)') '    "SAMI3_NATIVE_HE": "policy: He payload value -1",'
+      write(118,'(A)') '    "SAMI3_NATIVE_W": "policy: W payload value 0"'
       write(118,'(A)') '  },'
       write(118,'(A)') '  "sender_checksum": {'
       write(118,'(A)') '    "scope": "sum over all runtime-sent worker payload arrays",'

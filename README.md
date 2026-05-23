@@ -28,6 +28,7 @@ file-mode fallback    = 7641579, COMPLETED, exit 0:0
 receiver-stub 3-pkt   = 7641623, COMPLETED, exit 0:0
 N2-QC default smoke   = 7641625, COMPLETED, exit 0:0
 N2-QC invalid smoke   = 7641644, COMPLETED, exit 0:0
+source-flag metadata  = 7641645, COMPLETED, exit 0:0
 ```
 
 Latest receiver checks:
@@ -39,6 +40,7 @@ file fallback compare  = max_rel=3.26946e-13
 stub packet count       = ranks 1..32 received 3 packets; ranks 0..32 got done
 N2-QC default mode      = WXSAMI3_N2_NEGATIVE_MODE=floor, build and 3-pkt smoke ok
 N2-QC invalid delta     = +177092 invalid samples vs floor, 3-pkt transport ok
+source-flag metadata    = WACCMX_VALID=4211362, ABOVE_TOP=1642906, N2_INVALID=177092
 ```
 
 The latest source-state phase diagnostic compared live packet 2 against
@@ -88,6 +90,7 @@ docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_NEUTRAL_EXTRACTION_RESULT_20260523.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_SOURCE_STATE_PHASE_VALIDATION_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_N2_QC_CONTROL_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_N2_INVALID_MODE_RESULT_20260524.md
+docs/MAGE1.25_notes/WACCMX_SAMI3_SOURCE_FLAGS_METADATA_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_GAMERA_PHYSICS_REVIEW_20260523.md
 ```
 
@@ -127,6 +130,7 @@ Latest N2 residual QC launcher:
 ```text
 slurm/run_waccmx_cam_sami3_live_payload_f19_receiver_stub_3pkt_n2qc_20260524.sbatch
 slurm/run_waccmx_cam_sami3_live_payload_f19_receiver_stub_3pkt_n2qc_invalid_20260524.sbatch
+slurm/run_waccmx_cam_sami3_live_payload_f19_receiver_stub_3pkt_source_flags_20260524.sbatch
 ```
 
 ## Known Physical Blockers
@@ -137,7 +141,8 @@ these are handled:
 ```text
 strict same-call-site offline-vs-live source-state validation
 explicit WACCM-X-top SAMI3-native fallback or blending policy
-N2 residual and He native/MSIS fallback policy hardening
+receiver-side source/fallback flag diagnostics
+He native/MSIS fallback policy hardening
 W-off / vertical-wind policy validation
 REMIX -> SAMI3 potential/E-field forcing
 SAMI3 -> RAIJU/GAMERA flux-tube weighting and L/MLT mapping
@@ -158,14 +163,11 @@ directories.
 
 ## GitHub Upload Note
 
-The local machine currently has `git`, but `gh` was not available when this
-snapshot was created.  To publish:
+This collaboration snapshot is pushed to:
 
-```bash
-cd /home/jiaoy_group/jiaoy/data/MAGE1.25/waccmx-sami3-collab-20260524
-git remote add origin git@github.com:OWNER/REPO.git
-git push -u origin main
+```text
+https://github.com/Joey815/Whole-Geospace-Model.git
 ```
 
-Use a private repository first unless the upstream model-source and data-license
+Keep the repository private unless the upstream model-source and data-license
 constraints have been reviewed.

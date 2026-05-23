@@ -1,0 +1,23 @@
+{
+  "format": "wxsami3-live-phys-state-snapshot",
+  "version": 1,
+  "magic": 20260523,
+  "endianness": "little_endian",
+  "integer_kind": "Fortran default integer",
+  "real_kind": "SHR_KIND_R8",
+  "transport_status": "diagnostic snapshot plus runtime live payload sent",
+  "record_order": ["header_i4_12", "dtime_phys_r8", "species_indices_i4", "cid_i4", "lchnk_i4", "col_i4", "lat_deg_r8", "lon_deg_r8", "state_ps_pa_r8", "profile_r8", "qprof_r8"],
+  "profile_order": ["T_K", "U_m_s", "V_m_s", "OMEGA_Pa_s", "PMID_Pa", "ZM_m", "MBARV_kg_mol"],
+  "state_ps_note": "raw physics_state%ps snapshot; SAMI3 payload uses profile PMID_Pa",
+  "q_unit": "mass_mixing_ratio",
+  "density_conversion": "q*mbarv/species_mw*pmid/(kB*T)*1e-6 -> cm^-3",
+  "species": [
+    {"name":"O","mw":  1.6000E+01},
+    {"name":"O2","mw":  3.2000E+01},
+    {"name":"H","mw":  1.0000E+00},
+    {"name":"N","mw":  1.4000E+01},
+    {"name":"NO","mw":  3.0000E+01},
+    {"name":"N2","mw":  2.8000E+01},
+    {"name":"He","mw":  4.0000E+00}
+  ]
+}
