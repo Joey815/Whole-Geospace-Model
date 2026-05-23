@@ -1,0 +1,352 @@
+RUN_DIR=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_receiver_stub_3pkt_n2qc_invalid_20260524_0000
+CASE=/home/jiaoy_group/jiaoy/data/CESM/cases/mage_qpx2000_f19_sami3_live_neutral_20260523
+CESM_EXE=/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/bld/cesm.exe
+CESM_RUNDIR=/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run
+PAYLOAD_MODE=live
+LIVE_DUMP_MAX=3
+MAX_PACKETS=3
+SEND_EVERY_NSTEPS=1
+N2_NEGATIVE_MODE=invalid
+RUNCONFIG_STOP_N_PATCHED_TO=600
+RECEIVER=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/bin/wxsami3_payload_receiver_stub
+PORT=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_receiver_stub_3pkt_n2qc_invalid_20260524_0000/waccmx_sami3_online_port.txt
+START=Sun May 24 02:41:07 CST 2026
+HOST=qhcn078
+PRTE=/apps/support/intel_spr_rocky8.9/openmpi/5.0.3/gcc8.5.0/bin/prte
+PRUN=/apps/support/intel_spr_rocky8.9/openmpi/5.0.3/gcc8.5.0/bin/prun
+--- WACCM-X sender markers
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 online sender enabled
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 port file: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_receiver_stub_3pkt_n2qc_invalid_20260524_0000/waccmx_sami3_online_port.txt
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 payload mode: live
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 payload prefix: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_payload_esmf_msis_top_20231013_0000/waccmx_neutral_rank
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live map file: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/wxsami3_runtime_map_f19_20260523.bin
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 SAMI3 workers:           32
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 send cadence nsteps:            1
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 max packets (-1 unlimited):            3
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 N2 negative residual mode: invalid
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live phys_state diagnostics:  T
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 metadata file: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_receiver_stub_3pkt_n2qc_invalid_20260524_0000/wxsami3_live_meta.json
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live state dump enabled:  T
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live state dump prefix: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_receiver_stub_3pkt_n2qc_invalid_20260524_0000/live_dump/wxsami3_physstate_
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live state dump max packets:            3
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live neutral constituent registry begin
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live species,index,name,type,mw,sent=O          57 Odry   15.999400000000000      T
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live species,index,name,type,mw,sent=O2          58 O2dry   31.998799999999999      T
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live species,index,name,type,mw,sent=H          37 Hdry   1.0074000000000001      T
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live species,index,name,type,mw,sent=N          51 Ndry   14.006740000000001      T
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live species,index,name,type,mw,sent=NO          54 NOdry   30.006139999999998      T
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live species,index,name,type,mw,sent=N2          -1 MISSINGnone   28.000000000000000      F
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live species,index,name,type,mw,sent=He          -1 MISSINGnone   4.0000000000000000      F
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live neutral constituent registry end
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live neutral diagnostic packet nstep,dtime=           0   300.00000000000000
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live units: lat/lon=deg T=K U/V=m/s omega=Pa/s pmid=Pa zm/zi=m q=mass_mixing_ratio
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live density conversion: q*mbarv/species_mw*pmid/(kB*T)*1e-6 -> cm^-3
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live physics columns global=       13824
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live coord,min,max,bad,units=LAT  -90.000000000000000        90.000000000000000                0 deg
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live coord,min,max,bad,units=LON   0.0000000000000000        357.50000000000000                0 deg
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live column id min,max,bad=           1       13824           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live field,min,max,bad,units=T   113.19272490765026        1522.7628810979916                0 K
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live field,min,max,bad,units=U  -925.72421615946450        769.73441976740355                0 m/s
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live field,min,max,bad,units=V  -845.80624605741446        736.36509297061230                0 m/s
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live field,min,max,bad,units=OMEGA  -8.2581548028160903        8.0479049504611275                0 Pa/s
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live field,min,max,bad,units=PMID   4.0551408859926630E-008   107321.38902670480                0 Pa
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live field,min,max,bad,units=ZM   48.562666904990088        720507.75803997926                0 m
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live q species,index,min,max,bad=O          57   2.2052113116343699E-025  0.99993998744089385                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live ndens_cm3 species,min,max,bad=O   1.2084661643773829E-005   1245416442119.8696                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live q species,index,min,max,bad=O2          58   9.2292956504115868E-006  0.23732970847615611                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live ndens_cm3 species,min,max,bad=O2   12.656349992086984        7.2238760756717558E+018           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live q species,index,min,max,bad=H          37   2.9132490819482548E-028   5.0683000424878695E-003           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live ndens_cm3 species,min,max,bad=H   2.2485930900058927E-007   687846935.90896702                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live q species,index,min,max,bad=N          51   1.8852608042404040E-023   6.0584943671142005E-002           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live ndens_cm3 species,min,max,bad=N   9.5076107499545977E-004   57550723.732449487                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live q species,index,min,max,bad=NO          54   9.0114276470750297E-019   1.4346353422642934E-003           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live ndens_cm3 species,min,max,bad=NO  0.29699954540102086        2128027266445.5793                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live N2 residual major min,max,negative,bad=  -5.5064293290950861E-002  0.81318365337398735            89098           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live state dump packet written:            0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 connecting to SAMI3 online port
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 connected to SAMI3
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live runtime map loaded: npoints,n_s,nsource=     3618816    14475264       13824
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live runtime packet QC samples,invalid,above_top=     6031360     1819595     1641376
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live runtime N2 residual used,negative,min,max=     4389984      178219  -5.3314608006139914E-002  0.81297869253786992
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 sent live neutral packet: nstep,packet_hour,count=           0   0.00000000               0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live neutral diagnostic packet nstep,dtime=           1   300.00000000000000
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live units: lat/lon=deg T=K U/V=m/s omega=Pa/s pmid=Pa zm/zi=m q=mass_mixing_ratio
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live density conversion: q*mbarv/species_mw*pmid/(kB*T)*1e-6 -> cm^-3
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live physics columns global=       13824
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live coord,min,max,bad,units=LAT  -90.000000000000000        90.000000000000000                0 deg
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live coord,min,max,bad,units=LON   0.0000000000000000        357.50000000000000                0 deg
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live column id min,max,bad=           1       13824           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live field,min,max,bad,units=T   113.11677799602712        1525.6802633198183                0 K
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live field,min,max,bad,units=U  -908.28691639960289        746.22806845691525                0 m/s
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live field,min,max,bad,units=V  -848.89836236593237        724.39552927899376                0 m/s
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live field,min,max,bad,units=OMEGA  -12.577897717221402        13.052521688445184                0 Pa/s
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live field,min,max,bad,units=PMID   4.0551408859926630E-008   107228.60855014052                0 Pa
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live field,min,max,bad,units=ZM   48.739033121328895        722021.93506058573                0 m
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live q species,index,min,max,bad=O          57   2.3076025385839838E-025  0.99993999042257775                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live ndens_cm3 species,min,max,bad=O   1.2126526343566732E-005   1242006541843.9797                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live q species,index,min,max,bad=O2          58   9.1929348792157059E-006  0.23732727791004909                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live ndens_cm3 species,min,max,bad=O2   12.594414672457237        7.1525143456713390E+018           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live q species,index,min,max,bad=H          37   2.9749394233302019E-028   4.9777935984533592E-003           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live ndens_cm3 species,min,max,bad=H   2.0436029759100957E-007   687062798.38358688                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live q species,index,min,max,bad=N          51   1.8931286575806156E-023   6.0367837412881126E-002           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live ndens_cm3 species,min,max,bad=N   9.5182313500688065E-004   57185542.659580961                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live q species,index,min,max,bad=NO          54   9.0429227465238189E-019   1.3771497728481319E-003           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live ndens_cm3 species,min,max,bad=NO  0.29811485453875558        1923182040690.9314                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live N2 residual major min,max,negative,bad=  -5.4548596203321767E-002  0.81315931772029160            88963           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live state dump packet written:            1
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live runtime packet QC samples,invalid,above_top=     6031360     1819902     1642002
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live runtime N2 residual used,negative,min,max=     4389358      177900  -5.2937585309174473E-002  0.81304884527564425
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 sent live neutral packet: nstep,packet_hour,count=           1   8.33333358E-02           1
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live neutral diagnostic packet nstep,dtime=           2   300.00000000000000
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live units: lat/lon=deg T=K U/V=m/s omega=Pa/s pmid=Pa zm/zi=m q=mass_mixing_ratio
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live density conversion: q*mbarv/species_mw*pmid/(kB*T)*1e-6 -> cm^-3
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live physics columns global=       13824
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live coord,min,max,bad,units=LAT  -90.000000000000000        90.000000000000000                0 deg
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live coord,min,max,bad,units=LON   0.0000000000000000        357.50000000000000                0 deg
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live column id min,max,bad=           1       13824           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live field,min,max,bad,units=T   113.06448531984830        1540.7848935057236                0 K
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live field,min,max,bad,units=U  -877.23446522816573        693.82293205162409                0 m/s
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live field,min,max,bad,units=V  -848.90560403211430        717.71273488369900                0 m/s
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live field,min,max,bad,units=OMEGA  -12.997019083742028        18.013238325330363                0 Pa/s
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live field,min,max,bad,units=PMID   4.0551408859926630E-008   107010.83809744766                0 Pa
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live field,min,max,bad,units=ZM   49.278378607266390        726340.84236373287                0 m
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live q species,index,min,max,bad=O          57   2.6478441759302645E-025  0.99993993618247812                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live ndens_cm3 species,min,max,bad=O   1.2183972451106702E-005   1237205370802.3040                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live q species,index,min,max,bad=O2          58   9.1727340489765707E-006  0.23732447294924339                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live ndens_cm3 species,min,max,bad=O2   12.546154522826010        7.0912441246506916E+018           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live q species,index,min,max,bad=H          37   2.8195367284956676E-028   4.9428888078698946E-003           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live ndens_cm3 species,min,max,bad=H   1.9357983921215212E-007   686165032.08910310                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live q species,index,min,max,bad=N          51   1.8976942230578848E-023   6.0084517945671836E-002           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live ndens_cm3 species,min,max,bad=N   9.5324592233959340E-004   56976867.247117348                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live q species,index,min,max,bad=NO          54   8.9584632048925575E-019   1.3294114301633402E-003           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live ndens_cm3 species,min,max,bad=NO  0.30332326176612551        1712455012603.6462                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live N2 residual major min,max,negative,bad=  -5.4583833052351649E-002  0.81317377019864834            88670           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live state dump packet written:            2
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live runtime packet QC samples,invalid,above_top=     6031360     1819998     1642906
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 live runtime N2 residual used,negative,min,max=     4388454      177092  -5.2729643343870897E-002  0.81303163077207719
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 sent live neutral packet: nstep,packet_hour,count=           2  0.166666672               2
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 sent done signal to SAMI3
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: WXSAMI3 disconnected from SAMI3
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-022715: ******* END OF MODEL RUN *******
+--- Receiver stub markers
+WXSAMI3_RECEIVER_STUB port ready: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_receiver_stub_3pkt_n2qc_invalid_20260524_0000/waccmx_sami3_online_port.txt ranks=33
+WXSAMI3_RECEIVER_STUB accepted CAM sender
+WXSAMI3_RECEIVER_STUB packet rank=1 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.6852564482865162e+18 min=-58833.7 max=2.14574e+14
+WXSAMI3_RECEIVER_STUB packet rank=2 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.1447547445348526e+18 min=-61070.1 max=2.13584e+14
+WXSAMI3_RECEIVER_STUB packet rank=3 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.0032872501364664e+18 min=-63396.5 max=2.07262e+14
+WXSAMI3_RECEIVER_STUB packet rank=4 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.7162780911806085e+18 min=-67388.7 max=2.02729e+14
+WXSAMI3_RECEIVER_STUB packet rank=5 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.6309765999379456e+18 min=-74986.4 max=1.91728e+14
+WXSAMI3_RECEIVER_STUB packet rank=6 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.5267274450532413e+18 min=-81410.7 max=1.91728e+14
+WXSAMI3_RECEIVER_STUB packet rank=7 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.1518683050779556e+18 min=-87724.3 max=1.82084e+14
+WXSAMI3_RECEIVER_STUB packet rank=8 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=7.7561844057938104e+18 min=-91454.9 max=1.76658e+14
+WXSAMI3_RECEIVER_STUB packet rank=9 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=7.5362013013145876e+18 min=-91498.5 max=1.76658e+14
+WXSAMI3_RECEIVER_STUB packet rank=10 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=7.4806613281198879e+18 min=-91445.2 max=1.83312e+14
+WXSAMI3_RECEIVER_STUB packet rank=11 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=7.9335170335447828e+18 min=-89435.4 max=1.88491e+14
+WXSAMI3_RECEIVER_STUB packet rank=12 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.5818017170223411e+18 min=-85667.9 max=1.87497e+14
+WXSAMI3_RECEIVER_STUB packet rank=13 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.6740439934607626e+18 min=-83669.5 max=1.84751e+14
+WXSAMI3_RECEIVER_STUB packet rank=14 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.5471891155936768e+18 min=-81632.2 max=1.83916e+14
+WXSAMI3_RECEIVER_STUB packet rank=15 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.551987677786794e+18 min=-77983.3 max=1.89673e+14
+WXSAMI3_RECEIVER_STUB packet rank=16 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.5176856873132329e+18 min=-73411.7 max=1.94032e+14
+WXSAMI3_RECEIVER_STUB packet rank=17 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.562427537186305e+18 min=-70849.7 max=1.94032e+14
+WXSAMI3_RECEIVER_STUB packet rank=18 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.7233464874701138e+18 min=-69092.8 max=1.93493e+14
+WXSAMI3_RECEIVER_STUB packet rank=19 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.7094489409907784e+18 min=-66985.7 max=1.93493e+14
+WXSAMI3_RECEIVER_STUB packet rank=20 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.6838015431032934e+18 min=-64741.8 max=1.93776e+14
+WXSAMI3_RECEIVER_STUB packet rank=21 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.8160335944015299e+18 min=-62880.5 max=1.93776e+14
+WXSAMI3_RECEIVER_STUB packet rank=22 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.9896506559645809e+18 min=-61055.9 max=2.02269e+14
+WXSAMI3_RECEIVER_STUB packet rank=23 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.1719245145509448e+18 min=-59269.5 max=2.02269e+14
+WXSAMI3_RECEIVER_STUB packet rank=24 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.4504794245357015e+18 min=-57599.9 max=2.11369e+14
+WXSAMI3_RECEIVER_STUB packet rank=25 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.8280316034239468e+18 min=-56123.2 max=2.20864e+14
+WXSAMI3_RECEIVER_STUB packet rank=26 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.9099197708287877e+18 min=-54903.8 max=2.21225e+14
+WXSAMI3_RECEIVER_STUB packet rank=27 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.6792873681915003e+18 min=-53996.3 max=2.19405e+14
+WXSAMI3_RECEIVER_STUB packet rank=28 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.4054859249228452e+18 min=-53228.7 max=2.11679e+14
+WXSAMI3_RECEIVER_STUB packet rank=29 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.2570272247388959e+18 min=-53179.6 max=2.02448e+14
+WXSAMI3_RECEIVER_STUB packet rank=30 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.2082812675652721e+18 min=-53961.6 max=2.06884e+14
+WXSAMI3_RECEIVER_STUB packet rank=31 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.21540848100561e+18 min=-55199 max=2.08317e+14
+WXSAMI3_RECEIVER_STUB packet rank=32 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.6585146831127685e+18 min=-56848.7 max=2.11108e+14
+WXSAMI3_RECEIVER_STUB packet rank=1 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.6889139759997153e+18 min=-57641.1 max=2.13069e+14
+WXSAMI3_RECEIVER_STUB packet rank=2 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=9.1167642327302595e+18 min=-59859.5 max=2.12815e+14
+WXSAMI3_RECEIVER_STUB packet rank=3 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.995613816367746e+18 min=-62156.2 max=2.06648e+14
+WXSAMI3_RECEIVER_STUB packet rank=4 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.7226686020214333e+18 min=-66516.9 max=2.02171e+14
+WXSAMI3_RECEIVER_STUB packet rank=5 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.6383631809184788e+18 min=-74378.6 max=1.91291e+14
+WXSAMI3_RECEIVER_STUB packet rank=6 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.5443995809253939e+18 min=-80501.3 max=1.91291e+14
+WXSAMI3_RECEIVER_STUB packet rank=7 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.1649094652379679e+18 min=-86723.8 max=1.80996e+14
+WXSAMI3_RECEIVER_STUB packet rank=8 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=7.7599095496609106e+18 min=-89919.2 max=1.75159e+14
+WXSAMI3_RECEIVER_STUB packet rank=9 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=7.5404136428337695e+18 min=-89919.2 max=1.75159e+14
+WXSAMI3_RECEIVER_STUB packet rank=10 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=7.5224996313801994e+18 min=-89587.6 max=1.80088e+14
+WXSAMI3_RECEIVER_STUB packet rank=11 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=7.9634160535699128e+18 min=-87092.4 max=1.86948e+14
+WXSAMI3_RECEIVER_STUB packet rank=12 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.5664410399657923e+18 min=-84006.3 max=1.86948e+14
+WXSAMI3_RECEIVER_STUB packet rank=13 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.6671954637826007e+18 min=-84006.3 max=1.84848e+14
+WXSAMI3_RECEIVER_STUB packet rank=14 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.5376676863100129e+18 min=-81659 max=1.8342e+14
+WXSAMI3_RECEIVER_STUB packet rank=15 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.5384410762279291e+18 min=-77285.4 max=1.88938e+14
+WXSAMI3_RECEIVER_STUB packet rank=16 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.5093129512284221e+18 min=-71792 max=1.93266e+14
+WXSAMI3_RECEIVER_STUB packet rank=17 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.5632721674955899e+18 min=-69158.1 max=1.93266e+14
+WXSAMI3_RECEIVER_STUB packet rank=18 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.739487345427158e+18 min=-67394.9 max=1.93768e+14
+WXSAMI3_RECEIVER_STUB packet rank=19 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.722935231936382e+18 min=-65248 max=1.93768e+14
+WXSAMI3_RECEIVER_STUB packet rank=20 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.6936849368173865e+18 min=-62986.9 max=1.94148e+14
+WXSAMI3_RECEIVER_STUB packet rank=21 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.8238250266003425e+18 min=-61241.7 max=1.94148e+14
+WXSAMI3_RECEIVER_STUB packet rank=22 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.9994645243718287e+18 min=-59452.6 max=2.02438e+14
+WXSAMI3_RECEIVER_STUB packet rank=23 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=9.1824508198160333e+18 min=-57527.9 max=2.02438e+14
+WXSAMI3_RECEIVER_STUB packet rank=24 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=9.4591431834152612e+18 min=-55941.7 max=2.1178e+14
+WXSAMI3_RECEIVER_STUB packet rank=25 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=9.8303525293821358e+18 min=-54566.1 max=2.20946e+14
+WXSAMI3_RECEIVER_STUB packet rank=26 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=9.9104930982257541e+18 min=-53454 max=2.21246e+14
+WXSAMI3_RECEIVER_STUB packet rank=27 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=9.682352246891604e+18 min=-52651.5 max=2.19448e+14
+WXSAMI3_RECEIVER_STUB packet rank=28 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=9.4087488057691034e+18 min=-51944.5 max=2.11841e+14
+WXSAMI3_RECEIVER_STUB packet rank=29 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=9.2537417040606945e+18 min=-51980.9 max=2.01892e+14
+WXSAMI3_RECEIVER_STUB packet rank=30 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=9.1974981142413343e+18 min=-52776.2 max=2.06301e+14
+WXSAMI3_RECEIVER_STUB packet rank=31 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=9.1794021065669622e+18 min=-54017.5 max=2.06575e+14
+WXSAMI3_RECEIVER_STUB packet rank=32 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.6785139493630669e+18 min=-55664 max=2.06951e+14
+WXSAMI3_RECEIVER_STUB packet rank=1 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.7172709532691548e+18 min=-55928.9 max=2.1127e+14
+WXSAMI3_RECEIVER_STUB packet rank=2 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.0748010156622572e+18 min=-58180.8 max=2.1127e+14
+WXSAMI3_RECEIVER_STUB packet rank=3 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.9834369730316605e+18 min=-60467.8 max=2.05935e+14
+WXSAMI3_RECEIVER_STUB packet rank=4 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.7282478602712361e+18 min=-65040.4 max=2.01388e+14
+WXSAMI3_RECEIVER_STUB packet rank=5 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.6447921696269107e+18 min=-72775.8 max=1.91204e+14
+WXSAMI3_RECEIVER_STUB packet rank=6 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.5683421095484856e+18 min=-78550.7 max=1.90746e+14
+WXSAMI3_RECEIVER_STUB packet rank=7 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.1826688231388129e+18 min=-84245.5 max=1.81386e+14
+WXSAMI3_RECEIVER_STUB packet rank=8 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=7.7623008999438049e+18 min=-87132.3 max=1.72621e+14
+WXSAMI3_RECEIVER_STUB packet rank=9 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=7.5409002230844867e+18 min=-87132.3 max=1.72621e+14
+WXSAMI3_RECEIVER_STUB packet rank=10 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=7.5833988339354358e+18 min=-86574.2 max=1.75304e+14
+WXSAMI3_RECEIVER_STUB packet rank=11 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.0083365256544328e+18 min=-83493.1 max=1.8599e+14
+WXSAMI3_RECEIVER_STUB packet rank=12 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.5404355783511245e+18 min=-83890.1 max=1.8599e+14
+WXSAMI3_RECEIVER_STUB packet rank=13 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.6578395261912156e+18 min=-83890.1 max=1.84927e+14
+WXSAMI3_RECEIVER_STUB packet rank=14 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.5261847239528387e+18 min=-81789.3 max=1.82726e+14
+WXSAMI3_RECEIVER_STUB packet rank=15 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.5195730557936189e+18 min=-77050.3 max=1.88707e+14
+WXSAMI3_RECEIVER_STUB packet rank=16 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.4968717366270781e+18 min=-68842.1 max=1.92311e+14
+WXSAMI3_RECEIVER_STUB packet rank=17 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.5615560727051162e+18 min=-66145.1 max=1.92311e+14
+WXSAMI3_RECEIVER_STUB packet rank=18 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.7551454138291548e+18 min=-64386 max=1.93797e+14
+WXSAMI3_RECEIVER_STUB packet rank=19 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.7334866731915213e+18 min=-62328.7 max=1.93797e+14
+WXSAMI3_RECEIVER_STUB packet rank=20 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.701932251416234e+18 min=-60508.5 max=1.94529e+14
+WXSAMI3_RECEIVER_STUB packet rank=21 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.8317322702265784e+18 min=-58861.8 max=1.94529e+14
+WXSAMI3_RECEIVER_STUB packet rank=22 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.0103169430084465e+18 min=-57147.2 max=2.02721e+14
+WXSAMI3_RECEIVER_STUB packet rank=23 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.1941005454373571e+18 min=-55475.2 max=2.02721e+14
+WXSAMI3_RECEIVER_STUB packet rank=24 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.4688991980334367e+18 min=-53713 max=2.12215e+14
+WXSAMI3_RECEIVER_STUB packet rank=25 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.8339042366224998e+18 min=-52326.5 max=2.21032e+14
+WXSAMI3_RECEIVER_STUB packet rank=26 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.9122826789125509e+18 min=-51198.5 max=2.21266e+14
+WXSAMI3_RECEIVER_STUB packet rank=27 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.6868299566266061e+18 min=-50385.2 max=2.19491e+14
+WXSAMI3_RECEIVER_STUB packet rank=28 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.4135636236041605e+18 min=-49672.1 max=2.12004e+14
+WXSAMI3_RECEIVER_STUB packet rank=29 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.2523031913519268e+18 min=-49824.1 max=2.01657e+14
+WXSAMI3_RECEIVER_STUB packet rank=30 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.1873258784476027e+18 min=-50719.7 max=2.05772e+14
+WXSAMI3_RECEIVER_STUB packet rank=31 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.1304352356200151e+18 min=-52084.7 max=2.05772e+14
+WXSAMI3_RECEIVER_STUB packet rank=32 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.7308358297953577e+18 min=-53851.6 max=2.04071e+14
+WXSAMI3_RECEIVER_STUB done rank=32 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=28 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=4 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=30 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=8 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=20 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=14 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=25 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=27 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=1 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=31 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=10 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=26 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=0 done_value=3 packets=0
+WXSAMI3_RECEIVER_STUB done rank=15 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=9 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=24 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=5 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=11 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=6 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=22 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=2 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=12 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=21 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=7 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=29 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=3 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=13 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=19 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=23 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=16 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=17 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=18 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB complete
+--- Packet summaries and compares
+### pkt000000 summary
+files=16 ranks=16 total_cols=13824
+packets=[0] nsteps=[0]
+lat_deg={'min': -90.0, 'max': 90.0, 'bad': 0} lon_deg={'min': 0.0, 'max': 357.5, 'bad': 0}
+cid={'min': 1, 'max': 13824, 'missing': 0, 'unique': 13824}
+T_K={'min': 113.19272490765026, 'max': 1522.7628810979916, 'bad': 0}
+U_m_s={'min': -925.7242161594645, 'max': 769.7344197674036, 'bad': 0}
+V_m_s={'min': -845.8062460574145, 'max': 736.3650929706123, 'bad': 0}
+PMID_Pa={'min': 4.055140885992663e-08, 'max': 107321.3890267048, 'bad': 0}
+ZM_m={'min': 48.56266690499009, 'max': 720507.7580399793, 'bad': 0}
+MBARV_kg_mol={'min': 14.895337165442252, 'max': 28.874522993878628, 'bad': 0}
+q_O={'min': 2.20521131163437e-25, 'max': 0.9999399874408939, 'bad': 0}
+q_O2={'min': 9.229295650411587e-06, 'max': 0.23732970847615611, 'bad': 0}
+q_H={'min': 2.913249081948255e-28, 'max': 0.0050683000424878695, 'bad': 0}
+q_N={'min': 1.885260804240404e-23, 'max': 0.060584943671142005, 'bad': 0}
+q_NO={'min': 9.01142764707503e-19, 'max': 0.0014346353422642934, 'bad': 0}
+q_N2={'min': None, 'max': None, 'bad': 1741824}
+q_He={'min': None, 'max': None, 'bad': 1741824}
+### pkt000001 summary
+files=16 ranks=16 total_cols=13824
+packets=[1] nsteps=[1]
+lat_deg={'min': -90.0, 'max': 90.0, 'bad': 0} lon_deg={'min': 0.0, 'max': 357.5, 'bad': 0}
+cid={'min': 1, 'max': 13824, 'missing': 0, 'unique': 13824}
+T_K={'min': 113.11677799602712, 'max': 1525.6802633198183, 'bad': 0}
+U_m_s={'min': -908.2869163996029, 'max': 746.2280684569153, 'bad': 0}
+V_m_s={'min': -848.8983623659324, 'max': 724.3955292789938, 'bad': 0}
+PMID_Pa={'min': 4.055140885992663e-08, 'max': 107228.60855014052, 'bad': 0}
+ZM_m={'min': 48.739033121328895, 'max': 722021.9350605857, 'bad': 0}
+MBARV_kg_mol={'min': 14.914851476788279, 'max': 28.874494448016016, 'bad': 0}
+q_O={'min': 2.3076025385839838e-25, 'max': 0.9999399904225778, 'bad': 0}
+q_O2={'min': 9.192934879215706e-06, 'max': 0.2373272779100491, 'bad': 0}
+q_H={'min': 2.974939423330202e-28, 'max': 0.004977793598453359, 'bad': 0}
+q_N={'min': 1.8931286575806156e-23, 'max': 0.060367837412881126, 'bad': 0}
+q_NO={'min': 9.042922746523819e-19, 'max': 0.0013771497728481319, 'bad': 0}
+q_N2={'min': None, 'max': None, 'bad': 1741824}
+q_He={'min': None, 'max': None, 'bad': 1741824}
+### pkt000002 summary
+files=16 ranks=16 total_cols=13824
+packets=[2] nsteps=[2]
+lat_deg={'min': -90.0, 'max': 90.0, 'bad': 0} lon_deg={'min': 0.0, 'max': 357.5, 'bad': 0}
+cid={'min': 1, 'max': 13824, 'missing': 0, 'unique': 13824}
+T_K={'min': 113.0644853198483, 'max': 1540.7848935057236, 'bad': 0}
+U_m_s={'min': -877.2344652281657, 'max': 693.8229320516241, 'bad': 0}
+V_m_s={'min': -848.9056040321143, 'max': 717.712734883699, 'bad': 0}
+PMID_Pa={'min': 4.055140885992663e-08, 'max': 107010.83809744766, 'bad': 0}
+ZM_m={'min': 49.27837860726639, 'max': 726340.8423637329, 'bad': 0}
+MBARV_kg_mol={'min': 14.923714119000463, 'max': 28.87446960393479, 'bad': 0}
+q_O={'min': 2.6478441759302645e-25, 'max': 0.9999399361824781, 'bad': 0}
+q_O2={'min': 9.17273404897657e-06, 'max': 0.2373244729492434, 'bad': 0}
+q_H={'min': 2.8195367284956676e-28, 'max': 0.0049428888078698946, 'bad': 0}
+q_N={'min': 1.8976942230578848e-23, 'max': 0.060084517945671836, 'bad': 0}
+q_NO={'min': 8.958463204892557e-19, 'max': 0.0013294114301633402, 'bad': 0}
+q_N2={'min': None, 'max': None, 'bad': 1741824}
+q_He={'min': None, 'max': None, 'bad': 1741824}
+--- Same-run pkt000002 vs 00600 instantaneous history compares
+LIVE_DUMP files=16 packet=2 nstep=2 dtime_phys_s=300 pver=126 nsource=13824
+CAM_NC path=/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/mage_qpx2000_f19_sami3_live_neutral_20260523.cam.rh1.2005-12-31-00600.nc lat=96 lon=144 lev=126 variables_are_compared_on_cid_lat_lon_order=1 species_mode=molmol
+FIELD lat            nc=lat      units=deg        n=13824 live_bad=0 nc_bad=0 max_abs=1.4210854715202004e-14 rms_abs=4.0519338086785559e-15 max_rel=2.1127248794118792e-16 live_min=-90 live_max=90 nc_min=-90 nc_max=90 worst_cid=145 worst_lev=1 worst_lat_index=2 worst_lon_index=1 cell_methods=""
+FIELD lon            nc=lon      units=deg        n=13824 live_bad=0 nc_bad=0 max_abs=5.6843418860808015e-14 rms_abs=1.7460764738857487e-14 max_rel=2.2075114120702141e-16 live_min=0 live_max=357.5 nc_min=0 nc_max=357.5 worst_cid=104 worst_lev=1 worst_lat_index=1 worst_lon_index=104 cell_methods=""
+FIELD PS             nc=PS       units=Pa         n=13824 live_bad=0 nc_bad=0 max_abs=106208.27434666079 rms_abs=98420.416388691068 max_rel=0.98511319402721487 live_min=898.75431548497568 live_max=1605.1158460423319 nc_min=60366.747963482339 nc_max=107813.39019270313 worst_cid=11840 worst_lev=1 worst_lat_index=83 worst_lon_index=32 cell_methods="time: point"
+FIELD T_K            nc=T        units=K          n=1741824 live_bad=0 nc_bad=0 max_abs=147.46819393806879 rms_abs=5.8628413286311876 max_rel=0.14911593210556395 live_min=113.0644853198483 live_max=1540.7848935057236 nc_min=113.01384327343784 nc_max=1618.0844765548525 worst_cid=13737 worst_lev=22 worst_lat_index=96 worst_lon_index=57 cell_methods="time: point"
+FIELD U_m_s          nc=U        units=m/s        n=1741824 live_bad=0 nc_bad=0 max_abs=307.95113228558921 rms_abs=11.356438547501035 max_rel=17033.572554791514 live_min=-877.23446522816573 live_max=693.82293205162409 nc_min=-949.47951320390052 nc_max=768.72312948856609 worst_cid=1186 worst_lev=1 worst_lat_index=9 worst_lon_index=34 cell_methods="time: point"
+FIELD V_m_s          nc=V        units=m/s        n=1741824 live_bad=0 nc_bad=0 max_abs=163.9956432173218 rms_abs=9.9551675846181524 max_rel=101711.2945944789 live_min=-848.9056040321143 live_max=717.712734883699 nc_min=-930.68188174161844 nc_max=784.19872020406876 worst_cid=13745 worst_lev=22 worst_lat_index=96 worst_lon_index=65 cell_methods="time: point"
+FIELD OMEGA_Pa_s     nc=OMEGA    units=Pa/s       n=1741824 live_bad=0 nc_bad=0 max_abs=0 rms_abs=0 max_rel=0 live_min=-12.997019083742028 live_max=18.013238325330363 nc_min=-12.997019083742028 nc_max=18.013238325330363 worst_cid=-1 worst_lev=0 worst_lat_index=0 worst_lon_index=0 cell_methods="time: point"
+FIELD ZM_m           nc=Z3       units=m          n=1741824 live_bad=0 nc_bad=0 max_abs=34219.621183849522 rms_abs=1244.8478296533169 max_rel=0.061269102150690688 live_min=49.27837860726639 live_max=726340.84236373287 nc_min=48.672247534816194 nc_max=727459.94813242555 worst_cid=13737 worst_lev=1 worst_lat_index=96 worst_lon_index=57 cell_methods="time: point"
+FIELD O_molmol       nc=O        units=mol/mol    n=1741824 live_bad=0 nc_bad=0 max_abs=0.013565464281783179 rms_abs=0.00039020319606781589 max_rel=13.258982147720669 live_min=4.7751928397947998e-25 live_max=0.99221481535192257 nc_min=4.7738378713748846e-25 nc_max=0.99217137816251322 worst_cid=1323 worst_lev=14 worst_lat_index=10 worst_lon_index=27 cell_methods="time: point"
+FIELD O2_molmol      nc=O2       units=mol/mol    n=1741824 live_bad=0 nc_bad=0 max_abs=0.0042966530589399754 rms_abs=0.00027159193291357322 max_rel=0.28262635541040604 live_min=4.4136536410799519e-06 live_max=0.2140875666326077 nc_min=4.4206158754964729e-06 nc_max=0.2160403064742078 worst_cid=5376 worst_lev=124 worst_lat_index=38 worst_lon_index=48 cell_methods="time: point"
+FIELD H_molmol       nc=H        units=mol/mol    n=1741824 live_bad=0 nc_bad=0 max_abs=0.0028769125815270961 rms_abs=5.5705767283900352e-05 max_rel=112.00063273940175 live_min=8.136805511311296e-27 live_max=0.073766259490657307 nc_min=8.1983471507877969e-27 nc_max=0.073739477055210167 worst_cid=1186 worst_lev=1 worst_lat_index=9 worst_lon_index=34 cell_methods="time: point"
+NOTE use --species-mode molmol for CAM history species with mol/mol attributes; use --species-mode mass for restart/internal q fields.
+NOTE history files with cell_methods="time: mean" are diagnostic time means, not guaranteed bitwise snapshots of runtime phys_state(:).
+LIVE_DUMP files=16 packet=2 nstep=2 dtime_phys_s=300 pver=126 nsource=13824
+CAM_NC path=/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/mage_qpx2000_f19_sami3_live_neutral_20260523.cam.rh2.2005-12-31-00600.nc lat=96 lon=144 lev=126 variables_are_compared_on_cid_lat_lon_order=1 species_mode=molmol
+FIELD lat            nc=lat      units=deg        n=13824 live_bad=0 nc_bad=0 max_abs=1.4210854715202004e-14 rms_abs=4.0519338086785559e-15 max_rel=2.1127248794118792e-16 live_min=-90 live_max=90 nc_min=-90 nc_max=90 worst_cid=145 worst_lev=1 worst_lat_index=2 worst_lon_index=1 cell_methods=""
+FIELD lon            nc=lon      units=deg        n=13824 live_bad=0 nc_bad=0 max_abs=5.6843418860808015e-14 rms_abs=1.7460764738857487e-14 max_rel=2.2075114120702141e-16 live_min=0 live_max=357.5 nc_min=0 nc_max=357.5 worst_cid=104 worst_lev=1 worst_lat_index=1 worst_lon_index=104 cell_methods=""
+FIELD PS             nc=PS       units=Pa         n=13824 live_bad=0 nc_bad=0 max_abs=106208.27434666079 rms_abs=98420.416388691068 max_rel=0.98511319402721487 live_min=898.75431548497568 live_max=1605.1158460423319 nc_min=60366.747963482339 nc_max=107813.39019270313 worst_cid=11840 worst_lev=1 worst_lat_index=83 worst_lon_index=32 cell_methods="time: point"
+FIELD T_K            nc=T        units=K          n=1741824 live_bad=0 nc_bad=0 max_abs=147.46819393806879 rms_abs=5.8628413286311876 max_rel=0.14911593210556395 live_min=113.0644853198483 live_max=1540.7848935057236 nc_min=113.01384327343784 nc_max=1618.0844765548525 worst_cid=13737 worst_lev=22 worst_lat_index=96 worst_lon_index=57 cell_methods="time: point"
+FIELD U_m_s          nc=U        units=m/s        n=1741824 live_bad=0 nc_bad=0 max_abs=307.95113228558921 rms_abs=11.356438547501035 max_rel=17033.572554791514 live_min=-877.23446522816573 live_max=693.82293205162409 nc_min=-949.47951320390052 nc_max=768.72312948856609 worst_cid=1186 worst_lev=1 worst_lat_index=9 worst_lon_index=34 cell_methods="time: point"
+FIELD V_m_s          nc=V        units=m/s        n=1741824 live_bad=0 nc_bad=0 max_abs=163.9956432173218 rms_abs=9.9551675846181524 max_rel=101711.2945944789 live_min=-848.9056040321143 live_max=717.712734883699 nc_min=-930.68188174161844 nc_max=784.19872020406876 worst_cid=13745 worst_lev=22 worst_lat_index=96 worst_lon_index=65 cell_methods="time: point"
+FIELD OMEGA_Pa_s     nc=OMEGA    units=Pa/s       n=1741824 live_bad=0 nc_bad=0 max_abs=0 rms_abs=0 max_rel=0 live_min=-12.997019083742028 live_max=18.013238325330363 nc_min=-12.997019083742028 nc_max=18.013238325330363 worst_cid=-1 worst_lev=0 worst_lat_index=0 worst_lon_index=0 cell_methods="time: point"
+FIELD ZM_m           nc=Z3GM     units=m          n=1741824 live_bad=0 nc_bad=0 max_abs=93460.108631727053 rms_abs=17971.016326126086 max_rel=0.11400341572944167 live_min=49.27837860726639 live_max=726340.84236373287 nc_min=49.278759755206742 nc_max=819800.95099545992 worst_cid=1183 worst_lev=1 worst_lat_index=9 worst_lon_index=31 cell_methods="time: point"
+FIELD O_molmol       nc=O        units=mol/mol    n=1741824 live_bad=0 nc_bad=0 max_abs=0.013565464281783179 rms_abs=0.00039020319606781589 max_rel=13.258982147720669 live_min=4.7751928397947998e-25 live_max=0.99221481535192257 nc_min=4.7738378713748846e-25 nc_max=0.99217137816251322 worst_cid=1323 worst_lev=14 worst_lat_index=10 worst_lon_index=27 cell_methods="time: point"
+FIELD O2_molmol      nc=O2       units=mol/mol    n=1741824 live_bad=0 nc_bad=0 max_abs=0.0042966530589399754 rms_abs=0.00027159193291357322 max_rel=0.28262635541040604 live_min=4.4136536410799519e-06 live_max=0.2140875666326077 nc_min=4.4206158754964729e-06 nc_max=0.2160403064742078 worst_cid=5376 worst_lev=124 worst_lat_index=38 worst_lon_index=48 cell_methods="time: point"
+FIELD H_molmol       nc=H        units=mol/mol    n=1741824 live_bad=0 nc_bad=0 max_abs=0.0028769125815270961 rms_abs=5.5705767283900352e-05 max_rel=112.00063273940175 live_min=8.136805511311296e-27 live_max=0.073766259490657307 nc_min=8.1983471507877969e-27 nc_max=0.073739477055210167 worst_cid=1186 worst_lev=1 worst_lat_index=9 worst_lon_index=34 cell_methods="time: point"
+FIELD N_molmol       nc=N        units=mol/mol    n=1741824 live_bad=0 nc_bad=0 max_abs=0.0031154981989895136 rms_abs=0.00013646545013723028 max_rel=6.5892199143152936 live_min=3.9101583356338147e-23 live_max=0.068148462563519335 nc_min=3.9158470740927516e-23 nc_max=0.068412818352099808 worst_cid=1606 worst_lev=1 worst_lat_index=12 worst_lon_index=22 cell_methods="time: point"
+FIELD NO_molmol      nc=NO       units=mol/mol    n=1741824 live_bad=0 nc_bad=0 max_abs=2.5502337397065094e-05 rms_abs=1.1814951825621679e-06 max_rel=5641.862930600867 live_min=8.6170413298698384e-19 live_max=0.0010594033604250123 nc_min=8.7030603384212288e-19 nc_max=0.0010788984299576088 worst_cid=2340 worst_lev=26 worst_lat_index=17 worst_lon_index=36 cell_methods="time: point"
+NOTE use --species-mode molmol for CAM history species with mol/mol attributes; use --species-mode mass for restart/internal q fields.
+NOTE history files with cell_methods="time: mean" are diagnostic time means, not guaranteed bitwise snapshots of runtime phys_state(:).
+END=Sun May 24 02:43:19 CST 2026

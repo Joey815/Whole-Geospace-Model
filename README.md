@@ -27,6 +27,7 @@ live two-packet smoke = 7641573, COMPLETED, exit 0:0
 file-mode fallback    = 7641579, COMPLETED, exit 0:0
 receiver-stub 3-pkt   = 7641623, COMPLETED, exit 0:0
 N2-QC default smoke   = 7641625, COMPLETED, exit 0:0
+N2-QC invalid smoke   = 7641644, COMPLETED, exit 0:0
 ```
 
 Latest receiver checks:
@@ -37,6 +38,7 @@ pkt000001 live compare = max_rel=6.80359e-13
 file fallback compare  = max_rel=3.26946e-13
 stub packet count       = ranks 1..32 received 3 packets; ranks 0..32 got done
 N2-QC default mode      = WXSAMI3_N2_NEGATIVE_MODE=floor, build and 3-pkt smoke ok
+N2-QC invalid delta     = +177092 invalid samples vs floor, 3-pkt transport ok
 ```
 
 The latest source-state phase diagnostic compared live packet 2 against
@@ -85,6 +87,7 @@ docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_NEUTRAL_PLAN_20260523.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_NEUTRAL_EXTRACTION_RESULT_20260523.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_SOURCE_STATE_PHASE_VALIDATION_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_N2_QC_CONTROL_20260524.md
+docs/MAGE1.25_notes/WACCMX_SAMI3_N2_INVALID_MODE_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_GAMERA_PHYSICS_REVIEW_20260523.md
 ```
 
@@ -123,6 +126,7 @@ Latest N2 residual QC launcher:
 
 ```text
 slurm/run_waccmx_cam_sami3_live_payload_f19_receiver_stub_3pkt_n2qc_20260524.sbatch
+slurm/run_waccmx_cam_sami3_live_payload_f19_receiver_stub_3pkt_n2qc_invalid_20260524.sbatch
 ```
 
 ## Known Physical Blockers
