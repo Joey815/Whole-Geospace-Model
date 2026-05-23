@@ -48,6 +48,7 @@ module wxsami3_online_stub_mod
    character(len=512) :: port_file = ''
    character(len=512) :: payload_prefix = ''
    character(len=32) :: payload_mode = 'file'
+   character(len=16) :: n2_negative_mode = 'floor'
    character(len=512) :: meta_file = ''
    character(len=512) :: live_dump_prefix = ''
    character(len=512) :: live_map_file = ''
@@ -148,6 +149,15 @@ contains
       if (stat == 0 .and. lenval > 0) read(value,*) send_every_nsteps
       if (send_every_nsteps < 1) send_every_nsteps = 1
 
+      value = ''
+      call get_environment_variable('WXSAMI3_N2_NEGATIVE_MODE', value, length=lenval, status=stat)
+      if (stat == 0 .and. lenval > 0) n2_negative_mode = adjustl(value(1:min(lenval, len(n2_negative_mode))))
+      select case (trim(n2_negative_mode))
+      case ('floor', 'FLOOR', 'invalid', 'INVALID', 'fail', 'FAIL')
+      case default
+         call endrun('WXSAMI3_N2_NEGATIVE_MODE must be floor, invalid, or fail')
+      end select
+
       is_enabled = .true.
       if (masterproc) then
          write(iulog,*) 'WXSAMI3 online sender enabled'
@@ -158,6 +168,7 @@ contains
          write(iulog,*) 'WXSAMI3 SAMI3 workers: ', num_workers
          write(iulog,*) 'WXSAMI3 send cadence nsteps: ', send_every_nsteps
          write(iulog,*) 'WXSAMI3 max packets (-1 unlimited): ', max_packets
+         write(iulog,*) 'WXSAMI3 N2 negative residual mode: ', trim(n2_negative_mode)
          write(iulog,*) 'WXSAMI3 live phys_state diagnostics: ', live_diag_enabled
          if (len_trim(meta_file) > 0) write(iulog,*) 'WXSAMI3 metadata file: ', trim(meta_file)
          write(iulog,*) 'WXSAMI3 live state dump enabled: ', live_dump_enabled
@@ -688,6 +699,7 @@ contains
       write(118,'(A)') '  "composition_source": "physics_state%q mass mixing ratio",'
       write(118,'(A)') '  "density_conversion": "q*mbarv/species_mw*pmid/(kB*T)*1e-6 -> cm^-3",'
       write(118,'(A)') '  "vertical_wind_policy": "W not sent; omega diagnosed only",'
+      write(118,'(A,A,A)') '  "n2_negative_mode": "', trim(n2_negative_mode), '",'
       write(118,'(A)') '  "payload_species_order": ["H","O","NO","O2","He","N2","N"],'
       write(118,'(A)') '  "fallback_policy": "above-live-top samples invalid; He payload=-1 native fallback; W payload=0",'
       write(118,'(A)') '  "species": ['
@@ -777,7 +789,8 @@ contains
       write(118,'(A)') '  ],'
       write(118,'(A)') '  "fallback_policy": {'
       write(118,'(A)') '    "above_live_top": "payload sample marked invalid so SAMI3 native neutral state is retained",'
-      write(118,'(A)') '    "N2": "CAM N2 if finite, otherwise residual closure with 1e-20 floor",'
+      write(118,'(A)') '    "N2": "CAM N2 if finite, otherwise residual closure from major species",'
+      write(118,'(A,A,A)') '    "N2_negative_mode": "', trim(n2_negative_mode), '",'
       write(118,'(A)') '    "He": "payload value -1 so SAMI3 native/MSIS He is retained",'
       write(118,'(A)') '    "W": "payload value 0; CAM omega diagnostic only",'
       write(118,'(A)') '    "remap_scaling": "f19 gather-to-root prototype, not f09 production distributed remap"'
@@ -948,8 +961,12 @@ contains
       else
          write(122,'(A)') '  "transport_status": "diagnostic snapshot only; file-backed payload sent",'
       endif
-      write(122,'(A)') '  "record_order": ["header_i4_12", "dtime_phys_r8", "species_indices_i4", "cid_i4", "lchnk_i4", "col_i4", "lat_deg_r8", "lon_deg_r8", "ps_pa_r8", "profile_r8", "qprof_r8"],'
+      write(122,'(A)') '  "record_order": ["header_i4_12", "dtime_phys_r8", ' // &
+                         '"species_indices_i4", "cid_i4", "lchnk_i4", "col_i4", ' // &
+                         '"lat_deg_r8", "lon_deg_r8", "state_ps_pa_r8", ' // &
+                         '"profile_r8", "qprof_r8"],'
       write(122,'(A)') '  "profile_order": ["T_K", "U_m_s", "V_m_s", "OMEGA_Pa_s", "PMID_Pa", "ZM_m", "MBARV_kg_mol"],'
+      write(122,'(A)') '  "state_ps_note": "raw physics_state%ps snapshot; SAMI3 payload uses profile PMID_Pa",'
       write(122,'(A)') '  "q_unit": "mass_mixing_ratio",'
       write(122,'(A)') '  "density_conversion": "q*mbarv/species_mw*pmid/(kB*T)*1e-6 -> cm^-3",'
       write(122,'(A)') '  "species": ['
@@ -1369,7 +1386,18 @@ contains
           wxsami3_valid_r8(q_o) .and. wxsami3_valid_r8(q_o2) .and. &
           wxsami3_valid_r8(q_n) .and. wxsami3_valid_r8(q_no)) then
          n2_residual = 1._r8 - q_h - q_o - q_o2 - q_n - q_no
-         q_n2 = max(n2_residual, 1.0e-20_r8)
+         if (n2_residual < 0._r8) then
+            select case (trim(n2_negative_mode))
+            case ('invalid', 'INVALID')
+               return
+            case ('fail', 'FAIL')
+               call endrun('WXSAMI3 residual N2 is negative')
+            case default
+               q_n2 = 1.0e-20_r8
+            end select
+         else
+            q_n2 = max(n2_residual, 1.0e-20_r8)
+         endif
       endif
 
       if (.not. wxsami3_valid_r8(temp) .or. .not. wxsami3_valid_r8(u_m) .or. &

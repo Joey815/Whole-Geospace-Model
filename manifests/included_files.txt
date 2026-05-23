@@ -72,6 +72,7 @@ docs/MAGE1.25_notes/SAMI3_VOLTRON_MOMENTS_CONTRACT_20260523.md
 docs/MAGE1.25_notes/SAMI3_VOLTRON_RAIJU_MOMENTS_ADAPTER_RESULT_20260523.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_NEUTRAL_EXTRACTION_RESULT_20260523.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_NEUTRAL_PLAN_20260523.md
+docs/MAGE1.25_notes/WACCMX_SAMI3_N2_QC_CONTROL_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_SOURCE_STATE_PHASE_VALIDATION_20260524.md
 docs/MAGE1.25_notes/mage125_waccmx_handoff_2026-05-23.md
 logs/file_regression_20260524/recv_qc_compare.txt
@@ -84,6 +85,10 @@ logs/multipacket_20260524/recv_qc_compare_pkt000001.txt
 logs/multipacket_20260524/replay_builder_pkt000000.out
 logs/multipacket_20260524/replay_builder_pkt000001.out
 logs/multipacket_20260524/wxsami3_live_meta.json
+logs/n2_qc_20260524/receiver_stub_7641625.out
+logs/n2_qc_20260524/slurm_7641625_n2qc.out
+logs/n2_qc_20260524/wxsami3_live_meta.json
+logs/n2_qc_20260524/wxsami3_physstate_meta.json
 logs/source_state_compare/live_vs_restart_00300_compare.txt
 logs/source_state_compare/live_vs_rh0_00000_compare.txt
 logs/source_state_compare/live_vs_rh0_00300_compare.txt
@@ -111,3 +116,4 @@ slurm/run_waccmx_cam_sami3_live_dump_20260523.sbatch
 slurm/run_waccmx_cam_sami3_live_payload_f19_20260523.sbatch
 slurm/run_waccmx_cam_sami3_live_payload_f19_multipacket_20260524.sbatch
 slurm/run_waccmx_cam_sami3_live_payload_f19_receiver_stub_3pkt_compare_20260524.sbatch
+slurm/run_waccmx_cam_sami3_live_payload_f19_receiver_stub_3pkt_n2qc_20260524.sbatch

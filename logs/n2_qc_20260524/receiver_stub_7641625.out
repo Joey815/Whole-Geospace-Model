@@ -1,0 +1,132 @@
+WXSAMI3_RECEIVER_STUB port ready: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_receiver_stub_3pkt_n2qc_20260524_0000/waccmx_sami3_online_port.txt ranks=33
+WXSAMI3_RECEIVER_STUB accepted CAM sender
+WXSAMI3_RECEIVER_STUB packet rank=1 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.6852565576835379e+18 min=-59238 max=2.14574e+14
+WXSAMI3_RECEIVER_STUB packet rank=2 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.1447548479633009e+18 min=-61506.7 max=2.13584e+14
+WXSAMI3_RECEIVER_STUB packet rank=3 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.0032873522768476e+18 min=-63852.8 max=2.07262e+14
+WXSAMI3_RECEIVER_STUB packet rank=4 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.7162781934404874e+18 min=-67627.8 max=2.02729e+14
+WXSAMI3_RECEIVER_STUB packet rank=5 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.6309766960927048e+18 min=-75082.1 max=1.91728e+14
+WXSAMI3_RECEIVER_STUB packet rank=6 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.5267275291986586e+18 min=-81520.2 max=1.91728e+14
+WXSAMI3_RECEIVER_STUB packet rank=7 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.1518683763700204e+18 min=-87724.3 max=1.82084e+14
+WXSAMI3_RECEIVER_STUB packet rank=8 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=7.7561844651268444e+18 min=-91667.1 max=1.76658e+14
+WXSAMI3_RECEIVER_STUB packet rank=9 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=7.5362013518241341e+18 min=-91750 max=1.76658e+14
+WXSAMI3_RECEIVER_STUB packet rank=10 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=7.4806613717576458e+18 min=-91732.8 max=1.83312e+14
+WXSAMI3_RECEIVER_STUB packet rank=11 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=7.9335170708730163e+18 min=-89590.1 max=1.88491e+14
+WXSAMI3_RECEIVER_STUB packet rank=12 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.5818017492774318e+18 min=-85862 max=1.87497e+14
+WXSAMI3_RECEIVER_STUB packet rank=13 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.6740440230870057e+18 min=-83741.7 max=1.84751e+14
+WXSAMI3_RECEIVER_STUB packet rank=14 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.5471891440383826e+18 min=-81693.4 max=1.83916e+14
+WXSAMI3_RECEIVER_STUB packet rank=15 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.5519877067805932e+18 min=-78096.5 max=1.89673e+14
+WXSAMI3_RECEIVER_STUB packet rank=16 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.5176857200218993e+18 min=-73752.7 max=1.94032e+14
+WXSAMI3_RECEIVER_STUB packet rank=17 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.5624275763112868e+18 min=-71192 max=1.94032e+14
+WXSAMI3_RECEIVER_STUB packet rank=18 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.7233465365483346e+18 min=-69415.9 max=1.93493e+14
+WXSAMI3_RECEIVER_STUB packet rank=19 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.7094490051319624e+18 min=-67375.3 max=1.93493e+14
+WXSAMI3_RECEIVER_STUB packet rank=20 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.6838016269961339e+18 min=-65141.8 max=1.93776e+14
+WXSAMI3_RECEIVER_STUB packet rank=21 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.8160337017127199e+18 min=-63392.6 max=1.93776e+14
+WXSAMI3_RECEIVER_STUB packet rank=22 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.9896507853056522e+18 min=-61575.5 max=2.02269e+14
+WXSAMI3_RECEIVER_STUB packet rank=23 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.1719246581692058e+18 min=-59791.3 max=2.02269e+14
+WXSAMI3_RECEIVER_STUB packet rank=24 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.450479573217919e+18 min=-58128.2 max=2.11369e+14
+WXSAMI3_RECEIVER_STUB packet rank=25 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.8280317545739694e+18 min=-56655.6 max=2.20864e+14
+WXSAMI3_RECEIVER_STUB packet rank=26 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.9099199229231227e+18 min=-55445.7 max=2.21225e+14
+WXSAMI3_RECEIVER_STUB packet rank=27 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.6792875203744522e+18 min=-54480.1 max=2.19405e+14
+WXSAMI3_RECEIVER_STUB packet rank=28 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.4054860780852818e+18 min=-53684.3 max=2.11679e+14
+WXSAMI3_RECEIVER_STUB packet rank=29 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.2570273771700941e+18 min=-53590.9 max=2.02448e+14
+WXSAMI3_RECEIVER_STUB packet rank=30 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.2082814152368568e+18 min=-54369.8 max=2.06884e+14
+WXSAMI3_RECEIVER_STUB packet rank=31 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=9.2154086183961272e+18 min=-55551.8 max=2.08317e+14
+WXSAMI3_RECEIVER_STUB packet rank=32 packet=0 nstep=0 hour=0 nz=304 nf=124 nl=5 nneut=7 sum=8.6585148044923187e+18 min=-57223.7 max=2.11108e+14
+WXSAMI3_RECEIVER_STUB packet rank=1 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.6889140836436695e+18 min=-58332.3 max=2.13069e+14
+WXSAMI3_RECEIVER_STUB packet rank=2 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=9.1167643343562936e+18 min=-60590.1 max=2.12815e+14
+WXSAMI3_RECEIVER_STUB packet rank=3 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.9956139172460503e+18 min=-62912.7 max=2.06648e+14
+WXSAMI3_RECEIVER_STUB packet rank=4 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.7226687036099625e+18 min=-67074.3 max=2.02171e+14
+WXSAMI3_RECEIVER_STUB packet rank=5 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.6383632760704471e+18 min=-74814.6 max=1.91291e+14
+WXSAMI3_RECEIVER_STUB packet rank=6 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.5443996639391222e+18 min=-81079.3 max=1.91291e+14
+WXSAMI3_RECEIVER_STUB packet rank=7 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.1649095353657272e+18 min=-86791.1 max=1.80996e+14
+WXSAMI3_RECEIVER_STUB packet rank=8 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=7.7599096079104e+18 min=-90413.1 max=1.75159e+14
+WXSAMI3_RECEIVER_STUB packet rank=9 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=7.5404136924310282e+18 min=-90413.1 max=1.75159e+14
+WXSAMI3_RECEIVER_STUB packet rank=10 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=7.5224996740827034e+18 min=-90143.1 max=1.80088e+14
+WXSAMI3_RECEIVER_STUB packet rank=11 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=7.963416090093015e+18 min=-87385.7 max=1.86948e+14
+WXSAMI3_RECEIVER_STUB packet rank=12 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.5664410715357256e+18 min=-84145.5 max=1.86948e+14
+WXSAMI3_RECEIVER_STUB packet rank=13 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.6671954930401997e+18 min=-84145.5 max=1.84848e+14
+WXSAMI3_RECEIVER_STUB packet rank=14 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.5376677149666499e+18 min=-81835.9 max=1.8342e+14
+WXSAMI3_RECEIVER_STUB packet rank=15 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.5384411055402332e+18 min=-77716.8 max=1.88938e+14
+WXSAMI3_RECEIVER_STUB packet rank=16 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.5093129842962985e+18 min=-72160.5 max=1.93266e+14
+WXSAMI3_RECEIVER_STUB packet rank=17 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.5632722076022682e+18 min=-69734.4 max=1.93266e+14
+WXSAMI3_RECEIVER_STUB packet rank=18 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.7394873961492716e+18 min=-68107.8 max=1.93768e+14
+WXSAMI3_RECEIVER_STUB packet rank=19 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.7229352978715515e+18 min=-65929.6 max=1.93768e+14
+WXSAMI3_RECEIVER_STUB packet rank=20 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.6936850224321178e+18 min=-63669.9 max=1.94148e+14
+WXSAMI3_RECEIVER_STUB packet rank=21 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.8238251359061586e+18 min=-61907.8 max=1.94148e+14
+WXSAMI3_RECEIVER_STUB packet rank=22 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.999464655812139e+18 min=-60111.7 max=2.02438e+14
+WXSAMI3_RECEIVER_STUB packet rank=23 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=9.1824509652833167e+18 min=-58374.1 max=2.02438e+14
+WXSAMI3_RECEIVER_STUB packet rank=24 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=9.4591433333042074e+18 min=-56778.5 max=2.1178e+14
+WXSAMI3_RECEIVER_STUB packet rank=25 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=9.8303526805484134e+18 min=-55393.8 max=2.20946e+14
+WXSAMI3_RECEIVER_STUB packet rank=26 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=9.9104932501548728e+18 min=-54278.6 max=2.21246e+14
+WXSAMI3_RECEIVER_STUB packet rank=27 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=9.6823523989921812e+18 min=-53402 max=2.19448e+14
+WXSAMI3_RECEIVER_STUB packet rank=28 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=9.4087489580486001e+18 min=-52672.8 max=2.11841e+14
+WXSAMI3_RECEIVER_STUB packet rank=29 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=9.2537418548450877e+18 min=-52688.3 max=2.01892e+14
+WXSAMI3_RECEIVER_STUB packet rank=30 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=9.1974982611183247e+18 min=-53495.8 max=2.06301e+14
+WXSAMI3_RECEIVER_STUB packet rank=31 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=9.1794022426475735e+18 min=-54759.8 max=2.06575e+14
+WXSAMI3_RECEIVER_STUB packet rank=32 packet=1 nstep=1 hour=0.0833333 nz=304 nf=124 nl=5 nneut=7 sum=8.678514068465492e+18 min=-56449.9 max=2.06951e+14
+WXSAMI3_RECEIVER_STUB packet rank=1 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.7172710593663672e+18 min=-56806.6 max=2.1127e+14
+WXSAMI3_RECEIVER_STUB packet rank=2 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.0748011158821325e+18 min=-59106.8 max=2.1127e+14
+WXSAMI3_RECEIVER_STUB packet rank=3 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.9834370729024799e+18 min=-61257.6 max=2.05935e+14
+WXSAMI3_RECEIVER_STUB packet rank=4 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.7282479607399127e+18 min=-65627.9 max=2.01388e+14
+WXSAMI3_RECEIVER_STUB packet rank=5 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.6447922632274678e+18 min=-73253.5 max=1.91204e+14
+WXSAMI3_RECEIVER_STUB packet rank=6 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.5683421912109875e+18 min=-79174.9 max=1.90746e+14
+WXSAMI3_RECEIVER_STUB packet rank=7 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.1826688920543355e+18 min=-84313.7 max=1.81386e+14
+WXSAMI3_RECEIVER_STUB packet rank=8 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=7.7623009571512054e+18 min=-87444.9 max=1.72621e+14
+WXSAMI3_RECEIVER_STUB packet rank=9 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=7.5409002716119593e+18 min=-87444.9 max=1.72621e+14
+WXSAMI3_RECEIVER_STUB packet rank=10 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=7.583398875900841e+18 min=-86916.8 max=1.75304e+14
+WXSAMI3_RECEIVER_STUB packet rank=11 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.0083365615470449e+18 min=-83882.5 max=1.8599e+14
+WXSAMI3_RECEIVER_STUB packet rank=12 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.5404356092809021e+18 min=-84037.1 max=1.8599e+14
+WXSAMI3_RECEIVER_STUB packet rank=13 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.6578395550310031e+18 min=-84037.1 max=1.84927e+14
+WXSAMI3_RECEIVER_STUB packet rank=14 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.5261847522956923e+18 min=-82150 max=1.82726e+14
+WXSAMI3_RECEIVER_STUB packet rank=15 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.5195730853375611e+18 min=-77299.3 max=1.88707e+14
+WXSAMI3_RECEIVER_STUB packet rank=16 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.4968717701046907e+18 min=-69206.6 max=1.92311e+14
+WXSAMI3_RECEIVER_STUB packet rank=17 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.5615561135281316e+18 min=-66718.4 max=1.92311e+14
+WXSAMI3_RECEIVER_STUB packet rank=18 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.7551454657328353e+18 min=-64934.8 max=1.93797e+14
+WXSAMI3_RECEIVER_STUB packet rank=19 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.7334867405538089e+18 min=-63005.1 max=1.93797e+14
+WXSAMI3_RECEIVER_STUB packet rank=20 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.7019323387260221e+18 min=-61200.1 max=1.94529e+14
+WXSAMI3_RECEIVER_STUB packet rank=21 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.8317323814128302e+18 min=-59535.9 max=1.94529e+14
+WXSAMI3_RECEIVER_STUB packet rank=22 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.0103170760389714e+18 min=-57815.6 max=2.02721e+14
+WXSAMI3_RECEIVER_STUB packet rank=23 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.1941006919982295e+18 min=-56131.4 max=2.02721e+14
+WXSAMI3_RECEIVER_STUB packet rank=24 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.4688993481227653e+18 min=-54564.1 max=2.12215e+14
+WXSAMI3_RECEIVER_STUB packet rank=25 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.833904387176235e+18 min=-53164.6 max=2.21032e+14
+WXSAMI3_RECEIVER_STUB packet rank=26 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.9122828299793224e+18 min=-52030.8 max=2.21266e+14
+WXSAMI3_RECEIVER_STUB packet rank=27 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.6868301073399501e+18 min=-51138.2 max=2.19491e+14
+WXSAMI3_RECEIVER_STUB packet rank=28 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.4135637742612746e+18 min=-50401.3 max=2.12004e+14
+WXSAMI3_RECEIVER_STUB packet rank=29 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.2523033407809782e+18 min=-50541.2 max=2.01657e+14
+WXSAMI3_RECEIVER_STUB packet rank=30 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.1873260238409554e+18 min=-51452.8 max=2.05772e+14
+WXSAMI3_RECEIVER_STUB packet rank=31 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=9.1304353700362803e+18 min=-52853.3 max=2.05772e+14
+WXSAMI3_RECEIVER_STUB packet rank=32 packet=2 nstep=2 hour=0.166667 nz=304 nf=124 nl=5 nneut=7 sum=8.7308359473490381e+18 min=-54668.5 max=2.04071e+14
+WXSAMI3_RECEIVER_STUB done rank=32 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=2 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=30 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=7 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=26 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=3 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=31 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=15 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=22 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=6 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=28 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=27 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=29 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=4 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=20 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=16 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=0 done_value=3 packets=0
+WXSAMI3_RECEIVER_STUB done rank=9 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=19 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=12 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=1 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=10 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=21 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=17 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=5 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=25 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=8 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=24 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=13 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=11 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=23 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=18 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB done rank=14 done_value=3 packets=3
+WXSAMI3_RECEIVER_STUB complete
