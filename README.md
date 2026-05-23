@@ -13,8 +13,10 @@ CESM/MAGE/SAMI3 source trees, or input datasets.
 The current verified WACCM-X -> SAMI3 status is:
 
 ```text
-f19 online runtime live neutral-packet prototype,
-with two-packet cadence/done validation and file-mode fallback regression.
+f19 online runtime live neutral-packet prototype.
+Full SAMI3 smoke is validated for two packets plus done.
+Receiver-stub transport is validated for three live packets plus done.
+File-mode fallback regression remains validated.
 Not production live WACCM-X neutral forcing yet.
 ```
 
@@ -23,6 +25,7 @@ Latest verified jobs:
 ```text
 live two-packet smoke = 7641573, COMPLETED, exit 0:0
 file-mode fallback    = 7641579, COMPLETED, exit 0:0
+receiver-stub 3-pkt   = 7641623, COMPLETED, exit 0:0
 ```
 
 Latest receiver checks:
@@ -31,7 +34,15 @@ Latest receiver checks:
 pkt000000 live compare = max_rel=4.86991e-13
 pkt000001 live compare = max_rel=6.80359e-13
 file fallback compare  = max_rel=3.26946e-13
+stub packet count       = ranks 1..32 received 3 packets; ranks 0..32 got done
 ```
+
+The latest source-state phase diagnostic compared live packet 2 against
+same-run instantaneous CAM history at 00600.  The comparison confirms matching
+lat/lon and OMEGA, but T/U/V/Z/species differ because the live hook is in
+`cam_run2` before the later history-write phase.  Treat CAM history as a phase
+diagnostic, not as a strict same-call-site source-state reference for the
+current hook.
 
 ## Layout
 
@@ -70,6 +81,7 @@ Start with:
 docs/MAGE1.25_notes/mage125_waccmx_handoff_2026-05-23.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_NEUTRAL_PLAN_20260523.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_NEUTRAL_EXTRACTION_RESULT_20260523.md
+docs/MAGE1.25_notes/WACCMX_SAMI3_SOURCE_STATE_PHASE_VALIDATION_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_GAMERA_PHYSICS_REVIEW_20260523.md
 ```
 
@@ -98,13 +110,19 @@ Latest two-packet smoke launcher:
 slurm/run_waccmx_cam_sami3_live_payload_f19_multipacket_20260524.sbatch
 ```
 
+Latest receiver-only three-packet transport launcher:
+
+```text
+slurm/run_waccmx_cam_sami3_live_payload_f19_receiver_stub_3pkt_compare_20260524.sbatch
+```
+
 ## Known Physical Blockers
 
 Do not describe this snapshot as production live WACCM-X neutral forcing until
 these are handled:
 
 ```text
-strict same-source-time offline-vs-live source-state validation
+strict same-call-site offline-vs-live source-state validation
 explicit WACCM-X-top SAMI3-native fallback or blending policy
 N2 residual and He native/MSIS fallback policy hardening
 W-off / vertical-wind policy validation
