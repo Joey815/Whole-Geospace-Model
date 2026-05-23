@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 
 #define NZ 304
 #define NF 124
@@ -72,9 +73,31 @@ typedef struct {
     double n2_residual_negative_min;
 } SampleStats;
 
+static int n2_negative_mode = 0; /* 0=floor, 1=invalid, 2=fail */
+
 static void die(const char *msg) {
     fprintf(stderr, "%s\n", msg);
     exit(2);
+}
+
+static const char *n2_negative_mode_name(void) {
+    if (n2_negative_mode == 1) return "invalid";
+    if (n2_negative_mode == 2) return "fail";
+    return "floor";
+}
+
+static void init_n2_negative_mode(void) {
+    const char *value = getenv("WXSAMI3_N2_NEGATIVE_MODE");
+    if (!value || value[0] == '\0' || strcasecmp(value, "floor") == 0) {
+        n2_negative_mode = 0;
+    } else if (strcasecmp(value, "invalid") == 0) {
+        n2_negative_mode = 1;
+    } else if (strcasecmp(value, "fail") == 0) {
+        n2_negative_mode = 2;
+    } else {
+        die("WXSAMI3_N2_NEGATIVE_MODE must be floor, invalid, or fail");
+    }
+    fprintf(stderr, "N2 negative residual mode: %s\n", n2_negative_mode_name());
 }
 
 static void nc_check(int status, const char *what) {
@@ -436,12 +459,12 @@ static void print_sample_stats(const char *label, const SampleStats *stats) {
     double n2max = stats->n2_residual_used ? stats->n2_residual_max : NAN;
     double n2negmin = stats->n2_residual_negative ? stats->n2_residual_negative_min : NAN;
     fprintf(stderr,
-            "sample QC %s: samples=%lld invalid=%lld bad_weighted_z=%lld "
+            "sample QC %s: n2_negative_mode=%s samples=%lld invalid=%lld bad_weighted_z=%lld "
             "above_live_top=%lld n2_residual_used=%lld "
             "n2_residual_negative=%lld n2_residual_min=%.17g "
             "n2_residual_max=%.17g n2_residual_negative_min=%.17g\n",
-            label, stats->samples, stats->invalid_samples, stats->bad_weighted_z,
-            stats->above_live_top, stats->n2_residual_used,
+            label, n2_negative_mode_name(), stats->samples, stats->invalid_samples,
+            stats->bad_weighted_z, stats->above_live_top, stats->n2_residual_used,
             stats->n2_residual_negative, n2min, n2max, n2negmin);
 }
 
@@ -541,6 +564,14 @@ static void sample_live(const LiveState *st, const Weights *weights, double targ
         finite_real(q_o2) && finite_real(q_n) && finite_real(q_no)) {
         double residual = 1.0 - q_h - q_o - q_o2 - q_n - q_no;
         record_n2_residual(stats, residual);
+        if (residual < 0.0) {
+            if (n2_negative_mode == 1) {
+                if (stats) stats->invalid_samples++;
+                mark_invalid_sample(den, tn, uu, vv, ww);
+                return;
+            }
+            if (n2_negative_mode == 2) die("WXSAMI3 residual N2 is negative");
+        }
         q_n2 = fmax(residual, 1.0e-20);
     }
     if (!finite_real(temp) || !finite_real(uu_m) || !finite_real(vv_m) ||
@@ -662,6 +693,7 @@ int main(int argc, char **argv) {
         fprintf(stderr, "usage: %s LIVE_DUMP_PATTERN0 [LIVE_DUMP_PATTERN1] SAMI_GRID_DIR ESMF_WEIGHTS_NC OUT_PREFIX\n", argv[0]);
         return 2;
     }
+    init_n2_negative_mode();
     pattern0 = argv[1];
     if (argc == 5) {
         pattern1 = argv[1];

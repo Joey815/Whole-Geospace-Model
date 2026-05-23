@@ -1,0 +1,93 @@
+{
+  "payload_version": "wxsami3-live-payload-v2",
+  "payload_mode": "live",
+  "actual_transport": "runtime_live_packet",
+  "runtime_source": "CAM phys_state(:)",
+  "send_every_nsteps": 1,
+  "max_packets": 2,
+  "nstep": 1,
+  "dtime_phys_s":   3.0000000000000000E+02,
+  "packet_hour":   8.33333358E-02,
+  "packet_index": 1,
+  "payload_header": {
+    "magic": 20260522,
+    "nz": 304,
+    "nf": 124,
+    "nl": 5,
+    "nneut": 7
+  },
+  "runtime_map": {
+    "file": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/wxsami3_runtime_map_f19_20260523.bin",
+    "magic": 20260524,
+    "npoints": 3618816,
+    "n_s": 14475264,
+    "source_columns": 13824
+  },
+  "source_units": {
+    "temperature": "K",
+    "wind": "m/s",
+    "omega": "Pa/s diagnostic only",
+    "pressure": "Pa",
+    "height": "m",
+    "composition": "mass_mixing_ratio"
+  },
+  "payload_units": {
+    "density": "cm^-3",
+    "temperature": "K",
+    "wind": "cm/s"
+  },
+  "density_conversion": "q*mbarv/species_mw*pmid/(kB*T)*1e-6 -> cm^-3",
+  "source_species_order": ["O","O2","H","N","NO","N2","He"],
+  "payload_species_order": ["H","O","NO","O2","He","N2","N"],
+  "source_species_indices": [
+    {"name":"O","index":57},
+    {"name":"O2","index":58},
+    {"name":"H","index":37},
+    {"name":"N","index":51},
+    {"name":"NO","index":54},
+    {"name":"N2","index":-1},
+    {"name":"He","index":-1}
+  ],
+  "fallback_policy": {
+    "above_live_top": "payload sample marked invalid so SAMI3 native neutral state is retained",
+    "N2": "CAM N2 if finite, otherwise residual closure from major species",
+    "N2_negative_mode": "invalid",
+    "He": "payload value -1 so SAMI3 native/MSIS He is retained",
+    "W": "payload value 0; CAM omega diagnostic only",
+    "remap_scaling": "f19 gather-to-root prototype, not f09 production distributed remap"
+  },
+  "runtime_qc": {
+    "samples": 6031360,
+    "invalid": 1819902,
+    "above_live_top": 1642002,
+    "n2_residual_used": 4389358,
+    "n2_residual_negative": 177900,
+    "n2_residual_min":  -5.2937585309174473E-02,
+    "n2_residual_max":   8.1304884527564425E-01
+  },
+  "source_flags": {
+    "WACCMX_VALID": 4211458,
+    "SAMI3_NATIVE_ABOVE_TOP": 1642002,
+    "SAMI3_NATIVE_N2_INVALID": 177900,
+    "SAMI3_NATIVE_OTHER_INVALID": 0,
+    "SAMI3_NATIVE_HE": "policy: He payload value -1",
+    "SAMI3_NATIVE_W": "policy: W payload value 0"
+  },
+  "sender_checksum": {
+    "scope": "sum over all runtime-sent worker payload arrays",
+    "valid_i": 4211458,
+    "invalid_i": 1819902,
+    "valid_f": 4211458,
+    "invalid_f": 1819902,
+    "sum_denni":   1.4040114786818289E+20,
+    "sum_tni":   2.5157506910651245E+09,
+    "sum_ui":  -3.6080100080704613E+09,
+    "sum_vi":   2.9568898574542975E+09,
+    "sum_wi":   0.0000000000000000E+00,
+    "sum_dennf":   1.4040114786818289E+20,
+    "sum_tnf":   2.5157506910651245E+09,
+    "sum_uf":  -3.6080100080704613E+09,
+    "sum_vf":   2.9568898574542975E+09,
+    "sum_wf":   0.0000000000000000E+00
+  }
+}

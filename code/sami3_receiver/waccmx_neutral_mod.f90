@@ -72,6 +72,7 @@ contains
         integer, intent(in) :: header(6)
         real, intent(in) :: packet_hour
         integer :: nlocal, valid_i, invalid_i, valid_f, invalid_f
+        integer :: he_native_i, he_native_f, w_zero_i, w_zero_f
         real(kind=8) :: sum_denni, sum_tni, sum_ui, sum_vi, sum_wi
         real(kind=8) :: sum_dennf, sum_tnf, sum_uf, sum_vf, sum_wf
 
@@ -90,11 +91,18 @@ contains
         sum_uf    = sum(real(w_uf, kind=8))
         sum_vf    = sum(real(w_vf, kind=8))
         sum_wf    = sum(real(w_wf, kind=8))
+        he_native_i = valid_i
+        he_native_f = valid_f
+        w_zero_i = count(w_denni(:,:,:,pth) >= 0.0 .and. w_wi == 0.0)
+        w_zero_f = count(w_dennf(:,:,:,pth) >= 0.0 .and. w_wf == 0.0)
 
         print *, 'WACCMX_RECV_QC', taskid, header(6), packet_hour, &
                  valid_i, invalid_i, valid_f, invalid_f, &
                  sum_denni, sum_tni, sum_ui, sum_vi, sum_wi, &
                  sum_dennf, sum_tnf, sum_uf, sum_vf, sum_wf
+        print *, 'WACCMX_RECV_SOURCE_FLAGS', taskid, header(6), packet_hour, &
+                 nlocal, valid_i, invalid_i, valid_f, invalid_f, &
+                 he_native_i, he_native_f, w_zero_i, w_zero_f
 
     end subroutine waccmx_print_recv_qc
 
@@ -305,6 +313,8 @@ contains
         integer, intent(in) :: nll
         real, intent(in) :: hr
         integer :: i, j, k
+        integer :: nplane, valid_i, invalid_i, valid_f, invalid_f
+        integer :: he_native_i, he_native_f, w_zero_i, w_zero_f
 
         if (.not. lwaccmx_neutral) return
         call waccmx_load_neutral(hr)
@@ -316,6 +326,21 @@ contains
                 print *, 'WACCMX neutral apply policy: He payload is ignored; SAMI3 native He is retained'
             endif
             waccmx_apply_policy_logged = .true.
+        endif
+
+        if (waccmx_recv_qc_enabled()) then
+            nplane = nz*nf
+            invalid_i = count(w_denni(:,:,nll,pth) < 0.0)
+            invalid_f = count(w_dennf(:,:,nll,pth) < 0.0)
+            valid_i = nplane - invalid_i
+            valid_f = nplane - invalid_f
+            he_native_i = valid_i
+            he_native_f = valid_f
+            w_zero_i = count(w_denni(:,:,nll,pth) >= 0.0 .and. w_wi(:,:,nll) == 0.0)
+            w_zero_f = count(w_dennf(:,:,nll,pth) >= 0.0 .and. w_wf(:,:,nll) == 0.0)
+            print *, 'WACCMX_APPLY_QC', taskid, nll, hr, nplane, &
+                     valid_i, invalid_i, valid_f, invalid_f, &
+                     he_native_i, he_native_f, w_zero_i, w_zero_f
         endif
 
         do j = 1,nf

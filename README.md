@@ -29,6 +29,7 @@ receiver-stub 3-pkt   = 7641623, COMPLETED, exit 0:0
 N2-QC default smoke   = 7641625, COMPLETED, exit 0:0
 N2-QC invalid smoke   = 7641644, COMPLETED, exit 0:0
 source-flag metadata  = 7641645, COMPLETED, exit 0:0
+receiver source flags = 7641669, COMPLETED, exit 0:0
 ```
 
 Latest receiver checks:
@@ -41,6 +42,7 @@ stub packet count       = ranks 1..32 received 3 packets; ranks 0..32 got done
 N2-QC default mode      = WXSAMI3_N2_NEGATIVE_MODE=floor, build and 3-pkt smoke ok
 N2-QC invalid delta     = +177092 invalid samples vs floor, 3-pkt transport ok
 source-flag metadata    = WACCMX_VALID=4211362, ABOVE_TOP=1642906, N2_INVALID=177092
+full SAMI3 recv flags   = two packets, done=2, replay compare max_rel <= 6.76502e-13
 ```
 
 The latest source-state phase diagnostic compared live packet 2 against
@@ -91,6 +93,7 @@ docs/MAGE1.25_notes/WACCMX_SAMI3_SOURCE_STATE_PHASE_VALIDATION_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_N2_QC_CONTROL_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_N2_INVALID_MODE_RESULT_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_SOURCE_FLAGS_METADATA_20260524.md
+docs/MAGE1.25_notes/WACCMX_SAMI3_RECEIVER_SOURCE_FLAGS_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_GAMERA_PHYSICS_REVIEW_20260523.md
 ```
 
@@ -133,6 +136,12 @@ slurm/run_waccmx_cam_sami3_live_payload_f19_receiver_stub_3pkt_n2qc_invalid_2026
 slurm/run_waccmx_cam_sami3_live_payload_f19_receiver_stub_3pkt_source_flags_20260524.sbatch
 ```
 
+Latest full SAMI3 receiver source/fallback diagnostic launcher:
+
+```text
+slurm/run_waccmx_cam_sami3_live_payload_f19_multipacket_n2invalid_recvflags_20260524.sbatch
+```
+
 ## Known Physical Blockers
 
 Do not describe this snapshot as production live WACCM-X neutral forcing until
@@ -141,7 +150,7 @@ these are handled:
 ```text
 strict same-call-site offline-vs-live source-state validation
 explicit WACCM-X-top SAMI3-native fallback or blending policy
-receiver-side source/fallback flag diagnostics
+receiver-side reason split for above-top vs N2-invalid fallback if needed
 He native/MSIS fallback policy hardening
 W-off / vertical-wind policy validation
 REMIX -> SAMI3 potential/E-field forcing
