@@ -16,6 +16,7 @@ FATAL_RE = re.compile(
     r"(?:\bFATAL\b|\bforrtl\b|MPI_Abort|Unable to open input mesh|Segmentation fault|Traceback \(most recent call last\)|^\s*ERROR(?:\s+STOP|:|\s|$))",
     re.IGNORECASE | re.MULTILINE,
 )
+FIN_RE = re.compile(r"^\s*Fin\s*$", re.MULTILINE)
 
 
 def read_text(path):
@@ -42,12 +43,13 @@ def count(pattern, text):
 
 def validate_log(checks, label, path, min_raiju_writes, allow_incomplete):
     text = read_text(path)
+    has_fin = FIN_RE.search(text) is not None
     add_maybe_incomplete(checks, label + "_log_exists", path.is_file(), str(path), allow_incomplete)
     add_maybe_incomplete(
         checks,
         label + "_fin",
-        "Fin" in text,
-        "Fin" if "Fin" in text else "missing",
+        has_fin,
+        "Fin line" if has_fin else "missing",
         allow_incomplete,
     )
     raiju_writes = count(r"Writing RAIJU HDF5 DATA", text)
