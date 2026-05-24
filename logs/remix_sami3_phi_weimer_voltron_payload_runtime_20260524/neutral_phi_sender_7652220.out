@@ -1,0 +1,39 @@
+NEUTRAL_PHI_SENDER phi_payload_format=remix_sami3_phi_payload.v1 nframes=1
+NEUTRAL_PHI_SENDER connecting to 1094909953.0:492479170
+NEUTRAL_PHI_SENDER phi_stream=/home/jiaoy_group/jiaoy/data/MAGE1.25/waccmx-sami3-collab-20260524/logs/remix_sami3_live_phi_payload_writer_20260524/remix_sami3_phi_payload_live_from_remix.bin nframes=1
+NEUTRAL_PHI_SENDER connected; sending neutral count=1 start_step=0 start_packet_hour=0 hour_stride=0.25
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0001
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0002
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0003
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0004
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0005
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0006
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0007
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0008
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0009
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0010
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0011
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0012
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0013
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0014
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0015
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0016
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0017
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0018
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0019
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0020
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0021
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0022
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0023
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0024
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0025
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0026
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0027
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0028
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0029
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0030
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0031
+NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0032
+NEUTRAL_PHI_SENDER sent phi frame=0/1 hour=0 valid_until=1e+30 minmax not computed
+NEUTRAL_PHI_SENDER sent done signal
+NEUTRAL_PHI_SENDER done

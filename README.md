@@ -101,6 +101,11 @@ min/max `-36.93061447143555 / 31.483816146850586 statV`; comparison against
 the Python HDF5 adapter from the same package gave `max_abs_diff=3.8147e-06
 statV`.  The job was cancelled after artifact validation, so this validates
 the writer and payload contents, not a clean Voltron exit condition.
+That Voltron-generated payload has now been sent through the SAMI3 online MPI
+phi receiver path: job 7652220 completed 0:0, the C sender detected
+`remix_sami3_phi_payload.v1 nframes=1`, SAMI3 logged `WACCMX_PHI_RECV` with
+the same `-36.9306145 / 31.4838161 statV` min/max, `MASTER: All Done!`, online
+done signal 1, and neutral receiver QC remained at `max_rel=4.86991e-13`.
 Runtime blending is validated with alpha=0 exact baseline recovery.
 Density alpha scan is finite and continuous through alphaDavg=0.20.
 Pressure alpha scan at alphaDavg=0.05 is finite for alphaPavg=0.05 and 0.10.
@@ -140,6 +145,7 @@ remix phi append rt  = 7651789, COMPLETED, exit 0:0
 remix phi mpi rt     = 7651874, COMPLETED, exit 0:0
 remix phi bin mpi rt = 7651957, COMPLETED, exit 0:0
 remix live writer    = 7652185, payload validated, cancelled after evidence
+voltron phi mpi rt   = 7652220, COMPLETED, exit 0:0
 ```
 
 Latest receiver checks:

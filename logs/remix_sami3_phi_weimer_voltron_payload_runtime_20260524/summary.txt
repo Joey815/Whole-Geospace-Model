@@ -1,0 +1,46 @@
+Voltron-generated REMIX phi payload -> SAMI3 online MPI receiver smoke, 2026-05-24
+
+Goal:
+  Verify that the binary payload written by the Kaiju/Voltron runtime REMIX
+  POT writer is accepted by the existing SAMI3 online MPI phi receiver path.
+
+Input phi payload:
+  logs/remix_sami3_live_phi_payload_writer_20260524/remix_sami3_phi_payload_live_from_remix.bin
+
+Launcher:
+  slurm/run_sami3_online_receiver_remix_phi_weimer_voltron_payload_20260524.sbatch
+
+Slurm:
+  job_id = 7652220
+  state = COMPLETED
+  exit = 0:0
+  elapsed = 00:01:23
+  node = qhcn025
+
+Sender evidence:
+  NEUTRAL_PHI_SENDER phi_payload_format=remix_sami3_phi_payload.v1 nframes=1
+  NEUTRAL_PHI_SENDER sent phi frame=0/1 hour=0 valid_until=1e+30
+  NEUTRAL_PHI_SENDER sent done signal
+
+Receiver evidence:
+  SAMI3_USE_ONLINE_PHI_WEIMER: using online MPI phi_weimer payload
+  WACCMX_PHI_RECV 0 1 ... valid_until=1.00000002E+30 min/max=-36.9306145/31.4838161
+  hrutw2 = 0.00000000 1.00000002E+30
+  nweimer 1
+  MASTER: All Done!
+  WACCMX online done signal received: 1
+
+Neutral QC:
+  WACCMX_RECV_QC compare ok: ranks=32 occurrence=0 step_set=[0]
+  packet_hour_set=[0.0] max_abs=2.1033e+06 max_rel=4.86991e-13
+
+Error marker scan:
+  No fatal/forrtl/NaN/Abort/EOF/header-mismatch markers were found in the
+  selected receiver, sender, and Slurm logs.
+
+Interpretation:
+  This proves the Voltron runtime REMIX POT writer produces a payload that can
+  feed SAMI3's online MPI Weimer-potential path without changing the validated
+  receiver or C sender protocol. The remaining gap is process integration:
+  Voltron still writes a file that the C sender reads, rather than sending
+  phi frames directly from Voltron to the SAMI3 intercommunicator.

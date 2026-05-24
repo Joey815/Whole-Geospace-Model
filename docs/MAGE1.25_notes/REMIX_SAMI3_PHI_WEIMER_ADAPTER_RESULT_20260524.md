@@ -638,6 +638,54 @@ Kaiju REMIX arrays are native (lon,lat), while HDF5/Python views are (lat,lon)
 the writer must use captured gcm%APEX%gcmOutput(...,POT), matching the package
 ```
 
+## Voltron Payload Through SAMI3 Online MPI
+
+The Voltron-generated payload was then used directly as the phi input to the
+validated C sender + SAMI3 online MPI receiver path.
+
+Launcher:
+
+```text
+slurm/run_sami3_online_receiver_remix_phi_weimer_voltron_payload_20260524.sbatch
+```
+
+Archived evidence:
+
+```text
+logs/remix_sami3_phi_weimer_voltron_payload_runtime_20260524/summary.txt
+logs/remix_sami3_phi_weimer_voltron_payload_runtime_20260524/sacct_7652220.txt
+logs/remix_sami3_phi_weimer_voltron_payload_runtime_20260524/neutral_phi_sender_7652220.out
+logs/remix_sami3_phi_weimer_voltron_payload_runtime_20260524/sami3_online_receiver_7652220.out
+logs/remix_sami3_phi_weimer_voltron_payload_runtime_20260524/receiver_markers_7652220.txt
+logs/remix_sami3_phi_weimer_voltron_payload_runtime_20260524/recv_qc_compare_7652220.txt
+logs/remix_sami3_phi_weimer_voltron_payload_runtime_20260524/error_marker_scan_7652220.txt
+```
+
+Result:
+
+```text
+job_id = 7652220
+state = COMPLETED
+exit = 0:0
+elapsed = 00:01:23
+node = qhcn025
+
+NEUTRAL_PHI_SENDER phi_payload_format=remix_sami3_phi_payload.v1 nframes=1
+NEUTRAL_PHI_SENDER sent phi frame=0/1 hour=0 valid_until=1e+30
+SAMI3_USE_ONLINE_PHI_WEIMER: using online MPI phi_weimer payload
+WACCMX_PHI_RECV 0 1 ... valid_until=1.00000002E+30 min/max=-36.9306145/31.4838161
+hrutw2 = 0.00000000 1.00000002E+30
+nweimer 1
+MASTER: All Done!
+WACCMX online done signal received: 1
+WACCMX_RECV_QC compare ok: ranks=32 occurrence=0 step_set=[0] packet_hour_set=[0.0] max_rel=4.86991e-13
+```
+
+This proves the Voltron runtime REMIX POT writer produces a binary payload
+compatible with the already validated SAMI3 online MPI Weimer path.  The
+remaining process gap is that Voltron still writes a file and the C sender reads
+that file; direct Voltron -> SAMI3 MPI is not implemented yet.
+
 ## Current Limitation
 
 This adapter proves the file-format bridge and static SAMI3 runtime ingestion
