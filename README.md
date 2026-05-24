@@ -30,6 +30,9 @@ N2-QC default smoke   = 7641625, COMPLETED, exit 0:0
 N2-QC invalid smoke   = 7641644, COMPLETED, exit 0:0
 source-flag metadata  = 7641645, COMPLETED, exit 0:0
 receiver source flags = 7641669, COMPLETED, exit 0:0
+reason flag sidecar   = 7645354, COMPLETED, exit 0:0
+file tag212 regression= 7645380, COMPLETED, exit 0:0
+stub tag212 runtime   = 7645415, COMPLETED, exit 0:0
 ```
 
 Latest receiver checks:
@@ -43,6 +46,9 @@ N2-QC default mode      = WXSAMI3_N2_NEGATIVE_MODE=floor, build and 3-pkt smoke 
 N2-QC invalid delta     = +177092 invalid samples vs floor, 3-pkt transport ok
 source-flag metadata    = WACCMX_VALID=4211362, ABOVE_TOP=1642906, N2_INVALID=177092
 full SAMI3 recv flags   = two packets, done=2, replay compare max_rel <= 6.76502e-13
+reason flag sidecar     = tag 212, full SAMI3 receiver diff=[0,0,0,0,0]
+file tag212 regression  = valid=4494609, other_invalid=1536751, unknown=0
+stub tag212 runtime     = 3 packets, done=3, packet2 diff=[0,0,0,0,0]
 ```
 
 The latest source-state phase diagnostic compared live packet 2 against
@@ -94,6 +100,7 @@ docs/MAGE1.25_notes/WACCMX_SAMI3_N2_QC_CONTROL_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_N2_INVALID_MODE_RESULT_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_SOURCE_FLAGS_METADATA_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_RECEIVER_SOURCE_FLAGS_RESULT_20260524.md
+docs/MAGE1.25_notes/WACCMX_SAMI3_SOURCE_REASON_FLAGS_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_GAMERA_PHYSICS_REVIEW_20260523.md
 ```
 
@@ -142,6 +149,12 @@ Latest full SAMI3 receiver source/fallback diagnostic launcher:
 slurm/run_waccmx_cam_sami3_live_payload_f19_multipacket_n2invalid_recvflags_20260524.sbatch
 ```
 
+Latest full SAMI3 source-reason sidecar diagnostic launcher:
+
+```text
+slurm/run_waccmx_cam_sami3_live_payload_f19_multipacket_reasonflags_20260524.sbatch
+```
+
 ## Known Physical Blockers
 
 Do not describe this snapshot as production live WACCM-X neutral forcing until
@@ -150,7 +163,6 @@ these are handled:
 ```text
 strict same-call-site offline-vs-live source-state validation
 explicit WACCM-X-top SAMI3-native fallback or blending policy
-receiver-side reason split for above-top vs N2-invalid fallback if needed
 He native/MSIS fallback policy hardening
 W-off / vertical-wind policy validation
 REMIX -> SAMI3 potential/E-field forcing

@@ -1,0 +1,100 @@
+RUN_DIR=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_file_payload_f19_regression_20260524_0000
+CASE=/home/jiaoy_group/jiaoy/data/CESM/cases/mage_qpx2000_f19_sami3_live_neutral_20260523
+CESM_EXE=/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/bld/cesm.exe
+CESM_RUNDIR=/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run
+PAYLOAD_MODE=file
+PAYLOAD_PREFIX=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_payload_esmf_msis_top_20231013_0000/waccmx_neutral_rank
+PORT=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_file_payload_f19_regression_20260524_0000/waccmx_sami3_online_port.txt
+START=Sun May 24 11:06:52 CST 2026
+HOST=qhcn078
+PRTE=/apps/support/intel_spr_rocky8.9/openmpi/5.0.3/gcc8.5.0/bin/prte
+PRUN=/apps/support/intel_spr_rocky8.9/openmpi/5.0.3/gcc8.5.0/bin/prun
+--- WACCM-X sender markers
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-105941: WXSAMI3 online sender enabled
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-105941: WXSAMI3 port file: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_file_payload_f19_regression_20260524_0000/waccmx_sami3_online_port.txt
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-105941: WXSAMI3 payload mode: file
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-105941: WXSAMI3 payload prefix: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_payload_esmf_msis_top_20231013_0000/waccmx_neutral_rank
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-105941: WXSAMI3 SAMI3 workers:           32
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-105941: WXSAMI3 send cadence nsteps:            1
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-105941: WXSAMI3 max packets (-1 unlimited):           -1
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-105941: WXSAMI3 N2 negative residual mode: floor
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-105941: WXSAMI3 live phys_state diagnostics:  F
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-105941: WXSAMI3 live state dump enabled:  F
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-105941: WXSAMI3 connecting to SAMI3 online port
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-105941: WXSAMI3 connected to SAMI3
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-105941: WXSAMI3 sent neutral packet: nstep,packet_hour,count=           0   0.00000000               0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-105941: WXSAMI3 sent done signal to SAMI3
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-105941: WXSAMI3 disconnected from SAMI3
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260524-105941: ******* END OF MODEL RUN *******
+--- SAMI3 receiver markers
+ WACCMX online port ready: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_file_payload_f19_regression_20260524_0000/waccmx_sami3_online_port.txt
+ WACCMX online sender connected
+ WACCMX online neutral received: taskid,step,packet_hr=           1           0   0.00000000
+ WACCMX_RECV_QC           1           0   0.00000000          141140       47340      140874       47606   4.3202568193152625E+018   97568953.995101929        237993788.97753149        168285939.21294957        0.0000000000000000        4.3138500687976632E+018   96492531.088668823        257380710.31915414        182003141.13302481        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=           2           0   0.00000000
+ WACCMX_RECV_QC           2           0   0.00000000          140335       48145      140143       48337   4.4875453131963116E+018   94253883.130538940        239137837.19877625        217322990.27779341        0.0000000000000000        4.4806804208664576E+018   93517598.057754517        233293488.48087063        228100455.72579879        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=           3           0   0.00000000
+ WACCMX_RECV_QC           3           0   0.00000000          139845       48635      139695       48785   4.5804148237246377E+018   92024287.645065308        178490715.68675649        245795053.56438625        0.0000000000000000        4.5821315256561782E+018   91476657.230926514        161035285.29661471        254900391.53273594        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=           4           0   0.00000000
+ WACCMX_RECV_QC           4           0   0.00000000          139525       48955      139374       49106   4.5144178018992471E+018   90601516.989608765        133195860.73350567        202439608.80903488        0.0000000000000000        4.5256665798819415E+018   90089862.793579102        117749484.93746462        208717442.40938306        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=           5           0   0.00000000
+ WACCMX_RECV_QC           5           0   0.00000000          139203       49277      139086       49394   4.3851596796167296E+018   89491879.922668457        117364491.91914213        96990531.925843805        0.0000000000000000        4.3977493212225659E+018   89057243.318389893        107275093.02926138        100696414.90809309        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=           6           0   0.00000000
+ WACCMX_RECV_QC           6           0   0.00000000          138902       49578      138803       49677   4.2652458108279127E+018   88447929.284851074        97529936.716938674        77398294.822273538        0.0000000000000000        4.2691675428250501E+018   88072748.526214600        93296893.560155600        78286323.197256610        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=           7           0   0.00000000
+ WACCMX_RECV_QC           7           0   0.00000000          138593       49887      138484       49996   4.2470094803504287E+018   87272171.920028687        92500485.164883211        82322928.201922119        0.0000000000000000        4.2438221002224937E+018   86915589.420669556        91226638.690536991        83379276.978254408        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=           8           0   0.00000000
+ WACCMX_RECV_QC           8           0   0.00000000          138233       50247      138142       50338   4.1449902892157025E+018   86165840.159744263        55659806.634192631        41393298.151225910        0.0000000000000000        4.1535832872752604E+018   85856589.063690186        54848416.624055937        41334284.815722197        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=           9           0   0.00000000
+ WACCMX_RECV_QC           9           0   0.00000000          137966       50514      137894       50586   4.1073112467198991E+018   85442388.581832886        424463.33504695445        45219413.652976781        0.0000000000000000        4.1221579610842455E+018   85187813.553619385       -3680227.0211711749        39472876.281631187        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          10           0   0.00000000
+ WACCMX_RECV_QC          10           0   0.00000000          137792       50688      137761       50719   4.1970079208181606E+018   85013785.337234497       -31429699.116085820        28113232.841740325        0.0000000000000000        4.2025812132718612E+018   84859620.041290283       -40160873.771651506        16915459.530110806        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          11           0   0.00000000
+ WACCMX_RECV_QC          11           0   0.00000000          137710       50770      137708       50772   4.2730396084968781E+018   84755420.892562866       -18347752.076136023        25493951.726113789        0.0000000000000000        4.2687917173540434E+018   84691485.615234375       -33519372.625640690        7772591.0821743533        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          12           0   0.00000000
+ WACCMX_RECV_QC          12           0   0.00000000          137717       50763      137724       50756   4.3249562936706171E+018   84698936.725402832       -21627528.451176994        51049727.970969349        0.0000000000000000        4.3167237668780314E+018   84697896.367370605       -49598178.576104127        31532397.926855728        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          13           0   0.00000000
+ WACCMX_RECV_QC          13           0   0.00000000          137820       50660      137861       50619   4.3258281784473211E+018   84967908.004928589       -78881284.069204032        38210289.823446363        0.0000000000000000        4.3130093742879232E+018   85101758.822677612       -125433130.54130837        26623837.494998686        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          14           0   0.00000000
+ WACCMX_RECV_QC          14           0   0.00000000          138056       50424      138148       50332   4.3248828065092352E+018   85646532.456466675       -196123334.02171934        3003805.7393391468        0.0000000000000000        4.3049069996978540E+018   85930222.760101318       -250451982.23282346       -1740223.3269627355        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          15           0   0.00000000
+ WACCMX_RECV_QC          15           0   0.00000000          138484       49996      138619       49861   4.3597341255732106E+018   86984456.574798584       -343505509.07214725        31970043.314749837        0.0000000000000000        4.3423337502534861E+018   87351970.725585938       -392960677.96690351        27668009.508701392        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          16           0   0.00000000
+ WACCMX_RECV_QC          16           0   0.00000000          139022       49458      139163       49317   4.3280623954416758E+018   88872616.408081055       -462598018.47363842        80478984.528966159        0.0000000000000000        4.3282606847111183E+018   89248026.462493896       -502887516.14412820        78014228.534724027        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          17           0   0.00000000
+ WACCMX_RECV_QC          17           0   0.00000000          139558       48922      139674       48806   4.4151222602028959E+018   90799162.013793945       -570079175.89278865        114126495.59428920        0.0000000000000000        4.4348203970121902E+018   91112815.167251587       -595559272.67746150        111123700.38537982        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          18           0   0.00000000
+ WACCMX_RECV_QC          18           0   0.00000000          140137       48343      140250       48230   4.5159180613513687E+018   92851292.632171631       -618730702.58627295        170047622.02905905        0.0000000000000000        4.5399169600650921E+018   93150567.499298096       -633535668.40121603        164372845.11913913        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          19           0   0.00000000
+ WACCMX_RECV_QC          19           0   0.00000000          140736       47744      140818       47662   4.5294226661671767E+018   95045337.024429321       -666462413.05848420        184197967.17017576        0.0000000000000000        4.5576184621071365E+018   95307715.266632080       -669550065.38773358        175652665.48107186        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          20           0   0.00000000
+ WACCMX_RECV_QC          20           0   0.00000000          141242       47238      141313       47167   4.4891879584366618E+018   96926505.772628784       -674554855.69322014        221489512.34844300        0.0000000000000000        4.5073405109511910E+018   97180900.180923462       -666320709.79378414        213009691.49852818        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          21           0   0.00000000
+ WACCMX_RECV_QC          21           0   0.00000000          141728       46752      141775       46705   4.5083748392420367E+018   98633373.405181885       -629023987.67147028        268664847.19963133        0.0000000000000000        4.5180038443985900E+018   98866182.580169678       -610576908.73655915        258753747.31134135        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          22           0   0.00000000
+ WACCMX_RECV_QC          22           0   0.00000000          142146       46334      142163       46317   4.5430308206167383E+018   100417881.20489502       -589482450.21071780        274282393.98791045        0.0000000000000000        4.5502967036202931E+018   100597269.59608459       -563783642.91615641        264075030.58309668        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          23           0   0.00000000
+ WACCMX_RECV_QC          23           0   0.00000000          142496       45984      142503       45977   4.5288339624190802E+018   102188827.20771790       -569978932.97841442        289266305.72044605        0.0000000000000000        4.5372580340826045E+018   102316430.93495178       -537562298.31793356        276845232.73333913        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          24           0   0.00000000
+ WACCMX_RECV_QC          24           0   0.00000000          142816       45664      142817       45663   4.5659182023543557E+018   103716843.08392334       -553612324.65677404        238877597.46334201        0.0000000000000000        4.5723316635746109E+018   103759310.64840698       -514025490.20760822        225861735.18407366        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          25           0   0.00000000
+ WACCMX_RECV_QC          25           0   0.00000000          143067       45413      143047       45433   4.6747078460565760E+018   104876757.26870728       -502893107.71513951        217363934.12465474        0.0000000000000000        4.6773990275915356E+018   104796287.35778809       -459541593.63240093        202571574.42127076        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          26           0   0.00000000
+ WACCMX_RECV_QC          26           0   0.00000000          143174       45306      143129       45351   4.7674937978614292E+018   105623512.48959351       -407568852.68959653        221986538.47217435        0.0000000000000000        4.7615073748839025E+018   105411697.33108521       -362786533.99319983        203514808.44707054        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          27           0   0.00000000
+ WACCMX_RECV_QC          27           0   0.00000000          143220       45260      143152       45328   4.7838120399801620E+018   106135000.65116882       -276476090.52287292        221676714.42048654        0.0000000000000000        4.7713205079577027E+018   105779593.69203186       -231634069.13133553        203657135.60305920        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          28           0   0.00000000
+ WACCMX_RECV_QC          28           0   0.00000000          143218       45262      143116       45364   4.6687446721443697E+018   106314062.04432678       -132372284.38185361        198338598.00330833        0.0000000000000000        4.6583345181325486E+018   105798367.00534058       -88813219.829280868        182140338.43599063        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          29           0   0.00000000
+ WACCMX_RECV_QC          29           0   0.00000000          143155       45325      143014       45466   4.5419745071601085E+018   106002861.33607483       -33244917.972950920        159794717.61603746        0.0000000000000000        4.5334775748360202E+018   105300063.77577209        9952991.3413661942        146417350.72762784        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          30           0   0.00000000
+ WACCMX_RECV_QC          30           0   0.00000000          142981       45499      142756       45724   4.4693855846869740E+018   105218072.51737976        25414980.267138816        149503188.06051785        0.0000000000000000        4.4676675257674542E+018   104238574.01774597        70642588.676393956        138991908.90206167        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          31           0   0.00000000
+ WACCMX_RECV_QC          31           0   0.00000000          142604       45876      142355       46125   4.3905641851675331E+018   103732426.90859985        88121596.698920310        118559130.29402117        0.0000000000000000        4.3899087317140833E+018   102564671.29647827        135358421.36288559        114557851.92220144        0.0000000000000000
+ WACCMX online neutral received: taskid,step,packet_hr=          32           0   0.00000000
+ WACCMX_RECV_QC          32           0   0.00000000          141988       46492      141727       46753   4.2884437374327634E+018   101151698.30776978        171026701.65655059        101592534.22276905        0.0000000000000000        4.2806908873449641E+018   99929856.366210938        212003679.20604703        109592672.02018803        0.0000000000000000
+ MASTER: All Done!
+ WACCMX online done signal received:           1
+--- Receiver QC compare
+WACCMX_RECV_QC compare ok: ranks=32 occurrence=0 step_set=[0] packet_hour_set=[0.0] max_abs=1.38854e+06 max_rel=3.26946e-13
+END=Sun May 24 11:09:17 CST 2026

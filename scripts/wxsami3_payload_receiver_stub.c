@@ -18,8 +18,13 @@ enum {
     TAG_UF = 209,
     TAG_VF = 210,
     TAG_WF = 211,
+    TAG_SOURCE_FLAGS = 212,
     TAG_DONE = 299,
-    WXSAMI3_MAGIC = 20260522
+    WXSAMI3_MAGIC = 20260522,
+    SOURCE_FLAG_VALID = 1,
+    SOURCE_FLAG_ABOVE_TOP = 2,
+    SOURCE_FLAG_N2_INVALID = 3,
+    SOURCE_FLAG_OTHER_INVALID = 4
 };
 
 static void abort_msg(int rank, const char *msg, int rc)
@@ -123,7 +128,9 @@ int main(int argc, char **argv)
         int nlocal4 = nlocal * nneut;
         int max_count = nlocal4 > nlocal ? nlocal4 : nlocal;
         float *buf = (float *)malloc((size_t)max_count * sizeof(float));
+        int *source_flags = (int *)malloc((size_t)nlocal * sizeof(int));
         if (!buf) abort_msg(rank, "allocation failed", 6);
+        if (!source_flags) abort_msg(rank, "source flag allocation failed", 7);
 
         double sum = 0.0;
         float minv = FLT_MAX, maxv = -FLT_MAX;
@@ -137,12 +144,39 @@ int main(int argc, char **argv)
         recv_float_field(peer, TAG_UF, buf, nlocal, &sum, &minv, &maxv);
         recv_float_field(peer, TAG_VF, buf, nlocal, &sum, &minv, &maxv);
         recv_float_field(peer, TAG_WF, buf, nlocal, &sum, &minv, &maxv);
+        MPI_Recv(source_flags, nlocal, MPI_INT, 0, TAG_SOURCE_FLAGS, peer, MPI_STATUS_IGNORE);
+
+        int flag_valid = 0, flag_above = 0, flag_n2 = 0, flag_other = 0, flag_unknown = 0;
+        for (int i = 0; i < nlocal; ++i) {
+            switch (source_flags[i]) {
+            case SOURCE_FLAG_VALID:
+                flag_valid++;
+                break;
+            case SOURCE_FLAG_ABOVE_TOP:
+                flag_above++;
+                break;
+            case SOURCE_FLAG_N2_INVALID:
+                flag_n2++;
+                break;
+            case SOURCE_FLAG_OTHER_INVALID:
+                flag_other++;
+                break;
+            default:
+                flag_unknown++;
+                break;
+            }
+        }
+
         free(buf);
+        free(source_flags);
         packets++;
 
         printf("WXSAMI3_RECEIVER_STUB packet rank=%d packet=%d nstep=%d hour=%g nz=%d nf=%d nl=%d nneut=%d sum=%.17g min=%g max=%g\n",
                rank, packets - 1, header[5], packet_hour, nz, nf, nl, nneut,
                sum, minv, maxv);
+        printf("WXSAMI3_RECEIVER_STUB source_flags rank=%d packet=%d valid=%d above_top=%d n2_invalid=%d other=%d unknown=%d\n",
+               rank, packets - 1, flag_valid, flag_above, flag_n2, flag_other,
+               flag_unknown);
         fflush(stdout);
     }
 

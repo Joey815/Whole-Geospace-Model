@@ -20,7 +20,12 @@ module waccmx_neutral_mod
     integer, parameter :: waccmx_tag_uf = 209
     integer, parameter :: waccmx_tag_vf = 210
     integer, parameter :: waccmx_tag_wf = 211
+    integer, parameter :: waccmx_tag_source_flags = 212
     integer, parameter :: waccmx_tag_done = 299
+    integer, parameter :: waccmx_flag_valid = 1
+    integer, parameter :: waccmx_flag_above_top = 2
+    integer, parameter :: waccmx_flag_n2_invalid = 3
+    integer, parameter :: waccmx_flag_other_invalid = 4
 
     logical :: waccmx_loaded = .false.
     logical :: waccmx_online_connected = .false.
@@ -35,6 +40,7 @@ module waccmx_neutral_mod
     real, allocatable :: w_ui(:,:,:), w_uf(:,:,:)
     real, allocatable :: w_vi(:,:,:), w_vf(:,:,:)
     real, allocatable :: w_wi(:,:,:), w_wf(:,:,:)
+    integer, allocatable :: w_source_flag(:,:,:)
 
 contains
 
@@ -46,6 +52,7 @@ contains
             allocate(w_ui(nz,nf,nl), w_uf(nz,nf,nl))
             allocate(w_vi(nz,nf,nl), w_vf(nz,nf,nl))
             allocate(w_wi(nz,nf,nl), w_wf(nz,nf,nl))
+            allocate(w_source_flag(nz,nf,nl))
         endif
 
     end subroutine waccmx_alloc_arrays
@@ -73,6 +80,7 @@ contains
         real, intent(in) :: packet_hour
         integer :: nlocal, valid_i, invalid_i, valid_f, invalid_f
         integer :: he_native_i, he_native_f, w_zero_i, w_zero_f
+        integer :: flag_valid, flag_above, flag_n2, flag_other, flag_unknown
         real(kind=8) :: sum_denni, sum_tni, sum_ui, sum_vi, sum_wi
         real(kind=8) :: sum_dennf, sum_tnf, sum_uf, sum_vf, sum_wf
 
@@ -95,13 +103,19 @@ contains
         he_native_f = valid_f
         w_zero_i = count(w_denni(:,:,:,pth) >= 0.0 .and. w_wi == 0.0)
         w_zero_f = count(w_dennf(:,:,:,pth) >= 0.0 .and. w_wf == 0.0)
+        flag_valid = count(w_source_flag == waccmx_flag_valid)
+        flag_above = count(w_source_flag == waccmx_flag_above_top)
+        flag_n2 = count(w_source_flag == waccmx_flag_n2_invalid)
+        flag_other = count(w_source_flag == waccmx_flag_other_invalid)
+        flag_unknown = nlocal - flag_valid - flag_above - flag_n2 - flag_other
 
         print *, 'WACCMX_RECV_QC', taskid, header(6), packet_hour, &
                  valid_i, invalid_i, valid_f, invalid_f, &
                  sum_denni, sum_tni, sum_ui, sum_vi, sum_wi, &
                  sum_dennf, sum_tnf, sum_uf, sum_vf, sum_wf
         print *, 'WACCMX_RECV_SOURCE_FLAGS', taskid, header(6), packet_hour, &
-                 nlocal, valid_i, invalid_i, valid_f, invalid_f, &
+                 nlocal, flag_valid, flag_above, flag_n2, flag_other, &
+                 flag_unknown, valid_i, invalid_i, valid_f, invalid_f, &
                  he_native_i, he_native_f, w_zero_i, w_zero_f
 
     end subroutine waccmx_print_recv_qc
@@ -244,6 +258,8 @@ contains
                       waccmx_peer_comm, MPI_STATUS_IGNORE, ierr)
         call MPI_Recv(w_wf, nlocal, MPI_REAL, 0, waccmx_tag_wf, &
                       waccmx_peer_comm, MPI_STATUS_IGNORE, ierr)
+        call MPI_Recv(w_source_flag, nlocal, MPI_INTEGER, 0, waccmx_tag_source_flags, &
+                      waccmx_peer_comm, MPI_STATUS_IGNORE, ierr)
 
         waccmx_online_packet_count = waccmx_online_packet_count + 1
         waccmx_loaded = .true.
@@ -302,6 +318,11 @@ contains
         read(unit) w_vf
         read(unit) w_wf
         close(unit)
+        where (w_denni(:,:,:,pth) >= 0.0)
+            w_source_flag = waccmx_flag_valid
+        elsewhere
+            w_source_flag = waccmx_flag_other_invalid
+        endwhere
 
         waccmx_loaded = .true.
         print *, 'WACCMX neutral loaded: taskid,file=', taskid, trim(fname)
@@ -315,6 +336,7 @@ contains
         integer :: i, j, k
         integer :: nplane, valid_i, invalid_i, valid_f, invalid_f
         integer :: he_native_i, he_native_f, w_zero_i, w_zero_f
+        integer :: flag_valid, flag_above, flag_n2, flag_other, flag_unknown
 
         if (.not. lwaccmx_neutral) return
         call waccmx_load_neutral(hr)
@@ -338,9 +360,16 @@ contains
             he_native_f = valid_f
             w_zero_i = count(w_denni(:,:,nll,pth) >= 0.0 .and. w_wi(:,:,nll) == 0.0)
             w_zero_f = count(w_dennf(:,:,nll,pth) >= 0.0 .and. w_wf(:,:,nll) == 0.0)
+            flag_valid = count(w_source_flag(:,:,nll) == waccmx_flag_valid)
+            flag_above = count(w_source_flag(:,:,nll) == waccmx_flag_above_top)
+            flag_n2 = count(w_source_flag(:,:,nll) == waccmx_flag_n2_invalid)
+            flag_other = count(w_source_flag(:,:,nll) == waccmx_flag_other_invalid)
+            flag_unknown = nplane - flag_valid - flag_above - flag_n2 - flag_other
             print *, 'WACCMX_APPLY_QC', taskid, nll, hr, nplane, &
                      valid_i, invalid_i, valid_f, invalid_f, &
                      he_native_i, he_native_f, w_zero_i, w_zero_f
+            print *, 'WACCMX_APPLY_SOURCE_FLAGS', taskid, nll, hr, nplane, &
+                     flag_valid, flag_above, flag_n2, flag_other, flag_unknown
         endif
 
         do j = 1,nf

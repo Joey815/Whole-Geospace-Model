@@ -27,7 +27,13 @@ module wxsami3_online_stub_mod
    integer, parameter :: tag_uf     = 209
    integer, parameter :: tag_vf     = 210
    integer, parameter :: tag_wf     = 211
+   integer, parameter :: tag_source_flags = 212
    integer, parameter :: tag_done   = 299
+
+   integer, parameter :: source_flag_waccmx_valid = 1
+   integer, parameter :: source_flag_above_top = 2
+   integer, parameter :: source_flag_n2_invalid = 3
+   integer, parameter :: source_flag_other_invalid = 4
 
    logical :: is_initialized = .false.
    logical :: is_enabled = .false.
@@ -700,9 +706,13 @@ contains
       write(118,'(A)') '  "density_conversion": "q*mbarv/species_mw*pmid/(kB*T)*1e-6 -> cm^-3",'
       write(118,'(A)') '  "vertical_wind_policy": "W not sent; omega diagnosed only",'
       write(118,'(A,A,A)') '  "n2_negative_mode": "', trim(n2_negative_mode), '",'
+      write(118,'(A,I0,A)') '  "source_flag_mpi_tag": ', tag_source_flags, ','
       write(118,'(A)') '  "source_flag_contract": ["WACCMX_VALID", ' // &
                          '"SAMI3_NATIVE_ABOVE_TOP", "SAMI3_NATIVE_N2_INVALID", ' // &
-                         '"SAMI3_NATIVE_OTHER_INVALID", "SAMI3_NATIVE_HE", "SAMI3_NATIVE_W"],'
+                         '"SAMI3_NATIVE_OTHER_INVALID"],'
+      write(118,'(A)') '  "source_flag_values": {"WACCMX_VALID":1, ' // &
+                         '"SAMI3_NATIVE_ABOVE_TOP":2, "SAMI3_NATIVE_N2_INVALID":3, ' // &
+                         '"SAMI3_NATIVE_OTHER_INVALID":4},'
       write(118,'(A)') '  "payload_species_order": ["H","O","NO","O2","He","N2","N"],'
       write(118,'(A)') '  "fallback_policy": "above-live-top samples invalid; He payload=-1 native fallback; W payload=0",'
       write(118,'(A)') '  "species": ['
@@ -791,6 +801,10 @@ contains
       write(118,'(A)') '  "density_conversion": "q*mbarv/species_mw*pmid/(kB*T)*1e-6 -> cm^-3",'
       write(118,'(A)') '  "source_species_order": ["O","O2","H","N","NO","N2","He"],'
       write(118,'(A)') '  "payload_species_order": ["H","O","NO","O2","He","N2","N"],'
+      write(118,'(A,I0,A)') '  "source_flag_mpi_tag": ', tag_source_flags, ','
+      write(118,'(A)') '  "source_flag_values": {"WACCMX_VALID":1, ' // &
+                         '"SAMI3_NATIVE_ABOVE_TOP":2, "SAMI3_NATIVE_N2_INVALID":3, ' // &
+                         '"SAMI3_NATIVE_OTHER_INVALID":4},'
       write(118,'(A)') '  "source_species_indices": ['
       do ispc = 1, n_live_species
          if (ispc < n_live_species) then
@@ -1070,6 +1084,7 @@ contains
       integer :: worker
       real, allocatable :: denni(:), tni(:), ui(:), vi(:), wi(:)
       real, allocatable :: dennf(:), tnf(:), uf(:), vf(:), wf(:)
+      integer, allocatable :: source_flag(:)
       integer :: samples, invalid, above_top, n2_used, n2_negative
       integer :: valid_i, invalid_i, valid_f, invalid_f
       real(r8) :: payload_sums(10)
@@ -1192,7 +1207,9 @@ contains
                      vi(sami_nlocal), wi(sami_nlocal))
             allocate(dennf(sami_nlocal4), tnf(sami_nlocal), uf(sami_nlocal), &
                      vf(sami_nlocal), wf(sami_nlocal))
+            allocate(source_flag(sami_nlocal))
             call wxsami3_fill_live_worker(worker, src, denni, tni, ui, vi, wi, &
+                                          source_flag, &
                                           samples, invalid, above_top, n2_used, &
                                           n2_negative, n2_min, n2_max)
             dennf = denni
@@ -1204,8 +1221,9 @@ contains
                                           uf, vf, wf, valid_i, invalid_i, &
                                           valid_f, invalid_f, payload_sums)
             call wxsami3_send_worker_arrays(worker, nstep, packet_hour, denni, tni, &
-                                            ui, vi, wi, dennf, tnf, uf, vf, wf)
-            deallocate(denni, tni, ui, vi, wi, dennf, tnf, uf, vf, wf)
+                                            ui, vi, wi, dennf, tnf, uf, vf, wf, &
+                                            source_flag)
+            deallocate(denni, tni, ui, vi, wi, dennf, tnf, uf, vf, wf, source_flag)
          enddo
 
          write(iulog,*) 'WXSAMI3 live runtime packet QC samples,invalid,above_top=', &
@@ -1253,13 +1271,14 @@ contains
 
    end subroutine wxsami3_accum_payload_qc
 
-   subroutine wxsami3_fill_live_worker(worker, src, den, tn, uu, vv, ww, &
+   subroutine wxsami3_fill_live_worker(worker, src, den, tn, uu, vv, ww, source_flag, &
                                        samples, invalid, above_top, n2_used, &
                                        n2_negative, n2_min, n2_max)
 
       integer, intent(in) :: worker
       real(r8), intent(in) :: src(:,:,:)
       real, intent(out) :: den(:), tn(:), uu(:), vv(:), ww(:)
+      integer, intent(out) :: source_flag(:)
       integer, intent(inout) :: samples, invalid, above_top, n2_used, n2_negative
       real(r8), intent(inout) :: n2_min, n2_max
 
@@ -1273,6 +1292,7 @@ contains
       uu = 0.0
       vv = 0.0
       ww = 0.0
+      source_flag = source_flag_other_invalid
 
       do k = 1, sami_nl
          g0 = (worker - 1) * (sami_nl - 2) + (k - 2)
@@ -1292,6 +1312,17 @@ contains
                samples = samples + 1
                if (is_invalid) invalid = invalid + 1
                if (is_above) above_top = above_top + 1
+               if (.not. is_invalid) then
+                  source_flag(lidx) = source_flag_waccmx_valid
+               else if (is_above) then
+                  source_flag(lidx) = source_flag_above_top
+               else if (wxsami3_valid_r8(n2_residual) .and. n2_residual < 0._r8 .and. &
+                        (trim(n2_negative_mode) == 'invalid' .or. &
+                         trim(n2_negative_mode) == 'INVALID')) then
+                  source_flag(lidx) = source_flag_n2_invalid
+               else
+                  source_flag(lidx) = source_flag_other_invalid
+               endif
                if (wxsami3_valid_r8(n2_residual)) then
                   n2_used = n2_used + 1
                   n2_min = min(n2_min, n2_residual)
@@ -1524,7 +1555,8 @@ contains
    end function wxsami3_valid_r8
 
    subroutine wxsami3_send_worker_arrays(worker, nstep, packet_hour, denni, tni, &
-                                         ui, vi, wi, dennf, tnf, uf, vf, wf)
+                                         ui, vi, wi, dennf, tnf, uf, vf, wf, &
+                                         source_flag)
 
       include 'mpif.h'
 
@@ -1532,6 +1564,7 @@ contains
       real, intent(in) :: packet_hour
       real, intent(in) :: denni(:), tni(:), ui(:), vi(:), wi(:)
       real, intent(in) :: dennf(:), tnf(:), uf(:), vf(:), wf(:)
+      integer, intent(in) :: source_flag(:)
       integer :: ios
       integer :: header(6)
 
@@ -1554,6 +1587,8 @@ contains
       call MPI_Send(uf, sami_nlocal, MPI_REAL, worker, tag_uf, peer_comm, ios)
       call MPI_Send(vf, sami_nlocal, MPI_REAL, worker, tag_vf, peer_comm, ios)
       call MPI_Send(wf, sami_nlocal, MPI_REAL, worker, tag_wf, peer_comm, ios)
+      call MPI_Send(source_flag, sami_nlocal, MPI_INTEGER, worker, tag_source_flags, &
+                    peer_comm, ios)
 
    end subroutine wxsami3_send_worker_arrays
 
@@ -1607,6 +1642,7 @@ contains
       character(len=1024) :: fname
       real, allocatable :: denni(:), tni(:), ui(:), vi(:), wi(:)
       real, allocatable :: dennf(:), tnf(:), uf(:), vf(:), wf(:)
+      integer, allocatable :: source_flag(:)
 
       write(fname,'(A,I4.4,A)') trim(payload_prefix), worker, '.bin'
       open(unit=120, file=trim(fname), form='unformatted', access='stream', &
@@ -1623,6 +1659,7 @@ contains
 
       allocate(denni(nlocal4), tni(nlocal), ui(nlocal), vi(nlocal), wi(nlocal))
       allocate(dennf(nlocal4), tnf(nlocal), uf(nlocal), vf(nlocal), wf(nlocal))
+      allocate(source_flag(nlocal))
 
       read(120) denni
       read(120) tni
@@ -1635,6 +1672,12 @@ contains
       read(120) vf
       read(120) wf
       close(120)
+
+      where (denni(1:nlocal) >= 0.0)
+         source_flag = source_flag_waccmx_valid
+      elsewhere
+         source_flag = source_flag_other_invalid
+      endwhere
 
       header(1:5) = file_header
       header(6) = nstep
@@ -1651,8 +1694,10 @@ contains
       call MPI_Send(uf, nlocal, MPI_REAL, worker, tag_uf, peer_comm, ios)
       call MPI_Send(vf, nlocal, MPI_REAL, worker, tag_vf, peer_comm, ios)
       call MPI_Send(wf, nlocal, MPI_REAL, worker, tag_wf, peer_comm, ios)
+      call MPI_Send(source_flag, nlocal, MPI_INTEGER, worker, tag_source_flags, &
+                    peer_comm, ios)
 
-      deallocate(denni, tni, ui, vi, wi, dennf, tnf, uf, vf, wf)
+      deallocate(denni, tni, ui, vi, wi, dennf, tnf, uf, vf, wf, source_flag)
 
    end subroutine wxsami3_send_worker
 
