@@ -1,0 +1,25 @@
+ok   run_dir_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/multipacket_20260524
+ok   packet0_summary_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/multipacket_20260524/live_dump_summary_pkt000000.txt
+ok   packet0_replay_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/multipacket_20260524/replay_builder_pkt000000.out
+ok   packet0_compare_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/multipacket_20260524/recv_qc_compare_pkt000000.txt
+ok   packet0_compare_ok_marker: {'path': '/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/multipacket_20260524/recv_qc_compare_pkt000000.txt', 'ok_marker': True, 'ranks': 32, 'occurrence': 0, 'step_set': [0], 'packet_hour_set': [0.0], 'max_abs': 2103300.0, 'max_rel': 4.86991e-13}
+ok   packet0_occurrence: occurrence=0 expected=0
+ok   packet0_ranks: ranks=32 expected=32
+ok   packet0_single_step: [0]
+ok   packet0_single_hour: [0.0]
+ok   packet0_step_value: step=0 packet=0
+ok   packet0_max_rel: max_rel=4.86991e-13 limit=1e-06
+ok   packet1_summary_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/multipacket_20260524/live_dump_summary_pkt000001.txt
+ok   packet1_replay_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/multipacket_20260524/replay_builder_pkt000001.out
+ok   packet1_compare_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/multipacket_20260524/recv_qc_compare_pkt000001.txt
+ok   packet1_compare_ok_marker: {'path': '/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/multipacket_20260524/recv_qc_compare_pkt000001.txt', 'ok_marker': True, 'ranks': 32, 'occurrence': 1, 'step_set': [1], 'packet_hour_set': [0.0833333358], 'max_abs': 2708990.0, 'max_rel': 6.80359e-13}
+ok   packet1_occurrence: occurrence=1 expected=1
+ok   packet1_ranks: ranks=32 expected=32
+ok   packet1_single_step: [1]
+ok   packet1_single_hour: [0.0833333358]
+ok   packet1_step_value: step=1 packet=1
+ok   packet1_max_rel: max_rel=6.80359e-13 limit=1e-06
+ok   packet_steps_monotonic: steps=[0, 1]
+ok   packet_hours_monotonic: hours=[0.0, 0.0833333358]
+ok   packet_hour_cadence: diffs=[0.0833333358] expected=0.0833333358
+overall=ok

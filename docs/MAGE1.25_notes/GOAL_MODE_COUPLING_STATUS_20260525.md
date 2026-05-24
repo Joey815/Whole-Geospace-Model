@@ -246,6 +246,7 @@ scripts/validate_sami3_raiju_mapping_product.py strict moment gates
 scripts/validate_remix_sami3_phi_payload.py
 scripts/validate_wxsami3_time_axis.py
 scripts/validate_sami3_raiju_summary.py
+scripts/validate_wxsami3_replay_cadence.py
 ```
 
 The mapping-product validator now gates `/RaiCplMomentsOnly` plus
@@ -276,6 +277,10 @@ cells, N2-negative residual cells, unknown invalid cells, and replay
 initial/final fallback counts must agree with the source-flag metadata.
 It also checks metadata cadence consistency: positive `dtime_phys_s`, positive
 `send_every_nsteps`, and `packet_hour = nstep * dtime_phys_s / 3600`.
+For legacy multi-packet archives that predate source-flag metadata, the replay
+cadence gate verifies packet order, packet-hour cadence, rank count, and
+replay-vs-receiver `max_rel` without overstating them as current full-contract
+evidence.
 
 The SAMI3 -> RAIJU/GAMERA long-run archive now turns summary diagnostics into a
 hard gate: exact Pavg/Davg/Pstd/Dstd blending formula residuals, positive

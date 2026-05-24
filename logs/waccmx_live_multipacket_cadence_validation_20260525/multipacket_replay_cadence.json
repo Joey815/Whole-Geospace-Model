@@ -1,0 +1,158 @@
+{
+  "checks": [
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/multipacket_20260524",
+      "name": "run_dir_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/multipacket_20260524/live_dump_summary_pkt000000.txt",
+      "name": "packet0_summary_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/multipacket_20260524/replay_builder_pkt000000.out",
+      "name": "packet0_replay_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/multipacket_20260524/recv_qc_compare_pkt000000.txt",
+      "name": "packet0_compare_exists",
+      "ok": true
+    },
+    {
+      "detail": "{'path': '/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/multipacket_20260524/recv_qc_compare_pkt000000.txt', 'ok_marker': True, 'ranks': 32, 'occurrence': 0, 'step_set': [0], 'packet_hour_set': [0.0], 'max_abs': 2103300.0, 'max_rel': 4.86991e-13}",
+      "name": "packet0_compare_ok_marker",
+      "ok": true
+    },
+    {
+      "detail": "occurrence=0 expected=0",
+      "name": "packet0_occurrence",
+      "ok": true
+    },
+    {
+      "detail": "ranks=32 expected=32",
+      "name": "packet0_ranks",
+      "ok": true
+    },
+    {
+      "detail": "[0]",
+      "name": "packet0_single_step",
+      "ok": true
+    },
+    {
+      "detail": "[0.0]",
+      "name": "packet0_single_hour",
+      "ok": true
+    },
+    {
+      "detail": "step=0 packet=0",
+      "name": "packet0_step_value",
+      "ok": true
+    },
+    {
+      "detail": "max_rel=4.86991e-13 limit=1e-06",
+      "name": "packet0_max_rel",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/multipacket_20260524/live_dump_summary_pkt000001.txt",
+      "name": "packet1_summary_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/multipacket_20260524/replay_builder_pkt000001.out",
+      "name": "packet1_replay_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/multipacket_20260524/recv_qc_compare_pkt000001.txt",
+      "name": "packet1_compare_exists",
+      "ok": true
+    },
+    {
+      "detail": "{'path': '/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/multipacket_20260524/recv_qc_compare_pkt000001.txt', 'ok_marker': True, 'ranks': 32, 'occurrence': 1, 'step_set': [1], 'packet_hour_set': [0.0833333358], 'max_abs': 2708990.0, 'max_rel': 6.80359e-13}",
+      "name": "packet1_compare_ok_marker",
+      "ok": true
+    },
+    {
+      "detail": "occurrence=1 expected=1",
+      "name": "packet1_occurrence",
+      "ok": true
+    },
+    {
+      "detail": "ranks=32 expected=32",
+      "name": "packet1_ranks",
+      "ok": true
+    },
+    {
+      "detail": "[1]",
+      "name": "packet1_single_step",
+      "ok": true
+    },
+    {
+      "detail": "[0.0833333358]",
+      "name": "packet1_single_hour",
+      "ok": true
+    },
+    {
+      "detail": "step=1 packet=1",
+      "name": "packet1_step_value",
+      "ok": true
+    },
+    {
+      "detail": "max_rel=6.80359e-13 limit=1e-06",
+      "name": "packet1_max_rel",
+      "ok": true
+    },
+    {
+      "detail": "steps=[0, 1]",
+      "name": "packet_steps_monotonic",
+      "ok": true
+    },
+    {
+      "detail": "hours=[0.0, 0.0833333358]",
+      "name": "packet_hours_monotonic",
+      "ok": true
+    },
+    {
+      "detail": "diffs=[0.0833333358] expected=0.0833333358",
+      "name": "packet_hour_cadence",
+      "ok": true
+    }
+  ],
+  "meta": {
+    "packets": [
+      {
+        "max_abs": 2103300.0,
+        "max_rel": 4.86991e-13,
+        "occurrence": 0,
+        "ok_marker": true,
+        "packet_hour_set": [
+          0.0
+        ],
+        "path": "/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/multipacket_20260524/recv_qc_compare_pkt000000.txt",
+        "ranks": 32,
+        "step_set": [
+          0
+        ]
+      },
+      {
+        "max_abs": 2708990.0,
+        "max_rel": 6.80359e-13,
+        "occurrence": 1,
+        "ok_marker": true,
+        "packet_hour_set": [
+          0.0833333358
+        ],
+        "path": "/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/multipacket_20260524/recv_qc_compare_pkt000001.txt",
+        "ranks": 32,
+        "step_set": [
+          1
+        ]
+      }
+    ],
+    "run_dir": "/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/multipacket_20260524"
+  },
+  "ok": true
+}
