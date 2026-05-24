@@ -55,6 +55,7 @@ python3 scripts/archive_wxsami3_append2_result.py \
   --job-id 7659727 \
   --expected-phi-frames 2 \
   --expected-live-packets 1 \
+  --expected-sami3-workers 32 \
   --require-nonzero-phi \
   --require-receiver-phi-values \
   --require-changing-phi-frames \
@@ -115,6 +116,7 @@ python3 scripts/archive_wxsami3_append2_result.py \
   --job-id 7661005 \
   --expected-phi-frames 2 \
   --expected-live-packets 1 \
+  --expected-sami3-workers 32 \
   --expect-phi-wait-marker \
   --expect-direct-wait-mode \
   --require-nonzero-phi \

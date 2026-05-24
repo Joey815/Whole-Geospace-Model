@@ -53,13 +53,16 @@ python3 scripts/archive_wxsami3_append2_result.py \
   --archive-dir /tmp/wxsami3_append2_archive_smoke_20260525 \
   --job-id 7659383 \
   --expected-phi-frames 2 \
-  --expected-live-packets 1
+  --expected-live-packets 1 \
+  --expected-sami3-workers 32
 ```
 
 Result:
 
 ```text
 append2_validator_returncode = 0
+phi_payload_contract_returncode = 0
+time_axis_returncode = 0
 live_packet_contract_returncode = 0
 copied_files = 9
 overall = ok
@@ -83,6 +86,7 @@ python3 scripts/archive_wxsami3_append2_result.py \
   --job-id 7659727 \
   --expected-phi-frames 2 \
   --expected-live-packets 1 \
+  --expected-sami3-workers 32 \
   --require-nonzero-phi \
   --require-receiver-phi-values \
   --require-changing-phi-frames \
@@ -115,6 +119,7 @@ python3 scripts/archive_wxsami3_append2_result.py \
   --job-id 7661005 \
   --expected-phi-frames 2 \
   --expected-live-packets 1 \
+  --expected-sami3-workers 32 \
   --expect-phi-wait-marker \
   --expect-direct-wait-mode \
   --require-nonzero-phi \

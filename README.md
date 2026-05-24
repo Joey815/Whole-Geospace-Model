@@ -318,6 +318,8 @@ scripts/validate_wxsami3_live_packet_contract.py
 scripts/validate_wxsami3_topblend_policy.py
 scripts/validate_wxsami3_runtime_map.py
 scripts/validate_wxsami3_append2_run.py
+scripts/validate_remix_sami3_phi_payload.py
+scripts/validate_wxsami3_time_axis.py
 scripts/archive_wxsami3_append2_result.py
 scripts/compare_wxsami3_recv_qc.py
 ```
@@ -329,6 +331,7 @@ scripts/validate_sami3_raiju_longrun.py
 scripts/summarize_sami3_raiju_longrun.py
 scripts/archive_sami3_raiju_longrun_result.py
 scripts/validate_sami3_raiju_mapping_product.py
+scripts/validate_sami3_raiju_summary.py
 ```
 
 Current SAMI3 -> RAIJU scalar-moments adapter snapshot:
