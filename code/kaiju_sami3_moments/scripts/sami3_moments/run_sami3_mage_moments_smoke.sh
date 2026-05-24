@@ -7,6 +7,7 @@ SAMI3_RUN_DIR="${SAMI3_RUN_DIR:-/home/jiaoy_group/jiaoy/data/waccmx-sami3_offici
 OUT_PREFIX="${OUT_PREFIX:-${TREE_ROOT}/analysis/sami3_moments_stubpayload_20260523}"
 DIAG_PREFIX="${DIAG_PREFIX:-${TREE_ROOT}/analysis/sami3_voltron_raiju_diag_stubpayload_20260523}"
 DIAG_NFLUID1_PREFIX="${DIAG_NFLUID1_PREFIX:-${TREE_ROOT}/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_20260523}"
+DIAG_MASSEQP_PREFIX="${DIAG_MASSEQP_PREFIX:-${TREE_ROOT}/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_massEq_total_20260524}"
 
 "${PYTHON_BIN}" \
   "${TREE_ROOT}/scripts/sami3_moments/sami3_to_voltron_moments.py" \
@@ -37,5 +38,21 @@ DIAG_NFLUID1_PREFIX="${DIAG_NFLUID1_PREFIX:-${TREE_ROOT}/analysis/sami3_voltron_
   "${OUT_PREFIX}.h5" \
   "${DIAG_NFLUID1_PREFIX}.h5" \
   --n-fluid-in 1
+
+"${PYTHON_BIN}" \
+  "${TREE_ROOT}/scripts/sami3_moments/sami3_moments_to_raiju_diag.py" \
+  "${OUT_PREFIX}.h5" \
+  --out "${DIAG_MASSEQP_PREFIX}" \
+  --n-fluid-in 1 \
+  --density-mode massEq \
+  --pressure-mode total
+
+"${PYTHON_BIN}" \
+  "${TREE_ROOT}/scripts/sami3_moments/validate_sami3_mage_moments.py" \
+  "${OUT_PREFIX}.h5" \
+  "${DIAG_MASSEQP_PREFIX}.h5" \
+  --n-fluid-in 1 \
+  --density-mode massEq \
+  --pressure-mode total
 
 echo "SAMI3 MAGE moments smoke passed"

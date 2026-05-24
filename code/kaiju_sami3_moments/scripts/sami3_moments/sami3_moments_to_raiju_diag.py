@@ -54,6 +54,24 @@ def parse_args():
         help="Channel that receives the bulk SAMI3 moment. Default: 0.",
     )
     parser.add_argument(
+        "--density-mode",
+        choices=("num", "massEq"),
+        default="num",
+        help=(
+            "Davg source for runtime products. num uses total ion number density "
+            "Davg_num/Davg; massEq uses proton-equivalent Davg_massEq. Default: num."
+        ),
+    )
+    parser.add_argument(
+        "--pressure-mode",
+        choices=("ion", "total"),
+        default="ion",
+        help=(
+            "Pavg source for runtime products. ion uses ion pressure Pavg_i/Pavg; "
+            "total uses Pavg_total. Default: ion."
+        ),
+    )
+    parser.add_argument(
         "--allow-nonfinite",
         action="store_true",
         help="Write output even if one of the required arrays contains non-finite values.",
@@ -134,14 +152,49 @@ def require_moments_h5(path):
     return require_h5py()
 
 
-def read_moments(path):
+def select_dataset_name(handle, preferred, fallback=None):
+    dset_path = "moments/{0}".format(preferred)
+    if dset_path in handle:
+        return preferred
+    if fallback is not None and "moments/{0}".format(fallback) in handle:
+        return fallback
+    raise KeyError("missing required dataset /{0}".format(dset_path))
+
+
+def moment_source_selection(handle, density_mode, pressure_mode):
+    if density_mode == "num":
+        davg_source = select_dataset_name(handle, "Davg_num", fallback="Davg")
+    elif density_mode == "massEq":
+        davg_source = select_dataset_name(handle, "Davg_massEq")
+    else:
+        raise ValueError("unsupported density mode: {0}".format(density_mode))
+
+    if pressure_mode == "ion":
+        pavg_source = select_dataset_name(handle, "Pavg_i", fallback="Pavg")
+    elif pressure_mode == "total":
+        pavg_source = select_dataset_name(handle, "Pavg_total")
+    else:
+        raise ValueError("unsupported pressure mode: {0}".format(pressure_mode))
+
+    return {
+        "Pavg": pavg_source,
+        "Davg": davg_source,
+        "Pstd": "Pstd",
+        "Dstd": "Dstd",
+        "tiote": "tiote",
+    }
+
+
+def read_moments(path, density_mode, pressure_mode):
     h5py = require_moments_h5(path)
     arrays = {}
     source_metadata = {}
     source_attrs = {}
+    selection = {}
     with h5py.File(path, "r") as handle:
+        selection = moment_source_selection(handle, density_mode, pressure_mode)
         for name in MOMENTS:
-            dset_path = "moments/{0}".format(name)
+            dset_path = "moments/{0}".format(selection[name])
             if dset_path not in handle:
                 raise KeyError("missing required dataset /{0}".format(dset_path))
             arrays[name] = handle[dset_path][:].astype(np.float64)
@@ -158,7 +211,7 @@ def read_moments(path):
                     name, arrays[name].shape, shape
                 )
             )
-    return arrays, source_metadata, source_attrs
+    return arrays, source_metadata, source_attrs, selection
 
 
 def resize_2d(arr, target_shape):
@@ -397,7 +450,9 @@ def main():
     if out_dir and not os.path.isdir(out_dir):
         os.makedirs(out_dir)
 
-    arrays, source_metadata, source_attrs = read_moments(moments_h5)
+    arrays, source_metadata, source_attrs, source_selection = read_moments(
+        moments_h5, args.density_mode, args.pressure_mode
+    )
     nonfinite = {
         name: int(arr.size - np.count_nonzero(np.isfinite(arr)))
         for name, arr in arrays.items()
@@ -467,6 +522,14 @@ def main():
         "MAXTUBEFLUIDS": MAXTUBEFLUIDS,
         "tubeshell_moments_channels": MAXTUBEFLUIDS + 1,
         "bulk_channel": args.bulk_channel,
+        "density_mode": args.density_mode,
+        "pressure_mode": args.pressure_mode,
+        "moment_source_selection": source_selection,
+        "std_source_warning": (
+            "Pstd/Dstd are still read from the existing ion/number-density std fields. "
+            "For massEq density or total pressure modes, use runtime alphaPstd/alphaDstd=0 "
+            "unless matching std definitions are added."
+        ),
         "channel_semantics": {
             str(args.bulk_channel): "bulk SAMI3 ion moment mapped to MAGE BLK channel",
         },

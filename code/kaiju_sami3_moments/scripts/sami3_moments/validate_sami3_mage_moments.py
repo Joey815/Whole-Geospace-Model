@@ -31,6 +31,18 @@ def parse_args():
         default=None,
         help="Expected bulk channel. Defaults to metadata value.",
     )
+    parser.add_argument(
+        "--density-mode",
+        choices=("num", "massEq"),
+        default=None,
+        help="Expected stage-2 Davg source. Defaults to metadata value or num.",
+    )
+    parser.add_argument(
+        "--pressure-mode",
+        choices=("ion", "total"),
+        default=None,
+        help="Expected stage-2 Pavg source. Defaults to metadata value or ion.",
+    )
     return parser.parse_args()
 
 
@@ -96,6 +108,14 @@ def read_metadata(handle):
     return json.loads(decode_h5_text(handle["metadata/json"][()]))
 
 
+def select_moment_array(handle, preferred, fallback=None):
+    if "moments/{0}".format(preferred) in handle:
+        return require_dataset(handle, "moments/{0}".format(preferred))[:].astype(np.float64), preferred
+    if fallback is not None and "moments/{0}".format(fallback) in handle:
+        return require_dataset(handle, "moments/{0}".format(fallback))[:].astype(np.float64), fallback
+    raise AssertionError("missing stage-1 source dataset moments/{0}".format(preferred))
+
+
 def main():
     args = parse_args()
     for path in (args.moments_h5, args.diag_h5):
@@ -104,11 +124,29 @@ def main():
 
     h5py = require_h5py()
     with h5py.File(args.moments_h5, "r") as m, h5py.File(args.diag_h5, "r") as d:
-        pavg = require_dataset(m, "moments/Pavg")[:].astype(np.float64)
-        davg = require_dataset(m, "moments/Davg")[:].astype(np.float64)
+        metadata = read_metadata(d)
+        density_mode = args.density_mode or metadata.get("density_mode", "num")
+        pressure_mode = args.pressure_mode or metadata.get("pressure_mode", "ion")
+
+        if pressure_mode == "ion":
+            pavg, pavg_source = select_moment_array(m, "Pavg_i", fallback="Pavg")
+        elif pressure_mode == "total":
+            pavg, pavg_source = select_moment_array(m, "Pavg_total")
+        else:
+            raise AssertionError("unsupported pressure mode: {0}".format(pressure_mode))
+
+        if density_mode == "num":
+            davg, davg_source = select_moment_array(m, "Davg_num", fallback="Davg")
+        elif density_mode == "massEq":
+            davg, davg_source = select_moment_array(m, "Davg_massEq")
+        else:
+            raise AssertionError("unsupported density mode: {0}".format(density_mode))
+
         pstd = require_dataset(m, "moments/Pstd")[:].astype(np.float64)
         dstd = require_dataset(m, "moments/Dstd")[:].astype(np.float64)
         tiote = require_dataset(m, "moments/tiote")[:].astype(np.float64)
+        pavg_base = require_dataset(m, "moments/Pavg")[:].astype(np.float64)
+        davg_base = require_dataset(m, "moments/Davg")[:].astype(np.float64)
         davg_mass_eq = require_dataset(m, "moments/Davg_massEq")[:].astype(np.float64)
         mu_eff = require_dataset(m, "moments/mu_eff")[:].astype(np.float64)
         pavg_e = require_dataset(m, "moments/Pavg_e")[:].astype(np.float64)
@@ -130,8 +168,8 @@ def main():
                 raise AssertionError("{0} shape {1} != {(nf, nlt)}".format(name, arr.shape))
             require_finite(name, arr)
 
-        require_close("moments/Pavg_total identity", pavg_total, pavg + pavg_e)
-        if np.any(davg_mass_eq < davg * (1.0 - 1.0e-6)):
+        require_close("moments/Pavg_total identity", pavg_total, pavg_base + pavg_e)
+        if np.any(davg_mass_eq < davg_base * (1.0 - 1.0e-6)):
             raise AssertionError("moments/Davg_massEq should not be below Davg for positive ions")
         if np.nanmin(mu_eff) < 1.0:
             raise AssertionError("moments/mu_eff should be >= 1 for configured ion masses")
@@ -146,7 +184,6 @@ def main():
         require_units(m["moments/Pavg_total"], "nPa")
         require_units(m["moments/mu_eff"], "normalized")
 
-        metadata = read_metadata(d)
         n_fluid_in = args.n_fluid_in
         if n_fluid_in is None:
             n_fluid_in = int(metadata.get("nFluidIn", 0))
@@ -235,6 +272,8 @@ def main():
     print("grid: nf={0} nlt={1}".format(nf, nlt))
     print("RAIJU channels: {0}; bulk channel: {1}".format(n_channels, bulk_channel))
     print("TubeShellMomentsOnly channels: {0}".format(MAXTUBEFLUIDS + 1))
+    print("density_mode={0} source={1}".format(density_mode, davg_source))
+    print("pressure_mode={0} source={1}".format(pressure_mode, pavg_source))
 
 
 if __name__ == "__main__":

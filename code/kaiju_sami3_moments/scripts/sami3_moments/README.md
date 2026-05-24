@@ -93,6 +93,14 @@ Manual stage commands:
   /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_moments_stubpayload_20260523.h5 \
   /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_20260523.h5 \
   --n-fluid-in 0
+
+/home/jiaoy_group/jiaoy/.venvs/mage-vis/bin/python \
+  /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/scripts/sami3_moments/sami3_moments_to_raiju_diag.py \
+  /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_moments_stubpayload_20260523.h5 \
+  --out /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_massEq_total_20260524 \
+  --n-fluid-in 1 \
+  --density-mode massEq \
+  --pressure-mode total
 ```
 
 Outputs from the smoke run:
@@ -106,6 +114,8 @@ Outputs from the smoke run:
 /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_20260523.json
 /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_runtime_20260523.h5
 /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_runtime_20260523.json
+/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_massEq_total_20260524.h5
+/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_massEq_total_20260524.json
 ```
 
 ## Inputs
@@ -269,6 +279,29 @@ mu_eff      = Davg_massEq / Davg_num
 Pavg_e      = ne kB Te
 Pavg_total  = Pavg_i + Pavg_e
 ```
+
+Stage 2 can now choose which bulk scalar goes into the MAGE-facing
+`Pavg/Davg` contract:
+
+```text
+--density-mode num     # Davg_num/Davg, default
+--density-mode massEq  # Davg_massEq, proton-equivalent #/cc
+
+--pressure-mode ion    # Pavg_i/Pavg, default
+--pressure-mode total  # Pavg_total = ion + electron pressure
+```
+
+The selected source datasets are recorded in metadata:
+
+```text
+metadata/json.moment_source_selection
+metadata/json.density_mode
+metadata/json.pressure_mode
+```
+
+`Pstd/Dstd` still come from the existing std fields.  For `massEq` or `total`
+prototype runs, use runtime `alphaPstd=0` and `alphaDstd=0` unless matching
+mass-equivalent and total-pressure std definitions are added.
 
 ## Current Limit
 
