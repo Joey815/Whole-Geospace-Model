@@ -1,0 +1,2821 @@
+OMP: Warning #182: OMP_STACKSIZE: ignored because KMP_STACKSIZE has been defined
+ Voltron Reading input deck from tinyCase_base_control_long300.xml
+  KAIJU/VOLTRON/threading/NumTh           :             8[34m     (XML)[0m 
+  KAIJU/GAMERA/debug/writeGhosts          :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/debug/writeMagFlux         :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/threading/NumTh            :             8[34m     (XML)[0m 
+ KAIJU/GAMERA running threaded ...
+    # Threads =            8
+    # Cores   =            8
+ Checking stacksize, if the code crashes here fix your stack ...
+  KAIJU/GAMERA/physics/doMHD              :             T[34m     (XML)[0m 
+  KAIJU/GAMERA/physics/do25D              :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/physics/doResistive        :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/sim/pdmb                   :   1.00000E+00[34m     (XML)[0m 
+  KAIJU/GAMERA/floors/dFloor              :   1.00000E-04[34m     (XML)[0m 
+  KAIJU/GAMERA/floors/pFloor              :   1.00000E-06[34m     (XML)[0m 
+  KAIJU/GAMERA/sim/CFL                    :   3.00000E-01[32m (DEFAULT)[0m 
+ CFL # =   0.300000000000000     
+  KAIJU/GAMERA/sim/Vd0                    :   5.00000E-01[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/physics/gamma              :   1.66667E+00[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/physics/doHogs             :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/physics/cHogH              :   2.50000E-01[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/physics/cHogM              :   2.50000E-01[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/sim/doAB3                  :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/time/tFin                  :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/time/fixedTimestep         :  -1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/timestep/limDT0            :   1.00000E-03[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/timestep/doCPR             :             T[34m     (XML)[0m 
+  KAIJU/GAMERA/timestep/limCPR            :   2.50000E-01[34m     (XML)[0m 
+ Please update the XML to use output/dtCon for console output
+ Instead of the no longer used output/tsOut
+  KAIJU/GAMERA/output/dtCon               :   5.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/dtOut               :   1.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/restart/dtRes              :   1.00000E+02[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/doTimer             :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/doFat               :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/doSlim              :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/slimTimers          :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/DivB                :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/doFatIO             :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/doHighPrecOut       :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/restart/doRes              :             F[34m     (XML)[0m 
+  KAIJU/GAMERA/physics/doBoris            :             T[34m     (XML)[0m 
+  KAIJU/GAMERA/physics/Ca                 :   1.00000E+01[34m     (XML)[0m 
+  KAIJU/GAMERA/multifluid/doMF            :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/source/doSource            :             T[34m     (XML)[0m 
+  KAIJU/GAMERA/source/nvSrc               :            10[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/sim/runid                  :  sami3_moment[34m     (XML)[0m 
+  KAIJU/GAMERA/sim/rmeth                  :           7UP[34m     (XML)[0m 
+ Using 7UP Reconstruction
+  KAIJU/GAMERA/sim/lfmlim                 :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ring/rngrec                :           PPM[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/random/seed                :         31337[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/sim/doH5g                  :             T[34m     (XML)[0m 
+  KAIJU/GAMERA/sim/H5Grid                 :       lfmD.h5[34m     (XML)[0m 
+ Reading grid from file: lfmD.h5
+  KAIJU/GAMERA/ring/doRing                :             T[34m     (XML)[0m 
+  KAIJU/GAMERA/ring/gid                   :           lfm[34m     (XML)[0m 
+  KAIJU/GAMERA/ringknobs/doMassRA         :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ringknobs/doClean          :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ringknobs/doFastClean      :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ringknobs/doShift          :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ringknobs/NMag             :             1[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ringknobs/doVClean         :             T[34m     (XML)[0m 
+  KAIJU/GAMERA/ringknobs/NVel             :             0[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ring/doAggressive          :             F[34m     (XML)[0m 
+  KAIJU/GAMERA/ring/Nr                    :             4[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ring/Nc1                   :             8[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ring/Nc2                   :            16[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ring/Nc3                   :            32[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ring/Nc4                   :            32[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/sim/doH5ic                 :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/sim/icType                 :          user[34m     (XML)[0m 
+  KAIJU/GAMERA/prob/Rho0                  :   2.00000E-01[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/prob/P0                    :   1.00000E-03[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/prob/doPP0                 :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/prob/writeBC               :             T[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/prob/planet               :         Earth[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/prob/M0                   :   2.96174E-01[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/prob/period               :   8.64000E+04[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/prob/doCorot              :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/floors/dFloor              :   1.00000E-04[34m     (XML)[0m 
+  KAIJU/GAMERA/floors/pFloor              :   1.00000E-06[34m     (XML)[0m 
+  KAIJU/GAMERA/timestep/doCPR             :             T[34m     (XML)[0m 
+  KAIJU/GAMERA/timestep/limCPR            :   2.50000E-01[34m     (XML)[0m 
+  KAIJU/GAMERA/chill/doGAMChill           :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/chill/doLFMChill           :             F[32m (DEFAULT)[0m 
+ ---------------
+ Magnetosphere normalization
+ T0   [s]    =    63.7810000000000     
+ x0   [m]    =    6378100.00000000     
+ v0   [m/s]  =    100000.000000000     
+ P0   [nPa]  =   1.660539066600000E-002
+ B0   [nT]   =    4.56803560959387     
+ g    [m/s2] =    9.80700000000000     
+ psi0 [kV]   =    87.6183892504483     
+ ---------------
+ doGrav      =  T
+  KAIJU/GAMERA/source/doIngest            :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/source/doIngestCold        :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/source/coldDMax            :  -1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/source/coldPMax            :  -1.00000E+00[32m (DEFAULT)[0m 
+  /Kaiju/voltron/imag/doInit              :             T[34m     (XML)[0m 
+  KAIJU/GAMERA/wind/tsfile                :     bcwind.h5[34m     (XML)[0m 
+  KAIJU/GAMERA/source0/dz                 :   5.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/source0/dt0                :   3.00000E+02[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/prob/xMax                  :   2.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/prob/yMax                  :   7.50000E+01[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/prob/xMin                  :  -2.25000E+02[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/prob/sIn                   :   9.60000E-01[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/background/rCut            :   1.60000E+01[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/background/lCut            :   8.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/background/dcScl           :   4.00000E+00[32m (DEFAULT)[0m 
+  /Kaiju/voltron/coupling/dt              :   5.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ibc/doIonPush              :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ibc/nIonP                  :             1[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/wind/tsfile                :     bcwind.h5[34m     (XML)[0m 
+ ---------------
+ Solar wind data
+ Reading wind data from bcwind.h5
+ Assuming input units: t,D,V,T,B = [s],[#/cm3],[m/s],[K],[nT]
+ SW Coefficients (Bx0,ByC,BzC) =    0.000   0.000   0.000
+ Min solar wind Alfvenic Mach number =    7.587
+ Finished reading solar wind data
+ ---------------
+  /Kaiju/voltron/spinup/doSeq             :             F[32m (DEFAULT)[0m 
+[32m<Writing HDF5 DATA @ t =  0.00E+00 [sec] >[0m 
+ [36m
+ GAMERA
+      Time =  0.00E+00 [sec]
+        ts =        0
+        dt =  1.19E-01 [sec]
+    Spent     0.0% of time waiting for Voltron
+[0m  Please update the XML to use output/dtCon for console output
+ Instead of the no longer used output/tsOut
+  KAIJU/GAMERA/output/dtCon               :   5.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/dtOut               :   1.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/restart/dtRes              :   1.00000E+02[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/doTimer             :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/doFat               :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/doSlim              :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/slimTimers          :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/DivB                :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/doFatIO             :             F[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/prob/planet               :         Earth[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/prob/M0                   :   2.96174E-01[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/prob/period               :   8.64000E+04[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/prob/doCorot              :             T[32m (DEFAULT)[0m 
+ -------------
+ Planet params
+ Name             : EARTH
+ Planet Radius [m]:    6378100.00000000     
+ Iono Radius   [m]:    6500000.00000000     
+ Gravity    [m/s2]:    9.80700000000000     
+ Use gravity      :  T
+ Mag. Moment   [G]:   0.296173700000000     
+ Corot Pot.   [kV]:    87.6183892504483     
+ -------------
+  /Kaiju/Gamera/prob/doGeoCorot           :             F[32m (DEFAULT)[0m 
+ Going into geospace mode ...
+  /Kaiju/Gamera/wind/tsfile               :     bcwind.h5[34m     (XML)[0m 
+  KAIJU/VOLTRON/time/tFin                 :   3.00000E+02[34m     (XML)[0m 
+ Please update the XML to use output/dtCon for console output
+ Instead of the no longer used output/tsOut
+  KAIJU/VOLTRON/output/dtCon              :   5.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/output/dtOut              :   5.00000E+00[34m     (XML)[0m 
+  KAIJU/VOLTRON/restart/dtRes             :   1.08000E+04[34m     (XML)[0m 
+  KAIJU/VOLTRON/output/doTimer            :             F[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/output/doFat              :             F[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/output/doSlim             :             F[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/output/slimTimers         :             T[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/coupling/dtCouple         :   5.00000E+00[34m     (XML)[0m 
+  KAIJU/VOLTRON/coupling/rTrc             :   4.00000E+01[32m (DEFAULT)[0m 
+ Ending a simulation too close to a coupling interval can cause synchronization 
+ issues
+ Increasing the ending time by a fraction of a second to create a buffer
+  KAIJU/VOLTRON/coupling/doDeep           :             T[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/coupling/doGCM            :             F[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/coupling/dtAvgB0          :   9.00000E+02[32m (DEFAULT)[0m 
+  /Kaiju/gamera/restart/doRes             :             F[34m     (XML)[0m 
+  KAIJU/VOLTRON/spinup/doSpin             :             T[34m     (XML)[0m 
+  KAIJU/VOLTRON/spinup/tSpin              :   5.00000E+00[34m     (XML)[0m 
+  KAIJU/VOLTRON/spinup/tIO                :   0.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/coupling/tCouple          :  -5.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/grid/Nt                   :            90[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/grid/Np                   :           180[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/grid/Ng                   :             4[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/grid/gType                :        UNISPH[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/coupling/doQkSquish       :             T[34m     (XML)[0m 
+  KAIJU/VOLTRON/coupling/qkSquishStride   :             2[34m     (XML)[0m 
+  KAIJU/VOLTRON/ebsquish/epsSquish        :   5.00000E-02[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/coupling/imType           :         RAIJU[34m     (XML)[0m 
+  /Kaiju/voltron/imag/doInit              :             T[34m     (XML)[0m 
+ raijuInitModel is starting
+  KAIJU/RAIJU/driver/isSA                 :             F[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/sim/runid                 :  sami3_moment[34m     (XML)[0m 
+  KAIJU/RAIJU/time/T0                     :   0.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/time/tFin                   :   6.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/time/dt                     :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/config/fname                :  raijuconfig.[34m     (XML)[0m 
+  /Kaiju/Gamera/wind/tsFile               :     bcwind.h5[34m     (XML)[0m 
+  KAIJU/RAIJU/mpi/isMPI                   :             F[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/restart/doRes             :             F[34m     (XML)[0m 
+  KAIJU/RAIJU/plasmasphere/doPsphere      :             T[34m     (XML)[0m 
+  KAIJU/RAIJU/plasmasphere/doEvol         :             T[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/plasmasphere/evolRad        :   2.25000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/plasmasphere/initKp         :   3.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/prob/doExcessMap            :             T[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/prob/nSpc                   :             3[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/domain/bndLim               :             3[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/domain/tail_buffer          :   1.50000E+01[34m     (XML)[0m 
+  KAIJU/RAIJU/domain/sun_buffer           :   1.50000E+01[34m     (XML)[0m 
+  KAIJU/RAIJU/domain/tail_active          :   1.20000E+01[34m     (XML)[0m 
+  KAIJU/RAIJU/domain/sun_active           :   1.20000E+01[34m     (XML)[0m 
+  KAIJU/RAIJU/domain/activeRad            :   3.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sim/doSmoothGrads           :             T[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sim/useVelLRs               :             T[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sim/maxIter                 :          1000[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sim/maxOrder                :             7[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sim/pdmb                    :   7.50000E-01[34m     (XML)[0m 
+  KAIJU/RAIJU/sim/cfl                     :   3.00000E-01[32m (DEFAULT)[0m 
+ CFL # =   0.300000000000000     
+  KAIJU/RAIJU/prob/tiote                  :   4.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/moments/useStateTioteForInge:             F[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/activeShell/doAS            :             F[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/activeShell/worthyFrac      :   1.00000E-03[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/prob/doCorot                :             F[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/lambdas/dynamicRanges       :             F[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/moments/DP2EtaMap           :       MAXWELL[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/losses/doLosses             :             T[34m     (XML)[0m 
+  KAIJU/RAIJU/losses/doCC                 :             T[34m     (XML)[0m 
+  KAIJU/RAIJU/losses/doCX                 :             T[34m     (XML)[0m 
+  KAIJU/RAIJU/losses/doEWM                :             T[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/losses/ewmType              :            SS[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/output/loudConsole          :             T[34m     (XML)[0m 
+  KAIJU/RAIJU/output/writeGhosts          :             F[34m     (XML)[0m 
+  KAIJU/RAIJU/output/doLossExtras         :             F[34m     (XML)[0m 
+  KAIJU/RAIJU/output/doDebug              :             F[34m     (XML)[0m 
+  KAIJU/RAIJU/hax/rcmEtaPush              :             F[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/domain/vaFrac_soft          :   6.00000E-01[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/domain/vaFrac_hard          :   4.00000E-01[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/domain/bmin_soft            :   5.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/domain/bmin_hard            :   2.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/cpl/nBounce                 :   3.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/cpl/nFluidsIn               :             1[34m     (XML)[0m 
+  KAIJU/RAIJU/fluidIn1/imhd               :             0[34m     (XML)[0m 
+  KAIJU/RAIJU/fluidIn1/flav               :             2[34m     (XML)[0m 
+  KAIJU/RAIJU/fluidIn1/excessToPsph       :             T[34m     (XML)[0m 
+  /Kaiju/Gamera/prob/planet               :         Earth[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/prob/M0                   :   2.96174E-01[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/prob/period               :   8.64000E+04[32m (DEFAULT)[0m 
+  Calculated corotation potential [kV]:    87.6183892504483     
+  /Kaiju/Gamera/prob/doCorot              :             T[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/grid/Nbnd                   :             4[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/grid/gType                  :        SHGRID[34m     (XML)[0m 
+  KAIJU/RAIJU/grid/ThetaL                 :   1.50000E+01[34m     (XML)[0m 
+ RAIJU theta range =    15.0000000000000        49.1066053508691     
+  KAIJU/RAIJU/grid/Ng                     :             4[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/hax/doConstB                :             F[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/config/ignoreMismatch       :             F[32m (DEFAULT)[0m 
+ Found spc group Species/0
+  Flav:                    0
+  N:                       1
+  # nuc_p:                 1
+  # nuc_n:                 0
+  q:                       1
+  spcType:                 2
+  Fudge:          0.000000000000000E+000
+  kStart:                  1
+  kEnd:                    1
+ Found spc group Species/1
+  Flav:                    1
+  N:                      39
+  # nuc_p:                 0
+  # nuc_n:                 0
+  q:                      -1
+  spcType:                 1
+  Fudge:          0.333333333333333     
+  kStart:                  2
+  kEnd:                   40
+ Found spc group Species/2
+  Flav:                    2
+  N:                     120
+  # nuc_p:                 1
+  # nuc_n:                 0
+  q:                       1
+  spcType:                 2
+  Fudge:          0.000000000000000E+000
+  kStart:                 41
+  kEnd:                  160
+           0 T
+           1 F
+           2 T
+ ---------------
+ Creating time series for Kp
+ Reading data from bcwind.h5
+ Finished reading data for Kp
+ ---------------
+  KAIJU/RAIJU/prob/IC                     :           DIP[32m (DEFAULT)[0m 
+ Initializing a dipole field with XML-determined electrostatic potential and eta
+  distribution
+  KAIJU/RAIJU/prob/espotPreset            :         TOFFO[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/prob/cpcp                   :   5.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/prob/etaPreset              :          RING[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/prob/D                      :   1.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/prob/T                      :   3.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/prob/tiote                  :   4.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/prob/L                      :   4.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/prob/dL                     :   6.25000E-01[32m (DEFAULT)[0m 
+ RAIJU initializing plasmasphere with Kp =   3.00000000000000     
+  /Kaiju/RAIJU/losses/ssMult              :   1.00000E+00[32m (DEFAULT)[0m 
+ Please update the XML to use output/dtCon for console output
+ Instead of the no longer used output/tsOut
+  KAIJU/VOLTRON/output/dtCon              :   5.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/output/dtOut              :   5.00000E+00[34m     (XML)[0m 
+  KAIJU/VOLTRON/restart/dtRes             :   1.08000E+04[34m     (XML)[0m 
+  KAIJU/VOLTRON/output/doTimer            :             F[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/output/doFat              :             F[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/output/doSlim             :             F[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/output/slimTimers         :             T[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/cpl/startupTscl             :   7.20000E+03[34m     (XML)[0m 
+  KAIJU/RAIJU/cpl/tsclSm_dL               :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/cpl/tsclSm_dMLT             :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/doIngest       :             F[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/file           :          NONE[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/group          :  /RaiCplMomen[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/alphaPavg      :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/alphaDavg      :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/alphaPstd      :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/alphaDstd      :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/alphaTiote     :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/densityFloor   :   0.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/pressureFloor  :   0.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/tioteMin       :   0.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/tioteMax       :   1.00000E+30[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/abortOnNonfinit:             T[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/coldStarter/doCX            :             T[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/coldStarter/doUpdate        :             F[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/coldStarter/evalCadence     :   3.00000E+02[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/coldStarter/tEnd            :   7.20000E+03[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/grid/ThetaL                 :   1.50000E+01[34m     (XML)[0m 
+ RAIJU theta range =    15.0000000000000        49.1066053508691     
+  KAIJU/RAIJU/grid/Ng                     :             4[32m (DEFAULT)[0m 
+ RAIJU outputting to sami3_moments_base_control_long300.raiju.h5
+  KAIJU/VOLTRON/coupling/doDynDT          :             F[32m (DEFAULT)[0m 
+ Voltron outputting to sami3_moments_base_control_long300.volt.h5
+  KAIJU/REMIX/conductance/euv_model_type  :         LOMPE[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/et_model_type   :          NONE[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/sigma_model_type:         KAE23[32m (DEFAULT)[0m 
+  KAIJU/REMIX/precipitation/aurora_model_t:        LINMRG[34m     (XML)[0m 
+  KAIJU/REMIX/precipitation/alpha         :   2.00000E-01[34m     (XML)[0m 
+  KAIJU/REMIX/precipitation/beta          :   4.00000E-01[34m     (XML)[0m 
+  KAIJU/REMIX/precipitation/R             :   8.00000E-02[32m (DEFAULT)[0m 
+  KAIJU/REMIX/precipitation/doAuroralSmoot:             F[34m     (XML)[0m 
+  KAIJU/REMIX/conductance/F107            :   1.20000E+02[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/pedmin          :   2.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/hallmin         :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/sigma_ratio     :   6.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/ped0            :   1.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/const_sigma     :             F[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/doRamp          :             F[34m     (XML)[0m 
+  KAIJU/REMIX/conductance/doChill         :             F[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/doStarlight     :             T[34m     (XML)[0m 
+  KAIJU/REMIX/conductance/doMR            :             F[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/apply_cap       :             T[32m (DEFAULT)[0m 
+  KAIJU/REMIX/precipitation/gamma         :   1.66667E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/doEMA           :             T[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/doET            :             F[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/doSWF107        :             T[32m (DEFAULT)[0m 
+  KAIJU/REMIX/solver/maxitr               :           400[32m (DEFAULT)[0m 
+  KAIJU/REMIX/solver/mr                   :            30[32m (DEFAULT)[0m 
+  KAIJU/REMIX/solver/tol_abs              :   1.00000E-06[32m (DEFAULT)[0m 
+  KAIJU/REMIX/solver/tol_rel              :   1.00000E-06[32m (DEFAULT)[0m 
+  KAIJU/REMIX/solver/llbc_value           :   0.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/grid/Np                     :           360[32m (DEFAULT)[0m 
+  KAIJU/REMIX/grid/Nt                     :            45[32m (DEFAULT)[0m 
+  KAIJU/REMIX/grid/LowLatBoundary         :   4.50000E+01[32m (DEFAULT)[0m 
+  KAIJU/REMIX/grid/init_from_file         :             F[32m (DEFAULT)[0m 
+  KAIJU/REMIX/output/dtOut                :   1.00000E+00[32m (DEFAULT)[0m 
+  /Kaiju/gamera/restart/nRes              :             2[34m     (XML)[0m 
+  KAIJU/REMIX/debug/mklmsglvl             :             0[32m (DEFAULT)[0m 
+ [31m
+ [0m 
+ WARNING for ShellGrid with name: REMIX
+ No radius provided, assuming Earth's ionosphere according to kdefs:
+   1.01911227481538       Rp
+  KAIJU/REMIX/conductance/euv_model_type  :         LOMPE[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/et_model_type   :          NONE[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/sigma_model_type:         KAE23[32m (DEFAULT)[0m 
+  KAIJU/REMIX/precipitation/aurora_model_t:        LINMRG[34m     (XML)[0m 
+  KAIJU/REMIX/precipitation/alpha         :   2.00000E-01[34m     (XML)[0m 
+  KAIJU/REMIX/precipitation/beta          :   4.00000E-01[34m     (XML)[0m 
+  KAIJU/REMIX/precipitation/R             :   8.00000E-02[32m (DEFAULT)[0m 
+  KAIJU/REMIX/precipitation/doAuroralSmoot:             F[34m     (XML)[0m 
+  KAIJU/REMIX/conductance/F107            :   1.20000E+02[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/pedmin          :   2.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/hallmin         :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/sigma_ratio     :   6.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/ped0            :   1.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/const_sigma     :             F[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/doRamp          :             F[34m     (XML)[0m 
+  KAIJU/REMIX/conductance/doChill         :             F[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/doStarlight     :             T[34m     (XML)[0m 
+  KAIJU/REMIX/conductance/doMR            :             F[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/apply_cap       :             T[32m (DEFAULT)[0m 
+  KAIJU/REMIX/precipitation/gamma         :   1.66667E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/doEMA           :             T[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/doET            :             F[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/doSWF107        :             T[32m (DEFAULT)[0m 
+  KAIJU/REMIX/solver/maxitr               :           400[32m (DEFAULT)[0m 
+  KAIJU/REMIX/solver/mr                   :            30[32m (DEFAULT)[0m 
+  KAIJU/REMIX/solver/tol_abs              :   1.00000E-06[32m (DEFAULT)[0m 
+  KAIJU/REMIX/solver/tol_rel              :   1.00000E-06[32m (DEFAULT)[0m 
+  KAIJU/REMIX/solver/llbc_value           :   0.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/grid/Np                     :           360[32m (DEFAULT)[0m 
+  KAIJU/REMIX/grid/Nt                     :            45[32m (DEFAULT)[0m 
+  KAIJU/REMIX/grid/LowLatBoundary         :   4.50000E+01[32m (DEFAULT)[0m 
+  KAIJU/REMIX/grid/init_from_file         :             F[32m (DEFAULT)[0m 
+  KAIJU/REMIX/output/dtOut                :   1.00000E+00[32m (DEFAULT)[0m 
+  /Kaiju/gamera/restart/nRes              :             2[34m     (XML)[0m 
+  KAIJU/REMIX/debug/mklmsglvl             :             0[32m (DEFAULT)[0m 
+ [31m
+ [0m 
+ WARNING for ShellGrid with name: REMIX
+ No radius provided, assuming Earth's ionosphere according to kdefs:
+   1.01911227481538       Rp
+ Using F10.7 =    100.000000000000     
+ Using MJD0  =    52061.9583333333     
+[32m<Writing HDF5 DATA @ t = -5.00E+00 [sec] >[0m 
+ Overwriting group sami3_moments_base_control_long300.gam.h5/Step#0
+  KAIJU/CHIMP/domain/rClosed              :   2.25000E+00[32m (DEFAULT)[0m 
+ ------------
+ CHIMP Units
+ inTScl =    2997.92458000000     
+ inBScl =    17.0931245918848     
+ inVScl =   3.335640951981520E-004
+ ------------
+  KAIJU/CHIMP/interp/wgt                  :           TSC[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/tracer/epsds                :   5.00000E-02[34m     (XML)[0m 
+  KAIJU/CHIMP/tracer/doDip                :             F[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/streamline/steptype         :          MAGE[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/streamline/bMin_C           :   1.00000E-12[32m (DEFAULT)[0m 
+<Grid size = (48,48,64)>
+  KAIJU/CHIMP/fields/grType               :           LFM[34m     (XML)[0m 
+ <Grid type = LFM>
+ Doing grid calculations ...
+ Finished grid calculations
+ Initializing LFM locator
+  KAIJU/CHIMP/domain/rmin                 :   1.01911E+00[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/domain/rmax                 :   2.69493E+01[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/domain/dtype                :          MAGE[34m     (XML)[0m 
+ Using MAGE inDomain
+  KAIJU/CHIMP/domain/xSun                 :   2.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/domain/xTail                :  -5.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/domain/yzMax                :   4.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/domain/gtype                :           LFM[32m (DEFAULT)[0m 
+ Using spherical inGap
+  KAIJU/CHIMP/domain/rgap                 :   2.81609E+00[32m (DEFAULT)[0m 
+ MAXTUBESIZE =         5000
+ [32m
+ ---------------
+ Kaiju configuration
+Git branch = HEAD
+Git hash   = 9e19bfc
+Compiler   = Intel(R) Fortran Intel(R) 64 Compiler Classic for applications running on Intel(R) 64, Version 2021.10.0 Build 20230609_000000
+Run starting on: Sun May 24 16:15:21 2026
+ ---------------
+[0m  [36m
+ GAMERA
+      Time = -5.00E+00 [sec]
+        ts =        0
+        dt =  1.19E-01 [sec]
+    dt/dt0 =  100.000%
+    Spent     0.0% of time waiting for Voltron
+[0m       CPCP =    0.052   0.052 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 22:59:55
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.607 [nT]
+           dSMRs  ~     0.24   -0.08   -0.08   -0.08 [nT, 12/18/00/06]
+   Spent     0.0% of time waiting for Gamera
+             0.0% of time processing Chimp(Helpers)
+             0.0% of time processing IMAG
+             0.0% of time processing Remix
+             0.0% of time processing Tubes(Helpers)
+             0.0% of time writing files
+[0m [32m<Writing HDF5 DATA @ t = -5.00E+00 [sec] >[0m 
+ Overwriting group sami3_moments_base_control_long300.gam.h5/Step#0
+[32m<Writing RAIJU HDF5 DATA @ t =  0.00E+00 [sec] >[0m 
+ RAIJU Cold starting...
+  Real Dst             :   -5.00
+  Model Dst            :    7.70
+  Target DPS-Dst       :  -12.70
+  Hot proton pre-loss  :  -28.73
+            post-loss  :  -20.08
+         post-rescale  :  -12.70
+  Hot electron DPS-Dst :   -5.06
+ RAIJU initializing plasmasphere with Kp =   3.00000000000000     
+ [36m
+ GAMERA
+      Time =  1.17E-01 [sec]
+        ts =       43
+        dt =  1.19E-01 [sec]
+    dt/dt0 =   99.907%
+    Spent     0.0% of time waiting for Voltron
+[0m       CPCP =    2.423   2.423 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:00:00
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.671 [nT]
+           dSMRs  ~     0.25   -0.08   -0.09   -0.08 [nT, 12/18/00/06]
+   DPSDst  ~   -5.805 [nT]
+   Spent     4.6% of time waiting for Gamera
+             2.2% of time processing Chimp(Helpers)
+             3.1% of time processing IMAG
+             2.3% of time processing Remix
+             3.8% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @    2.205% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:00:05
+      Time =  5.00E+00 [sec]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    2.554 [min] @ 53
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   1.03, D =   0.44 @  4.00 Rp,15.69 MLT; DPS:  -2.01
+        2: P =   2.67, D =   0.40 @  4.00 Rp,15.51 MLT; DPS:  -5.13
+[0m [32m<Writing HDF5 DATA @ t =  1.17E-01 [sec] >[0m 
+ Overwriting group sami3_moments_base_control_long300.gamCpl.h5/Step#1
+[32m<Writing RAIJU HDF5 DATA @ t =  5.00E+00 [sec] >[0m 
+[32m<Writing HDF5 RESTART @ t =  1.17E-01 [sec] >[0m 
+[32m<Writing RAIJU HDF5 RESTART @ t =  5.00E+00 [sec] >[0m 
+ [36m
+ GAMERA
+      Time =  5.01E+00 [sec]
+        ts =       83
+        dt =  1.25E-01 [sec]
+    dt/dt0 =  104.655%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3205.57 /    975.13 [MHD/TOT] (8 threads)
+[0m       CPCP =    3.069   3.070 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:00:05
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.695 [nT]
+           dSMRs  ~     0.25   -0.08   -0.09   -0.08 [nT, 12/18/00/06]
+   DPSDst  ~   -5.684 [nT]
+   Spent     9.2% of time waiting for Gamera
+             4.4% of time processing Chimp(Helpers)
+             3.9% of time processing IMAG
+             4.0% of time processing Remix
+             7.4% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @    4.521% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:00:10
+      Time =  1.00E+01 [sec]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    2.699 [min] @ 53
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   1.00, D =   0.47 @  4.16 Rp,16.22 MLT; DPS:  -1.98
+        2: P =   2.67, D =   0.40 @  3.96 Rp,15.47 MLT; DPS:  -5.13
+[0m [32m<Writing HDF5 DATA @ t =  5.01E+00 [sec] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =  1.00E+01 [sec] >[0m 
+ [36m
+ GAMERA
+      Time =  1.00E+01 [sec]
+        ts =      123
+        dt =  1.27E-01 [sec]
+    dt/dt0 =  106.441%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3393.89 /    980.16 [MHD/TOT] (8 threads)
+[0m       CPCP =    3.298   3.299 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:00:10
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.709 [nT]
+           dSMRs  ~     0.28   -0.11   -0.06   -0.11 [nT, 12/18/00/06]
+   DPSDst  ~   -5.635 [nT]
+   Spent    12.7% of time waiting for Gamera
+             6.2% of time processing Chimp(Helpers)
+             4.7% of time processing IMAG
+             5.7% of time processing Remix
+            10.5% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @    7.025% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:00:15
+      Time =  1.50E+01 [sec]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    2.716 [min] @ 53
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.98, D =   0.46 @  4.16 Rp,16.22 MLT; DPS:  -1.94
+        2: P =   2.68, D =   0.40 @  3.96 Rp,15.46 MLT; DPS:  -5.08
+[0m [32m<Writing HDF5 DATA @ t =  1.00E+01 [sec] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =  1.50E+01 [sec] >[0m 
+ [36m
+ GAMERA
+      Time =  1.50E+01 [sec]
+        ts =      162
+        dt =  1.28E-01 [sec]
+    dt/dt0 =  107.155%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3395.60 /    955.03 [MHD/TOT] (8 threads)
+[0m       CPCP =    3.249   3.250 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:00:15
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.703 [nT]
+           dSMRs  ~     0.27   -0.11   -0.04   -0.12 [nT, 12/18/00/06]
+   DPSDst  ~   -5.621 [nT]
+   Spent    15.6% of time waiting for Gamera
+             7.7% of time processing Chimp(Helpers)
+             5.3% of time processing IMAG
+             7.3% of time processing Remix
+            13.1% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @    9.452% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:00:20
+      Time =  2.00E+01 [sec]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    2.550 [min] @ 53
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.95, D =   0.45 @  4.21 Rp,16.26 MLT; DPS:  -1.91
+        2: P =   2.67, D =   0.40 @  3.96 Rp,15.46 MLT; DPS:  -5.09
+[0m [32m<Writing HDF5 DATA @ t =  1.50E+01 [sec] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =  2.00E+01 [sec] >[0m 
+ [36m
+ GAMERA
+      Time =  2.01E+01 [sec]
+        ts =      202
+        dt =  1.28E-01 [sec]
+    dt/dt0 =  107.571%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3394.28 /    963.70 [MHD/TOT] (8 threads)
+[0m       CPCP =    3.119   3.120 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:00:20
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.807 [nT]
+           dSMRs  ~     0.26   -0.12   -0.02   -0.12 [nT, 12/18/00/06]
+   DPSDst  ~   -5.602 [nT]
+   Spent    18.1% of time waiting for Gamera
+             8.9% of time processing Chimp(Helpers)
+             5.8% of time processing IMAG
+             8.7% of time processing Remix
+            15.1% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   11.795% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:00:25
+      Time =  2.50E+01 [sec]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    2.610 [min] @ 53
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.93, D =   0.45 @  4.21 Rp,16.26 MLT; DPS:  -1.88
+        2: P =   2.67, D =   0.40 @  3.96 Rp,15.47 MLT; DPS:  -5.09
+[0m [32m<Writing HDF5 DATA @ t =  2.01E+01 [sec] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =  2.50E+01 [sec] >[0m 
+ [36m
+ GAMERA
+      Time =  2.51E+01 [sec]
+        ts =      241
+        dt =  1.28E-01 [sec]
+    dt/dt0 =  107.834%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3387.40 /    944.70 [MHD/TOT] (8 threads)
+[0m       CPCP =    3.006   3.008 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:00:25
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.827 [nT]
+           dSMRs  ~     0.25   -0.10   -0.07   -0.09 [nT, 12/18/00/06]
+   DPSDst  ~   -5.607 [nT]
+   Spent    20.1% of time waiting for Gamera
+            10.0% of time processing Chimp(Helpers)
+             6.3% of time processing IMAG
+            10.0% of time processing Remix
+            16.9% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   14.044% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:00:30
+      Time =  3.00E+01 [sec]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    2.510 [min] @ 53
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.90, D =   0.44 @  4.20 Rp,20.73 MLT; DPS:  -1.86
+        2: P =   2.67, D =   0.40 @  3.96 Rp,15.47 MLT; DPS:  -5.09
+[0m [32m<Writing HDF5 DATA @ t =  2.51E+01 [sec] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =  3.00E+01 [sec] >[0m 
+ [36m
+ GAMERA
+      Time =  3.01E+01 [sec]
+        ts =      280
+        dt =  1.29E-01 [sec]
+    dt/dt0 =  108.024%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3392.59 /    947.66 [MHD/TOT] (8 threads)
+[0m       CPCP =    2.911   2.914 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:00:30
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.729 [nT]
+           dSMRs  ~     0.25   -0.11   -0.05   -0.10 [nT, 12/18/00/06]
+   DPSDst  ~   -5.577 [nT]
+   Spent    21.8% of time waiting for Gamera
+            10.9% of time processing Chimp(Helpers)
+             6.6% of time processing IMAG
+            11.1% of time processing Remix
+            18.4% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   15.957% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:00:35
+      Time =  3.50E+01 [sec]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    2.477 [min] @ 53
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.88, D =   0.43 @  4.21 Rp, 8.87 MLT; DPS:  -1.84
+        2: P =   2.67, D =   0.40 @  3.96 Rp,15.47 MLT; DPS:  -5.10
+[0m [32m<Writing HDF5 DATA @ t =  3.01E+01 [sec] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =  3.50E+01 [sec] >[0m 
+ [36m
+ GAMERA
+      Time =  3.50E+01 [sec]
+        ts =      318
+        dt =  1.29E-01 [sec]
+    dt/dt0 =  108.148%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3391.02 /    935.01 [MHD/TOT] (8 threads)
+[0m       CPCP =    2.773   2.780 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:00:35
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.561 [nT]
+           dSMRs  ~     0.30   -0.13   -0.05   -0.12 [nT, 12/18/00/06]
+   DPSDst  ~   -5.529 [nT]
+   Spent    23.2% of time waiting for Gamera
+            11.7% of time processing Chimp(Helpers)
+             7.0% of time processing IMAG
+            12.1% of time processing Remix
+            19.7% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   18.066% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:00:40
+      Time =  4.00E+01 [sec]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    2.336 [min] @ 53
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.86, D =   0.43 @  4.21 Rp, 9.00 MLT; DPS:  -1.81
+        2: P =   2.66, D =   0.40 @  3.96 Rp,15.47 MLT; DPS:  -5.08
+[0m [32m<Writing HDF5 DATA @ t =  3.50E+01 [sec] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =  4.00E+01 [sec] >[0m 
+ [36m
+ GAMERA
+      Time =  4.00E+01 [sec]
+        ts =      357
+        dt =  1.29E-01 [sec]
+    dt/dt0 =  108.236%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3393.99 /    957.54 [MHD/TOT] (8 threads)
+[0m       CPCP =    2.698   2.698 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:00:40
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.407 [nT]
+           dSMRs  ~     0.31   -0.13   -0.05   -0.12 [nT, 12/18/00/06]
+   DPSDst  ~   -5.525 [nT]
+   Spent    24.5% of time waiting for Gamera
+            12.4% of time processing Chimp(Helpers)
+             7.2% of time processing IMAG
+            12.8% of time processing Remix
+            20.8% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   20.175% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:00:45
+      Time =  4.50E+01 [sec]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    2.220 [min] @ 54
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.84, D =   0.42 @  4.21 Rp, 8.87 MLT; DPS:  -1.79
+        2: P =   2.66, D =   0.40 @  3.96 Rp,15.47 MLT; DPS:  -5.09
+[0m [32m<Writing HDF5 DATA @ t =  4.00E+01 [sec] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =  4.50E+01 [sec] >[0m 
+ [36m
+ GAMERA
+      Time =  4.51E+01 [sec]
+        ts =      396
+        dt =  1.29E-01 [sec]
+    dt/dt0 =  108.296%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3395.00 /    958.96 [MHD/TOT] (8 threads)
+[0m       CPCP =    2.724   2.721 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:00:45
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.283 [nT]
+           dSMRs  ~     0.27   -0.12   -0.03   -0.12 [nT, 12/18/00/06]
+   DPSDst  ~   -5.524 [nT]
+   Spent    25.6% of time waiting for Gamera
+            12.9% of time processing Chimp(Helpers)
+             7.5% of time processing IMAG
+            13.4% of time processing Remix
+            21.7% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   22.190% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:00:50
+      Time =  5.00E+01 [sec]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    2.190 [min] @ 54
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.81, D =   0.41 @  4.21 Rp, 9.00 MLT; DPS:  -1.77
+        2: P =   2.65, D =   0.40 @  3.96 Rp,15.47 MLT; DPS:  -5.11
+[0m [32m<Writing HDF5 DATA @ t =  4.51E+01 [sec] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =  5.00E+01 [sec] >[0m 
+ [36m
+ GAMERA
+      Time =  5.01E+01 [sec]
+        ts =      435
+        dt =  1.28E-01 [sec]
+    dt/dt0 =  107.285%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3391.39 /    960.43 [MHD/TOT] (8 threads)
+[0m       CPCP =    2.680   2.670 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:00:50
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.120 [nT]
+           dSMRs  ~     0.23   -0.12    0.01   -0.12 [nT, 12/18/00/06]
+   DPSDst  ~   -5.516 [nT]
+   Spent    26.5% of time waiting for Gamera
+            13.4% of time processing Chimp(Helpers)
+             7.6% of time processing IMAG
+            13.9% of time processing Remix
+            22.4% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   24.168% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:00:55
+      Time =  5.50E+01 [sec]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    1.998 [min] @ 54
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.79, D =   0.40 @  4.21 Rp, 9.00 MLT; DPS:  -1.76
+        2: P =   2.65, D =   0.40 @  3.96 Rp,15.47 MLT; DPS:  -5.12
+[0m [32m<Writing HDF5 DATA @ t =  5.01E+01 [sec] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =  5.50E+01 [sec] >[0m 
+ [36m
+ GAMERA
+      Time =  5.50E+01 [sec]
+        ts =      474
+        dt =  1.25E-01 [sec]
+    dt/dt0 =  104.888%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3392.19 /    961.91 [MHD/TOT] (8 threads)
+[0m       CPCP =    3.019   3.007 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:00:55
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    6.905 [nT]
+           dSMRs  ~     0.22   -0.13    0.03   -0.12 [nT, 12/18/00/06]
+   DPSDst  ~   -5.513 [nT]
+   Spent    27.3% of time waiting for Gamera
+            13.8% of time processing Chimp(Helpers)
+             7.8% of time processing IMAG
+            14.4% of time processing Remix
+            23.0% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   25.795% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:00:59
+      Time =  6.00E+01 [sec]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    1.888 [min] @ 54
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.77, D =   0.40 @  4.21 Rp, 9.00 MLT; DPS:  -1.74
+        2: P =   2.64, D =   0.40 @  3.96 Rp,15.47 MLT; DPS:  -5.14
+[0m [32m<Writing HDF5 DATA @ t =  5.50E+01 [sec] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =  6.00E+01 [sec] >[0m 
+ [36m
+ GAMERA
+      Time =     1.002 [min]
+        ts =      515
+        dt =  1.23E-01 [sec]
+    dt/dt0 =  103.408%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3394.93 /    998.96 [MHD/TOT] (8 threads)
+[0m       CPCP =    3.179   3.162 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:01:00
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    6.655 [nT]
+           dSMRs  ~     0.20   -0.13    0.06   -0.13 [nT, 12/18/00/06]
+   DPSDst  ~   -5.506 [nT]
+   Spent    28.2% of time waiting for Gamera
+            14.1% of time processing Chimp(Helpers)
+             7.9% of time processing IMAG
+            14.7% of time processing Remix
+            23.5% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   27.657% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:01:05
+      Time =     1.083 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    1.804 [min] @ 54
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.75, D =   0.39 @  4.21 Rp, 8.87 MLT; DPS:  -1.73
+        2: P =   2.64, D =   0.40 @  3.97 Rp, 0.20 MLT; DPS:  -5.15
+[0m [32m<Writing HDF5 DATA @ t =     1.002 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     1.083 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     1.083 [min]
+        ts =      555
+        dt =  1.23E-01 [sec]
+    dt/dt0 =  103.308%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3392.91 /    983.97 [MHD/TOT] (8 threads)
+[0m       CPCP =    3.231   3.195 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:01:05
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    6.444 [nT]
+           dSMRs  ~     0.18   -0.13    0.08   -0.13 [nT, 12/18/00/06]
+   DPSDst  ~   -5.499 [nT]
+   Spent    28.9% of time waiting for Gamera
+            14.4% of time processing Chimp(Helpers)
+             8.1% of time processing IMAG
+            15.0% of time processing Remix
+            23.8% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   29.256% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:01:10
+      Time =     1.167 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    1.827 [min] @ 54
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.73, D =   0.39 @  4.22 Rp, 0.74 MLT; DPS:  -1.71
+        2: P =   2.64, D =   0.40 @  3.97 Rp, 0.20 MLT; DPS:  -5.16
+[0m [32m<Writing HDF5 DATA @ t =     1.083 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     1.167 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     1.168 [min]
+        ts =      596
+        dt =  1.25E-01 [sec]
+    dt/dt0 =  104.881%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3389.98 /   1003.58 [MHD/TOT] (8 threads)
+[0m       CPCP =    3.389   3.432 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:01:10
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    6.265 [nT]
+           dSMRs  ~     0.17   -0.13    0.08   -0.13 [nT, 12/18/00/06]
+   DPSDst  ~   -5.499 [nT]
+   Spent    29.5% of time waiting for Gamera
+            14.6% of time processing Chimp(Helpers)
+             8.2% of time processing IMAG
+            15.2% of time processing Remix
+            24.1% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   30.998% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:01:15
+      Time =     1.250 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    1.871 [min] @ 54
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.72, D =   0.38 @  4.22 Rp,23.13 MLT; DPS:  -1.70
+        2: P =   2.64, D =   0.40 @  3.97 Rp, 0.20 MLT; DPS:  -5.18
+[0m [32m<Writing HDF5 DATA @ t =     1.168 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     1.250 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     1.251 [min]
+        ts =      636
+        dt =  1.25E-01 [sec]
+    dt/dt0 =  104.915%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3392.91 /    991.98 [MHD/TOT] (8 threads)
+[0m       CPCP =    3.252   3.302 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:01:15
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    6.139 [nT]
+           dSMRs  ~     0.19   -0.13    0.07   -0.13 [nT, 12/18/00/06]
+   DPSDst  ~   -5.498 [nT]
+   Spent    30.0% of time waiting for Gamera
+            14.8% of time processing Chimp(Helpers)
+             8.3% of time processing IMAG
+            15.4% of time processing Remix
+            24.4% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   32.665% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:01:20
+      Time =     1.333 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    1.903 [min] @ 54
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.70, D =   0.37 @  4.22 Rp,11.53 MLT; DPS:  -1.69
+        2: P =   2.64, D =   0.40 @  3.97 Rp, 0.20 MLT; DPS:  -5.20
+[0m [32m<Writing HDF5 DATA @ t =     1.251 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     1.333 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     1.334 [min]
+        ts =      676
+        dt =  1.24E-01 [sec]
+    dt/dt0 =  104.281%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3391.94 /    992.15 [MHD/TOT] (8 threads)
+[0m       CPCP =    3.194   3.152 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:01:20
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    6.015 [nT]
+           dSMRs  ~     0.15   -0.11    0.09   -0.12 [nT, 12/18/00/06]
+   DPSDst  ~   -5.502 [nT]
+   Spent    30.4% of time waiting for Gamera
+            15.0% of time processing Chimp(Helpers)
+             8.4% of time processing IMAG
+            15.5% of time processing Remix
+            24.7% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   34.251% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:01:25
+      Time =     1.417 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    1.868 [min] @ 54
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.70, D =   0.37 @  4.21 Rp,11.80 MLT; DPS:  -1.68
+        2: P =   2.70, D =   0.43 @  4.21 Rp,12.20 MLT; DPS:  -5.21
+[0m [32m<Writing HDF5 DATA @ t =     1.334 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     1.417 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     1.418 [min]
+        ts =      716
+        dt =  1.26E-01 [sec]
+    dt/dt0 =  105.502%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3391.55 /    993.34 [MHD/TOT] (8 threads)
+[0m       CPCP =    3.429   3.328 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:01:25
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    6.016 [nT]
+           dSMRs  ~     0.24   -0.13    0.03   -0.13 [nT, 12/18/00/06]
+   DPSDst  ~   -5.501 [nT]
+   Spent    30.8% of time waiting for Gamera
+            15.2% of time processing Chimp(Helpers)
+             8.4% of time processing IMAG
+            15.6% of time processing Remix
+            24.9% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   35.841% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:01:30
+      Time =     1.500 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    1.762 [min] @ 54
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.70, D =   0.37 @  4.19 Rp,11.80 MLT; DPS:  -1.66
+        2: P =   2.76, D =   0.44 @  4.19 Rp,12.20 MLT; DPS:  -5.23
+[0m [32m<Writing HDF5 DATA @ t =     1.418 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     1.500 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     1.502 [min]
+        ts =      756
+        dt =  1.26E-01 [sec]
+    dt/dt0 =  105.765%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3390.77 /   1001.55 [MHD/TOT] (8 threads)
+[0m       CPCP =    3.350   3.304 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:01:30
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.109 [nT]
+           dSMRs  ~     1.42   -0.41   -0.61   -0.41 [nT, 12/18/00/06]
+   DPSDst  ~   -5.494 [nT]
+   Spent    31.1% of time waiting for Gamera
+            15.3% of time processing Chimp(Helpers)
+             8.5% of time processing IMAG
+            15.5% of time processing Remix
+            25.1% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   37.387% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:01:35
+      Time =     1.583 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    1.725 [min] @ 54
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.69, D =   0.37 @  4.18 Rp,11.53 MLT; DPS:  -1.65
+        2: P =   2.78, D =   0.44 @  4.18 Rp,12.47 MLT; DPS:  -5.24
+[0m [32m<Writing HDF5 DATA @ t =     1.502 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     1.583 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     1.585 [min]
+        ts =      796
+        dt =  1.25E-01 [sec]
+    dt/dt0 =  104.850%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3390.96 /    989.54 [MHD/TOT] (8 threads)
+[0m       CPCP =    4.866   5.059 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:01:35
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    8.832 [nT]
+           dSMRs  ~     2.68   -0.64   -1.40   -0.64 [nT, 12/18/00/06]
+   DPSDst  ~   -5.481 [nT]
+   Spent    31.4% of time waiting for Gamera
+            15.4% of time processing Chimp(Helpers)
+             8.5% of time processing IMAG
+            15.7% of time processing Remix
+            25.2% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   38.846% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:01:40
+      Time =     1.667 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    1.681 [min] @ 54
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.67, D =   0.36 @  4.18 Rp,11.40 MLT; DPS:  -1.63
+        2: P =   2.77, D =   0.44 @  4.18 Rp,12.60 MLT; DPS:  -5.24
+[0m [32m<Writing HDF5 DATA @ t =     1.585 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     1.667 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     1.668 [min]
+        ts =      836
+        dt =  1.24E-01 [sec]
+    dt/dt0 =  103.963%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3391.94 /    988.05 [MHD/TOT] (8 threads)
+[0m       CPCP =    8.780   9.018 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:01:40
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    9.970 [nT]
+           dSMRs  ~     2.92   -0.57   -1.76   -0.59 [nT, 12/18/00/06]
+   DPSDst  ~   -5.464 [nT]
+   Spent    31.6% of time waiting for Gamera
+            15.5% of time processing Chimp(Helpers)
+             8.6% of time processing IMAG
+            15.8% of time processing Remix
+            25.3% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   40.218% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:01:45
+      Time =     1.750 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    1.515 [min] @ 54
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.66, D =   0.36 @  4.19 Rp,11.53 MLT; DPS:  -1.61
+        2: P =   2.77, D =   0.41 @  3.95 Rp,12.20 MLT; DPS:  -5.23
+[0m [32m<Writing HDF5 DATA @ t =     1.668 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     1.750 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     1.750 [min]
+        ts =      876
+        dt =  1.22E-01 [sec]
+    dt/dt0 =  102.856%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3392.72 /    988.66 [MHD/TOT] (8 threads)
+[0m       CPCP =   12.748  12.780 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:01:45
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~   10.400 [nT]
+           dSMRs  ~     2.56   -0.39   -1.75   -0.41 [nT, 12/18/00/06]
+   DPSDst  ~   -5.443 [nT]
+   Spent    31.7% of time waiting for Gamera
+            15.6% of time processing Chimp(Helpers)
+             8.6% of time processing IMAG
+            16.0% of time processing Remix
+            25.3% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   41.458% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:01:50
+      Time =     1.833 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    1.426 [min] @ 54
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.64, D =   0.35 @  4.19 Rp,11.53 MLT; DPS:  -1.60
+        2: P =   2.78, D =   0.44 @  4.19 Rp,12.47 MLT; DPS:  -5.23
+[0m [32m<Writing HDF5 DATA @ t =     1.750 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     1.833 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     1.833 [min]
+        ts =      917
+        dt =  1.21E-01 [sec]
+    dt/dt0 =  101.829%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3388.27 /   1004.45 [MHD/TOT] (8 threads)
+[0m       CPCP =   16.774  16.696 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:01:50
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~   10.312 [nT]
+           dSMRs  ~     2.02   -0.23   -1.54   -0.25 [nT, 12/18/00/06]
+   DPSDst  ~   -5.441 [nT]
+   Spent    32.0% of time waiting for Gamera
+            15.6% of time processing Chimp(Helpers)
+             8.6% of time processing IMAG
+            16.1% of time processing Remix
+            25.4% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   42.748% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:01:55
+      Time =     1.917 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max    1.211 [min] @ 55
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.62, D =   0.34 @  4.19 Rp,11.53 MLT; DPS:  -1.58
+        2: P =   2.76, D =   0.44 @  4.19 Rp, 9.79 MLT; DPS:  -5.23
+[0m [32m<Writing HDF5 DATA @ t =     1.833 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     1.917 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     1.918 [min]
+        ts =      959
+        dt =  1.20E-01 [sec]
+    dt/dt0 =  100.987%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3391.46 /   1020.66 [MHD/TOT] (8 threads)
+[0m       CPCP =   21.414  21.228 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:01:55
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    9.904 [nT]
+           dSMRs  ~     1.58   -0.15   -1.25   -0.18 [nT, 12/18/00/06]
+   DPSDst  ~   -5.438 [nT]
+   Spent    32.2% of time waiting for Gamera
+            15.6% of time processing Chimp(Helpers)
+             8.6% of time processing IMAG
+            16.1% of time processing Remix
+            25.4% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   44.013% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:01:59
+      Time =     2.000 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 5.73E+01 [sec] @ 55
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.60, D =   0.34 @  4.19 Rp, 9.66 MLT; DPS:  -1.56
+        2: P =   2.74, D =   0.43 @  4.19 Rp, 9.66 MLT; DPS:  -5.22
+[0m [32m<Writing HDF5 DATA @ t =     1.918 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     2.000 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     2.001 [min]
+        ts =     1001
+        dt =  1.12E-01 [sec]
+    dt/dt0 =   93.728%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3390.91 /   1020.61 [MHD/TOT] (8 threads)
+[0m       CPCP =   25.070  24.965 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:02:00
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    9.352 [nT]
+           dSMRs  ~     1.28   -0.13   -0.98   -0.17 [nT, 12/18/00/06]
+   DPSDst  ~   -5.403 [nT]
+   Spent    32.5% of time waiting for Gamera
+            15.6% of time processing Chimp(Helpers)
+             8.7% of time processing IMAG
+            16.1% of time processing Remix
+            25.3% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   45.193% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:02:05
+      Time =     2.083 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 5.12E+01 [sec] @ 56
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.58, D =   0.33 @  4.19 Rp, 9.66 MLT; DPS:  -1.54
+        2: P =   2.72, D =   0.43 @  4.19 Rp, 9.66 MLT; DPS:  -5.21
+[0m [32m<Writing HDF5 DATA @ t =     2.001 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     2.083 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     2.085 [min]
+        ts =     1051
+        dt =  9.28E-02 [sec]
+    dt/dt0 =   77.942%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3390.42 /   1142.10 [MHD/TOT] (8 threads)
+[0m       CPCP =   28.262  27.929 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:02:05
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    8.752 [nT]
+           dSMRs  ~     1.10   -0.14   -0.77   -0.19 [nT, 12/18/00/06]
+   DPSDst  ~   -5.365 [nT]
+   Spent    33.3% of time waiting for Gamera
+            15.5% of time processing Chimp(Helpers)
+             8.6% of time processing IMAG
+            16.0% of time processing Remix
+            25.1% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   46.237% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:02:10
+      Time =     2.167 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 4.55E+01 [sec] @ 56
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.56, D =   0.32 @  4.20 Rp, 9.66 MLT; DPS:  -1.52
+        2: P =   2.70, D =   0.40 @  3.96 Rp,12.20 MLT; DPS:  -5.19
+[0m [32m<Writing HDF5 DATA @ t =     2.085 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     2.167 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     2.167 [min]
+        ts =     1106
+        dt =  8.74E-02 [sec]
+    dt/dt0 =   73.381%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3392.63 /   1208.48 [MHD/TOT] (8 threads)
+[0m       CPCP =   29.593  29.355 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:02:10
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    8.216 [nT]
+           dSMRs  ~     1.03   -0.15   -0.67   -0.21 [nT, 12/18/00/06]
+   DPSDst  ~   -5.338 [nT]
+   Spent    34.3% of time waiting for Gamera
+            15.3% of time processing Chimp(Helpers)
+             8.5% of time processing IMAG
+            15.8% of time processing Remix
+            24.8% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   46.950% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:02:15
+      Time =     2.250 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 4.21E+01 [sec] @ 57
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.55, D =   0.32 @  4.20 Rp, 9.66 MLT; DPS:  -1.50
+        2: P =   2.69, D =   0.40 @  3.97 Rp,12.20 MLT; DPS:  -5.18
+[0m [32m<Writing HDF5 DATA @ t =     2.167 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     2.250 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     2.251 [min]
+        ts =     1164
+        dt =  8.64E-02 [sec]
+    dt/dt0 =   72.542%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3393.56 /   1251.02 [MHD/TOT] (8 threads)
+[0m       CPCP =   29.847  29.726 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:02:15
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.762 [nT]
+           dSMRs  ~     1.02   -0.14   -0.65   -0.23 [nT, 12/18/00/06]
+   DPSDst  ~   -5.315 [nT]
+   Spent    35.4% of time waiting for Gamera
+            15.1% of time processing Chimp(Helpers)
+             8.4% of time processing IMAG
+            15.6% of time processing Remix
+            24.4% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   47.784% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:02:20
+      Time =     2.333 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 3.85E+01 [sec] @ 57
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.53, D =   0.31 @  4.20 Rp, 9.53 MLT; DPS:  -1.48
+        2: P =   2.69, D =   0.40 @  3.97 Rp,12.20 MLT; DPS:  -5.16
+[0m [32m<Writing HDF5 DATA @ t =     2.251 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     2.333 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     2.333 [min]
+        ts =     1221
+        dt =  8.73E-02 [sec]
+    dt/dt0 =   73.330%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3394.17 /   1237.72 [MHD/TOT] (8 threads)
+[0m       CPCP =   29.745  30.294 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:02:20
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.337 [nT]
+           dSMRs  ~     1.04   -0.14   -0.67   -0.23 [nT, 12/18/00/06]
+   DPSDst  ~   -5.304 [nT]
+   Spent    36.2% of time waiting for Gamera
+            14.9% of time processing Chimp(Helpers)
+             8.3% of time processing IMAG
+            15.4% of time processing Remix
+            24.1% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   48.576% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:02:25
+      Time =     2.417 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 3.54E+01 [sec] @ 57
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.52, D =   0.36 @  4.48 Rp, 8.59 MLT; DPS:  -1.47
+        2: P =   2.68, D =   0.40 @  3.97 Rp,12.07 MLT; DPS:  -5.16
+[0m [32m<Writing HDF5 DATA @ t =     2.333 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     2.417 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     2.418 [min]
+        ts =     1279
+        dt =  8.71E-02 [sec]
+    dt/dt0 =   73.171%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3391.27 /   1251.00 [MHD/TOT] (8 threads)
+[0m       CPCP =   30.296  30.795 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:02:25
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.016 [nT]
+           dSMRs  ~     1.03   -0.14   -0.68   -0.21 [nT, 12/18/00/06]
+   DPSDst  ~   -5.303 [nT]
+   Spent    37.0% of time waiting for Gamera
+            14.7% of time processing Chimp(Helpers)
+             8.2% of time processing IMAG
+            15.3% of time processing Remix
+            23.9% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   49.367% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:02:30
+      Time =     2.500 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 3.32E+01 [sec] @ 57
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.51, D =   0.36 @  4.48 Rp, 8.73 MLT; DPS:  -1.45
+        2: P =   2.67, D =   0.40 @  3.97 Rp,12.07 MLT; DPS:  -5.16
+[0m [32m<Writing HDF5 DATA @ t =     2.418 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     2.500 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     2.501 [min]
+        ts =     1337
+        dt =  8.47E-02 [sec]
+    dt/dt0 =   71.164%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3392.75 /   1252.59 [MHD/TOT] (8 threads)
+[0m       CPCP =   30.680  30.699 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:02:30
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    6.798 [nT]
+           dSMRs  ~     1.00   -0.12   -0.68   -0.20 [nT, 12/18/00/06]
+   DPSDst  ~   -5.282 [nT]
+   Spent    37.7% of time waiting for Gamera
+            14.6% of time processing Chimp(Helpers)
+             8.2% of time processing IMAG
+            15.1% of time processing Remix
+            23.6% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   50.076% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:02:35
+      Time =     2.583 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 3.23E+01 [sec] @ 58
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.50, D =   0.35 @  4.48 Rp, 8.73 MLT; DPS:  -1.43
+        2: P =   2.67, D =   0.40 @  3.92 Rp, 8.31 MLT; DPS:  -5.14
+[0m [32m<Writing HDF5 DATA @ t =     2.501 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     2.583 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     2.584 [min]
+        ts =     1395
+        dt =  8.64E-02 [sec]
+    dt/dt0 =   72.539%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3392.21 /   1253.16 [MHD/TOT] (8 threads)
+[0m       CPCP =   30.143  30.793 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:02:35
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    6.552 [nT]
+           dSMRs  ~     0.97   -0.11   -0.68   -0.18 [nT, 12/18/00/06]
+   DPSDst  ~   -5.229 [nT]
+   Spent    38.2% of time waiting for Gamera
+            14.5% of time processing Chimp(Helpers)
+             8.1% of time processing IMAG
+            15.0% of time processing Remix
+            23.5% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   50.783% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:02:40
+      Time =     2.667 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 3.31E+01 [sec] @ 57
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.49, D =   0.35 @  4.48 Rp, 8.73 MLT; DPS:  -1.41
+        2: P =   2.66, D =   0.40 @  3.96 Rp, 8.33 MLT; DPS:  -5.11
+[0m [32m<Writing HDF5 DATA @ t =     2.584 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     2.667 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     2.667 [min]
+        ts =     1452
+        dt =  8.93E-02 [sec]
+    dt/dt0 =   75.020%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3390.75 /   1241.62 [MHD/TOT] (8 threads)
+[0m       CPCP =   28.649  29.725 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:02:40
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    6.300 [nT]
+           dSMRs  ~     0.88   -0.09   -0.64   -0.15 [nT, 12/18/00/06]
+   DPSDst  ~   -5.209 [nT]
+   Spent    38.7% of time waiting for Gamera
+            14.4% of time processing Chimp(Helpers)
+             8.1% of time processing IMAG
+            14.8% of time processing Remix
+            23.3% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   51.501% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:02:45
+      Time =     2.750 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 3.49E+01 [sec] @ 57
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.48, D =   0.34 @  4.48 Rp, 8.73 MLT; DPS:  -1.40
+        2: P =   2.66, D =   0.40 @  3.96 Rp, 8.33 MLT; DPS:  -5.10
+[0m [32m<Writing HDF5 DATA @ t =     2.667 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     2.750 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     2.751 [min]
+        ts =     1507
+        dt =  9.39E-02 [sec]
+    dt/dt0 =   78.887%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3394.05 /   1218.55 [MHD/TOT] (8 threads)
+[0m       CPCP =   27.748  28.438 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:02:45
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    6.092 [nT]
+           dSMRs  ~     0.78   -0.07   -0.58   -0.14 [nT, 12/18/00/06]
+   DPSDst  ~   -5.188 [nT]
+   Spent    38.9% of time waiting for Gamera
+            14.4% of time processing Chimp(Helpers)
+             8.1% of time processing IMAG
+            14.7% of time processing Remix
+            23.3% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   52.151% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:02:50
+      Time =     2.833 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 3.55E+01 [sec] @ 57
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.47, D =   0.34 @  4.48 Rp, 8.73 MLT; DPS:  -1.39
+        2: P =   2.66, D =   0.40 @  3.96 Rp, 8.33 MLT; DPS:  -5.10
+[0m [32m<Writing HDF5 DATA @ t =     2.751 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     2.833 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     2.834 [min]
+        ts =     1558
+        dt =  9.99E-02 [sec]
+    dt/dt0 =   83.948%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3391.17 /   1165.41 [MHD/TOT] (8 threads)
+[0m       CPCP =   26.689  27.053 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:02:50
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    5.938 [nT]
+           dSMRs  ~     0.72   -0.07   -0.53   -0.12 [nT, 12/18/00/06]
+   DPSDst  ~   -5.191 [nT]
+   Spent    38.8% of time waiting for Gamera
+            14.4% of time processing Chimp(Helpers)
+             8.1% of time processing IMAG
+            14.7% of time processing Remix
+            23.4% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   52.911% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:02:55
+      Time =     2.917 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 3.64E+01 [sec] @ 57
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.46, D =   0.34 @  4.48 Rp, 8.73 MLT; DPS:  -1.38
+        2: P =   2.66, D =   0.40 @  3.96 Rp, 8.33 MLT; DPS:  -5.11
+[0m [32m<Writing HDF5 DATA @ t =     2.834 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     2.917 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     2.918 [min]
+        ts =     1607
+        dt =  1.04E-01 [sec]
+    dt/dt0 =   87.608%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3393.30 /   1138.15 [MHD/TOT] (8 threads)
+[0m       CPCP =   25.539  26.025 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:02:55
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    5.837 [nT]
+           dSMRs  ~     0.65   -0.06   -0.47   -0.11 [nT, 12/18/00/06]
+   DPSDst  ~   -5.209 [nT]
+   Spent    38.6% of time waiting for Gamera
+            14.5% of time processing Chimp(Helpers)
+             8.2% of time processing IMAG
+            14.7% of time processing Remix
+            23.5% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   53.721% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:02:59
+      Time =     3.000 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 3.81E+01 [sec] @ 57
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.45, D =   0.33 @  4.48 Rp, 8.73 MLT; DPS:  -1.37
+        2: P =   2.66, D =   0.40 @  3.96 Rp, 8.20 MLT; DPS:  -5.12
+[0m [32m<Writing HDF5 DATA @ t =     2.918 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     3.000 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     3.000 [min]
+        ts =     1655
+        dt =  1.02E-01 [sec]
+    dt/dt0 =   85.795%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3392.72 /   1122.89 [MHD/TOT] (8 threads)
+[0m       CPCP =   24.511  25.315 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:03:00
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    5.795 [nT]
+           dSMRs  ~     0.60   -0.05   -0.45   -0.10 [nT, 12/18/00/06]
+   DPSDst  ~   -5.203 [nT]
+   Spent    38.4% of time waiting for Gamera
+            14.6% of time processing Chimp(Helpers)
+             8.2% of time processing IMAG
+            14.8% of time processing Remix
+            23.6% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   54.468% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:03:05
+      Time =     3.083 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 4.12E+01 [sec] @ 57
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.45, D =   0.33 @  4.48 Rp, 8.73 MLT; DPS:  -1.36
+        2: P =   2.65, D =   0.40 @  3.96 Rp, 8.20 MLT; DPS:  -5.12
+[0m [32m<Writing HDF5 DATA @ t =     3.000 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     3.083 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     3.085 [min]
+        ts =     1705
+        dt =  1.00E-01 [sec]
+    dt/dt0 =   84.270%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3392.76 /   1153.97 [MHD/TOT] (8 threads)
+[0m       CPCP =   23.705  24.430 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:03:05
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    5.796 [nT]
+           dSMRs  ~     0.60   -0.05   -0.46   -0.09 [nT, 12/18/00/06]
+   DPSDst  ~   -5.197 [nT]
+   Spent    38.4% of time waiting for Gamera
+            14.6% of time processing Chimp(Helpers)
+             8.2% of time processing IMAG
+            14.7% of time processing Remix
+            23.7% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   55.242% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:03:10
+      Time =     3.167 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 4.21E+01 [sec] @ 57
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.44, D =   0.33 @  4.49 Rp, 8.73 MLT; DPS:  -1.35
+        2: P =   2.65, D =   0.40 @  3.96 Rp, 8.20 MLT; DPS:  -5.13
+[0m [32m<Writing HDF5 DATA @ t =     3.085 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     3.167 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     3.167 [min]
+        ts =     1755
+        dt =  9.71E-02 [sec]
+    dt/dt0 =   81.566%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3393.85 /   1154.98 [MHD/TOT] (8 threads)
+[0m       CPCP =   22.949  23.172 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:03:10
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    5.823 [nT]
+           dSMRs  ~     0.64   -0.06   -0.48   -0.10 [nT, 12/18/00/06]
+   DPSDst  ~   -5.195 [nT]
+   Spent    38.3% of time waiting for Gamera
+            14.6% of time processing Chimp(Helpers)
+             8.3% of time processing IMAG
+            14.7% of time processing Remix
+            23.7% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   55.909% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:03:15
+      Time =     3.250 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 4.32E+01 [sec] @ 56
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.43, D =   0.32 @  4.49 Rp, 8.73 MLT; DPS:  -1.34
+        2: P =   2.65, D =   0.40 @  3.96 Rp, 8.20 MLT; DPS:  -5.13
+[0m [32m<Writing HDF5 DATA @ t =     3.167 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     3.250 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     3.251 [min]
+        ts =     1808
+        dt =  9.38E-02 [sec]
+    dt/dt0 =   78.812%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3389.65 /   1198.04 [MHD/TOT] (8 threads)
+[0m       CPCP =   22.273  22.077 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:03:15
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    5.865 [nT]
+           dSMRs  ~     0.68   -0.06   -0.51   -0.10 [nT, 12/18/00/06]
+   DPSDst  ~   -5.200 [nT]
+   Spent    38.5% of time waiting for Gamera
+            14.6% of time processing Chimp(Helpers)
+             8.2% of time processing IMAG
+            14.6% of time processing Remix
+            23.7% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   56.584% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:03:20
+      Time =     3.333 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 4.41E+01 [sec] @ 56
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.42, D =   0.32 @  4.49 Rp, 8.73 MLT; DPS:  -1.34
+        2: P =   2.65, D =   0.40 @  3.96 Rp, 8.20 MLT; DPS:  -5.15
+[0m [32m<Writing HDF5 DATA @ t =     3.251 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     3.333 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     3.335 [min]
+        ts =     1862
+        dt =  9.13E-02 [sec]
+    dt/dt0 =   76.696%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3392.68 /   1213.07 [MHD/TOT] (8 threads)
+[0m       CPCP =   21.635  21.397 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:03:20
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    5.914 [nT]
+           dSMRs  ~     0.67   -0.06   -0.52   -0.09 [nT, 12/18/00/06]
+   DPSDst  ~   -5.202 [nT]
+   Spent    38.8% of time waiting for Gamera
+            14.6% of time processing Chimp(Helpers)
+             8.2% of time processing IMAG
+            14.5% of time processing Remix
+            23.6% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   57.186% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:03:25
+      Time =     3.417 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 4.49E+01 [sec] @ 56
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.41, D =   0.31 @  4.49 Rp, 8.73 MLT; DPS:  -1.33
+        2: P =   2.65, D =   0.40 @  3.96 Rp, 8.20 MLT; DPS:  -5.16
+[0m [32m<Writing HDF5 DATA @ t =     3.335 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     3.417 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     3.417 [min]
+        ts =     1917
+        dt =  8.90E-02 [sec]
+    dt/dt0 =   74.739%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3390.36 /   1227.26 [MHD/TOT] (8 threads)
+[0m       CPCP =   20.893  20.911 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:03:25
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    5.892 [nT]
+           dSMRs  ~     0.62   -0.05   -0.49   -0.08 [nT, 12/18/00/06]
+   DPSDst  ~   -5.211 [nT]
+   Spent    39.0% of time waiting for Gamera
+            14.5% of time processing Chimp(Helpers)
+             8.2% of time processing IMAG
+            14.4% of time processing Remix
+            23.6% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   57.727% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:03:30
+      Time =     3.500 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 4.62E+01 [sec] @ 56
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.41, D =   0.31 @  4.48 Rp, 9.66 MLT; DPS:  -1.33
+        2: P =   2.66, D =   0.40 @  3.97 Rp,11.80 MLT; DPS:  -5.18
+[0m [32m<Writing HDF5 DATA @ t =     3.417 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     3.500 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     3.501 [min]
+        ts =     1975
+        dt =  8.47E-02 [sec]
+    dt/dt0 =   71.170%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3391.54 /   1267.20 [MHD/TOT] (8 threads)
+[0m       CPCP =   20.008  20.487 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:03:30
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    5.933 [nT]
+           dSMRs  ~     0.69   -0.07   -0.51   -0.11 [nT, 12/18/00/06]
+   DPSDst  ~   -5.221 [nT]
+   Spent    39.5% of time waiting for Gamera
+            14.4% of time processing Chimp(Helpers)
+             8.2% of time processing IMAG
+            14.2% of time processing Remix
+            23.4% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   58.251% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:03:35
+      Time =     3.583 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 4.75E+01 [sec] @ 56
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.41, D =   0.31 @  4.48 Rp, 9.79 MLT; DPS:  -1.32
+        2: P =   2.68, D =   0.40 @  3.96 Rp,11.80 MLT; DPS:  -5.20
+[0m [32m<Writing HDF5 DATA @ t =     3.501 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     3.583 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     3.584 [min]
+        ts =     2035
+        dt =  8.20E-02 [sec]
+    dt/dt0 =   68.854%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3392.52 /   1293.68 [MHD/TOT] (8 threads)
+[0m       CPCP =   19.379  20.097 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:03:35
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    6.391 [nT]
+           dSMRs  ~     1.12   -0.19   -0.73   -0.21 [nT, 12/18/00/06]
+   DPSDst  ~   -5.228 [nT]
+   Spent    40.0% of time waiting for Gamera
+            14.3% of time processing Chimp(Helpers)
+             8.1% of time processing IMAG
+            14.1% of time processing Remix
+            23.3% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   58.656% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:03:40
+      Time =     3.667 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 4.90E+01 [sec] @ 56
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.40, D =   0.31 @  4.47 Rp, 9.79 MLT; DPS:  -1.32
+        2: P =   2.69, D =   0.40 @  3.96 Rp,11.66 MLT; DPS:  -5.21
+[0m [32m<Writing HDF5 DATA @ t =     3.584 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     3.667 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     3.668 [min]
+        ts =     2097
+        dt =  8.04E-02 [sec]
+    dt/dt0 =   67.560%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3386.65 /   1318.01 [MHD/TOT] (8 threads)
+[0m       CPCP =   19.141  20.080 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:03:40
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.017 [nT]
+           dSMRs  ~     1.54   -0.26   -1.00   -0.28 [nT, 12/18/00/06]
+   DPSDst  ~   -5.236 [nT]
+   Spent    40.5% of time waiting for Gamera
+            14.1% of time processing Chimp(Helpers)
+             8.0% of time processing IMAG
+            13.9% of time processing Remix
+            23.1% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   59.062% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:03:45
+      Time =     3.750 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 5.07E+01 [sec] @ 56
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.40, D =   0.31 @  4.47 Rp, 9.93 MLT; DPS:  -1.31
+        2: P =   2.70, D =   0.40 @  3.95 Rp, 9.66 MLT; DPS:  -5.23
+[0m [32m<Writing HDF5 DATA @ t =     3.668 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     3.750 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     3.751 [min]
+        ts =     2159
+        dt =  8.06E-02 [sec]
+    dt/dt0 =   67.725%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3391.68 /   1314.91 [MHD/TOT] (8 threads)
+[0m       CPCP =   19.403  20.402 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:03:45
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.442 [nT]
+           dSMRs  ~     1.68   -0.24   -1.15   -0.28 [nT, 12/18/00/06]
+   DPSDst  ~   -5.241 [nT]
+   Spent    41.0% of time waiting for Gamera
+            14.0% of time processing Chimp(Helpers)
+             8.0% of time processing IMAG
+            13.8% of time processing Remix
+            22.9% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   59.431% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:03:50
+      Time =     3.833 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 5.21E+01 [sec] @ 56
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.39, D =   0.31 @  4.47 Rp, 9.93 MLT; DPS:  -1.31
+        2: P =   2.71, D =   0.40 @  3.95 Rp, 9.53 MLT; DPS:  -5.24
+[0m [32m<Writing HDF5 DATA @ t =     3.751 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     3.833 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     3.835 [min]
+        ts =     2221
+        dt =  8.16E-02 [sec]
+    dt/dt0 =   68.515%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3388.29 /   1315.34 [MHD/TOT] (8 threads)
+[0m       CPCP =   20.191  20.901 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:03:50
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.688 [nT]
+           dSMRs  ~     1.67   -0.21   -1.21   -0.25 [nT, 12/18/00/06]
+   DPSDst  ~   -5.249 [nT]
+   Spent    41.4% of time waiting for Gamera
+            13.9% of time processing Chimp(Helpers)
+             7.9% of time processing IMAG
+            13.7% of time processing Remix
+            22.8% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   59.789% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:03:55
+      Time =     3.917 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 5.32E+01 [sec] @ 56
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.39, D =   0.30 @  4.46 Rp, 9.93 MLT; DPS:  -1.30
+        2: P =   2.71, D =   0.40 @  3.95 Rp, 9.53 MLT; DPS:  -5.25
+[0m [32m<Writing HDF5 DATA @ t =     3.835 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     3.917 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     3.917 [min]
+        ts =     2282
+        dt =  8.16E-02 [sec]
+    dt/dt0 =   68.543%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3389.15 /   1302.03 [MHD/TOT] (8 threads)
+[0m       CPCP =   21.284  21.952 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:03:55
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.825 [nT]
+           dSMRs  ~     1.61   -0.18   -1.22   -0.21 [nT, 12/18/00/06]
+   DPSDst  ~   -5.253 [nT]
+   Spent    41.6% of time waiting for Gamera
+            13.8% of time processing Chimp(Helpers)
+             7.9% of time processing IMAG
+            13.7% of time processing Remix
+            22.7% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   60.156% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:03:59
+      Time =     4.000 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 5.27E+01 [sec] @ 56
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.38, D =   0.30 @  4.46 Rp, 9.93 MLT; DPS:  -1.30
+        2: P =   2.72, D =   0.40 @  3.95 Rp, 9.53 MLT; DPS:  -5.27
+[0m [32m<Writing HDF5 DATA @ t =     3.917 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     4.000 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     4.001 [min]
+        ts =     2349
+        dt =  6.26E-02 [sec]
+    dt/dt0 =   52.617%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3390.03 /   1370.01 [MHD/TOT] (8 threads)
+[0m       CPCP =   22.583  23.438 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:04:00
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.873 [nT]
+           dSMRs  ~     1.55   -0.16   -1.20   -0.19 [nT, 12/18/00/06]
+   DPSDst  ~   -5.262 [nT]
+   Spent    42.2% of time waiting for Gamera
+            13.7% of time processing Chimp(Helpers)
+             7.8% of time processing IMAG
+            13.6% of time processing Remix
+            22.5% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   60.429% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:04:05
+      Time =     4.083 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 4.65E+01 [sec] @ 56
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.37, D =   0.30 @  4.47 Rp,10.06 MLT; DPS:  -1.29
+        2: P =   2.72, D =   0.40 @  3.95 Rp, 9.53 MLT; DPS:  -5.28
+[0m [32m<Writing HDF5 DATA @ t =     4.001 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     4.083 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     4.084 [min]
+        ts =     2447
+        dt =  4.10E-02 [sec]
+    dt/dt0 =   34.465%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3388.52 /   1654.06 [MHD/TOT] (8 threads)
+[0m       CPCP =   24.196  25.095 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:04:05
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.857 [nT]
+           dSMRs  ~     1.51   -0.14   -1.17   -0.20 [nT, 12/18/00/06]
+   DPSDst  ~   -5.268 [nT]
+   Spent    44.1% of time waiting for Gamera
+            13.2% of time processing Chimp(Helpers)
+             7.6% of time processing IMAG
+            13.2% of time processing Remix
+            21.8% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   60.270% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:04:10
+      Time =     4.167 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 4.47E+01 [sec] @ 56
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.37, D =   0.30 @  4.47 Rp,10.19 MLT; DPS:  -1.29
+        2: P =   2.72, D =   0.40 @  3.95 Rp, 9.53 MLT; DPS:  -5.29
+[0m [32m<Writing HDF5 DATA @ t =     4.084 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     4.167 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     4.167 [min]
+        ts =     2595
+        dt =  3.05E-02 [sec]
+    dt/dt0 =   25.631%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3391.80 /   1954.67 [MHD/TOT] (8 threads)
+[0m       CPCP =   25.914  26.931 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:04:10
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.839 [nT]
+           dSMRs  ~     1.52   -0.14   -1.17   -0.21 [nT, 12/18/00/06]
+   DPSDst  ~   -5.274 [nT]
+   Spent    47.2% of time waiting for Gamera
+            12.4% of time processing Chimp(Helpers)
+             7.1% of time processing IMAG
+            12.4% of time processing Remix
+            20.5% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   59.753% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:04:15
+      Time =     4.250 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 4.70E+01 [sec] @ 56
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.36, D =   0.29 @  4.47 Rp,10.19 MLT; DPS:  -1.29
+        2: P =   2.72, D =   0.40 @  3.95 Rp, 9.39 MLT; DPS:  -5.31
+[0m [32m<Writing HDF5 DATA @ t =     4.167 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     4.250 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     4.250 [min]
+        ts =     2760
+        dt =  3.01E-02 [sec]
+    dt/dt0 =   25.291%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3390.22 /   2028.82 [MHD/TOT] (8 threads)
+[0m       CPCP =   27.678  28.575 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:04:15
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.826 [nT]
+           dSMRs  ~     1.56   -0.14   -1.19   -0.23 [nT, 12/18/00/06]
+   DPSDst  ~   -5.278 [nT]
+   Spent    50.3% of time waiting for Gamera
+            11.7% of time processing Chimp(Helpers)
+             6.7% of time processing IMAG
+            11.7% of time processing Remix
+            19.3% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   59.143% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:04:20
+      Time =     4.333 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 4.64E+01 [sec] @ 56
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.35, D =   0.29 @  4.47 Rp,10.19 MLT; DPS:  -1.28
+        2: P =   2.72, D =   0.40 @  3.95 Rp, 9.39 MLT; DPS:  -5.32
+[0m [32m<Writing HDF5 DATA @ t =     4.250 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     4.333 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     4.334 [min]
+        ts =     2920
+        dt =  3.13E-02 [sec]
+    dt/dt0 =   26.284%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3389.74 /   2007.50 [MHD/TOT] (8 threads)
+[0m       CPCP =   29.311  29.871 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:04:20
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.841 [nT]
+           dSMRs  ~     1.63   -0.16   -1.24   -0.23 [nT, 12/18/00/06]
+   DPSDst  ~   -5.285 [nT]
+   Spent    52.8% of time waiting for Gamera
+            11.1% of time processing Chimp(Helpers)
+             6.4% of time processing IMAG
+            11.2% of time processing Remix
+            18.4% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   58.583% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:04:25
+      Time =     4.417 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 4.54E+01 [sec] @ 56
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.35, D =   0.29 @  4.47 Rp,10.19 MLT; DPS:  -1.28
+        2: P =   2.72, D =   0.40 @  3.95 Rp, 9.26 MLT; DPS:  -5.33
+[0m [32m<Writing HDF5 DATA @ t =     4.334 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     4.417 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     4.417 [min]
+        ts =     3084
+        dt =  3.04E-02 [sec]
+    dt/dt0 =   25.536%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3391.27 /   2025.38 [MHD/TOT] (8 threads)
+[0m       CPCP =   30.899  31.068 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:04:25
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    7.882 [nT]
+           dSMRs  ~     1.71   -0.17   -1.30   -0.24 [nT, 12/18/00/06]
+   DPSDst  ~   -5.290 [nT]
+   Spent    54.9% of time waiting for Gamera
+            10.6% of time processing Chimp(Helpers)
+             6.1% of time processing IMAG
+            10.7% of time processing Remix
+            17.5% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   57.962% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:04:30
+      Time =     4.500 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 4.47E+01 [sec] @ 56
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.35, D =   0.29 @  4.46 Rp,10.19 MLT; DPS:  -1.27
+        2: P =   2.73, D =   0.40 @  3.95 Rp, 9.26 MLT; DPS:  -5.34
+[0m [32m<Writing HDF5 DATA @ t =     4.417 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     4.500 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     4.500 [min]
+        ts =     3250
+        dt =  2.99E-02 [sec]
+    dt/dt0 =   25.123%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3391.34 /   2034.43 [MHD/TOT] (8 threads)
+[0m       CPCP =   32.651  32.103 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:04:30
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    8.029 [nT]
+           dSMRs  ~     1.85   -0.19   -1.40   -0.26 [nT, 12/18/00/06]
+   DPSDst  ~   -5.295 [nT]
+   Spent    56.8% of time waiting for Gamera
+            10.1% of time processing Chimp(Helpers)
+             5.8% of time processing IMAG
+            10.2% of time processing Remix
+            16.8% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   57.403% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:04:35
+      Time =     4.583 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 4.17E+01 [sec] @ 57
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.34, D =   0.33 @  4.76 Rp,10.19 MLT; DPS:  -1.27
+        2: P =   2.74, D =   0.40 @  3.95 Rp, 9.13 MLT; DPS:  -5.35
+[0m [32m<Writing HDF5 DATA @ t =     4.500 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     4.583 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     4.584 [min]
+        ts =     3418
+        dt =  3.02E-02 [sec]
+    dt/dt0 =   25.366%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3391.60 /   2042.76 [MHD/TOT] (8 threads)
+[0m       CPCP =   34.367  33.626 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:04:35
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    8.266 [nT]
+           dSMRs  ~     1.95   -0.19   -1.48   -0.28 [nT, 12/18/00/06]
+   DPSDst  ~   -5.298 [nT]
+   Spent    58.5% of time waiting for Gamera
+             9.7% of time processing Chimp(Helpers)
+             5.6% of time processing IMAG
+             9.9% of time processing Remix
+            16.2% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   56.868% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:04:40
+      Time =     4.667 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 3.97E+01 [sec] @ 57
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.34, D =   0.33 @  4.76 Rp,10.19 MLT; DPS:  -1.26
+        2: P =   2.74, D =   0.40 @  3.95 Rp, 8.99 MLT; DPS:  -5.36
+[0m [32m<Writing HDF5 DATA @ t =     4.584 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     4.667 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     4.667 [min]
+        ts =     3582
+        dt =  3.10E-02 [sec]
+    dt/dt0 =   26.073%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3392.98 /   2024.93 [MHD/TOT] (8 threads)
+[0m       CPCP =   36.196  35.758 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:04:40
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    8.448 [nT]
+           dSMRs  ~     2.01   -0.16   -1.56   -0.29 [nT, 12/18/00/06]
+   DPSDst  ~   -5.301 [nT]
+   Spent    59.8% of time waiting for Gamera
+             9.4% of time processing Chimp(Helpers)
+             5.4% of time processing IMAG
+             9.6% of time processing Remix
+            15.6% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   56.358% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:04:45
+      Time =     4.750 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 3.81E+01 [sec] @ 57
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.34, D =   0.33 @  4.75 Rp,10.19 MLT; DPS:  -1.26
+        2: P =   2.75, D =   0.40 @  3.95 Rp, 9.00 MLT; DPS:  -5.37
+[0m [32m<Writing HDF5 DATA @ t =     4.667 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     4.750 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     4.750 [min]
+        ts =     3744
+        dt =  3.12E-02 [sec]
+    dt/dt0 =   26.239%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3390.56 /   2018.72 [MHD/TOT] (8 threads)
+[0m       CPCP =   38.236  37.594 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:04:45
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    8.575 [nT]
+           dSMRs  ~     2.02   -0.13   -1.61   -0.28 [nT, 12/18/00/06]
+   DPSDst  ~   -5.308 [nT]
+   Spent    60.8% of time waiting for Gamera
+             9.2% of time processing Chimp(Helpers)
+             5.3% of time processing IMAG
+             9.3% of time processing Remix
+            15.2% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   55.889% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:04:50
+      Time =     4.833 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 3.74E+01 [sec] @ 57
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.33, D =   0.33 @  4.75 Rp,10.06 MLT; DPS:  -1.26
+        2: P =   2.75, D =   0.41 @  3.95 Rp, 8.86 MLT; DPS:  -5.38
+[0m [32m<Writing HDF5 DATA @ t =     4.750 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     4.833 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     4.834 [min]
+        ts =     3908
+        dt =  3.01E-02 [sec]
+    dt/dt0 =   25.258%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3388.89 /   2026.67 [MHD/TOT] (8 threads)
+[0m       CPCP =   40.235  39.612 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:04:50
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    8.696 [nT]
+           dSMRs  ~     2.05   -0.13   -1.66   -0.26 [nT, 12/18/00/06]
+   DPSDst  ~   -5.315 [nT]
+   Spent    61.8% of time waiting for Gamera
+             8.9% of time processing Chimp(Helpers)
+             5.2% of time processing IMAG
+             9.1% of time processing Remix
+            14.9% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   55.392% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:04:55
+      Time =     4.917 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 3.78E+01 [sec] @ 57
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.33, D =   0.33 @  4.75 Rp, 9.93 MLT; DPS:  -1.25
+        2: P =   2.76, D =   0.41 @  3.95 Rp, 8.86 MLT; DPS:  -5.39
+[0m [32m<Writing HDF5 DATA @ t =     4.834 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     4.917 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     4.917 [min]
+        ts =     4075
+        dt =  3.00E-02 [sec]
+    dt/dt0 =   25.161%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3389.00 /   2038.39 [MHD/TOT] (8 threads)
+[0m       CPCP =   42.289  42.081 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:04:55
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    8.831 [nT]
+           dSMRs  ~     2.11   -0.13   -1.72   -0.26 [nT, 12/18/00/06]
+   DPSDst  ~   -5.325 [nT]
+   Spent    62.7% of time waiting for Gamera
+             8.7% of time processing Chimp(Helpers)
+             5.1% of time processing IMAG
+             8.9% of time processing Remix
+            14.5% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   54.920% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:04:59
+      Time =     5.000 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 3.68E+01 [sec] @ 57
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.33, D =   0.33 @  4.75 Rp, 9.79 MLT; DPS:  -1.25
+        2: P =   2.77, D =   0.41 @  3.95 Rp, 8.86 MLT; DPS:  -5.40
+[0m [32m<Writing HDF5 DATA @ t =     4.917 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     5.000 [min] >[0m 
+ [36m
+ GAMERA
+      Time =     5.000 [min]
+        ts =     4241
+        dt =  2.98E-02 [sec]
+    dt/dt0 =   25.016%
+    Spent     0.0% of time waiting for Voltron
+      kZCs =   3388.81 /   2031.31 [MHD/TOT] (8 threads)
+[0m       CPCP =   44.681  44.341 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2001-06-01 23:05:00
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~    9.007 [nT]
+           dSMRs  ~     2.18   -0.14   -1.78   -0.25 [nT, 12/18/00/06]
+   DPSDst  ~   -5.337 [nT]
+   Spent    63.4% of time waiting for Gamera
+             8.6% of time processing Chimp(Helpers)
+             5.0% of time processing IMAG
+             8.7% of time processing Remix
+            14.2% of time processing Tubes(Helpers)
+             0.0% of time writing files
+    Running @   54.465% of real-time (8 threads)
+[0m  [35m
+ RAIJU
+      UT   = 2001-06-01 23:05:05
+      Time =     5.083 [min]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 3.52E+01 [sec] @ 57
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   0.32, D =   0.33 @  4.75 Rp, 9.66 MLT; DPS:  -1.25
+        2: P =   2.77, D =   0.41 @  3.95 Rp, 8.99 MLT; DPS:  -5.42
+[0m [32m<Writing HDF5 DATA @ t =     5.000 [min] >[0m 
+[32m<Writing RAIJU HDF5 DATA @ t =     5.083 [min] >[0m 
+ Fin

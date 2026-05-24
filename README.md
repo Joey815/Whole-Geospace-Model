@@ -35,6 +35,9 @@ Recommended short prototype is validated with alphaDavg=0.05, alphaPavg=0.05,
 alphaTiote=1, alphaPstd=0, alphaDstd=0, and useStateTioteForIngest=T.
 Recommended prototype also passes a 60 second baseline/control smoke with no
 non-finite physics fields.
+Recommended prototype now also passes a 300 second Slurm baseline/control smoke:
+job 7648350 completed 0:0, both runs reached Fin, final raiCpl blend formula
+checks are exact, and checked physics fields contain no NaN/Inf.
 ```
 
 Latest verified jobs:
@@ -50,6 +53,7 @@ receiver source flags = 7641669, COMPLETED, exit 0:0
 reason flag sidecar   = 7645354, COMPLETED, exit 0:0
 file tag212 regression= 7645380, COMPLETED, exit 0:0
 stub tag212 runtime   = 7645415, COMPLETED, exit 0:0
+sami3 raiju long300   = 7648350, COMPLETED, exit 0:0
 ```
 
 Latest receiver checks:
@@ -131,6 +135,7 @@ docs/MAGE1.25_notes/SAMI3_RAIJU_DSB_LMLT_PRESSURE_SCAN_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_MOMENT_SEMANTICS_TIOTE_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_RECOMMENDED_PROTOTYPE_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_RECOMMENDED_LONG60_RESULT_20260524.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_RECOMMENDED_LONG300_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_GAMERA_PHYSICS_REVIEW_20260523.md
 ```
 
@@ -201,6 +206,12 @@ Latest full SAMI3 WACCM-X-top blending diagnostic launcher:
 slurm/run_waccmx_cam_sami3_live_payload_f19_multipacket_topblend_20260524.sbatch
 ```
 
+Latest SAMI3 -> RAIJU/GAMERA recommended prototype runtime evidence:
+
+```text
+logs/sami3_dsB_lmlt_recommended_long300_20260524/
+```
+
 ## Known Physical Blockers
 
 Do not describe this snapshot as production live WACCM-X neutral forcing until
@@ -215,7 +226,7 @@ REMIX -> SAMI3 potential/E-field forcing
 production SAMI3 -> RAIJU/GAMERA Voltron-consistent flux-tube weighting
 production SAMI3 -> RAIJU/GAMERA geometry/mask coverage policy
 longer runtime scans for density, pressure, and tiote blending
-multi-minute or Slurm runtime stability scan for the recommended prototype
+longer-duration stability scan beyond the 300 second recommended prototype
 f09/finer distributed remap design
 ```
 
