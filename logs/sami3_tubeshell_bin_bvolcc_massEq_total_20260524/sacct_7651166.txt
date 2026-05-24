@@ -1,0 +1,4 @@
+JobID|JobName|State|ExitCode|Elapsed|NodeList|MaxRSS
+7651166|sami3_bvmeq_smoke|COMPLETED|0:0|00:02:02|qhcn335|
+7651166.batch|batch|COMPLETED|0:0|00:02:02|qhcn335|1020096K
+7651166.extern|extern|COMPLETED|0:0|00:02:02|qhcn335|0

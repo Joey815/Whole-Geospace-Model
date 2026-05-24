@@ -51,6 +51,10 @@ TubeShell cell centers into RAIJU target cells with `bvol_cc` weights.  Its
 runtime smoke job 7651071 completed 0:0, naturally invalid coverage cells
 preserve baseline values exactly, and valid cells match the configured alpha
 blend formula exactly.
+The same `bin_bvol_cc` mapping also validates with `density-mode=massEq` and
+`pressure-mode=total`: job 7651166 completed 0:0 with conservative
+alphaDavg/alphaPavg=0.01, exact blend formula checks, and no non-finite checked
+RAIJU physics fields.
 Runtime blending is validated with alpha=0 exact baseline recovery.
 Density alpha scan is finite and continuous through alphaDavg=0.20.
 Pressure alpha scan at alphaDavg=0.05 is finite for alphaPavg=0.05 and 0.10.
@@ -83,6 +87,7 @@ sami3 raiju long300   = 7648350, COMPLETED, exit 0:0
 sami3 mapq runtime    = 7648737, COMPLETED, exit 0:0
 sami3 volshell runtime= 7649439, COMPLETED, exit 0:0
 sami3 bin-bvolcc rt = 7651071, COMPLETED, exit 0:0
+sami3 bin-bv massEq = 7651166, COMPLETED, exit 0:0
 ```
 
 Latest receiver checks:
@@ -164,6 +169,7 @@ docs/MAGE1.25_notes/SAMI3_RAIJU_VOLTRON_SHELL_WEIGHT_FILE_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_VOLTRON_SHELL_RUNTIME_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_VOLTRON_TUBESHELL_WEIGHT_FILE_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_TUBESHELL_BIN_BVOLCC_RESULT_20260524.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_TUBESHELL_BIN_BVOLCC_MASSEQ_TOTAL_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_RUNTIME_BLEND_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_STAGE2_SOURCE_MODES_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_DSB_LMLT_RUNTIME_BLEND_RESULT_20260524.md
@@ -260,6 +266,7 @@ logs/sami3_voltron_shell_weightfile_20260524/
 logs/sami3_voltron_shell_runtime_20260524/
 logs/sami3_voltron_tubeshell_weightfile_20260524/
 logs/sami3_tubeshell_bin_bvolcc_20260524/
+logs/sami3_tubeshell_bin_bvolcc_massEq_total_20260524/
 ```
 
 ## Known Physical Blockers

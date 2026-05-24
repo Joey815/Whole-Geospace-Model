@@ -1,0 +1,38 @@
+comparison=num_ion_vs_massEq_total_bin_bvol_cc
+num_ion /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_voltron_tubeshell_l_mlt_lon0_bin_bvolcc_20260524.h5
+massEq_total /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_massEq_total_voltron_tubeshell_l_mlt_lon0_bin_bvolcc_20260524.h5
+runtime_valid_count 5940
+runtime_invalid_count 2520
+Pavg
+  valid_abs_max 0.27733685076236725
+  valid_rms 0.0962849569430804
+  num_valid_mean 0.06074320064105545
+  mass_valid_mean 0.1243436348768344
+  ratio_valid_min 1.999549890565594
+  ratio_valid_max 2.1442725936188998
+  ratio_valid_mean 2.025805245665852
+Davg
+  valid_abs_max 115908.931640625
+  valid_rms 38035.26859305195
+  num_valid_mean 5045.988230676884
+  mass_valid_mean 27731.656016737365
+  ratio_valid_min 1.6977211607149911
+  ratio_valid_max 7.528251050239331
+  ratio_valid_mean 3.5996960672378715
+Pstd
+  valid_abs_max 0.0
+  valid_rms 0.0
+  num_valid_mean 0.21146108928051863
+  mass_valid_mean 0.21146108928051863
+  ratio_valid_min 1.0
+  ratio_valid_max 1.0
+  ratio_valid_mean 1.0
+Dstd
+  valid_abs_max 0.0
+  valid_rms 0.0
+  num_valid_mean 12434.221382397995
+  mass_valid_mean 12434.221382397995
+  ratio_valid_min 1.0
+  ratio_valid_max 1.0
+  ratio_valid_mean 1.0
+tiote valid_abs_max 0.0
