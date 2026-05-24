@@ -86,6 +86,7 @@ def main():
     parser.add_argument("--expected-phi-frames", type=int, default=2)
     parser.add_argument("--expected-live-packets", type=int, default=1)
     parser.add_argument("--expect-phi-wait-marker", action="store_true")
+    parser.add_argument("--expect-direct-wait-mode", action="store_true")
     parser.add_argument("--allow-incomplete", action="store_true")
     args = parser.parse_args()
 
@@ -108,6 +109,8 @@ def main():
     ]
     if args.expect_phi_wait_marker:
         append2_cmd.append("--expect-phi-wait-marker")
+    if args.expect_direct_wait_mode:
+        append2_cmd.append("--expect-direct-wait-mode")
     if args.allow_incomplete:
         append2_cmd.append("--allow-incomplete")
     append2_rc = run_checked(append2_cmd, append2_txt)

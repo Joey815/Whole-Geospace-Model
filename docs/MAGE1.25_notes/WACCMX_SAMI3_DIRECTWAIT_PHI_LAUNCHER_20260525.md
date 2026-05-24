@@ -62,11 +62,27 @@ Use the same validator as the pre-generated append2 full integration run:
 python3 scripts/validate_wxsami3_append2_run.py \
   --run-dir /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000 \
   --expected-phi-frames 2 \
-  --expect-phi-wait-marker
+  --expect-phi-wait-marker \
+  --expect-direct-wait-mode
 ```
 
-Additional expected marker from the CESM sender log:
+The archive helper should use the same direct-wait checks:
+
+```bash
+python3 scripts/archive_wxsami3_append2_result.py \
+  --run-dir /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000 \
+  --archive-dir logs/waccmx_append2_directwait_20260525 \
+  --job-id 7661005 \
+  --expected-phi-frames 2 \
+  --expected-live-packets 1 \
+  --expect-phi-wait-marker \
+  --expect-direct-wait-mode
+```
+
+Additional expected markers:
 
 ```text
+DIRECT_WAIT_MODE=1
+VOLTRON_WRITER_PID=<pid>
 WXSAMI3 phi payload ready after wait
 ```

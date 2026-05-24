@@ -101,7 +101,8 @@ python3 scripts/archive_wxsami3_append2_result.py \
   --job-id 7661005 \
   --expected-phi-frames 2 \
   --expected-live-packets 1 \
-  --expect-phi-wait-marker
+  --expect-phi-wait-marker \
+  --expect-direct-wait-mode
 ```
 
 ## Acceptance Meaning
@@ -111,6 +112,7 @@ Passing this workflow means:
 ```text
 Voltron/REMIX phi payload has the expected two-frame binary schema
 WACCM-X sender sent the expected phi frames
+direct-wait runs show a same-job Voltron writer PID and sender wait marker
 SAMI3 received the expected phi frames
 SAMI3 reached MASTER: All Done!
 WACCM-X reached END OF MODEL RUN

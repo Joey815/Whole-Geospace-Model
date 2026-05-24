@@ -184,6 +184,22 @@ def validate(args):
             f"wait_markers={wait_markers}",
         )
 
+    if args.expect_direct_wait_mode:
+        direct_wait_markers = count(r"DIRECT_WAIT_MODE=1", text)
+        writer_pid_markers = count(r"VOLTRON_WRITER_PID=\d+", text)
+        add_check(
+            checks,
+            "direct_wait_mode_marker",
+            direct_wait_markers >= 1 or args.allow_incomplete,
+            f"direct_wait_markers={direct_wait_markers}",
+        )
+        add_check(
+            checks,
+            "voltron_writer_pid_marker",
+            writer_pid_markers >= 1 or args.allow_incomplete,
+            f"writer_pid_markers={writer_pid_markers}",
+        )
+
     recv_frames = count(r"WACCMX_PHI_RECV", text)
     add_check(
         checks,
@@ -224,6 +240,7 @@ def main() -> int:
     parser.add_argument("--hour-tol", type=float, default=1.0e-7)
     parser.add_argument("--allow-incomplete", action="store_true")
     parser.add_argument("--expect-phi-wait-marker", action="store_true")
+    parser.add_argument("--expect-direct-wait-mode", action="store_true")
     parser.add_argument("--json-output", default=None)
     args = parser.parse_args()
 
