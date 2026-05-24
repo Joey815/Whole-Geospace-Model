@@ -1,0 +1,71 @@
+# WACCM-X/SAMI3 Direct-Wait Phi Launcher
+
+Date: 2026-05-25
+
+## Purpose
+
+The append2 full integration launcher validates:
+
+```text
+Voltron writes the two-frame phi payload first
+CESM/WACCM-X sender reads the completed file
+SAMI3 online receiver consumes the phi frames
+```
+
+The direct-wait launcher moves one step closer to the final online route:
+
+```text
+Voltron phi writer starts in the same job
+CESM/WACCM-X starts while the writer is still an active producer
+CESM/WACCM-X sender waits for the payload via WXSAMI3_PHI_PAYLOAD_WAIT_SECONDS
+SAMI3 online receiver consumes the phi frames
+```
+
+## Launcher
+
+```text
+slurm/run_waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525.sbatch
+```
+
+Run directory:
+
+```text
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000
+```
+
+Key setting:
+
+```text
+WXSAMI3_PHI_PAYLOAD_WAIT_SECONDS = 240
+WXSAMI3_PHI_PAYLOAD_STABLE_SECONDS = 1
+```
+
+## Submitted Job
+
+```text
+jobid = 7661005
+jobname = wxsami3_ap2w
+state = PENDING
+reason = Dependency
+dependency = afterok:7659727
+```
+
+The dependency is intentional.  Both full WACCM-X/SAMI3 launchers use the same
+CESM case executable and `nuopc.runconfig`, so the direct-wait test should only
+run after the current full append2 integration job succeeds.
+
+## Acceptance
+
+Use the same validator as the pre-generated append2 full integration run:
+
+```bash
+python3 scripts/validate_wxsami3_append2_run.py \
+  --run-dir /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000 \
+  --expected-phi-frames 2
+```
+
+Additional expected marker from the CESM sender log:
+
+```text
+WXSAMI3 phi payload ready after wait
+```
