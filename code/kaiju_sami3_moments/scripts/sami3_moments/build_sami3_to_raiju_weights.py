@@ -40,12 +40,14 @@ def parse_args():
     parser.add_argument("--out", required=True, help="Output prefix or .h5 path.")
     parser.add_argument(
         "--mapping-mode",
-        choices=("l_mlt_separable", "voltron_shell_l_mlt"),
+        choices=("l_mlt_separable", "voltron_shell_l_mlt", "voltron_tubeshell_l_mlt"),
         default="l_mlt_separable",
         help=(
             "Weight-generation path. l_mlt_separable maps SAMI3 directly to "
             "RAIJU target L/MLT. voltron_shell_l_mlt composes SAMI3->Voltron "
-            "TubeShell grid and Voltron->RAIJU target shell-grid interpolation."
+            "ShellGrid and Voltron->RAIJU target shell-grid interpolation. "
+            "voltron_tubeshell_l_mlt maps SAMI3 onto Voltron TubeShell Lb and "
+            "footpoint longitude before the Voltron->RAIJU step."
         ),
     )
     parser.add_argument(
@@ -68,6 +70,15 @@ def parse_args():
             "For voltron_shell_l_mlt, skip intermediate Voltron cells whose "
             "four TubeShell/topo corners are not all TUBE_CLOSED. The remaining "
             "weights are renormalized per RAIJU target cell."
+        ),
+    )
+    parser.add_argument(
+        "--voltron-tube-longitude",
+        choices=("lon0", "lonc"),
+        default="lon0",
+        help=(
+            "For voltron_tubeshell_l_mlt, choose the cell-centered TubeShell "
+            "longitude used as the SAMI3 MLT/longitude query coordinate."
         ),
     )
     parser.add_argument(
@@ -164,6 +175,68 @@ def build_sparse_l_mlt_weights(source_grid, target_grid):
         "mlt_left_source_index": mlt_left,
         "mlt_right_source_index": mlt_right,
         "mlt_interp_weight": mlt_weight.astype(np.float32),
+    }
+
+
+def build_sparse_l_mlt_weights_2d(source_grid, target_l_2d, target_mlt_2d):
+    source_l = source_grid["source_l"]
+    source_mlt = source_grid["source_lon_deg"]
+    target_l_2d = np.asarray(target_l_2d, dtype=np.float64)
+    target_mlt_2d = np.asarray(target_mlt_2d, dtype=np.float64)
+    if target_l_2d.shape != target_mlt_2d.shape:
+        raise ValueError(
+            "target_l_2d shape {0} does not match target_mlt_2d shape {1}".format(
+                target_l_2d.shape, target_mlt_2d.shape
+            )
+        )
+    nj, ni = target_l_2d.shape
+    dst_rows = []
+    src_rows = []
+    weight_rows = []
+    corner_rows = []
+    weight_sum = np.zeros((nj, ni), dtype=np.float64)
+    coverage_count = np.zeros((nj, ni), dtype=np.int16)
+    l_extrapolated = np.zeros((nj, ni), dtype=np.uint8)
+
+    flat_lq = linear_interp_brackets(source_l, target_l_2d.reshape(-1))
+    flat_mq = periodic_interp_brackets_deg(source_mlt, target_mlt_2d.reshape(-1))
+    for j in range(nj):
+        for i in range(ni):
+            flat = j * ni + i
+            wl = float(flat_lq["interp_weight"][flat])
+            wm = float(flat_mq["interp_weight"][flat])
+            if bool(flat_lq["outside"][flat]):
+                l_extrapolated[j, i] = 1
+            corners = (
+                (int(flat_lq["left_source_index"][flat]), int(flat_mq["left_source_index"][flat]), (1.0 - wl) * (1.0 - wm), 0),
+                (int(flat_lq["right_source_index"][flat]), int(flat_mq["left_source_index"][flat]), wl * (1.0 - wm), 1),
+                (int(flat_lq["left_source_index"][flat]), int(flat_mq["right_source_index"][flat]), (1.0 - wl) * wm, 2),
+                (int(flat_lq["right_source_index"][flat]), int(flat_mq["right_source_index"][flat]), wl * wm, 3),
+            )
+            for src_i, src_j, weight, corner in corners:
+                if weight <= 0.0:
+                    continue
+                dst_rows.append((j, i))
+                src_rows.append((src_i, src_j))
+                weight_rows.append(float(weight))
+                corner_rows.append(int(corner))
+                weight_sum[j, i] += weight
+                coverage_count[j, i] += 1
+
+    if len(weight_rows) == 0:
+        raise ValueError("generated 2-D L/MLT mapping contains no nonzero weights")
+    if np.any(weight_sum <= 0.0):
+        raise ValueError("generated 2-D L/MLT mapping contains target cells with zero weight sum")
+
+    return {
+        "dst_index": np.asarray(dst_rows, dtype=np.int32),
+        "src_index": np.asarray(src_rows, dtype=np.int32),
+        "weight": np.asarray(weight_rows, dtype=np.float32),
+        "corner": np.asarray(corner_rows, dtype=np.int8),
+        "coverage_count": coverage_count,
+        "weight_sum": weight_sum.astype(np.float32),
+        "l_extrapolated_mask": l_extrapolated,
+        "l_extrapolated_count": int(np.count_nonzero(l_extrapolated)),
     }
 
 
@@ -294,6 +367,12 @@ def compose_sami3_voltron_raiju_weights(sami3_to_voltron, voltron_to_raiju, volt
 
 def center_corners_2d(arr):
     return 0.25 * (arr[:-1, :-1] + arr[1:, :-1] + arr[:-1, 1:] + arr[1:, 1:])
+
+
+def center_periodic_rad_2d(arr):
+    sin_cc = center_corners_2d(np.sin(arr))
+    cos_cc = center_corners_2d(np.cos(arr))
+    return np.mod(np.arctan2(sin_cc, cos_cc), 2.0 * np.pi)
 
 
 def read_optional_dataset(handle, name):
@@ -471,11 +550,21 @@ def read_voltron_tubeshell_geometry(template_path):
     lb_cc = center_corners_2d(lb)
     bmin_cc = center_corners_2d(bmin)
     ntrc_cc = center_corners_2d(ntrc)
+    lon0_cc = center_periodic_rad_2d(lon0)
+    lonc_cc = center_periodic_rad_2d(lonc)
+    lat0_cc = center_corners_2d(lat0)
+    latc_cc = center_corners_2d(latc)
+    lon0_cc_deg = np.mod(np.degrees(lon0_cc), 360.0)
+    lonc_cc_deg = np.mod(np.degrees(lonc_cc), 360.0)
     stats = shell_grid["stats"] + [
         finite_stats("voltron_tubeshell_bVol_corner", bvol),
         finite_stats("voltron_tubeshell_bVol_cc", bvol_cc),
         finite_stats("voltron_tubeshell_Lb_corner", lb),
         finite_stats("voltron_tubeshell_Lb_cc", lb_cc),
+        finite_stats("voltron_tubeshell_lon0_cc_deg", lon0_cc_deg),
+        finite_stats("voltron_tubeshell_lonc_cc_deg", lonc_cc_deg),
+        finite_stats("voltron_tubeshell_lat0_cc_rad", lat0_cc),
+        finite_stats("voltron_tubeshell_latc_cc_rad", latc_cc),
         finite_stats("voltron_tubeshell_topo_corner", topo),
         finite_stats("voltron_tubeshell_closed_cell_mask", closed_cell_mask),
         finite_stats("voltron_tubeshell_bmin_corner", bmin),
@@ -501,6 +590,12 @@ def read_voltron_tubeshell_geometry(template_path):
         "lat0": lat0,
         "lonc": lonc,
         "latc": latc,
+        "lon0_cc": lon0_cc,
+        "lat0_cc": lat0_cc,
+        "lonc_cc": lonc_cc,
+        "latc_cc": latc_cc,
+        "lon0_cc_deg": lon0_cc_deg,
+        "lonc_cc_deg": lonc_cc_deg,
         "wMAG": wmag,
         "Tb": tb,
         "stats": stats,
@@ -527,6 +622,10 @@ def write_intermediate_group(handle, intermediate):
     create_dataset(group, "closed_cell_mask", intermediate["closed_cell_mask"].astype(np.uint8), "logical", "Voltron cell mask, 1 where all four TubeShell topo corners are TUBE_CLOSED.")
     create_dataset(group, "Lb_corner", intermediate["Lb"].astype(np.float32), "Rp", "Voltron TubeShell corner Lb.")
     create_dataset(group, "Lb_cc", intermediate["Lb_cc"].astype(np.float32), "Rp", "Voltron TubeShell cell-centered Lb.")
+    create_dataset(group, "lon0_cc_deg", intermediate["lon0_cc_deg"].astype(np.float32), "degrees", "Voltron TubeShell cell-centered lon0.")
+    create_dataset(group, "lonc_cc_deg", intermediate["lonc_cc_deg"].astype(np.float32), "degrees", "Voltron TubeShell cell-centered lonc.")
+    create_dataset(group, "lat0_cc_rad", intermediate["lat0_cc"].astype(np.float32), "radian", "Voltron TubeShell cell-centered lat0.")
+    create_dataset(group, "latc_cc_rad", intermediate["latc_cc"].astype(np.float32), "radian", "Voltron TubeShell cell-centered latc.")
     create_dataset(group, "bmin_corner", intermediate["bmin"].astype(np.float32), "nT", "Voltron TubeShell corner bmin.")
     create_dataset(group, "bmin_cc", intermediate["bmin_cc"].astype(np.float32), "nT", "Voltron TubeShell cell-centered bmin.")
     create_dataset(group, "nTrc_corner", intermediate["nTrc"].astype(np.float32), "count", "Voltron TubeShell corner nTrc.")
@@ -543,6 +642,8 @@ def write_intermediate_group(handle, intermediate):
         create_dataset(sub, "dst_index", item["dst_index"], "index", "Voltron intermediate destination indices; columns are j,i.")
         create_dataset(sub, "src_index", item["src_index"], "index", "SAMI3 source indices; columns are nf,nlt.")
         create_dataset(sub, "weight", item["weight"].astype(np.float32), "normalized", "SAMI3-to-Voltron sparse weights.")
+        if "l_extrapolated_mask" in item:
+            create_dataset(sub, "l_extrapolated_mask", item["l_extrapolated_mask"], "logical", "1 where the Voltron TubeShell Lb query was clamped to the SAMI3 L range.")
     if intermediate.get("voltron_to_raiju") is not None:
         sub = group.create_group("voltron_to_raiju")
         item = intermediate["voltron_to_raiju"]
@@ -568,6 +669,8 @@ def write_weight_file(path, metadata, source_grid, target_grid, target_geometry,
         handle.attrs["apply_voltron_closed_mask"] = int(metadata["apply_voltron_closed_mask"])
         if metadata["voltron_template"] is not None:
             handle.attrs["voltron_template"] = metadata["voltron_template"]
+        if metadata["voltron_tube_longitude"] is not None:
+            handle.attrs["voltron_tube_longitude"] = metadata["voltron_tube_longitude"]
         handle.attrs["runtime_index_layout"] = "dst_index columns are j,i; src_index columns are nf,nlt"
         handle.attrs["note"] = (
             "Prototype sparse mapping weights with RAIJU target bvol/topology "
@@ -698,9 +801,27 @@ def main():
         apply_voltron_mask = False
     else:
         if not args.voltron_template:
-            raise ValueError("--mapping-mode voltron_shell_l_mlt requires --voltron-template")
+            raise ValueError("--mapping-mode {0} requires --voltron-template".format(args.mapping_mode))
         voltron_geometry = read_voltron_tubeshell_geometry(os.path.abspath(args.voltron_template))
-        sami3_to_voltron = build_sparse_l_mlt_weights(source_grid, voltron_geometry)
+        if args.mapping_mode == "voltron_shell_l_mlt":
+            sami3_to_voltron = build_sparse_l_mlt_weights(source_grid, voltron_geometry)
+            physical_note = (
+                "SAMI3-to-Voltron-shell then Voltron-shell-to-RAIJU composed sparse weights"
+            )
+            voltron_tube_longitude = None
+        else:
+            longitude_key = args.voltron_tube_longitude + "_cc_deg"
+            sami3_to_voltron = build_sparse_l_mlt_weights_2d(
+                source_grid,
+                voltron_geometry["Lb_cc"],
+                voltron_geometry[longitude_key],
+            )
+            physical_note = (
+                "SAMI3-to-Voltron-TubeShell Lb/{0} then Voltron-shell-to-RAIJU composed sparse weights".format(
+                    args.voltron_tube_longitude
+                )
+            )
+            voltron_tube_longitude = args.voltron_tube_longitude
         voltron_to_raiju = build_sparse_grid_to_grid(
             voltron_geometry["target_l"],
             voltron_geometry["target_lon_deg"],
@@ -722,9 +843,6 @@ def main():
         intermediate["sami3_to_voltron"] = sami3_to_voltron
         intermediate["voltron_to_raiju"] = voltron_to_raiju
         schema_version = 3
-        physical_note = (
-            "SAMI3-to-Voltron-shell then Voltron-shell-to-RAIJU composed sparse weights"
-        )
         voltron_template = os.path.abspath(args.voltron_template)
         apply_voltron_mask = bool(args.apply_voltron_closed_mask)
 
@@ -742,6 +860,9 @@ def main():
         "source_grid_dir": os.path.abspath(grid_dir),
         "target_template": os.path.abspath(args.raicpl_template),
         "voltron_template": voltron_template,
+        "voltron_tube_longitude": (
+            voltron_tube_longitude if args.mapping_mode == "voltron_tubeshell_l_mlt" else None
+        ),
         "apply_voltron_closed_mask": apply_voltron_mask,
         "output_hdf5": out_h5,
         "source_shape_nf_nlt": [int(shape2[0]), int(shape2[1])],
@@ -768,6 +889,11 @@ def main():
         ),
         "sparse_raw_weight_sum_min": sparse.get("raw_weight_sum_min"),
         "sparse_raw_weight_sum_max": sparse.get("raw_weight_sum_max"),
+        "sami3_to_voltron_l_extrapolated_count": (
+            intermediate["sami3_to_voltron"].get("l_extrapolated_count")
+            if intermediate is not None
+            else None
+        ),
         "skipped_voltron_to_raiju_terms_by_mask": sparse.get(
             "skipped_voltron_to_raiju_terms_by_mask"
         ),

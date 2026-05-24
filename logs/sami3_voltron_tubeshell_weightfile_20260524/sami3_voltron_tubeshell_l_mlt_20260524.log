@@ -1,0 +1,128 @@
+replay_time=2026-05-24 18:29:48 +0800
+build/validate voltron_tubeshell_l_mlt lon0
+wrote /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_voltron_tubeshell_l_mlt_lon0_20260524.h5
+wrote /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_voltron_tubeshell_l_mlt_lon0_20260524.json
+sparse_weight_count=33840
+coverage_count_min=4
+coverage_count_max=4
+weight_sum_min=0.9999998807907104
+weight_sum_max=1.0000001192092896
+l_extrapolated_cell_count=0
+closed_field_cell_count=8460
+closed_field_fraction=1.0
+bvol_cc_min=0.00016075602010707862
+bvol_cc_max=32.672893056940694
+wrote /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_voltron_tubeshell_l_mlt_lon0_20260524.h5
+wrote /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_voltron_tubeshell_l_mlt_lon0_20260524.json
+Voltron.avgP/RAIJU.Pavg: shape=[124, 96] finite=11904/11904 min=3.5241025670984527e-06 max=4.13702392578125 mean=0.5670715121648862
+Voltron.avgN/RAIJU.Davg: shape=[124, 96] finite=11904/11904 min=0.34504061937332153 max=216045.671875 mean=36795.40061156311
+Voltron.stdP absolute: shape=[124, 96] finite=11904/11904 min=0.00033129382063634694 max=2.928270101547241 mean=0.6109515934927615
+Voltron.stdN absolute: shape=[124, 96] finite=11904/11904 min=19.846067428588867 max=151099.875 mean=36530.11959860065
+RAIJU_State.Pstd normalized: shape=[124, 96] finite=11904/11904 min=0.255208268178331 max=143.18782045339753 mean=9.903409574754571
+RAIJU_State.Dstd normalized: shape=[124, 96] finite=11904/11904 min=0.2455597644274279 max=86.95889332449026 mean=6.415755106234947
+tiote: shape=[124, 96] finite=11904/11904 min=0.11160942912101746 max=1.0005241632461548 mean=0.9328574435065641
+RaiCplMomentsOnly.Pavg_mapped: shape=[45, 188] finite=8460/8460 min=1.3370806650944189e-05 max=0.22596272677318607 mean=0.04123294291826141
+RaiCplMomentsOnly.Davg_mapped: shape=[45, 188] finite=8460/8460 min=1.3600883693859693 max=16357.00463069118 mean=3448.6994760170364
+RaiCplMomentsOnly.Pstd_mapped: shape=[45, 188] finite=8460/8460 min=0.0014119842552453479 max=0.6747841837809108 mean=0.14820382833075857
+RaiCplMomentsOnly.Dstd_mapped: shape=[45, 188] finite=8460/8460 min=84.57477555190422 max=36840.407383717924 mean=8690.191907782848
+RaiCplMomentsOnly.tiote_mapped: shape=[45, 188] finite=8460/8460 min=0.8779889973565395 max=1.0004393328764063 mean=0.9817765389347752
+validated /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_voltron_tubeshell_l_mlt_lon0_20260524.h5
+grid: nf=124 nlt=96
+RAIJU channels: 2; bulk channel: 0
+TubeShellMomentsOnly channels: 6
+density_mode=num source=Davg_num
+pressure_mode=ion source=Pavg_i
+runtime_mapping=weights
+runtime_mapping_quality finite_all_fraction=1.0
+build/validate voltron_tubeshell_l_mlt lonc
+wrote /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_voltron_tubeshell_l_mlt_lonc_20260524.h5
+wrote /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_voltron_tubeshell_l_mlt_lonc_20260524.json
+sparse_weight_count=33840
+coverage_count_min=4
+coverage_count_max=4
+weight_sum_min=0.9999998807907104
+weight_sum_max=1.0000001192092896
+l_extrapolated_cell_count=0
+closed_field_cell_count=8460
+closed_field_fraction=1.0
+bvol_cc_min=0.00016075602010707862
+bvol_cc_max=32.672893056940694
+wrote /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_voltron_tubeshell_l_mlt_lonc_20260524.h5
+wrote /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_voltron_tubeshell_l_mlt_lonc_20260524.json
+Voltron.avgP/RAIJU.Pavg: shape=[124, 96] finite=11904/11904 min=3.5241025670984527e-06 max=4.13702392578125 mean=0.5670715121648862
+Voltron.avgN/RAIJU.Davg: shape=[124, 96] finite=11904/11904 min=0.34504061937332153 max=216045.671875 mean=36795.40061156311
+Voltron.stdP absolute: shape=[124, 96] finite=11904/11904 min=0.00033129382063634694 max=2.928270101547241 mean=0.6109515934927615
+Voltron.stdN absolute: shape=[124, 96] finite=11904/11904 min=19.846067428588867 max=151099.875 mean=36530.11959860065
+RAIJU_State.Pstd normalized: shape=[124, 96] finite=11904/11904 min=0.255208268178331 max=143.18782045339753 mean=9.903409574754571
+RAIJU_State.Dstd normalized: shape=[124, 96] finite=11904/11904 min=0.2455597644274279 max=86.95889332449026 mean=6.415755106234947
+tiote: shape=[124, 96] finite=11904/11904 min=0.11160942912101746 max=1.0005241632461548 mean=0.9328574435065641
+RaiCplMomentsOnly.Pavg_mapped: shape=[45, 188] finite=8460/8460 min=1.3370807145750714e-05 max=0.22596272677318607 mean=0.04123294289393009
+RaiCplMomentsOnly.Davg_mapped: shape=[45, 188] finite=8460/8460 min=1.3600883398963914 max=16357.00463069118 mean=3448.6994755043934
+RaiCplMomentsOnly.Pstd_mapped: shape=[45, 188] finite=8460/8460 min=0.0014119842333669887 max=0.6747841837809108 mean=0.1482038281730592
+RaiCplMomentsOnly.Dstd_mapped: shape=[45, 188] finite=8460/8460 min=84.57477521062118 max=36840.407383717924 mean=8690.191892276618
+RaiCplMomentsOnly.tiote_mapped: shape=[45, 188] finite=8460/8460 min=0.8779889973565395 max=1.0004393328764063 mean=0.9817765401745479
+validated /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_voltron_tubeshell_l_mlt_lonc_20260524.h5
+grid: nf=124 nlt=96
+RAIJU channels: 2; bulk channel: 0
+TubeShellMomentsOnly channels: 6
+density_mode=num source=Davg_num
+pressure_mode=ion source=Pavg_i
+runtime_mapping=weights
+runtime_mapping_quality finite_all_fraction=1.0
+build closed-mask lon0 diagnostic
+wrote /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_voltron_tubeshell_l_mlt_lon0_closedmask_20260524.h5
+wrote /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_voltron_tubeshell_l_mlt_lon0_closedmask_20260524.json
+sparse_weight_count=33840
+coverage_count_min=4
+coverage_count_max=4
+weight_sum_min=0.9999998807907104
+weight_sum_max=1.0000001192092896
+l_extrapolated_cell_count=0
+closed_field_cell_count=8460
+closed_field_fraction=1.0
+bvol_cc_min=0.00016075602010707862
+bvol_cc_max=32.672893056940694
+WEIGHT lon0
+schema_version 3
+mapping_mode voltron_tubeshell_l_mlt
+voltron_tube_longitude lon0
+apply_voltron_closed_mask 0
+map_weight_count 33840
+weight_sum_min 0.9999998807907104
+weight_sum_max 1.0000001192092896
+coverage_min 4
+coverage_max 4
+sami3_to_voltron_l_extrapolated 164
+Lb_cc_min 0.0
+Lb_cc_max 553.7752075195312
+WEIGHT lonc
+schema_version 3
+mapping_mode voltron_tubeshell_l_mlt
+voltron_tube_longitude lonc
+apply_voltron_closed_mask 0
+map_weight_count 33840
+weight_sum_min 0.9999998807907104
+weight_sum_max 1.0000001192092896
+coverage_min 4
+coverage_max 4
+sami3_to_voltron_l_extrapolated 164
+Lb_cc_min 0.0
+Lb_cc_max 553.7752075195312
+COMPARE shell lon0
+Pavg max_abs 0.03142083017155528 rms 0.006535884861533728 max_rel_vs_shell 0.03142083017155528 mean_shell 0.023705168903692984 mean_lon0 0.020616471462820335
+Davg max_abs 2671.9531860351562 rms 566.0494622315373 max_rel_vs_shell 0.9343638401392484 mean_shell 1985.475588861129 mean_lon0 1724.3497391370101
+Pstd max_abs 0.11445978656411171 rms 0.028125701677920924 max_rel_vs_shell 0.11445978656411171 mean_shell 0.08824501977376166 mean_lon0 0.0741019141486635
+Dstd max_abs 7085.109619140625 rms 1659.9744327046108 max_rel_vs_shell 0.7996670906065566 mean_shell 5179.265261804748 mean_lon0 4345.095956865946
+tiote max_abs 0.020108938217163086 rms 0.0062803472138201494 max_rel_vs_shell 0.020108938217163086 mean_shell 0.97833202959657 mean_lon0 0.9817765389914772
+COMPARE shell lonc
+Pavg max_abs 0.03142083017155528 rms 0.006535884897740013 max_rel_vs_shell 0.03142083017155528 mean_shell 0.023705168903692984 mean_lonc 0.020616471450631224
+Davg max_abs 2671.9531860351562 rms 566.0494632068197 max_rel_vs_shell 0.9343638401392484 mean_shell 1985.475588861129 mean_lonc 1724.3497388839157
+Pstd max_abs 0.1144597977399826 rms 0.028125701872963413 max_rel_vs_shell 0.1144597977399826 mean_shell 0.08824501977376166 mean_lonc 0.07410191406660172
+Dstd max_abs 7085.1094970703125 rms 1659.9744584658097 max_rel_vs_shell 0.7996670906065566 mean_shell 5179.265261804748 mean_lonc 4345.095949056188
+tiote max_abs 0.020108938217163086 rms 0.0062803511788354265 max_rel_vs_shell 0.020108938217163086 mean_shell 0.97833202959657 mean_lonc 0.9817765399003423
+COMPARE lon0 lonc
+Pavg max_abs 5.122274160385132e-09 rms 2.6936145145057875e-10 max_rel_vs_lon0 5.122274160385132e-09 mean_lon0 0.020616471462820335 mean_lonc 0.020616471450631224
+Davg max_abs 0.00018310546875 rms 7.255085637410937e-06 max_rel_vs_lon0 9.523505678628349e-07 mean_lon0 1724.3497391370101 mean_lonc 1724.3497388839157
+Pstd max_abs 6.705522537231445e-08 rms 2.573959798030588e-09 max_rel_vs_lon0 6.705522537231445e-08 mean_lon0 0.0741019141486635 mean_lonc 0.07410191406660172
+Dstd max_abs 0.001953125 rms 0.00012692886958654663 max_rel_vs_lon0 1.0443505855076962e-06 mean_lon0 4345.095956865946 mean_lonc 4345.095949056188
+tiote max_abs 4.172325134277344e-07 rms 3.747943053764877e-08 max_rel_vs_lon0 4.172325134277344e-07 mean_lon0 0.9817765389914772 mean_lonc 0.9817765399003423

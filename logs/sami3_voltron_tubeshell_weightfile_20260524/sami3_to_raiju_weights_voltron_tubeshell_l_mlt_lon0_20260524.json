@@ -1,0 +1,433 @@
+{
+  "apply_voltron_closed_mask": false,
+  "bvol_cc_max": 32.672893056940694,
+  "bvol_cc_min": 0.00016075602010707862,
+  "closed_field_cell_count": 8460,
+  "closed_field_fraction": 1.0,
+  "closed_field_mask_policy": "RAIJU cell is closed only if all four target topo corners are RAIJUCLOSED",
+  "coverage_count_max": 4,
+  "coverage_count_min": 4,
+  "l_extrapolated_cell_count": 0,
+  "mapping_mode": "voltron_tubeshell_l_mlt",
+  "output_hdf5": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_voltron_tubeshell_l_mlt_lon0_20260524.h5",
+  "physical_note": "SAMI3-to-Voltron-TubeShell Lb/lon0 then Voltron-shell-to-RAIJU composed sparse weights",
+  "physical_validity": "prototype",
+  "product": "sami3_to_raiju_mapping_weights",
+  "sami3_to_voltron_l_extrapolated_count": 164,
+  "schema_version": 3,
+  "skipped_voltron_to_raiju_terms_by_mask": 0,
+  "source_grid_dir": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_online_stubpayload_20231013_0000",
+  "source_l_formula": "median_nz_nlt((baltu/Re)/cos(blatu)^2)",
+  "source_mlt_formula": "circular_mean_nz_nf(blonu) degrees",
+  "source_moments_h5": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_moments_stubpayload_ds_over_B_20260524.h5",
+  "source_shape_nf_nlt": [
+    124,
+    96
+  ],
+  "sparse_raw_weight_sum_max": 1.0000000409781933,
+  "sparse_raw_weight_sum_min": 0.9999999571591616,
+  "sparse_weight_count": 33840,
+  "stats": [
+    {
+      "finite_count": 3618816,
+      "max": 1059.0595045319635,
+      "mean": 16.130434809244388,
+      "min": 1.0141530580980849,
+      "name": "sami3_l_shell_3d",
+      "shape": [
+        304,
+        124,
+        96
+      ],
+      "total_count": 3618816
+    },
+    {
+      "finite_count": 11904,
+      "max": 1058.5288045080313,
+      "mean": 16.155727297897812,
+      "min": 1.0141534222944688,
+      "name": "sami3_tube_l",
+      "shape": [
+        124,
+        96
+      ],
+      "total_count": 11904
+    },
+    {
+      "finite_count": 124,
+      "max": 1058.519161639254,
+      "mean": 16.155727421741652,
+      "min": 1.0141534559011587,
+      "name": "sami3_source_l",
+      "shape": [
+        124
+      ],
+      "total_count": 124
+    },
+    {
+      "finite_count": 96,
+      "max": 358.1249694824219,
+      "mean": 179.99997923566994,
+      "min": 1.8750000850997979,
+      "name": "sami3_source_lon_deg",
+      "shape": [
+        96
+      ],
+      "total_count": 96
+    },
+    {
+      "finite_count": 45,
+      "max": 30.111605578372767,
+      "mean": 6.3233442982763055,
+      "min": 1.508787000709922,
+      "name": "raicpl_target_l",
+      "shape": [
+        45
+      ],
+      "total_count": 45
+    },
+    {
+      "finite_count": 188,
+      "max": 359.0,
+      "mean": 180.0,
+      "min": 1.0,
+      "name": "raicpl_target_lon_deg",
+      "shape": [
+        188
+      ],
+      "total_count": 188
+    },
+    {
+      "finite_count": 8694,
+      "max": 44.6890691763335,
+      "mean": 1.2354391241605094,
+      "min": 0.00015203770831137862,
+      "name": "target_bvol_corner",
+      "shape": [
+        189,
+        46
+      ],
+      "total_count": 8694
+    },
+    {
+      "finite_count": 8460,
+      "max": 32.672893056940694,
+      "mean": 0.9921398059024972,
+      "min": 0.00016075602010707862,
+      "name": "target_bvol_cc",
+      "shape": [
+        188,
+        45
+      ],
+      "total_count": 8460
+    },
+    {
+      "finite_count": 8694,
+      "max": 1.0,
+      "mean": 1.0,
+      "min": 1.0,
+      "name": "target_topo_corner",
+      "shape": [
+        189,
+        46
+      ],
+      "total_count": 8694
+    },
+    {
+      "finite_count": 8460,
+      "max": 1.0,
+      "mean": 1.0,
+      "min": 1.0,
+      "name": "target_closed_field_mask",
+      "shape": [
+        188,
+        45
+      ],
+      "total_count": 8460
+    },
+    {
+      "finite_count": 8694,
+      "max": 8456.904051297464,
+      "mean": 1914.3342573940397,
+      "min": 0.7865122956976914,
+      "name": "target_bmin_mag_corner",
+      "shape": [
+        189,
+        46
+      ],
+      "total_count": 8694
+    },
+    {
+      "finite_count": 8460,
+      "max": 8152.721162318281,
+      "mean": 1862.8745326883047,
+      "min": 1.0811176730248788,
+      "name": "target_bmin_mag_cc",
+      "shape": [
+        188,
+        45
+      ],
+      "total_count": 8460
+    },
+    {
+      "finite_count": 8694,
+      "max": 1.0000000000000002,
+      "mean": 0.9946391346046682,
+      "min": 0.7959592743944272,
+      "name": "target_vaFrac_corner",
+      "shape": [
+        189,
+        46
+      ],
+      "total_count": 8694
+    },
+    {
+      "finite_count": 8460,
+      "max": 3880.3489416690827,
+      "mean": 122.51868209750887,
+      "min": 0.0,
+      "name": "target_Tb_center",
+      "shape": [
+        188,
+        45
+      ],
+      "total_count": 8460
+    },
+    {
+      "finite_count": 180,
+      "max": 13131.558738457328,
+      "mean": 179.99999999999943,
+      "min": 1.0000761582214375,
+      "name": "raicpl_target_l",
+      "shape": [
+        180
+      ],
+      "total_count": 180
+    },
+    {
+      "finite_count": 188,
+      "max": 359.0,
+      "mean": 180.0,
+      "min": 1.0,
+      "name": "raicpl_target_lon_deg",
+      "shape": [
+        188
+      ],
+      "total_count": 188
+    },
+    {
+      "finite_count": 34209,
+      "max": 18541.31774786079,
+      "mean": 66.32110296651743,
+      "min": 0.0,
+      "name": "voltron_tubeshell_bVol_corner",
+      "shape": [
+        189,
+        181
+      ],
+      "total_count": 34209
+    },
+    {
+      "finite_count": 33840,
+      "max": 14539.833633832615,
+      "mean": 67.03498803894638,
+      "min": 0.0,
+      "name": "voltron_tubeshell_bVol_cc",
+      "shape": [
+        188,
+        180
+      ],
+      "total_count": 33840
+    },
+    {
+      "finite_count": 34209,
+      "max": 585.5510801743719,
+      "mean": 24.06100696513658,
+      "min": 0.0,
+      "name": "voltron_tubeshell_Lb_corner",
+      "shape": [
+        189,
+        181
+      ],
+      "total_count": 34209
+    },
+    {
+      "finite_count": 33840,
+      "max": 553.7751885137056,
+      "mean": 24.228647254575865,
+      "min": 0.0,
+      "name": "voltron_tubeshell_Lb_cc",
+      "shape": [
+        188,
+        180
+      ],
+      "total_count": 33840
+    },
+    {
+      "finite_count": 33840,
+      "max": 359.5000380800774,
+      "mean": 179.99736972292888,
+      "min": 0.4999619199226161,
+      "name": "voltron_tubeshell_lon0_cc_deg",
+      "shape": [
+        188,
+        180
+      ],
+      "total_count": 33840
+    },
+    {
+      "finite_count": 33840,
+      "max": 359.4962265892879,
+      "mean": 179.12784601265406,
+      "min": 0.0,
+      "name": "voltron_tubeshell_lonc_cc_deg",
+      "shape": [
+        188,
+        180
+      ],
+      "total_count": 33840
+    },
+    {
+      "finite_count": 33840,
+      "max": 1.5620696805349192,
+      "mean": 5.039310182695746e-17,
+      "min": -1.5620696805349195,
+      "name": "voltron_tubeshell_lat0_cc_rad",
+      "shape": [
+        188,
+        180
+      ],
+      "total_count": 33840
+    },
+    {
+      "finite_count": 33840,
+      "max": 1.5459412633912741,
+      "mean": 9.658839544832908e-10,
+      "min": -1.545940843165401,
+      "name": "voltron_tubeshell_latc_cc_rad",
+      "shape": [
+        188,
+        180
+      ],
+      "total_count": 33840
+    },
+    {
+      "finite_count": 34209,
+      "max": 2.0,
+      "mean": 1.9838054313192435,
+      "min": 1.0,
+      "name": "voltron_tubeshell_topo_corner",
+      "shape": [
+        189,
+        181
+      ],
+      "total_count": 34209
+    },
+    {
+      "finite_count": 33840,
+      "max": 1.0,
+      "mean": 0.9833333333333333,
+      "min": 0.0,
+      "name": "voltron_tubeshell_closed_cell_mask",
+      "shape": [
+        188,
+        180
+      ],
+      "total_count": 33840
+    },
+    {
+      "finite_count": 34209,
+      "max": 27982.105733205586,
+      "mean": 8696.18306089715,
+      "min": 0.0,
+      "name": "voltron_tubeshell_bmin_corner",
+      "shape": [
+        189,
+        181
+      ],
+      "total_count": 34209
+    },
+    {
+      "finite_count": 33840,
+      "max": 27969.32516971204,
+      "mean": 8744.49325284594,
+      "min": 0.0,
+      "name": "voltron_tubeshell_bmin_cc",
+      "shape": [
+        188,
+        180
+      ],
+      "total_count": 33840
+    },
+    {
+      "finite_count": 34209,
+      "max": 926.0,
+      "mean": 183.17720482913853,
+      "min": 0.0,
+      "name": "voltron_tubeshell_nTrc_corner",
+      "shape": [
+        189,
+        181
+      ],
+      "total_count": 34209
+    },
+    {
+      "finite_count": 33840,
+      "max": 910.5,
+      "mean": 182.1497635933806,
+      "min": 0.0,
+      "name": "voltron_tubeshell_nTrc_cc",
+      "shape": [
+        188,
+        180
+      ],
+      "total_count": 33840
+    },
+    {
+      "finite_count": 33840,
+      "max": 0.9653595089912415,
+      "mean": 0.25,
+      "min": 4.5070803025737405e-05,
+      "name": "mapping_weight",
+      "shape": [
+        33840
+      ],
+      "total_count": 33840
+    },
+    {
+      "finite_count": 8460,
+      "max": 1.0000001192092896,
+      "mean": 1.0,
+      "min": 0.9999998807907104,
+      "name": "mapping_weight_sum",
+      "shape": [
+        188,
+        45
+      ],
+      "total_count": 8460
+    },
+    {
+      "finite_count": 8460,
+      "max": 4.0,
+      "mean": 4.0,
+      "min": 4.0,
+      "name": "mapping_coverage_count",
+      "shape": [
+        188,
+        45
+      ],
+      "total_count": 8460
+    }
+  ],
+  "target_l_formula": "1/sin(theta_cell_center)^2 from ShellGrid/theta",
+  "target_mlt_formula": "ShellGrid/phi cell centers modulo 360 degrees",
+  "target_shape_ni_nj": [
+    45,
+    188
+  ],
+  "target_template": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_blend_20260524/sami3_moments_base_control.raiCpl.Res.00000.h5",
+  "voltron_template": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_blend_20260524/sami3_moments_base_control.volt.Res.00000.h5",
+  "voltron_tube_longitude": "lon0",
+  "weight_sum_max": 1.0000001192092896,
+  "weight_sum_min": 0.9999998807907104
+}

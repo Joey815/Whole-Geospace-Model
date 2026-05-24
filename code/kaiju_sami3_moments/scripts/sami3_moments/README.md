@@ -350,6 +350,18 @@ so masked and unmasked generation have the same target coverage.  This remains
 a Voltron-shell-aware L/MLT prototype, not a production traced-tube or
 `bvol`-weighted mapping.
 
+A more geometry-aware prototype is available as:
+
+```text
+--mapping-mode voltron_tubeshell_l_mlt
+--voltron-tube-longitude lon0 | lonc
+```
+
+This maps SAMI3 moments to the Voltron TubeShell cell-centered `Lb` and chosen
+footpoint longitude before composing the same Voltron->RAIJU shell-grid step.
+It is useful for testing traced-tube coordinate plumbing, but the longitude
+choice and flux-tube volume weighting remain prototype assumptions.
+
 When a runtime layout is requested, the product also writes explicit
 `/MappingQuality` datasets.  For `l_mlt` these include:
 
