@@ -37,6 +37,14 @@ runtime-map header, so the packer was the brittle point.
 This change does not complete the f09/distributed-remap production work.  It
 removes a concrete f19-only assumption from the runtime-map artifact schema.
 
+The live metadata snapshot was also adjusted so `fallback_policy.remap_scaling`
+reports the runtime-map source column count instead of hard-coding f19 wording:
+
+```text
+gather-to-root prototype; runtime_map_source_columns=<nsource>;
+f09 production still needs distributed remap
+```
+
 ## Validation
 
 Runtime map validator:

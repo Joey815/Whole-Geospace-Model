@@ -858,7 +858,8 @@ contains
       write(118,'(A,A,A)') '    "N2_negative_mode": "', trim(n2_negative_mode), '",'
       write(118,'(A)') '    "He": "payload value -1 so SAMI3 native/MSIS He is retained",'
       write(118,'(A)') '    "W": "payload value 0; CAM omega diagnostic only",'
-      write(118,'(A)') '    "remap_scaling": "f19 gather-to-root prototype, not f09 production distributed remap"'
+      write(118,'(A,I0,A)') '    "remap_scaling": "gather-to-root prototype; runtime_map_source_columns=', &
+                             live_map_nsource, '; f09 production still needs distributed remap"'
       write(118,'(A)') '  },'
       write(118,'(A)') '  "runtime_qc": {'
       write(118,'(A,I0,A)') '    "samples": ', samples, ','
