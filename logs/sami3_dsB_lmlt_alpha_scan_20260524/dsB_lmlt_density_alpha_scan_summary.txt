@@ -1,0 +1,39 @@
+input_product = analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_l_mlt_20260524.h5
+input_Davg_mean_all_channels = 1985.4757080078125
+input_Pavg_mean_all_channels = 0.023705169558525085
+base_Davg_mean_all_channels = 0.05433108774465307
+base_Pavg_mean_all_channels = 0.00043784124116159
+
+case D005 alphaDavg 0.05
+  Davg formula_max_abs 3.662109372726263e-05 formula_max_rel 7.136261094681787e-08 mean 99.32539397052527 max 872.230859375
+  Pavg formula_max_abs 0.0 formula_max_rel 0.0 mean 0.00043784124116159 max 0.0045781374009727024
+  State/Davg_in mean 99.32539397052527 max 872.230859375 delta_max 872.230859375 delta_mean 99.27106288278063
+  State/Density mean 994.7365570893501 max 9075.909053467174 delta_max 4.352037883696225 delta_mean 0.2108520077725299
+  State/eta mean 10081292.251164462 max 2937313100.690331 delta_max 852515660.4469385 delta_mean 1338053.6368864153
+  GAMERA/Gas0 mean 25.058230423206936 max 7258.259591253042 delta_max 4.262714108613584 delta_mean 0.021035976942650598
+  nonfinite_raiCpl []
+  nonfinite_raiju []
+  nonfinite_gamera []
+
+case D010 alphaDavg 0.1
+  Davg formula_max_abs 7.324218745452526e-05 formula_max_rel 7.139196866164153e-08 mean 198.5964568533059 max 1744.46171875
+  Pavg formula_max_abs 0.0 formula_max_rel 0.0 mean 0.00043784124116159 max 0.0045781374009727024
+  State/Davg_in mean 198.5964568533059 max 1744.46171875 delta_max 1744.46171875 delta_mean 198.54212576556125
+  State/Density mean 994.797241951813 max 9075.909053467174 delta_max 6.78451904931095 delta_mean 0.2773705737514537
+  State/eta mean 10789015.92888345 max 2937313100.690331 delta_max 1577045169.8438303 delta_mean 2093479.921312136
+  GAMERA/Gas0 mean 25.062921302299536 max 7258.259591253042 delta_max 6.6941463236579315 delta_mean 0.026778565052997937
+  nonfinite_raiCpl []
+  nonfinite_raiju []
+  nonfinite_gamera []
+
+case D020 alphaDavg 0.2
+  Davg formula_max_abs 0.00014648437490905053 formula_max_rel 7.140665657897348e-08 mean 397.13858261886713 max 3488.9234375
+  Pavg formula_max_abs 0.0 formula_max_rel 0.0 mean 0.00043784124116159 max 0.0045781374009727024
+  State/Davg_in mean 397.13858261886713 max 3488.9234375 delta_max 3488.9234375 delta_mean 397.0842515311225
+  State/Density mean 994.8285021507141 max 9075.909053467174 delta_max 9.983316597770147 delta_mean 0.31507020287177046
+  State/eta mean 11611121.78803891 max 2937313100.690331 delta_max 2239493854.235352 delta_mean 2953379.4167547566
+  GAMERA/Gas0 mean 25.054203442374792 max 7258.259591253042 delta_max 7.627087523676051 delta_mean 0.019778656008832725
+  nonfinite_raiCpl []
+  nonfinite_raiju []
+  nonfinite_gamera []
+
