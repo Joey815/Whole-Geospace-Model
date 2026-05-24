@@ -10,10 +10,13 @@ from pathlib import Path
 FATAL_PATTERNS = (
     "fatal",
     "forrtl",
-    "abort",
     "header mismatch",
     "mpi_abort",
     "nan",
+)
+
+IGNORED_FATAL_LINES = (
+    "abortOnNonfinit",
 )
 
 
@@ -23,6 +26,21 @@ def add(checks, name, ok, detail):
 
 def count_re(pattern, text):
     return len(re.findall(pattern, text, flags=re.IGNORECASE))
+
+
+def fatal_lines(text):
+    hits = []
+    for line in text.splitlines():
+        if any(ignored in line for ignored in IGNORED_FATAL_LINES):
+            continue
+        lower = line.lower()
+        if "abort" in lower and not re.search(r"\babort(ed|ing)?\b", lower):
+            continue
+        if any(pattern in lower for pattern in FATAL_PATTERNS) or re.search(
+            r"\babort(ed|ing)?\b", lower
+        ):
+            hits.append(line.strip())
+    return hits
 
 
 def parse_phi_recv(text):
@@ -72,10 +90,7 @@ def validate(args):
     neutral_sender = neutral_sender_path.read_text(errors="replace") if neutral_sender_path and neutral_sender_path.exists() else ""
     recv_qc = qc_path.read_text(errors="replace") if qc_path and qc_path.exists() else ""
 
-    fatal_hits = [
-        pattern for pattern in FATAL_PATTERNS
-        if pattern in receiver.lower() or pattern in phi_sender.lower()
-    ]
+    fatal_hits = fatal_lines(receiver) + fatal_lines(phi_sender)
     add(checks, "no_fatal_markers", not fatal_hits, fatal_hits or "none")
     add(checks, "direct_phi_port_ready", "SAMI3 direct phi port ready" in receiver, "marker")
     add(checks, "direct_phi_connected", "SAMI3 direct phi sender connected" in receiver, "marker")
@@ -130,13 +145,19 @@ def validate(args):
     add(
         checks,
         "phi_sender_sent_frames",
-        count_re(r"PHI_DIRECT_SENDER sent frame=", phi_sender) == args.expected_frames,
-        f"count={count_re(r'PHI_DIRECT_SENDER sent frame=', phi_sender)}",
+        count_re(r"PHI_DIRECT_SENDER sent frame=", phi_sender)
+        + count_re(r"WACCMX_SAMI3_PHI_DIRECT sent frame=", phi_sender)
+        == args.expected_frames,
+        "count={}".format(
+            count_re(r"PHI_DIRECT_SENDER sent frame=", phi_sender)
+            + count_re(r"WACCMX_SAMI3_PHI_DIRECT sent frame=", phi_sender)
+        ),
     )
     add(
         checks,
         "phi_sender_sent_done",
-        "PHI_DIRECT_SENDER sent done=" in phi_sender,
+        "PHI_DIRECT_SENDER sent done=" in phi_sender
+        or "WACCMX_SAMI3_PHI_DIRECT sent done=" in phi_sender,
         "marker",
     )
     if neutral_sender_path:
@@ -165,12 +186,28 @@ def main():
     parser.add_argument("--recv-qc-compare", default=None)
     parser.add_argument("--expected-frames", type=int, default=2)
     parser.add_argument("--require-changing-phi", action="store_true")
+    parser.add_argument(
+        "--allow-incomplete-run",
+        action="store_true",
+        help="Treat model-exit/finalize markers as advisory for live handshake checks.",
+    )
     parser.add_argument("--change-tol", type=float, default=1.0e-6)
     parser.add_argument("--json-output", default=None)
     args = parser.parse_args()
 
     checks, meta = validate(args)
-    ok = all(check["ok"] for check in checks)
+    advisory = set()
+    if args.allow_incomplete_run:
+        advisory.update(
+            {
+                "master_done",
+                "neutral_done_received",
+                "direct_phi_done_received",
+                "recv_qc_compare_exists",
+                "recv_qc_compare_ok",
+            }
+        )
+    ok = all(check["ok"] or check["name"] in advisory for check in checks)
     result = {"ok": ok, "checks": checks, "meta": meta}
     if args.json_output:
         Path(args.json_output).write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")

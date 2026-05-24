@@ -409,6 +409,13 @@ contains
             close(unit)
             print *, 'WACCMX online port ready: ', trim(waccmx_online_port_file)
         endif
+        call MPI_Bcast(port_name, MPI_MAX_PORT_NAME, MPI_CHARACTER, 0, &
+                       sami3_comm, ierr)
+        if (ierr /= MPI_SUCCESS) then
+            print *, 'WACCMX online port name broadcast failed taskid,ierr=', &
+                     taskid, ierr
+            call MPI_Abort(sami3_comm, ierr, ierr)
+        endif
 
         call MPI_Comm_accept(port_name, MPI_INFO_NULL, 0, sami3_comm, &
                              waccmx_peer_comm, ierr)

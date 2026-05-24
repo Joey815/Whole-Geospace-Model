@@ -1,0 +1,112 @@
+{
+  "checks": [
+    {
+      "detail": "logs/sami3_intelmpi_voltron_runtime_direct_phi_20260525/sami3_online_receiver.out",
+      "name": "receiver_log_exists",
+      "ok": true
+    },
+    {
+      "detail": "logs/sami3_intelmpi_voltron_runtime_direct_phi_20260525/voltron_runtime_direct.out",
+      "name": "phi_sender_log_exists",
+      "ok": true
+    },
+    {
+      "detail": "logs/sami3_intelmpi_voltron_runtime_direct_phi_20260525/neutral_sender.out",
+      "name": "neutral_sender_log_exists",
+      "ok": true
+    },
+    {
+      "detail": "none",
+      "name": "no_fatal_markers",
+      "ok": true
+    },
+    {
+      "detail": "marker",
+      "name": "direct_phi_port_ready",
+      "ok": true
+    },
+    {
+      "detail": "marker",
+      "name": "direct_phi_connected",
+      "ok": true
+    },
+    {
+      "detail": "marker",
+      "name": "master_done",
+      "ok": false
+    },
+    {
+      "detail": "marker",
+      "name": "neutral_done_received",
+      "ok": false
+    },
+    {
+      "detail": "marker",
+      "name": "direct_phi_done_received",
+      "ok": false
+    },
+    {
+      "detail": "observed=2 expected=2",
+      "name": "phi_recv_frame_count",
+      "ok": true
+    },
+    {
+      "detail": "[0, 1]",
+      "name": "phi_recv_frame_indices",
+      "ok": true
+    },
+    {
+      "detail": "[2, 2]",
+      "name": "phi_recv_total_frames",
+      "ok": true
+    },
+    {
+      "detail": "[(-36.93061, 31.48382), (-37.68302, 31.89119)]",
+      "name": "phi_recv_finite_range",
+      "ok": true
+    },
+    {
+      "detail": "[{'frame': 0, 'nframes': 2, 'hrut': 0.0, 'hour': 0.0, 'valid_until': 0.0013888889, 'min': -36.93061, 'max': 31.48382}, {'frame': 1, 'nframes': 2, 'hrut': 0.0022222223, 'hour': 0.0013888889, 'valid_until': 1e+30, 'min': -37.68302, 'max': 31.89119}]",
+      "name": "phi_recv_frames_change",
+      "ok": true
+    },
+    {
+      "detail": "count=2",
+      "name": "phi_sender_sent_frames",
+      "ok": true
+    },
+    {
+      "detail": "marker",
+      "name": "phi_sender_sent_done",
+      "ok": true
+    },
+    {
+      "detail": "marker",
+      "name": "neutral_sender_sent_done",
+      "ok": true
+    }
+  ],
+  "meta": {
+    "phi_recv_frames": [
+      {
+        "frame": 0,
+        "hour": 0.0,
+        "hrut": 0.0,
+        "max": 31.48382,
+        "min": -36.93061,
+        "nframes": 2,
+        "valid_until": 0.0013888889
+      },
+      {
+        "frame": 1,
+        "hour": 0.0013888889,
+        "hrut": 0.0022222223,
+        "max": 31.89119,
+        "min": -37.68302,
+        "nframes": 2,
+        "valid_until": 1e+30
+      }
+    ]
+  },
+  "ok": true
+}

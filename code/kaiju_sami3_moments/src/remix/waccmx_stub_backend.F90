@@ -1,6 +1,9 @@
 module waccmx_stub_backend
   use iso_fortran_env, only: int32, real32
   use ieee_arithmetic, only: ieee_is_finite
+#ifdef KAIJU_ENABLE_MPI
+  use mpi_f08
+#endif
   use gcmtypes
   use mixdefs
   use mixtypes
@@ -15,12 +18,24 @@ module waccmx_stub_backend
   integer(int32), parameter :: sami3_phi_version = 1_int32
   integer, parameter :: sami3_phi_nlat = 125
   integer, parameter :: sami3_phi_nlon = 97
+  integer, parameter :: sami3_tag_phi_header = 220
+  integer, parameter :: sami3_tag_phi_hour = 221
+  integer, parameter :: sami3_tag_phi_valid_until = 222
+  integer, parameter :: sami3_tag_phi_data = 223
+  integer, parameter :: sami3_tag_done = 299
   real(rp), parameter :: statvolt_per_kv = 1000.0_rp/300.0_rp
   character(len=strLen), save :: feedback_package_file = ''
   character(len=strLen), save :: backend_label = 'WACCMX_STUB'
   character(len=strLen), save :: backend_producer = 'MAGE_WACCMX_STUB'
   character(len=strLen), save :: backend_grid_source = 'REMIX_SM_STUB'
   character(len=strLen), save :: backend_direction = 'MAGE_REMIX_to_future_WACCMX'
+  logical, save :: sami3_phi_direct_connected = .false.
+  logical, save :: sami3_phi_direct_done_sent = .false.
+  integer, save :: sami3_phi_direct_sent_frames = 0
+#ifdef KAIJU_ENABLE_MPI
+  type(MPI_Comm), save :: sami3_phi_direct_comm = MPI_COMM_NULL
+  logical, save :: sami3_phi_direct_mpi_started = .false.
+#endif
 
   private
   public :: init_waccmx_stub
@@ -357,16 +372,23 @@ contains
     type(mixIon_T), dimension(:), intent(in) :: ion
     real(rp), intent(in) :: time
 
-    character(len=strLen) :: payload_file, grid_file, hemi_env, value
+    character(len=strLen) :: payload_file, direct_port_file, grid_file, hemi_env, value
     integer :: stat, lenval, hemi, ios
     real(rp) :: frame_hour, frame_hour_offset, valid_until
     real(rp) :: target_mlat(sami3_phi_nlat), target_mlon(sami3_phi_nlon)
     real(real32) :: phi_statv(sami3_phi_nlat, sami3_phi_nlon)
+    logical :: payload_enabled, direct_enabled
 
     payload_file = ''
     call get_environment_variable('WACCMX_SAMI3_PHI_PAYLOAD_FILE', payload_file, &
       length=lenval, status=stat)
-    if (stat /= 0 .or. len_trim(payload_file) <= 0) return
+    payload_enabled = stat == 0 .and. len_trim(payload_file) > 0
+
+    direct_port_file = ''
+    call get_environment_variable('WACCMX_SAMI3_PHI_DIRECT_PORT_FILE', &
+      direct_port_file, length=lenval, status=stat)
+    direct_enabled = stat == 0 .and. len_trim(direct_port_file) > 0
+    if (.not. payload_enabled .and. .not. direct_enabled) return
 
     grid_file = ''
     call get_environment_variable('WACCMX_SAMI3_WEIMER_GRID', grid_file, &
@@ -422,14 +444,158 @@ contains
     call read_sami3_weimer_grid(trim(grid_file), target_mlat, target_mlon)
     call remix_pot_to_sami3_phi(ion(hemi)%G%t, ion(hemi)%G%p, &
       gcm%APEX%gcmOutput(hemi,1)%var, target_mlat, target_mlon, phi_statv)
-    call write_sami3_phi_payload(trim(payload_file), phi_statv, frame_hour, valid_until)
+    if (payload_enabled) then
+      call write_sami3_phi_payload(trim(payload_file), phi_statv, frame_hour, valid_until)
+    end if
+    if (direct_enabled) then
+      call send_sami3_phi_direct(trim(direct_port_file), phi_statv, frame_hour, valid_until)
+    end if
 
-    write(*,*) 'WACCMX_SAMI3_PHI_PAYLOAD wrote ', trim(payload_file), &
-      ' hemi=', hemi, ' hour=', frame_hour, ' valid_until=', valid_until, &
+    write(*,*) 'WACCMX_SAMI3_PHI prepared payload_file=', trim(payload_file), &
+      ' direct_port_file=', trim(direct_port_file), ' hemi=', hemi, &
+      ' hour=', frame_hour, ' valid_until=', valid_until, &
       ' source_min/max=', minval(gcm%APEX%gcmOutput(hemi,1)%var), &
       maxval(gcm%APEX%gcmOutput(hemi,1)%var), &
       ' payload_min/max=', minval(phi_statv), maxval(phi_statv)
   end subroutine write_waccmx_sami3_phi_payload_if_enabled
+
+  subroutine connect_sami3_phi_direct(port_file)
+    character(len=*), intent(in) :: port_file
+
+#ifdef KAIJU_ENABLE_MPI
+    character(len=MPI_MAX_PORT_NAME) :: port_name
+    integer :: unitno, ios, ierr
+    logical :: mpi_is_initialized
+
+    if (sami3_phi_direct_connected) return
+
+    call MPI_Initialized(mpi_is_initialized, ierr)
+    if (ierr /= MPI_SUCCESS) stop 'SAMI3 direct phi MPI_Initialized failed.'
+    if (.not. mpi_is_initialized) then
+      call MPI_Init(ierr)
+      if (ierr /= MPI_SUCCESS) stop 'SAMI3 direct phi MPI_Init failed.'
+      sami3_phi_direct_mpi_started = .true.
+    end if
+
+    port_name = ''
+    open(newunit=unitno, file=trim(port_file), status='old', action='read', &
+      iostat=ios)
+    if (ios /= 0) then
+      write(*,*) 'Unable to open SAMI3 direct phi port file: ', trim(port_file), &
+        ' iostat=', ios
+      stop
+    end if
+    read(unitno,'(A)',iostat=ios) port_name
+    close(unitno)
+    if (ios /= 0 .or. len_trim(port_name) <= 0) then
+      write(*,*) 'Unable to read SAMI3 direct phi port file: ', trim(port_file)
+      stop
+    end if
+
+    call MPI_Comm_connect(trim(port_name), MPI_INFO_NULL, 0, MPI_COMM_SELF, &
+      sami3_phi_direct_comm, ierr)
+    if (ierr /= MPI_SUCCESS) then
+      write(*,*) 'SAMI3 direct phi MPI_Comm_connect failed ierr=', ierr
+      stop
+    end if
+    sami3_phi_direct_connected = .true.
+    write(*,*) 'WACCMX_SAMI3_PHI_DIRECT connected ', trim(port_file)
+#else
+    write(*,*) 'WACCMX_SAMI3_PHI_DIRECT requires an MPI-enabled Voltron build: ', &
+      trim(port_file)
+    stop
+#endif
+  end subroutine connect_sami3_phi_direct
+
+  subroutine send_sami3_phi_direct(port_file, phi_statv, frame_hour, valid_until)
+    character(len=*), intent(in) :: port_file
+    real(real32), intent(in) :: phi_statv(:,:)
+    real(rp), intent(in) :: frame_hour, valid_until
+
+#ifdef KAIJU_ENABLE_MPI
+    character(len=strLen) :: value
+    integer :: ierr, stat, lenval, ios
+    integer :: frame_index, max_frames
+    integer :: header(6), done_value
+    real(real32) :: frame_hour32, frame_valid_until32
+    real(rp) :: frame_valid_until, valid_hours, final_valid_until
+
+    valid_hours = -1.0_rp
+    value = ''
+    call get_environment_variable('WACCMX_SAMI3_PHI_VALID_HOURS', value, &
+      length=lenval, status=stat)
+    if (stat == 0 .and. len_trim(value) > 0) read(value,*,iostat=ios) valid_hours
+
+    max_frames = -1
+    value = ''
+    call get_environment_variable('WACCMX_SAMI3_PHI_MAX_FRAMES', value, &
+      length=lenval, status=stat)
+    if (stat == 0 .and. len_trim(value) > 0) read(value,*,iostat=ios) max_frames
+    if (max_frames <= 0) then
+      stop 'WACCMX_SAMI3_PHI_DIRECT_PORT_FILE requires WACCMX_SAMI3_PHI_MAX_FRAMES.'
+    end if
+    if (sami3_phi_direct_sent_frames >= max_frames) return
+
+    final_valid_until = valid_until
+    value = ''
+    call get_environment_variable('WACCMX_SAMI3_PHI_FINAL_VALID_UNTIL_HOUR', value, &
+      length=lenval, status=stat)
+    if (stat == 0 .and. len_trim(value) > 0) read(value,*,iostat=ios) final_valid_until
+
+    call connect_sami3_phi_direct(port_file)
+
+    frame_index = sami3_phi_direct_sent_frames
+    frame_valid_until = valid_until
+    if (valid_hours > 0.0_rp) frame_valid_until = frame_hour + valid_hours
+    if (frame_index + 1 >= max_frames) frame_valid_until = final_valid_until
+
+    header = [int(sami3_phi_magic), int(sami3_phi_version), size(phi_statv,1), &
+      size(phi_statv,2), frame_index, max_frames]
+    frame_hour32 = real(frame_hour, real32)
+    frame_valid_until32 = real(frame_valid_until, real32)
+
+    call MPI_Send(header, 6, MPI_INTEGER, 0, sami3_tag_phi_header, &
+      sami3_phi_direct_comm, ierr)
+    if (ierr /= MPI_SUCCESS) stop 'SAMI3 direct phi MPI_Send header failed.'
+    call MPI_Send(frame_hour32, 1, MPI_REAL, 0, sami3_tag_phi_hour, &
+      sami3_phi_direct_comm, ierr)
+    if (ierr /= MPI_SUCCESS) stop 'SAMI3 direct phi MPI_Send hour failed.'
+    call MPI_Send(frame_valid_until32, 1, MPI_REAL, 0, sami3_tag_phi_valid_until, &
+      sami3_phi_direct_comm, ierr)
+    if (ierr /= MPI_SUCCESS) stop 'SAMI3 direct phi MPI_Send valid_until failed.'
+    call MPI_Send(phi_statv, size(phi_statv), MPI_REAL, 0, sami3_tag_phi_data, &
+      sami3_phi_direct_comm, ierr)
+    if (ierr /= MPI_SUCCESS) stop 'SAMI3 direct phi MPI_Send data failed.'
+
+    sami3_phi_direct_sent_frames = sami3_phi_direct_sent_frames + 1
+    write(*,*) 'WACCMX_SAMI3_PHI_DIRECT sent frame=', frame_index, &
+      ' nframes=', max_frames, ' hour=', frame_hour32, &
+      ' valid_until=', frame_valid_until32, &
+      ' min/max=', minval(phi_statv), maxval(phi_statv)
+
+    if (.not. sami3_phi_direct_done_sent .and. &
+        sami3_phi_direct_sent_frames >= max_frames) then
+      done_value = sami3_phi_direct_sent_frames
+      call MPI_Send(done_value, 1, MPI_INTEGER, 0, sami3_tag_done, &
+        sami3_phi_direct_comm, ierr)
+      if (ierr /= MPI_SUCCESS) stop 'SAMI3 direct phi MPI_Send done failed.'
+      call MPI_Comm_disconnect(sami3_phi_direct_comm, ierr)
+      if (ierr /= MPI_SUCCESS) stop 'SAMI3 direct phi MPI_Comm_disconnect failed.'
+      sami3_phi_direct_connected = .false.
+      sami3_phi_direct_done_sent = .true.
+      if (sami3_phi_direct_mpi_started) then
+        call MPI_Finalize(ierr)
+        if (ierr /= MPI_SUCCESS) stop 'SAMI3 direct phi MPI_Finalize failed.'
+        sami3_phi_direct_mpi_started = .false.
+      end if
+      write(*,*) 'WACCMX_SAMI3_PHI_DIRECT sent done=', done_value
+    end if
+#else
+    write(*,*) 'WACCMX_SAMI3_PHI_DIRECT disabled in non-MPI Voltron build: ', &
+      trim(port_file), frame_hour, valid_until, minval(phi_statv), maxval(phi_statv)
+    stop
+#endif
+  end subroutine send_sami3_phi_direct
 
   subroutine read_sami3_weimer_grid(path, target_mlat, target_mlon)
     character(len=*), intent(in) :: path
