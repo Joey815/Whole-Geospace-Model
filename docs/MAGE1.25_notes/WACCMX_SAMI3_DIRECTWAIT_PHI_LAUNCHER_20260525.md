@@ -84,7 +84,9 @@ python3 scripts/archive_wxsami3_append2_result.py \
   --min-total-blend-cells 1 \
   --require-zero-unknown-source-flags \
   --require-he-native \
-  --require-w-zero
+  --require-w-zero \
+  --weights-nc /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/weights_bilinear_f19_live.nc \
+  --expected-runtime-map-nsource 13824
 ```
 
 Additional expected markers:

@@ -21,6 +21,7 @@ It runs both validators:
 scripts/validate_wxsami3_append2_run.py
 scripts/validate_wxsami3_live_packet_contract.py
 scripts/validate_wxsami3_topblend_policy.py
+scripts/validate_wxsami3_runtime_map.py
 ```
 
 and copies only lightweight evidence:
@@ -89,7 +90,9 @@ python3 scripts/archive_wxsami3_append2_result.py \
   --min-total-blend-cells 1 \
   --require-zero-unknown-source-flags \
   --require-he-native \
-  --require-w-zero
+  --require-w-zero \
+  --weights-nc /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/weights_bilinear_f19_live.nc \
+  --expected-runtime-map-nsource 13824
 ```
 
 ## Use On Direct-Wait Job
@@ -119,7 +122,9 @@ python3 scripts/archive_wxsami3_append2_result.py \
   --min-total-blend-cells 1 \
   --require-zero-unknown-source-flags \
   --require-he-native \
-  --require-w-zero
+  --require-w-zero \
+  --weights-nc /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/weights_bilinear_f19_live.nc \
+  --expected-runtime-map-nsource 13824
 ```
 
 ## Acceptance Meaning
@@ -134,6 +139,7 @@ direct-wait runs show a same-job Voltron writer PID and sender wait marker
 top-blend diagnostics show linear 600-720 km blending and nonzero blend cells
 source-flag unknown counts remain zero
 He remains native and W remains zero for valid payload cells
+runtime map header and row/col/weight arrays match the ESMF weights file
 SAMI3 received the expected phi frames
 SAMI3 reached MASTER: All Done!
 WACCM-X reached END OF MODEL RUN

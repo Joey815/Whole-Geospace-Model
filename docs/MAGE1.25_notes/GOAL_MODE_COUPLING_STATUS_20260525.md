@@ -62,7 +62,9 @@ python3 scripts/archive_wxsami3_append2_result.py \
   --min-total-blend-cells 1 \
   --require-zero-unknown-source-flags \
   --require-he-native \
-  --require-w-zero
+  --require-w-zero \
+  --weights-nc /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/weights_bilinear_f19_live.nc \
+  --expected-runtime-map-nsource 13824
 ```
 
 This must show:
@@ -120,7 +122,9 @@ python3 scripts/archive_wxsami3_append2_result.py \
   --min-total-blend-cells 1 \
   --require-zero-unknown-source-flags \
   --require-he-native \
-  --require-w-zero
+  --require-w-zero \
+  --weights-nc /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/weights_bilinear_f19_live.nc \
+  --expected-runtime-map-nsource 13824
 ```
 
 This must additionally show:
@@ -222,6 +226,7 @@ scripts/validate_sami3_raiju_mapping_product.py
 scripts/validate_wxsami3_append2_run.py --expect-direct-wait-mode
 scripts/archive_wxsami3_append2_result.py --expect-direct-wait-mode
 scripts/validate_wxsami3_topblend_policy.py
+scripts/validate_wxsami3_runtime_map.py
 ```
 
 The mapping-product validator now gates `/RaiCplMomentsOnly` plus

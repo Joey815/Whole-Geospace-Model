@@ -78,6 +78,18 @@ def write_sacct(job_id, archive_dir):
     return {"path": str(out), "returncode": proc.returncode}
 
 
+def runtime_map_from_meta(run_dir):
+    meta_path = run_dir / "wxsami3_live_meta.json"
+    if not meta_path.is_file():
+        return None
+    try:
+        meta = json.loads(meta_path.read_text())
+    except (OSError, json.JSONDecodeError):
+        return None
+    runtime_map = meta.get("runtime_map", {})
+    return runtime_map.get("file")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run-dir", required=True)
@@ -97,6 +109,10 @@ def main():
     parser.add_argument("--require-zero-unknown-source-flags", action="store_true")
     parser.add_argument("--require-he-native", action="store_true")
     parser.add_argument("--require-w-zero", action="store_true")
+    parser.add_argument("--runtime-map", default=None)
+    parser.add_argument("--weights-nc", default=None)
+    parser.add_argument("--expected-runtime-map-nsource", type=int, default=None)
+    parser.add_argument("--runtime-map-python", default="/home/jiaoy_group/jiaoy/.venvs/mage-vis/bin/python")
     parser.add_argument("--allow-incomplete", action="store_true")
     args = parser.parse_args()
 
@@ -179,11 +195,51 @@ def main():
             topblend_cmd.append("--allow-incomplete")
         topblend_rc = run_checked(topblend_cmd, topblend_txt)
 
+    runtime_map_info = None
+    if args.runtime_map or args.weights_nc:
+        runtime_map_json = archive_dir / "validate_wxsami3_runtime_map.json"
+        runtime_map_txt = archive_dir / "validate_wxsami3_runtime_map.txt"
+        runtime_map_path = args.runtime_map or runtime_map_from_meta(run_dir)
+        if runtime_map_path:
+            runtime_map_cmd = [
+                args.runtime_map_python,
+                str(repo / "scripts" / "validate_wxsami3_runtime_map.py"),
+                "--runtime-map",
+                str(runtime_map_path),
+                "--json-output",
+                str(runtime_map_json),
+            ]
+            if args.weights_nc:
+                runtime_map_cmd.extend(["--weights-nc", str(args.weights_nc)])
+            if args.expected_runtime_map_nsource is not None:
+                runtime_map_cmd.extend(["--expected-nsource", str(args.expected_runtime_map_nsource)])
+            runtime_map_rc = run_checked(runtime_map_cmd, runtime_map_txt)
+        elif args.allow_incomplete:
+            runtime_map_rc = 0
+            runtime_map_txt.write_text("runtime map not available yet; allowed while incomplete\n")
+            runtime_map_json.write_text(json.dumps({"ok": True, "skipped": "runtime map not available yet"}, indent=2) + "\n")
+        else:
+            runtime_map_rc = 1
+            runtime_map_txt.write_text("runtime map not found; pass --runtime-map or wait for wxsami3_live_meta.json\n")
+            runtime_map_json.write_text(json.dumps({"ok": False, "error": "runtime map not found"}, indent=2) + "\n")
+        runtime_map_info = {
+            "returncode": runtime_map_rc,
+            "text": str(runtime_map_txt),
+            "json": str(runtime_map_json),
+            "python": args.runtime_map_python,
+            "runtime_map": runtime_map_path,
+            "weights_nc": args.weights_nc,
+            "expected_nsource": args.expected_runtime_map_nsource,
+        }
+
     copied = copy_files(collect_files(run_dir), archive_dir)
     sacct = write_sacct(args.job_id, archive_dir)
 
     summary = {
-        "ok": append2_rc == 0 and contract_rc == 0 and topblend_rc == 0,
+        "ok": append2_rc == 0
+        and contract_rc == 0
+        and topblend_rc == 0
+        and (runtime_map_info is None or runtime_map_info["returncode"] == 0),
         "run_dir": str(run_dir),
         "archive_dir": str(archive_dir),
         "job_id": args.job_id,
@@ -202,6 +258,7 @@ def main():
             "text": str(topblend_txt) if topblend_txt else None,
             "json": str(topblend_json) if topblend_json else None,
         },
+        "runtime_map_validator": runtime_map_info,
         "copied_files": copied,
         "sacct": sacct,
     }
@@ -215,6 +272,7 @@ def main():
         "append2_validator_returncode: {}".format(append2_rc),
         "live_packet_contract_returncode: {}".format(contract_rc),
         "topblend_policy_returncode: {}".format(topblend_rc),
+        "runtime_map_returncode: {}".format(runtime_map_info["returncode"] if runtime_map_info else ""),
         "copied_files: {}".format(len(copied)),
         "overall: {}".format("ok" if summary["ok"] else "FAIL"),
         "",
@@ -223,6 +281,7 @@ def main():
         "- validate_wxsami3_append2_run.txt",
         "- validate_wxsami3_live_packet_contract.txt",
         "- validate_wxsami3_topblend_policy.txt",
+        "- validate_wxsami3_runtime_map.txt",
     ]
     (archive_dir / "README.md").write_text("\n".join(lines) + "\n")
 
