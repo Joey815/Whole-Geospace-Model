@@ -75,6 +75,17 @@ Then generate the compact result summary and archive the small evidence under:
 logs/sami3_dsB_lmlt_recommended_long1800_20260525/
 ```
 
+The long-run archive helper can run the strict validator and copy the small
+evidence:
+
+```text
+python3 scripts/archive_sami3_raiju_longrun_result.py \
+  --run-dir /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525 \
+  --archive-dir logs/sami3_dsB_lmlt_recommended_long1800_20260525 \
+  --label long1800 \
+  --job-id 7663122
+```
+
 Do not commit the large HDF5 history/restart products.
 
 ## Interpretation

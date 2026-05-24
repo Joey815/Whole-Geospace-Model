@@ -260,6 +260,7 @@ docs/MAGE1.25_notes/SAMI3_RAIJU_RECOMMENDED_LONG60_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_RECOMMENDED_LONG300_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_RECOMMENDED_LONG900_RESULT_20260525.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_RECOMMENDED_LONG1800_LAUNCH_20260525.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_LONGRUN_ARCHIVE_WORKFLOW_20260525.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_GAMERA_PHYSICS_REVIEW_20260523.md
 ```
 
@@ -290,6 +291,13 @@ scripts/validate_wxsami3_live_packet_contract.py
 scripts/validate_wxsami3_append2_run.py
 scripts/archive_wxsami3_append2_result.py
 scripts/compare_wxsami3_recv_qc.py
+```
+
+Current SAMI3 -> RAIJU validation/archive scripts:
+
+```text
+scripts/validate_sami3_raiju_longrun.py
+scripts/archive_sami3_raiju_longrun_result.py
 ```
 
 Current SAMI3 -> RAIJU scalar-moments adapter snapshot:
