@@ -1,0 +1,55 @@
+ok   product_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_voltron_tubeshell_l_mlt_lon0_bin_bvolcc_20260524.h5
+ok   raicpl_group_exists: RaiCplMomentsOnly
+ok   mapping_quality_group_exists: MappingQuality
+ok   mapping_mode: actual=weights expected=weights
+ok   Pavg_exists: Pavg
+ok   Pavg_mask_exists: Pavg_mask
+ok   Pavg_finite: nonfinite=0
+ok   Pavg_mask_shape: (2, 188, 45) vs (2, 188, 45)
+ok   Pavg_runtime_shape: (2, 188, 45) expected suffix (188, 45)
+ok   Pavg_masked_nonnegative: masked_min=3.281176395830698e-05
+ok   Davg_exists: Davg
+ok   Davg_mask_exists: Davg_mask
+ok   Davg_finite: nonfinite=0
+ok   Davg_mask_shape: (2, 188, 45) vs (2, 188, 45)
+ok   Davg_runtime_shape: (2, 188, 45) expected suffix (188, 45)
+ok   Davg_masked_nonnegative: masked_min=3.3459291458129883
+ok   Pstd_exists: Pstd
+ok   Pstd_mask_exists: Pstd_mask
+ok   Pstd_finite: nonfinite=0
+ok   Pstd_mask_shape: (2, 188, 45) vs (2, 188, 45)
+ok   Pstd_runtime_shape: (2, 188, 45) expected suffix (188, 45)
+ok   Pstd_masked_nonnegative: masked_min=0.0026316309813410044
+ok   Dstd_exists: Dstd
+ok   Dstd_mask_exists: Dstd_mask
+ok   Dstd_finite: nonfinite=0
+ok   Dstd_mask_shape: (2, 188, 45) vs (2, 188, 45)
+ok   Dstd_runtime_shape: (2, 188, 45) expected suffix (188, 45)
+ok   Dstd_masked_nonnegative: masked_min=154.9624481201172
+ok   tiote_exists: tiote
+ok   tiote_mask_exists: tiote_mask
+ok   tiote_finite: nonfinite=0
+ok   tiote_mask_shape: (188, 45) vs (188, 45)
+ok   tiote_masked_range: masked_min=0.8739513754844666 masked_max=1.0004502534866333 allowed=[0.0,100.0]
+ok   finite_all_fraction: fraction=1.0 min=1.0
+ok   runtime_valid_fraction: fraction=0.7021276595744681 min=0.7
+ok   Pavg_mask_matches_runtime_valid: mask_shape=(2, 188, 45) valid_shape=(188, 45)
+ok   Davg_mask_matches_runtime_valid: mask_shape=(2, 188, 45) valid_shape=(188, 45)
+ok   Pstd_mask_matches_runtime_valid: mask_shape=(2, 188, 45) valid_shape=(188, 45)
+ok   Dstd_mask_matches_runtime_valid: mask_shape=(2, 188, 45) valid_shape=(188, 45)
+ok   tiote_mask_matches_runtime_valid: mask_shape=(188, 45) valid_shape=(188, 45)
+ok   extrapolated_fraction: fraction=0.0 max=0.0
+ok   coverage_count_nonnegative: min=0
+ok   coverage_valid_positive: valid_min=4
+ok   weight_sum_valid_near_one: max_dev=1.1920928955078125e-07 tol=5e-06
+ok   source_l_finite: nonfinite=0
+ok   source_l_positive: min=1.0141534805297852 max=1058.5191650390625
+ok   source_l_monotonic: min=1.0141534805297852 max=1058.5191650390625
+ok   target_l_finite: nonfinite=0
+ok   target_l_positive: min=1.5087870359420776 max=30.111604690551758
+ok   source_mlt_deg_finite: nonfinite=0
+ok   source_mlt_deg_range: min=1.8750001192092896 max=358.1249694824219
+ok   source_mlt_deg_monotonic: min=1.8750001192092896 max=358.1249694824219
+ok   target_mlt_deg_finite: nonfinite=0
+ok   target_mlt_deg_range: min=1.0 max=359.0
+overall=ok

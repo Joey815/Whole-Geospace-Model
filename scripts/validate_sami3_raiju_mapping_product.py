@@ -38,6 +38,20 @@ def in_range(values, lower, upper):
     return bool(np.all((arr >= lower) & (arr <= upper)))
 
 
+def decode_metadata_json(h5):
+    if "metadata/json" not in h5:
+        return {}
+    raw = h5["metadata/json"][()]
+    if isinstance(raw, bytes):
+        text = raw.decode("utf-8")
+    else:
+        text = str(raw)
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        return {}
+
+
 def validate(args):
     path = Path(args.product_h5).expanduser().resolve()
     checks = []
@@ -54,8 +68,13 @@ def validate(args):
 
         moments = h5["RaiCplMomentsOnly"]
         quality = h5["MappingQuality"]
+        metadata = decode_metadata_json(h5)
+        bulk_channel = args.bulk_channel
+        if bulk_channel is None:
+            bulk_channel = int(metadata.get("bulk_channel", 0))
         meta["root_attrs"] = {key: str(value) for key, value in h5.attrs.items()}
         meta["mapping_attrs"] = {key: str(value) for key, value in quality.attrs.items()}
+        meta["bulk_channel"] = bulk_channel
         mapping_mode = str(quality.attrs.get("mapping_mode", ""))
         if args.expect_mapping_mode:
             add(
@@ -66,6 +85,8 @@ def validate(args):
             )
 
         shape2 = None
+        moment_masks = {}
+        moment_arrays = {}
         for field in MOMENT_FIELDS:
             add(checks, field + "_exists", field in moments, field)
             add(checks, field + "_mask_exists", field + "_mask" in moments, field + "_mask")
@@ -73,19 +94,42 @@ def validate(args):
                 continue
             data = moments[field][...]
             mask = moments[field + "_mask"][...].astype(bool)
+            moment_arrays[field] = data
+            moment_masks[field] = mask
             add(checks, field + "_finite", finite_count(data) == data.size, "nonfinite={}".format(data.size - finite_count(data)))
             add(checks, field + "_mask_shape", data.shape == mask.shape, "{} vs {}".format(data.shape, mask.shape))
             if shape2 is None:
                 shape2 = data.shape[-2:]
             add(checks, field + "_runtime_shape", data.shape[-2:] == shape2, "{} expected suffix {}".format(data.shape, shape2))
+            if not args.allow_negative_moments and np.any(mask):
+                add(
+                    checks,
+                    field + "_masked_nonnegative",
+                    bool(np.all(data[mask] >= 0.0)),
+                    "masked_min={}".format(float(np.min(data[mask]))),
+                )
 
         add(checks, "tiote_exists", "tiote" in moments, "tiote")
         add(checks, "tiote_mask_exists", "tiote_mask" in moments, "tiote_mask")
         if "tiote" in moments and "tiote_mask" in moments:
             tiote = moments["tiote"][...]
             tiote_mask = moments["tiote_mask"][...].astype(bool)
+            moment_masks["tiote"] = tiote_mask
             add(checks, "tiote_finite", finite_count(tiote) == tiote.size, "nonfinite={}".format(tiote.size - finite_count(tiote)))
             add(checks, "tiote_mask_shape", tiote.shape == tiote_mask.shape, "{} vs {}".format(tiote.shape, tiote_mask.shape))
+            if np.any(tiote_mask):
+                masked = tiote[tiote_mask]
+                add(
+                    checks,
+                    "tiote_masked_range",
+                    bool(np.all((masked >= args.min_tiote) & (masked <= args.max_tiote))),
+                    "masked_min={} masked_max={} allowed=[{},{}]".format(
+                        float(np.min(masked)),
+                        float(np.max(masked)),
+                        args.min_tiote,
+                        args.max_tiote,
+                    ),
+                )
 
         if "finite_all_moments_runtime_mask" in quality:
             finite_all = quality["finite_all_moments_runtime_mask"][...].astype(bool)
@@ -115,6 +159,30 @@ def validate(args):
                 valid_fraction >= args.min_valid_fraction,
                 "fraction={} min={}".format(valid_fraction, args.min_valid_fraction),
             )
+            for field, mask in moment_masks.items():
+                if mask.shape[-2:] != valid.shape:
+                    continue
+                if field == "tiote":
+                    data = moments[field][...]
+                    expected = np.isfinite(data) & valid
+                else:
+                    data = moment_arrays[field]
+                    expected = np.zeros_like(mask, dtype=bool)
+                    if bulk_channel < 0 or bulk_channel >= mask.shape[0]:
+                        add(
+                            checks,
+                            field + "_bulk_channel_valid",
+                            False,
+                            "bulk_channel={} channels={}".format(bulk_channel, mask.shape[0]),
+                        )
+                        continue
+                    expected[bulk_channel, :, :] = np.isfinite(data[bulk_channel, :, :]) & valid
+                add(
+                    checks,
+                    field + "_mask_matches_runtime_valid",
+                    bool(np.array_equal(mask, expected)),
+                    "mask_shape={} valid_shape={}".format(mask.shape, valid.shape),
+                )
 
         if "extrapolation_flag_runtime_mask" in quality:
             extrap = quality["extrapolation_flag_runtime_mask"][...].astype(bool)
@@ -174,6 +242,10 @@ def main():
     parser.add_argument("--min-finite-all-fraction", type=float, default=1.0)
     parser.add_argument("--max-extrapolated-fraction", type=float, default=0.0)
     parser.add_argument("--weight-sum-tol", type=float, default=5.0e-6)
+    parser.add_argument("--allow-negative-moments", action="store_true")
+    parser.add_argument("--bulk-channel", type=int, default=None)
+    parser.add_argument("--min-tiote", type=float, default=0.0)
+    parser.add_argument("--max-tiote", type=float, default=100.0)
     parser.add_argument("--require-target-monotonic", action="store_true")
     parser.add_argument("--json-output", default=None)
     args = parser.parse_args()

@@ -233,12 +233,15 @@ scripts/archive_wxsami3_append2_result.py --expect-direct-wait-mode
 scripts/validate_wxsami3_topblend_policy.py
 scripts/validate_wxsami3_runtime_map.py
 scripts/validate_wxsami3_live_packet_contract.py field-stat gates
+scripts/validate_sami3_raiju_mapping_product.py strict moment gates
 ```
 
 The mapping-product validator now gates `/RaiCplMomentsOnly` plus
-`/MappingQuality` products before runtime ingest.  The direct-wait validator
-now distinguishes a completed pre-generated phi payload from a same-job
-producer/waiter path.
+`/MappingQuality` products before runtime ingest.  It now also verifies masked
+Pavg/Davg/Pstd/Dstd non-negativity, tiote bounds, and the runtime mask
+convention for the populated bulk channel.  The direct-wait validator now
+distinguishes a completed pre-generated phi payload from a same-job producer
+and waiter path.
 
 The WACCM-X archive gate now also checks the live metadata schema, phi payload
 content, top-blend policy diagnostics, and runtime-map/ESMF weight consistency.

@@ -34,7 +34,10 @@ mapping_mode matches the expected mode when requested
 Pavg/Davg/Pstd/Dstd and masks exist
 Pavg/Davg/Pstd/Dstd are finite
 moment arrays and masks have matching runtime shapes
+masked Pavg/Davg/Pstd/Dstd values are non-negative
 tiote and tiote_mask exist and are finite
+masked tiote values stay inside the configured physical range
+moment masks match finite values on the configured bulk channel and runtime_valid_mask
 finite_all_moments_runtime_mask fraction meets threshold
 runtime_valid_mask fraction meets threshold
 extrapolation mask fraction stays below threshold
@@ -81,7 +84,24 @@ coverage_count_min = 0
 coverage_count_max = 6
 valid coverage_count_min = 4
 extrapolated_fraction = 0.0
+masked Pavg/Davg/Pstd/Dstd non-negative = ok
+masked tiote range = 0.873951..1.000450
 weight_sum_valid_max_deviation = 1.1920928955078125e-07
+moment masks match runtime_valid on bulk_channel=0
+overall = ok
+```
+
+Mass-equivalent density plus total-pressure bVol-binned product:
+
+```text
+product = sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_massEq_total_voltron_tubeshell_l_mlt_lon0_bin_bvolcc_20260524.h5
+expected mapping_mode = weights
+finite_all_fraction = 1.0
+runtime_valid_fraction = 0.7021276595744681
+masked Pavg_min = 6.574494e-05
+masked Davg_min = 5.689286
+masked Pavg/Davg/Pstd/Dstd non-negative = ok
+moment masks match runtime_valid on bulk_channel=0
 overall = ok
 ```
 
@@ -95,6 +115,10 @@ than a traced flux-tube-volume map.
 
 The useful new checkpoint is that the existing stage-2 products now have a
 repeatable, scriptable QC gate before runtime ingest or longer stability scans.
+The stricter moment gates also catch an important shape convention: the current
+runtime scalar moments populate only the configured bulk channel, so masks are
+expected to match `runtime_valid_mask` on that channel rather than on every
+allocated channel.
 
 ## Evidence
 
@@ -111,4 +135,10 @@ l_mlt_validate.txt
 l_mlt_validate.json
 bin_bvolcc_validate.txt
 bin_bvolcc_validate.json
+l_mlt_validate_strict_moments.txt
+l_mlt_validate_strict_moments.json
+bin_bvolcc_validate_strict_moments.txt
+bin_bvolcc_validate_strict_moments.json
+massEq_total_bin_bvolcc_validate_strict_moments.txt
+massEq_total_bin_bvolcc_validate_strict_moments.json
 ```
