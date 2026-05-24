@@ -15,6 +15,8 @@ The current verified WACCM-X -> SAMI3 status is:
 
 ```text
 f19 online runtime live neutral-packet prototype.
+Runtime map packing no longer hard-codes f19 source columns; nsource is read
+from the ESMF weight-file n_a dimension.
 Full SAMI3 smoke is validated for two packets plus done.
 Receiver-stub transport is validated for three live packets plus done.
 File-mode fallback regression remains validated.
@@ -258,6 +260,7 @@ docs/MAGE1.25_notes/WACCMX_SAMI3_APPEND2_INTEL_EXPR_ATTEMPT_20260525.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_DIRECTWAIT_PHI_LAUNCHER_20260525.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_APPEND2_ARCHIVE_WORKFLOW_20260525.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_PHI_PAYLOAD_CONTENT_QC_20260525.md
+docs/MAGE1.25_notes/WACCMX_SAMI3_RUNTIME_MAP_DYNAMIC_NSOURCE_20260525.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_WEIGHTING_CONTRACT_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_EXTENDED_DIAGNOSTICS_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_DS_OVER_B_WEIGHTING_RESULT_20260524.md
@@ -410,6 +413,7 @@ logs/sami3_mapping_quality_runtime_20260524/
 logs/waccmx_topblend_policy_validation_20260525/
 logs/waccmx_phi_payload_content_validation_20260525/
 logs/waccmx_live_meta_contract_20260525/
+logs/waccmx_runtime_map_dynamic_nsource_20260525/
 logs/sami3_weightfile_mapping_20260524/
 logs/sami3_weightfile_bvol_geometry_20260524/
 logs/sami3_voltron_shell_weightfile_20260524/

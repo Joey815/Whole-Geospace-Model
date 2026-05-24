@@ -1,0 +1,6 @@
+syntax_check: module load intel/netcdf/4.7.4/gcc8.5.0_ompi5.0.3; gcc $(nc-config --cflags) -fsyntax-only scripts/pack_wxsami3_runtime_map.c
+pack_test_output:
+wrote runtime map: /tmp/wxsami3_runtime_map_dynamic_nsource_f19_20260525.bin npoints=3618816 n_s=14475264 nsource=13824
+headers:
+original size 217128992 header (20260524, 1, 304, 124, 96, 3618816, 14475264, 13824)
+dynamic_nsource_test size 217128992 header (20260524, 1, 304, 124, 96, 3618816, 14475264, 13824)

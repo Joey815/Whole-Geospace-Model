@@ -69,6 +69,7 @@ int main(int argc, char **argv) {
     char zalt_path[2048];
     int ncid, dimid, varid;
     size_t n_s;
+    size_t nsource;
     int *row, *col, *row_start, *row_count;
     double *s;
     float *zalt;
@@ -89,7 +90,10 @@ int main(int argc, char **argv) {
     nc_check(nc_open(weights_path, NC_NOWRITE, &ncid), weights_path);
     nc_check(nc_inq_dimid(ncid, "n_s", &dimid), "weights n_s dim");
     nc_check(nc_inq_dimlen(ncid, dimid, &n_s), "weights n_s len");
+    nc_check(nc_inq_dimid(ncid, "n_a", &dimid), "weights n_a dim");
+    nc_check(nc_inq_dimlen(ncid, dimid, &nsource), "weights n_a len");
     if (n_s > INT32_MAX) die("n_s exceeds int32");
+    if (nsource > INT32_MAX) die("n_a exceeds int32");
 
     row = (int *)xcalloc(n_s, sizeof(int));
     col = (int *)xcalloc(n_s, sizeof(int));
@@ -113,6 +117,10 @@ int main(int argc, char **argv) {
         }
         if (row_start[r - 1] == 0) row_start[r - 1] = (int)i + 1;
         row_count[r - 1] += 1;
+        if (col[i] < 1 || (size_t)col[i] > nsource) {
+            fprintf(stderr, "weight col out of range: %d for nsource=%zu\n", col[i], nsource);
+            exit(2);
+        }
     }
 
     out = fopen(out_path, "wb");
@@ -127,7 +135,7 @@ int main(int argc, char **argv) {
     header[4] = NLT;
     header[5] = (int32_t)npoints;
     header[6] = (int32_t)n_s;
-    header[7] = 13824;
+    header[7] = (int32_t)nsource;
     fwrite(header, sizeof(header), 1, out);
     fwrite(zalt, sizeof(float), npoints, out);
     fwrite(row_start, sizeof(int), npoints, out);
@@ -136,8 +144,8 @@ int main(int argc, char **argv) {
     fwrite(s, sizeof(double), n_s, out);
     fclose(out);
 
-    fprintf(stderr, "wrote runtime map: %s npoints=%zu n_s=%zu nsource=%d\n",
-            out_path, npoints, n_s, header[7]);
+    fprintf(stderr, "wrote runtime map: %s npoints=%zu n_s=%zu nsource=%zu\n",
+            out_path, npoints, n_s, nsource);
     free(row);
     free(col);
     free(s);
