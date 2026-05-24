@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<Kaiju>
+  <VOLTRON>
+    <time tFin="11.5"/>
+    <spinup doSpin="T" tSpin="5.0"/>
+    <output dtOut="5.0" tsOut="10"/>
+    <coupling dtCouple="5.0" imType="RAIJU" doQkSquish="T" qkSquishStride="2" doAsyncCoupling="F"/>
+    <restart dtRes="10800.0"/>
+    <imag doInit="T"/>
+    <threading NumTh="8"/>
+  </VOLTRON>
+  <Gamera>
+    <sim runid="sami3_moments_base_control_tubeshell" doH5g="T" H5Grid="lfmD.h5" icType="user" pdmb="1.0" rmeth="7UP"/>
+    <floors dFloor="1.0e-4" pFloor="1.0e-6"/>
+    <timestep doCPR="T" limCPR="0.25"/>
+    <restart doRes="F" resID="gr_smoke" nRes="2"/>
+    <physics doMHD="T" doBoris="T" Ca="10.0"/>
+    <ring gid="lfm" doRing="T" doAggressive="F"/>
+    <ringknobs doVClean="T"/>
+    <wind tsfile="bcwind.h5"/>
+    <source doSource="T" doWolfLim="T" doBounceDT="T" nBounce="1.0"/>
+    <iPdir N="1" bcPeriodic="F"/>
+    <jPdir N="1" bcPeriodic="F"/>
+    <kPdir N="1" bcPeriodic="T"/>
+    <threading NumTh="8"/>
+    <coupling blockHalo="T"/>
+  </Gamera>
+  <CHIMP>
+    <units uid="EARTHCODE"/>
+    <fields grType="LFM"/>
+    <domain dtype="MAGE"/>
+    <tracer epsds="0.05"/>
+  </CHIMP>
+  <REMIX>
+    <conductance doStarlight="T" doRamp="F"/>
+    <precipitation aurora_model_type="LINMRG" alpha="0.2" beta="0.4" doAuroralSmooth="F"/>
+  </REMIX>
+  <RAIJU>
+    <output loudConsole="T" doFat="F" doLossExtras="F" doDebug="F" writeGhosts="F"/>
+    <grid gType="SHGRID" ThetaL="15" ThetaU="50"/>
+    <domain tail_buffer="15.0" sun_buffer="15.0" tail_active="12.0" sun_active="12.0"/>
+    <sim pdmb="0.75"/>
+    <config fname="raijuconfig.h5"/>
+    <plasmasphere doPsphere="T" doExcessMap="T"/>
+    <losses doLosses="T" doCX="T" doSS="T" doCC="T"/>
+    <cpl nFluidsIn="1" startupTscl="7200.0" vaFracThresh="0.60" bminThresh="5.0" Pstd="5.0" normAngThresh="180.0"/>
+    <fluidIn1 imhd="0" flav="2" excessToPsph="T"/>
+  </RAIJU>
+</Kaiju>
