@@ -1,0 +1,80 @@
+--- a/potential.f90
++++ b/potential.f90
+@@
+     use variable_mod
+     use namelist_mod
+     use misc_mod
+     use grid_mod
++    use waccmx_neutral_mod, only: waccmx_online_phi_enabled, &
++        waccmx_recv_phi_weimer_online
+
+     real :: phi_weimer_real(nfp1,nlt+1)
+     real :: phi_weimer_interp(nfp1,nlt+1)
+     real :: phi_weimer(nnx,nny)
+     real :: hrutw1,hrutw2
++    logical :: use_online_phi_weimer
+
+     data iread_weimer / 1 /
++
++    use_online_phi_weimer = waccmx_online_phi_enabled()
+@@
+     if ( iread_weimer == 1 ) then
+-        open(810,file='phi_weimer.inp',form='unformatted')
+-        read(810) hrutw1
++        if (use_online_phi_weimer) then
++            call waccmx_recv_phi_weimer_online(phi_weimer_real,hrut,hrutw2)
++            print *,'hrutw2 = ',hrut,hrutw2
++            nweimer       = 1
++            print *,'nweimer',nweimer
++        else
++            open(810,file='phi_weimer.inp',form='unformatted')
++            read(810) hrutw1
+@@
+             print *,'hrutw2 = ',hrut,hrutw2
+             nweimer       = 1
+             print *,'nweimer',nweimer
+ !!$        endif
++        endif
+         iread_weimer  = 0
+     endif
+@@
+     if ( hrut >= hrutw2 ) then
+-        read(810) phi_weimer_real
+-        read(810) hrutw2
++        if (use_online_phi_weimer) then
++            call waccmx_recv_phi_weimer_online(phi_weimer_real,hrut,hrutw2)
++        else
++            read(810) phi_weimer_real
++            read(810) hrutw2
++        endif
+         print *,'hrutw2 = ',hrut,hrutw2
+         nweimer         = nweimer + 1
+     endif
+--- a/sami3-3.22.f90
++++ b/sami3-3.22.f90
+@@
+-      logical :: use_existing_phi_weimer, phi_weimer_exists
+-      character(len=32) :: use_existing_phi_weimer_env
++      logical :: use_existing_phi_weimer, use_online_phi_weimer, phi_weimer_exists
++      character(len=32) :: use_existing_phi_weimer_env, use_online_phi_weimer_env
+@@
+       if ( taskid == 0 .AND. lweimer) then
+         use_existing_phi_weimer = .false.
++        use_online_phi_weimer = .false.
+         call get_environment_variable('SAMI3_USE_EXISTING_PHI_WEIMER', &
+              use_existing_phi_weimer_env)
+@@
+           use_existing_phi_weimer = .true.
+         endif
+-        if (use_existing_phi_weimer) then
++        call get_environment_variable('SAMI3_USE_ONLINE_PHI_WEIMER', &
++             use_online_phi_weimer_env)
++        if (trim(use_online_phi_weimer_env) == '1' .OR. &
++            trim(use_online_phi_weimer_env) == 'true' .OR. &
++            trim(use_online_phi_weimer_env) == 'TRUE') then
++          use_online_phi_weimer = .true.
++        endif
++        if (use_online_phi_weimer) then
++          print *,'SAMI3_USE_ONLINE_PHI_WEIMER: using online MPI phi_weimer payload'
++        else if (use_existing_phi_weimer) then
+           inquire(file='phi_weimer.inp', exist=phi_weimer_exists)

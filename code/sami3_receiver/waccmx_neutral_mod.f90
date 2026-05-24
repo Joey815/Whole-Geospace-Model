@@ -22,6 +22,11 @@ module waccmx_neutral_mod
     integer, parameter :: waccmx_tag_vf = 210
     integer, parameter :: waccmx_tag_wf = 211
     integer, parameter :: waccmx_tag_source_flags = 212
+    integer, parameter :: waccmx_phi_magic = 20260524
+    integer, parameter :: waccmx_tag_phi_header = 220
+    integer, parameter :: waccmx_tag_phi_hour = 221
+    integer, parameter :: waccmx_tag_phi_valid_until = 222
+    integer, parameter :: waccmx_tag_phi_data = 223
     integer, parameter :: waccmx_tag_done = 299
     integer, parameter :: waccmx_flag_valid = 1
     integer, parameter :: waccmx_flag_above_top = 2
@@ -78,6 +83,71 @@ contains
         endif
 
     end function waccmx_recv_qc_enabled
+
+    logical function waccmx_online_phi_enabled()
+
+        integer :: stat, lenval
+        character(len=32) :: value
+
+        value = ''
+        call get_environment_variable('SAMI3_USE_ONLINE_PHI_WEIMER', value, &
+                                      length=lenval, status=stat)
+        waccmx_online_phi_enabled = .false.
+        if (stat == 0 .and. lenval > 0) then
+            if (trim(value) == '1' .or. trim(value) == 'true' .or. &
+                trim(value) == 'TRUE') then
+                waccmx_online_phi_enabled = .true.
+            endif
+        endif
+
+    end function waccmx_online_phi_enabled
+
+    subroutine waccmx_recv_phi_weimer_online(phi_weimer_real, hrut, hrutw2)
+
+        include 'mpif.h'
+
+        real, intent(out) :: phi_weimer_real(nfp1,nlt+1)
+        real, intent(in) :: hrut
+        real, intent(out) :: hrutw2
+        integer :: ierr
+        integer :: header(6)
+        integer :: nphi
+        real :: frame_hour
+
+        if (.not. waccmx_online_phi_enabled()) return
+        if (taskid /= 0) return
+        if (.not. waccmx_online_connected) then
+            print *, 'WACCMX online phi receive requested before connection'
+            call MPI_Abort(sami3_comm, 9201, ierr)
+        endif
+
+        nphi = nfp1*(nlt+1)
+
+        call MPI_Recv(header, 6, MPI_INTEGER, 0, waccmx_tag_phi_header, &
+                      waccmx_peer_comm, MPI_STATUS_IGNORE, ierr)
+        if (ierr /= MPI_SUCCESS) then
+            print *, 'WACCMX online phi header receive failed ierr=', ierr
+            call MPI_Abort(sami3_comm, ierr, ierr)
+        endif
+        if (header(1) /= waccmx_phi_magic .or. header(2) /= 1 .or. &
+            header(3) /= nfp1 .or. header(4) /= nlt+1) then
+            print *, 'WACCMX online phi header mismatch'
+            print *, 'header=', header
+            print *, 'expected=', waccmx_phi_magic, 1, nfp1, nlt+1
+            call MPI_Abort(sami3_comm, 9202, ierr)
+        endif
+
+        call MPI_Recv(frame_hour, 1, MPI_REAL, 0, waccmx_tag_phi_hour, &
+                      waccmx_peer_comm, MPI_STATUS_IGNORE, ierr)
+        call MPI_Recv(hrutw2, 1, MPI_REAL, 0, waccmx_tag_phi_valid_until, &
+                      waccmx_peer_comm, MPI_STATUS_IGNORE, ierr)
+        call MPI_Recv(phi_weimer_real, nphi, MPI_REAL, 0, waccmx_tag_phi_data, &
+                      waccmx_peer_comm, MPI_STATUS_IGNORE, ierr)
+
+        print *, 'WACCMX_PHI_RECV', header(5), header(6), hrut, frame_hour, &
+                 hrutw2, minval(phi_weimer_real), maxval(phi_weimer_real)
+
+    end subroutine waccmx_recv_phi_weimer_online
 
     subroutine waccmx_init_top_blend_policy()
 

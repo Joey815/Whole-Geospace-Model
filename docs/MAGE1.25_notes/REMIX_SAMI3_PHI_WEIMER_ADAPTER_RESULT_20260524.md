@@ -16,8 +16,10 @@ MAGE/REMIX POT[kV]
 -> exb(hrut, phi)
 ```
 
-This is an offline adapter plus static-file runtime validator.  It is not yet
-live REMIX forcing inside the online MPI loop.
+This started as an offline adapter plus static-file runtime validator.  It now
+also has a validated online MPI phi payload path into SAMI3 rank 0, but the
+sender still replays a previously generated REMIX phi stream rather than
+reading directly from a live REMIX runtime producer.
 
 ## Source-Code Audit Result
 
@@ -403,18 +405,98 @@ logs/remix_sami3_phi_weimer_live_append_runtime_20260524/slurm_7651789.out
 logs/remix_sami3_phi_weimer_live_append_runtime_20260524/slurm_7651789.err
 ```
 
+## Online MPI Phi Payload Smoke
+
+The file-backed append stream has now been replaced, for the smoke path, by a
+versioned MPI payload sent to SAMI3 rank 0.  The online neutral worker payload
+path remains unchanged; phi frames use the existing SAMI3 intercommunicator but
+separate tags:
+
+```text
+SAMI3_USE_ONLINE_PHI_WEIMER=1
+tag 220: phi header = magic, version, nlat, nlon, frame_index, nframes
+tag 221: frame_hour
+tag 222: valid_until_hour
+tag 223: phi_weimer_real(nfp1,nlt+1)
+```
+
+The receiver-side patch adds an online branch in `potential.f90:weimer`:
+
+```text
+if SAMI3_USE_ONLINE_PHI_WEIMER=1:
+  receive next phi frame by MPI
+else:
+  use the existing phi_weimer.inp reader
+```
+
+Runtime launcher:
+
+```text
+slurm/run_sami3_online_receiver_remix_phi_weimer_mpi_payload_20260524.sbatch
+```
+
+Validated run:
+
+```text
+job: 7651874
+state: COMPLETED
+exit: 0:0
+elapsed: 00:01:25
+node: qhcn025
+MaxRSS: 16547900K
+```
+
+Key evidence:
+
+```text
+SAMI3_USE_ONLINE_PHI_WEIMER: using online MPI phi_weimer payload
+NEUTRAL_PHI_SENDER sent phi frame=0/2 hour=0 valid_until=0.005
+NEUTRAL_PHI_SENDER sent phi frame=1/2 hour=0.005 valid_until=1e+30
+WACCMX_PHI_RECV 0 2 hrut=0 frame_hour=0 valid_until=0.005 min/max=-43.5993385/35.1005516
+hrutw2 = 0.00000000       4.99999989E-03
+WACCMX_PHI_RECV 1 2 hrut=5.50118554E-03 frame_hour=0.005 valid_until=1.0e30 min/max=-42.9881668/35.7645760
+hrutw2 = 5.50118554E-03   1.00000002E+30
+MASTER: All Done!
+WACCMX online done signal received: 1
+WACCMX_RECV_QC compare ok: ranks=32 occurrence=0 step_set=[0]
+packet_hour_set=[0.0] max_abs=2.1033e+06 max_rel=4.86991e-13
+```
+
+No `fatal`, `forrtl`, `NaN`, `Abort`, `EOF`, `header mismatch`, or `ERROR`
+markers were found in the selected runtime logs.
+
+Archived evidence:
+
+```text
+logs/remix_sami3_phi_weimer_mpi_payload_runtime_20260524/sacct_7651874.txt
+logs/remix_sami3_phi_weimer_mpi_payload_runtime_20260524/receiver_markers_7651874.txt
+logs/remix_sami3_phi_weimer_mpi_payload_runtime_20260524/recv_qc_compare_7651874.txt
+logs/remix_sami3_phi_weimer_mpi_payload_runtime_20260524/error_marker_scan_7651874.txt
+logs/remix_sami3_phi_weimer_mpi_payload_runtime_20260524/sami3_online_receiver_7651874.out
+logs/remix_sami3_phi_weimer_mpi_payload_runtime_20260524/neutral_phi_sender_7651874.out
+logs/remix_sami3_phi_weimer_mpi_payload_runtime_20260524/slurm_7651874.out
+logs/remix_sami3_phi_weimer_mpi_payload_runtime_20260524/slurm_7651874.err
+```
+
+This proves that a REMIX-derived scalar high-latitude potential can enter
+SAMI3's `weimer()` update through an online MPI payload to rank 0 without a
+receiver-side `phi_weimer.inp`.  The smoke sender still replays the phi frames
+from the previously generated REMIX stream file; the remaining integration step
+is to connect the live REMIX producer directly to the versioned payload path.
+
 ## Current Limitation
 
 This adapter proves the file-format bridge and static SAMI3 runtime ingestion
 path, a two-frame runtime transition through SAMI3's existing Weimer reader,
-and a runtime append stream visible to that reader.  It does not yet prove
-production REMIX -> SAMI3 electrodynamic consistency.
+and a runtime append stream visible to that reader.  It now also proves the
+rank-0 online MPI phi payload path.  It does not yet prove production
+REMIX -> SAMI3 electrodynamic consistency.
 
 Known limitations:
 
 ```text
 uses NORTH_APEX only by default
-runtime append is file-backed and requires the next frame before the marker time
+the online MPI smoke sender replays phi frames from an existing stream file
 does not yet handle southern-hemisphere sign/mirroring policy
 uses direct mlat/mlon interpolation, not a full SAMI3 field-line mapping
 sets target mlat < 45 deg to zero because the source package is high-lat only
@@ -422,17 +504,17 @@ sets target mlat < 45 deg to zero because the source package is high-lat only
 
 ## Next Step
 
-The next implementation step is replacing the file-backed append stream with a
-versioned live REMIX potential payload:
+The next implementation step is connecting the live REMIX producer directly to
+the validated versioned MPI phi payload:
 
 ```text
-REMIX/POT time sequence
+REMIX/POT live time sequence
 -> versioned phi payload
 -> SAMI3 potential.f90:weimer read/update at coupling cadence
 -> exb(hrut, phi)
 ```
 
-Keep the static-file and append-stream paths as replay baselines.  For the
-physical path, add time metadata, hemisphere policy, and a validation comparison
-against the current Weimer baseline (`phiu.dat` and E x B diagnostics if
-enabled).
+Keep the static-file, append-stream, and replayed-MPI paths as baselines.  For
+the physical path, add live REMIX production timing, hemisphere policy, and a
+validation comparison against the current Weimer baseline (`phiu.dat` and
+E x B diagnostics if enabled).
