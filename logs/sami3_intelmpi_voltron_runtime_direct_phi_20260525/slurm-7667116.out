@@ -1,0 +1,323 @@
+RUN_DIR=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_runtime_direct_phi_20260525_0000
+VOLTRON_RUN=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_runtime_direct_phi_20260525_0000/voltron_runtime_direct_phi
+VOLTRON_EXE=/home/jiaoy_group/jiaoy/data/MAGE1.25/build_gr_sami3_phi_direct_mpi_ifort_20260525/bin/voltron.x
+PAYLOAD_PREFIX=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_replay_payload_from_live_dump_20260523/waccmx_neutral_rank
+PHI_PAYLOAD=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_runtime_direct_phi_20260525_0000/voltron_runtime_direct_phi/remix_sami3_phi_payload_runtime_direct.bin
+NEUTRAL_PORT=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_runtime_direct_phi_20260525_0000/waccmx_sami3_online_port.txt
+PHI_PORT=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_runtime_direct_phi_20260525_0000/sami3_direct_phi_port.txt
+START=Mon May 25 07:43:57 CST 2026
+HOST=qhcn012
+MPI=/apps/support/intel_spr_rocky8.9/oneapi/2023.2.0/mpi/2021.10.0//bin/mpirun
+SAMI3_EXE=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_runtime_direct_phi_20260525_0000/sami3.x
+NEUTRAL_SENDER=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/bin/wxsami3_neutral_sender_intelmpi
+SAMI3_USE_ONLINE_PHI_WEIMER=1
+SAMI3_PHI_DIRECT_PORT_FILE=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_runtime_direct_phi_20260525_0000/sami3_direct_phi_port.txt
+SAMI3_PHI_SKIP_MADALA_AFTER_FINAL=1
+--- neutral sender tail
+NEUTRAL_SENDER connecting to tag#0$connentry#0200953FB000000C0000000000000000$
+NEUTRAL_SENDER connected; sending count=1 start_step=0 start_packet_hour=0 hour_stride=0.25
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0001
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0002
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0003
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0004
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0005
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0006
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0007
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0008
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0009
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0010
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0011
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0012
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0013
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0014
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0015
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0016
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0017
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0018
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0019
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0020
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0021
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0022
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0023
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0024
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0025
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0026
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0027
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0028
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0029
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0030
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0031
+NEUTRAL_SENDER sent step=0 packet_hour=0 rank=0032
+NEUTRAL_SENDER sent done signal
+NEUTRAL_SENDER done
+--- voltron runtime direct tail
+ IM Energy flux proton NORTH  0.000000000000000E+000  0.000000000000000E+000
+ MHD average energy NORTH   20.1990984607528       1.456209455880318E-002
+ MHD number flux NORTH   463299256.185216        298030.366452422     
+ Variable not found in restart, skipping: Corotation Potential NORTH
+ Variable not found in restart, skipping: Total Potential NORTH
+ RCM grid type NORTH  0.000000000000000E+000  0.000000000000000E+000
+ Auroral model type NORTH   3.00000000000000       0.000000000000000E+000
+ RCM beta NORTH  0.200000000000000       0.200000000000000     
+ RCM electron density NORTH  0.000000000000000E+000  0.000000000000000E+000
+ RCM electron pressure NORTH  0.000000000000000E+000  0.000000000000000E+000
+ IM Number flux NORTH  0.000000000000000E+000  0.000000000000000E+000
+ IM Number flux proton NORTH  0.000000000000000E+000  0.000000000000000E+000
+ Mono potential drop NORTH   22.7638056814608       0.000000000000000E+000
+ RCM plasmasphere density NORTH  0.000000000000000E+000  0.000000000000000E+000
+ Conjugate Colatitude NORTH  0.000000000000000E+000  0.000000000000000E+000
+ Conjugate Longitude NORTH  0.000000000000000E+000  0.000000000000000E+000
+ Potential SOUTH   9.68979523408079       -11.1658998808196     
+ Field-aligned current SOUTH  0.753229256285235      -0.707262524742153     
+ Pedersen conductance SOUTH   10.0000000000000        10.0000000000000     
+ Hall conductance SOUTH  0.000000000000000E+000  0.000000000000000E+000
+ Sound speed SOUTH   56629254.1502670        6979650.64873802     
+ Density SOUTH  2.573969146308813E-024  3.261232752475525E-026
+ Average energy SOUTH   7.70254421462694       1.000000000000000E-008
+ Number flux SOUTH   470128724.999088       0.000000000000000E+000
+ Variable not found in restart, skipping: Neutral wind SOUTH
+ Variable not found in restart, skipping: Electric field SOUTH
+ IM average energy SOUTH  0.000000000000000E+000  0.000000000000000E+000
+ IM Energy flux SOUTH  0.000000000000000E+000  0.000000000000000E+000
+ IM average energy proton SOUTH  0.000000000000000E+000  0.000000000000000E+000
+ IM Energy flux proton SOUTH  0.000000000000000E+000  0.000000000000000E+000
+ MHD average energy SOUTH   7.70254421462694       1.415872033203968E-002
+ MHD number flux SOUTH   470128724.999088        149648.988446078     
+ Variable not found in restart, skipping: Corotation Potential SOUTH
+ Variable not found in restart, skipping: Total Potential SOUTH
+ RCM grid type SOUTH  0.000000000000000E+000  0.000000000000000E+000
+ Auroral model type SOUTH   3.00000000000000       0.000000000000000E+000
+ RCM beta SOUTH  0.200000000000000       0.200000000000000     
+ RCM electron density SOUTH  0.000000000000000E+000  0.000000000000000E+000
+ RCM electron pressure SOUTH  0.000000000000000E+000  0.000000000000000E+000
+ IM Number flux SOUTH  0.000000000000000E+000  0.000000000000000E+000
+ IM Number flux proton SOUTH  0.000000000000000E+000  0.000000000000000E+000
+ Mono potential drop SOUTH   7.54847256951001       0.000000000000000E+000
+ RCM plasmasphere density SOUTH  0.000000000000000E+000  0.000000000000000E+000
+ Conjugate Colatitude SOUTH  0.000000000000000E+000  0.000000000000000E+000
+ Conjugate Longitude SOUTH  0.000000000000000E+000  0.000000000000000E+000
+ Done readMIXrestart
+ Using F10.7 =    100.000000000000     
+ Using MJD0  =   0.000000000000000E+000
+ mapRemixToGamera
+  /Kaiju/gamera/restart/resID             :  gtrd_2021120[34m     (XML)[0m 
+  /Kaiju/gamera/restart/nRes              :             0[34m     (XML)[0m 
+  KAIJU/VOLTRON/coupling/gcmBackend       :   WACCMX_FILE[34m     (XML)[0m 
+  KAIJU/VOLTRON/waccmxFile/contractFile   :  waccmx_voltr[34m     (XML)[0m 
+  KAIJU/VOLTRON/waccmxFile/exchangeFile   :  waccmx_voltr[34m     (XML)[0m 
+  KAIJU/VOLTRON/waccmxFile/packageFile    :  waccmx_voltr[34m     (XML)[0m 
+  KAIJU/VOLTRON/waccmxFile/feedbackFile   :  waccmx_voltr[34m     (XML)[0m 
+  KAIJU/VOLTRON/waccmxFile/sigmap_floor   :   5.00000E+00[34m     (XML)[0m 
+  KAIJU/VOLTRON/waccmxFile/sigmah_floor   :   2.00000E+00[34m     (XML)[0m 
+  KAIJU/VOLTRON/waccmxFile/sigmap_oval    :   1.00000E+01[34m     (XML)[0m 
+  KAIJU/VOLTRON/waccmxFile/sigmah_oval    :   6.00000E+00[34m     (XML)[0m 
+[31m<waccmx_voltron_contract.txt already exists, deleting ...>[0m 
+[31m<waccmx_voltron_exchange.md already exists, deleting ...>[0m 
+  KAIJU/CHIMP/domain/rClosed              :   2.25000E+00[32m (DEFAULT)[0m 
+ ------------
+ CHIMP Units
+ inTScl =    2997.92458000000     
+ inBScl =    17.0931245918848     
+ inVScl =   3.335640951981520E-004
+ ------------
+  KAIJU/CHIMP/interp/wgt                  :           TSC[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/tracer/epsds                :   5.00000E-02[34m     (XML)[0m 
+  KAIJU/CHIMP/tracer/doDip                :             F[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/streamline/steptype         :          MAGE[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/streamline/bMin_C           :   1.00000E-12[32m (DEFAULT)[0m 
+<Grid size = (48,48,64)>
+  KAIJU/CHIMP/fields/grType               :           lfm[34m     (XML)[0m 
+ <Grid type = LFM>
+ Doing grid calculations ...
+ Finished grid calculations
+ Initializing LFM locator
+  KAIJU/CHIMP/domain/rmin                 :   1.01911E+00[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/domain/rmax                 :   2.88340E+01[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/domain/dtype                :          MAGE[34m     (XML)[0m 
+ Using MAGE inDomain
+  KAIJU/CHIMP/domain/xSun                 :   2.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/domain/xTail                :  -5.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/domain/yzMax                :   4.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/domain/gtype                :           LFM[32m (DEFAULT)[0m 
+ Using spherical inGap
+  KAIJU/CHIMP/domain/rgap                 :   2.82447E+00[32m (DEFAULT)[0m 
+ MAXTUBESIZE =         5000
+ [32m
+ ---------------
+ Kaiju configuration
+Git branch = HEAD
+Git hash   = 9e19bfc
+Compiler   = Intel(R) Fortran Intel(R) 64 Compiler Classic for applications running on Intel(R) 64, Version 2021.10.0 Build 20230609_000000
+Run starting on: Mon May 25 07:46:30 2026
+ ---------------
+[0m  [36m
+ GAMERA
+      Time =  7.64E-02 [sec]
+        ts =     5048
+        dt =  1.19E-01 [sec]
+    dt/dt0 =   99.655%
+    Spent     0.0% of time waiting for Voltron
+[0m       CPCP =   14.882  18.189 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2021-12-04 05:00:00
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~   16.916 [nT]
+           dSMRs  ~     1.43   -0.09   -1.22   -0.12 [nT, 12/18/00/06]
+   DPSDst  ~  -14.215 [nT]
+   Spent     0.0% of time waiting for Gamera
+             0.0% of time processing Chimp(Helpers)
+             0.0% of time processing IMAG
+             0.0% of time processing Remix
+             0.0% of time processing Tubes(Helpers)
+             0.0% of time writing files
+[0m  [35m
+ RAIJU
+      UT   = 2021-12-04 05:00:05
+      Time =  5.00E+00 [sec]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 4.70E+01 [sec] @ 56
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   1.62, D =   0.81 @  3.96 Rp,15.13 MLT; DPS:  -2.88
+        2: P =   8.36, D =   1.08 @  3.96 Rp,15.00 MLT; DPS: -14.30
+[0m  WACCMX_SAMI3_PHI_DIRECT connected 
+ /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_
+ runtime_direct_phi_20260525_0000/sami3_direct_phi_port.txt
+ WACCMX_SAMI3_PHI_DIRECT sent frame=           0  nframes=           2  hour=
+  0.0000000E+00  valid_until=  1.3888889E-03  min/max=  -36.93061    
+   31.48382    
+ WACCMX_SAMI3_PHI prepared payload_file=
+ /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_
+ runtime_direct_phi_20260525_0000/voltron_runtime_direct_phi/remix_sami3_phi_pay
+ load_runtime_direct.bin direct_port_file=
+ /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_
+ runtime_direct_phi_20260525_0000/sami3_direct_phi_port.txt hemi=           1 
+  hour=  0.000000000000000E+000  valid_until=  1.000000000000000E+030 
+  source_min/max=  -11.1173050129855        9.57916846795794      
+  payload_min/max=  -36.93061       31.48382    
+ Overwriting group waccmx_voltron_forward_package.h5//Meta
+ Overwriting group waccmx_voltron_forward_package.h5//NORTH_GRID
+ Overwriting group waccmx_voltron_forward_package.h5//NORTH_GEO
+ Overwriting group waccmx_voltron_forward_package.h5//NORTH_APEX
+ Overwriting group waccmx_voltron_forward_package.h5//SOUTH_GRID
+ Overwriting group waccmx_voltron_forward_package.h5//SOUTH_GEO
+ Overwriting group waccmx_voltron_forward_package.h5//SOUTH_APEX
+ WACCMX_SAMI3_PHI_DIRECT sent frame=           1  nframes=           2  hour=
+  1.3888889E-03  valid_until=  1.0000000E+30  min/max=  -37.68302    
+   31.89119    
+ WACCMX_SAMI3_PHI_DIRECT sent done=           2
+ WACCMX_SAMI3_PHI_DIRECT stop after done requested
+--- sami3 runtime direct markers
+ WACCMX online port ready: 
+ WACCMX online sender connected
+ WACCMX online neutral received: taskid,step,packet_hr=           1           0
+ WACCMX_RECV_QC           1           0  0.0000000E+00      137447       51033
+ WACCMX_RECV_SOURCE_FLAGS           1           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=           2           0
+ WACCMX_RECV_QC           2           0  0.0000000E+00      136911       51569
+ WACCMX_RECV_SOURCE_FLAGS           2           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=           3           0
+ WACCMX_RECV_QC           3           0  0.0000000E+00      136672       51808
+ WACCMX_RECV_SOURCE_FLAGS           3           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=           4           0
+ WACCMX_RECV_QC           4           0  0.0000000E+00      136483       51997
+ WACCMX_RECV_SOURCE_FLAGS           4           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=           5           0
+ WACCMX_RECV_QC           5           0  0.0000000E+00      136307       52173
+ WACCMX_RECV_SOURCE_FLAGS           5           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=           6           0
+ WACCMX_RECV_QC           6           0  0.0000000E+00      136139       52341
+ WACCMX_RECV_SOURCE_FLAGS           6           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=           7           0
+ WACCMX_RECV_QC           7           0  0.0000000E+00      135821       52659
+ WACCMX_RECV_SOURCE_FLAGS           7           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=           8           0
+ WACCMX_RECV_QC           8           0  0.0000000E+00      135442       53038
+ WACCMX_RECV_SOURCE_FLAGS           8           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=           9           0
+ WACCMX_RECV_QC           9           0  0.0000000E+00      135135       53345
+ WACCMX_RECV_SOURCE_FLAGS           9           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          10           0
+ WACCMX_RECV_QC          10           0  0.0000000E+00      134888       53592
+ WACCMX_RECV_SOURCE_FLAGS          10           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          11           0
+ WACCMX_RECV_QC          11           0  0.0000000E+00      134575       53905
+ WACCMX_RECV_SOURCE_FLAGS          11           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          12           0
+ WACCMX_RECV_QC          12           0  0.0000000E+00      134208       54272
+ WACCMX_RECV_SOURCE_FLAGS          12           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          13           0
+ WACCMX_RECV_QC          13           0  0.0000000E+00      134121       54359
+ WACCMX_RECV_SOURCE_FLAGS          13           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          14           0
+ WACCMX_RECV_QC          14           0  0.0000000E+00      134366       54114
+ WACCMX_RECV_SOURCE_FLAGS          14           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          15           0
+ WACCMX_RECV_QC          15           0  0.0000000E+00      134926       53554
+ WACCMX_RECV_SOURCE_FLAGS          15           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          16           0
+ WACCMX_RECV_QC          16           0  0.0000000E+00      135535       52945
+ WACCMX_RECV_SOURCE_FLAGS          16           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          17           0
+ WACCMX_RECV_QC          17           0  0.0000000E+00      136111       52369
+ WACCMX_RECV_SOURCE_FLAGS          17           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          18           0
+ WACCMX_RECV_QC          18           0  0.0000000E+00      136772       51708
+ WACCMX_RECV_SOURCE_FLAGS          18           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          19           0
+ WACCMX_RECV_QC          19           0  0.0000000E+00      137413       51067
+ WACCMX_RECV_SOURCE_FLAGS          19           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          20           0
+ WACCMX_RECV_QC          20           0  0.0000000E+00      138032       50448
+ WACCMX_RECV_SOURCE_FLAGS          20           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          21           0
+ WACCMX_RECV_QC          21           0  0.0000000E+00      138610       49870
+ WACCMX_RECV_SOURCE_FLAGS          21           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          22           0
+ WACCMX_RECV_QC          22           0  0.0000000E+00      139075       49405
+ WACCMX_RECV_SOURCE_FLAGS          22           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          23           0
+ WACCMX_RECV_QC          23           0  0.0000000E+00      139435       49045
+ WACCMX_RECV_SOURCE_FLAGS          23           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          24           0
+ WACCMX_RECV_QC          24           0  0.0000000E+00      139732       48748
+ WACCMX_RECV_SOURCE_FLAGS          24           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          25           0
+ WACCMX_RECV_QC          25           0  0.0000000E+00      139939       48541
+ WACCMX_RECV_SOURCE_FLAGS          25           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          26           0
+ WACCMX_RECV_QC          26           0  0.0000000E+00      139993       48487
+ WACCMX_RECV_SOURCE_FLAGS          26           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          27           0
+ WACCMX_RECV_QC          27           0  0.0000000E+00      139913       48567
+ WACCMX_RECV_SOURCE_FLAGS          27           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          28           0
+ WACCMX_RECV_QC          28           0  0.0000000E+00      139835       48645
+ WACCMX_RECV_SOURCE_FLAGS          28           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          29           0
+ WACCMX_RECV_QC          29           0  0.0000000E+00      139701       48779
+ WACCMX_RECV_SOURCE_FLAGS          29           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          30           0
+ WACCMX_RECV_QC          30           0  0.0000000E+00      139372       49108
+ WACCMX_RECV_SOURCE_FLAGS          30           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          31           0
+ WACCMX_RECV_QC          31           0  0.0000000E+00      138877       49603
+ WACCMX_RECV_SOURCE_FLAGS          31           0  0.0000000E+00      188480
+ WACCMX online neutral received: taskid,step,packet_hr=          32           0
+ WACCMX_RECV_QC          32           0  0.0000000E+00      138198       50282
+ WACCMX_RECV_SOURCE_FLAGS          32           0  0.0000000E+00      188480
+ SAMI3_USE_ONLINE_PHI_WEIMER: using online MPI phi_weimer payload
+ SAMI3 direct phi port ready: 
+ SAMI3 direct phi sender connected
+ WACCMX_PHI_RECV           0           2  0.0000000E+00  0.0000000E+00
+ WACCMX_PHI_RECV           1           2  2.2222223E-03  1.3888889E-03
+ MASTER: All Done!
+ WACCMX online done signal received:           1
+ SAMI3 direct phi done signal received:           2
+--- recv qc compare
+WACCMX_RECV_QC compare ok: ranks=32 occurrence=0 step_set=[0] packet_hour_set=[0.0] max_abs=633856 max_rel=1.63445e-13
+END=Mon May 25 07:48:36 CST 2026

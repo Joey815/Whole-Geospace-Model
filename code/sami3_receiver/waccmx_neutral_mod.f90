@@ -48,6 +48,7 @@ module waccmx_neutral_mod
     character(len=256) :: waccmx_phi_direct_port_name = ''
     character(len=512) :: waccmx_phi_direct_port_file = ''
     logical :: waccmx_phi_direct_connected = .false.
+    logical :: waccmx_phi_direct_final_seen = .false.
 
     real, allocatable :: w_denni(:,:,:,:), w_dennf(:,:,:,:)
     real, allocatable :: w_tni(:,:,:), w_tnf(:,:,:)
@@ -120,6 +121,30 @@ contains
         endif
 
     end function waccmx_phi_direct_enabled
+
+    logical function waccmx_phi_skip_madala_after_final_enabled()
+
+        integer :: stat, lenval
+        character(len=32) :: value
+
+        value = ''
+        call get_environment_variable('SAMI3_PHI_SKIP_MADALA_AFTER_FINAL', &
+                                      value, length=lenval, status=stat)
+        waccmx_phi_skip_madala_after_final_enabled = .false.
+        if (stat == 0 .and. lenval > 0) then
+            if (trim(value) == '1' .or. trim(value) == 'true' .or. &
+                trim(value) == 'TRUE') then
+                waccmx_phi_skip_madala_after_final_enabled = .true.
+            endif
+        endif
+
+    end function waccmx_phi_skip_madala_after_final_enabled
+
+    logical function waccmx_phi_final_frame_seen()
+
+        waccmx_phi_final_frame_seen = waccmx_phi_direct_final_seen
+
+    end function waccmx_phi_final_frame_seen
 
     subroutine waccmx_phi_direct_init()
 
@@ -236,6 +261,7 @@ contains
                       phi_comm, MPI_STATUS_IGNORE, ierr)
         call MPI_Recv(phi_weimer_real, nphi, MPI_REAL, 0, waccmx_tag_phi_data, &
                       phi_comm, MPI_STATUS_IGNORE, ierr)
+        if (header(5) + 1 >= header(6)) waccmx_phi_direct_final_seen = .true.
 
         print *, 'WACCMX_PHI_RECV', header(5), header(6), hrut, frame_hour, &
                  hrutw2, minval(phi_weimer_real), maxval(phi_weimer_real)

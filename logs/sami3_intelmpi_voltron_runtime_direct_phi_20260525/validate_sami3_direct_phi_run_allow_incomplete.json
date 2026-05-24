@@ -16,6 +16,11 @@
       "ok": true
     },
     {
+      "detail": "logs/sami3_intelmpi_voltron_runtime_direct_phi_20260525/recv_qc_compare.txt",
+      "name": "recv_qc_compare_exists",
+      "ok": true
+    },
+    {
       "detail": "none",
       "name": "no_fatal_markers",
       "ok": true
@@ -33,17 +38,17 @@
     {
       "detail": "marker",
       "name": "master_done",
-      "ok": false
+      "ok": true
     },
     {
       "detail": "marker",
       "name": "neutral_done_received",
-      "ok": false
+      "ok": true
     },
     {
       "detail": "marker",
       "name": "direct_phi_done_received",
-      "ok": false
+      "ok": true
     },
     {
       "detail": "observed=2 expected=2",
@@ -83,6 +88,11 @@
     {
       "detail": "marker",
       "name": "neutral_sender_sent_done",
+      "ok": true
+    },
+    {
+      "detail": "WACCMX_RECV_QC compare ok: ranks=32 occurrence=0 step_set=[0] packet_hour_set=[0.0] max_abs=633856 max_rel=1.63445e-13",
+      "name": "recv_qc_compare_ok",
       "ok": true
     }
   ],

@@ -35,6 +35,7 @@ NEUTRAL_SENDER=$BASE/bin/wxsami3_neutral_sender_intelmpi
 export WXSAMI3_RECV_QC=1
 export SAMI3_USE_ONLINE_PHI_WEIMER=1
 export SAMI3_PHI_DIRECT_PORT_FILE=$PHI_PORT
+export SAMI3_PHI_SKIP_MADALA_AFTER_FINAL=1
 export I_MPI_HYDRA_BOOTSTRAP=slurm
 export I_MPI_FABRICS=shm:ofi
 export I_MPI_SPAWN=on
@@ -97,7 +98,7 @@ p = Path('sami3-3.22.namelist')
 s = p.read_text()
 s = re.sub(r'^\\s*maxstep\\s*=.*?,', '  maxstep  =   20,', s, flags=re.MULTILINE)
 s = re.sub(r'^\\s*hrmax\\s*=.*?,', '  hrmax = .020000,', s, flags=re.MULTILINE)
-s = re.sub(r'^\\s*tphi\\s*=.*?,', '  tphi       = 1.,', s, flags=re.MULTILINE)
+s = re.sub(r'^\\s*tphi\\s*=.*?,', '  tphi       = 7.,', s, flags=re.MULTILINE)
 s = s.replace('  lwaccmx_neutral = .false.,', '  lwaccmx_neutral = .true.,')
 s = re.sub(r"\\s*waccmx_neutral_prefix\\s*=\\s*'.*?',",
            "  waccmx_neutral_prefix = '$PAY',", s)
@@ -129,6 +130,7 @@ echo "SAMI3_EXE=$RUN/sami3.x"
 echo "NEUTRAL_SENDER=$NEUTRAL_SENDER"
 echo "SAMI3_USE_ONLINE_PHI_WEIMER=$SAMI3_USE_ONLINE_PHI_WEIMER"
 echo "SAMI3_PHI_DIRECT_PORT_FILE=$SAMI3_PHI_DIRECT_PORT_FILE"
+echo "SAMI3_PHI_SKIP_MADALA_AFTER_FINAL=$SAMI3_PHI_SKIP_MADALA_AFTER_FINAL"
 
 mpirun -n 33 ./sami3.x > "$RUN/sami3_online_receiver.out" 2>&1 &
 sami3_pid=$!
@@ -165,6 +167,7 @@ fi
   export WACCMX_SAMI3_PHI_VALID_HOURS=0.0013888889
   export WACCMX_SAMI3_PHI_MAX_FRAMES=2
   export WACCMX_SAMI3_PHI_FINAL_VALID_UNTIL_HOUR=1.0e30
+  export WACCMX_SAMI3_PHI_STOP_AFTER_DONE=1
   export OMP_NUM_THREADS=8
   export KMP_STACKSIZE=512M
   export OMP_STACKSIZE=512M

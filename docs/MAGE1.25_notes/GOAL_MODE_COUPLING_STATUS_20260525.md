@@ -401,3 +401,43 @@ MASTER: All Done!, online done markers, and recv_qc_compare.txt.
 Next decision gate is whether `7666704` naturally exits before its 30 minute
 limit.  If it times out, the next implementation step is a dedicated
 smoke-exit/finalize path; rerunning the same parameters is not useful.
+
+## 2026-05-25 07:49 CST Update
+
+The runtime Voltron -> SAMI3 direct-phi smoke now has a strict completed run:
+
+```text
+jobid = 7667116
+jobname = sami3_vrtd
+state = COMPLETED
+exit = 0:0
+elapsed = 00:04:40
+doc = docs/MAGE1.25_notes/SAMI3_INTELMPI_VOLTRON_RUNTIME_DIRECT_PHI_RESULT_20260525.md
+archive = logs/sami3_intelmpi_voltron_runtime_direct_phi_20260525/
+```
+
+Key markers:
+
+```text
+Voltron runtime direct sender connected to SAMI3
+Voltron sent two changing phi frames and done=2
+Voltron stopped after done via WACCMX_SAMI3_PHI_STOP_AFTER_DONE=1
+SAMI3 received WACCMX_PHI_RECV frame 0 and frame 1
+SAMI3 reached MASTER: All Done!
+SAMI3 received neutral done and direct-phi done
+recv_qc_compare = ok
+validate_sami3_direct_phi_run strict = overall=ok
+validate_remix_sami3_phi_payload = overall=ok
+```
+
+This remains a smoke/finalize completion, not production electrodynamics,
+because it uses:
+
+```text
+SAMI3_PHI_SKIP_MADALA_AFTER_FINAL=1
+```
+
+That switch only activates after the final available direct-phi frame has been
+received; it returns zero potential for subsequent `potpphi` calls so the short
+online MPI smoke can finalize.  The production next step is a real cadence
+policy for post-final-frame potential solves and multi-frame REMIX timing.

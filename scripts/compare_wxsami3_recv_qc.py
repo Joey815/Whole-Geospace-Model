@@ -80,12 +80,19 @@ def read_payload(prefix, rank):
 def parse_qc(log_path):
     qc = {}
     with open(log_path, "r") as fp:
-        for line in fp:
+        lines = fp.readlines()
+        idx_line = 0
+        while idx_line < len(lines):
+            line = lines[idx_line]
+            idx_line += 1
             if "WACCMX_RECV_QC" not in line:
                 continue
             parts = line.split()
             idx = parts.index("WACCMX_RECV_QC")
             vals = parts[idx + 1:]
+            while len(vals) < 17 and idx_line < len(lines):
+                vals.extend(lines[idx_line].split())
+                idx_line += 1
             if len(vals) < 17:
                 raise RuntimeError("short WACCMX_RECV_QC line: {}".format(line.rstrip()))
             task = int(vals[0])

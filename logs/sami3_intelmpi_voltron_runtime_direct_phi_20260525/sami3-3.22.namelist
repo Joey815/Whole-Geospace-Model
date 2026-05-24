@@ -51,7 +51,7 @@
   anu_drag0  = 4.e3,
   kp = 1,1,1,1,2,2,2,1,
   xhardy     = 1.,
-  tphi       = 1.,
+  tphi       = 7.,
   euv_fac    = 1.,
   tmax       = 1.e4,
   lfism      = .false.,

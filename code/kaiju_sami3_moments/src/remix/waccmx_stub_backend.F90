@@ -589,6 +589,14 @@ contains
         sami3_phi_direct_mpi_started = .false.
       end if
       write(*,*) 'WACCMX_SAMI3_PHI_DIRECT sent done=', done_value
+      value = ''
+      call get_environment_variable('WACCMX_SAMI3_PHI_STOP_AFTER_DONE', value, &
+        length=lenval, status=stat)
+      if (stat == 0 .and. len_trim(value) > 0 .and. trim(value) /= '0' .and. &
+          trim(value) /= 'false' .and. trim(value) /= 'FALSE') then
+        write(*,*) 'WACCMX_SAMI3_PHI_DIRECT stop after done requested'
+        stop
+      end if
     end if
 #else
     write(*,*) 'WACCMX_SAMI3_PHI_DIRECT disabled in non-MPI Voltron build: ', &

@@ -1,4 +1,4 @@
-ok   phi_payload_exists: logs/sami3_intelmpi_voltron_runtime_direct_phi_20260525/remix_sami3_phi_payload_runtime_direct.bin
+ok   phi_payload_exists: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_runtime_direct_phi_20260525_0000/voltron_runtime_direct_phi/remix_sami3_phi_payload_runtime_direct.bin
 ok   phi_payload_header: {'magic': 20260524, 'version': 1, 'nlat': 125, 'nlon': 97, 'nframes': 2}
 ok   phi_payload_frame_count: nframes=2 expected=2
 ok   phi_payload_exact_size: size=97044 expected=97044 trailing=0

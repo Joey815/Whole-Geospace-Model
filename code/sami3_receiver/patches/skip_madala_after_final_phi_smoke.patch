@@ -1,0 +1,39 @@
+--- a/potential.f90
++++ b/potential.f90
+@@
+     use conductance_mod
+     use misc_mod
+     use grid_mod
++    use waccmx_neutral_mod, only: waccmx_phi_final_frame_seen, &
++        waccmx_phi_skip_madala_after_final_enabled
+@@
+     real :: phi_weimer(nnx,nny)
++    logical :: skip_madala_after_final
+@@
+     data idpinter / 1 /
+     data ipcrit   / 1 /
++
++    skip_madala_after_final = waccmx_phi_final_frame_seen() .and. &
++        waccmx_phi_skip_madala_after_final_enabled()
++    if (skip_madala_after_final) then
++        print *, 'SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning zero phi'
++        do j = 1,nny
++            do i = 1,nnx
++                phi(i,j) = 0.
++            enddo
++        enddo
++        return
++    endif
+@@
+-        if ( lmadala ) then
++        if ( lmadala .and. .not. skip_madala_after_final ) then
+             call madala_sevp(a1,a2,a5,a4,a3,si,dphi,f11_lb,f11_ub)
++        else if (skip_madala_after_final) then
++            do j = 1,nnyt
++                do i = 1,nnx+1
++                    dphi(i,j) = dphi0(i,j)
++                enddo
++            enddo
+         else
+             do j = 1,nnyt
+                 do i = 1,nnx+1

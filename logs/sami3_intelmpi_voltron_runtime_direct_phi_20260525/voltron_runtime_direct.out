@@ -528,7 +528,7 @@ OMP: Warning #182: OMP_STACKSIZE: ignored because KMP_STACKSIZE has been defined
 Git branch = HEAD
 Git hash   = 9e19bfc
 Compiler   = Intel(R) Fortran Intel(R) 64 Compiler Classic for applications running on Intel(R) 64, Version 2021.10.0 Build 20230609_000000
-Run starting on: Mon May 25 06:25:44 2026
+Run starting on: Mon May 25 07:46:30 2026
  ---------------
 [0m  [36m
  GAMERA
@@ -590,12 +590,4 @@ Run starting on: Mon May 25 06:25:44 2026
   1.3888889E-03  valid_until=  1.0000000E+30  min/max=  -37.68302    
    31.89119    
  WACCMX_SAMI3_PHI_DIRECT sent done=           2
- WACCMX_SAMI3_PHI prepared payload_file=
- /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_
- runtime_direct_phi_20260525_0000/voltron_runtime_direct_phi/remix_sami3_phi_pay
- load_runtime_direct.bin direct_port_file=
- /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_
- runtime_direct_phi_20260525_0000/sami3_direct_phi_port.txt hemi=           1 
-  hour=  1.388888877777778E-003  valid_until=  1.000000000000000E+030 
-  source_min/max=  -11.3245702154329        9.62833046492136      
-  payload_min/max=  -37.68302       31.89119    
+ WACCMX_SAMI3_PHI_DIRECT stop after done requested

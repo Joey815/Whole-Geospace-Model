@@ -91,21 +91,31 @@ The `hrmax=.020000` setting is needed for this short smoke to produce
 `ntmmax=2`.  Lower tested values such as `.005` and `.012` produced
 `ntmmax=1`, so SAMI3 exited before it could consume frame 1.
 
-## Active Run Snapshot
+## Completed Smoke Run
 
-Current job:
+Final validated job:
 
 ```text
-jobid = 7666704
+jobid = 7667116
 jobname = sami3_vrtd
+state = COMPLETED
+exit = 0:0
+elapsed = 00:04:40
 node = qhcn012
-time limit = 00:30:00
 run dir = /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_runtime_direct_phi_20260525_0000
 ```
 
-At the snapshot archived in this repository, the job had not yet reached the
-natural SAMI3 finalize path.  The strict whole-run validator therefore remains
-failed on finalize artifacts, but the direct runtime phi handshake is complete.
+This completion uses two smoke-only controls:
+
+```text
+SAMI3_PHI_SKIP_MADALA_AFTER_FINAL=1
+WACCMX_SAMI3_PHI_STOP_AFTER_DONE=1
+```
+
+They are runtime/finalize controls, not production physics.  After SAMI3 has
+already consumed the final direct-phi frame, later `potpphi` calls return a zero
+potential immediately so the receiver can finalize.  Voltron also exits after
+sending the direct done tag, so the Slurm job can complete cleanly.
 
 ## Runtime Markers
 
@@ -116,6 +126,7 @@ WACCMX_SAMI3_PHI_DIRECT connected
 WACCMX_SAMI3_PHI_DIRECT sent frame=0 nframes=2 hour=0.0 valid_until=1.3888889E-03
 WACCMX_SAMI3_PHI_DIRECT sent frame=1 nframes=2 hour=1.3888889E-03 valid_until=1.0000000E+30
 WACCMX_SAMI3_PHI_DIRECT sent done=2
+WACCMX_SAMI3_PHI_DIRECT stop after done requested
 ```
 
 SAMI3 receiver:
@@ -125,6 +136,10 @@ SAMI3 direct phi port ready
 SAMI3 direct phi sender connected
 WACCMX_PHI_RECV 0 2 hour=0.0 valid_until=1.3888889E-03 min=-36.93061 max=31.48382
 WACCMX_PHI_RECV 1 2 hour=1.3888889E-03 valid_until=1.0000000E+30 min=-37.68302 max=31.89119
+SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning zero phi
+MASTER: All Done!
+WACCMX online done signal received: 1
+SAMI3 direct phi done signal received: 2
 ```
 
 Neutral sender:
@@ -163,17 +178,13 @@ validate_sami3_direct_phi_run --allow-incomplete-run = overall=ok
 Strict whole-run validator:
 
 ```text
-validate_sami3_direct_phi_run = overall=FAIL
+validate_sami3_direct_phi_run = overall=ok
 ```
 
-The strict failure is expected for this snapshot because the job had not yet
-written:
+Neutral replay/QC:
 
 ```text
-MASTER: All Done!
-WACCMX online done signal received
-SAMI3 direct phi done signal received
-recv_qc_compare.txt
+WACCMX_RECV_QC compare ok: ranks=32 occurrence=0 step_set=[0] packet_hour_set=[0.0] max_abs=633856 max_rel=1.63445e-13
 ```
 
 The `no_fatal_markers` check has been tightened so configuration keys such as
@@ -189,27 +200,27 @@ Validated now:
 3. Voltron runtime REMIX potential is remapped into the SAMI3 phi payload grid.
 4. Two physically different runtime phi frames are transmitted and consumed.
 5. The neutral replay channel still sends the expected WACCM-X packet and done tag.
+6. SAMI3 finalize consumes both neutral done and direct-phi done.
+7. Voltron exits after direct done when the smoke-only stop-after-done switch is set.
 ```
 
 Still unresolved:
 
 ```text
-1. The current full model run has not yet naturally finalized in the archived snapshot.
-2. SAMI3 direct phi done is currently consumed only in online finalize.
-3. If SAMI3 remains in a long solver tail after frame 1, add a smoke-only stop/finalize gate
-   or a marker-driven archive path that is explicitly not a natural-completion test.
-4. Production coupling still needs cadence management, REMIX/SAMI3 time synchronization,
+1. The strict completion is a smoke/finalize completion because it skips
+   post-final-frame Madala solves.
+2. Production coupling still needs normal physical potential solves after frame updates.
+3. Production coupling still needs cadence management, REMIX/SAMI3 time synchronization,
    and longer multi-cycle validation.
 ```
 
 ## Next Step
 
-Keep polling job `7666704` until it either completes or reaches the 30 minute
-limit.  Then:
+The next production step is to replace this finalize smoke switch with a real
+cadence policy:
 
 ```text
-1. If it completes: rerun strict validators, archive recv_qc_compare, and update this result.
-2. If it times out: preserve the timeout as evidence, document the frame-1 solver/finalize tail,
-   and implement a dedicated smoke-exit strategy rather than rerunning the same parameters.
+1. Decide when SAMI3 should solve potential after a final available REMIX frame.
+2. Keep direct done/finalize clean without forcing zero-phi after the final frame.
+3. Run a multi-cycle REMIX/Voltron direct-phi test with more than two frames.
 ```
-
