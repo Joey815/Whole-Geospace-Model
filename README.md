@@ -38,6 +38,9 @@ Schema v3 Voltron-shell intermediate mapping weights are implemented and
 validated: SAMI3 -> Voltron TubeShell ShellGrid -> RAIJU ShellGrid reproduces
 the inline L/MLT product with max_rel=1.19e-7 while carrying Voltron
 TubeShell bVol/topo/Lb/bmin/nTrc geometry.
+The Voltron-shell stage-2 product also passes a runtime ingest smoke: job
+7649439 completed 0:0, final raiCpl blend formula checks are exact, and checked
+physics fields contain no NaN/Inf.
 Runtime blending is validated with alpha=0 exact baseline recovery.
 Density alpha scan is finite and continuous through alphaDavg=0.20.
 Pressure alpha scan at alphaDavg=0.05 is finite for alphaPavg=0.05 and 0.10.
@@ -68,6 +71,7 @@ file tag212 regression= 7645380, COMPLETED, exit 0:0
 stub tag212 runtime   = 7645415, COMPLETED, exit 0:0
 sami3 raiju long300   = 7648350, COMPLETED, exit 0:0
 sami3 mapq runtime    = 7648737, COMPLETED, exit 0:0
+sami3 volshell runtime= 7649439, COMPLETED, exit 0:0
 ```
 
 Latest receiver checks:
@@ -146,6 +150,7 @@ docs/MAGE1.25_notes/SAMI3_RAIJU_MAPPING_QUALITY_RUNTIME_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_EXPLICIT_WEIGHT_FILE_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_WEIGHT_FILE_BVOL_GEOMETRY_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_VOLTRON_SHELL_WEIGHT_FILE_RESULT_20260524.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_VOLTRON_SHELL_RUNTIME_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_RUNTIME_BLEND_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_STAGE2_SOURCE_MODES_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_DSB_LMLT_RUNTIME_BLEND_RESULT_20260524.md
@@ -239,6 +244,7 @@ logs/sami3_mapping_quality_runtime_20260524/
 logs/sami3_weightfile_mapping_20260524/
 logs/sami3_weightfile_bvol_geometry_20260524/
 logs/sami3_voltron_shell_weightfile_20260524/
+logs/sami3_voltron_shell_runtime_20260524/
 ```
 
 ## Known Physical Blockers
