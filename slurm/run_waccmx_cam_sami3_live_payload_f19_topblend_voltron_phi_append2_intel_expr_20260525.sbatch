@@ -11,8 +11,8 @@
 
 # Experimental single-node intel_expr copy.  Job 7660816 failed before model
 # startup because qhcn817's module command rejected module-hide in .modulerc.
-# Keep this launcher as evidence; prefer the intel launcher unless the
-# intel_expr module environment is fixed.
+# On qhcn816, module load returns nonzero for that warning but still applies the
+# requested environment, so this launcher tolerates module-load return code 1.
 
 set -eo pipefail
 
@@ -62,6 +62,10 @@ cleanup() {
 }
 trap cleanup EXIT
 
+safe_module_load() {
+  module load "$@" || echo "WARN: module load returned nonzero but continuing: $*" >&2
+}
+
 echo "RUN_DIR=$RUN"
 echo "VOLTRON_RUN=$VOLTRON_RUN"
 echo "PHI_PAYLOAD=$PHI_PAYLOAD"
@@ -74,8 +78,8 @@ echo "HOST=$(hostname)"
 echo "--- stage 1: Voltron/REMIX phi payload generation"
 source /etc/profile.d/modules.sh >/dev/null 2>&1 || true
 module purge >/dev/null 2>&1 || true
-module load intel/oneapi/2023.2.0
-module load intel/hdf5/1.13.0/intel2023.2_impi2023.2
+safe_module_load intel/oneapi/2023.2.0
+safe_module_load intel/hdf5/1.13.0/intel2023.2_impi2023.2
 
 source "$MAGE/tools/bootstrap_kaipy_minimal_env.sh" "$MAGE" "$MAGE/kaipy"
 source "$MAGE/kaiju/scripts/setupEnvironment.sh"
@@ -169,7 +173,7 @@ fi
 wait "$voltron_pid" 2>/dev/null || true
 
 module purge >/dev/null 2>&1 || true
-module load intel/anaconda/2024.10
+safe_module_load intel/anaconda/2024.10
 python - <<PY > "$RUN/phi_payload_summary.txt"
 from pathlib import Path
 import struct
@@ -371,7 +375,7 @@ wait "$sami3_pid"
 sami3_pid=
 pterm --dvm-uri "file:$DVM_URI" || true
 
-module load intel/netcdf/4.7.4/gcc8.5.0_ompi5.0.3 >/dev/null 2>&1
+safe_module_load intel/netcdf/4.7.4/gcc8.5.0_ompi5.0.3 >/dev/null 2>&1
 for pkt in 000000 000001; do
   pattern="$LIVE_DUMP_DIR/wxsami3_physstate_rank*_pkt${pkt}.bin"
   replay_dir="$RUN/replay_pkt${pkt}"

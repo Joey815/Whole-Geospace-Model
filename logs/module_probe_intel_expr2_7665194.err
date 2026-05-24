@@ -1,0 +1,10 @@
+Module ERROR: invalid command name "module-hide"
+      while executing
+  "module-hide intel/vasp/5.4.4/intel2020.4_impi"
+      (file "/apps/support/modulefiles/.modulerc" line 2)
+  Please contact <root@localhost>
+Module ERROR: invalid command name "module-hide"
+      while executing
+  "module-hide intel/vasp/5.4.4/intel2020.4_impi"
+      (file "/apps/support/modulefiles/.modulerc" line 2)
+  Please contact <root@localhost>

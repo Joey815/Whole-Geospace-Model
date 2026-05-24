@@ -1,0 +1,89 @@
+HOST=qhcn816
+SHELL=/bin/bash
+module is a function
+module () 
+{ 
+    local _mlredir=0;
+    if [ -n "${MODULES_REDIRECT_OUTPUT+x}" ]; then
+        if [ "$MODULES_REDIRECT_OUTPUT" = '0' ]; then
+            _mlredir=0;
+        else
+            if [ "$MODULES_REDIRECT_OUTPUT" = '1' ]; then
+                _mlredir=1;
+            fi;
+        fi;
+    fi;
+    case " $@ " in 
+        *' --no-redirect '*)
+            _mlredir=0
+        ;;
+        *' --redirect '*)
+            _mlredir=1
+        ;;
+    esac;
+    if [ $_mlredir -eq 0 ]; then
+        _module_raw "$@";
+    else
+        _module_raw "$@" 2>&1;
+    fi
+}
+module is a function
+module () 
+{ 
+    unset _mlshdbg;
+    if [ "${MODULES_SILENT_SHELL_DEBUG:-0}" = '1' ]; then
+        case "$-" in 
+            *v*x*)
+                set +vx;
+                _mlshdbg='vx'
+            ;;
+            *v*)
+                set +v;
+                _mlshdbg='v'
+            ;;
+            *x*)
+                set +x;
+                _mlshdbg='x'
+            ;;
+            *)
+                _mlshdbg=''
+            ;;
+        esac;
+    fi;
+    unset _mlre _mlIFS;
+    if [ -n "${IFS+x}" ]; then
+        _mlIFS=$IFS;
+    fi;
+    IFS=' ';
+    for _mlv in ${MODULES_RUN_QUARANTINE:-};
+    do
+        if [ "${_mlv}" = "${_mlv##*[!A-Za-z0-9_]}" -a "${_mlv}" = "${_mlv#[0-9]}" ]; then
+            if [ -n "`eval 'echo ${'$_mlv'+x}'`" ]; then
+                _mlre="${_mlre:-}${_mlv}_modquar='`eval 'echo ${'$_mlv'}'`' ";
+            fi;
+            _mlrv="MODULES_RUNENV_${_mlv}";
+            _mlre="${_mlre:-}${_mlv}='`eval 'echo ${'$_mlrv':-}'`' ";
+        fi;
+    done;
+    if [ -n "${_mlre:-}" ]; then
+        eval `eval ${_mlre} /usr/bin/tclsh /usr/share/Modules/libexec/modulecmd.tcl sh '"$@"'`;
+    else
+        eval `/usr/bin/tclsh /usr/share/Modules/libexec/modulecmd.tcl sh "$@"`;
+    fi;
+    _mlstatus=$?;
+    if [ -n "${_mlIFS+x}" ]; then
+        IFS=$_mlIFS;
+    else
+        unset IFS;
+    fi;
+    unset _mlre _mlv _mlrv _mlIFS;
+    if [ -n "${_mlshdbg:-}" ]; then
+        set -$_mlshdbg;
+    fi;
+    unset _mlshdbg;
+    return $_mlstatus
+}
+purge_rc=0
+load_oneapi_rc=1
+load_hdf5_rc=1
+DONE

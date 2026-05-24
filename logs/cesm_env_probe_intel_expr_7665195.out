@@ -1,0 +1,9 @@
+HOST=qhcn816
+source_rc=0
+LD_LIBRARY_PATH=/apps/support/intel_spr_rocky8.9/openmpi/5.0.3/gcc8.5.0/lib:/apps/support/intel_spr_rocky8.9/netcdf/4.7.4/gcc8.5.0_ompi5.0.3/lib:/apps/support/intel_spr_rocky8.9/pnetcdf/1.12.2/gcc8.5.0_ompi5.0.3/lib:/apps/support/intel_spr_rocky8.9/lapack/3.12.1
+LOADEDMODULES=
+MODULEPATH=/etc/scl/modulefiles:/apps/support/modulefiles:/apps/support/intel_spr_rocky8.9/spack/0.22.0/share/spack/modules
+PATH=/apps/support/intel_spr_rocky8.9/cmake/3.19.8/bin:/apps/support/intel_spr_rocky8.9/openmpi/5.0.3/gcc8.5.0/bin:/apps/support/intel_spr_rocky8.9/netcdf/4.7.4/gcc8.5.0_ompi5.0.3/bin:/apps/support/intel_spr_rocky8.9/pnetcdf/1.12.2/gcc8.5.0_ompi5.0.3/bin:/apps/support/intel_spr_rocky8.9/cmake/3.19.8/bin:/apps/support/intel_spr_rocky8.9/openmpi/5.0.3/gcc8.5.0/bin:/apps/support/intel_spr_rocky8.9/netcdf/4.7.4/gcc8.5.0_ompi5.0.3/bin:/apps/support/intel_spr_rocky8.9/pnetcdf/1.12.2/gcc8.5.0_ompi5.0.3/bin:/home/jiaoy_group/jiaoy/.codex/tmp/arg0/codex-arg0HF0FZ2:/home/jiaoy_group/jiaoy/.vscode-server/bin/0958016b2af9f09bb4257e0df4a95e2f90590f9f/bin/remote-cli:/home/jiaoy_group/jiaoy/.local/bin:/home/jiaoy_group/jiaoy/bin:/apps/support/tools/modules5.4.0/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/apps/hpc/software/slurm/23.02/bin:/apps/hpc/software/slurm/23.02/sbin:/apps/tools/:/apps/tools/htop/3.4.0/bin:/apps/hpc/software/slurm/23.02/bin:/apps/hpc/software/slurm/23.02/sbin:/apps/tools/:/apps/tools/htop/3.4.0/bin:/home/jiaoy_group/jiaoy/.vscode-server/extensions/openai.chatgpt-26.5519.32039-linux-x64/bin/linux-x86_64:/apps/hpc/software/slurm/23.02/bin:/apps/hpc/software/slurm/23.02/sbin:/apps/tools/:/apps/tools/htop/3.4.0/bin
+/apps/support/intel_spr_rocky8.9/openmpi/5.0.3/gcc8.5.0/bin/mpiexec
+/apps/support/intel_spr_rocky8.9/openmpi/5.0.3/gcc8.5.0/bin/prte
+/apps/support/intel_spr_rocky8.9/openmpi/5.0.3/gcc8.5.0/bin/prun

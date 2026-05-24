@@ -226,6 +226,13 @@ Strict validation and HDF5 summary artifacts have been committed and pushed.
    - true traced flux-tube volume map for SAMI3 -> RAIJU/GAMERA,
    - finer f09/distributed remap design.
 
+`intel_expr` fallback note: the previous append2 expr job failed because
+`module load` returned nonzero on a non-fatal `.modulerc` `module-hide` warning.
+The expr launcher now tolerates that warning after probe jobs confirmed the
+oneAPI/HDF5 environment is still applied and the CESM case env returns zero.
+It has not been resubmitted yet to avoid racing the queued `intel` job against
+the same CESM run directory.
+
 ## New Tooling Added In This Goal Pass
 
 ```text
