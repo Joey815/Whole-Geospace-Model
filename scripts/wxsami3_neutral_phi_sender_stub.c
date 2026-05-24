@@ -99,9 +99,53 @@ static float record_as_float(unsigned char *payload, int nbytes, const char *wha
     return value;
 }
 
-static PhiFrame *read_phi_stream(const char *path, int *nframes_out)
+static PhiFrame *read_mpi_phi_payload(FILE *fp, int *nframes_out)
 {
-    FILE *fp = fopen(path, "rb");
+    int32_t header[5];
+    int nframes;
+    PhiFrame *frames;
+    const int nphi = PHI_NLAT * PHI_NLON;
+
+    read_exact(fp, &header[1], 4 * sizeof(int32_t), "MPI phi payload header");
+    header[0] = PHI_MAGIC;
+
+    if (header[1] != PHI_VERSION || header[2] != PHI_NLAT || header[3] != PHI_NLON) {
+        fprintf(stderr,
+                "MPI phi payload header mismatch: magic=%d version=%d nlat=%d nlon=%d nframes=%d\n",
+                header[0], header[1], header[2], header[3], header[4]);
+        die("MPI phi payload header mismatch");
+    }
+    nframes = header[4];
+    if (nframes < 1) die("MPI phi payload contains no frames");
+
+    frames = (PhiFrame *)calloc((size_t)nframes, sizeof(PhiFrame));
+    if (!frames) die("MPI phi payload frame allocation failed");
+
+    for (int i = 0; i < nframes; ++i) {
+        int32_t frame_index;
+        float frame_meta[2];
+
+        read_exact(fp, &frame_index, sizeof(frame_index), "MPI phi payload frame index");
+        if (frame_index != i) die("MPI phi payload frame index mismatch");
+        read_exact(fp, frame_meta, sizeof(frame_meta), "MPI phi payload frame hour metadata");
+
+        frames[i].hour = frame_meta[0];
+        frames[i].valid_until = frame_meta[1];
+        frames[i].phi = (float *)malloc((size_t)nphi * sizeof(float));
+        if (!frames[i].phi) die("MPI phi payload phi allocation failed");
+        read_exact(fp, frames[i].phi, (size_t)nphi * sizeof(float),
+                   "MPI phi payload phi frame");
+    }
+
+    *nframes_out = nframes;
+    printf("NEUTRAL_PHI_SENDER phi_payload_format=remix_sami3_phi_payload.v1 nframes=%d\n",
+           nframes);
+    fflush(stdout);
+    return frames;
+}
+
+static PhiFrame *read_phi_weimer_stream(FILE *fp, int *nframes_out)
+{
     unsigned char *payload = NULL;
     int nbytes = 0;
     float current_hour;
@@ -110,11 +154,6 @@ static PhiFrame *read_phi_stream(const char *path, int *nframes_out)
     PhiFrame *frames;
     const int nphi = PHI_NLAT * PHI_NLON;
     const int phi_nbytes = nphi * (int)sizeof(float);
-
-    if (!fp) {
-        perror(path);
-        die("failed to open phi stream");
-    }
 
     if (!read_fortran_record(fp, &payload, &nbytes)) {
         die("empty phi stream");
@@ -147,10 +186,32 @@ static PhiFrame *read_phi_stream(const char *path, int *nframes_out)
         nframes += 1;
         payload = NULL;
     }
-    fclose(fp);
 
     if (nframes < 1) die("phi stream contains no frames");
     *nframes_out = nframes;
+    printf("NEUTRAL_PHI_SENDER phi_payload_format=phi_weimer.inp nframes=%d\n", nframes);
+    fflush(stdout);
+    return frames;
+}
+
+static PhiFrame *read_phi_stream(const char *path, int *nframes_out)
+{
+    FILE *fp = fopen(path, "rb");
+    int32_t first_word;
+    PhiFrame *frames;
+
+    if (!fp) {
+        perror(path);
+        die("failed to open phi stream");
+    }
+    read_exact(fp, &first_word, sizeof(first_word), "phi payload leading word");
+    if (first_word == PHI_MAGIC) {
+        frames = read_mpi_phi_payload(fp, nframes_out);
+    } else {
+        if (fseek(fp, 0L, SEEK_SET) != 0) die("failed to rewind phi_weimer stream");
+        frames = read_phi_weimer_stream(fp, nframes_out);
+    }
+    fclose(fp);
     return frames;
 }
 

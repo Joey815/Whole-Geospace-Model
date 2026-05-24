@@ -29,6 +29,8 @@ import numpy as np
 
 
 STATVOLT_PER_KV = 1000.0 / 300.0
+MPI_PHI_MAGIC = 20260524
+MPI_PHI_VERSION = 1
 
 
 def _decode_attr(value: Any) -> Any:
@@ -229,6 +231,73 @@ def write_phi_weimer(
             out.write(_fortran_record(np.asarray([next_hour], dtype="<f4").tobytes()))
 
 
+def write_mpi_phi_payload(
+    path: Path,
+    phi_statv: np.ndarray,
+    frame_hours: np.ndarray,
+    valid_until: float,
+) -> None:
+    frames = np.asarray(phi_statv, dtype=np.float64)
+    if frames.ndim == 2:
+        frames = frames[np.newaxis, :, :]
+    if frames.ndim != 3:
+        raise ValueError(f"phi_statv must be 2D or 3D, got shape {frames.shape}")
+    if frame_hours.size != frames.shape[0]:
+        raise ValueError(
+            f"frame hour count {frame_hours.size} does not match frame count {frames.shape[0]}"
+        )
+    if not np.all(np.diff(frame_hours) > 0.0):
+        raise ValueError(f"frame hours must be strictly increasing: {frame_hours.tolist()}")
+    if valid_until <= frame_hours[-1]:
+        raise ValueError(
+            f"valid_until_hour={valid_until} must be greater than last frame hour={frame_hours[-1]}"
+        )
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    nframes, nlat, nlon = frames.shape
+    with path.open("wb") as out:
+        np.asarray(
+            [MPI_PHI_MAGIC, MPI_PHI_VERSION, nlat, nlon, nframes],
+            dtype="<i4",
+        ).tofile(out)
+        for iframe in range(nframes):
+            next_hour = frame_hours[iframe + 1] if iframe + 1 < nframes else valid_until
+            np.asarray([iframe], dtype="<i4").tofile(out)
+            np.asarray([frame_hours[iframe], next_hour], dtype="<f4").tofile(out)
+            out.write(
+                np.asarray(frames[iframe], dtype="<f4", order="F").tobytes(order="F")
+            )
+
+
+def read_mpi_phi_payload(path: Path) -> dict[str, np.ndarray]:
+    with path.open("rb") as inp:
+        header = np.fromfile(inp, dtype="<i4", count=5)
+        if header.size != 5:
+            raise EOFError("unexpected EOF reading MPI phi payload header")
+        magic, version, nlat, nlon, nframes = [int(item) for item in header]
+        if magic != MPI_PHI_MAGIC or version != MPI_PHI_VERSION:
+            raise ValueError(f"unexpected MPI phi payload header: {header.tolist()}")
+        hours = []
+        valid_until = []
+        phis = []
+        nphi = nlat * nlon
+        for _ in range(nframes):
+            iframe_arr = np.fromfile(inp, dtype="<i4", count=1)
+            frame_meta = np.fromfile(inp, dtype="<f4", count=2)
+            phi_flat = np.fromfile(inp, dtype="<f4", count=nphi)
+            if iframe_arr.size != 1 or frame_meta.size != 2 or phi_flat.size != nphi:
+                raise EOFError("unexpected EOF reading MPI phi payload frame")
+            hours.append(float(frame_meta[0]))
+            valid_until.append(float(frame_meta[1]))
+            phis.append(phi_flat.reshape((nlat, nlon), order="F").copy())
+    return {
+        "header": np.asarray(header, dtype=np.int32),
+        "hours": np.asarray(hours, dtype=np.float64),
+        "valid_until": np.asarray(valid_until, dtype=np.float64),
+        "phi": np.stack(phis, axis=0),
+    }
+
+
 def read_phi_weimer(path: Path, nlat: int, nlon: int, nframes: int) -> dict[str, np.ndarray]:
     records: list[bytes] = []
     nrecords = 2 * nframes + 1
@@ -309,6 +378,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--group", default="NORTH_APEX", help="HDF5 group containing POT/theta/phi")
     parser.add_argument("--weimer-grid", required=True, type=Path, help="SAMI3 weimer_grid.dat")
     parser.add_argument("--output", required=True, type=Path, help="Output phi_weimer.inp")
+    parser.add_argument(
+        "--mpi-payload-output",
+        type=Path,
+        help="Optional versioned REMIX-to-SAMI3 MPI phi payload binary",
+    )
     parser.add_argument("--summary-json", type=Path, help="Optional JSON summary")
     parser.add_argument("--diagnostic-h5", type=Path, help="Optional diagnostic HDF5 output")
     parser.add_argument("--target-nlat", type=int, default=125)
@@ -417,6 +491,37 @@ def main() -> None:
         np.abs(readback["hours"].astype(np.float64) - expected_readback_hours)
     )
 
+    mpi_payload_readback: dict[str, Any] = {}
+    if args.mpi_payload_output:
+        write_mpi_phi_payload(
+            args.mpi_payload_output, phi_statv, frame_hours, args.valid_until_hour
+        )
+        mpi_readback = read_mpi_phi_payload(args.mpi_payload_output)
+        mpi_phi_diff = np.max(
+            np.abs(mpi_readback["phi"].astype(np.float64) - np.asarray(phi_statv))
+        )
+        expected_valid_until = np.asarray(
+            np.concatenate([frame_hours[1:], [args.valid_until_hour]]),
+            dtype="<f4",
+        ).astype(np.float64)
+        mpi_hour_diff = np.max(
+            np.abs(mpi_readback["hours"].astype(np.float64) - frame_hours.astype("<f4"))
+        )
+        mpi_valid_until_diff = np.max(
+            np.abs(mpi_readback["valid_until"].astype(np.float64) - expected_valid_until)
+        )
+        mpi_payload_readback = {
+            "mpi_payload_output": str(args.mpi_payload_output),
+            "mpi_payload_schema": "remix_sami3_phi_payload.v1",
+            "mpi_payload_magic": MPI_PHI_MAGIC,
+            "mpi_payload_version": MPI_PHI_VERSION,
+            "mpi_payload_readback_hours": mpi_readback["hours"].tolist(),
+            "mpi_payload_readback_valid_until": mpi_readback["valid_until"].tolist(),
+            "mpi_payload_hour_max_abs_diff": float(mpi_hour_diff),
+            "mpi_payload_valid_until_max_abs_diff": float(mpi_valid_until_diff),
+            "mpi_payload_phi_max_abs_diff_statV": float(mpi_phi_diff),
+        }
+
     summary: dict[str, Any] = {
         "schema": "remix_pot_to_sami3_phi_weimer.v1",
         "input": str(args.input[0]) if len(args.input) == 1 else [str(path) for path in args.input],
@@ -460,6 +565,7 @@ def main() -> None:
             for path, hour, source in zip(args.input, frame_hours, sources)
         ],
     }
+    summary.update(mpi_payload_readback)
     summary.update(summarize_array("phi_kV", phi_kv))
     summary.update(summarize_array("phi_statV", phi_statv))
 

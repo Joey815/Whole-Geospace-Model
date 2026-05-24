@@ -85,6 +85,13 @@ with `SAMI3_USE_ONLINE_PHI_WEIMER=1`, no receiver-side `phi_weimer.inp`,
 versioned phi payload tags 220-223, two REMIX-derived frames received by
 SAMI3 rank 0, `weimer()` advancing to the final `1.0e30` marker, receiver QC
 replay again matching to `4.86991e-13`, and SAMI3 reaching `MASTER: All Done!`.
+The sender no longer has to read SAMI3's `phi_weimer.inp` record stream:
+`remix_sami3_phi_payload.v1` binary generation from REMIX HDF5/POT is
+implemented and validated.  Job 7651957 completed 0:0 with the C sender
+auto-detecting `remix_sami3_phi_payload.v1`, sending two frames over the same
+MPI tags 220-223, SAMI3 advancing from `hrutw2=1.0e-3` to the final `1.0e30`
+marker, receiver QC replay again matching to `4.86991e-13`, and
+`MASTER: All Done!`.
 Runtime blending is validated with alpha=0 exact baseline recovery.
 Density alpha scan is finite and continuous through alphaDavg=0.20.
 Pressure alpha scan at alphaDavg=0.05 is finite for alphaPavg=0.05 and 0.10.
@@ -122,6 +129,7 @@ remix phi static rt  = 7651485, COMPLETED, exit 0:0
 remix phi 2frame rt  = 7651608, COMPLETED, exit 0:0
 remix phi append rt  = 7651789, COMPLETED, exit 0:0
 remix phi mpi rt     = 7651874, COMPLETED, exit 0:0
+remix phi bin mpi rt = 7651957, COMPLETED, exit 0:0
 ```
 
 Latest receiver checks:
@@ -258,10 +266,13 @@ logs/remix_sami3_phi_weimer_timeseries_20260524/
 logs/remix_sami3_phi_weimer_transition_runtime_20260524/
 logs/remix_sami3_phi_weimer_live_append_runtime_20260524/
 logs/remix_sami3_phi_weimer_mpi_payload_runtime_20260524/
+logs/remix_sami3_phi_weimer_mpi_payload_bin_20260524/
+logs/remix_sami3_phi_weimer_mpi_payload_bin_runtime_20260524/
 slurm/run_sami3_online_receiver_remix_phi_weimer_20260524.sbatch
 slurm/run_sami3_online_receiver_remix_phi_weimer_2frame_fast_20260524.sbatch
 slurm/run_sami3_online_receiver_remix_phi_weimer_live_append_20260524.sbatch
 slurm/run_sami3_online_receiver_remix_phi_weimer_mpi_payload_20260524.sbatch
+slurm/run_sami3_online_receiver_remix_phi_weimer_mpi_payload_bin_20260524.sbatch
 ```
 
 Latest two-packet smoke launcher:
@@ -334,7 +345,7 @@ He native/MSIS fallback policy hardening
 W-off / vertical-wind policy validation
 REMIX -> SAMI3 potential/E-field forcing
 connect the live REMIX producer directly to the online MPI phi payload path
-and remove the replayed phi stream source
+and remove the replayed HDF5/source-package stage
 production SAMI3 -> RAIJU/GAMERA Voltron-consistent flux-tube weighting
 replace prototype lon0/bin-center bvol weighting with a true traced-tube flux-volume map
 production SAMI3 -> RAIJU/GAMERA geometry/mask coverage policy

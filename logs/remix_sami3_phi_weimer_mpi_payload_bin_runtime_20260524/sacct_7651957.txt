@@ -1,0 +1,4 @@
+JobID|JobName|State|ExitCode|Elapsed|MaxRSS|NodeList
+7651957|sami3_phibin|COMPLETED|0:0|00:01:23||qhcn025
+7651957.batch|batch|COMPLETED|0:0|00:01:23|28307104K|qhcn025
+7651957.extern|extern|COMPLETED|0:0|00:01:23|0|qhcn025

@@ -1,0 +1,97 @@
+{
+  "cap_abs_kv": "none",
+  "frame_hours": [
+    0.0,
+    0.001
+  ],
+  "frames": [
+    {
+      "hour": 0.0,
+      "input": "/home/jiaoy_group/jiaoy/data/MAGE1.25/experiments/cesm_kaiju_bridge/long_runs/waccmx_file_d_mpi_1h_cleanexit_20260519_S7475694/cycle01_kaiju/waccmx_voltron_forward_package.h5",
+      "source_mix": "gtrd_20211204_0500_0510.mix.h5",
+      "source_mjd": 59552.208391203705,
+      "source_time_seconds": 5.0
+    },
+    {
+      "hour": 0.001,
+      "input": "/home/jiaoy_group/jiaoy/data/MAGE1.25/experiments/cesm_kaiju_bridge/long_runs/waccmx_file_d_mpi_1h_cleanexit_20260519_S7475694/cycle02_kaiju/waccmx_voltron_forward_package.h5",
+      "source_mix": "gtrd_20211204_0500_0510.mix.h5",
+      "source_mjd": 59552.208391203705,
+      "source_time_seconds": 5.0
+    }
+  ],
+  "group": "NORTH_APEX",
+  "hour0": 0.0,
+  "input": [
+    "/home/jiaoy_group/jiaoy/data/MAGE1.25/experiments/cesm_kaiju_bridge/long_runs/waccmx_file_d_mpi_1h_cleanexit_20260519_S7475694/cycle01_kaiju/waccmx_voltron_forward_package.h5",
+    "/home/jiaoy_group/jiaoy/data/MAGE1.25/experiments/cesm_kaiju_bridge/long_runs/waccmx_file_d_mpi_1h_cleanexit_20260519_S7475694/cycle02_kaiju/waccmx_voltron_forward_package.h5"
+  ],
+  "inputs": [
+    "/home/jiaoy_group/jiaoy/data/MAGE1.25/experiments/cesm_kaiju_bridge/long_runs/waccmx_file_d_mpi_1h_cleanexit_20260519_S7475694/cycle01_kaiju/waccmx_voltron_forward_package.h5",
+    "/home/jiaoy_group/jiaoy/data/MAGE1.25/experiments/cesm_kaiju_bridge/long_runs/waccmx_file_d_mpi_1h_cleanexit_20260519_S7475694/cycle02_kaiju/waccmx_voltron_forward_package.h5"
+  ],
+  "low_lat_mode": "zero",
+  "low_lat_zero_count": 89,
+  "mpi_payload_hour_max_abs_diff": 0.0,
+  "mpi_payload_magic": 20260524,
+  "mpi_payload_output": "/home/jiaoy_group/jiaoy/data/MAGE1.25/waccmx-sami3-collab-20260524/logs/remix_sami3_phi_weimer_mpi_payload_bin_20260524/remix_sami3_phi_payload_north_2frame_fast.bin",
+  "mpi_payload_phi_max_abs_diff_statV": 1.888117893145136e-06,
+  "mpi_payload_readback_hours": [
+    0.0,
+    0.0010000000474974513
+  ],
+  "mpi_payload_readback_valid_until": [
+    0.0010000000474974513,
+    1.0000000150474662e+30
+  ],
+  "mpi_payload_schema": "remix_sami3_phi_payload.v1",
+  "mpi_payload_valid_until_max_abs_diff": 0.0,
+  "mpi_payload_version": 1,
+  "nframes": 2,
+  "output": "/home/jiaoy_group/jiaoy/data/MAGE1.25/waccmx-sami3-collab-20260524/logs/remix_sami3_phi_weimer_mpi_payload_bin_20260524/phi_weimer_remix_north_2frame_fast_for_readback.inp",
+  "phi_kV_finite_count": 24250,
+  "phi_kV_max": 10.72937314195538,
+  "phi_kV_mean": -0.07636781304572414,
+  "phi_kV_min": -13.07980127883359,
+  "phi_kV_nan_count": 0,
+  "phi_kV_shape": [
+    2,
+    125,
+    97
+  ],
+  "phi_statV_finite_count": 24250,
+  "phi_statV_max": 35.76457713985127,
+  "phi_statV_mean": -0.25455937681908053,
+  "phi_statV_min": -43.59933759611197,
+  "phi_statV_nan_count": 0,
+  "phi_statV_shape": [
+    2,
+    125,
+    97
+  ],
+  "readback_hour0": 0.0,
+  "readback_hour_max_abs_diff": 0.0,
+  "readback_hours": [
+    0.0,
+    0.0010000000474974513,
+    1.0000000150474662e+30
+  ],
+  "readback_phi_max_abs_diff_statV": 1.888117893145136e-06,
+  "readback_valid_until": 1.0000000150474662e+30,
+  "scale": 1.0,
+  "schema": "remix_pot_to_sami3_phi_weimer.v1",
+  "source_lon_max": 359.0,
+  "source_lon_min": 0.0,
+  "source_mlat_max": 90.0,
+  "source_mlat_min": 45.00000000000002,
+  "source_pot_units": "kV",
+  "target_mlat_max": 88.9908981,
+  "target_mlat_min": 1.87674153,
+  "target_mlon_max": 360.0,
+  "target_mlon_min": 0.0,
+  "target_nlat": 125,
+  "target_nlon": 97,
+  "valid_until_hour": 1e+30,
+  "weimer_grid": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_20260523_0000/weimer_grid.dat",
+  "zero_reference": "none"
+}

@@ -484,19 +484,111 @@ receiver-side `phi_weimer.inp`.  The smoke sender still replays the phi frames
 from the previously generated REMIX stream file; the remaining integration step
 is to connect the live REMIX producer directly to the versioned payload path.
 
+## Versioned Binary Payload Smoke
+
+The MPI sender now also accepts an explicit versioned payload binary instead of
+using SAMI3's `phi_weimer.inp` record stream as the sender-side source format.
+The adapter writes both the old `phi_weimer.inp` replay baseline and the new
+payload:
+
+```text
+remix_sami3_phi_payload.v1
+magic: 20260524
+version: 1
+nlat: 125
+nlon: 97
+nframes: 2
+per frame: frame_index, frame_hour, valid_until_hour, phi_statV(nlat,nlon)
+array order: Fortran order, matching SAMI3 phi_weimer_real(nfp1,nlt+1)
+```
+
+Generation artifacts:
+
+```text
+logs/remix_sami3_phi_weimer_mpi_payload_bin_20260524/remix_sami3_phi_payload_north_2frame_fast.bin
+logs/remix_sami3_phi_weimer_mpi_payload_bin_20260524/remix_sami3_phi_payload_north_2frame_fast.json
+logs/remix_sami3_phi_weimer_mpi_payload_bin_20260524/phi_weimer_remix_north_2frame_fast_for_readback.inp
+logs/remix_sami3_phi_weimer_mpi_payload_bin_20260524/run_remix_pot_to_sami3_phi_payload_bin.out
+```
+
+Payload readback checks:
+
+```text
+mpi_payload_schema: remix_sami3_phi_payload.v1
+mpi_payload_hour_max_abs_diff: 0.0
+mpi_payload_valid_until_max_abs_diff: 0.0
+mpi_payload_phi_max_abs_diff_statV: 1.888117893145136e-06
+```
+
+Runtime launcher:
+
+```text
+slurm/run_sami3_online_receiver_remix_phi_weimer_mpi_payload_bin_20260524.sbatch
+```
+
+Validated run:
+
+```text
+job: 7651957
+state: COMPLETED
+exit: 0:0
+elapsed: 00:01:23
+node: qhcn025
+MaxRSS: 28307104K
+```
+
+Key evidence:
+
+```text
+NEUTRAL_PHI_SENDER phi_payload_format=remix_sami3_phi_payload.v1 nframes=2
+NEUTRAL_PHI_SENDER sent phi frame=0/2 hour=0 valid_until=0.001
+NEUTRAL_PHI_SENDER sent phi frame=1/2 hour=0.001 valid_until=1e+30
+WACCMX_PHI_RECV 0 2 hrut=0 frame_hour=0 valid_until=0.001 min/max=-43.5993385/35.1005516
+hrutw2 = 0.00000000       1.00000005E-03
+WACCMX_PHI_RECV 1 2 hrut=2.22222228E-03 frame_hour=0.001 valid_until=1.0e30 min/max=-42.9881668/35.7645760
+hrutw2 = 2.22222228E-03   1.00000002E+30
+MASTER: All Done!
+WACCMX online done signal received: 1
+WACCMX_RECV_QC compare ok: ranks=32 occurrence=0 step_set=[0]
+packet_hour_set=[0.0] max_abs=2.1033e+06 max_rel=4.86991e-13
+```
+
+No `fatal`, `forrtl`, `NaN`, `Abort`, `EOF`, `header mismatch`, or `ERROR`
+markers were found in the selected runtime logs.
+
+Archived evidence:
+
+```text
+logs/remix_sami3_phi_weimer_mpi_payload_bin_runtime_20260524/sacct_7651957.txt
+logs/remix_sami3_phi_weimer_mpi_payload_bin_runtime_20260524/receiver_markers_7651957.txt
+logs/remix_sami3_phi_weimer_mpi_payload_bin_runtime_20260524/recv_qc_compare_7651957.txt
+logs/remix_sami3_phi_weimer_mpi_payload_bin_runtime_20260524/error_marker_scan_7651957.txt
+logs/remix_sami3_phi_weimer_mpi_payload_bin_runtime_20260524/sami3_online_receiver_7651957.out
+logs/remix_sami3_phi_weimer_mpi_payload_bin_runtime_20260524/neutral_phi_sender_7651957.out
+logs/remix_sami3_phi_weimer_mpi_payload_bin_runtime_20260524/slurm_7651957.out
+logs/remix_sami3_phi_weimer_mpi_payload_bin_runtime_20260524/slurm_7651957.err
+```
+
+This removes the SAMI3 file-format dependency from the sender-side replay path.
+The remaining replay element is now the HDF5 source-package stage: the payload
+is generated from archived `waccmx_voltron_forward_package.h5` files, not yet
+from a live REMIX runtime call.
+
 ## Current Limitation
 
 This adapter proves the file-format bridge and static SAMI3 runtime ingestion
 path, a two-frame runtime transition through SAMI3's existing Weimer reader,
 and a runtime append stream visible to that reader.  It now also proves the
-rank-0 online MPI phi payload path.  It does not yet prove production
+rank-0 online MPI phi payload path and a sender-side versioned binary payload
+that no longer depends on `phi_weimer.inp`.  It does not yet prove production
 REMIX -> SAMI3 electrodynamic consistency.
 
 Known limitations:
 
 ```text
 uses NORTH_APEX only by default
-the online MPI smoke sender replays phi frames from an existing stream file
+the latest smoke still generates payloads from archived REMIX HDF5 packages
+instead of a live REMIX runtime producer
 does not yet handle southern-hemisphere sign/mirroring policy
 uses direct mlat/mlon interpolation, not a full SAMI3 field-line mapping
 sets target mlat < 45 deg to zero because the source package is high-lat only
@@ -514,7 +606,7 @@ REMIX/POT live time sequence
 -> exb(hrut, phi)
 ```
 
-Keep the static-file, append-stream, and replayed-MPI paths as baselines.  For
-the physical path, add live REMIX production timing, hemisphere policy, and a
-validation comparison against the current Weimer baseline (`phiu.dat` and
-E x B diagnostics if enabled).
+Keep the static-file, append-stream, replayed-MPI, and binary-payload-MPI paths
+as baselines.  For the physical path, add live REMIX production timing,
+hemisphere policy, and a validation comparison against the current Weimer
+baseline (`phiu.dat` and E x B diagnostics if enabled).
