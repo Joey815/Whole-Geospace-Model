@@ -1,0 +1,135 @@
+{
+  "closed_field_mask_policy": "prototype_all_one_no_traced_topology_filter",
+  "coverage_count_max": 4,
+  "coverage_count_min": 4,
+  "l_extrapolated_cell_count": 0,
+  "mapping_mode": "l_mlt_separable",
+  "output_hdf5": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_l_mlt_20260524.h5",
+  "physical_validity": "prototype",
+  "product": "sami3_to_raiju_mapping_weights",
+  "schema_version": 1,
+  "source_grid_dir": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_online_stubpayload_20231013_0000",
+  "source_l_formula": "median_nz_nlt((baltu/Re)/cos(blatu)^2)",
+  "source_mlt_formula": "circular_mean_nz_nf(blonu) degrees",
+  "source_moments_h5": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_moments_stubpayload_ds_over_B_20260524.h5",
+  "source_shape_nf_nlt": [
+    124,
+    96
+  ],
+  "sparse_weight_count": 33840,
+  "stats": [
+    {
+      "finite_count": 3618816,
+      "max": 1059.0595045319635,
+      "mean": 16.130434809244388,
+      "min": 1.0141530580980849,
+      "name": "sami3_l_shell_3d",
+      "shape": [
+        304,
+        124,
+        96
+      ],
+      "total_count": 3618816
+    },
+    {
+      "finite_count": 11904,
+      "max": 1058.5288045080313,
+      "mean": 16.155727297897812,
+      "min": 1.0141534222944688,
+      "name": "sami3_tube_l",
+      "shape": [
+        124,
+        96
+      ],
+      "total_count": 11904
+    },
+    {
+      "finite_count": 124,
+      "max": 1058.519161639254,
+      "mean": 16.155727421741652,
+      "min": 1.0141534559011587,
+      "name": "sami3_source_l",
+      "shape": [
+        124
+      ],
+      "total_count": 124
+    },
+    {
+      "finite_count": 96,
+      "max": 358.1249694824219,
+      "mean": 179.99997923566994,
+      "min": 1.8750000850997979,
+      "name": "sami3_source_lon_deg",
+      "shape": [
+        96
+      ],
+      "total_count": 96
+    },
+    {
+      "finite_count": 45,
+      "max": 30.111605578372767,
+      "mean": 6.3233442982763055,
+      "min": 1.508787000709922,
+      "name": "raicpl_target_l",
+      "shape": [
+        45
+      ],
+      "total_count": 45
+    },
+    {
+      "finite_count": 188,
+      "max": 359.0,
+      "mean": 180.0,
+      "min": 1.0,
+      "name": "raicpl_target_lon_deg",
+      "shape": [
+        188
+      ],
+      "total_count": 188
+    },
+    {
+      "finite_count": 33840,
+      "max": 0.9539408683776855,
+      "mean": 0.25,
+      "min": 0.00043907391955144703,
+      "name": "mapping_weight",
+      "shape": [
+        33840
+      ],
+      "total_count": 33840
+    },
+    {
+      "finite_count": 8460,
+      "max": 1.0,
+      "mean": 1.0,
+      "min": 1.0,
+      "name": "mapping_weight_sum",
+      "shape": [
+        188,
+        45
+      ],
+      "total_count": 8460
+    },
+    {
+      "finite_count": 8460,
+      "max": 4.0,
+      "mean": 4.0,
+      "min": 4.0,
+      "name": "mapping_coverage_count",
+      "shape": [
+        188,
+        45
+      ],
+      "total_count": 8460
+    }
+  ],
+  "target_l_formula": "1/sin(theta_cell_center)^2 from ShellGrid/theta",
+  "target_mlt_formula": "ShellGrid/phi cell centers modulo 360 degrees",
+  "target_shape_ni_nj": [
+    45,
+    188
+  ],
+  "target_template": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_blend_20260524/sami3_moments_base_control.raiCpl.Res.00000.h5",
+  "weight_sum_max": 1.0,
+  "weight_sum_min": 1.0
+}

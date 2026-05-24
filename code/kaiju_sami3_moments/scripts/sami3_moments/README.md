@@ -233,6 +233,7 @@ Runtime mapping is controlled by:
 ```text
 --mapping-mode index   # old normalized-index resize, smoke_only
 --mapping-mode l_mlt   # prototype L/MLT interpolation, requires --raicpl-template
+--mapping-mode weights # explicit sparse mapping-weight HDF5, requires --mapping-weight-file
 ```
 
 `l_mlt` reads SAMI3 `baltu.dat`, `blatu.dat`, and `blonu.dat` from
@@ -253,6 +254,51 @@ MLT/longitude interpolation is periodic using SAMI3 `blonu` and RAIJU
 `ShellGrid/phi` cell centers modulo 360 degrees.  Metadata records
 `raicpl_runtime_mapping.mode`, source/target ranges, and L extrapolation counts.
 This is still a prototype mapping, not a Voltron traced-tube `bvol` mapping.
+
+The same prototype L/MLT mapping can now be serialized into an explicit sparse
+weight file:
+
+```text
+build_sami3_to_raiju_weights.py \
+  sami3_moments_stubpayload_ds_over_B_20260524.h5 \
+  --out sami3_to_raiju_weights_l_mlt_20260524 \
+  --raicpl-template sami3_moments_base_control.raiCpl.Res.00000.h5
+```
+
+The resulting file has the contract:
+
+```text
+/src/L
+/src/MLT_deg
+/src/tube_L
+
+/dst/L
+/dst/MLT_deg
+/dst/shell_index
+/dst/mlt_index
+
+/map/dst_index   # sparse runtime j,i target indices
+/map/src_index   # sparse SAMI3 nf,nlt source indices
+/map/weight
+/map/corner
+
+/quality/coverage_count
+/quality/weight_sum
+/quality/extrapolation_flag
+/quality/closed_field_mask
+```
+
+Stage 2 can then consume the file with:
+
+```text
+--mapping-mode weights
+--mapping-weight-file sami3_to_raiju_weights_l_mlt_20260524.h5
+```
+
+For the current `ds_over_B + l_mlt` smoke, the weight-file path matches the old
+inline `l_mlt` path to `max_rel=1.19e-7`; the remaining differences are
+`float32` HDF5 write-rounding.
+
 When a runtime layout is requested, the product also writes explicit
 `/MappingQuality` datasets.  For `l_mlt` these include:
 

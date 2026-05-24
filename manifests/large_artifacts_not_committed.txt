@@ -232,3 +232,6 @@
 34039136 /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_mapping_quality_20260524/sami3_moments_base_control_mapq.mix.h5
 28010664 /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_mapping_quality_20260524/sami3_moments_mapq_D005_P005_stateTiote.volt.Res.00000.h5
 28010664 /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_mapping_quality_20260524/sami3_moments_base_control_mapq.volt.Res.00000.h5
+
+# 2026-05-24 explicit mapping-weight smoke omitted generated diagnostic product
+1016354 /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_weightfile_l_mlt_20260524.h5

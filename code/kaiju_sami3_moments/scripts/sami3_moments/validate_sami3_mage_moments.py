@@ -322,6 +322,23 @@ def main():
                     expected_count = int(runtime_mapping_quality.get("l_extrapolated_cell_count", -1))
                     if expected_count >= 0 and int(np.count_nonzero(l_extrap)) != expected_count:
                         raise AssertionError("MappingQuality L extrapolated count mismatch")
+                if runtime_mapping.get("mode") == "weights":
+                    for path, shape in (
+                        ("MappingQuality/source_l", (nf,)),
+                        ("MappingQuality/source_mlt_deg", (nlt,)),
+                        ("MappingQuality/target_l", (ni,)),
+                        ("MappingQuality/target_mlt_deg", (nj,)),
+                        ("MappingQuality/coverage_count_runtime", (nj, ni)),
+                        ("MappingQuality/weight_sum_runtime", (nj, ni)),
+                        ("MappingQuality/extrapolation_flag_runtime_mask", (nj, ni)),
+                        ("MappingQuality/closed_field_mask", (nj, ni)),
+                    ):
+                        arr = require_dataset(d, path)[:]
+                        if arr.shape != shape:
+                            raise AssertionError("{0} shape {1} != {2}".format(path, arr.shape, shape))
+                    weight_sum = require_dataset(d, "MappingQuality/weight_sum_runtime")[:].astype(np.float64)
+                    if np.any(~np.isfinite(weight_sum)) or np.any(weight_sum <= 0.0):
+                        raise AssertionError("MappingQuality weight_sum_runtime contains invalid values")
 
         for path, units in (
             ("RAIJU_Coupler/Pavg", "nPa"),

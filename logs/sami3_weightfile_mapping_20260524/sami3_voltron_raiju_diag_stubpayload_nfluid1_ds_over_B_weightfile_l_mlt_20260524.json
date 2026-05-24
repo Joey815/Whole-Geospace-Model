@@ -1,0 +1,772 @@
+{
+  "MAXTUBEFLUIDS": 5,
+  "bulk_channel": 0,
+  "channel_semantics": {
+    "0": "bulk SAMI3 ion moment mapped to MAGE BLK channel"
+  },
+  "compatibility": {
+    "gamera_equation_change": false,
+    "note": "Field-name and unit diagnostic product only; a production restart requires ShellGrid, topology, magnetic geometry, potentials, masks, and timing.",
+    "rai_cpl_restart": false,
+    "tube_shell_restart": false
+  },
+  "density_mode": "num",
+  "mage_read_groups": {
+    "/RaiCplMomentsOnly": "moments-only raijuCoupler_T field group; Pavg/Davg/Pstd/Dstd have nFluidIn+1 channels",
+    "/TubeShellMomentsOnly": "moments-only TubeShell_T field group; avgP/avgN/stdP/stdN have MAXTUBEFLUIDS+1 channels"
+  },
+  "moment_source_selection": {
+    "Davg": "Davg_num",
+    "Dstd": "Dstd",
+    "Pavg": "Pavg_i",
+    "Pstd": "Pstd",
+    "tiote": "tiote"
+  },
+  "nFluidIn": 1,
+  "n_channels": 2,
+  "normalization": {
+    "Dstd": "RAIJU_State.Dstd = RAIJU_Coupler.Dstd / max(Davg, 1e-30)",
+    "Pstd": "RAIJU_State.Pstd = RAIJU_Coupler.Pstd / max(Pavg, 1e-30)"
+  },
+  "output_hdf5": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_weightfile_l_mlt_20260524.h5",
+  "pressure_mode": "ion",
+  "product": "sami3_voltron_raiju_moments_diagnostic",
+  "raicpl_runtime_layout": {
+    "fortran_shape": [
+      45,
+      188,
+      2
+    ],
+    "hdf5_shape": [
+      2,
+      188,
+      45
+    ],
+    "layout": "ReadInSGV runtime HDF5 order: channel, j, i",
+    "mapping_mode": "weights",
+    "mapping_weight_file": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_l_mlt_20260524.h5",
+    "target_2d_shape": [
+      45,
+      188
+    ],
+    "template": null
+  },
+  "raicpl_runtime_mapping": {
+    "mapped_stats": [
+      {
+        "finite_count": 8460,
+        "max": 0.24368590459728434,
+        "mean": 0.047410337768040954,
+        "min": 3.389955265437446e-05,
+        "name": "RaiCplMomentsOnly.Pavg_mapped",
+        "shape": [
+          45,
+          188
+        ],
+        "total_count": 8460
+      },
+      {
+        "finite_count": 8460,
+        "max": 17444.617011183782,
+        "mean": 3970.95117887612,
+        "min": 3.463230481279736,
+        "name": "RaiCplMomentsOnly.Davg_mapped",
+        "shape": [
+          45,
+          188
+        ],
+        "total_count": 8460
+      },
+      {
+        "finite_count": 8460,
+        "max": 0.7108953426727336,
+        "mean": 0.17649003960655174,
+        "min": 0.002713999798232983,
+        "name": "RaiCplMomentsOnly.Pstd_mapped",
+        "shape": [
+          45,
+          188
+        ],
+        "total_count": 8460
+      },
+      {
+        "finite_count": 8460,
+        "max": 38595.214916048906,
+        "mean": 10358.530520208493,
+        "min": 160.1990916844367,
+        "name": "RaiCplMomentsOnly.Dstd_mapped",
+        "shape": [
+          45,
+          188
+        ],
+        "total_count": 8460
+      },
+      {
+        "finite_count": 8460,
+        "max": 1.0004480049576971,
+        "mean": 0.9783320295525203,
+        "min": 0.8748378995839925,
+        "name": "RaiCplMomentsOnly.tiote_mapped",
+        "shape": [
+          45,
+          188
+        ],
+        "total_count": 8460
+      }
+    ],
+    "mode": "weights",
+    "note": "Sparse mapping-weight application.  The current generated weight file can encode the prototype separable L/MLT interpolation; later files should replace it with Voltron traced-tube or bvol-aligned weights.",
+    "physical_validity": "prototype",
+    "quality_summary": {
+      "closed_field_mask_zero_count": 0,
+      "coverage_count_max": 4,
+      "coverage_count_min": 4,
+      "extrapolated_cell_count": 0,
+      "finite_all_cell_count": 8460,
+      "finite_all_fraction": 1.0,
+      "finite_moment_count_max": 5,
+      "finite_moment_count_min": 5,
+      "mode": "weights",
+      "source_shape_nf_nlt": [
+        124,
+        96
+      ],
+      "sparse_weight_count": 33840,
+      "target_runtime_shape_j_i": [
+        188,
+        45
+      ],
+      "target_shape_ni_nj": [
+        45,
+        188
+      ],
+      "weight_file": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_l_mlt_20260524.h5",
+      "weight_file_mapping_mode": "l_mlt_separable",
+      "weight_file_physical_validity": "prototype",
+      "weight_file_schema_version": 1,
+      "weight_sum_max": 1.0,
+      "weight_sum_min": 1.0
+    },
+    "source_shape_nf_nlt": [
+      124,
+      96
+    ],
+    "target_shape": [
+      45,
+      188
+    ],
+    "target_shape_ni_nj": [
+      45,
+      188
+    ],
+    "weight_file": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_l_mlt_20260524.h5",
+    "weight_file_mapping_mode": "l_mlt_separable",
+    "weight_file_physical_validity": "prototype",
+    "weight_file_schema_version": 1
+  },
+  "raicpl_runtime_mapping_quality": {
+    "closed_field_mask_zero_count": 0,
+    "coverage_count_max": 4,
+    "coverage_count_min": 4,
+    "extrapolated_cell_count": 0,
+    "finite_all_cell_count": 8460,
+    "finite_all_fraction": 1.0,
+    "finite_moment_count_max": 5,
+    "finite_moment_count_min": 5,
+    "mode": "weights",
+    "source_shape_nf_nlt": [
+      124,
+      96
+    ],
+    "sparse_weight_count": 33840,
+    "target_runtime_shape_j_i": [
+      188,
+      45
+    ],
+    "target_shape_ni_nj": [
+      45,
+      188
+    ],
+    "weight_file": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_l_mlt_20260524.h5",
+    "weight_file_mapping_mode": "l_mlt_separable",
+    "weight_file_physical_validity": "prototype",
+    "weight_file_schema_version": 1,
+    "weight_sum_max": 1.0,
+    "weight_sum_min": 1.0
+  },
+  "schema_version": 1,
+  "source_attrs": {
+    "Davg": {
+      "units": "#/cc"
+    },
+    "Dstd": {
+      "units": "#/cc"
+    },
+    "Pavg": {
+      "units": "nPa"
+    },
+    "Pstd": {
+      "units": "nPa"
+    },
+    "tiote": {
+      "units": "normalized"
+    }
+  },
+  "source_metadata": {
+    "compatibility": {
+      "intermediate_hdf5": true,
+      "note": "This is a diagnostic intermediate product, not a complete Voltron TubeShell restart.",
+      "target_fields": [
+        "Pavg",
+        "Davg",
+        "Pstd",
+        "Dstd",
+        "tiote"
+      ],
+      "tube_shell_restart": false
+    },
+    "coordinate_sources": {
+      "balt_mean_km": "baltu.dat",
+      "blat_mean_deg": "blatu.dat",
+      "blon_mean_deg": "blonu.dat",
+      "glat_mean_deg": "glatu.dat",
+      "glon_mean_deg": "glonu.dat",
+      "zalt_mean_km": "zaltu.dat"
+    },
+    "density_semantics": {
+      "Davg": "alias for Davg_num; total ion number density",
+      "Davg_massEq": "sum_i A_i n_i, proton-equivalent #/cc",
+      "Davg_num": "sum_i n_i, #/cc",
+      "mu_eff": "Davg_massEq / Davg_num"
+    },
+    "density_units": "#/cc",
+    "dimensions": {
+      "nf": 124,
+      "nion": 7,
+      "nlt": 96,
+      "nz": 304
+    },
+    "ion_mass_amu": [
+      1.0,
+      16.0,
+      30.0,
+      32.0,
+      4.0,
+      28.0,
+      14.0
+    ],
+    "ion_order": [
+      "H+",
+      "O+",
+      "NO+",
+      "O2+",
+      "He+",
+      "N2+",
+      "N+"
+    ],
+    "moment_weighting": "ds_over_B",
+    "ne_source": "deneu.dat",
+    "output_hdf5": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_moments_stubpayload_ds_over_B_20260524.h5",
+    "output_npz": null,
+    "physical_validity": "prototype",
+    "pressure_conversion": {
+      "formula": "p_nPa = deni_cm3 * ti_K * 1.38044e-8",
+      "kB_cgs_times_dyn_cm2_to_nPa": 1.38044e-08
+    },
+    "pressure_semantics": {
+      "Pavg": "alias for Pavg_i; total ion pressure",
+      "Pavg_e": "ne kB Te, nPa",
+      "Pavg_i": "sum_i n_i kB Ti_i, nPa",
+      "Pavg_total": "Pavg_i + Pavg_e, nPa"
+    },
+    "pressure_units": "nPa",
+    "product": "sami3_voltron_moments_diagnostic",
+    "records": {
+      "bmstu.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "deneu.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "deni1u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "deni2u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "deni3u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "deni4u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "deni5u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "deni6u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "deni7u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "teu.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "ti1u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "ti2u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "ti3u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "ti4u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "ti5u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "ti6u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "ti7u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "xsu.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "ysu.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "zsu.dat": {
+        "record_count": 1,
+        "record_index": 0
+      }
+    },
+    "run_dir": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_online_stubpayload_20231013_0000",
+    "schema_version": 1,
+    "stats": [
+      {
+        "finite_count": 11904,
+        "max": 4.13702392578125,
+        "mean": 0.5670714974403381,
+        "min": 3.5241025670984527e-06,
+        "name": "Pavg",
+        "shape": [
+          124,
+          96
+        ]
+      },
+      {
+        "finite_count": 11904,
+        "max": 216045.671875,
+        "mean": 36795.40234375,
+        "min": 0.34504061937332153,
+        "name": "Davg",
+        "shape": [
+          124,
+          96
+        ]
+      },
+      {
+        "finite_count": 11904,
+        "max": 2.928270101547241,
+        "mean": 0.6109516024589539,
+        "min": 0.00033129382063634694,
+        "name": "Pstd",
+        "shape": [
+          124,
+          96
+        ]
+      },
+      {
+        "finite_count": 11904,
+        "max": 151099.875,
+        "mean": 36530.1171875,
+        "min": 19.846067428588867,
+        "name": "Dstd",
+        "shape": [
+          124,
+          96
+        ]
+      },
+      {
+        "finite_count": 11904,
+        "max": 1.0005241632461548,
+        "mean": 0.9328573942184448,
+        "min": 0.11160942912101746,
+        "name": "tiote",
+        "shape": [
+          124,
+          96
+        ]
+      },
+      {
+        "finite_count": 11904,
+        "max": 3498050.5,
+        "mean": 556836.0625,
+        "min": 0.4629077911376953,
+        "name": "Davg_massEq",
+        "shape": [
+          124,
+          96
+        ]
+      },
+      {
+        "finite_count": 11904,
+        "max": 30.546707153320312,
+        "mean": 13.372474670410156,
+        "min": 1.3312475681304932,
+        "name": "mu_eff",
+        "shape": [
+          124,
+          96
+        ]
+      },
+      {
+        "finite_count": 11904,
+        "max": 4.852145671844482,
+        "mean": 0.6503766775131226,
+        "min": 3.5257846775493817e-06,
+        "name": "Pavg_e",
+        "shape": [
+          124,
+          96
+        ]
+      },
+      {
+        "finite_count": 11904,
+        "max": 8.929980278015137,
+        "mean": 1.2174482345581055,
+        "min": 7.0498872446478345e-06,
+        "name": "Pavg_total",
+        "shape": [
+          124,
+          96
+        ]
+      },
+      {
+        "finite_count": 11904,
+        "max": 1.0,
+        "mean": 0.22836527228355408,
+        "min": 7.045279926387593e-05,
+        "name": "f_molecular",
+        "shape": [
+          124,
+          96
+        ]
+      },
+      {
+        "finite_count": 11904,
+        "max": 1389.518310546875,
+        "mean": 820.374755859375,
+        "min": 200.0,
+        "name": "Ti_eff",
+        "shape": [
+          124,
+          96
+        ]
+      },
+      {
+        "finite_count": 11904,
+        "max": 7657.37255859375,
+        "mean": 1007.7861328125,
+        "min": 200.0,
+        "name": "Te_eff",
+        "shape": [
+          124,
+          96
+        ]
+      }
+    ],
+    "std_units": {
+      "Dstd": "#/cc absolute; RAIJU normalizes later",
+      "Pstd": "nPa absolute; RAIJU normalizes later"
+    },
+    "temperature_units": "K",
+    "time_rows": [
+      [
+        "1",
+        "0",
+        "0",
+        "0",
+        "0.0000E+00"
+      ]
+    ],
+    "weighting": {
+      "b_source": "bmstu.dat, normalized B=b/b0",
+      "bms_floor": 0.0001,
+      "bms_floor_hit_count": 1152,
+      "bms_floor_hit_fraction": 0.00031833616298811547,
+      "ds_units": "km",
+      "grid_files": {
+        "bmstu.dat": {
+          "record_count": 1,
+          "record_index": 0
+        },
+        "xsu.dat": {
+          "record_count": 1,
+          "record_index": 0
+        },
+        "ysu.dat": {
+          "record_count": 1,
+          "record_index": 0
+        },
+        "zsu.dat": {
+          "record_count": 1,
+          "record_index": 0
+        }
+      },
+      "mode": "ds_over_B",
+      "note": "Weights are proportional to ds/B using SAMI3 s-grid centers. This is a prototype flux-tube-volume quadrature, not yet a Voltron traced-tube bvol-aligned production mapping.  The normalized magnetic field is floored by --weight-bmin to prevent pathological near-zero bmstu samples from dominating the mean.",
+      "physical_validity": "prototype",
+      "source": "xsu/ysu/zsu center spacing divided by bmstu",
+      "stats": [
+        {
+          "finite_count": 3618816,
+          "max": 6045625.242367499,
+          "mean": 554.8284792326273,
+          "min": 0.15008821752476503,
+          "name": "ds_km",
+          "shape": [
+            304,
+            124,
+            96
+          ]
+        },
+        {
+          "finite_count": 3618816,
+          "max": 2.0681204795837402,
+          "mean": 1.0165203277793788,
+          "min": 1.1267823341043481e-09,
+          "name": "bms",
+          "shape": [
+            304,
+            124,
+            96
+          ]
+        },
+        {
+          "finite_count": 3618816,
+          "max": 2.0681204795837402,
+          "mean": 1.0165203531635152,
+          "min": 0.0001,
+          "name": "bms_effective",
+          "shape": [
+            304,
+            124,
+            96
+          ]
+        },
+        {
+          "finite_count": 3618816,
+          "max": 60456252423.67498,
+          "mean": 2489173.0761641823,
+          "min": 0.11683273451666609,
+          "name": "ds_over_B_weight",
+          "shape": [
+            304,
+            124,
+            96
+          ]
+        }
+      ]
+    }
+  },
+  "source_moments_h5": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_moments_stubpayload_ds_over_B_20260524.h5",
+  "stats": [
+    {
+      "finite_count": 11904,
+      "max": 4.13702392578125,
+      "mean": 0.5670715121648862,
+      "min": 3.5241025670984527e-06,
+      "name": "Voltron.avgP/RAIJU.Pavg",
+      "shape": [
+        124,
+        96
+      ],
+      "total_count": 11904
+    },
+    {
+      "finite_count": 11904,
+      "max": 216045.671875,
+      "mean": 36795.40061156311,
+      "min": 0.34504061937332153,
+      "name": "Voltron.avgN/RAIJU.Davg",
+      "shape": [
+        124,
+        96
+      ],
+      "total_count": 11904
+    },
+    {
+      "finite_count": 11904,
+      "max": 2.928270101547241,
+      "mean": 0.6109515934927615,
+      "min": 0.00033129382063634694,
+      "name": "Voltron.stdP absolute",
+      "shape": [
+        124,
+        96
+      ],
+      "total_count": 11904
+    },
+    {
+      "finite_count": 11904,
+      "max": 151099.875,
+      "mean": 36530.11959860065,
+      "min": 19.846067428588867,
+      "name": "Voltron.stdN absolute",
+      "shape": [
+        124,
+        96
+      ],
+      "total_count": 11904
+    },
+    {
+      "finite_count": 11904,
+      "max": 143.18782045339753,
+      "mean": 9.903409574754571,
+      "min": 0.255208268178331,
+      "name": "RAIJU_State.Pstd normalized",
+      "shape": [
+        124,
+        96
+      ],
+      "total_count": 11904
+    },
+    {
+      "finite_count": 11904,
+      "max": 86.95889332449026,
+      "mean": 6.415755106234947,
+      "min": 0.2455597644274279,
+      "name": "RAIJU_State.Dstd normalized",
+      "shape": [
+        124,
+        96
+      ],
+      "total_count": 11904
+    },
+    {
+      "finite_count": 11904,
+      "max": 1.0005241632461548,
+      "mean": 0.9328574435065641,
+      "min": 0.11160942912101746,
+      "name": "tiote",
+      "shape": [
+        124,
+        96
+      ],
+      "total_count": 11904
+    },
+    {
+      "finite_count": 8460,
+      "max": 0.24368590459728434,
+      "mean": 0.047410337768040954,
+      "min": 3.389955265437446e-05,
+      "name": "RaiCplMomentsOnly.Pavg_mapped",
+      "shape": [
+        45,
+        188
+      ],
+      "total_count": 8460
+    },
+    {
+      "finite_count": 8460,
+      "max": 17444.617011183782,
+      "mean": 3970.95117887612,
+      "min": 3.463230481279736,
+      "name": "RaiCplMomentsOnly.Davg_mapped",
+      "shape": [
+        45,
+        188
+      ],
+      "total_count": 8460
+    },
+    {
+      "finite_count": 8460,
+      "max": 0.7108953426727336,
+      "mean": 0.17649003960655174,
+      "min": 0.002713999798232983,
+      "name": "RaiCplMomentsOnly.Pstd_mapped",
+      "shape": [
+        45,
+        188
+      ],
+      "total_count": 8460
+    },
+    {
+      "finite_count": 8460,
+      "max": 38595.214916048906,
+      "mean": 10358.530520208493,
+      "min": 160.1990916844367,
+      "name": "RaiCplMomentsOnly.Dstd_mapped",
+      "shape": [
+        45,
+        188
+      ],
+      "total_count": 8460
+    },
+    {
+      "finite_count": 8460,
+      "max": 1.0004480049576971,
+      "mean": 0.9783320295525203,
+      "min": 0.8748378995839925,
+      "name": "RaiCplMomentsOnly.tiote_mapped",
+      "shape": [
+        45,
+        188
+      ],
+      "total_count": 8460
+    }
+  ],
+  "std_source_warning": "Pstd/Dstd are still read from the existing ion/number-density std fields. For massEq density, total pressure, or prototype weighted-moment runs, use runtime alphaPstd/alphaDstd=0 unless matching std definitions are added.",
+  "tubeshell_moments_channels": 6,
+  "units": {
+    "RAIJU_Coupler.Dstd": "#/cc absolute",
+    "RAIJU_Coupler.Pstd": "nPa absolute",
+    "RAIJU_State.Dstd": "normalized by Davg",
+    "RAIJU_State.Pstd": "normalized by Pavg",
+    "TubeShellMomentsOnly.stdN": "#/cc absolute",
+    "TubeShellMomentsOnly.stdP": "nPa absolute",
+    "Voltron.Tiote0": "normalized Ti/Te",
+    "Voltron.avgN": "#/cc",
+    "Voltron.avgP": "nPa",
+    "Voltron.stdN": "#/cc absolute",
+    "Voltron.stdP": "nPa absolute"
+  },
+  "validation": {
+    "negative_or_zero_counts": {
+      "Davg": 0,
+      "Pavg": 0,
+      "tiote": 0
+    },
+    "nonfinite_counts": {
+      "Davg": 0,
+      "Dstd": 0,
+      "Pavg": 0,
+      "Pstd": 0,
+      "tiote": 0
+    }
+  }
+}

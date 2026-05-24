@@ -98,13 +98,24 @@ def parse_args():
     )
     parser.add_argument(
         "--mapping-mode",
-        choices=("index", "l_mlt"),
+        choices=("index", "l_mlt", "weights"),
         default="index",
         help=(
             "Runtime /RaiCplMomentsOnly mapping mode when a target layout is "
             "requested. index preserves the old normalized-index resize. "
             "l_mlt maps SAMI3 L/longitude onto RAIJU ShellGrid theta/phi with "
-            "periodic MLT interpolation. Default: index."
+            "periodic MLT interpolation. weights applies an explicit sparse "
+            "mapping-weight HDF5 file. Default: index."
+        ),
+    )
+    parser.add_argument(
+        "--mapping-weight-file",
+        default=None,
+        help=(
+            "Explicit sparse SAMI3-to-RAIJU mapping weight file for "
+            "--mapping-mode weights. If no --raicpl-template or "
+            "--target-raicpl-shape is supplied, the target shape is inferred "
+            "from this file."
         ),
     )
     parser.add_argument(
@@ -158,6 +169,16 @@ def finite_stats(name, arr):
         }
     )
     return stat
+
+
+def jsonable_h5_value(value):
+    if isinstance(value, bytes):
+        return value.decode("utf-8")
+    if isinstance(value, np.ndarray):
+        return value.tolist()
+    if isinstance(value, np.generic):
+        return value.item()
+    return value
 
 
 def require_h5py():
@@ -314,13 +335,16 @@ def read_raicpl_target_l_mlt(template_path, target_shape):
         phi = handle["ShellGrid/phi"][:].astype(np.float64)
         theta = handle["ShellGrid/theta"][:].astype(np.float64)
 
-    ni, nj = target_shape
-    if phi.size != nj + 1 or theta.size != ni + 1:
-        raise ValueError(
-            "ShellGrid node sizes phi={0}, theta={1} do not match target shape {2}".format(
-                phi.size, theta.size, target_shape
+    if target_shape is None:
+        ni, nj = theta.size - 1, phi.size - 1
+    else:
+        ni, nj = target_shape
+        if phi.size != nj + 1 or theta.size != ni + 1:
+            raise ValueError(
+                "ShellGrid node sizes phi={0}, theta={1} do not match target shape {2}".format(
+                    phi.size, theta.size, target_shape
+                )
             )
-        )
 
     phi_cc = 0.5 * (phi[:-1] + phi[1:])
     theta_cc = 0.5 * (theta[:-1] + theta[1:])
@@ -413,6 +437,265 @@ def periodic_interp_brackets_deg(source_deg, target_deg):
         "left_source_index": order_ext[left].astype(np.int32),
         "right_source_index": order_ext[right].astype(np.int32),
         "interp_weight": np.clip(weight, 0.0, 1.0).astype(np.float32),
+    }
+
+
+def peek_mapping_weight_target_shape(path):
+    h5py = require_moments_h5(path)
+    with h5py.File(path, "r") as handle:
+        if "target_shape_ni_nj" in handle.attrs:
+            shape = np.asarray(handle.attrs["target_shape_ni_nj"], dtype=np.int64)
+            if shape.size != 2:
+                raise ValueError("target_shape_ni_nj must have two entries in {0}".format(path))
+            return int(shape[0]), int(shape[1])
+        if "map/dst_index" not in handle:
+            raise KeyError("mapping weight file is missing /map/dst_index: {0}".format(path))
+        dst = handle["map/dst_index"][:].astype(np.int64)
+    if dst.ndim != 2 or dst.shape[1] != 2 or dst.size == 0:
+        raise ValueError("/map/dst_index must have shape (nnz, 2)")
+    # dst_index columns are runtime j,i.
+    return int(np.max(dst[:, 1])) + 1, int(np.max(dst[:, 0])) + 1
+
+
+def read_optional_h5_dataset(handle, path, default=None):
+    if path in handle:
+        return handle[path][:]
+    return default
+
+
+def read_mapping_weight_file(path, target_shape, source_shape):
+    h5py = require_moments_h5(path)
+    with h5py.File(path, "r") as handle:
+        required = (
+            "map/dst_index",
+            "map/src_index",
+            "map/weight",
+            "src/L",
+            "src/MLT_deg",
+            "dst/L",
+            "dst/MLT_deg",
+        )
+        for item in required:
+            if item not in handle:
+                raise KeyError("mapping weight file is missing /{0}".format(item))
+
+        dst_index = handle["map/dst_index"][:].astype(np.int64)
+        src_index = handle["map/src_index"][:].astype(np.int64)
+        weights = handle["map/weight"][:].astype(np.float64)
+        source_l = handle["src/L"][:].astype(np.float64)
+        source_mlt = handle["src/MLT_deg"][:].astype(np.float64)
+        target_l = handle["dst/L"][:].astype(np.float64)
+        target_mlt = handle["dst/MLT_deg"][:].astype(np.float64)
+
+        coverage = read_optional_h5_dataset(handle, "quality/coverage_count")
+        weight_sum = read_optional_h5_dataset(handle, "quality/weight_sum")
+        extrap = read_optional_h5_dataset(handle, "quality/extrapolation_flag")
+        closed = read_optional_h5_dataset(handle, "quality/closed_field_mask")
+        corner = read_optional_h5_dataset(handle, "map/corner")
+        l_left = read_optional_h5_dataset(handle, "map/l_left_source_index")
+        l_right = read_optional_h5_dataset(handle, "map/l_right_source_index")
+        l_weight = read_optional_h5_dataset(handle, "map/l_interp_weight")
+        mlt_left = read_optional_h5_dataset(handle, "map/mlt_left_source_index")
+        mlt_right = read_optional_h5_dataset(handle, "map/mlt_right_source_index")
+        mlt_weight = read_optional_h5_dataset(handle, "map/mlt_interp_weight")
+        attrs = {key: jsonable_h5_value(value) for key, value in handle.attrs.items()}
+
+    if dst_index.ndim != 2 or dst_index.shape[1] != 2:
+        raise ValueError("/map/dst_index must have shape (nnz, 2)")
+    if src_index.shape != dst_index.shape:
+        raise ValueError("/map/src_index shape must match /map/dst_index")
+    if weights.ndim != 1 or weights.shape[0] != dst_index.shape[0]:
+        raise ValueError("/map/weight must have shape (nnz,)")
+
+    ni, nj = target_shape
+    nf, nlt = source_shape
+    if source_l.shape != (nf,) or source_mlt.shape != (nlt,):
+        raise ValueError("mapping weight source coordinate shapes do not match SAMI3 moments")
+    if target_l.shape != (ni,) or target_mlt.shape != (nj,):
+        raise ValueError("mapping weight target coordinate shapes do not match runtime layout")
+
+    if np.any(src_index[:, 0] < 0) or np.any(src_index[:, 0] >= nf):
+        raise ValueError("/map/src_index nf column outside source range")
+    if np.any(src_index[:, 1] < 0) or np.any(src_index[:, 1] >= nlt):
+        raise ValueError("/map/src_index nlt column outside source range")
+    if np.any(dst_index[:, 0] < 0) or np.any(dst_index[:, 0] >= nj):
+        raise ValueError("/map/dst_index j column outside target range")
+    if np.any(dst_index[:, 1] < 0) or np.any(dst_index[:, 1] >= ni):
+        raise ValueError("/map/dst_index i column outside target range")
+    if np.any(~np.isfinite(weights)) or np.any(weights < 0.0):
+        raise ValueError("/map/weight contains non-finite or negative weights")
+
+    if coverage is None or weight_sum is None:
+        coverage = np.zeros((nj, ni), dtype=np.int16)
+        weight_sum = np.zeros((nj, ni), dtype=np.float64)
+        np.add.at(coverage, (dst_index[:, 0], dst_index[:, 1]), weights > 0.0)
+        np.add.at(weight_sum, (dst_index[:, 0], dst_index[:, 1]), weights)
+    else:
+        coverage = coverage.astype(np.int16)
+        weight_sum = weight_sum.astype(np.float64)
+    if coverage.shape != (nj, ni) or weight_sum.shape != (nj, ni):
+        raise ValueError("mapping quality arrays must use runtime shape (NJ, NI)")
+    if extrap is None:
+        extrap = np.zeros((nj, ni), dtype=np.uint8)
+    if closed is None:
+        closed = np.ones((nj, ni), dtype=np.uint8)
+    extrap = extrap.astype(np.uint8)
+    closed = closed.astype(np.uint8)
+    if extrap.shape != (nj, ni) or closed.shape != (nj, ni):
+        raise ValueError("mapping flag arrays must use runtime shape (NJ, NI)")
+
+    summary = {
+        "weight_file": os.path.abspath(path),
+        "weight_file_schema_version": int(attrs.get("schema_version", 0)),
+        "weight_file_mapping_mode": attrs.get("mapping_mode", "unknown"),
+        "weight_file_physical_validity": attrs.get("physical_validity", "unknown"),
+        "source_shape_nf_nlt": [int(nf), int(nlt)],
+        "target_shape_ni_nj": [int(ni), int(nj)],
+        "sparse_weight_count": int(weights.size),
+        "coverage_count_min": int(np.min(coverage)),
+        "coverage_count_max": int(np.max(coverage)),
+        "weight_sum_min": float(np.min(weight_sum)),
+        "weight_sum_max": float(np.max(weight_sum)),
+        "extrapolated_cell_count": int(np.count_nonzero(extrap)),
+        "closed_field_mask_zero_count": int(closed.size - np.count_nonzero(closed)),
+    }
+    optional = {
+        "corner": corner,
+        "l_left_source_index": l_left,
+        "l_right_source_index": l_right,
+        "l_interp_weight": l_weight,
+        "mlt_left_source_index": mlt_left,
+        "mlt_right_source_index": mlt_right,
+        "mlt_interp_weight": mlt_weight,
+    }
+    return {
+        "path": os.path.abspath(path),
+        "attrs": attrs,
+        "dst_index": dst_index.astype(np.int64),
+        "src_index": src_index.astype(np.int64),
+        "weight": weights.astype(np.float64),
+        "source_l": source_l,
+        "source_mlt_deg": source_mlt,
+        "target_l": target_l,
+        "target_mlt_deg": target_mlt,
+        "coverage_count": coverage,
+        "weight_sum": weight_sum,
+        "extrapolation_flag": extrap,
+        "closed_field_mask": closed,
+        "optional": optional,
+        "summary": summary,
+    }
+
+
+def map_weight_file_2d(arr, weight_info):
+    target_l = weight_info["target_l"]
+    target_mlt = weight_info["target_mlt_deg"]
+    ni = target_l.size
+    nj = target_mlt.size
+    dst = weight_info["dst_index"]
+    src = weight_info["src_index"]
+    weights = weight_info["weight"]
+    runtime = np.zeros((nj, ni), dtype=np.float64)
+    weight_sum = np.zeros((nj, ni), dtype=np.float64)
+    np.add.at(runtime, (dst[:, 0], dst[:, 1]), arr[src[:, 0], src[:, 1]] * weights)
+    np.add.at(weight_sum, (dst[:, 0], dst[:, 1]), weights)
+    runtime = runtime / np.maximum(weight_sum, TINY)
+    return runtime.T
+
+
+def build_mapping_quality_from_weights(mapped, target_shape, weight_info):
+    result = build_mapping_quality("weights", mapped, target_shape)
+    datasets = result["datasets"]
+    summary = result["summary"]
+    attrs = result["attrs"]
+    attrs["weight_file"] = weight_info["path"]
+    attrs["weight_file_mapping_mode"] = str(weight_info["summary"]["weight_file_mapping_mode"])
+    attrs["weight_file_physical_validity"] = str(
+        weight_info["summary"]["weight_file_physical_validity"]
+    )
+    datasets.update(
+        {
+            "source_l": {
+                "data": weight_info["source_l"].astype(np.float32),
+                "units": "Re",
+                "description": "Source SAMI3 shell coordinate by nf index from mapping weight file.",
+            },
+            "source_mlt_deg": {
+                "data": weight_info["source_mlt_deg"].astype(np.float32),
+                "units": "degrees",
+                "description": "Source SAMI3 periodic longitude/MLT coordinate by nlt index from mapping weight file.",
+            },
+            "target_l": {
+                "data": weight_info["target_l"].astype(np.float32),
+                "units": "Re",
+                "description": "RAIJU target shell coordinate by i index from mapping weight file.",
+            },
+            "target_mlt_deg": {
+                "data": weight_info["target_mlt_deg"].astype(np.float32),
+                "units": "degrees",
+                "description": "RAIJU target periodic longitude/MLT coordinate by j index from mapping weight file.",
+            },
+            "coverage_count_runtime": {
+                "data": weight_info["coverage_count"].astype(np.int16),
+                "units": "count",
+                "description": "Number of nonzero sparse mapping weights at each runtime j,i cell.",
+            },
+            "weight_sum_runtime": {
+                "data": weight_info["weight_sum"].astype(np.float32),
+                "units": "normalized",
+                "description": "Sparse mapping weight sum at each runtime j,i cell.",
+            },
+            "extrapolation_flag_runtime_mask": {
+                "data": weight_info["extrapolation_flag"].astype(np.uint8),
+                "units": "logical",
+                "description": "1 where the mapping weight file marks the target cell as extrapolated.",
+            },
+            "closed_field_mask": {
+                "data": weight_info["closed_field_mask"].astype(np.uint8),
+                "units": "logical",
+                "description": "Closed-field mask from mapping weight file; prototype files may set all cells to 1.",
+            },
+        }
+    )
+    optional_shapes = {
+        "l_left_source_index": ("index", "Lower SAMI3 nf source index used for each target i."),
+        "l_right_source_index": ("index", "Upper SAMI3 nf source index used for each target i."),
+        "l_interp_weight": ("normalized", "Linear L interpolation weight toward l_right_source_index."),
+        "mlt_left_source_index": ("index", "Left periodic SAMI3 nlt source index used for each target j."),
+        "mlt_right_source_index": ("index", "Right periodic SAMI3 nlt source index used for each target j."),
+        "mlt_interp_weight": ("normalized", "Periodic MLT interpolation weight toward mlt_right_source_index."),
+    }
+    for name, (units, description) in optional_shapes.items():
+        value = weight_info["optional"].get(name)
+        if value is not None:
+            datasets[name] = {
+                "data": value,
+                "units": units,
+                "description": description,
+            }
+    summary.update(weight_info["summary"])
+    return result
+
+
+def build_mapping_metadata_from_weights(target_shape, weight_info):
+    return {
+        "mode": "weights",
+        "target_shape": [int(target_shape[0]), int(target_shape[1])],
+        "weight_file": weight_info["path"],
+        "weight_file_schema_version": weight_info["summary"]["weight_file_schema_version"],
+        "weight_file_mapping_mode": weight_info["summary"]["weight_file_mapping_mode"],
+        "weight_file_physical_validity": weight_info["summary"][
+            "weight_file_physical_validity"
+        ],
+        "source_shape_nf_nlt": weight_info["summary"]["source_shape_nf_nlt"],
+        "target_shape_ni_nj": weight_info["summary"]["target_shape_ni_nj"],
+        "physical_validity": "prototype",
+        "note": (
+            "Sparse mapping-weight application.  The current generated weight "
+            "file can encode the prototype separable L/MLT interpolation; later "
+            "files should replace it with Voltron traced-tube or bvol-aligned weights."
+        ),
+        "quality_summary": weight_info["summary"],
     }
 
 
@@ -611,6 +894,7 @@ def build_raicpl_runtime_layout(
     source_metadata,
     sami3_grid_dir,
     template_path,
+    mapping_weight_file,
 ):
     if mapping_mode == "index":
         mapped = {name: resize_2d(arrays[name], target_shape) for name in MOMENTS}
@@ -640,6 +924,18 @@ def build_raicpl_runtime_layout(
         mapping_quality = build_mapping_quality(
             "l_mlt", mapped, target_shape, source_grid=source_grid, target_grid=target_grid
         )
+    elif mapping_mode == "weights":
+        if not mapping_weight_file:
+            raise ValueError("--mapping-mode weights requires --mapping-weight-file")
+        weight_info = read_mapping_weight_file(
+            os.path.abspath(mapping_weight_file), target_shape, arrays["Pavg"].shape
+        )
+        mapped = {
+            name: map_weight_file_2d(arrays[name], weight_info)
+            for name in MOMENTS
+        }
+        mapping_metadata = build_mapping_metadata_from_weights(target_shape, weight_info)
+        mapping_quality = build_mapping_quality_from_weights(mapped, target_shape, weight_info)
     else:
         raise ValueError("unsupported mapping mode: {0}".format(mapping_mode))
 
@@ -885,6 +1181,20 @@ def main():
             "target_2d_shape": [int(ni), int(nj)],
             "layout": "ReadInSGV runtime HDF5 order: channel, j, i",
         }
+    if (
+        args.mapping_mode == "weights"
+        and args.mapping_weight_file
+        and raicpl_runtime_layout is None
+    ):
+        ni, nj = peek_mapping_weight_target_shape(args.mapping_weight_file)
+        raicpl_runtime_layout = {
+            "template": os.path.abspath(args.raicpl_template) if args.raicpl_template else None,
+            "mapping_weight_file": os.path.abspath(args.mapping_weight_file),
+            "hdf5_shape": [int(n_channels), int(nj), int(ni)],
+            "fortran_shape": [int(ni), int(nj), int(n_channels)],
+            "target_2d_shape": [int(ni), int(nj)],
+            "layout": "ReadInSGV runtime HDF5 order: channel, j, i",
+        }
     if raicpl_runtime_layout is not None:
         target_shape = tuple(raicpl_runtime_layout["target_2d_shape"])
         (
@@ -901,6 +1211,7 @@ def main():
             source_metadata,
             args.sami3_grid_dir,
             args.raicpl_template,
+            args.mapping_weight_file,
         )
         raicpl_runtime_layout["mapping_mode"] = args.mapping_mode
     elif args.mapping_mode != "index":

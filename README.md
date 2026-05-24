@@ -28,6 +28,9 @@ L/MLT RAIJU mapping prototype is available.
 Explicit /MappingQuality datasets are available for runtime L/MLT products.
 MappingQuality product runtime ingest smoke is validated with the extra group
 present and the Fortran hook reading only /RaiCplMomentsOnly.
+Explicit sparse SAMI3-to-RAIJU mapping weight files are implemented and
+validated: the current l_mlt_separable file reproduces the inline L/MLT mapper
+with max_rel=1.19e-7.
 Runtime blending is validated with alpha=0 exact baseline recovery.
 Density alpha scan is finite and continuous through alphaDavg=0.20.
 Pressure alpha scan at alphaDavg=0.05 is finite for alphaPavg=0.05 and 0.10.
@@ -133,6 +136,7 @@ docs/MAGE1.25_notes/SAMI3_RAIJU_DS_OVER_B_WEIGHTING_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_L_MLT_MAPPING_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_MAPPING_QUALITY_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_MAPPING_QUALITY_RUNTIME_RESULT_20260524.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_EXPLICIT_WEIGHT_FILE_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_RUNTIME_BLEND_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_STAGE2_SOURCE_MODES_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_DSB_LMLT_RUNTIME_BLEND_RESULT_20260524.md
@@ -223,6 +227,7 @@ Latest SAMI3 -> RAIJU/GAMERA mapping quality evidence:
 ```text
 logs/sami3_mapping_quality_20260524/
 logs/sami3_mapping_quality_runtime_20260524/
+logs/sami3_weightfile_mapping_20260524/
 ```
 
 ## Known Physical Blockers
@@ -237,6 +242,7 @@ He native/MSIS fallback policy hardening
 W-off / vertical-wind policy validation
 REMIX -> SAMI3 potential/E-field forcing
 production SAMI3 -> RAIJU/GAMERA Voltron-consistent flux-tube weighting
+replace prototype l_mlt_separable mapping weights with Voltron traced-tube or bvol-aligned weights
 production SAMI3 -> RAIJU/GAMERA geometry/mask coverage policy
 longer runtime scans for density, pressure, and tiote blending
 longer-duration stability scan beyond the 300 second recommended prototype
