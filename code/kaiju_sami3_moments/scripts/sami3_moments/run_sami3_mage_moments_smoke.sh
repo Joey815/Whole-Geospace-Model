@@ -10,6 +10,9 @@ DIAG_PREFIX="${DIAG_PREFIX:-${TREE_ROOT}/analysis/sami3_voltron_raiju_diag_stubp
 DIAG_NFLUID1_PREFIX="${DIAG_NFLUID1_PREFIX:-${TREE_ROOT}/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_20260523}"
 DIAG_MASSEQP_PREFIX="${DIAG_MASSEQP_PREFIX:-${TREE_ROOT}/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_massEq_total_20260524}"
 DIAG_DSOVERB_PREFIX="${DIAG_DSOVERB_PREFIX:-${TREE_ROOT}/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_20260524}"
+DIAG_LMLT_PREFIX="${DIAG_LMLT_PREFIX:-${TREE_ROOT}/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_l_mlt_20260524}"
+DIAG_DSOVERB_LMLT_PREFIX="${DIAG_DSOVERB_LMLT_PREFIX:-${TREE_ROOT}/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_l_mlt_20260524}"
+RAICPL_TEMPLATE="${RAICPL_TEMPLATE:-${TREE_ROOT}/analysis/runtime_ingest_blend_20260524/sami3_moments_base_control.raiCpl.Res.00000.h5}"
 
 "${PYTHON_BIN}" \
   "${TREE_ROOT}/scripts/sami3_moments/sami3_to_voltron_moments.py" \
@@ -74,6 +77,34 @@ DIAG_DSOVERB_PREFIX="${DIAG_DSOVERB_PREFIX:-${TREE_ROOT}/analysis/sami3_voltron_
   "${TREE_ROOT}/scripts/sami3_moments/validate_sami3_mage_moments.py" \
   "${OUT_DSOVERB_PREFIX}.h5" \
   "${DIAG_DSOVERB_PREFIX}.h5" \
+  --n-fluid-in 1
+
+"${PYTHON_BIN}" \
+  "${TREE_ROOT}/scripts/sami3_moments/sami3_moments_to_raiju_diag.py" \
+  "${OUT_PREFIX}.h5" \
+  --out "${DIAG_LMLT_PREFIX}" \
+  --n-fluid-in 1 \
+  --raicpl-template "${RAICPL_TEMPLATE}" \
+  --mapping-mode l_mlt
+
+"${PYTHON_BIN}" \
+  "${TREE_ROOT}/scripts/sami3_moments/validate_sami3_mage_moments.py" \
+  "${OUT_PREFIX}.h5" \
+  "${DIAG_LMLT_PREFIX}.h5" \
+  --n-fluid-in 1
+
+"${PYTHON_BIN}" \
+  "${TREE_ROOT}/scripts/sami3_moments/sami3_moments_to_raiju_diag.py" \
+  "${OUT_DSOVERB_PREFIX}.h5" \
+  --out "${DIAG_DSOVERB_LMLT_PREFIX}" \
+  --n-fluid-in 1 \
+  --raicpl-template "${RAICPL_TEMPLATE}" \
+  --mapping-mode l_mlt
+
+"${PYTHON_BIN}" \
+  "${TREE_ROOT}/scripts/sami3_moments/validate_sami3_mage_moments.py" \
+  "${OUT_DSOVERB_PREFIX}.h5" \
+  "${DIAG_DSOVERB_LMLT_PREFIX}.h5" \
   --n-fluid-in 1
 
 echo "SAMI3 MAGE moments smoke passed"

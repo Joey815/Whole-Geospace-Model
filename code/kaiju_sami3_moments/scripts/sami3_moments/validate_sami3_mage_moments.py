@@ -254,6 +254,30 @@ def main():
             dstd / np.maximum(davg, TINY),
         )
 
+        runtime_layout = metadata.get("raicpl_runtime_layout")
+        runtime_mapping = metadata.get("raicpl_runtime_mapping") or {}
+        if runtime_layout is not None:
+            ni, nj, runtime_channels = runtime_layout["fortran_shape"]
+            if runtime_channels != n_channels:
+                raise AssertionError("runtime channel count does not match nFluidIn+1")
+            for path in (
+                "RaiCplMomentsOnly/Pavg",
+                "RaiCplMomentsOnly/Davg",
+                "RaiCplMomentsOnly/Pstd",
+                "RaiCplMomentsOnly/Dstd",
+            ):
+                arr = require_dataset(d, path)[:].astype(np.float64)
+                if arr.shape != (n_channels, nj, ni):
+                    raise AssertionError("{0} runtime shape {1} != {(n_channels, nj, ni)}".format(path, arr.shape))
+                require_finite(path, arr)
+                mask = require_dataset(d, "{0}_mask".format(path))[:].astype(np.float64)
+                if mask.shape != arr.shape:
+                    raise AssertionError("{0}_mask shape mismatch".format(path))
+            runtime_tiote = require_dataset(d, "RaiCplMomentsOnly/tiote")[:].astype(np.float64)
+            if runtime_tiote.shape != (nj, ni):
+                raise AssertionError("RaiCplMomentsOnly/tiote runtime shape mismatch")
+            require_finite("RaiCplMomentsOnly/tiote", runtime_tiote)
+
         for path, units in (
             ("RAIJU_Coupler/Pavg", "nPa"),
             ("RAIJU_Coupler/Davg", "#/cc"),
@@ -274,6 +298,9 @@ def main():
     print("TubeShellMomentsOnly channels: {0}".format(MAXTUBEFLUIDS + 1))
     print("density_mode={0} source={1}".format(density_mode, davg_source))
     print("pressure_mode={0} source={1}".format(pressure_mode, pavg_source))
+    if metadata.get("raicpl_runtime_layout") is not None:
+        mapping = metadata.get("raicpl_runtime_mapping") or {}
+        print("runtime_mapping={0}".format(mapping.get("mode", "unknown")))
 
 
 if __name__ == "__main__":

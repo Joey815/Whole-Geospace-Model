@@ -227,6 +227,32 @@ For the current tiny GR/RAIJU smoke template:
 Fortran target shape          = (45, 188, 2)
 ```
 
+Runtime mapping is controlled by:
+
+```text
+--mapping-mode index   # old normalized-index resize, smoke_only
+--mapping-mode l_mlt   # prototype L/MLT interpolation, requires --raicpl-template
+```
+
+`l_mlt` reads SAMI3 `baltu.dat`, `blatu.dat`, and `blonu.dat` from
+`--sami3-grid-dir` or the stage-1 `run_dir` metadata.  The source shell
+coordinate follows the helper formula used in `L_n.f90`:
+
+```text
+L_src = (baltu / Re) / cos(blatu)^2
+```
+
+The target shell coordinate is built from RAIJU `ShellGrid/theta` cell centers:
+
+```text
+L_dst = 1 / sin(theta_cc)^2
+```
+
+MLT/longitude interpolation is periodic using SAMI3 `blonu` and RAIJU
+`ShellGrid/phi` cell centers modulo 360 degrees.  Metadata records
+`raicpl_runtime_mapping.mode`, source/target ranges, and L extrapolation counts.
+This is still a prototype mapping, not a Voltron traced-tube `bvol` mapping.
+
 `TubeShellMomentsOnly` uses the fixed `TubeShell_T` moment channel count:
 
 ```text

@@ -21,9 +21,12 @@ import sys
 
 import numpy as np
 
+from sami3_to_voltron_moments import read_fortran_record, require_file
+
 
 MAXTUBEFLUIDS = 5
 TINY = 1.0e-30
+RE_KM = 6370.0
 MOMENTS = ("Pavg", "Davg", "Pstd", "Dstd", "tiote")
 
 
@@ -91,6 +94,25 @@ def parse_args():
         help=(
             "Optional target raijuCoupler_T cell-center shape for "
             "/RaiCplMomentsOnly. Use NI NJ in Fortran order."
+        ),
+    )
+    parser.add_argument(
+        "--mapping-mode",
+        choices=("index", "l_mlt"),
+        default="index",
+        help=(
+            "Runtime /RaiCplMomentsOnly mapping mode when a target layout is "
+            "requested. index preserves the old normalized-index resize. "
+            "l_mlt maps SAMI3 L/longitude onto RAIJU ShellGrid theta/phi with "
+            "periodic MLT interpolation. Default: index."
+        ),
+    )
+    parser.add_argument(
+        "--sami3-grid-dir",
+        default=None,
+        help=(
+            "Optional SAMI3 run directory containing baltu/blatu/blonu.dat for "
+            "--mapping-mode l_mlt. Defaults to the stage-1 source metadata run_dir."
         ),
     )
     return parser.parse_args()
@@ -233,6 +255,164 @@ def resize_2d(arr, target_shape):
     return out
 
 
+def circular_mean_deg(values, axis):
+    radians = np.deg2rad(values)
+    sin_mean = np.nanmean(np.sin(radians), axis=axis)
+    cos_mean = np.nanmean(np.cos(radians), axis=axis)
+    return np.mod(np.rad2deg(np.arctan2(sin_mean, cos_mean)), 360.0)
+
+
+def read_sami3_l_mlt_grid(run_dir, shape):
+    """Return separable SAMI3 L-shell and magnetic-longitude coordinates.
+
+    SAMI3's helper L_n.f90 uses p=(r/Re)/cos(blat)^2 as the dipole-like shell
+    coordinate.  We use the median over nz/nlt for the nf shell coordinate and
+    circular mean blonu over nz/nf for the nlt longitude coordinate.
+    """
+    balt, _, _ = read_fortran_record(
+        require_file(os.path.join(run_dir, "baltu.dat")), shape, "last"
+    )
+    blat, _, _ = read_fortran_record(
+        require_file(os.path.join(run_dir, "blatu.dat")), shape, "last"
+    )
+    blon, _, _ = read_fortran_record(
+        require_file(os.path.join(run_dir, "blonu.dat")), shape, "last"
+    )
+
+    cos2 = np.cos(np.deg2rad(blat.astype(np.float64))) ** 2
+    l_shell_3d = (balt.astype(np.float64) / RE_KM) / np.maximum(cos2, TINY)
+    tube_l = np.nanmedian(l_shell_3d, axis=0)
+    source_l = np.nanmedian(tube_l, axis=1)
+    source_lon = circular_mean_deg(blon.astype(np.float64), axis=(0, 1))
+
+    if np.any(~np.isfinite(source_l)) or np.any(source_l <= 0.0):
+        raise ValueError("SAMI3 L-shell coordinate contains invalid values")
+    if np.any(~np.isfinite(source_lon)):
+        raise ValueError("SAMI3 longitude coordinate contains invalid values")
+
+    return {
+        "run_dir": os.path.abspath(run_dir),
+        "source_l": source_l.astype(np.float64),
+        "source_lon_deg": source_lon.astype(np.float64),
+        "tube_l": tube_l.astype(np.float64),
+        "stats": [
+            finite_stats("sami3_l_shell_3d", l_shell_3d),
+            finite_stats("sami3_tube_l", tube_l),
+            finite_stats("sami3_source_l", source_l),
+            finite_stats("sami3_source_lon_deg", source_lon),
+        ],
+    }
+
+
+def read_raicpl_target_l_mlt(template_path, target_shape):
+    h5py = require_moments_h5(template_path)
+    with h5py.File(template_path, "r") as handle:
+        if "ShellGrid/phi" not in handle or "ShellGrid/theta" not in handle:
+            raise KeyError(
+                "template must contain /ShellGrid/phi and /ShellGrid/theta for l_mlt mapping"
+            )
+        phi = handle["ShellGrid/phi"][:].astype(np.float64)
+        theta = handle["ShellGrid/theta"][:].astype(np.float64)
+
+    ni, nj = target_shape
+    if phi.size != nj + 1 or theta.size != ni + 1:
+        raise ValueError(
+            "ShellGrid node sizes phi={0}, theta={1} do not match target shape {2}".format(
+                phi.size, theta.size, target_shape
+            )
+        )
+
+    phi_cc = 0.5 * (phi[:-1] + phi[1:])
+    theta_cc = 0.5 * (theta[:-1] + theta[1:])
+    target_lon = np.mod(np.rad2deg(phi_cc), 360.0)
+    target_l = 1.0 / np.maximum(np.sin(theta_cc) ** 2, TINY)
+
+    return {
+        "target_l": target_l.astype(np.float64),
+        "target_lon_deg": target_lon.astype(np.float64),
+        "template": os.path.abspath(template_path),
+        "stats": [
+            finite_stats("raicpl_target_l", target_l),
+            finite_stats("raicpl_target_lon_deg", target_lon),
+        ],
+    }
+
+
+def map_l_mlt_2d(arr, source_grid, target_grid):
+    source_l = source_grid["source_l"]
+    source_lon = source_grid["source_lon_deg"]
+    target_l = target_grid["target_l"]
+    target_lon = target_grid["target_lon_deg"]
+
+    l_order = np.argsort(source_l)
+    lon_order = np.argsort(source_lon)
+    source_l_sorted = source_l[l_order]
+    source_lon_sorted = source_lon[lon_order]
+    values_l_sorted = arr[l_order, :]
+
+    l_mapped = np.empty((target_l.size, arr.shape[1]), dtype=np.float64)
+    for j in range(arr.shape[1]):
+        values = values_l_sorted[:, j]
+        l_mapped[:, j] = np.interp(
+            target_l,
+            source_l_sorted,
+            values,
+            left=values[0],
+            right=values[-1],
+        )
+
+    l_mapped = l_mapped[:, lon_order]
+    lon_ext = np.concatenate(
+        (source_lon_sorted - 360.0, source_lon_sorted, source_lon_sorted + 360.0)
+    )
+    out = np.empty((target_l.size, target_lon.size), dtype=np.float64)
+    for i in range(target_l.size):
+        values_ext = np.concatenate((l_mapped[i, :], l_mapped[i, :], l_mapped[i, :]))
+        out[i, :] = np.interp(target_lon, lon_ext, values_ext)
+    return out
+
+
+def build_mapping_metadata(mode, target_shape, source_grid=None, target_grid=None):
+    if mode == "index":
+        return {
+            "mode": "index",
+            "target_shape": [int(target_shape[0]), int(target_shape[1])],
+            "physical_validity": "smoke_only",
+            "note": "Normalized index-space resize; no physical L/MLT mapping.",
+        }
+
+    source_l = source_grid["source_l"]
+    target_l = target_grid["target_l"]
+    outside_l = (target_l < np.min(source_l)) | (target_l > np.max(source_l))
+    source_lon = source_grid["source_lon_deg"]
+    target_lon = target_grid["target_lon_deg"]
+    return {
+        "mode": "l_mlt",
+        "source_grid_dir": source_grid["run_dir"],
+        "target_template": target_grid["template"],
+        "target_shape": [int(target_shape[0]), int(target_shape[1])],
+        "source_l_formula": "median_nz_nlt((baltu/Re)/cos(blatu)^2)",
+        "source_mlt_formula": "circular_mean_nz_nf(blonu) degrees",
+        "target_l_formula": "1/sin(theta_cell_center)^2 from ShellGrid/theta",
+        "target_mlt_formula": "ShellGrid/phi cell centers modulo 360 degrees",
+        "periodic_mlt": True,
+        "l_extrapolated_i_count": int(np.count_nonzero(outside_l)),
+        "l_extrapolated_cell_count": int(np.count_nonzero(outside_l)) * int(target_lon.size),
+        "l_extrapolated_fraction": (
+            float(np.count_nonzero(outside_l)) / float(target_l.size)
+            if target_l.size
+            else 0.0
+        ),
+        "physical_validity": "prototype",
+        "note": (
+            "Prototype separable L/MLT interpolation.  L outside the source range "
+            "is clamped to the nearest SAMI3 shell and counted as extrapolated. "
+            "This is not yet a full Voltron traced-tube bvol mapping."
+        ),
+        "stats": source_grid["stats"] + target_grid["stats"],
+    }
+
+
 def infer_raicpl_template(path, expected_channels):
     h5py = require_moments_h5(path)
     with h5py.File(path, "r") as handle:
@@ -257,18 +437,60 @@ def infer_raicpl_template(path, expected_channels):
     }
 
 
-def build_raicpl_runtime_layout(arrays, n_channels, channel, target_shape):
-    resized = {name: resize_2d(arrays[name], target_shape) for name in MOMENTS}
+def build_raicpl_runtime_layout(
+    arrays,
+    n_channels,
+    channel,
+    target_shape,
+    mapping_mode,
+    source_metadata,
+    sami3_grid_dir,
+    template_path,
+):
+    if mapping_mode == "index":
+        mapped = {name: resize_2d(arrays[name], target_shape) for name in MOMENTS}
+        mapping_metadata = build_mapping_metadata("index", target_shape)
+    elif mapping_mode == "l_mlt":
+        if not template_path:
+            raise ValueError("--mapping-mode l_mlt requires --raicpl-template")
+        grid_dir = sami3_grid_dir or source_metadata.get("run_dir")
+        if not grid_dir:
+            raise ValueError(
+                "--mapping-mode l_mlt requires --sami3-grid-dir or stage-1 run_dir metadata"
+            )
+        dims = source_metadata.get("dimensions", {})
+        if "nz" not in dims:
+            raise ValueError("stage-1 metadata is missing dimensions.nz")
+        shape3 = (int(dims["nz"]), int(arrays["Pavg"].shape[0]), int(arrays["Pavg"].shape[1]))
+        source_grid = read_sami3_l_mlt_grid(os.path.abspath(grid_dir), shape3)
+        target_grid = read_raicpl_target_l_mlt(os.path.abspath(template_path), target_shape)
+        mapped = {
+            name: map_l_mlt_2d(arrays[name], source_grid, target_grid)
+            for name in MOMENTS
+        }
+        mapping_metadata = build_mapping_metadata(
+            "l_mlt", target_shape, source_grid=source_grid, target_grid=target_grid
+        )
+    else:
+        raise ValueError("unsupported mapping mode: {0}".format(mapping_mode))
+
     out = {}
     masks = {}
     for name in ("Pavg", "Davg", "Pstd", "Dstd"):
         out[name] = np.zeros((n_channels, target_shape[1], target_shape[0]), dtype=np.float32)
         masks[name] = np.zeros_like(out[name], dtype=np.float32)
-        out[name][channel, :, :] = resized[name].T.astype(np.float32)
-        masks[name][channel, :, :] = np.isfinite(resized[name]).T.astype(np.float32)
-    out["tiote"] = resized["tiote"].T.astype(np.float32)
-    masks["tiote"] = np.isfinite(resized["tiote"]).T.astype(np.float32)
-    return out, masks
+        out[name][channel, :, :] = mapped[name].T.astype(np.float32)
+        masks[name][channel, :, :] = np.isfinite(mapped[name]).T.astype(np.float32)
+    out["tiote"] = mapped["tiote"].T.astype(np.float32)
+    masks["tiote"] = np.isfinite(mapped["tiote"]).T.astype(np.float32)
+    mapping_metadata["mapped_stats"] = [
+        finite_stats("RaiCplMomentsOnly.Pavg_mapped", mapped["Pavg"]),
+        finite_stats("RaiCplMomentsOnly.Davg_mapped", mapped["Davg"]),
+        finite_stats("RaiCplMomentsOnly.Pstd_mapped", mapped["Pstd"]),
+        finite_stats("RaiCplMomentsOnly.Dstd_mapped", mapped["Dstd"]),
+        finite_stats("RaiCplMomentsOnly.tiote_mapped", mapped["tiote"]),
+    ]
+    return out, masks, mapping_metadata
 
 
 def make_channel_array(arr, n_channels, channel):
@@ -468,6 +690,7 @@ def main():
     raicpl_runtime_layout = None
     raicpl_runtime_arrays = None
     raicpl_runtime_masks = None
+    raicpl_runtime_mapping = None
     if args.raicpl_template:
         raicpl_runtime_layout = infer_raicpl_template(args.raicpl_template, n_channels)
     if args.target_raicpl_shape:
@@ -481,9 +704,23 @@ def main():
         }
     if raicpl_runtime_layout is not None:
         target_shape = tuple(raicpl_runtime_layout["target_2d_shape"])
-        raicpl_runtime_arrays, raicpl_runtime_masks = build_raicpl_runtime_layout(
-            arrays, n_channels, args.bulk_channel, target_shape
+        (
+            raicpl_runtime_arrays,
+            raicpl_runtime_masks,
+            raicpl_runtime_mapping,
+        ) = build_raicpl_runtime_layout(
+            arrays,
+            n_channels,
+            args.bulk_channel,
+            target_shape,
+            args.mapping_mode,
+            source_metadata,
+            args.sami3_grid_dir,
+            args.raicpl_template,
         )
+        raicpl_runtime_layout["mapping_mode"] = args.mapping_mode
+    elif args.mapping_mode != "index":
+        raise ValueError("--mapping-mode {0} requires a runtime target layout".format(args.mapping_mode))
 
     channel_arrays = {
         "Pavg": make_channel_array(arrays["Pavg"], n_channels, args.bulk_channel),
@@ -525,6 +762,7 @@ def main():
         "density_mode": args.density_mode,
         "pressure_mode": args.pressure_mode,
         "moment_source_selection": source_selection,
+        "raicpl_runtime_mapping": raicpl_runtime_mapping,
         "std_source_warning": (
             "Pstd/Dstd are still read from the existing ion/number-density std fields. "
             "For massEq density, total pressure, or prototype weighted-moment runs, "
@@ -589,7 +827,8 @@ def main():
             finite_stats("RAIJU_State.Pstd normalized", pstd_norm),
             finite_stats("RAIJU_State.Dstd normalized", dstd_norm),
             finite_stats("tiote", arrays["tiote"]),
-        ],
+        ]
+        + (raicpl_runtime_mapping.get("mapped_stats", []) if raicpl_runtime_mapping else []),
     }
 
     write_product(out_h5, arrays, channel_arrays, masks, metadata)
