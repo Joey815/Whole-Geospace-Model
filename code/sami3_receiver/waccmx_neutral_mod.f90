@@ -41,9 +41,13 @@ module waccmx_neutral_mod
     real :: waccmx_top_blend_bottom_km = 0.0
     real :: waccmx_top_blend_top_km = 0.0
     integer :: waccmx_peer_comm = -1
+    integer :: waccmx_phi_peer_comm = -1
     integer :: waccmx_online_packet_count = 0
     real :: waccmx_loaded_request_hr = -1.0e30
     character(len=256) :: waccmx_online_port_name = ''
+    character(len=256) :: waccmx_phi_direct_port_name = ''
+    character(len=512) :: waccmx_phi_direct_port_file = ''
+    logical :: waccmx_phi_direct_connected = .false.
 
     real, allocatable :: w_denni(:,:,:,:), w_dennf(:,:,:,:)
     real, allocatable :: w_tni(:,:,:), w_tnf(:,:,:)
@@ -102,6 +106,87 @@ contains
 
     end function waccmx_online_phi_enabled
 
+    logical function waccmx_phi_direct_enabled()
+
+        integer :: stat, lenval
+
+        waccmx_phi_direct_port_file = ''
+        call get_environment_variable('SAMI3_PHI_DIRECT_PORT_FILE', &
+                                      waccmx_phi_direct_port_file, &
+                                      length=lenval, status=stat)
+        waccmx_phi_direct_enabled = stat == 0 .and. lenval > 0
+        if (waccmx_phi_direct_enabled) then
+            waccmx_phi_direct_port_file = adjustl(waccmx_phi_direct_port_file)
+        endif
+
+    end function waccmx_phi_direct_enabled
+
+    subroutine waccmx_phi_direct_init()
+
+        include 'mpif.h'
+
+        integer :: ierr, unit, ios
+        character(len=MPI_MAX_PORT_NAME) :: port_name
+
+        if (taskid /= 0) return
+        if (waccmx_phi_direct_connected) return
+        if (.not. waccmx_phi_direct_enabled()) return
+
+        port_name = ''
+        call MPI_Open_port(MPI_INFO_NULL, port_name, ierr)
+        if (ierr /= MPI_SUCCESS) then
+            print *, 'SAMI3 direct phi MPI_Open_port failed ierr=', ierr
+            call MPI_Abort(sami3_comm, ierr, ierr)
+        endif
+        waccmx_phi_direct_port_name = port_name
+        open(newunit=unit, file=trim(waccmx_phi_direct_port_file), &
+             status='replace', action='write', iostat=ios)
+        if (ios /= 0) then
+            print *, 'SAMI3 direct phi port file open failed: ', &
+                     trim(waccmx_phi_direct_port_file), ios
+            call MPI_Abort(sami3_comm, ios, ierr)
+        endif
+        write(unit,'(A)') trim(port_name)
+        close(unit)
+        print *, 'SAMI3 direct phi port ready: ', trim(waccmx_phi_direct_port_file)
+
+        call MPI_Comm_accept(port_name, MPI_INFO_NULL, 0, MPI_COMM_SELF, &
+                             waccmx_phi_peer_comm, ierr)
+        if (ierr /= MPI_SUCCESS) then
+            print *, 'SAMI3 direct phi MPI_Comm_accept failed ierr=', ierr
+            call MPI_Abort(sami3_comm, ierr, ierr)
+        endif
+        waccmx_phi_direct_connected = .true.
+        print *, 'SAMI3 direct phi sender connected'
+
+    end subroutine waccmx_phi_direct_init
+
+    subroutine waccmx_phi_direct_finalize()
+
+        include 'mpif.h'
+
+        integer :: ierr
+        integer :: done_value
+
+        if (taskid /= 0) return
+        if (.not. waccmx_phi_direct_connected) return
+
+        call MPI_Recv(done_value, 1, MPI_INTEGER, 0, waccmx_tag_done, &
+                      waccmx_phi_peer_comm, MPI_STATUS_IGNORE, ierr)
+        if (ierr /= MPI_SUCCESS) then
+            print *, 'SAMI3 direct phi done receive failed ierr=', ierr
+            call MPI_Abort(sami3_comm, ierr, ierr)
+        endif
+        print *, 'SAMI3 direct phi done signal received:', done_value
+
+        call MPI_Comm_disconnect(waccmx_phi_peer_comm, ierr)
+        if (len_trim(waccmx_phi_direct_port_name) > 0) then
+            call MPI_Close_port(waccmx_phi_direct_port_name, ierr)
+        endif
+        waccmx_phi_direct_connected = .false.
+
+    end subroutine waccmx_phi_direct_finalize
+
     subroutine waccmx_recv_phi_weimer_online(phi_weimer_real, hrut, hrutw2)
 
         include 'mpif.h'
@@ -112,11 +197,19 @@ contains
         integer :: ierr
         integer :: header(6)
         integer :: nphi
+        integer :: phi_comm
         real :: frame_hour
+        logical :: use_direct_phi
 
         if (.not. waccmx_online_phi_enabled()) return
         if (taskid /= 0) return
-        if (.not. waccmx_online_connected) then
+        use_direct_phi = waccmx_phi_direct_enabled()
+        if (use_direct_phi) then
+            call waccmx_phi_direct_init()
+            phi_comm = waccmx_phi_peer_comm
+        else if (waccmx_online_connected) then
+            phi_comm = waccmx_peer_comm
+        else
             print *, 'WACCMX online phi receive requested before connection'
             call MPI_Abort(sami3_comm, 9201, ierr)
         endif
@@ -124,7 +217,7 @@ contains
         nphi = nfp1*(nlt+1)
 
         call MPI_Recv(header, 6, MPI_INTEGER, 0, waccmx_tag_phi_header, &
-                      waccmx_peer_comm, MPI_STATUS_IGNORE, ierr)
+                      phi_comm, MPI_STATUS_IGNORE, ierr)
         if (ierr /= MPI_SUCCESS) then
             print *, 'WACCMX online phi header receive failed ierr=', ierr
             call MPI_Abort(sami3_comm, ierr, ierr)
@@ -138,11 +231,11 @@ contains
         endif
 
         call MPI_Recv(frame_hour, 1, MPI_REAL, 0, waccmx_tag_phi_hour, &
-                      waccmx_peer_comm, MPI_STATUS_IGNORE, ierr)
+                      phi_comm, MPI_STATUS_IGNORE, ierr)
         call MPI_Recv(hrutw2, 1, MPI_REAL, 0, waccmx_tag_phi_valid_until, &
-                      waccmx_peer_comm, MPI_STATUS_IGNORE, ierr)
+                      phi_comm, MPI_STATUS_IGNORE, ierr)
         call MPI_Recv(phi_weimer_real, nphi, MPI_REAL, 0, waccmx_tag_phi_data, &
-                      waccmx_peer_comm, MPI_STATUS_IGNORE, ierr)
+                      phi_comm, MPI_STATUS_IGNORE, ierr)
 
         print *, 'WACCMX_PHI_RECV', header(5), header(6), hrut, frame_hour, &
                  hrutw2, minval(phi_weimer_real), maxval(phi_weimer_real)
@@ -347,6 +440,8 @@ contains
             call MPI_Abort(sami3_comm, ierr, ierr)
         endif
         if (taskid == 0) print *, 'WACCMX online done signal received:', done_value
+
+        call waccmx_phi_direct_finalize()
 
         value = ''
         call get_environment_variable('WXSAMI3_SKIP_DISCONNECT', value, length=lenval, status=stat)

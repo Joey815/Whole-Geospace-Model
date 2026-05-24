@@ -1,0 +1,5 @@
+PHI_DIRECT_SENDER payload_format=remix_sami3_phi_payload.v1 nframes=2
+PHI_DIRECT_SENDER connecting to 3625779201.0:891644666
+PHI_DIRECT_SENDER sent frame=0/2 hour=0 valid_until=0.00138889
+PHI_DIRECT_SENDER sent frame=1/2 hour=0.00138889 valid_until=1e+30
+PHI_DIRECT_SENDER sent done=2

@@ -1,0 +1,4 @@
+JobID|JobName|Partition|State|ExitCode|Elapsed|MaxRSS|NNodes|NodeList
+7665788|sami3_dphi|intel|COMPLETED|0:0|00:01:42||1|qhcn181
+7665788.batch|batch||COMPLETED|0:0|00:01:42|39678104K|1|qhcn181
+7665788.extern|extern||COMPLETED|0:0|00:01:42|0|1|qhcn181

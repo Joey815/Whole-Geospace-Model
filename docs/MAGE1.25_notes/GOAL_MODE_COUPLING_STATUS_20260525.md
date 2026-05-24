@@ -306,3 +306,60 @@ coupling hardening:
 3. Turn the top-blend policy into a production per-variable contract.
 4. Continue SAMI3 -> RAIJU/GAMERA physical blockers: traced flux-tube weighting and geometry mapping.
 ```
+
+## 2026-05-25 05:26 CST Update
+
+The first direct REMIX/Voltron -> SAMI3 online phi handoff prototype passed as a
+standalone SAMI3 validation:
+
+```text
+jobid = 7665788
+jobname = sami3_dphi
+state = COMPLETED
+exit = 0:0
+elapsed = 00:01:42
+node = qhcn181
+archive = logs/sami3_direct_phi_port_20260525/
+doc = docs/MAGE1.25_notes/SAMI3_DIRECT_PHI_PORT_RESULT_20260525.md
+```
+
+This run separates the channels:
+
+```text
+neutral sender -> SAMI3 neutral MPI port
+direct phi sender -> SAMI3 rank0 phi-only MPI port
+```
+
+Validated markers:
+
+```text
+SAMI3 direct phi port ready
+SAMI3 direct phi sender connected
+WACCMX_PHI_RECV records = 2
+MASTER: All Done!
+WACCMX online done signal received: 1
+SAMI3 direct phi done signal received: 2
+```
+
+Strict gates:
+
+```text
+validate_sami3_direct_phi_run = overall=ok
+validate_remix_sami3_phi_payload = overall=ok
+recv_qc_compare = compare ok
+```
+
+New implementation pieces:
+
+```text
+SAMI3 env contract: SAMI3_PHI_DIRECT_PORT_FILE
+code/sami3_receiver/waccmx_neutral_mod.f90
+scripts/wxsami3_phi_direct_sender_stub.c
+scripts/validate_sami3_direct_phi_run.py
+slurm/run_sami3_online_receiver_direct_phi_port_20260525.sbatch
+```
+
+This removes CESM from the online phi forwarding path for the validated
+standalone test.  The remaining production blocker is that the direct phi
+sender still reads the existing Voltron payload file; next step is to replace
+that sender stub with a runtime REMIX/Voltron sender path.

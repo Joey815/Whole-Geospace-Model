@@ -1,0 +1,19 @@
+{
+  "direct_phi_env": "SAMI3_PHI_DIRECT_PORT_FILE",
+  "evidence_files": [
+    "sami3_online_receiver.out",
+    "neutral_sender.out",
+    "phi_direct_sender.out",
+    "recv_qc_compare.txt",
+    "sacct_7665788.txt"
+  ],
+  "expected_frames": 2,
+  "job_id": 7665788,
+  "ok": true,
+  "run_dir": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_online_receiver_direct_phi_port_20260525_0000",
+  "validated_path": "neutral MPI port + SAMI3 direct phi-only MPI port",
+  "validators": {
+    "validate_remix_sami3_phi_payload": true,
+    "validate_sami3_direct_phi_run": true
+  }
+}
