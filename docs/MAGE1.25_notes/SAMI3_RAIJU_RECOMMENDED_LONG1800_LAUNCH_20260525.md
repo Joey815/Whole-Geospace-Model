@@ -53,6 +53,7 @@ Run the strict validator:
 ```text
 python3 scripts/validate_sami3_raiju_longrun.py \
   --run-dir /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525 \
+  --label long1800 \
   --expect-slurm \
   --json-output /tmp/sami3_raiju_long1800_strict.json
 ```

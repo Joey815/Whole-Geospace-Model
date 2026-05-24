@@ -122,16 +122,26 @@ def validate(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run-dir", required=True)
-    parser.add_argument("--base-log", default="base_control_long900.log")
-    parser.add_argument("--prototype-log", default="dsB_lmlt_recommended_long900.log")
-    parser.add_argument("--base-prefix", default="sami3_moments_base_control_long900")
-    parser.add_argument("--prototype-prefix", default="sami3_moments_dsB_lmlt_recommended_long900")
+    parser.add_argument("--label", default="long900", help="Run label used to derive default log/prefix names")
+    parser.add_argument("--base-log", default=None)
+    parser.add_argument("--prototype-log", default=None)
+    parser.add_argument("--base-prefix", default=None)
+    parser.add_argument("--prototype-prefix", default=None)
     parser.add_argument("--min-raiju-writes", type=int, default=10)
     parser.add_argument("--expect-slurm", action="store_true")
     parser.add_argument("--allow-incomplete", action="store_true")
     parser.add_argument("--skip-h5-products", action="store_true")
     parser.add_argument("--json-output", default=None)
     args = parser.parse_args()
+
+    if args.base_log is None:
+        args.base_log = "base_control_{0}.log".format(args.label)
+    if args.prototype_log is None:
+        args.prototype_log = "dsB_lmlt_recommended_{0}.log".format(args.label)
+    if args.base_prefix is None:
+        args.base_prefix = "sami3_moments_base_control_{0}".format(args.label)
+    if args.prototype_prefix is None:
+        args.prototype_prefix = "sami3_moments_dsB_lmlt_recommended_{0}".format(args.label)
 
     checks, meta = validate(args)
     ok = all(item["ok"] for item in checks)
