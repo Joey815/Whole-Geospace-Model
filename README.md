@@ -176,6 +176,13 @@ lat/lon and OMEGA, but T/U/V/Z/species differ because the live hook is in
 diagnostic, not as a strict same-call-site source-state reference for the
 current hook.
 
+The same-call-site live neutral packet contract now has a dedicated validator:
+`scripts/validate_wxsami3_live_packet_contract.py`.  It checks that SAMI3
+receiver QC can be reconstructed from the CAM `phys_state(:)` live dump through
+the offline replay builder.  It passes the one-packet Voltron-phi runtime
+(`max_rel=4.83248e-13`) and the two-packet top-blend runtime
+(`max_rel<=6.76502e-13`).
+
 ## Layout
 
 ```text
@@ -221,6 +228,7 @@ docs/MAGE1.25_notes/WACCMX_SAMI3_SOURCE_FLAGS_METADATA_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_RECEIVER_SOURCE_FLAGS_RESULT_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_SOURCE_REASON_FLAGS_RESULT_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_TOP_BLEND_RESULT_20260524.md
+docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_PACKET_CONTRACT_VALIDATOR_20260525.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_PHI_PAYLOAD_WAIT_BUILD_RESULT_20260525.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_APPEND2_INTEL_EXPR_ATTEMPT_20260525.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_DIRECTWAIT_PHI_LAUNCHER_20260525.md
@@ -269,6 +277,14 @@ Current receiver implementation:
 ```text
 code/sami3_receiver/waccmx_neutral_mod.f90
 code/sami3_receiver/Makefile
+```
+
+Current WACCM-X -> SAMI3 validation scripts:
+
+```text
+scripts/validate_wxsami3_live_packet_contract.py
+scripts/validate_wxsami3_append2_run.py
+scripts/compare_wxsami3_recv_qc.py
 ```
 
 Current SAMI3 -> RAIJU scalar-moments adapter snapshot:

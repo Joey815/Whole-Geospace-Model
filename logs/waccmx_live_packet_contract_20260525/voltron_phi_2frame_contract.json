@@ -1,0 +1,378 @@
+{
+  "checks": [
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_2frame_20260525_0000",
+      "name": "run_dir_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_2frame_20260525_0000/wxsami3_live_meta.json",
+      "name": "live_meta_exists",
+      "ok": true
+    },
+    {
+      "detail": "wxsami3-live-payload-v2",
+      "name": "meta_payload_version",
+      "ok": true
+    },
+    {
+      "detail": "CAM phys_state(:)",
+      "name": "meta_runtime_source",
+      "ok": true
+    },
+    {
+      "detail": "runtime_live_packet",
+      "name": "meta_actual_transport",
+      "ok": true
+    },
+    {
+      "detail": "packet_index=0 expected=0",
+      "name": "meta_last_packet_index",
+      "ok": true
+    },
+    {
+      "detail": "source_columns=13824 expected=13824",
+      "name": "meta_runtime_map_source_columns",
+      "ok": true
+    },
+    {
+      "detail": "npoints=3618816",
+      "name": "meta_runtime_map_npoints",
+      "ok": true
+    },
+    {
+      "detail": "invalid",
+      "name": "meta_n2_negative_mode",
+      "ok": true
+    },
+    {
+      "detail": "payload value -1 so SAMI3 native/MSIS He is retained",
+      "name": "meta_he_policy",
+      "ok": true
+    },
+    {
+      "detail": "payload value 0; CAM omega diagnostic only",
+      "name": "meta_w_policy",
+      "ok": true
+    },
+    {
+      "detail": "flag_total=6031360 samples=6031360",
+      "name": "meta_source_flags_sum",
+      "ok": true
+    },
+    {
+      "detail": "invalid=1819595 above+n2+other=1819595",
+      "name": "meta_invalid_sum",
+      "ok": true
+    },
+    {
+      "detail": "valid_i=4211765 valid_f=4211765 source_valid=4211765",
+      "name": "meta_checksum_valid_counts",
+      "ok": true
+    },
+    {
+      "detail": "invalid_i=1819595 invalid_f=1819595 runtime_invalid=1819595",
+      "name": "meta_checksum_invalid_counts",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_2frame_20260525_0000/live_dump_summary_pkt000000.txt",
+      "name": "packet0_summary_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_2frame_20260525_0000/replay_builder_pkt000000.out",
+      "name": "packet0_replay_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_2frame_20260525_0000/recv_qc_compare_pkt000000.txt",
+      "name": "packet0_recv_compare_exists",
+      "ok": true
+    },
+    {
+      "detail": "total_cols=13824 expected=13824",
+      "name": "packet0_summary_source_columns",
+      "ok": true
+    },
+    {
+      "detail": "packets=[0]",
+      "name": "packet0_summary_packet_index",
+      "ok": true
+    },
+    {
+      "detail": "bad_size_files_present=False",
+      "name": "packet0_summary_no_bad_size_files",
+      "ok": true
+    },
+    {
+      "detail": "source_cols=13824 filled=13824 expected=13824",
+      "name": "packet0_replay_source_coverage",
+      "ok": true
+    },
+    {
+      "detail": "invalid",
+      "name": "packet0_replay_n2_mode",
+      "ok": true
+    },
+    {
+      "detail": "bad_weighted_z=0",
+      "name": "packet0_replay_bad_weighted_z",
+      "ok": true
+    },
+    {
+      "detail": "samples=6031360",
+      "name": "packet0_replay_samples_positive",
+      "ok": true
+    },
+    {
+      "detail": "ok_marker=True",
+      "name": "packet0_recv_compare_ok",
+      "ok": true
+    },
+    {
+      "detail": "ranks=32 expected=32",
+      "name": "packet0_recv_compare_ranks",
+      "ok": true
+    },
+    {
+      "detail": "occurrence=0 expected=0",
+      "name": "packet0_recv_compare_occurrence",
+      "ok": true
+    },
+    {
+      "detail": "max_rel=4.83248e-13 limit=1e-06",
+      "name": "packet0_recv_compare_max_rel",
+      "ok": true
+    },
+    {
+      "detail": "sent_packets=1 expected=1",
+      "name": "sender_live_packet_count",
+      "ok": true
+    },
+    {
+      "detail": "qc_lines=54 expected_min=32",
+      "name": "receiver_qc_line_count",
+      "ok": true
+    },
+    {
+      "detail": "present=True",
+      "name": "sami3_done",
+      "ok": true
+    },
+    {
+      "detail": "present=True",
+      "name": "waccmx_done",
+      "ok": true
+    },
+    {
+      "detail": "matches=0",
+      "name": "fatal_markers_absent",
+      "ok": true
+    }
+  ],
+  "meta": {
+    "live_meta": {
+      "actual_transport": "runtime_live_packet",
+      "density_conversion": "q*mbarv/species_mw*pmid/(kB*T)*1e-6 -> cm^-3",
+      "dtime_phys_s": 300.0,
+      "fallback_policy": {
+        "He": "payload value -1 so SAMI3 native/MSIS He is retained",
+        "N2": "CAM N2 if finite, otherwise residual closure from major species",
+        "N2_negative_mode": "invalid",
+        "W": "payload value 0; CAM omega diagnostic only",
+        "above_live_top": "payload sample marked invalid so SAMI3 native neutral state is retained",
+        "remap_scaling": "f19 gather-to-root prototype, not f09 production distributed remap"
+      },
+      "max_packets": 1,
+      "nstep": 0,
+      "packet_hour": 0.0,
+      "packet_index": 0,
+      "payload_header": {
+        "magic": 20260522,
+        "nf": 124,
+        "nl": 5,
+        "nneut": 7,
+        "nz": 304
+      },
+      "payload_mode": "live",
+      "payload_species_order": [
+        "H",
+        "O",
+        "NO",
+        "O2",
+        "He",
+        "N2",
+        "N"
+      ],
+      "payload_units": {
+        "density": "cm^-3",
+        "temperature": "K",
+        "wind": "cm/s"
+      },
+      "payload_version": "wxsami3-live-payload-v2",
+      "runtime_map": {
+        "file": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/wxsami3_runtime_map_f19_20260523.bin",
+        "magic": 20260524,
+        "n_s": 14475264,
+        "npoints": 3618816,
+        "source_columns": 13824
+      },
+      "runtime_qc": {
+        "above_live_top": 1641376,
+        "invalid": 1819595,
+        "n2_residual_max": 0.8129786925378699,
+        "n2_residual_min": -0.053314608006139914,
+        "n2_residual_negative": 178219,
+        "n2_residual_used": 4389984,
+        "samples": 6031360
+      },
+      "runtime_source": "CAM phys_state(:)",
+      "send_every_nsteps": 1,
+      "sender_checksum": {
+        "invalid_f": 1819595,
+        "invalid_i": 1819595,
+        "scope": "sum over all runtime-sent worker payload arrays",
+        "sum_dennf": 1.4035374508155344e+20,
+        "sum_denni": 1.4035374508155344e+20,
+        "sum_tnf": 2517919366.776947,
+        "sum_tni": 2517919366.776947,
+        "sum_uf": -3705616575.653117,
+        "sum_ui": -3705616575.653117,
+        "sum_vf": 2991409860.6004586,
+        "sum_vi": 2991409860.6004586,
+        "sum_wf": 0.0,
+        "sum_wi": 0.0,
+        "valid_f": 4211765,
+        "valid_i": 4211765
+      },
+      "source_flag_mpi_tag": 212,
+      "source_flag_values": {
+        "SAMI3_NATIVE_ABOVE_TOP": 2,
+        "SAMI3_NATIVE_N2_INVALID": 3,
+        "SAMI3_NATIVE_OTHER_INVALID": 4,
+        "WACCMX_VALID": 1
+      },
+      "source_flags": {
+        "SAMI3_NATIVE_ABOVE_TOP": 1641376,
+        "SAMI3_NATIVE_HE": "policy: He payload value -1",
+        "SAMI3_NATIVE_N2_INVALID": 178219,
+        "SAMI3_NATIVE_OTHER_INVALID": 0,
+        "SAMI3_NATIVE_W": "policy: W payload value 0",
+        "WACCMX_VALID": 4211765
+      },
+      "source_species_indices": [
+        {
+          "index": 57,
+          "name": "O"
+        },
+        {
+          "index": 58,
+          "name": "O2"
+        },
+        {
+          "index": 37,
+          "name": "H"
+        },
+        {
+          "index": 51,
+          "name": "N"
+        },
+        {
+          "index": 54,
+          "name": "NO"
+        },
+        {
+          "index": -1,
+          "name": "N2"
+        },
+        {
+          "index": -1,
+          "name": "He"
+        }
+      ],
+      "source_species_order": [
+        "O",
+        "O2",
+        "H",
+        "N",
+        "NO",
+        "N2",
+        "He"
+      ],
+      "source_units": {
+        "composition": "mass_mixing_ratio",
+        "height": "m",
+        "omega": "Pa/s diagnostic only",
+        "pressure": "Pa",
+        "temperature": "K",
+        "wind": "m/s"
+      }
+    },
+    "logs": {
+      "sami3_online_receiver": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_2frame_20260525_0000/sami3_online_receiver.out",
+      "waccmx_cesm": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_2frame_20260525_0000/waccmx_cesm.out"
+    },
+    "packets": {
+      "0": {
+        "recv_compare": {
+          "max_abs": 2087940.0,
+          "max_rel": 4.83248e-13,
+          "occurrence": 0,
+          "ok_marker": true,
+          "packet_hour_set": [
+            0.0
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_2frame_20260525_0000/recv_qc_compare_pkt000000.txt",
+          "ranks": 32,
+          "step_set": [
+            0
+          ]
+        },
+        "replay": {
+          "filled": 13824,
+          "final": {
+            "above_live_top": 1641376,
+            "bad_weighted_z": 0,
+            "invalid": 1819595,
+            "n2_residual_max": 0.8129786925378699,
+            "n2_residual_min": -0.053314608006139914,
+            "n2_residual_negative": 178219,
+            "n2_residual_used": 4389984,
+            "samples": 6031360
+          },
+          "initial": {
+            "above_live_top": 1641376,
+            "bad_weighted_z": 0,
+            "invalid": 1819595,
+            "n2_residual_max": 0.8129786925378699,
+            "n2_residual_min": -0.053314608006139914,
+            "n2_residual_negative": 178219,
+            "n2_residual_used": 4389984,
+            "samples": 6031360
+          },
+          "n2_mode": "invalid",
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_2frame_20260525_0000/replay_builder_pkt000000.out",
+          "payload_prefix": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_2frame_20260525_0000/replay_pkt000000/waccmx_neutral_rank",
+          "pver": 126,
+          "source_cols": 13824
+        },
+        "summary": {
+          "files": 16,
+          "has_bad_size_files": false,
+          "nsteps": [
+            0
+          ],
+          "packets": [
+            0
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_2frame_20260525_0000/live_dump_summary_pkt000000.txt",
+          "ranks": 16,
+          "total_cols": 13824
+        }
+      }
+    },
+    "run_dir": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_2frame_20260525_0000"
+  },
+  "ok": true
+}
