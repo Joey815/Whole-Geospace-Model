@@ -1,0 +1,4 @@
+JobID|JobName|State|ExitCode|Elapsed|MaxRSS|NodeList
+7651703|sami3_phiappend|CANCELLED by 3446|0:0|00:03:53||qhcn025
+7651703.batch|batch|CANCELLED|0:15|00:03:54|22644928K|qhcn025
+7651703.extern|extern|COMPLETED|0:0|00:03:53|0|qhcn025

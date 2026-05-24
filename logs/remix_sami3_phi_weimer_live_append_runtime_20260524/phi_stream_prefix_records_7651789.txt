@@ -1,0 +1,3 @@
+0 hour nbytes=4 hour=0
+1 phi nbytes=48500
+2 hour nbytes=4 hour=0.00499999989

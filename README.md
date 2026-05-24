@@ -75,6 +75,11 @@ completed 0:0, SAMI3's existing `weimer()` reader advanced from the first
 REMIX-derived frame to the second (`hrutw2=1.0e-3` then `1.0e30`), online
 receiver QC replay matched to `4.86991e-13` relative error, and SAMI3 reached
 `MASTER: All Done!`.
+A runtime append stream smoke is now validated: job 7651789 completed 0:0 after
+SAMI3 opened a prefix-only `phi_weimer.inp`, a background watcher appended the
+second REMIX-derived frame, SAMI3 advanced from `hrutw2=0.005` to the final
+`1.0e30` marker, receiver QC replay again matched to `4.86991e-13`, and SAMI3
+reached `MASTER: All Done!`.
 Runtime blending is validated with alpha=0 exact baseline recovery.
 Density alpha scan is finite and continuous through alphaDavg=0.20.
 Pressure alpha scan at alphaDavg=0.05 is finite for alphaPavg=0.05 and 0.10.
@@ -110,6 +115,7 @@ sami3 bin-bvolcc rt = 7651071, COMPLETED, exit 0:0
 sami3 bin-bv massEq = 7651166, COMPLETED, exit 0:0
 remix phi static rt  = 7651485, COMPLETED, exit 0:0
 remix phi 2frame rt  = 7651608, COMPLETED, exit 0:0
+remix phi append rt  = 7651789, COMPLETED, exit 0:0
 ```
 
 Latest receiver checks:
@@ -238,12 +244,15 @@ Current REMIX -> SAMI3 electric-potential offline adapter:
 
 ```text
 scripts/remix_sami3/remix_pot_to_sami3_phi_weimer.py
+scripts/remix_sami3/remix_phi_weimer_stream_update.py
 logs/remix_sami3_phi_weimer_20260524/
 logs/remix_sami3_phi_weimer_runtime_20260524/
 logs/remix_sami3_phi_weimer_timeseries_20260524/
 logs/remix_sami3_phi_weimer_transition_runtime_20260524/
+logs/remix_sami3_phi_weimer_live_append_runtime_20260524/
 slurm/run_sami3_online_receiver_remix_phi_weimer_20260524.sbatch
 slurm/run_sami3_online_receiver_remix_phi_weimer_2frame_fast_20260524.sbatch
+slurm/run_sami3_online_receiver_remix_phi_weimer_live_append_20260524.sbatch
 ```
 
 Latest two-packet smoke launcher:
@@ -315,7 +324,7 @@ production choice of WACCM-X-top blending heights and per-variable policy
 He native/MSIS fallback policy hardening
 W-off / vertical-wind policy validation
 REMIX -> SAMI3 potential/E-field forcing
-time-aware REMIX -> SAMI3 potential refresh beyond file-backed phi_weimer replay
+replace file-backed phi_weimer append stream with a versioned live REMIX potential payload
 production SAMI3 -> RAIJU/GAMERA Voltron-consistent flux-tube weighting
 replace prototype lon0/bin-center bvol weighting with a true traced-tube flux-volume map
 production SAMI3 -> RAIJU/GAMERA geometry/mask coverage policy

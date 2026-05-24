@@ -319,18 +319,102 @@ logs/remix_sami3_phi_weimer_transition_runtime_20260524/slurm_7651608.out
 logs/remix_sami3_phi_weimer_transition_runtime_20260524/slurm_7651608.err
 ```
 
+## Runtime Live-Append Stream Smoke
+
+The next diagnostic step was to stop pre-generating the complete two-frame
+`phi_weimer.inp` file.  A stream update helper now writes only an initial
+prefix and appends the second frame after SAMI3 has already opened and read the
+first record:
+
+```text
+scripts/remix_sami3/remix_phi_weimer_stream_update.py
+```
+
+Prefix record contract:
+
+```text
+0 hour nbytes=4 hour=0
+1 phi  nbytes=48500
+2 hour nbytes=4 hour=0.00499999989
+```
+
+Append record contract after SAMI3 prints the first `hrutw2`:
+
+```text
+0 hour nbytes=4 hour=0
+1 phi  nbytes=48500
+2 hour nbytes=4 hour=0.00499999989
+3 phi  nbytes=48500
+4 hour nbytes=4 hour=1.00000002e+30
+```
+
+Launcher:
+
+```text
+slurm/run_sami3_online_receiver_remix_phi_weimer_live_append_20260524.sbatch
+```
+
+Validated run:
+
+```text
+job: 7651789
+state: COMPLETED
+exit: 0:0
+elapsed: 00:01:11
+node: qhcn025
+MaxRSS: 39503252K
+```
+
+Key evidence:
+
+```text
+PHI_STREAM_PREFIX_READY=Sun May 24 22:09:40 CST 2026
+PHI_STREAM_APPEND_DONE=Sun May 24 22:10:30 CST 2026
+hrutw2 = 0.00000000       4.99999989E-03
+hrutw2 = 5.50118554E-03   1.00000002E+30
+MASTER: All Done!
+WACCMX online done signal received: 1
+WACCMX_RECV_QC compare ok: ranks=32 occurrence=0 step_set=[0]
+packet_hour_set=[0.0] max_abs=2.1033e+06 max_rel=4.86991e-13
+```
+
+This proves the current SAMI3 reader can see a REMIX-derived frame appended to
+`phi_weimer.inp` after runtime startup, provided the next frame is appended
+before `hrut` crosses the advertised next-hour marker.  It is still a
+file-backed stream prototype, not the final MPI REMIX potential channel.
+
+One cancelled attempt is archived as `sacct_7651703_cancelled.txt`; that attempt
+sequenced append after the sender `prun` command and did not reach the append
+stage in time.  The successful launcher uses an independent background watcher.
+
+Archived evidence:
+
+```text
+logs/remix_sami3_phi_weimer_live_append_runtime_20260524/sacct_7651789.txt
+logs/remix_sami3_phi_weimer_live_append_runtime_20260524/receiver_markers_7651789.txt
+logs/remix_sami3_phi_weimer_live_append_runtime_20260524/recv_qc_compare_7651789.txt
+logs/remix_sami3_phi_weimer_live_append_runtime_20260524/phi_stream_prefix_records_7651789.txt
+logs/remix_sami3_phi_weimer_live_append_runtime_20260524/phi_stream_append_records_7651789.txt
+logs/remix_sami3_phi_weimer_live_append_runtime_20260524/phi_stream_append_watcher_7651789.out
+logs/remix_sami3_phi_weimer_live_append_runtime_20260524/phi_weimer_live_append_final_7651789.inp
+logs/remix_sami3_phi_weimer_live_append_runtime_20260524/sami3_online_receiver_7651789.out
+logs/remix_sami3_phi_weimer_live_append_runtime_20260524/neutral_sender_7651789.out
+logs/remix_sami3_phi_weimer_live_append_runtime_20260524/slurm_7651789.out
+logs/remix_sami3_phi_weimer_live_append_runtime_20260524/slurm_7651789.err
+```
+
 ## Current Limitation
 
 This adapter proves the file-format bridge and static SAMI3 runtime ingestion
-path, plus a two-frame runtime transition through SAMI3's existing Weimer
-reader.  It does not yet prove production REMIX -> SAMI3 electrodynamic
-consistency.
+path, a two-frame runtime transition through SAMI3's existing Weimer reader,
+and a runtime append stream visible to that reader.  It does not yet prove
+production REMIX -> SAMI3 electrodynamic consistency.
 
 Known limitations:
 
 ```text
 uses NORTH_APEX only by default
-time sequence replay is supported from multiple files, but not yet live update
+runtime append is file-backed and requires the next frame before the marker time
 does not yet handle southern-hemisphere sign/mirroring policy
 uses direct mlat/mlon interpolation, not a full SAMI3 field-line mapping
 sets target mlat < 45 deg to zero because the source package is high-lat only
@@ -338,16 +422,17 @@ sets target mlat < 45 deg to zero because the source package is high-lat only
 
 ## Next Step
 
-The next implementation step is replacing replay files with a live REMIX
-potential feed:
+The next implementation step is replacing the file-backed append stream with a
+versioned live REMIX potential payload:
 
 ```text
 REMIX/POT time sequence
--> versioned phi payload or regenerated phi_weimer.inp sidecar
+-> versioned phi payload
 -> SAMI3 potential.f90:weimer read/update at coupling cadence
 -> exb(hrut, phi)
 ```
 
-Keep the static-file path as the replay baseline.  For the physical path, add
-time metadata, hemisphere policy, and a validation comparison against the
-current Weimer baseline (`phiu.dat` and E x B diagnostics if enabled).
+Keep the static-file and append-stream paths as replay baselines.  For the
+physical path, add time metadata, hemisphere policy, and a validation comparison
+against the current Weimer baseline (`phiu.dat` and E x B diagnostics if
+enabled).

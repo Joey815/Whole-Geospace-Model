@@ -46,7 +46,9 @@ def _decode_attr(value: Any) -> Any:
 
 
 def read_weimer_grid(path: Path, nlat: int, nlon: int) -> tuple[np.ndarray, np.ndarray]:
-    values = np.loadtxt(path, dtype=np.float64).reshape(-1)
+    values = np.asarray(
+        [float(item) for item in path.read_text().split()], dtype=np.float64
+    )
     expected = nlat + nlon
     if values.size != expected:
         raise ValueError(
