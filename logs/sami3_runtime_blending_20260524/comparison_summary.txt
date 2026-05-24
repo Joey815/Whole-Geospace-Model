@@ -1,0 +1,11 @@
+SAMI3 runtime blending validation, 2026-05-24
+Build: make voltron.x -j 8 with Intel runtime LD_LIBRARY_PATH set
+Runs: baseline no ingest, alpha0 ingest, default alpha1 ingest
+
+alpha0_vs_baseline raiCpl.Res.00000: datasets=36 max_abs=0.0000000000000000e+00 max_rel=0.0000000000000000e+00 worst=None
+alpha0_vs_baseline raiju.Res.00000: datasets=47 max_abs=0.0000000000000000e+00 max_rel=0.0000000000000000e+00 worst=None
+
+default_alpha1_input_vs_raiCpl Pavg: max_abs=0.0000000000000000e+00 max_rel=0.0000000000000000e+00
+default_alpha1_input_vs_raiCpl Davg: max_abs=0.0000000000000000e+00 max_rel=0.0000000000000000e+00
+default_alpha1_input_vs_raiCpl Pstd: max_abs=0.0000000000000000e+00 max_rel=0.0000000000000000e+00
+default_alpha1_input_vs_raiCpl Dstd: max_abs=0.0000000000000000e+00 max_rel=0.0000000000000000e+00

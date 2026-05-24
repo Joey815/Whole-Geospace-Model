@@ -1,5 +1,7 @@
 module raijuCplHelper
 
+    use, intrinsic :: ieee_arithmetic, only : ieee_is_finite
+
     use volttypes
     use raijutypes
     use remixReader
@@ -45,6 +47,18 @@ module raijuCplHelper
         call iXML%Set_Val(raiCpl%doSami3MomentsIngest, "sami3Moments/doIngest", raiCpl%doSami3MomentsIngest)
         call iXML%Set_Val(raiCpl%sami3MomentsFile, "sami3Moments/file", raiCpl%sami3MomentsFile)
         call iXML%Set_Val(raiCpl%sami3MomentsGroup, "sami3Moments/group", raiCpl%sami3MomentsGroup)
+        call iXML%Set_Val(raiCpl%sami3AlphaPavg, "sami3Moments/alphaPavg", raiCpl%sami3AlphaPavg)
+        call iXML%Set_Val(raiCpl%sami3AlphaDavg, "sami3Moments/alphaDavg", raiCpl%sami3AlphaDavg)
+        call iXML%Set_Val(raiCpl%sami3AlphaPstd, "sami3Moments/alphaPstd", raiCpl%sami3AlphaPstd)
+        call iXML%Set_Val(raiCpl%sami3AlphaDstd, "sami3Moments/alphaDstd", raiCpl%sami3AlphaDstd)
+        call iXML%Set_Val(raiCpl%sami3AlphaTiote, "sami3Moments/alphaTiote", raiCpl%sami3AlphaTiote)
+        call iXML%Set_Val(raiCpl%sami3DensityFloor, "sami3Moments/densityFloor", raiCpl%sami3DensityFloor)
+        call iXML%Set_Val(raiCpl%sami3PressureFloor, "sami3Moments/pressureFloor", raiCpl%sami3PressureFloor)
+        call iXML%Set_Val(raiCpl%sami3TioteMin, "sami3Moments/tioteMin", raiCpl%sami3TioteMin)
+        call iXML%Set_Val(raiCpl%sami3TioteMax, "sami3Moments/tioteMax", raiCpl%sami3TioteMax)
+        call iXML%Set_Val(raiCpl%sami3AbortOnNonfinite, "sami3Moments/abortOnNonfinite", &
+            raiCpl%sami3AbortOnNonfinite)
+        call sanitizeSami3MomentControls(raiCpl)
         
         ! State sub-modules that need coupler settings
         call initRaijuColdStarter(raiCpl%raiApp%Model, iXML, raiCpl%raiApp%State%coldStarter,tEndO=raiCpl%startup_blendTscl)
@@ -103,6 +117,13 @@ module raijuCplHelper
                 stop
             endif
             write(*,*) "SAMI3 moments ingest enabled: ", trim(raiCpl%sami3MomentsFile), " group=", trim(raiCpl%sami3MomentsGroup)
+            write(*,*) "SAMI3 moments alpha Pavg/Davg/Pstd/Dstd/tiote:", &
+                raiCpl%sami3AlphaPavg, raiCpl%sami3AlphaDavg, raiCpl%sami3AlphaPstd, &
+                raiCpl%sami3AlphaDstd, raiCpl%sami3AlphaTiote
+            write(*,*) "SAMI3 moments floors density/pressure and tiote min/max:", &
+                raiCpl%sami3DensityFloor, raiCpl%sami3PressureFloor, &
+                raiCpl%sami3TioteMin, raiCpl%sami3TioteMax
+            write(*,*) "SAMI3 moments abortOnNonfinite:", raiCpl%sami3AbortOnNonfinite
         endif
 
     end subroutine raijuCpl_init
@@ -111,6 +132,11 @@ module raijuCplHelper
     subroutine applySami3RaiCplMoments(raiCpl)
         class(raijuCoupler_T), intent(inout) :: raiCpl
 
+        real(rp), dimension(:,:,:), allocatable :: Pavg0, Davg0, Pstd0, Dstd0
+        real(rp), dimension(:,:), allocatable :: tiote0
+        logical, dimension(:,:,:), allocatable :: PavgMask0, DavgMask0, PstdMask0, DstdMask0
+        logical, dimension(:,:), allocatable :: tioteMask0
+        integer :: i0, i1, j0, j1, k0, k1, k
         logical :: fExist
 
         if (.not. raiCpl%doSami3MomentsIngest) return
@@ -121,7 +147,60 @@ module raijuCplHelper
             stop
         endif
 
+        k0 = lbound(raiCpl%Pavg,1)
+        k1 = ubound(raiCpl%Pavg,1)
+        i0 = lbound(raiCpl%Pavg(k0)%data,1)
+        i1 = ubound(raiCpl%Pavg(k0)%data,1)
+        j0 = lbound(raiCpl%Pavg(k0)%data,2)
+        j1 = ubound(raiCpl%Pavg(k0)%data,2)
+
+        allocate(Pavg0(i0:i1,j0:j1,k0:k1))
+        allocate(Davg0(i0:i1,j0:j1,k0:k1))
+        allocate(Pstd0(i0:i1,j0:j1,k0:k1))
+        allocate(Dstd0(i0:i1,j0:j1,k0:k1))
+        allocate(PavgMask0(i0:i1,j0:j1,k0:k1))
+        allocate(DavgMask0(i0:i1,j0:j1,k0:k1))
+        allocate(PstdMask0(i0:i1,j0:j1,k0:k1))
+        allocate(DstdMask0(i0:i1,j0:j1,k0:k1))
+        do k=k0,k1
+            Pavg0(:,:,k) = raiCpl%Pavg(k)%data
+            Davg0(:,:,k) = raiCpl%Davg(k)%data
+            Pstd0(:,:,k) = raiCpl%Pstd(k)%data
+            Dstd0(:,:,k) = raiCpl%Dstd(k)%data
+            PavgMask0(:,:,k) = raiCpl%Pavg(k)%mask
+            DavgMask0(:,:,k) = raiCpl%Davg(k)%mask
+            PstdMask0(:,:,k) = raiCpl%Pstd(k)%mask
+            DstdMask0(:,:,k) = raiCpl%Dstd(k)%mask
+        enddo
+
+        allocate(tiote0(lbound(raiCpl%tiote%data,1):ubound(raiCpl%tiote%data,1), &
+            lbound(raiCpl%tiote%data,2):ubound(raiCpl%tiote%data,2)))
+        allocate(tioteMask0(lbound(raiCpl%tiote%mask,1):ubound(raiCpl%tiote%mask,1), &
+            lbound(raiCpl%tiote%mask,2):ubound(raiCpl%tiote%mask,2)))
+        tiote0 = raiCpl%tiote%data
+        tioteMask0 = raiCpl%tiote%mask
+
         call readSami3RaiCplMoments(raiCpl, trim(raiCpl%sami3MomentsFile), trim(raiCpl%sami3MomentsGroup))
+
+        do k=k0,k1
+            raiCpl%Pavg(k)%mask = PavgMask0(:,:,k)
+            raiCpl%Davg(k)%mask = DavgMask0(:,:,k)
+            raiCpl%Pstd(k)%mask = PstdMask0(:,:,k)
+            raiCpl%Dstd(k)%mask = DstdMask0(:,:,k)
+            call blendFloorSami3Moment(raiCpl%Pavg(k)%data, Pavg0(:,:,k), &
+                raiCpl%sami3AlphaPavg, raiCpl%sami3PressureFloor, "Pavg", k, &
+                raiCpl%sami3AbortOnNonfinite)
+            call blendFloorSami3Moment(raiCpl%Davg(k)%data, Davg0(:,:,k), &
+                raiCpl%sami3AlphaDavg, raiCpl%sami3DensityFloor, "Davg", k, &
+                raiCpl%sami3AbortOnNonfinite)
+            call blendFloorSami3Moment(raiCpl%Pstd(k)%data, Pstd0(:,:,k), &
+                raiCpl%sami3AlphaPstd, 0.0_rp, "Pstd", k, raiCpl%sami3AbortOnNonfinite)
+            call blendFloorSami3Moment(raiCpl%Dstd(k)%data, Dstd0(:,:,k), &
+                raiCpl%sami3AlphaDstd, 0.0_rp, "Dstd", k, raiCpl%sami3AbortOnNonfinite)
+        enddo
+        raiCpl%tiote%mask = tioteMask0
+        call blendClampSami3Moment(raiCpl%tiote%data, tiote0, raiCpl%sami3AlphaTiote, &
+            raiCpl%sami3TioteMin, raiCpl%sami3TioteMax, "tiote", raiCpl%sami3AbortOnNonfinite)
 
         if (.not. raiCpl%sami3MomentsReported) then
             write(*,*) "SAMI3 moments ingest applied after RAIJU realtime pack: ", &
@@ -133,6 +212,93 @@ module raijuCplHelper
         endif
 
     end subroutine applySami3RaiCplMoments
+
+
+    subroutine sanitizeSami3MomentControls(raiCpl)
+        class(raijuCoupler_T), intent(inout) :: raiCpl
+
+        raiCpl%sami3AlphaPavg = clamp01(raiCpl%sami3AlphaPavg)
+        raiCpl%sami3AlphaDavg = clamp01(raiCpl%sami3AlphaDavg)
+        raiCpl%sami3AlphaPstd = clamp01(raiCpl%sami3AlphaPstd)
+        raiCpl%sami3AlphaDstd = clamp01(raiCpl%sami3AlphaDstd)
+        raiCpl%sami3AlphaTiote = clamp01(raiCpl%sami3AlphaTiote)
+        raiCpl%sami3DensityFloor = max(0.0_rp, raiCpl%sami3DensityFloor)
+        raiCpl%sami3PressureFloor = max(0.0_rp, raiCpl%sami3PressureFloor)
+        raiCpl%sami3TioteMin = max(0.0_rp, raiCpl%sami3TioteMin)
+        raiCpl%sami3TioteMax = max(raiCpl%sami3TioteMin, raiCpl%sami3TioteMax)
+    end subroutine sanitizeSami3MomentControls
+
+
+    real(rp) function clamp01(x)
+        real(rp), intent(in) :: x
+
+        clamp01 = min(1.0_rp, max(0.0_rp, x))
+    end function clamp01
+
+
+    subroutine blendFloorSami3Moment(data, baseData, alpha, floorVal, fieldName, channel, abortOnBad)
+        real(rp), dimension(:,:), intent(inout) :: data
+        real(rp), dimension(:,:), intent(in) :: baseData
+        real(rp), intent(in) :: alpha, floorVal
+        character(len=*), intent(in) :: fieldName
+        integer, intent(in) :: channel
+        logical, intent(in) :: abortOnBad
+
+        integer :: nBad
+
+        if (alpha <= 0.0_rp) then
+            data = baseData
+        else
+            nBad = count(.not. ieee_is_finite(data))
+            if (nBad > 0) then
+                write(*,*) "SAMI3 moments non-finite input: ", trim(fieldName), &
+                    " channel=", channel, " count=", nBad
+                if (abortOnBad) stop
+                where (.not. ieee_is_finite(data))
+                    data = baseData
+                end where
+            endif
+            if (alpha < 1.0_rp) then
+                data = (1.0_rp-alpha)*baseData + alpha*data
+            endif
+        endif
+        where (data < floorVal)
+            data = floorVal
+        end where
+    end subroutine blendFloorSami3Moment
+
+
+    subroutine blendClampSami3Moment(data, baseData, alpha, minVal, maxVal, fieldName, abortOnBad)
+        real(rp), dimension(:,:), intent(inout) :: data
+        real(rp), dimension(:,:), intent(in) :: baseData
+        real(rp), intent(in) :: alpha, minVal, maxVal
+        character(len=*), intent(in) :: fieldName
+        logical, intent(in) :: abortOnBad
+
+        integer :: nBad
+
+        if (alpha <= 0.0_rp) then
+            data = baseData
+        else
+            nBad = count(.not. ieee_is_finite(data))
+            if (nBad > 0) then
+                write(*,*) "SAMI3 moments non-finite input: ", trim(fieldName), " count=", nBad
+                if (abortOnBad) stop
+                where (.not. ieee_is_finite(data))
+                    data = baseData
+                end where
+            endif
+            if (alpha < 1.0_rp) then
+                data = (1.0_rp-alpha)*baseData + alpha*data
+            endif
+        endif
+        where (data < minVal)
+            data = minVal
+        end where
+        where (data > maxVal)
+            data = maxVal
+        end where
+    end subroutine blendClampSami3Moment
 
 
     subroutine tubeShell2RaiCpl(voltGrid, tubeShell, raiCpl)
