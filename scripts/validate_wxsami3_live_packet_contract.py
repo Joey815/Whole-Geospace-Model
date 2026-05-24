@@ -191,6 +191,28 @@ def check_meta(checks, meta, args):
         meta.get("packet_index") == args.expected_packets - 1 or args.allow_incomplete,
         "packet_index={} expected={}".format(meta.get("packet_index"), args.expected_packets - 1),
     )
+    add_check(
+        checks,
+        "meta_dtime_phys_positive",
+        numeric(meta.get("dtime_phys_s")) and float(meta.get("dtime_phys_s")) > 0.0,
+        meta.get("dtime_phys_s"),
+    )
+    add_check(
+        checks,
+        "meta_send_every_nsteps_positive",
+        isinstance(meta.get("send_every_nsteps"), int) and meta.get("send_every_nsteps") > 0,
+        meta.get("send_every_nsteps"),
+    )
+    expected_packet_hour = None
+    if numeric(meta.get("dtime_phys_s")) and isinstance(meta.get("nstep"), int):
+        expected_packet_hour = float(meta["nstep"]) * float(meta["dtime_phys_s"]) / 3600.0
+    add_check(
+        checks,
+        "meta_packet_hour_matches_nstep_dtime",
+        expected_packet_hour is not None
+        and close_enough(meta.get("packet_hour"), expected_packet_hour, args.packet_hour_rtol, args.packet_hour_atol),
+        "packet_hour={} expected={}".format(meta.get("packet_hour"), expected_packet_hour),
+    )
 
     header = meta.get("payload_header", {})
     expected_header = {
@@ -680,6 +702,8 @@ def main():
     parser.add_argument("--expect-he-native", action="store_true", default=True)
     parser.add_argument("--require-zero-unknown-source-flags", action="store_true")
     parser.add_argument("--max-qc-rel", type=float, default=DEFAULT_QC_MAX_REL)
+    parser.add_argument("--packet-hour-rtol", type=float, default=1.0e-7)
+    parser.add_argument("--packet-hour-atol", type=float, default=1.0e-7)
     parser.add_argument("--allow-incomplete", action="store_true")
     parser.add_argument("--json-output", default=None)
     args = parser.parse_args()

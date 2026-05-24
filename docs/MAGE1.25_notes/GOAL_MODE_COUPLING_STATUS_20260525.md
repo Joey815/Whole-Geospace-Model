@@ -267,6 +267,8 @@ available phi payload frames.
 The live neutral contract gate now also closes fallback accounting: above-top
 cells, N2-negative residual cells, unknown invalid cells, and replay
 initial/final fallback counts must agree with the source-flag metadata.
+It also checks metadata cadence consistency: positive `dtime_phys_s`, positive
+`send_every_nsteps`, and `packet_hour = nstep * dtime_phys_s / 3600`.
 
 The SAMI3 -> RAIJU/GAMERA long-run archive now turns summary diagnostics into a
 hard gate: exact Pavg/Davg/Pstd/Dstd blending formula residuals, positive
