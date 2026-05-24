@@ -20,6 +20,18 @@ File-mode fallback regression remains validated.
 Not production live WACCM-X neutral forcing yet.
 ```
 
+The current verified SAMI3 -> RAIJU/GAMERA scalar-moment status is:
+
+```text
+ds_over_B field-line weighting prototype is available.
+L/MLT RAIJU mapping prototype is available.
+Runtime blending is validated with alpha=0 exact baseline recovery.
+Density alpha scan is finite and continuous through alphaDavg=0.20.
+RAIJU moment semantics audit is complete for Pavg/Davg/Pstd/Dstd/tiote.
+Gridded State%tiote can now be enabled for moment-to-eta mapping with
+moments/useStateTioteForIngest=T; default behavior remains unchanged.
+```
+
 Latest verified jobs:
 
 ```text
@@ -104,6 +116,13 @@ docs/MAGE1.25_notes/WACCMX_SAMI3_SOURCE_REASON_FLAGS_RESULT_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_TOP_BLEND_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_WEIGHTING_CONTRACT_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_EXTENDED_DIAGNOSTICS_RESULT_20260524.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_DS_OVER_B_WEIGHTING_RESULT_20260524.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_L_MLT_MAPPING_RESULT_20260524.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_RUNTIME_BLEND_RESULT_20260524.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_STAGE2_SOURCE_MODES_RESULT_20260524.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_DSB_LMLT_RUNTIME_BLEND_RESULT_20260524.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_DSB_LMLT_ALPHA_SCAN_RESULT_20260524.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_MOMENT_SEMANTICS_TIOTE_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_GAMERA_PHYSICS_REVIEW_20260523.md
 ```
 
@@ -132,6 +151,8 @@ Current SAMI3 -> RAIJU scalar-moments adapter snapshot:
 ```text
 code/kaiju_sami3_moments/scripts/sami3_moments/
 code/kaiju_sami3_moments/src/voltron/modelInterfaces/
+code/kaiju_sami3_moments/src/raiju/
+code/kaiju_sami3_moments/src/base/types/
 ```
 
 Latest two-packet smoke launcher:
@@ -183,9 +204,9 @@ production choice of WACCM-X-top blending heights and per-variable policy
 He native/MSIS fallback policy hardening
 W-off / vertical-wind policy validation
 REMIX -> SAMI3 potential/E-field forcing
-production SAMI3 -> RAIJU/GAMERA ds/B or Voltron flux-tube weighting
-SAMI3 -> RAIJU/GAMERA L/MLT mapping
-runtime density/pressure mode selection and per-field blending
+production SAMI3 -> RAIJU/GAMERA Voltron-consistent flux-tube weighting
+production SAMI3 -> RAIJU/GAMERA geometry/mask coverage policy
+longer runtime scans for density, pressure, and tiote blending
 f09/finer distributed remap design
 ```
 

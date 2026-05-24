@@ -1,0 +1,16 @@
+alpha0_vs_base_raiCpl: datasets=36 max_abs=0 worst_abs=None max_rel=0 worst_rel=None
+alpha0_vs_base_raiCpl: nonfinite_count=0
+alpha0_vs_base_raiju: datasets=47 max_abs=0 worst_abs=None max_rel=0 worst_rel=None
+alpha0_vs_base_raiju: nonfinite_count=0
+stateTiote_vs_D005_raiju: datasets=47 max_abs=452793303.24868566 worst_abs=State/eta max_rel=213.14347309526715 worst_rel=State/eta
+stateTiote_vs_D005_raiju: nonfinite_count=0
+stateTiote_vs_D005_raiju: State/Davg_in max_abs=0 mean_abs=0 a_mean=99.325393970525269 b_mean=99.325393970525269
+stateTiote_vs_D005_raiju: State/Pavg_in max_abs=0 mean_abs=0 a_mean=0.00043784124116159 b_mean=0.00043784124116159
+stateTiote_vs_D005_raiju: State/eta max_abs=452793303.24868566 mean_abs=781413.37990397448 a_mean=10099071.872078419 b_mean=10081292.251164462
+stateTiote_vs_D005_raiju: State/Density max_abs=4.4609337436245395 mean_abs=0.050073375409387534 a_mean=994.71901938064252 b_mean=994.73655708935007
+stateTiote_vs_D005_raiju: State/Pressure max_abs=0.0035325228984534052 mean_abs=6.7482308433885923e-05 a_mean=0.27766802546375802 b_mean=0.27767339821475034
+stateTiote_vs_D005_raiju: State/eta_avg max_abs=452793303.24868566 mean_abs=781413.37990397471 a_mean=10099078.446879759 b_mean=10081298.825965803
+stateTiote_vs_D005_raiju: State/Density_avg max_abs=4.4609337436245404 mean_abs=0.050073375409387548 a_mean=994.71904322543617 b_mean=994.73658093414394
+stateTiote_vs_D005_raiju: State/Pressure_avg max_abs=0.0035325228984534329 mean_abs=6.7482308433885923e-05 a_mean=0.27794509745053986 b_mean=0.2779504702015323
+stateTiote_vs_D005_gamera: datasets=12 max_abs=3.4072678346057494 worst_abs=Gas0 max_rel=0.95315484925994653 worst_rel=Gas0
+stateTiote_vs_D005_gamera: nonfinite_count=0
