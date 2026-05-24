@@ -1,0 +1,27 @@
+job_id=7645541
+run_dir=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_multipacket_topblend_20260524_0000
+JobID|State|ExitCode|Elapsed|MaxRSS
+7645541|COMPLETED|0:0|00:03:29|
+7645541.batch|COMPLETED|0:0|00:03:29|63903700K
+7645541.extern|COMPLETED|0:0|00:03:29|0
+7645541.0|COMPLETED|0:0|00:00:00|0
+7645541.1|COMPLETED|0:0|00:00:00|0
+apply_blend_lines=320
+blend_i_total=2601
+blend_f_total=2601
+blend_i_nonzero_lines=178
+blend_f_nonzero_lines=178
+blend_i_max=36
+blend_f_max=36
+recv_source_lines=64
+source_valid_total=8423223
+source_above_top_total=3283378
+source_n2_invalid_total=356119
+source_other_invalid_total=0
+source_unknown_total=0
+recv_valid_i_total=8423223
+recv_invalid_i_total=3639497
+recv_valid_f_total=8423223
+recv_invalid_f_total=3639497
+packet0_compare=WACCMX_RECV_QC compare ok: ranks=32 occurrence=0 step_set=[0] packet_hour_set=[0.0] max_abs=2.08794e+06 max_rel=4.83248e-13
+packet1_compare=WACCMX_RECV_QC compare ok: ranks=32 occurrence=1 step_set=[1] packet_hour_set=[0.0833333358] max_abs=2.69363e+06 max_rel=6.76502e-13

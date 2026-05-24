@@ -352,8 +352,16 @@ Current policy is physically reasonable:
 above the WACCM-X valid top, retain SAMI3 native MSIS/HWM neutral state
 ```
 
-but this must be explicit in payload metadata and receiver logs.  Prefer a
-transition layer instead of a hard switch:
+2026-05-24 update: receiver-side explicit top blending is now implemented and
+validated as a runtime prototype.  See:
+
+```text
+docs/MAGE1.25_notes/WACCMX_SAMI3_TOP_BLEND_RESULT_20260524.md
+```
+
+The production choice of transition heights and whether each variable should
+share the same blend fraction still needs physics review.  Prefer a transition
+layer instead of a hard switch:
 
 ```text
 X_neutral = w(z) * X_WACCMX + (1 - w(z)) * X_SAMI3_native

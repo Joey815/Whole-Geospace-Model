@@ -101,6 +101,7 @@ docs/MAGE1.25_notes/WACCMX_SAMI3_N2_INVALID_MODE_RESULT_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_SOURCE_FLAGS_METADATA_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_RECEIVER_SOURCE_FLAGS_RESULT_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_SOURCE_REASON_FLAGS_RESULT_20260524.md
+docs/MAGE1.25_notes/WACCMX_SAMI3_TOP_BLEND_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_GAMERA_PHYSICS_REVIEW_20260523.md
 ```
 
@@ -121,6 +122,7 @@ Current receiver implementation:
 
 ```text
 code/sami3_receiver/waccmx_neutral_mod.f90
+code/sami3_receiver/Makefile
 ```
 
 Latest two-packet smoke launcher:
@@ -155,6 +157,12 @@ Latest full SAMI3 source-reason sidecar diagnostic launcher:
 slurm/run_waccmx_cam_sami3_live_payload_f19_multipacket_reasonflags_20260524.sbatch
 ```
 
+Latest full SAMI3 WACCM-X-top blending diagnostic launcher:
+
+```text
+slurm/run_waccmx_cam_sami3_live_payload_f19_multipacket_topblend_20260524.sbatch
+```
+
 ## Known Physical Blockers
 
 Do not describe this snapshot as production live WACCM-X neutral forcing until
@@ -162,7 +170,7 @@ these are handled:
 
 ```text
 strict same-call-site offline-vs-live source-state validation
-explicit WACCM-X-top SAMI3-native fallback or blending policy
+production choice of WACCM-X-top blending heights and per-variable policy
 He native/MSIS fallback policy hardening
 W-off / vertical-wind policy validation
 REMIX -> SAMI3 potential/E-field forcing

@@ -4,6 +4,7 @@ module waccmx_neutral_mod
     use namelist_mod
     use message_passing_mod
     use variable_mod
+    use grid_mod, only: alts
 
     implicit none
 
@@ -30,6 +31,10 @@ module waccmx_neutral_mod
     logical :: waccmx_loaded = .false.
     logical :: waccmx_online_connected = .false.
     logical :: waccmx_apply_policy_logged = .false.
+    logical :: waccmx_top_blend_initialized = .false.
+    logical :: waccmx_top_blend_enabled = .false.
+    real :: waccmx_top_blend_bottom_km = 0.0
+    real :: waccmx_top_blend_top_km = 0.0
     integer :: waccmx_peer_comm = -1
     integer :: waccmx_online_packet_count = 0
     real :: waccmx_loaded_request_hr = -1.0e30
@@ -73,6 +78,97 @@ contains
         endif
 
     end function waccmx_recv_qc_enabled
+
+    subroutine waccmx_init_top_blend_policy()
+
+        integer :: stat, lenval, ios
+        character(len=32) :: mode
+        character(len=64) :: value
+
+        if (waccmx_top_blend_initialized) return
+
+        mode = ''
+        call get_environment_variable('WXSAMI3_TOP_BLEND_MODE', mode, &
+                                      length=lenval, status=stat)
+        if (stat == 0 .and. lenval > 0) then
+            if (trim(mode) == 'linear' .or. trim(mode) == 'LINEAR') then
+                waccmx_top_blend_enabled = .true.
+            else if (trim(mode) == 'none' .or. trim(mode) == 'NONE' .or. &
+                     trim(mode) == '0' .or. trim(mode) == 'false' .or. &
+                     trim(mode) == 'FALSE') then
+                waccmx_top_blend_enabled = .false.
+            else
+                print *, 'WACCMX top blend invalid WXSAMI3_TOP_BLEND_MODE=', &
+                         trim(mode)
+                stop
+            endif
+        endif
+
+        if (waccmx_top_blend_enabled) then
+            value = ''
+            call get_environment_variable('WXSAMI3_BLEND_BOTTOM_KM', value, &
+                                          length=lenval, status=stat)
+            if (stat /= 0 .or. lenval <= 0) then
+                print *, 'WACCMX top blend requires WXSAMI3_BLEND_BOTTOM_KM'
+                stop
+            endif
+            read(value,*,iostat=ios) waccmx_top_blend_bottom_km
+            if (ios /= 0) then
+                print *, 'WACCMX top blend could not parse WXSAMI3_BLEND_BOTTOM_KM=', &
+                         trim(value)
+                stop
+            endif
+
+            value = ''
+            call get_environment_variable('WXSAMI3_BLEND_TOP_KM', value, &
+                                          length=lenval, status=stat)
+            if (stat /= 0 .or. lenval <= 0) then
+                print *, 'WACCMX top blend requires WXSAMI3_BLEND_TOP_KM'
+                stop
+            endif
+            read(value,*,iostat=ios) waccmx_top_blend_top_km
+            if (ios /= 0) then
+                print *, 'WACCMX top blend could not parse WXSAMI3_BLEND_TOP_KM=', &
+                         trim(value)
+                stop
+            endif
+
+            if (waccmx_top_blend_top_km <= waccmx_top_blend_bottom_km) then
+                print *, 'WACCMX top blend requires top_km > bottom_km', &
+                         waccmx_top_blend_bottom_km, waccmx_top_blend_top_km
+                stop
+            endif
+        endif
+
+        if (taskid == 1) then
+            if (waccmx_top_blend_enabled) then
+                print *, 'WACCMX neutral top blend policy: linear WACCMX fraction from 1 to 0 between km', &
+                         waccmx_top_blend_bottom_km, waccmx_top_blend_top_km
+            else
+                print *, 'WACCMX neutral top blend policy: none; valid WACCMX cells overwrite native SAMI3'
+            endif
+        endif
+
+        waccmx_top_blend_initialized = .true.
+
+    end subroutine waccmx_init_top_blend_policy
+
+    real function waccmx_top_blend_alpha(alt_km)
+
+        real, intent(in) :: alt_km
+
+        if (.not. waccmx_top_blend_enabled) then
+            waccmx_top_blend_alpha = 1.0
+        else if (alt_km <= waccmx_top_blend_bottom_km) then
+            waccmx_top_blend_alpha = 1.0
+        else if (alt_km >= waccmx_top_blend_top_km) then
+            waccmx_top_blend_alpha = 0.0
+        else
+            waccmx_top_blend_alpha = (waccmx_top_blend_top_km - alt_km) / &
+                                     (waccmx_top_blend_top_km - waccmx_top_blend_bottom_km)
+        endif
+
+    end function waccmx_top_blend_alpha
 
     subroutine waccmx_print_recv_qc(header, packet_hour)
 
@@ -337,10 +433,14 @@ contains
         integer :: nplane, valid_i, invalid_i, valid_f, invalid_f
         integer :: he_native_i, he_native_f, w_zero_i, w_zero_f
         integer :: flag_valid, flag_above, flag_n2, flag_other, flag_unknown
+        integer :: full_i, blend_i, native_top_i
+        integer :: full_f, blend_f, native_top_f
+        real :: alpha
 
         if (.not. lwaccmx_neutral) return
         call waccmx_load_neutral(hr)
         if (.not. waccmx_loaded) return
+        call waccmx_init_top_blend_policy()
 
         if (.not. waccmx_apply_policy_logged) then
             if (taskid == 1) then
@@ -365,33 +465,73 @@ contains
             flag_n2 = count(w_source_flag(:,:,nll) == waccmx_flag_n2_invalid)
             flag_other = count(w_source_flag(:,:,nll) == waccmx_flag_other_invalid)
             flag_unknown = nplane - flag_valid - flag_above - flag_n2 - flag_other
+            full_i = 0
+            blend_i = 0
+            native_top_i = 0
+            full_f = 0
+            blend_f = 0
+            native_top_f = 0
+            do j = 1,nf
+                do i = 1,nz
+                    alpha = waccmx_top_blend_alpha(alts(i,j,nll))
+                    if (w_denni(i,j,nll,pth) >= 0.0) then
+                        if (alpha >= 0.999999) then
+                            full_i = full_i + 1
+                        else if (alpha <= 0.000001) then
+                            native_top_i = native_top_i + 1
+                        else
+                            blend_i = blend_i + 1
+                        endif
+                    endif
+                    if (w_dennf(i,j,nll,pth) >= 0.0) then
+                        if (alpha >= 0.999999) then
+                            full_f = full_f + 1
+                        else if (alpha <= 0.000001) then
+                            native_top_f = native_top_f + 1
+                        else
+                            blend_f = blend_f + 1
+                        endif
+                    endif
+                enddo
+            enddo
             print *, 'WACCMX_APPLY_QC', taskid, nll, hr, nplane, &
                      valid_i, invalid_i, valid_f, invalid_f, &
                      he_native_i, he_native_f, w_zero_i, w_zero_f
             print *, 'WACCMX_APPLY_SOURCE_FLAGS', taskid, nll, hr, nplane, &
                      flag_valid, flag_above, flag_n2, flag_other, flag_unknown
+            print *, 'WACCMX_APPLY_BLEND', taskid, nll, hr, nplane, &
+                     merge(1, 0, waccmx_top_blend_enabled), &
+                     waccmx_top_blend_bottom_km, waccmx_top_blend_top_km, &
+                     full_i, blend_i, native_top_i, full_f, blend_f, native_top_f
         endif
 
         do j = 1,nf
             do i = 1,nz
-                if (w_denni(i,j,nll,pth) >= 0.0) then
+                alpha = waccmx_top_blend_alpha(alts(i,j,nll))
+                if (w_denni(i,j,nll,pth) >= 0.0 .and. alpha > 0.0) then
                     do k = 1,nneut
-                        if (k /= pthe) denni(i,j,nll,k) = w_denni(i,j,nll,k)
+                        if (k /= pthe) then
+                            denni(i,j,nll,k) = alpha*w_denni(i,j,nll,k) + &
+                                               (1.0-alpha)*denni(i,j,nll,k)
+                        endif
                     enddo
-                    tni(i,j,nll) = w_tni(i,j,nll)
-                    ui(i,j,nll)  = w_ui(i,j,nll)
-                    vi(i,j,nll)  = w_vi(i,j,nll)
-                    wi(i,j,nll)  = w_wi(i,j,nll)
+                    tni(i,j,nll) = alpha*w_tni(i,j,nll) + (1.0-alpha)*tni(i,j,nll)
+                    ui(i,j,nll)  = alpha*w_ui(i,j,nll)  + (1.0-alpha)*ui(i,j,nll)
+                    vi(i,j,nll)  = alpha*w_vi(i,j,nll)  + (1.0-alpha)*vi(i,j,nll)
+                    wi(i,j,nll)  = alpha*w_wi(i,j,nll)  + (1.0-alpha)*wi(i,j,nll)
                 endif
 
-                if (w_dennf(i,j,nll,pth) >= 0.0) then
+                if (w_dennf(i,j,nll,pth) >= 0.0 .and. alpha > 0.0) then
                     do k = 1,nneut
-                        if (k /= pthe) dennf(i,j,nll,k) = w_dennf(i,j,nll,k)
+                        if (k /= pthe) then
+                            dennf(i,j,nll,k) = alpha*w_dennf(i,j,nll,k) + &
+                                               (1.0-alpha)*dennf(i,j,nll,k)
+                        endif
                     enddo
-                    tnf(i,j,nll) = w_tnf(i,j,nll)
-                    uf(i,j,nll)  = w_uf(i,j,nll)
-                    vf(i,j,nll)  = w_vf(i,j,nll)
-                    wf(i,j,nll)  = w_wf(i,j,nll)
+                    tnf(i,j,nll) = alpha*w_tnf(i,j,nll) + (1.0-alpha)*tnf(i,j,nll)
+                    uf(i,j,nll)  = alpha*w_uf(i,j,nll)  + (1.0-alpha)*uf(i,j,nll)
+                    vf(i,j,nll)  = alpha*w_vf(i,j,nll)  + (1.0-alpha)*vf(i,j,nll)
+                    wf(i,j,nll)  = alpha*w_wf(i,j,nll)  + (1.0-alpha)*wf(i,j,nll)
                 endif
             enddo
         enddo
