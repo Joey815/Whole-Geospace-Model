@@ -1,0 +1,2 @@
+/var/spool/slurmd/job7658944/slurm_script: line 135: 327895 Terminated              ( cd "$VOLTRON_RUN"; echo "voltron_exe=$VOLTRON_EXE"; echo "weimer_grid=$WEIMER_GRID"; echo "omp_threads=$OMP_NUM_THREADS"; echo "ldd_missing=$(ldd ./voltron.x | grep -c 'not found' || true)"; ./voltron.x "$VOLTRON_XML" ) > "$VOLTRON_RUN/live_phi_payload_writer_voltron_append.out" 2>&1
+TERMINATING DVM...DONE
