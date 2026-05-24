@@ -26,6 +26,8 @@ The current verified SAMI3 -> RAIJU/GAMERA scalar-moment status is:
 ds_over_B field-line weighting prototype is available.
 L/MLT RAIJU mapping prototype is available.
 Explicit /MappingQuality datasets are available for runtime L/MLT products.
+MappingQuality product runtime ingest smoke is validated with the extra group
+present and the Fortran hook reading only /RaiCplMomentsOnly.
 Runtime blending is validated with alpha=0 exact baseline recovery.
 Density alpha scan is finite and continuous through alphaDavg=0.20.
 Pressure alpha scan at alphaDavg=0.05 is finite for alphaPavg=0.05 and 0.10.
@@ -55,6 +57,7 @@ reason flag sidecar   = 7645354, COMPLETED, exit 0:0
 file tag212 regression= 7645380, COMPLETED, exit 0:0
 stub tag212 runtime   = 7645415, COMPLETED, exit 0:0
 sami3 raiju long300   = 7648350, COMPLETED, exit 0:0
+sami3 mapq runtime    = 7648737, COMPLETED, exit 0:0
 ```
 
 Latest receiver checks:
@@ -129,6 +132,7 @@ docs/MAGE1.25_notes/SAMI3_RAIJU_EXTENDED_DIAGNOSTICS_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_DS_OVER_B_WEIGHTING_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_L_MLT_MAPPING_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_MAPPING_QUALITY_RESULT_20260524.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_MAPPING_QUALITY_RUNTIME_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_RUNTIME_BLEND_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_STAGE2_SOURCE_MODES_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_DSB_LMLT_RUNTIME_BLEND_RESULT_20260524.md
@@ -218,6 +222,7 @@ Latest SAMI3 -> RAIJU/GAMERA mapping quality evidence:
 
 ```text
 logs/sami3_mapping_quality_20260524/
+logs/sami3_mapping_quality_runtime_20260524/
 ```
 
 ## Known Physical Blockers
