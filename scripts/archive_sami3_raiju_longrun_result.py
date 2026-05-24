@@ -22,14 +22,15 @@ def copy_if_exists(src, archive_dir, copied):
         copied.append({"source": str(src), "archive": str(dst), "bytes": dst.stat().st_size})
 
 
-def collect_files(run_dir, label):
+def collect_files(run_dir, label, include_existing_summary):
     names = [
         "base_control_{0}.log".format(label),
         "dsB_lmlt_recommended_{0}.log".format(label),
         "tinyCase_base_control_{0}.xml".format(label),
         "tinyCase_sami3_moments_dsB_lmlt_recommended_{0}.xml".format(label),
-        "recommended_{0}_summary.txt".format(label),
     ]
+    if include_existing_summary:
+        names.append("recommended_{0}_summary.txt".format(label))
     files = [run_dir / name for name in names]
     files.extend(sorted(run_dir.glob("slurm-*.out")))
     return files
@@ -57,6 +58,8 @@ def main():
     parser.add_argument("--archive-dir", required=True)
     parser.add_argument("--label", required=True, help="Run label such as long900 or long1800")
     parser.add_argument("--job-id", default=None)
+    parser.add_argument("--summary-python", default="/home/jiaoy_group/jiaoy/.venvs/mage-vis/bin/python")
+    parser.add_argument("--skip-summary", action="store_true")
     parser.add_argument("--allow-incomplete", action="store_true")
     args = parser.parse_args()
 
@@ -82,13 +85,43 @@ def main():
         cmd.append("--allow-incomplete")
     validator_rc = run_checked(cmd, validator_txt)
 
+    summary_info = None
+    if not args.skip_summary and not args.allow_incomplete:
+        summary_stdout = archive_dir / "summarize_sami3_raiju_longrun.stdout.txt"
+        summary_json = archive_dir / "recommended_{}_summary.json".format(args.label)
+        summary_txt = archive_dir / "recommended_{}_summary.txt".format(args.label)
+        summary_cmd = [
+            args.summary_python,
+            str(repo / "scripts" / "summarize_sami3_raiju_longrun.py"),
+            "--run-dir",
+            str(run_dir),
+            "--label",
+            args.label,
+            "--json-output",
+            str(summary_json),
+            "--text-output",
+            str(summary_txt),
+        ]
+        if args.job_id:
+            summary_cmd.extend(["--job-id", str(args.job_id)])
+        summary_rc = run_checked(summary_cmd, summary_stdout)
+        summary_info = {
+            "returncode": summary_rc,
+            "stdout": str(summary_stdout),
+            "json": str(summary_json),
+            "text": str(summary_txt),
+            "python": args.summary_python,
+        }
+
     copied = []
-    for path in collect_files(run_dir, args.label):
+    include_existing_summary = args.skip_summary or args.allow_incomplete
+    for path in collect_files(run_dir, args.label, include_existing_summary):
         copy_if_exists(path, archive_dir, copied)
     sacct = write_sacct(args.job_id, archive_dir)
 
+    archive_ok = validator_rc == 0 and (summary_info is None or summary_info["returncode"] == 0)
     summary = {
-        "ok": validator_rc == 0,
+        "ok": archive_ok,
         "run_dir": str(run_dir),
         "archive_dir": str(archive_dir),
         "label": args.label,
@@ -98,6 +131,7 @@ def main():
             "text": str(validator_txt),
             "json": str(validator_json),
         },
+        "summary": summary_info,
         "copied_files": copied,
         "sacct": sacct,
     }
@@ -110,6 +144,7 @@ def main():
         "label: {}".format(args.label),
         "job_id: {}".format(args.job_id if args.job_id else ""),
         "validator_returncode: {}".format(validator_rc),
+        "summary_returncode: {}".format(summary_info["returncode"] if summary_info else ""),
         "copied_files: {}".format(len(copied)),
         "overall: {}".format("ok" if summary["ok"] else "FAIL"),
         "",

@@ -75,7 +75,8 @@ Then generate the compact result summary and archive the small evidence under:
 logs/sami3_dsB_lmlt_recommended_long1800_20260525/
 ```
 
-The long-run archive helper can run the strict validator and copy the small
+The long-run archive helper can run the strict validator, generate the HDF5
+summary through the local `mage-vis` h5py environment, and copy the small
 evidence:
 
 ```text

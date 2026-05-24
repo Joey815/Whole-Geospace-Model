@@ -297,6 +297,7 @@ Current SAMI3 -> RAIJU validation/archive scripts:
 
 ```text
 scripts/validate_sami3_raiju_longrun.py
+scripts/summarize_sami3_raiju_longrun.py
 scripts/archive_sami3_raiju_longrun_result.py
 ```
 
