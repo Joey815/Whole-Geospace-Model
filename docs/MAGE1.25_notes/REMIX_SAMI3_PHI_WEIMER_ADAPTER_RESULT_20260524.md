@@ -198,17 +198,74 @@ logs/remix_sami3_phi_weimer_runtime_20260524/slurm_7651485.out
 logs/remix_sami3_phi_weimer_runtime_20260524/slurm_7651485.err
 ```
 
+## Time-Series Replay Contract
+
+The adapter now also accepts multiple `waccmx_voltron_forward_package.h5`
+inputs and writes SAMI3's native multi-frame `phi_weimer.inp` record sequence:
+
+```text
+hour0, phi0, hour1, phi1, ..., phiN, valid_until_hour
+```
+
+If the input files contain strictly increasing `Meta/mjd`, frame hours are
+derived from that.  The current long-run packages used for this test still
+carry identical `Meta/mjd`, so the two-frame artifact uses an explicit
+cadence:
+
+```text
+--cadence-hours 0.08333333333333333
+```
+
+Prototype artifact:
+
+```text
+logs/remix_sami3_phi_weimer_timeseries_20260524/phi_weimer_remix_north_2frame.inp
+logs/remix_sami3_phi_weimer_timeseries_20260524/phi_weimer_remix_north_2frame.json
+logs/remix_sami3_phi_weimer_timeseries_20260524/phi_weimer_remix_north_2frame_diag.h5
+logs/remix_sami3_phi_weimer_timeseries_20260524/phi_weimer_remix_north_2frame_record_summary.txt
+logs/remix_sami3_phi_weimer_timeseries_20260524/run_remix_pot_to_sami3_phi_weimer_2frame.out
+```
+
+Checks:
+
+```text
+nframes: 2
+frame_hours: [0.0, 0.08333333333333333]
+readback_hours: [0.0, 0.0833333358168602, 1.0000000150474662e+30]
+readback_hour_max_abs_diff: 0.0
+readback_phi_max_abs_diff_statV: 1.888117893145136e-06
+phi_kV shape: 2 x 125 x 97
+phi_kV min/max/mean: -13.07980127883359 / 10.72937314195538 / -0.07636781304572414
+```
+
+The selected cycle01/cycle02 source packages are not identical:
+
+```text
+NORTH_APEX/POT max_abs_diff: 0.32675565522934047 kV
+NORTH_APEX/POT rms_diff: 0.1271580700463197 kV
+```
+
+Record parser output confirms the SAMI3 reader contract:
+
+```text
+0 ('hour', 4, 0.0)
+1 ('phi', 48500, None)
+2 ('hour', 4, 0.0833333358168602)
+3 ('phi', 48500, None)
+4 ('hour', 4, 1.0000000150474662e+30)
+```
+
 ## Current Limitation
 
 This adapter proves the file-format bridge and static SAMI3 runtime ingestion
-path.  It does not yet prove production REMIX -> SAMI3 electrodynamic
-consistency.
+path, plus a two-frame time-series replay file contract.  It does not yet
+prove production REMIX -> SAMI3 electrodynamic consistency.
 
 Known limitations:
 
 ```text
 uses NORTH_APEX only by default
-does not yet handle a time sequence of REMIX potentials
+time sequence replay is supported from multiple files, but not yet live update
 does not yet handle southern-hemisphere sign/mirroring policy
 uses direct mlat/mlon interpolation, not a full SAMI3 field-line mapping
 sets target mlat < 45 deg to zero because the source package is high-lat only
@@ -216,7 +273,8 @@ sets target mlat < 45 deg to zero because the source package is high-lat only
 
 ## Next Step
 
-The next implementation step is to replace the static replay with a time-aware
+The next implementation step is a controlled runtime test that forces SAMI3 to
+read the second `phi_weimer` frame, then replacing replay files with a live
 REMIX potential feed:
 
 ```text

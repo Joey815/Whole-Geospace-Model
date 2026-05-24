@@ -65,6 +65,11 @@ float32 roundoff.  Static runtime ingestion is validated: job 7651485 completed
 `1e30` valid-until marker, exact online receiver QC replay comparison to
 4.86991e-13 relative error, `MASTER: All Done!`, and online done signal
 received.
+The same adapter now supports multi-file time-series replay into SAMI3's native
+`phi_weimer.inp` sequence.  A two-frame NORTH_APEX artifact is archived under
+`logs/remix_sami3_phi_weimer_timeseries_20260524/` with record order
+`hour0, phi0, hour1, phi1, valid_until` and readback max phi error
+`1.888117893145136e-06` statV.
 Runtime blending is validated with alpha=0 exact baseline recovery.
 Density alpha scan is finite and continuous through alphaDavg=0.20.
 Pressure alpha scan at alphaDavg=0.05 is finite for alphaPavg=0.05 and 0.10.
@@ -228,6 +233,7 @@ Current REMIX -> SAMI3 electric-potential offline adapter:
 scripts/remix_sami3/remix_pot_to_sami3_phi_weimer.py
 logs/remix_sami3_phi_weimer_20260524/
 logs/remix_sami3_phi_weimer_runtime_20260524/
+logs/remix_sami3_phi_weimer_timeseries_20260524/
 slurm/run_sami3_online_receiver_remix_phi_weimer_20260524.sbatch
 ```
 
@@ -300,6 +306,7 @@ production choice of WACCM-X-top blending heights and per-variable policy
 He native/MSIS fallback policy hardening
 W-off / vertical-wind policy validation
 REMIX -> SAMI3 potential/E-field forcing
+runtime smoke that forces SAMI3 to advance to the second phi_weimer frame
 time-aware REMIX -> SAMI3 potential refresh beyond static phi_weimer replay
 production SAMI3 -> RAIJU/GAMERA Voltron-consistent flux-tube weighting
 replace prototype lon0/bin-center bvol weighting with a true traced-tube flux-volume map

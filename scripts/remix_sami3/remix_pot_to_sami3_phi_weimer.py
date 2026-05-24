@@ -6,10 +6,14 @@ It keeps the transport route that SAMI3 already has:
 
     phi_weimer.inp -> potential.f90:weimer -> potpphi -> exb(phi)
 
-The default output is a static potential packet.  SAMI3's current reader
-expects a leading hour, one potential record, then the next hour; the default
-next hour is a far-future sentinel so short smoke runs do not read past the
-static frame.
+The default output is a static potential packet.  With multiple input packages
+the output is a SAMI3-native time sequence:
+
+    hour0, phi0, hour1, phi1, ..., phiN, valid_until_hour
+
+SAMI3's current reader keeps each potential until hrut reaches the following
+hour record.  The default final valid-until hour is a far-future sentinel so
+short smoke runs do not read past the last replay frame.
 """
 
 from __future__ import annotations
@@ -54,6 +58,11 @@ def read_weimer_grid(path: Path, nlat: int, nlon: int) -> tuple[np.ndarray, np.n
 
 def load_remix_pot(path: Path, group: str) -> dict[str, Any]:
     with h5py.File(path, "r") as h5:
+        meta_attrs = {}
+        if "Meta" in h5:
+            meta_attrs = {
+                key: _decode_attr(value) for key, value in h5["Meta"].attrs.items()
+            }
         if group not in h5:
             raise KeyError(f"{path} does not contain group {group!r}")
         grp = h5[group]
@@ -88,6 +97,7 @@ def load_remix_pot(path: Path, group: str) -> dict[str, Any]:
         "lon_deg": lon_deg,
         "pot_kv": pot,
         "attrs": attrs,
+        "meta": meta_attrs,
     }
 
 
@@ -186,18 +196,42 @@ def _fortran_record(payload: bytes) -> bytes:
     return marker + payload + marker
 
 
-def write_phi_weimer(path: Path, phi_statv: np.ndarray, hour0: float, valid_until: float) -> None:
-    phi_f4 = np.asarray(phi_statv, dtype="<f4", order="F")
+def write_phi_weimer(
+    path: Path,
+    phi_statv: np.ndarray,
+    frame_hours: np.ndarray,
+    valid_until: float,
+) -> None:
+    frames = np.asarray(phi_statv, dtype=np.float64)
+    if frames.ndim == 2:
+        frames = frames[np.newaxis, :, :]
+    if frames.ndim != 3:
+        raise ValueError(f"phi_statv must be 2D or 3D, got shape {frames.shape}")
+    if frame_hours.size != frames.shape[0]:
+        raise ValueError(
+            f"frame hour count {frame_hours.size} does not match frame count {frames.shape[0]}"
+        )
+    if not np.all(np.diff(frame_hours) > 0.0):
+        raise ValueError(f"frame hours must be strictly increasing: {frame_hours.tolist()}")
+    if valid_until <= frame_hours[-1]:
+        raise ValueError(
+            f"valid_until_hour={valid_until} must be greater than last frame hour={frame_hours[-1]}"
+        )
+
     with path.open("wb") as out:
-        out.write(_fortran_record(np.asarray([hour0], dtype="<f4").tobytes()))
-        out.write(_fortran_record(phi_f4.tobytes(order="F")))
-        out.write(_fortran_record(np.asarray([valid_until], dtype="<f4").tobytes()))
+        out.write(_fortran_record(np.asarray([frame_hours[0]], dtype="<f4").tobytes()))
+        for iframe in range(frames.shape[0]):
+            phi_f4 = np.asarray(frames[iframe], dtype="<f4", order="F")
+            out.write(_fortran_record(phi_f4.tobytes(order="F")))
+            next_hour = frame_hours[iframe + 1] if iframe + 1 < frames.shape[0] else valid_until
+            out.write(_fortran_record(np.asarray([next_hour], dtype="<f4").tobytes()))
 
 
-def read_static_phi_weimer(path: Path, nlat: int, nlon: int) -> dict[str, np.ndarray]:
+def read_phi_weimer(path: Path, nlat: int, nlon: int, nframes: int) -> dict[str, np.ndarray]:
     records: list[bytes] = []
+    nrecords = 2 * nframes + 1
     with path.open("rb") as inp:
-        for _ in range(3):
+        for _ in range(nrecords):
             raw = inp.read(4)
             if len(raw) != 4:
                 raise EOFError("unexpected EOF reading record marker")
@@ -211,16 +245,26 @@ def read_static_phi_weimer(path: Path, nlat: int, nlon: int) -> dict[str, np.nda
                 raise ValueError("Fortran record marker mismatch")
             records.append(payload)
 
-    hour0 = np.frombuffer(records[0], dtype="<f4").copy()
-    phi = np.frombuffer(records[1], dtype="<f4").reshape((nlat, nlon), order="F").copy()
-    valid_until = np.frombuffer(records[2], dtype="<f4").copy()
-    return {"hour0": hour0, "phi": phi, "valid_until": valid_until}
+    hours = [float(np.frombuffer(records[0], dtype="<f4")[0])]
+    phis = []
+    for iframe in range(nframes):
+        phis.append(
+            np.frombuffer(records[2 * iframe + 1], dtype="<f4")
+            .reshape((nlat, nlon), order="F")
+            .copy()
+        )
+        hours.append(float(np.frombuffer(records[2 * iframe + 2], dtype="<f4")[0]))
+    return {
+        "hours": np.asarray(hours, dtype=np.float64),
+        "phi": np.stack(phis, axis=0),
+    }
 
 
 def write_diagnostic_h5(
     path: Path,
     target_mlat: np.ndarray,
     target_mlon: np.ndarray,
+    frame_hours: np.ndarray,
     phi_kv: np.ndarray,
     phi_statv: np.ndarray,
     summary: dict[str, Any],
@@ -228,6 +272,7 @@ def write_diagnostic_h5(
     with h5py.File(path, "w") as h5:
         h5.create_dataset("target_mlat_deg", data=target_mlat)
         h5.create_dataset("target_mlon_deg", data=target_mlon)
+        h5.create_dataset("frame_hours", data=frame_hours)
         h5.create_dataset("phi_kV", data=phi_kv)
         h5.create_dataset("phi_statV", data=phi_statv)
         meta = h5.create_group("Meta")
@@ -252,7 +297,13 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Map MAGE/REMIX POT[kV] HDF5 export to SAMI3 phi_weimer.inp"
     )
-    parser.add_argument("--input", required=True, type=Path, help="waccmx_voltron_forward_package.h5")
+    parser.add_argument(
+        "--input",
+        required=True,
+        type=Path,
+        nargs="+",
+        help="one or more waccmx_voltron_forward_package.h5 files",
+    )
     parser.add_argument("--group", default="NORTH_APEX", help="HDF5 group containing POT/theta/phi")
     parser.add_argument("--weimer-grid", required=True, type=Path, help="SAMI3 weimer_grid.dat")
     parser.add_argument("--output", required=True, type=Path, help="Output phi_weimer.inp")
@@ -261,6 +312,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--target-nlat", type=int, default=125)
     parser.add_argument("--target-nlon", type=int, default=97)
     parser.add_argument("--hour0", type=float, default=0.0)
+    parser.add_argument(
+        "--frame-hours",
+        help="comma-separated frame hours; overrides MJD/cadence inference",
+    )
+    parser.add_argument(
+        "--cadence-hours",
+        type=float,
+        help="fallback frame cadence when multiple inputs do not have increasing MJD",
+    )
     parser.add_argument("--valid-until-hour", type=float, default=1.0e30)
     parser.add_argument("--low-lat-mode", choices=("zero", "edge", "nan"), default="zero")
     parser.add_argument("--scale", type=float, default=1.0)
@@ -273,58 +333,130 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def parse_frame_hours(text: str) -> np.ndarray:
+    values = [float(item.strip()) for item in text.split(",") if item.strip()]
+    if not values:
+        raise ValueError("--frame-hours did not contain any values")
+    return np.asarray(values, dtype=np.float64)
+
+
+def infer_frame_hours(args: argparse.Namespace, sources: list[dict[str, Any]]) -> np.ndarray:
+    nframes = len(sources)
+    if args.frame_hours:
+        frame_hours = parse_frame_hours(args.frame_hours)
+        if frame_hours.size != nframes:
+            raise ValueError(
+                f"--frame-hours has {frame_hours.size} values but {nframes} inputs were provided"
+            )
+        return frame_hours
+
+    mjds = []
+    for source in sources:
+        value = source["meta"].get("mjd")
+        try:
+            mjds.append(float(value))
+        except (TypeError, ValueError):
+            mjds.append(np.nan)
+    mjds_arr = np.asarray(mjds, dtype=np.float64)
+    if nframes == 1:
+        return np.asarray([args.hour0], dtype=np.float64)
+    if np.all(np.isfinite(mjds_arr)):
+        frame_hours = args.hour0 + (mjds_arr - mjds_arr[0]) * 24.0
+        if np.all(np.diff(frame_hours) > 0.0):
+            return frame_hours
+
+    if args.cadence_hours is None:
+        raise ValueError(
+            "multiple inputs require strictly increasing Meta/mjd, --frame-hours, "
+            "or --cadence-hours"
+        )
+    return args.hour0 + np.arange(nframes, dtype=np.float64) * args.cadence_hours
+
+
 def main() -> None:
     args = parse_args()
     target_mlat, target_mlon = read_weimer_grid(
         args.weimer_grid, args.target_nlat, args.target_nlon
     )
-    source = load_remix_pot(args.input, args.group)
-    phi_kv = remix_to_sami3_phi(
-        source,
-        target_mlat,
-        target_mlon,
-        args.low_lat_mode,
-        args.scale,
-        args.cap_abs_kv,
-        args.zero_reference,
-    )
+    sources = [load_remix_pot(path, args.group) for path in args.input]
+    frame_hours = infer_frame_hours(args, sources)
+    phi_kv_frames = [
+        remix_to_sami3_phi(
+            source,
+            target_mlat,
+            target_mlon,
+            args.low_lat_mode,
+            args.scale,
+            args.cap_abs_kv,
+            args.zero_reference,
+        )
+        for source in sources
+    ]
+    if len(phi_kv_frames) == 1:
+        phi_kv = phi_kv_frames[0]
+    else:
+        phi_kv = np.stack(phi_kv_frames, axis=0)
     phi_statv = phi_kv * STATVOLT_PER_KV
 
     if not np.all(np.isfinite(phi_statv)):
         raise ValueError("mapped phi contains NaN/Inf")
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    write_phi_weimer(args.output, phi_statv, args.hour0, args.valid_until_hour)
-    readback = read_static_phi_weimer(args.output, args.target_nlat, args.target_nlon)
-    readback_diff = np.max(np.abs(readback["phi"].astype(np.float64) - phi_statv))
+    write_phi_weimer(args.output, phi_statv, frame_hours, args.valid_until_hour)
+    readback = read_phi_weimer(
+        args.output, args.target_nlat, args.target_nlon, len(phi_kv_frames)
+    )
+    readback_phi = readback["phi"][0] if len(phi_kv_frames) == 1 else readback["phi"]
+    readback_diff = np.max(np.abs(readback_phi.astype(np.float64) - phi_statv))
+    expected_readback_hours = np.asarray(
+        np.concatenate([frame_hours, [args.valid_until_hour]]), dtype="<f4"
+    ).astype(np.float64)
+    readback_hour_diff = np.max(
+        np.abs(readback["hours"].astype(np.float64) - expected_readback_hours)
+    )
 
     summary: dict[str, Any] = {
-        "schema": "remix_pot_to_sami3_phi_weimer.v0",
-        "input": str(args.input),
+        "schema": "remix_pot_to_sami3_phi_weimer.v1",
+        "input": str(args.input[0]) if len(args.input) == 1 else [str(path) for path in args.input],
+        "inputs": [str(path) for path in args.input],
         "group": args.group,
         "weimer_grid": str(args.weimer_grid),
         "output": str(args.output),
         "target_nlat": args.target_nlat,
         "target_nlon": args.target_nlon,
-        "hour0": args.hour0,
+        "nframes": len(phi_kv_frames),
+        "frame_hours": frame_hours.tolist(),
+        "hour0": float(frame_hours[0]),
         "valid_until_hour": args.valid_until_hour,
         "low_lat_mode": args.low_lat_mode,
         "scale": args.scale,
         "cap_abs_kv": args.cap_abs_kv if args.cap_abs_kv is not None else "none",
         "zero_reference": args.zero_reference,
-        "source_pot_units": source["attrs"]["POT_units"],
-        "source_mlat_min": float(np.nanmin(source["mlat_deg"])),
-        "source_mlat_max": float(np.nanmax(source["mlat_deg"])),
-        "source_lon_min": float(np.nanmin(source["lon_deg"])),
-        "source_lon_max": float(np.nanmax(source["lon_deg"])),
+        "source_pot_units": sources[0]["attrs"]["POT_units"],
+        "source_mlat_min": float(np.nanmin(sources[0]["mlat_deg"])),
+        "source_mlat_max": float(np.nanmax(sources[0]["mlat_deg"])),
+        "source_lon_min": float(np.nanmin(sources[0]["lon_deg"])),
+        "source_lon_max": float(np.nanmax(sources[0]["lon_deg"])),
         "target_mlat_min": float(np.nanmin(target_mlat)),
         "target_mlat_max": float(np.nanmax(target_mlat)),
         "target_mlon_min": float(np.nanmin(target_mlon)),
         "target_mlon_max": float(np.nanmax(target_mlon)),
-        "low_lat_zero_count": int(np.count_nonzero(target_mlat < np.nanmin(source["mlat_deg"]))),
-        "readback_hour0": float(readback["hour0"][0]),
-        "readback_valid_until": float(readback["valid_until"][0]),
+        "low_lat_zero_count": int(np.count_nonzero(target_mlat < np.nanmin(sources[0]["mlat_deg"]))),
+        "readback_hours": readback["hours"].tolist(),
+        "readback_hour_max_abs_diff": float(readback_hour_diff),
+        "readback_hour0": float(readback["hours"][0]),
+        "readback_valid_until": float(readback["hours"][-1]),
         "readback_phi_max_abs_diff_statV": float(readback_diff),
+        "frames": [
+            {
+                "input": str(path),
+                "hour": float(hour),
+                "source_mjd": source["meta"].get("mjd", ""),
+                "source_time_seconds": source["meta"].get("time_seconds", ""),
+                "source_mix": source["meta"].get("source_mix", ""),
+            }
+            for path, hour, source in zip(args.input, frame_hours, sources)
+        ],
     }
     summary.update(summarize_array("phi_kV", phi_kv))
     summary.update(summarize_array("phi_statV", phi_statv))
@@ -334,7 +466,9 @@ def main() -> None:
         args.summary_json.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n")
     if args.diagnostic_h5:
         args.diagnostic_h5.parent.mkdir(parents=True, exist_ok=True)
-        write_diagnostic_h5(args.diagnostic_h5, target_mlat, target_mlon, phi_kv, phi_statv, summary)
+        write_diagnostic_h5(
+            args.diagnostic_h5, target_mlat, target_mlon, frame_hours, phi_kv, phi_statv, summary
+        )
 
     print(json.dumps(summary, indent=2, sort_keys=True))
 
