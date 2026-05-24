@@ -20,7 +20,7 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-25 03:51:14 CST.
+Status refreshed: 2026-05-25 04:37:48 CST.
 
 ### Full WACCM-X/CESM -> SAMI3 Append2 Integration
 
@@ -29,8 +29,9 @@ Slurm:
 ```text
 jobid = 7659727
 jobname = wxsami3_ap2
-state = PENDING
-reason = Priority
+state = RUNNING
+node = qhcn332
+elapsed = 00:01:14 at 2026-05-25 04:37:48 CST
 requested = 1 intel node, 49 tasks, 296G
 ```
 
@@ -141,58 +142,28 @@ VOLTRON_WRITER_PID=<pid>
 WXSAMI3 phi payload ready after wait
 ```
 
-### SAMI3 -> RAIJU/GAMERA Recommended Long1800
+### Completed Stability Gates
 
-Slurm:
+The 1800 second recommended prototype gate is complete:
 
 ```text
 jobid = 7663122
 jobname = sami3_rai_long1800
-state = RUNNING
+state = COMPLETED
+exit = 0:0
+elapsed = 01:23:20
 node = qhcn065
-elapsed = 00:39:28 at 2026-05-25 03:51:14 CST
-settings = alphaDavg=0.05, alphaPavg=0.05, alphaTiote=1.0, alphaPstd=0, alphaDstd=0
+batch MaxRSS = 1169988K
+archive = logs/sami3_dsB_lmlt_recommended_long1800_20260525/
 ```
 
-Launcher:
+Strict validation, mapping-product validation, and HDF5 summary validation all
+returned `overall=ok`.  Baseline/control and recommended runs both reached
+`Fin`; they wrote 362 RAIJU history outputs and 364 GAMERA history outputs, and
+the final RAIJU/GAMERA history comparison matched at `Step#361`.
 
-```text
-slurm/run_sami3_raiju_recommended_long1800_20260525.sbatch
-```
+The previous 900 second recommended prototype gate is also complete:
 
-Run directory:
-
-```text
-/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525
-```
-
-Running-state gate:
-
-```bash
-python3 scripts/validate_sami3_raiju_longrun.py \
-  --run-dir /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525 \
-  --label long1800 \
-  --allow-incomplete \
-  --expect-slurm
-```
-
-Completion gate:
-
-```bash
-python3 scripts/archive_sami3_raiju_longrun_result.py \
-  --run-dir /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525 \
-  --archive-dir logs/sami3_dsB_lmlt_recommended_long1800_20260525 \
-  --label long1800 \
-  --job-id 7663122
-```
-
-This must show both baseline/control and recommended runs reached `Fin`, wrote
-RAIJU/GAMERA HDF5 outputs, contain no fatal markers, and produced the expected
-restart products.
-
-### Completed Stability Gate
-
-The previous 900 second recommended prototype gate is complete:
 
 ```text
 jobid = 7660334
@@ -209,15 +180,13 @@ Strict validation and HDF5 summary artifacts have been committed and pushed.
 
 ## Next Work Order
 
-1. Keep polling jobs `7659727`, `7661005`, and `7663122`.
-2. When `7663122` completes, run the strict long1800 validator, archive the
-   compact logs/results, write the result note, and push to GitHub.
-3. When `7659727` completes, run the append2 archiver, archive the compact
+1. Keep polling jobs `7659727` and `7661005`.
+2. When `7659727` completes, run the append2 archiver, archive the compact
    full-integration evidence, write the result note, and push to GitHub.
-4. When dependency job `7661005` completes, run the direct-wait archiver with
+3. When dependency job `7661005` completes, run the direct-wait archiver with
    `--expect-phi-wait-marker --expect-direct-wait-mode`, write the result note,
    and push to GitHub.
-5. If the full WACCM-X jobs remain queued, continue implementation work on the
+4. If the full WACCM-X jobs remain queued or running, continue implementation work on the
    remaining production blockers:
    - production cadence/f09 live source-state validation beyond the current
      f19 same-call-site replay gate,

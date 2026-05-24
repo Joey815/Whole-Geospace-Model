@@ -1,0 +1,24 @@
+ok   run_dir_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525
+ok   baseline_log_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525/base_control_long1800.log
+ok   baseline_fin: Fin line
+ok   baseline_raiju_write_count: raiju_writes=362, min=10
+ok   baseline_gamera_write_count: gamera_writes=364, min=10
+ok   baseline_fatal_markers_absent: matches=0
+ok   prototype_log_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525/dsB_lmlt_recommended_long1800.log
+ok   prototype_fin: Fin line
+ok   prototype_raiju_write_count: raiju_writes=362, min=10
+ok   prototype_gamera_write_count: gamera_writes=364, min=10
+ok   prototype_fatal_markers_absent: matches=0
+ok   baseline_gam_h5_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525/sami3_moments_base_control_long1800.gam.h5
+ok   baseline_raiju_h5_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525/sami3_moments_base_control_long1800.raiju.h5
+ok   baseline_raiCpl_Res_00000_h5_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525/sami3_moments_base_control_long1800.raiCpl.Res.00000.h5
+ok   baseline_gam_Res_00000_h5_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525/sami3_moments_base_control_long1800.gam.Res.00000.h5
+ok   baseline_raiju_Res_00000_h5_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525/sami3_moments_base_control_long1800.raiju.Res.00000.h5
+ok   prototype_gam_h5_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525/sami3_moments_dsB_lmlt_recommended_long1800.gam.h5
+ok   prototype_raiju_h5_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525/sami3_moments_dsB_lmlt_recommended_long1800.raiju.h5
+ok   prototype_raiCpl_Res_00000_h5_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525/sami3_moments_dsB_lmlt_recommended_long1800.raiCpl.Res.00000.h5
+ok   prototype_gam_Res_00000_h5_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525/sami3_moments_dsB_lmlt_recommended_long1800.gam.Res.00000.h5
+ok   prototype_raiju_Res_00000_h5_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525/sami3_moments_dsB_lmlt_recommended_long1800.raiju.Res.00000.h5
+ok   slurm_log_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525/slurm-7663122.out
+ok   slurm_run_complete: run_complete=1
+overall=ok

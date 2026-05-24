@@ -1,0 +1,62 @@
+{
+  "archive_dir": "logs/sami3_dsB_lmlt_recommended_long1800_20260525",
+  "copied_files": [
+    {
+      "archive": "logs/sami3_dsB_lmlt_recommended_long1800_20260525/base_control_long1800.log",
+      "bytes": 529352,
+      "source": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525/base_control_long1800.log"
+    },
+    {
+      "archive": "logs/sami3_dsB_lmlt_recommended_long1800_20260525/dsB_lmlt_recommended_long1800.log",
+      "bytes": 530707,
+      "source": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525/dsB_lmlt_recommended_long1800.log"
+    },
+    {
+      "archive": "logs/sami3_dsB_lmlt_recommended_long1800_20260525/tinyCase_base_control_long1800.xml",
+      "bytes": 1876,
+      "source": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525/tinyCase_base_control_long1800.xml"
+    },
+    {
+      "archive": "logs/sami3_dsB_lmlt_recommended_long1800_20260525/tinyCase_sami3_moments_dsB_lmlt_recommended_long1800.xml",
+      "bytes": 2233,
+      "source": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525/tinyCase_sami3_moments_dsB_lmlt_recommended_long1800.xml"
+    },
+    {
+      "archive": "logs/sami3_dsB_lmlt_recommended_long1800_20260525/slurm-7663122.out",
+      "bytes": 4862,
+      "source": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525/slurm-7663122.out"
+    }
+  ],
+  "job_id": "7663122",
+  "label": "long1800",
+  "mapping_product": {
+    "expect_mapping_mode": "l_mlt",
+    "json": "logs/sami3_dsB_lmlt_recommended_long1800_20260525/validate_sami3_raiju_mapping_product.json",
+    "min_valid_fraction": 1.0,
+    "product_h5": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_l_mlt_20260524.h5",
+    "python": "/home/jiaoy_group/jiaoy/.venvs/mage-vis/bin/python",
+    "returncode": 0,
+    "text": "logs/sami3_dsB_lmlt_recommended_long1800_20260525/validate_sami3_raiju_mapping_product.txt"
+  },
+  "ok": true,
+  "run_dir": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525",
+  "sacct": {
+    "path": "logs/sami3_dsB_lmlt_recommended_long1800_20260525/sacct_7663122.txt",
+    "returncode": 0
+  },
+  "summary": {
+    "json": "logs/sami3_dsB_lmlt_recommended_long1800_20260525/recommended_long1800_summary.json",
+    "python": "/home/jiaoy_group/jiaoy/.venvs/mage-vis/bin/python",
+    "returncode": 0,
+    "stdout": "logs/sami3_dsB_lmlt_recommended_long1800_20260525/summarize_sami3_raiju_longrun.stdout.txt",
+    "text": "logs/sami3_dsB_lmlt_recommended_long1800_20260525/recommended_long1800_summary.txt",
+    "validation_json": "logs/sami3_dsB_lmlt_recommended_long1800_20260525/validate_sami3_raiju_summary.json",
+    "validation_returncode": 0,
+    "validation_text": "logs/sami3_dsB_lmlt_recommended_long1800_20260525/validate_sami3_raiju_summary.txt"
+  },
+  "validator": {
+    "json": "logs/sami3_dsB_lmlt_recommended_long1800_20260525/validate_sami3_raiju_longrun.json",
+    "returncode": 0,
+    "text": "logs/sami3_dsB_lmlt_recommended_long1800_20260525/validate_sami3_raiju_longrun.txt"
+  }
+}

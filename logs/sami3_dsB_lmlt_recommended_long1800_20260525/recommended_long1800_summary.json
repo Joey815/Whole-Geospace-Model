@@ -1,0 +1,195 @@
+{
+  "final_history_recommended_vs_baseline": {
+    "gam": {
+      "Step#361/D": {
+        "baseline_mean": 13.193082721768057,
+        "max_abs": 10.28887939453125,
+        "max_rel": 75.66305565216695,
+        "mean_abs": 0.4136176562419899,
+        "recommended_mean": 13.44438693231984
+      },
+      "Step#361/P": {
+        "baseline_mean": 0.21537477523523385,
+        "max_abs": 0.3433699607849121,
+        "max_rel": 8.73380715825262,
+        "mean_abs": 0.007801311148941497,
+        "recommended_mean": 0.21613871061504536
+      },
+      "Step#361/SrcD_COLD": {
+        "baseline_mean": 68.60406432943768,
+        "max_abs": 37.1865234375,
+        "max_rel": 1.849386692047119e+300,
+        "mean_abs": 0.061255920453737546,
+        "recommended_mean": 68.61163197708066
+      },
+      "Step#361/SrcP_COLD": {
+        "baseline_mean": 0.005200811442674734,
+        "max_abs": 0.00213545560836792,
+        "max_rel": 3.777648671530187e+296,
+        "mean_abs": 6.330810554705102e-06,
+        "recommended_mean": 0.005201748821107832
+      }
+    },
+    "raiju": {
+      "Step#361/Davg_in": {
+        "baseline_mean": 1.0410180220285334,
+        "max_abs": 625.5477905273438,
+        "max_rel": 6.255477905273438e+302,
+        "mean_abs": 80.59820585585571,
+        "recommended_mean": 81.63796503091001
+      },
+      "Step#361/Density": {
+        "baseline_mean": 797.7913845196344,
+        "max_abs": 68.703125,
+        "max_rel": 4.961801052093506e+300,
+        "mean_abs": 0.6365761505997632,
+        "recommended_mean": 798.1640072892845
+      },
+      "Step#361/Pavg_in": {
+        "baseline_mean": 0.18124215577340297,
+        "max_abs": 0.17875349521636963,
+        "max_rel": 1.787534952163696e+299,
+        "mean_abs": 0.01062564049268319,
+        "recommended_mean": 0.1735219503074934
+      },
+      "Step#361/Pressure": {
+        "baseline_mean": 0.25692765127869455,
+        "max_abs": 0.1813514679670334,
+        "max_rel": 1.8135146796703338e+299,
+        "mean_abs": 0.0051210592226024546,
+        "recommended_mean": 0.2563088907856454
+      }
+    }
+  },
+  "final_restart_recommended_vs_baseline": {
+    "gam": {
+      "Gas0": {
+        "baseline_mean": 25.043238275334442,
+        "max_abs": 3.539851024860331,
+        "max_rel": 9.76945106848609,
+        "mean_abs": 0.017140940619025425,
+        "recommended_mean": 25.053817487983547
+      }
+    },
+    "raiju": {
+      "State/Davg_in": {
+        "baseline_mean": 0.05433108774465306,
+        "max_abs": 872.230859375,
+        "max_rel": 8.72230859375e+302,
+        "mean_abs": 99.27106288278063,
+        "recommended_mean": 99.32539397052527
+      },
+      "State/Density": {
+        "baseline_mean": 994.5915339820937,
+        "max_abs": 3.6291416521227338,
+        "max_rel": 10.071317326593885,
+        "mean_abs": 0.19274910328960174,
+        "recommended_mean": 994.7134849242166
+      },
+      "State/Density_avg": {
+        "baseline_mean": 994.5915578268873,
+        "max_abs": 3.6291416521227333,
+        "max_rel": 10.071270968615854,
+        "mean_abs": 0.19274910328960201,
+        "recommended_mean": 994.7135087690102
+      },
+      "State/Pavg_in": {
+        "baseline_mean": 0.00043784124116159,
+        "max_abs": 0.012184295058250428,
+        "max_rel": 1.218429505825043e+298,
+        "mean_abs": 0.0011874576956966423,
+        "recommended_mean": 0.0016012076243789371
+      },
+      "State/Pressure": {
+        "baseline_mean": 0.27778404853351163,
+        "max_abs": 0.003918246350490817,
+        "max_rel": 0.025844042682276906,
+        "mean_abs": 0.00023430574676482196,
+        "recommended_mean": 0.27765787363762223
+      },
+      "State/Pressure_avg": {
+        "baseline_mean": 0.2780611205202935,
+        "max_abs": 0.003918246350490789,
+        "max_rel": 0.025844042682277104,
+        "mean_abs": 0.00023430574676482245,
+        "recommended_mean": 0.2779349456244041
+      },
+      "State/eta": {
+        "baseline_mean": 8929748.807585003,
+        "max_abs": 658578162.0162892,
+        "max_rel": 3681.0378971488535,
+        "mean_abs": 1331480.1268928621,
+        "recommended_mean": 10086079.69074115
+      },
+      "State/eta_avg": {
+        "baseline_mean": 8929755.382386344,
+        "max_abs": 658578162.0162892,
+        "max_rel": 3681.037897148853,
+        "mean_abs": 1331480.1268928621,
+        "recommended_mean": 10086086.26554249
+      }
+    }
+  },
+  "formula_checks": {
+    "Davg": {
+      "actual_max": 872.230859375,
+      "actual_mean": 99.32539397052527,
+      "alpha": 0.05,
+      "formula_max_abs": 0.0,
+      "formula_max_rel": 0.0,
+      "mask_total": 16920,
+      "mask_true": 8460
+    },
+    "Dstd": {
+      "actual_max": 0.09626227232160983,
+      "actual_mean": 0.008178260314749292,
+      "alpha": 0.0,
+      "formula_max_abs": 0.0,
+      "formula_max_rel": 0.0,
+      "mask_total": 16920,
+      "mask_true": 8460
+    },
+    "Pavg": {
+      "actual_max": 0.012184295058250428,
+      "actual_mean": 0.0016012076243789371,
+      "alpha": 0.05,
+      "formula_max_abs": 0.0,
+      "formula_max_rel": 0.0,
+      "mask_total": 16920,
+      "mask_true": 8460
+    },
+    "Pstd": {
+      "actual_max": 0.002409403797901249,
+      "actual_mean": 0.0001685590862329495,
+      "alpha": 0.0,
+      "formula_max_abs": 0.0,
+      "formula_max_rel": 0.0,
+      "mask_total": 16920,
+      "mask_true": 8460
+    }
+  },
+  "history_last_steps": {
+    "gam": "Step#361",
+    "raiju": "Step#361"
+  },
+  "job_id": "7663122",
+  "label": "long1800",
+  "nonfinite": {
+    "base_gam_res": [],
+    "base_raiju_res": [],
+    "proto_gam_res": [],
+    "proto_raiju_res": []
+  },
+  "run_dir": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525",
+  "sacct": "JobID|JobName|State|ExitCode|Elapsed|MaxRSS\n7663122|sami3_rai_long1800|COMPLETED|0:0|01:23:20|\n7663122.batch|batch|COMPLETED|0:0|01:23:20|1169988K\n7663122.extern|extern|COMPLETED|0:0|01:23:20|0\n",
+  "xml": {
+    "alphas": {
+      "Davg": 0.05,
+      "Dstd": 0.0,
+      "Pavg": 0.05,
+      "Pstd": 0.0
+    },
+    "group": "/RaiCplMomentsOnly",
+    "source_file": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_l_mlt_20260524.h5"
+  }
+}

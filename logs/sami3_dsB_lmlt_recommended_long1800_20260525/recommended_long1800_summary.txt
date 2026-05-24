@@ -1,0 +1,50 @@
+SAMI3 RAIJU recommended long1800 summary
+run_dir /online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_long1800_20260525
+jobid 7663122
+sacct
+  JobID|JobName|State|ExitCode|Elapsed|MaxRSS
+  7663122|sami3_rai_long1800|COMPLETED|0:0|01:23:20|
+  7663122.batch|batch|COMPLETED|0:0|01:23:20|1169988K
+  7663122.extern|extern|COMPLETED|0:0|01:23:20|0
+Pavg_formula_max_abs 0
+Pavg_formula_max_rel 0
+Pavg_actual_mean 0.0016012076243789371
+Pavg_actual_max 0.012184295058250428
+Davg_formula_max_abs 0
+Davg_formula_max_rel 0
+Davg_actual_mean 99.325393970525269
+Davg_actual_max 872.23085937500002
+Pstd_formula_max_abs 0
+Pstd_formula_max_rel 0
+Pstd_actual_mean 0.0001685590862329495
+Pstd_actual_max 0.002409403797901249
+Dstd_formula_max_abs 0
+Dstd_formula_max_rel 0
+Dstd_actual_mean 0.0081782603147492923
+Dstd_actual_max 0.096262272321609832
+nonfinite_physics_base_raiju_res []
+nonfinite_physics_proto_raiju_res []
+nonfinite_physics_base_gam_res []
+nonfinite_physics_proto_gam_res []
+final_restart_recommended_vs_baseline
+State/Pavg_in max_abs=0.012184295058250428 mean_abs=0.0011874576956966423 recommended_mean=0.0016012076243789371 baseline_mean=0.00043784124116159
+State/Davg_in max_abs=872.23085937500002 mean_abs=99.271062882780626 recommended_mean=99.325393970525269 baseline_mean=0.054331087744653062
+State/eta max_abs=658578162.01628923 mean_abs=1331480.1268928621 recommended_mean=10086079.69074115 baseline_mean=8929748.8075850029
+State/Density max_abs=3.6291416521227338 mean_abs=0.19274910328960174 recommended_mean=994.71348492421657 baseline_mean=994.59153398209367
+State/Pressure max_abs=0.0039182463504908172 mean_abs=0.00023430574676482196 recommended_mean=0.27765787363762223 baseline_mean=0.27778404853351163
+State/eta_avg max_abs=658578162.01628923 mean_abs=1331480.1268928621 recommended_mean=10086086.26554249 baseline_mean=8929755.3823863436
+State/Density_avg max_abs=3.6291416521227333 mean_abs=0.19274910328960201 recommended_mean=994.71350876901022 baseline_mean=994.59155782688731
+State/Pressure_avg max_abs=0.0039182463504907894 mean_abs=0.00023430574676482245 recommended_mean=0.27793494562440407 baseline_mean=0.27806112052029353
+Gas0 max_abs=3.5398510248603312 mean_abs=0.017140940619025425 recommended_mean=25.053817487983547 baseline_mean=25.043238275334442
+history_last_steps
+raiju_history_last_step Step#361
+gam_history_last_step Step#361
+final_history_recommended_vs_baseline
+Step#361/Pavg_in max_abs=0.17875349521636963 mean_abs=0.01062564049268319 recommended_mean=0.1735219503074934 baseline_mean=0.18124215577340297
+Step#361/Davg_in max_abs=625.54779052734375 mean_abs=80.59820585585571 recommended_mean=81.63796503091001 baseline_mean=1.0410180220285334
+Step#361/Density max_abs=68.703125 mean_abs=0.63657615059976325 recommended_mean=798.16400728928454 baseline_mean=797.79138451963445
+Step#361/Pressure max_abs=0.18135146796703339 mean_abs=0.0051210592226024546 recommended_mean=0.25630889078564539 baseline_mean=0.25692765127869455
+Step#361/D max_abs=10.28887939453125 mean_abs=0.41361765624198987 recommended_mean=13.444386932319841 baseline_mean=13.193082721768057
+Step#361/P max_abs=0.34336996078491211 mean_abs=0.0078013111489414972 recommended_mean=0.21613871061504536 baseline_mean=0.21537477523523385
+Step#361/SrcD_COLD max_abs=37.1865234375 mean_abs=0.061255920453737546 recommended_mean=68.611631977080663 baseline_mean=68.604064329437676
+Step#361/SrcP_COLD max_abs=0.0021354556083679199 mean_abs=6.330810554705102e-06 recommended_mean=0.0052017488211078319 baseline_mean=0.0052008114426747342
