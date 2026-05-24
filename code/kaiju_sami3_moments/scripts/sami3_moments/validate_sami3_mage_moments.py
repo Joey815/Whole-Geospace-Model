@@ -109,6 +109,10 @@ def main():
         pstd = require_dataset(m, "moments/Pstd")[:].astype(np.float64)
         dstd = require_dataset(m, "moments/Dstd")[:].astype(np.float64)
         tiote = require_dataset(m, "moments/tiote")[:].astype(np.float64)
+        davg_mass_eq = require_dataset(m, "moments/Davg_massEq")[:].astype(np.float64)
+        mu_eff = require_dataset(m, "moments/mu_eff")[:].astype(np.float64)
+        pavg_e = require_dataset(m, "moments/Pavg_e")[:].astype(np.float64)
+        pavg_total = require_dataset(m, "moments/Pavg_total")[:].astype(np.float64)
 
         nf, nlt = pavg.shape
         for name, arr in (
@@ -117,16 +121,30 @@ def main():
             ("moments/Pstd", pstd),
             ("moments/Dstd", dstd),
             ("moments/tiote", tiote),
+            ("moments/Davg_massEq", davg_mass_eq),
+            ("moments/mu_eff", mu_eff),
+            ("moments/Pavg_e", pavg_e),
+            ("moments/Pavg_total", pavg_total),
         ):
             if arr.shape != (nf, nlt):
                 raise AssertionError("{0} shape {1} != {(nf, nlt)}".format(name, arr.shape))
             require_finite(name, arr)
+
+        require_close("moments/Pavg_total identity", pavg_total, pavg + pavg_e)
+        if np.any(davg_mass_eq < davg * (1.0 - 1.0e-6)):
+            raise AssertionError("moments/Davg_massEq should not be below Davg for positive ions")
+        if np.nanmin(mu_eff) < 1.0:
+            raise AssertionError("moments/mu_eff should be >= 1 for configured ion masses")
 
         require_units(m["moments/Pavg"], "nPa")
         require_units(m["moments/Davg"], "#/cc")
         require_units(m["moments/Pstd"], "nPa")
         require_units(m["moments/Dstd"], "#/cc")
         require_units(m["moments/tiote"], "normalized")
+        require_units(m["moments/Davg_massEq"], "proton_equivalent_#/cc")
+        require_units(m["moments/Pavg_e"], "nPa")
+        require_units(m["moments/Pavg_total"], "nPa")
+        require_units(m["moments/mu_eff"], "normalized")
 
         metadata = read_metadata(d)
         n_fluid_in = args.n_fluid_in

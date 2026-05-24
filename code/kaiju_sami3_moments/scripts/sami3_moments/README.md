@@ -143,8 +143,16 @@ First-stage HDF5 groups:
 /moments/tiote
 /moments/Ti_eff
 /moments/Te_eff
+/moments/Davg_num
+/moments/Davg_massEq
+/moments/mu_eff
+/moments/Pavg_i
+/moments/Pavg_e
+/moments/Pavg_total
 /species/Pavg_ion
 /species/Davg_ion
+/species/f_H /species/f_O /species/f_NO /species/f_O2
+/species/f_He /species/f_N2 /species/f_N /species/f_molecular
 /species/ion_order
 /coords/*_mean_*
 /metadata/json
@@ -236,6 +244,30 @@ Ion order:
 
 ```text
 H+, O+, NO+, O2+, He+, N2+, N+
+```
+
+Ion mass numbers used by `Davg_massEq`:
+
+```text
+H+=1, O+=16, NO+=30, O2+=32, He+=4, N2+=28, N+=14
+```
+
+The legacy RAIJU-facing aliases are intentionally unchanged:
+
+```text
+Davg = Davg_num       # total ion number density [#/cc]
+Pavg = Pavg_i         # total ion pressure [nPa]
+```
+
+Additional diagnostics are written so downstream coupling can later choose
+number density versus proton-equivalent mass loading, and ion pressure versus
+total thermal pressure:
+
+```text
+Davg_massEq = sum_i A_i n_i
+mu_eff      = Davg_massEq / Davg_num
+Pavg_e      = ne kB Te
+Pavg_total  = Pavg_i + Pavg_e
 ```
 
 ## Current Limit

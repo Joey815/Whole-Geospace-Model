@@ -21,6 +21,8 @@ NF = 124
 NLT = 96
 NION = 7
 ION_NAMES = ("H+", "O+", "NO+", "O2+", "He+", "N2+", "N+")
+ION_MASS_AMU = np.array((1.0, 16.0, 30.0, 32.0, 4.0, 28.0, 14.0), dtype=np.float64)
+ION_FRACTION_NAMES = ("f_H", "f_O", "f_NO", "f_O2", "f_He", "f_N2", "f_N")
 KB_CGS_TO_NPA = 1.38044e-8
 TINY = 1.0e-30
 
@@ -245,14 +247,30 @@ def write_hdf5(path, arrays, metadata):
         moments = handle.create_group("moments")
         moments.attrs["moment_weighting"] = metadata["moment_weighting"]
         moments.attrs["physical_validity"] = metadata["physical_validity"]
-        for name in ("Pavg", "Davg", "Pstd", "Dstd", "tiote", "Ti_eff", "Te_eff"):
+        for name in (
+            "Pavg",
+            "Davg",
+            "Pstd",
+            "Dstd",
+            "tiote",
+            "Ti_eff",
+            "Te_eff",
+            "Davg_num",
+            "Davg_massEq",
+            "mu_eff",
+            "Pavg_i",
+            "Pavg_e",
+            "Pavg_total",
+        ):
             dataset = moments.create_dataset(
                 name, data=arrays[name], compression="gzip", shuffle=True
             )
-            if name in ("Pavg", "Pstd"):
+            if name in ("Pavg", "Pstd", "Pavg_i", "Pavg_e", "Pavg_total"):
                 dataset.attrs["units"] = "nPa"
-            elif name in ("Davg", "Dstd"):
+            elif name in ("Davg", "Dstd", "Davg_num"):
                 dataset.attrs["units"] = "#/cc"
+            elif name == "Davg_massEq":
+                dataset.attrs["units"] = "proton_equivalent_#/cc"
             elif name in ("Ti_eff", "Te_eff"):
                 dataset.attrs["units"] = "K"
             else:
@@ -268,6 +286,11 @@ def write_hdf5(path, arrays, metadata):
             "Davg_ion", data=arrays["Davg_ion"], compression="gzip", shuffle=True
         )
         dset.attrs["units"] = "#/cc"
+        for name in ION_FRACTION_NAMES + ("f_molecular",):
+            dset = species.create_dataset(
+                name, data=arrays[name], compression="gzip", shuffle=True
+            )
+            dset.attrs["units"] = "fraction"
 
         coords = handle.create_group("coords")
         for name, value in arrays.items():
@@ -376,11 +399,17 @@ def main():
         }
 
     n_total = np.sum(deni_stack, axis=0)
+    n_mass_equiv = np.sum(ION_MASS_AMU[:, None, None, None] * deni_stack, axis=0)
     p_ion = deni_stack * ti_stack * KB_CGS_TO_NPA
     p_total = np.sum(p_ion, axis=0)
+    p_e = ne * te * KB_CGS_TO_NPA
 
     davg = weighted_mean(n_total, weights, axis=0)
+    davg_mass_equiv = weighted_mean(n_mass_equiv, weights, axis=0)
+    mu_eff = davg_mass_equiv / np.maximum(davg, TINY)
     pavg = weighted_mean(p_total, weights, axis=0)
+    pavg_e = weighted_mean(p_e, weights, axis=0)
+    pavg_total = weighted_mean(p_total + p_e, weights, axis=0)
     dstd = weighted_std(n_total, weights, davg, axis=0)
     pstd = weighted_std(p_total, weights, pavg, axis=0)
 
@@ -389,6 +418,8 @@ def main():
     for ion_idx in range(NION):
         davg_ion[ion_idx] = weighted_mean(deni_stack[ion_idx], weights, axis=0)
         pavg_ion[ion_idx] = weighted_mean(p_ion[ion_idx], weights, axis=0)
+    ion_fraction = davg_ion / np.maximum(davg[None, :, :], TINY)
+    f_molecular = ion_fraction[2] + ion_fraction[3] + ion_fraction[5]
 
     ti_num = np.sum(weights[None, :, :, :] * deni_stack * ti_stack, axis=(0, 1))
     ti_den = np.sum(weights[None, :, :, :] * deni_stack, axis=(0, 1))
@@ -404,11 +435,20 @@ def main():
         "Pstd": pstd.astype(np.float32),
         "Dstd": dstd.astype(np.float32),
         "tiote": tiote.astype(np.float32),
+        "Davg_num": davg.astype(np.float32),
+        "Davg_massEq": davg_mass_equiv.astype(np.float32),
+        "mu_eff": mu_eff.astype(np.float32),
+        "Pavg_i": pavg.astype(np.float32),
+        "Pavg_e": pavg_e.astype(np.float32),
+        "Pavg_total": pavg_total.astype(np.float32),
         "Pavg_ion": pavg_ion.astype(np.float32),
         "Davg_ion": davg_ion.astype(np.float32),
         "Ti_eff": ti_eff.astype(np.float32),
         "Te_eff": te_eff.astype(np.float32),
+        "f_molecular": f_molecular.astype(np.float32),
     }
+    for idx, name in enumerate(ION_FRACTION_NAMES):
+        arrays[name] = ion_fraction[idx].astype(np.float32)
 
     coord_sources = {}
     if not args.no_coords:
@@ -433,6 +473,7 @@ def main():
         "output_npz": npz_path,
         "dimensions": {"nz": args.nz, "nf": args.nf, "nlt": args.nlt, "nion": NION},
         "ion_order": list(ION_NAMES),
+        "ion_mass_amu": ION_MASS_AMU.tolist(),
         "records": records,
         "time_rows": read_time_table(os.path.join(run_dir, "time.dat")),
         "density_units": "#/cc",
@@ -441,6 +482,18 @@ def main():
         "std_units": {
             "Pstd": "nPa absolute; RAIJU normalizes later",
             "Dstd": "#/cc absolute; RAIJU normalizes later",
+        },
+        "density_semantics": {
+            "Davg": "alias for Davg_num; total ion number density",
+            "Davg_num": "sum_i n_i, #/cc",
+            "Davg_massEq": "sum_i A_i n_i, proton-equivalent #/cc",
+            "mu_eff": "Davg_massEq / Davg_num",
+        },
+        "pressure_semantics": {
+            "Pavg": "alias for Pavg_i; total ion pressure",
+            "Pavg_i": "sum_i n_i kB Ti_i, nPa",
+            "Pavg_e": "ne kB Te, nPa",
+            "Pavg_total": "Pavg_i + Pavg_e, nPa",
         },
         "pressure_conversion": {
             "formula": "p_nPa = deni_cm3 * ti_K * 1.38044e-8",
@@ -463,6 +516,11 @@ def main():
             finite_stats("Pstd", arrays["Pstd"]),
             finite_stats("Dstd", arrays["Dstd"]),
             finite_stats("tiote", arrays["tiote"]),
+            finite_stats("Davg_massEq", arrays["Davg_massEq"]),
+            finite_stats("mu_eff", arrays["mu_eff"]),
+            finite_stats("Pavg_e", arrays["Pavg_e"]),
+            finite_stats("Pavg_total", arrays["Pavg_total"]),
+            finite_stats("f_molecular", arrays["f_molecular"]),
             finite_stats("Ti_eff", arrays["Ti_eff"]),
             finite_stats("Te_eff", arrays["Te_eff"]),
         ],

@@ -103,6 +103,7 @@ docs/MAGE1.25_notes/WACCMX_SAMI3_RECEIVER_SOURCE_FLAGS_RESULT_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_SOURCE_REASON_FLAGS_RESULT_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_TOP_BLEND_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_WEIGHTING_CONTRACT_RESULT_20260524.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_EXTENDED_DIAGNOSTICS_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_GAMERA_PHYSICS_REVIEW_20260523.md
 ```
 
@@ -184,6 +185,7 @@ W-off / vertical-wind policy validation
 REMIX -> SAMI3 potential/E-field forcing
 production SAMI3 -> RAIJU/GAMERA ds/B or Voltron flux-tube weighting
 SAMI3 -> RAIJU/GAMERA L/MLT mapping
+runtime density/pressure mode selection and per-field blending
 f09/finer distributed remap design
 ```
 
