@@ -290,7 +290,15 @@ def build_sparse_grid_to_grid(source_l, source_mlt, target_l, target_mlt):
     }
 
 
-def compose_sami3_voltron_raiju_weights(sami3_to_voltron, voltron_to_raiju, voltron_closed_mask=None):
+def compose_sami3_voltron_raiju_weights(
+    sami3_to_voltron,
+    voltron_to_raiju,
+    voltron_closed_mask=None,
+    voltron_extrapolated_mask=None,
+):
+    if voltron_extrapolated_mask is not None:
+        voltron_extrapolated_mask = np.asarray(voltron_extrapolated_mask, dtype=bool)
+
     per_voltron = {}
     for dst, src, weight in zip(
         sami3_to_voltron["dst_index"],
@@ -302,6 +310,8 @@ def compose_sami3_voltron_raiju_weights(sami3_to_voltron, voltron_to_raiju, volt
 
     per_target = {}
     skipped_by_mask = 0
+    extrapolated_source_terms = 0
+    extrapolated_target_keys = set()
     for dst, vsrc, vweight in zip(
         voltron_to_raiju["dst_index"],
         voltron_to_raiju["src_index"],
@@ -315,6 +325,11 @@ def compose_sami3_voltron_raiju_weights(sami3_to_voltron, voltron_to_raiju, volt
         source_terms = per_voltron.get(vkey, ())
         if not source_terms:
             continue
+        if voltron_extrapolated_mask is not None and bool(
+            voltron_extrapolated_mask[vkey[0], vkey[1]]
+        ):
+            extrapolated_source_terms += 1
+            extrapolated_target_keys.add(target_key)
         acc = per_target.setdefault(target_key, {})
         for src_i, src_j, sw in source_terms:
             src_key = (src_i, src_j)
@@ -351,6 +366,9 @@ def compose_sami3_voltron_raiju_weights(sami3_to_voltron, voltron_to_raiju, volt
     weight_sum = np.zeros((nj, ni), dtype=np.float32)
     np.add.at(coverage_count, (dst_arr[:, 0], dst_arr[:, 1]), weight_arr > 0.0)
     np.add.at(weight_sum, (dst_arr[:, 0], dst_arr[:, 1]), weight_arr)
+    extrapolation_flag = np.zeros((nj, ni), dtype=np.uint8)
+    for j, i in extrapolated_target_keys:
+        extrapolation_flag[j, i] = 1
     return {
         "dst_index": dst_arr,
         "src_index": src_arr,
@@ -358,7 +376,10 @@ def compose_sami3_voltron_raiju_weights(sami3_to_voltron, voltron_to_raiju, volt
         "corner": np.zeros(weight_arr.shape, dtype=np.int8),
         "coverage_count": coverage_count,
         "weight_sum": weight_sum,
+        "extrapolation_flag": extrapolation_flag,
         "skipped_voltron_to_raiju_terms_by_mask": int(skipped_by_mask),
+        "intermediate_extrapolated_source_terms": int(extrapolated_source_terms),
+        "intermediate_extrapolated_target_count": int(np.count_nonzero(extrapolation_flag)),
         "zero_target_count": int(zero_target_count),
         "raw_weight_sum_min": float(min(raw_weight_sum.values())) if raw_weight_sum else None,
         "raw_weight_sum_max": float(max(raw_weight_sum.values())) if raw_weight_sum else None,
@@ -752,7 +773,7 @@ def write_weight_file(path, metadata, source_grid, target_grid, target_geometry,
         quality = handle.create_group("quality")
         create_dataset(quality, "coverage_count", sparse["coverage_count"], "count", "Number of nonzero weights at each runtime j,i cell.")
         create_dataset(quality, "weight_sum", sparse["weight_sum"], "normalized", "Sum of sparse weights at each runtime j,i cell.")
-        create_dataset(quality, "extrapolation_flag", sparse["extrapolation_flag"], "logical", "1 where target L was outside the source L range and clamped.")
+        create_dataset(quality, "extrapolation_flag", sparse["extrapolation_flag"], "logical", "1 where the direct target or any contributing Voltron intermediate cell was outside the SAMI3 source L range and clamped.")
         create_dataset(
             quality,
             "closed_field_mask",
@@ -832,11 +853,12 @@ def main():
             sami3_to_voltron,
             voltron_to_raiju,
             voltron_geometry["closed_cell_mask"] if args.apply_voltron_closed_mask else None,
+            sami3_to_voltron.get("l_extrapolated_mask")
+            if args.mapping_mode == "voltron_tubeshell_l_mlt"
+            else sami3_to_voltron.get("extrapolation_flag"),
         )
-        sparse["l_extrapolated_i"] = np.zeros(target_grid["target_l"].shape, dtype=np.uint8)
-        sparse["extrapolation_flag"] = np.zeros(
-            (target_grid["target_lon_deg"].size, target_grid["target_l"].size),
-            dtype=np.uint8,
+        sparse["l_extrapolated_i"] = np.any(sparse["extrapolation_flag"], axis=0).astype(
+            np.uint8
         )
         sparse["intermediate_closed_mask"] = voltron_geometry["closed_cell_mask"]
         intermediate = dict(voltron_geometry)
@@ -896,6 +918,12 @@ def main():
         ),
         "skipped_voltron_to_raiju_terms_by_mask": sparse.get(
             "skipped_voltron_to_raiju_terms_by_mask"
+        ),
+        "intermediate_extrapolated_source_terms": sparse.get(
+            "intermediate_extrapolated_source_terms"
+        ),
+        "intermediate_extrapolated_target_count": sparse.get(
+            "intermediate_extrapolated_target_count"
         ),
         "source_l_formula": "median_nz_nlt((baltu/Re)/cos(blatu)^2)",
         "source_mlt_formula": "circular_mean_nz_nf(blonu) degrees",
