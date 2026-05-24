@@ -20,6 +20,7 @@ It runs both validators:
 ```text
 scripts/validate_wxsami3_append2_run.py
 scripts/validate_wxsami3_live_packet_contract.py
+scripts/validate_wxsami3_topblend_policy.py
 ```
 
 and copies only lightweight evidence:
@@ -80,7 +81,14 @@ python3 scripts/archive_wxsami3_append2_result.py \
   --archive-dir logs/waccmx_append2_full_20260525 \
   --job-id 7659727 \
   --expected-phi-frames 2 \
-  --expected-live-packets 1
+  --expected-live-packets 1 \
+  --expect-top-blend-mode linear \
+  --expect-blend-bottom-km 600 \
+  --expect-blend-top-km 720 \
+  --min-total-blend-cells 1 \
+  --require-zero-unknown-source-flags \
+  --require-he-native \
+  --require-w-zero
 ```
 
 ## Use On Direct-Wait Job
@@ -102,7 +110,14 @@ python3 scripts/archive_wxsami3_append2_result.py \
   --expected-phi-frames 2 \
   --expected-live-packets 1 \
   --expect-phi-wait-marker \
-  --expect-direct-wait-mode
+  --expect-direct-wait-mode \
+  --expect-top-blend-mode linear \
+  --expect-blend-bottom-km 600 \
+  --expect-blend-top-km 720 \
+  --min-total-blend-cells 1 \
+  --require-zero-unknown-source-flags \
+  --require-he-native \
+  --require-w-zero
 ```
 
 ## Acceptance Meaning
@@ -113,6 +128,9 @@ Passing this workflow means:
 Voltron/REMIX phi payload has the expected two-frame binary schema
 WACCM-X sender sent the expected phi frames
 direct-wait runs show a same-job Voltron writer PID and sender wait marker
+top-blend diagnostics show linear 600-720 km blending and nonzero blend cells
+source-flag unknown counts remain zero
+He remains native and W remains zero for valid payload cells
 SAMI3 received the expected phi frames
 SAMI3 reached MASTER: All Done!
 WACCM-X reached END OF MODEL RUN

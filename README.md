@@ -192,6 +192,11 @@ receiver QC can be reconstructed from the CAM `phys_state(:)` live dump through
 the offline replay builder.  It passes the one-packet Voltron-phi runtime
 (`max_rel=4.83248e-13`) and the two-packet top-blend runtime
 (`max_rel<=6.76502e-13`).
+The receiver-side WACCM-X top-blend/source-policy diagnostics now also have a
+dedicated validator: `scripts/validate_wxsami3_topblend_policy.py`.  It passes
+on the existing f19 600-720 km linear top-blend evidence with 424 apply-blend
+lines, 7354 total blend cells, zero unknown source flags, native He retained,
+and W held at zero for valid payload cells.
 
 ## Layout
 
@@ -238,6 +243,7 @@ docs/MAGE1.25_notes/WACCMX_SAMI3_SOURCE_FLAGS_METADATA_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_RECEIVER_SOURCE_FLAGS_RESULT_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_SOURCE_REASON_FLAGS_RESULT_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_TOP_BLEND_RESULT_20260524.md
+docs/MAGE1.25_notes/WACCMX_SAMI3_TOPBLEND_POLICY_VALIDATOR_20260525.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_PACKET_CONTRACT_VALIDATOR_20260525.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_PHI_PAYLOAD_WAIT_BUILD_RESULT_20260525.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_APPEND2_INTEL_EXPR_ATTEMPT_20260525.md
@@ -297,6 +303,7 @@ Current WACCM-X -> SAMI3 validation scripts:
 
 ```text
 scripts/validate_wxsami3_live_packet_contract.py
+scripts/validate_wxsami3_topblend_policy.py
 scripts/validate_wxsami3_append2_run.py
 scripts/archive_wxsami3_append2_result.py
 scripts/compare_wxsami3_recv_qc.py
@@ -391,6 +398,7 @@ Latest SAMI3 -> RAIJU/GAMERA mapping quality evidence:
 ```text
 logs/sami3_mapping_quality_20260524/
 logs/sami3_mapping_quality_runtime_20260524/
+logs/waccmx_topblend_policy_validation_20260525/
 logs/sami3_weightfile_mapping_20260524/
 logs/sami3_weightfile_bvol_geometry_20260524/
 logs/sami3_voltron_shell_weightfile_20260524/

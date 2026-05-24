@@ -87,6 +87,13 @@ def main():
     parser.add_argument("--expected-live-packets", type=int, default=1)
     parser.add_argument("--expect-phi-wait-marker", action="store_true")
     parser.add_argument("--expect-direct-wait-mode", action="store_true")
+    parser.add_argument("--expect-top-blend-mode", choices=["linear", "none"], default=None)
+    parser.add_argument("--expect-blend-bottom-km", type=float, default=None)
+    parser.add_argument("--expect-blend-top-km", type=float, default=None)
+    parser.add_argument("--min-total-blend-cells", type=int, default=0)
+    parser.add_argument("--require-zero-unknown-source-flags", action="store_true")
+    parser.add_argument("--require-he-native", action="store_true")
+    parser.add_argument("--require-w-zero", action="store_true")
     parser.add_argument("--allow-incomplete", action="store_true")
     args = parser.parse_args()
 
@@ -131,11 +138,45 @@ def main():
         contract_cmd.append("--allow-incomplete")
     contract_rc = run_checked(contract_cmd, contract_txt)
 
+    topblend_rc = 0
+    topblend_txt = None
+    topblend_json = None
+    if args.expect_top_blend_mode:
+        topblend_json = archive_dir / "validate_wxsami3_topblend_policy.json"
+        topblend_txt = archive_dir / "validate_wxsami3_topblend_policy.txt"
+        topblend_cmd = [
+            sys.executable,
+            str(repo / "scripts" / "validate_wxsami3_topblend_policy.py"),
+            "--run-dir",
+            str(run_dir),
+            "--expect-top-blend-mode",
+            args.expect_top_blend_mode,
+            "--min-apply-blend-lines",
+            "1",
+            "--min-total-blend-cells",
+            str(args.min_total_blend_cells),
+            "--json-output",
+            str(topblend_json),
+        ]
+        if args.expect_blend_bottom_km is not None:
+            topblend_cmd.extend(["--expect-bottom-km", str(args.expect_blend_bottom_km)])
+        if args.expect_blend_top_km is not None:
+            topblend_cmd.extend(["--expect-top-km", str(args.expect_blend_top_km)])
+        if args.require_zero_unknown_source_flags:
+            topblend_cmd.append("--require-zero-unknown-source-flags")
+        if args.require_he_native:
+            topblend_cmd.append("--require-he-native")
+        if args.require_w_zero:
+            topblend_cmd.append("--require-w-zero")
+        if args.allow_incomplete:
+            topblend_cmd.append("--allow-incomplete")
+        topblend_rc = run_checked(topblend_cmd, topblend_txt)
+
     copied = copy_files(collect_files(run_dir), archive_dir)
     sacct = write_sacct(args.job_id, archive_dir)
 
     summary = {
-        "ok": append2_rc == 0 and contract_rc == 0,
+        "ok": append2_rc == 0 and contract_rc == 0 and topblend_rc == 0,
         "run_dir": str(run_dir),
         "archive_dir": str(archive_dir),
         "job_id": args.job_id,
@@ -149,6 +190,11 @@ def main():
             "text": str(contract_txt),
             "json": str(contract_json),
         },
+        "topblend_policy_validator": {
+            "returncode": topblend_rc,
+            "text": str(topblend_txt) if topblend_txt else None,
+            "json": str(topblend_json) if topblend_json else None,
+        },
         "copied_files": copied,
         "sacct": sacct,
     }
@@ -161,6 +207,7 @@ def main():
         "job_id: {}".format(args.job_id if args.job_id else ""),
         "append2_validator_returncode: {}".format(append2_rc),
         "live_packet_contract_returncode: {}".format(contract_rc),
+        "topblend_policy_returncode: {}".format(topblend_rc),
         "copied_files: {}".format(len(copied)),
         "overall: {}".format("ok" if summary["ok"] else "FAIL"),
         "",
@@ -168,6 +215,7 @@ def main():
         "",
         "- validate_wxsami3_append2_run.txt",
         "- validate_wxsami3_live_packet_contract.txt",
+        "- validate_wxsami3_topblend_policy.txt",
     ]
     (archive_dir / "README.md").write_text("\n".join(lines) + "\n")
 
