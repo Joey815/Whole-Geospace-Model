@@ -1,0 +1,4 @@
+path=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_online_receiver_remix_phi_weimer_voltron_bridge_20260524_0000/voltron_phi_writer/remix_sami3_phi_payload_from_voltron_bridge.bin
+size=48532
+header=[20260524, 1, 125, 97, 1]
+frame=0 frame_index=0 hour=0 valid_until=1e+30 min=-36.930614 max=31.483816 finite=True nonzero=3492

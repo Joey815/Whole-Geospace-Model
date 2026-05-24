@@ -1,0 +1,13 @@
+RUN_DIR=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_online_receiver_remix_phi_weimer_voltron_bridge_20260524_0000
+VOLTRON_RUN=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_online_receiver_remix_phi_weimer_voltron_bridge_20260524_0000/voltron_phi_writer
+PAYLOAD_PREFIX=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_replay_payload_from_live_dump_20260523/waccmx_neutral_rank
+PHI_PAYLOAD=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_online_receiver_remix_phi_weimer_voltron_bridge_20260524_0000/voltron_phi_writer/remix_sami3_phi_payload_from_voltron_bridge.bin
+PORT=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_online_receiver_remix_phi_weimer_voltron_bridge_20260524_0000/waccmx_sami3_online_port.txt
+START=Sun May 24 23:57:00 CST 2026
+HOST=qhcn182
+--- stage 1: Voltron/REMIX phi payload generation
+path=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_online_receiver_remix_phi_weimer_voltron_bridge_20260524_0000/voltron_phi_writer/remix_sami3_phi_payload_from_voltron_bridge.bin
+size=48532
+header=[20260524, 1, 125, 97, 1]
+frame=0 frame_index=0 hour=0 valid_until=1e+30 min=-36.930614 max=31.483816 finite=True nonzero=3492
+--- stage 2: SAMI3 online receiver plus single-peer neutral+phi sender

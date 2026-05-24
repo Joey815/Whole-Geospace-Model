@@ -1,0 +1,62 @@
+MAGE1.25 WACCM-X/SAMI3 REMIX phi bridge validation
+Date: 2026-05-24/25 CST
+
+Goal:
+  Validate a single Slurm job that generates a REMIX/Voltron-derived SAMI3
+  Weimer phi binary payload and then sends neutral + phi payloads to SAMI3
+  through the existing single MPI intercommunicator.
+
+Why this route:
+  The current SAMI3 receiver has one waccmx_peer_comm. Neutral payloads, phi
+  frames, and the done tag are all received from that same MPI peer. A true
+  separate Voltron MPI client would require receiver protocol changes. This
+  bridge keeps the receiver unchanged and validates the next safe integration
+  stage.
+
+Launcher:
+  slurm/run_sami3_online_receiver_remix_phi_weimer_voltron_bridge_20260524.sbatch
+
+Run directory:
+  /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_online_receiver_remix_phi_weimer_voltron_bridge_20260524_0000
+
+Jobs:
+  7655063: failed before SAMI3 stage because module purge left LD_LIBRARY_PATH
+           unset; launcher expanded it directly.
+  7656022: completed, ExitCode 0:0, Elapsed 00:02:35.
+
+Voltron-generated phi payload:
+  path=voltron_phi_writer/remix_sami3_phi_payload_from_voltron_bridge.bin
+  archived=remix_sami3_phi_payload_from_voltron_bridge_7656022.bin
+  size=48532
+  header=[20260524, 1, 125, 97, 1]
+  frame=0 frame_index=0 hour=0 valid_until=1e+30
+  min=-36.930614 max=31.483816 finite=True nonzero=3492
+
+Sender evidence:
+  NEUTRAL_PHI_SENDER phi_payload_format=remix_sami3_phi_payload.v1 nframes=1
+  NEUTRAL_PHI_SENDER sent neutral step=0 packet_hour=0 rank=0001..0032
+  NEUTRAL_PHI_SENDER sent phi frame=0/1 hour=0 valid_until=1e+30
+  NEUTRAL_PHI_SENDER sent done signal
+  NEUTRAL_PHI_SENDER done
+
+Receiver evidence:
+  SAMI3_USE_ONLINE_PHI_WEIMER: using online MPI phi_weimer payload
+  WACCMX_PHI_RECV 0 1 0.00000000 0.00000000 1.00000002E+30 -36.9306145 31.4838161
+  hrutw2 = 0.00000000 1.00000002E+30
+  nweimer 1
+  MASTER: All Done!
+  WACCMX online done signal received: 1
+
+Neutral QC:
+  WACCMX_RECV_QC compare ok: ranks=32 occurrence=0 step_set=[0]
+  packet_hour_set=[0.0] max_abs=2.1033e+06 max_rel=4.86991e-13
+
+Launcher fixes retained:
+  OpenMPI stage now expands LD_LIBRARY_PATH as ${LD_LIBRARY_PATH:-}.
+  Voltron stage sends TERM after payload readiness and follows with KILL if
+  voltron.x does not exit.
+
+Current status:
+  The automated one-job bridge from Voltron/REMIX payload generation to SAMI3
+  online MPI ingestion is validated. It is still a file-boundary bridge, not
+  a direct two-client MPI coupling.
