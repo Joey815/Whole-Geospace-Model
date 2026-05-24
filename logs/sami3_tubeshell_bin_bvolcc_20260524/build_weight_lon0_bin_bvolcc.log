@@ -1,0 +1,12 @@
+wrote /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_voltron_tubeshell_l_mlt_lon0_bin_bvolcc_20260524.h5
+wrote /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_voltron_tubeshell_l_mlt_lon0_bin_bvolcc_20260524.json
+sparse_weight_count=25920
+coverage_count_min=0
+coverage_count_max=6
+weight_sum_min=0.0
+weight_sum_max=1.0000001192092896
+l_extrapolated_cell_count=0
+closed_field_cell_count=8460
+closed_field_fraction=1.0
+bvol_cc_min=0.00016075602010707862
+bvol_cc_max=32.672893056940694

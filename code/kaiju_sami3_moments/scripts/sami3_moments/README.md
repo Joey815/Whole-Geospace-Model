@@ -362,6 +362,20 @@ footpoint longitude before composing the same Voltron->RAIJU shell-grid step.
 It is useful for testing traced-tube coordinate plumbing, but the longitude
 choice and flux-tube volume weighting remain prototype assumptions.
 
+For Voltron intermediate mappings, the Voltron->RAIJU composition can also use
+cell-centered TubeShell `bVol` as a prototype volume weight:
+
+```text
+--voltron-compose-weight-mode interp    # default shell-grid interpolation only
+--voltron-compose-weight-mode bvol_cc   # multiply interpolation terms by bVol_cc
+--voltron-compose-weight-mode bin_bvol_cc
+```
+
+`bin_bvol_cc` bins Voltron TubeShell cell centers into the coarser RAIJU target
+cells and normalizes by the summed cell-centered `bVol`.  The bVol-aware modes
+write `schema_version=4`.  They are still prototypes; they do not yet derive a
+full SAMI3 cell-volume-to-RAIJU flux-tube quadrature.
+
 When a runtime layout is requested, the product also writes explicit
 `/MappingQuality` datasets.  For `l_mlt` these include:
 

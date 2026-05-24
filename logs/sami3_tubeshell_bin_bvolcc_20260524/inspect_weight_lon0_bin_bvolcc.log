@@ -1,0 +1,7 @@
+coverage_shape (188, 45)
+coverage_zero_count 2520
+coverage_positive_count 5940
+coverage_unique [(0, 2520), (4, 4860), (6, 1080)]
+weight_sum_zero_count 2520
+weight_sum_positive_min 0.9999998807907104
+voltron_compose_weight_mode bin_bvol_cc

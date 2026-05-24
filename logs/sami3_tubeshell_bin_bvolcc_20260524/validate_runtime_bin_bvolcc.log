@@ -1,0 +1,57 @@
+runtime_validation=bin_bvol_cc
+product_h5 /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_voltron_tubeshell_l_mlt_lon0_bin_bvolcc_20260524.h5
+base_cpl /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_20260524/sami3_moments_base_control_bin_bvolcc.raiCpl.Res.00000.h5
+ingest_cpl /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_20260524/sami3_moments_tubeshell_lon0_bin_bvolcc_D005_P005_stateTiote.raiCpl.Res.00000.h5
+runtime_valid_count 5940
+runtime_invalid_count 2520
+coverage_unique [(0, 2520), (4, 4860), (6, 1080)]
+Pavg
+  alpha 0.05
+  mask_count_by_channel [5940, 0]
+  formula_max_abs 0.0
+  formula_rms 0.0
+  invalid_preserve_max_abs 0.0
+  valid_delta_max_abs 0.012439010292291643
+  nonfinite_actual 0
+Davg
+  alpha 0.05
+  mask_count_by_channel [5940, 0]
+  formula_max_abs 0.0
+  formula_rms 0.0
+  invalid_preserve_max_abs 0.0
+  valid_delta_max_abs 887.7487304687501
+  nonfinite_actual 0
+Pstd
+  alpha 0.0
+  mask_count_by_channel [5940, 0]
+  formula_max_abs 0.0
+  formula_rms 0.0
+  invalid_preserve_max_abs 0.0
+  valid_delta_max_abs 0.0
+  nonfinite_actual 0
+Dstd
+  alpha 0.0
+  mask_count_by_channel [5940, 0]
+  formula_max_abs 0.0
+  formula_rms 0.0
+  invalid_preserve_max_abs 0.0
+  valid_delta_max_abs 0.0
+  nonfinite_actual 0
+State/Pavg_in
+  alpha 0.05
+  formula_max_abs 0.0
+  formula_rms 0.0
+  invalid_preserve_max_abs 0.0
+  valid_delta_max_abs 0.012439010292291643
+  nonfinite_actual 0
+State/Davg_in
+  alpha 0.05
+  formula_max_abs 0.0
+  formula_rms 0.0
+  invalid_preserve_max_abs 0.0
+  valid_delta_max_abs 887.7487304687501
+  nonfinite_actual 0
+State/Density nonfinite_actual 0 min 0.0 max 9075.909053467174
+State/Pressure nonfinite_actual 0 min 0.0 max 3.7015857474565
+State/eta nonfinite_actual 0 min 0.0 max 2937313100.690331
+runtime_validation_passed 1

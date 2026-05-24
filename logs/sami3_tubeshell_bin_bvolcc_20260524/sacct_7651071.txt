@@ -1,0 +1,4 @@
+JobID|JobName|State|ExitCode|Elapsed|NodeList
+7651071|sami3_bvolcc_smoke|COMPLETED|0:0|00:02:08|qhcn290
+7651071.batch|batch|COMPLETED|0:0|00:02:08|qhcn290
+7651071.extern|extern|COMPLETED|0:0|00:02:08|qhcn290

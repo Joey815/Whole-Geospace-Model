@@ -82,6 +82,29 @@ def parse_args():
         ),
     )
     parser.add_argument(
+        "--voltron-compose-weight-mode",
+        choices=("interp", "bvol_cc", "bin_bvol_cc"),
+        default="interp",
+        help=(
+            "For Voltron intermediate mappings, choose how Voltron-to-RAIJU "
+            "source cells are weighted before per-target renormalization. "
+            "interp uses only the existing shell-grid interpolation weights. "
+            "bvol_cc multiplies those weights by Voltron TubeShell cell-centered "
+            "bVol. bin_bvol_cc bins Voltron TubeShell cell centers into RAIJU "
+            "target cells and uses bVol_cc as the bin weight. Default: interp."
+        ),
+    )
+    parser.add_argument(
+        "--voltron-bvol-floor",
+        type=float,
+        default=0.0,
+        help=(
+            "Minimum positive Voltron bVol_cc allowed when "
+            "--voltron-compose-weight-mode=bvol_cc. Terms with non-finite or "
+            "non-positive bVol at or below this floor are skipped. Default: 0.0."
+        ),
+    )
+    parser.add_argument(
         "--sami3-grid-dir",
         default=None,
         help="SAMI3 run directory containing baltu/blatu/blonu.dat. Defaults to stage-1 metadata run_dir.",
@@ -295,9 +318,18 @@ def compose_sami3_voltron_raiju_weights(
     voltron_to_raiju,
     voltron_closed_mask=None,
     voltron_extrapolated_mask=None,
+    voltron_compose_weight=None,
+    voltron_compose_weight_mode="interp",
+    voltron_weight_floor=0.0,
 ):
     if voltron_extrapolated_mask is not None:
         voltron_extrapolated_mask = np.asarray(voltron_extrapolated_mask, dtype=bool)
+    if voltron_compose_weight is not None:
+        voltron_compose_weight = np.asarray(voltron_compose_weight, dtype=np.float64)
+    if voltron_compose_weight_mode not in ("interp", "bvol_cc", "bin_bvol_cc"):
+        raise ValueError("unsupported Voltron compose weight mode: {0}".format(voltron_compose_weight_mode))
+    if voltron_compose_weight_mode == "bvol_cc" and voltron_compose_weight is None:
+        raise ValueError("bvol_cc Voltron compose weight mode requires voltron_compose_weight")
 
     per_voltron = {}
     for dst, src, weight in zip(
@@ -310,8 +342,10 @@ def compose_sami3_voltron_raiju_weights(
 
     per_target = {}
     skipped_by_mask = 0
+    skipped_by_compose_weight = 0
     extrapolated_source_terms = 0
     extrapolated_target_keys = set()
+    used_compose_weights = []
     for dst, vsrc, vweight in zip(
         voltron_to_raiju["dst_index"],
         voltron_to_raiju["src_index"],
@@ -321,6 +355,14 @@ def compose_sami3_voltron_raiju_weights(
         if voltron_closed_mask is not None and not bool(voltron_closed_mask[vkey[0], vkey[1]]):
             skipped_by_mask += 1
             continue
+        composed_vweight = float(vweight)
+        if voltron_compose_weight_mode == "bvol_cc":
+            compose_weight = float(voltron_compose_weight[vkey[0], vkey[1]])
+            if (not np.isfinite(compose_weight)) or compose_weight <= voltron_weight_floor:
+                skipped_by_compose_weight += 1
+                continue
+            composed_vweight *= compose_weight
+            used_compose_weights.append(compose_weight)
         target_key = (int(dst[0]), int(dst[1]))
         source_terms = per_voltron.get(vkey, ())
         if not source_terms:
@@ -333,7 +375,7 @@ def compose_sami3_voltron_raiju_weights(
         acc = per_target.setdefault(target_key, {})
         for src_i, src_j, sw in source_terms:
             src_key = (src_i, src_j)
-            acc[src_key] = acc.get(src_key, 0.0) + float(vweight) * sw
+            acc[src_key] = acc.get(src_key, 0.0) + composed_vweight * sw
 
     dst_rows = []
     src_rows = []
@@ -360,8 +402,11 @@ def compose_sami3_voltron_raiju_weights(
     dst_arr = np.asarray(dst_rows, dtype=np.int32)
     src_arr = np.asarray(src_rows, dtype=np.int32)
     weight_arr = np.asarray(weight_rows, dtype=np.float32)
-    nj = int(np.max(voltron_to_raiju["dst_index"][:, 0])) + 1
-    ni = int(np.max(voltron_to_raiju["dst_index"][:, 1])) + 1
+    if "coverage_count" in voltron_to_raiju:
+        nj, ni = voltron_to_raiju["coverage_count"].shape
+    else:
+        nj = int(np.max(voltron_to_raiju["dst_index"][:, 0])) + 1
+        ni = int(np.max(voltron_to_raiju["dst_index"][:, 1])) + 1
     coverage_count = np.zeros((nj, ni), dtype=np.int16)
     weight_sum = np.zeros((nj, ni), dtype=np.float32)
     np.add.at(coverage_count, (dst_arr[:, 0], dst_arr[:, 1]), weight_arr > 0.0)
@@ -377,12 +422,117 @@ def compose_sami3_voltron_raiju_weights(
         "coverage_count": coverage_count,
         "weight_sum": weight_sum,
         "extrapolation_flag": extrapolation_flag,
+        "voltron_compose_weight_mode": voltron_compose_weight_mode,
         "skipped_voltron_to_raiju_terms_by_mask": int(skipped_by_mask),
+        "skipped_voltron_to_raiju_terms_by_compose_weight": int(skipped_by_compose_weight),
         "intermediate_extrapolated_source_terms": int(extrapolated_source_terms),
         "intermediate_extrapolated_target_count": int(np.count_nonzero(extrapolation_flag)),
         "zero_target_count": int(zero_target_count),
         "raw_weight_sum_min": float(min(raw_weight_sum.values())) if raw_weight_sum else None,
         "raw_weight_sum_max": float(max(raw_weight_sum.values())) if raw_weight_sum else None,
+        "voltron_compose_weight_min": float(np.min(used_compose_weights)) if used_compose_weights else None,
+        "voltron_compose_weight_max": float(np.max(used_compose_weights)) if used_compose_weights else None,
+    }
+
+
+def find_periodic_target_index(lon_deg, edge_deg):
+    lon = float(np.mod(lon_deg, 360.0))
+    edges = np.asarray(edge_deg, dtype=np.float64)
+    if edges.size < 2:
+        return None
+    start = float(edges[0])
+    stop = float(edges[-1])
+    while lon < start:
+        lon += 360.0
+    while lon >= stop and lon - 360.0 >= start:
+        lon -= 360.0
+    if lon < start or lon > stop:
+        return None
+    idx = int(np.searchsorted(edges, lon, side="right") - 1)
+    if idx == edges.size - 1:
+        idx -= 1
+    if idx < 0 or idx >= edges.size - 1:
+        return None
+    return idx
+
+
+def build_sparse_voltron_to_raiju_bvol_bins(voltron_geometry, target_grid, longitude_key, bvol_floor=0.0):
+    target_l_edge = np.asarray(target_grid["target_l_edge"], dtype=np.float64)
+    target_lon_edge = np.asarray(
+        target_grid["target_lon_edge_deg_unwrapped"], dtype=np.float64
+    )
+    if target_l_edge.ndim != 1 or target_lon_edge.ndim != 1:
+        raise ValueError("target L/longitude edges must be 1-D")
+    ni = target_l_edge.size - 1
+    nj = target_lon_edge.size - 1
+    if ni <= 0 or nj <= 0:
+        raise ValueError("target grid edges imply an empty target grid")
+
+    src_l = np.asarray(voltron_geometry["Lb_cc"], dtype=np.float64)
+    src_lon = np.asarray(voltron_geometry[longitude_key], dtype=np.float64)
+    src_bvol = np.asarray(voltron_geometry["bvol_cc"], dtype=np.float64)
+    if src_l.shape != src_lon.shape or src_l.shape != src_bvol.shape:
+        raise ValueError("Voltron TubeShell L/longitude/bVol center arrays differ in shape")
+
+    l_low = np.minimum(target_l_edge[:-1], target_l_edge[1:])
+    l_high = np.maximum(target_l_edge[:-1], target_l_edge[1:])
+    dst_rows = []
+    src_rows = []
+    weight_rows = []
+    raw_weight_sum = np.zeros((nj, ni), dtype=np.float64)
+    coverage_count = np.zeros((nj, ni), dtype=np.int16)
+    skipped_outside = 0
+    skipped_bad_bvol = 0
+
+    for jv in range(src_l.shape[0]):
+        for iv in range(src_l.shape[1]):
+            lval = float(src_l[jv, iv])
+            lonval = float(src_lon[jv, iv])
+            bvol = float(src_bvol[jv, iv])
+            if not np.isfinite(lval) or not np.isfinite(lonval):
+                skipped_outside += 1
+                continue
+            if (not np.isfinite(bvol)) or bvol <= bvol_floor:
+                skipped_bad_bvol += 1
+                continue
+            imatches = np.where((lval >= l_low) & (lval <= l_high))[0]
+            if imatches.size == 0:
+                skipped_outside += 1
+                continue
+            i = int(imatches[0])
+            j = find_periodic_target_index(lonval, target_lon_edge)
+            if j is None:
+                skipped_outside += 1
+                continue
+            dst_rows.append((j, i))
+            src_rows.append((jv, iv))
+            weight_rows.append(bvol)
+            raw_weight_sum[j, i] += bvol
+            coverage_count[j, i] += 1
+
+    if len(weight_rows) == 0:
+        raise ValueError("Voltron bvol binning produced no nonzero weights")
+    weights = np.asarray(weight_rows, dtype=np.float64)
+    dst_arr = np.asarray(dst_rows, dtype=np.int32)
+    src_arr = np.asarray(src_rows, dtype=np.int32)
+    norm = raw_weight_sum[dst_arr[:, 0], dst_arr[:, 1]]
+    weights = weights / np.maximum(norm, TINY)
+    weight_sum = np.zeros((nj, ni), dtype=np.float64)
+    np.add.at(weight_sum, (dst_arr[:, 0], dst_arr[:, 1]), weights)
+
+    return {
+        "dst_index": dst_arr,
+        "src_index": src_arr,
+        "weight": weights.astype(np.float64),
+        "corner": np.zeros(weights.shape, dtype=np.int8),
+        "coverage_count": coverage_count,
+        "weight_sum": weight_sum,
+        "skipped_outside_target_bins": int(skipped_outside),
+        "skipped_bad_bvol": int(skipped_bad_bvol),
+        "raw_bvol_sum_min": float(np.min(raw_weight_sum[raw_weight_sum > 0.0]))
+        if np.any(raw_weight_sum > 0.0)
+        else None,
+        "raw_bvol_sum_max": float(np.max(raw_weight_sum)) if raw_weight_sum.size else None,
     }
 
 
@@ -688,6 +838,14 @@ def write_weight_file(path, metadata, source_grid, target_grid, target_geometry,
         handle.attrs["target_shape_ni_nj"] = metadata["target_shape_ni_nj"]
         handle.attrs["target_geometry_source"] = metadata["target_template"]
         handle.attrs["apply_voltron_closed_mask"] = int(metadata["apply_voltron_closed_mask"])
+        handle.attrs["voltron_compose_weight_mode"] = (
+            metadata["voltron_compose_weight_mode"] or "none"
+        )
+        handle.attrs["voltron_bvol_floor"] = (
+            metadata["voltron_bvol_floor"]
+            if metadata["voltron_bvol_floor"] is not None
+            else -1.0
+        )
         if metadata["voltron_template"] is not None:
             handle.attrs["voltron_template"] = metadata["voltron_template"]
         if metadata["voltron_tube_longitude"] is not None:
@@ -843,12 +1001,26 @@ def main():
                 )
             )
             voltron_tube_longitude = args.voltron_tube_longitude
-        voltron_to_raiju = build_sparse_grid_to_grid(
-            voltron_geometry["target_l"],
-            voltron_geometry["target_lon_deg"],
-            target_grid["target_l"],
-            target_grid["target_lon_deg"],
-        )
+        if args.voltron_compose_weight_mode == "bin_bvol_cc":
+            if args.mapping_mode != "voltron_tubeshell_l_mlt":
+                raise ValueError(
+                    "--voltron-compose-weight-mode bin_bvol_cc requires "
+                    "--mapping-mode voltron_tubeshell_l_mlt"
+                )
+            longitude_key = args.voltron_tube_longitude + "_cc_deg"
+            voltron_to_raiju = build_sparse_voltron_to_raiju_bvol_bins(
+                voltron_geometry,
+                target_grid,
+                longitude_key,
+                args.voltron_bvol_floor,
+            )
+        else:
+            voltron_to_raiju = build_sparse_grid_to_grid(
+                voltron_geometry["target_l"],
+                voltron_geometry["target_lon_deg"],
+                target_grid["target_l"],
+                target_grid["target_lon_deg"],
+            )
         sparse = compose_sami3_voltron_raiju_weights(
             sami3_to_voltron,
             voltron_to_raiju,
@@ -856,6 +1028,9 @@ def main():
             sami3_to_voltron.get("l_extrapolated_mask")
             if args.mapping_mode == "voltron_tubeshell_l_mlt"
             else sami3_to_voltron.get("extrapolation_flag"),
+            voltron_geometry["bvol_cc"] if args.voltron_compose_weight_mode == "bvol_cc" else None,
+            args.voltron_compose_weight_mode,
+            args.voltron_bvol_floor,
         )
         sparse["l_extrapolated_i"] = np.any(sparse["extrapolation_flag"], axis=0).astype(
             np.uint8
@@ -864,7 +1039,14 @@ def main():
         intermediate = dict(voltron_geometry)
         intermediate["sami3_to_voltron"] = sami3_to_voltron
         intermediate["voltron_to_raiju"] = voltron_to_raiju
-        schema_version = 3
+        if args.voltron_compose_weight_mode == "bvol_cc":
+            physical_note += " with Voltron bVol_cc-weighted composition"
+            schema_version = 4
+        elif args.voltron_compose_weight_mode == "bin_bvol_cc":
+            physical_note += " with Voltron TubeShell bVol_cc target-cell binning"
+            schema_version = 4
+        else:
+            schema_version = 3
         voltron_template = os.path.abspath(args.voltron_template)
         apply_voltron_mask = bool(args.apply_voltron_closed_mask)
 
@@ -886,6 +1068,12 @@ def main():
             voltron_tube_longitude if args.mapping_mode == "voltron_tubeshell_l_mlt" else None
         ),
         "apply_voltron_closed_mask": apply_voltron_mask,
+        "voltron_compose_weight_mode": (
+            args.voltron_compose_weight_mode if args.mapping_mode != "l_mlt_separable" else None
+        ),
+        "voltron_bvol_floor": (
+            float(args.voltron_bvol_floor) if args.mapping_mode != "l_mlt_separable" else None
+        ),
         "output_hdf5": out_h5,
         "source_shape_nf_nlt": [int(shape2[0]), int(shape2[1])],
         "target_shape_ni_nj": [int(ni), int(nj)],
@@ -919,6 +1107,31 @@ def main():
         "skipped_voltron_to_raiju_terms_by_mask": sparse.get(
             "skipped_voltron_to_raiju_terms_by_mask"
         ),
+        "skipped_voltron_to_raiju_terms_by_compose_weight": sparse.get(
+            "skipped_voltron_to_raiju_terms_by_compose_weight"
+        ),
+        "voltron_to_raiju_bvol_bin_skipped_outside_target_bins": (
+            voltron_to_raiju.get("skipped_outside_target_bins")
+            if args.mapping_mode != "l_mlt_separable"
+            else None
+        ),
+        "voltron_to_raiju_bvol_bin_skipped_bad_bvol": (
+            voltron_to_raiju.get("skipped_bad_bvol")
+            if args.mapping_mode != "l_mlt_separable"
+            else None
+        ),
+        "voltron_to_raiju_bvol_bin_raw_bvol_sum_min": (
+            voltron_to_raiju.get("raw_bvol_sum_min")
+            if args.mapping_mode != "l_mlt_separable"
+            else None
+        ),
+        "voltron_to_raiju_bvol_bin_raw_bvol_sum_max": (
+            voltron_to_raiju.get("raw_bvol_sum_max")
+            if args.mapping_mode != "l_mlt_separable"
+            else None
+        ),
+        "voltron_compose_weight_min": sparse.get("voltron_compose_weight_min"),
+        "voltron_compose_weight_max": sparse.get("voltron_compose_weight_max"),
         "intermediate_extrapolated_source_terms": sparse.get(
             "intermediate_extrapolated_source_terms"
         ),

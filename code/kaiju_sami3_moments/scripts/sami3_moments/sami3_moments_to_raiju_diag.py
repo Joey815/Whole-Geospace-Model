@@ -362,12 +362,17 @@ def read_raicpl_target_l_mlt(template_path, target_shape):
 
     phi_cc = 0.5 * (phi[:-1] + phi[1:])
     theta_cc = 0.5 * (theta[:-1] + theta[1:])
+    phi_edge_deg = np.rad2deg(phi)
+    theta_edge_l = 1.0 / np.maximum(np.sin(theta) ** 2, TINY)
     target_lon = np.mod(np.rad2deg(phi_cc), 360.0)
     target_l = 1.0 / np.maximum(np.sin(theta_cc) ** 2, TINY)
 
     return {
         "target_l": target_l.astype(np.float64),
         "target_lon_deg": target_lon.astype(np.float64),
+        "target_l_edge": theta_edge_l.astype(np.float64),
+        "target_lon_edge_deg_unwrapped": phi_edge_deg.astype(np.float64),
+        "target_lon_edge_deg": np.mod(phi_edge_deg, 360.0).astype(np.float64),
         "template": os.path.abspath(template_path),
         "stats": [
             finite_stats("raicpl_target_l", target_l),
@@ -577,6 +582,9 @@ def read_mapping_weight_file(path, target_shape, source_shape):
         "weight_file_schema_version": int(attrs.get("schema_version", 0)),
         "weight_file_mapping_mode": attrs.get("mapping_mode", "unknown"),
         "weight_file_physical_validity": attrs.get("physical_validity", "unknown"),
+        "weight_file_voltron_compose_weight_mode": attrs.get(
+            "voltron_compose_weight_mode", "unknown"
+        ),
         "source_shape_nf_nlt": [int(nf), int(nlt)],
         "target_shape_ni_nj": [int(ni), int(nj)],
         "sparse_weight_count": int(weights.size),
@@ -655,6 +663,9 @@ def build_mapping_quality_from_weights(
     attrs["weight_file_physical_validity"] = str(
         weight_info["summary"]["weight_file_physical_validity"]
     )
+    attrs["weight_file_voltron_compose_weight_mode"] = str(
+        weight_info["summary"].get("weight_file_voltron_compose_weight_mode", "unknown")
+    )
     attrs["runtime_mask_policy"] = runtime_mask_policy
     datasets.update(
         {
@@ -710,6 +721,9 @@ def build_mapping_quality_from_weights(
             ),
         }
         summary["runtime_mask_policy"] = runtime_mask_policy
+        summary["weight_file_voltron_compose_weight_mode"] = weight_info["summary"].get(
+            "weight_file_voltron_compose_weight_mode", "unknown"
+        )
         summary["runtime_valid_cell_count"] = int(np.count_nonzero(runtime_valid_mask))
         summary["runtime_valid_fraction"] = (
             float(np.count_nonzero(runtime_valid_mask)) / float(runtime_valid_mask.size)

@@ -1,0 +1,42 @@
+comparison=interp_vs_bvol_cc_vs_bin_bvol_cc
+interp /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_voltron_tubeshell_l_mlt_lon0_20260524.h5
+bvol_cc /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_voltron_tubeshell_l_mlt_lon0_bvolcc_20260524.h5
+bin_bvol_cc /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_voltron_tubeshell_l_mlt_lon0_bin_bvolcc_20260524.h5
+bin_runtime_valid_count 5940
+bin_runtime_invalid_count 2520
+bin_coverage_unique [(0, 2520), (4, 4860), (6, 1080)]
+Pavg
+  bvol_cc_vs_interp_max_abs 1.8189894035458565e-12
+  bvol_cc_vs_interp_rms 1.977629824766354e-14
+  bin_valid_vs_interp_max_abs 0.022859632968902588
+  bin_valid_vs_interp_rms 0.007996797561645508
+  interp_valid_mean 0.05558444932103157
+  bin_valid_mean 0.06074320524930954
+Davg
+  bvol_cc_vs_interp_max_abs 0.0
+  bvol_cc_vs_interp_rms 0.0
+  bin_valid_vs_interp_max_abs 1417.8154296875
+  bin_valid_vs_interp_rms 582.39453125
+  interp_valid_mean 4657.79296875
+  bin_valid_mean 5045.98828125
+Pstd
+  bvol_cc_vs_interp_max_abs 0.0
+  bvol_cc_vs_interp_rms 0.0
+  bin_valid_vs_interp_max_abs 0.050461336970329285
+  bin_valid_vs_interp_rms 0.0223594531416893
+  interp_valid_mean 0.1938355267047882
+  bin_valid_mean 0.21146108210086823
+Dstd
+  bvol_cc_vs_interp_max_abs 0.0
+  bvol_cc_vs_interp_rms 0.0
+  bin_valid_vs_interp_max_abs 3106.8154296875
+  bin_valid_vs_interp_rms 1307.439208984375
+  interp_valid_mean 11399.0166015625
+  bin_valid_mean 12434.22265625
+tiote
+  bvol_cc_vs_interp_max_abs 0.0
+  bvol_cc_vs_interp_rms 0.0
+  bin_valid_vs_interp_max_abs 0.018895208835601807
+  bin_valid_vs_interp_rms 0.004151249770075083
+  interp_valid_mean 0.9784493446350098
+  bin_valid_mean 0.975895345211029

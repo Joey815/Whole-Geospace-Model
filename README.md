@@ -45,6 +45,12 @@ An additional `voltron_tubeshell_l_mlt` prototype maps SAMI3 onto Voltron
 TubeShell cell-centered `Lb + lon0/lonc` before the Voltron->RAIJU step; both
 longitude choices validate with finite MappingQuality, and lon0/lonc differ
 only at roundoff for the current template.
+The TubeShell prototype now has a bVol-binned compose mode,
+`--voltron-compose-weight-mode bin_bvol_cc`, which bins traced Voltron
+TubeShell cell centers into RAIJU target cells with `bvol_cc` weights.  Its
+runtime smoke job 7651071 completed 0:0, naturally invalid coverage cells
+preserve baseline values exactly, and valid cells match the configured alpha
+blend formula exactly.
 Runtime blending is validated with alpha=0 exact baseline recovery.
 Density alpha scan is finite and continuous through alphaDavg=0.20.
 Pressure alpha scan at alphaDavg=0.05 is finite for alphaPavg=0.05 and 0.10.
@@ -76,6 +82,7 @@ stub tag212 runtime   = 7645415, COMPLETED, exit 0:0
 sami3 raiju long300   = 7648350, COMPLETED, exit 0:0
 sami3 mapq runtime    = 7648737, COMPLETED, exit 0:0
 sami3 volshell runtime= 7649439, COMPLETED, exit 0:0
+sami3 bin-bvolcc rt = 7651071, COMPLETED, exit 0:0
 ```
 
 Latest receiver checks:
@@ -156,6 +163,7 @@ docs/MAGE1.25_notes/SAMI3_RAIJU_WEIGHT_FILE_BVOL_GEOMETRY_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_VOLTRON_SHELL_WEIGHT_FILE_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_VOLTRON_SHELL_RUNTIME_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_VOLTRON_TUBESHELL_WEIGHT_FILE_RESULT_20260524.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_TUBESHELL_BIN_BVOLCC_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_RUNTIME_BLEND_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_STAGE2_SOURCE_MODES_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_DSB_LMLT_RUNTIME_BLEND_RESULT_20260524.md
@@ -251,6 +259,7 @@ logs/sami3_weightfile_bvol_geometry_20260524/
 logs/sami3_voltron_shell_weightfile_20260524/
 logs/sami3_voltron_shell_runtime_20260524/
 logs/sami3_voltron_tubeshell_weightfile_20260524/
+logs/sami3_tubeshell_bin_bvolcc_20260524/
 ```
 
 ## Known Physical Blockers
@@ -265,7 +274,7 @@ He native/MSIS fallback policy hardening
 W-off / vertical-wind policy validation
 REMIX -> SAMI3 potential/E-field forcing
 production SAMI3 -> RAIJU/GAMERA Voltron-consistent flux-tube weighting
-replace prototype l_mlt_separable mapping weights with Voltron traced-tube or bvol-aligned weights
+replace prototype lon0/bin-center bvol weighting with a true traced-tube flux-volume map
 production SAMI3 -> RAIJU/GAMERA geometry/mask coverage policy
 longer runtime scans for density, pressure, and tiote blending
 longer-duration stability scan beyond the 300 second recommended prototype
