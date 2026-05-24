@@ -1,0 +1,76 @@
+{
+  "append2_validator": {
+    "json": "logs/waccmx_append2_directwait_20260525/validate_wxsami3_append2_run.json",
+    "returncode": 1,
+    "text": "logs/waccmx_append2_directwait_20260525/validate_wxsami3_append2_run.txt"
+  },
+  "archive_dir": "logs/waccmx_append2_directwait_20260525",
+  "copied_files": [
+    {
+      "archive": "logs/waccmx_append2_directwait_20260525/slurm-7661005.out",
+      "bytes": 2196,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000/slurm-7661005.out"
+    },
+    {
+      "archive": "logs/waccmx_append2_directwait_20260525/slurm-7661005.err",
+      "bytes": 1325,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000/slurm-7661005.err"
+    },
+    {
+      "archive": "logs/waccmx_append2_directwait_20260525/waccmx_cesm.out",
+      "bytes": 140504,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000/waccmx_cesm.out"
+    },
+    {
+      "archive": "logs/waccmx_append2_directwait_20260525/sami3_online_receiver.out",
+      "bytes": 125303,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000/sami3_online_receiver.out"
+    },
+    {
+      "archive": "logs/waccmx_append2_directwait_20260525/wxsami3_live_meta.json",
+      "bytes": 3154,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000/wxsami3_live_meta.json"
+    }
+  ],
+  "job_id": "7661005",
+  "live_packet_contract_validator": {
+    "json": "logs/waccmx_append2_directwait_20260525/validate_wxsami3_live_packet_contract.json",
+    "returncode": 1,
+    "text": "logs/waccmx_append2_directwait_20260525/validate_wxsami3_live_packet_contract.txt"
+  },
+  "ok": false,
+  "phi_payload_contract_validator": {
+    "json": "logs/waccmx_append2_directwait_20260525/validate_remix_sami3_phi_payload.json",
+    "returncode": 0,
+    "text": "logs/waccmx_append2_directwait_20260525/validate_remix_sami3_phi_payload.txt"
+  },
+  "run_dir": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000",
+  "runtime_map_validator": {
+    "expected_nsource": 13824,
+    "json": "logs/waccmx_append2_directwait_20260525/validate_wxsami3_runtime_map.json",
+    "python": "/home/jiaoy_group/jiaoy/.venvs/mage-vis/bin/python",
+    "returncode": 0,
+    "runtime_map": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/wxsami3_runtime_map_f19_20260523.bin",
+    "text": "logs/waccmx_append2_directwait_20260525/validate_wxsami3_runtime_map.txt",
+    "weights_nc": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/weights_bilinear_f19_live.nc"
+  },
+  "sacct": {
+    "path": "logs/waccmx_append2_directwait_20260525/sacct_7661005.txt",
+    "returncode": 0
+  },
+  "source_flag_balance_validator": {
+    "json": "logs/waccmx_append2_directwait_20260525/validate_wxsami3_source_flag_balance.json",
+    "returncode": 0,
+    "text": "logs/waccmx_append2_directwait_20260525/validate_wxsami3_source_flag_balance.txt"
+  },
+  "time_axis_validator": {
+    "json": "logs/waccmx_append2_directwait_20260525/validate_wxsami3_time_axis.json",
+    "returncode": 0,
+    "text": "logs/waccmx_append2_directwait_20260525/validate_wxsami3_time_axis.txt"
+  },
+  "topblend_policy_validator": {
+    "json": "logs/waccmx_append2_directwait_20260525/validate_wxsami3_topblend_policy.json",
+    "returncode": 0,
+    "text": "logs/waccmx_append2_directwait_20260525/validate_wxsami3_topblend_policy.txt"
+  }
+}

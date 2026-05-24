@@ -208,3 +208,45 @@ steps, and finite restart/history response metrics.
 archive commands for the active 2026-05-25 goal-mode jobs.  It checks `sacct`
 first, skips incomplete jobs by default, and can be used with
 `--allow-incomplete` only for explicit partial evidence snapshots.
+
+## 2026-05-25 05:02 CST Update
+
+The same-job Voltron phi writer + CESM/WACCM-X direct-wait run `7661005`
+failed, but the failure is now isolated:
+
+```text
+archive = logs/waccmx_append2_directwait_20260525/
+doc = docs/MAGE1.25_notes/WACCMX_SAMI3_DIRECTWAIT_FALSE_TIMEOUT_20260525.md
+payload validator = overall=ok
+source flag balance = ok
+time-axis/topblend/runtime-map gates = ok
+failure = WXSAMI3 phi payload wait timed out with correct 97044 byte payload present
+```
+
+Root cause: `wxsami3_wait_for_phi_payload()` opened the little-endian binary
+payload without `convert='little_endian'`, while the sender read path and
+payload writer both use little-endian.  That made the wait loop reject the
+correct header and time out.
+
+Patch applied to both the active CESM case SourceMod and the GitHub-tracked
+SourceMod copy:
+
+```text
+code/cesm_source_mods/src.cam/wxsami3_online_stub_mod.F90
+/home/jiaoy_group/jiaoy/data/CESM/cases/mage_qpx2000_f19_sami3_live_neutral_20260523/SourceMods/src.cam/wxsami3_online_stub_mod.F90
+```
+
+The CESM case rebuilt successfully after the fix:
+
+```text
+build command used temporary CIME HOME:
+  /home/jiaoy_group/jiaoy/data/CESM/experiments/cime_home_v3_qhslurm_20260525
+case-local EXTRA_MACHDIR was cleared to avoid the v3 qhslurm fragment reload
+MODEL BUILD HAS FINISHED SUCCESSFULLY
+Total build time = 95.828171 seconds
+```
+
+Next immediate gate: commit/push this failure archive and endian wait fix, then
+rerun direct-wait.  Acceptance is no timeout, two sender phi frames, two
+receiver `WACCMX_PHI_RECV` records, receiver `MASTER: All Done!`, and strict
+direct-wait archive `ok=true`.

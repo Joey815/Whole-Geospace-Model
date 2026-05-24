@@ -1,0 +1,25 @@
+# WACCMX_FILE contract summary
+# Purpose: formal WACCM-X file-coupling backend for non-MPI voltron.x.
+
+MAGE -> WACCM-X fields:
+  POT
+  AVG_ENG
+  NUM_FLUX
+
+WACCM-X -> MAGE/REMIX fields:
+  SIGMAP
+  SIGMAH
+  NEUTRAL_DYNAMO_RHS (mapped to NEUTRAL_WIND slot)
+
+External feedback package (optional): waccmx_voltron_feedback_package.h5
+
+Hemisphere 1
+  Grid: 360 x 45
+  SIGMAP min/max:    5.000 /   14.966 S
+  SIGMAH min/max:    2.000 /    7.980 S
+  NEUTRAL_DYNAMO_RHS absmax:   2491.476 cm/s
+Hemisphere 2
+  Grid: 360 x 45
+  SIGMAP min/max:    5.000 /   14.966 S
+  SIGMAH min/max:    2.000 /    7.980 S
+  NEUTRAL_DYNAMO_RHS absmax:   2491.476 cm/s

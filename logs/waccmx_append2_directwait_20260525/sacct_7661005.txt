@@ -1,0 +1,6 @@
+JobID|JobName|State|ExitCode|Elapsed|NodeList|MaxRSS
+7661005|wxsami3_ap2w|FAILED|1:0|00:06:23|qhcn425|
+7661005.batch|batch|FAILED|1:0|00:06:23|qhcn425|60350988K
+7661005.extern|extern|COMPLETED|0:0|00:06:23|qhcn425|0
+7661005.0|hostname|COMPLETED|0:0|00:00:00|qhcn425|0
+7661005.1|ps|COMPLETED|0:0|00:00:00|qhcn425|0

@@ -1,0 +1,1484 @@
+ (t_initf) Read in prof_inparm namelist from: drv_in
+ (t_initf) Using profile_disable=          F
+ (t_initf)       profile_timer=                      4
+ (t_initf)       profile_depth_limit=                4
+ (t_initf)       profile_detail_limit=               2
+ (t_initf)       profile_barrier=          F
+ (t_initf)       profile_outpe_num=                  1
+ (t_initf)       profile_outpe_stride=               0
+ (t_initf)       profile_single_file=      F
+ (t_initf)       profile_global_stats=     T
+ (t_initf)       profile_ovhd_measurement= F
+ (t_initf)       profile_add_detail=       F
+ (t_initf)       profile_papi_enable=      F
+(shr_drydep_init) CH3OOH not in tables; will have dep vel = 0
+(shr_drydep_init) CH3OOH not in tables; will have dep vel = 0
+(shr_drydep_init) CO not in tables; will have dep vel = 0
+(shr_drydep_init) HO2NO2 not in tables; will have dep vel = 0
+(shr_drydep_init) NO not in tables; will have dep vel = 0
+(shr_drydep_init) CH3OOH not in tables; will have dep vel = 0
+(shr_drydep_init) CO not in tables; will have dep vel = 0
+(shr_drydep_init) HO2NO2 not in tables; will have dep vel = 0
+(shr_drydep_init) NO not in tables; will have dep vel = 0
+(shr_drydep_init) CH3OOH not in tables; will have dep vel = 0
+(shr_drydep_init) CO not in tables; will have dep vel = 0
+(shr_drydep_init) HO2NO2 not in tables; will have dep vel = 0
+(shr_drydep_init) NO not in tables; will have dep vel = 0
+(shr_drydep_init) CH3OOH not in tables; will have dep vel = 0
+(shr_drydep_init) CO not in tables; will have dep vel = 0
+(shr_drydep_init) CO not in tables; will have dep vel = 0
+(shr_drydep_init) HO2NO2 not in tables; will have dep vel = 0
+(shr_drydep_init) NO not in tables; will have dep vel = 0
+(shr_drydep_init) CH3OOH not in tables; will have dep vel = 0
+(shr_drydep_init) HO2NO2 not in tables; will have dep vel = 0
+(shr_drydep_init) NO not in tables; will have dep vel = 0
+(shr_drydep_init) CH3OOH not in tables; will have dep vel = 0
+(shr_drydep_init) CO not in tables; will have dep vel = 0
+(shr_drydep_init) HO2NO2 not in tables; will have dep vel = 0
+(shr_drydep_init) NO not in tables; will have dep vel = 0
+(shr_drydep_init) CO not in tables; will have dep vel = 0
+(shr_drydep_init) CH3OOH not in tables; will have dep vel = 0
+(shr_drydep_init) HO2NO2 not in tables; will have dep vel = 0
+(shr_drydep_init) NO not in tables; will have dep vel = 0
+(shr_drydep_init) CO not in tables; will have dep vel = 0
+(shr_drydep_init) HO2NO2 not in tables; will have dep vel = 0
+(shr_drydep_init) NO not in tables; will have dep vel = 0
+(shr_drydep_init) CH3OOH not in tables; will have dep vel = 0
+(shr_drydep_init) CO not in tables; will have dep vel = 0
+(shr_drydep_init) HO2NO2 not in tables; will have dep vel = 0
+(shr_drydep_init) CH3OOH not in tables; will have dep vel = 0
+(shr_drydep_init) CO not in tables; will have dep vel = 0
+(shr_drydep_init) HO2NO2 not in tables; will have dep vel = 0
+(shr_drydep_init) NO not in tables; will have dep vel = 0
+(shr_drydep_init) CH3OOH not in tables; will have dep vel = 0
+(shr_drydep_init) CO not in tables; will have dep vel = 0
+(shr_drydep_init) HO2NO2 not in tables; will have dep vel = 0
+(shr_drydep_init) NO not in tables; will have dep vel = 0
+(shr_drydep_init) CH3OOH not in tables; will have dep vel = 0
+(shr_drydep_init) CO not in tables; will have dep vel = 0
+(shr_drydep_init) HO2NO2 not in tables; will have dep vel = 0
+(shr_drydep_init) NO not in tables; will have dep vel = 0
+(shr_drydep_init) NO not in tables; will have dep vel = 0
+(shr_drydep_init) CH3OOH not in tables; will have dep vel = 0
+(shr_drydep_init) CH3OOH not in tables; will have dep vel = 0
+(shr_drydep_init) CO not in tables; will have dep vel = 0
+(shr_drydep_init) HO2NO2 not in tables; will have dep vel = 0
+(shr_drydep_init) NO not in tables; will have dep vel = 0
+(shr_drydep_init) CO not in tables; will have dep vel = 0
+(shr_drydep_init) HO2NO2 not in tables; will have dep vel = 0
+(shr_drydep_init) NO not in tables; will have dep vel = 0
+(shr_drydep_init) CH3OOH not in tables; will have dep vel = 0
+(shr_drydep_init) CO not in tables; will have dep vel = 0
+(shr_drydep_init) HO2NO2 not in tables; will have dep vel = 0
+(shr_drydep_init) NO not in tables; will have dep vel = 0
+ Opening existing file /home/jiaoy_group/jiaoy/data/CESM/experiments/inputdata_overlay/atm/waccm/ic/f.c54137.FX2000climo.f19_f19.ZGTest.001.cam.i.0002-01-01-00000_c170817.nc           0
+ Opening existing file /apps/public_data/inputdata/atm/waccm/sulf/CESM_1949_2100_sad_V2_c130627.nc           0
+ Opening existing file /apps/public_data/inputdata/atm/waccm/lb/LBC_1765-2100_1.9x2.5_CCMI_RCP60_za_c130313.nc           0
+ Opening existing file /home/jiaoy_group/jiaoy/data/CESM/experiments/inputdata_overlay/atm/waccm/geomag/IGRF14_coeffs_c250130.nc           0
+ Opening existing file /apps/public_data/inputdata/atm/cam/solar/spectral_irradiance_Lean_1950-2014_daily_GOME-Mg_Leap_c150623.nc           0
+ Opening existing file /apps/public_data/inputdata/atm/cam/solar/spectral_irradiance_Lean_1950-2014_daily_GOME-Mg_Leap_c150623.nc           0
+ Opening existing file /home/jiaoy_group/jiaoy/data/CESM/experiments/inputdata_overlay/atm/waccm/phot/wa_avg_c20170519.nc           0
+ Opening existing file /home/jiaoy_group/jiaoy/data/CESM/experiments/inputdata_overlay/atm/waccm/phot/wa_avg_c20170519.nc           0
+ Opening existing file /home/jiaoy_group/jiaoy/data/CESM/experiments/inputdata_overlay/atm/waccm/phot/wa_avg_c20170519.nc           0
+ Opening existing file /apps/public_data/inputdata/atm/cam/physprops/sulfate_camrt_c080918.nc           0
+ Opening existing file /apps/public_data/inputdata/atm/cam/physprops/dust1_camrt_c120518.nc         139
+ Opening existing file /apps/public_data/inputdata/atm/cam/physprops/dust2_camrt_c120518.nc         140
+ Opening existing file /apps/public_data/inputdata/atm/cam/physprops/dust3_camrt_c120518.nc         141
+ Opening existing file /apps/public_data/inputdata/atm/cam/physprops/dust4_camrt_c120518.nc         142
+ Opening existing file /apps/public_data/inputdata/atm/cam/physprops/bcpho_camrt_c080918.nc         143
+ Opening existing file /apps/public_data/inputdata/atm/cam/physprops/bcphi_camrt_c080918.nc         144
+ Opening existing file /apps/public_data/inputdata/atm/cam/physprops/ocpho_camrt_c080918.nc         145
+ Opening existing file /apps/public_data/inputdata/atm/cam/physprops/ocphi_camrt_c080918.nc         146
+ Opening existing file /apps/public_data/inputdata/atm/cam/physprops/ssam_camrt_c080918.nc         147
+ Opening existing file /apps/public_data/inputdata/atm/cam/physprops/sscm_camrt_c080918.nc         148
+ Opening existing file /apps/public_data/inputdata/atm/cam/rad/abs_ems_factors_fastvx.c030508.nc           0
+ Opening existing file /apps/public_data/inputdata/atm/cam/chem/emis/ccmi_1960-2008/maccity_maccity_corrdates_CH2O_woBiog_1960-2008_1.9x2.5_mol_c130314.nc           0
+ Opening existing file /apps/public_data/inputdata/atm/cam/chem/emis/ccmi_1960-2008/maccity_maccity_corrdates_CH2O_woBiog_1960-2008_1.9x2.5_mol_c130314.nc          -1
+ Opening existing file /apps/public_data/inputdata/atm/cam/chem/emis/ccmi_1960-2008/maccity_maccity_corrdates_CO_woBiog_1960-2008_1.9x2.5_mol_c130314.nc         151
+ Opening existing file /apps/public_data/inputdata/atm/cam/chem/emis/ccmi_1960-2008/maccity_maccity_corrdates_CO_woBiog_1960-2008_1.9x2.5_mol_c130314.nc          -1
+ Opening existing file /apps/public_data/inputdata/atm/cam/chem/emis/ccmi_1960-2008/maccity_maccity_corrdates_NO_1960-2008_1.9x2.5_mol_c130314.nc         153
+ Opening existing file /apps/public_data/inputdata/atm/cam/chem/emis/ccmi_1960-2008/maccity_maccity_corrdates_NO_1960-2008_1.9x2.5_mol_c130314.nc          -1
+ Opening existing file /apps/public_data/inputdata/atm/cam/chem/emis/ccmi_1960-2008/CCMI_emissions_aircraft_NO2_1850-2100_1.9x2.5_c130314.nc           0
+ Opening existing file /apps/public_data/inputdata/atm/cam/chem/emis/ccmi_1960-2008/CCMI_emissions_aircraft_NO2_1850-2100_1.9x2.5_c130314.nc  -527609744
+ Opening existing file /apps/public_data/inputdata/atm/waccm/sulf/sulfate_b.e11.TSREFC2.f19.g16.ccmi23.001_c150908.nc           0
+ Opening existing file /apps/public_data/inputdata/atm/waccm/phot/EUVAC_reference_c170222.nc           0
+ Opening existing file /home/jiaoy_group/jiaoy/data/CESM/experiments/inputdata_overlay/atm/waccm/phot/xs_short_c221005mm_slh_c250930.nc           0
+ problem with mapping_to_heff of CH3OOH
+ problem with mapping_to_heff of CO
+ problem with mapping_to_heff of HO2NO2
+ problem with mapping_to_heff of NO
+ Opening existing file /apps/public_data/inputdata/atm/waccm/gcrs/gcr_prod_NO_1949-2142_c150309.nc           0
+ Opening existing file /apps/public_data/inputdata/atm/cam/chem/trop_mozart_aero/aero/aero_b.e11.TSREFC2.f19.f19.ccmi23.001_c141030.nc           0
+ Opening existing file /apps/public_data/inputdata/atm/cam/chem/trop_mozart_aero/aero/aerosoldep_rcp6.0_monthly_1849-2104_1.9x2.5_c100830.nc           0
+ Opening existing file /apps/public_data/inputdata/atm/waccm/sulf/CESM_1949_2100_sad_V2_c130627.nc           0
+ Opening existing file /apps/public_data/inputdata/atm/waccm/gw/newmfspectra40_dc25.nc       17572
+ Opening existing file /apps/public_data/inputdata/atm/waccm/solar/spes_1963-2014_c150717.nc           0
+ Opening existing file /apps/public_data/inputdata/atm/waccm/solar/spes_1963-2014_c150717.nc   712350310
+ Opening existing file /apps/public_data/inputdata/atm/cam/chem/trop_mozart/ub/clim_p_trop.nc           0
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   1.8026813156033244E-014  (abs)    1.3073986337985843E-012
+   Maximum absolute diff: (rel)   1.1991074880122987E-014  (abs)    4.1495695768389851E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   4.0126339500139986E-013  (abs)    2.1781621645233784E-016
+   Maximum absolute diff: (rel)   1.0708208583854277E-013  (abs)    3.6689401516909470E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            4  fields.
+   Maximum relative diff: (rel)   1.3457732514612353E-013  (abs)    3.3833202905952930E-010
+   Maximum absolute diff: (rel)   1.9692665291648758E-014  (abs)    1.2660166248679161E-009
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.2272147403632425E-014  (abs)    2.9467628337442875E-010
+   Maximum absolute diff: (rel)   1.2272147403632425E-014  (abs)    2.9467628337442875E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0748032340794923E-014  (abs)    3.0531133177191805E-015
+   Maximum absolute diff: (rel)   1.0748032340794923E-014  (abs)    3.0531133177191805E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   8.1109561209794583E-014  (abs)    6.2705396430828841E-013
+   Maximum absolute diff: (rel)   1.0729400189840107E-014  (abs)    3.4106051316484809E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   5.6680652977697805E-014  (abs)    8.5764728652293343E-015
+   Maximum absolute diff: (rel)   1.6702036926742227E-014  (abs)    1.3877787807814457E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.5947020857302463E-014  (abs)    4.5474735088646412E-013
+   Maximum absolute diff: (rel)   1.5947020857302463E-014  (abs)    4.5474735088646412E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            4  fields.
+   Maximum relative diff: (rel)   6.6988402503362902E-013  (abs)    4.5794479319738457E-012
+   Maximum absolute diff: (rel)   5.3792756661692450E-014  (abs)    2.0736479200422764E-009
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.7841360235266785E-014  (abs)    5.0626169922907138E-014
+   Maximum absolute diff: (rel)   1.7841360235266785E-014  (abs)    5.0626169922907138E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            7  fields.
+   Maximum relative diff: (rel)   2.9667134633044954E-014  (abs)    1.2292389328649733E-012
+   Maximum absolute diff: (rel)   1.9918398102025937E-014  (abs)    1.2789769243681803E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.5966208422325062E-014  (abs)    9.8953023552894592E-010
+   Maximum absolute diff: (rel)   1.5966208422325062E-014  (abs)    9.8953023552894592E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0155813365755580E-014  (abs)    1.4097167877480388E-011
+   Maximum absolute diff: (rel)   1.0155813365755580E-014  (abs)    1.4097167877480388E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in           17  fields.
+   Maximum relative diff: (rel)   1.5217908897243184E-013  (abs)    4.0589753780295723E-013
+   Maximum absolute diff: (rel)   6.1112094190917875E-014  (abs)    7.0059513745945878E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   5.2121827068362234E-014  (abs)    4.0384362520740069E-015
+   Maximum absolute diff: (rel)   5.2121827068362234E-014  (abs)    4.0384362520740069E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   8.5596071434196000E-014  (abs)    4.3888503942213219E-016
+   Maximum absolute diff: (rel)   8.5596071434196000E-014  (abs)    4.3888503942213219E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            6  fields.
+   Maximum relative diff: (rel)   4.6275688298055530E-013  (abs)    2.2657431486550195E-012
+   Maximum absolute diff: (rel)   1.2541982333879166E-014  (abs)    2.9394868761301041E-009
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.0727233898765458E-014  (abs)    1.2164491636212915E-011
+   Maximum absolute diff: (rel)   2.0727233898765458E-014  (abs)    1.2164491636212915E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.5107764378859427E-014  (abs)    6.7643668444361538E-012
+   Maximum absolute diff: (rel)   1.4046551677961572E-014  (abs)    7.2759576141834259E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in           21  fields.
+   Maximum relative diff: (rel)   2.3921235425589831E-013  (abs)    4.9737991503207013E-013
+   Maximum absolute diff: (rel)   1.6274343859326881E-014  (abs)    8.2422957348171622E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            8  fields.
+   Maximum relative diff: (rel)   1.1136871024763047E-013  (abs)    1.0222720447927713E-009
+   Maximum absolute diff: (rel)   1.0405927459735696E-014  (abs)    4.9476511776447296E-009
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.9396578880619829E-014  (abs)    5.0626169922907138E-014
+   Maximum absolute diff: (rel)   1.9396578880619829E-014  (abs)    5.0626169922907138E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.2107329271214770E-014  (abs)    1.1518563880485999E-015
+   Maximum absolute diff: (rel)   1.2107329271214770E-014  (abs)    1.1518563880485999E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.2156472938718176E-014  (abs)    6.3060667798708891E-014
+   Maximum absolute diff: (rel)   1.2156472938718176E-014  (abs)    6.3060667798708891E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.6407144844709781E-014  (abs)    8.5833562479820102E-012
+   Maximum absolute diff: (rel)   2.6407144844709781E-014  (abs)    8.5833562479820102E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.9726359549904993E-014  (abs)    5.4123372450476381E-016
+   Maximum absolute diff: (rel)   2.9726359549904993E-014  (abs)    5.4123372450476381E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in          122  fields.
+   Maximum relative diff: (rel)   2.6020074983534869E-011  (abs)    2.6020074983534869E-011
+   Maximum absolute diff: (rel)   2.6020074983534869E-011  (abs)    2.6020074983534869E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in          119  fields.
+   Maximum relative diff: (rel)   1.6029844118747860E-011  (abs)    1.6029844118747860E-011
+   Maximum absolute diff: (rel)   1.6029844118747860E-011  (abs)    1.6029844118747860E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in           11  fields.
+   Maximum relative diff: (rel)  0.99200449747017305       (abs)    3.2071424091686115E-024
+   Maximum absolute diff: (rel)  0.68727943970899619       (abs)    1.3089099217885972E-021
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in          127  fields.
+   Maximum relative diff: (rel)  0.97725657427149959       (abs)    7.8159700933611020E-011
+   Maximum absolute diff: (rel)   4.1327439248561859E-009  (abs)    4.1327439248561859E-009
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in           21  fields.
+   Maximum relative diff: (rel)  0.97866894197952214       (abs)    3.6192938331540022E-027
+   Maximum absolute diff: (rel)  0.97866894197952214       (abs)    3.6192938331540022E-027
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   2.2201533267845242E-014  (abs)    1.6768808563938364E-012
+   Maximum absolute diff: (rel)   2.2201533267845242E-014  (abs)    1.6768808563938364E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            8  fields.
+   Maximum relative diff: (rel)   3.8382348902953047E-014  (abs)    2.1944251971106610E-016
+   Maximum absolute diff: (rel)   1.5837931537017587E-014  (abs)    8.8817841970012523E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   3.2441903343046246E-014  (abs)    5.1625370645069779E-015
+   Maximum absolute diff: (rel)   3.2441903343046246E-014  (abs)    5.1625370645069779E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   3.5292475934607296E-014  (abs)    7.1498362785860081E-014
+   Maximum absolute diff: (rel)   3.5292475934607296E-014  (abs)    7.1498362785860081E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   6.5461860876035563E-014  (abs)    2.1938006966593093E-013
+   Maximum absolute diff: (rel)   2.7474267948834548E-014  (abs)    3.0375701953744283E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   6.2980738868018042E-014  (abs)    3.1334934647020418E-012
+   Maximum absolute diff: (rel)   1.3343351898803874E-014  (abs)    1.8872015061788261E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            6  fields.
+   Maximum relative diff: (rel)   8.5552094147849864E-013  (abs)    3.9248118643975261E-017
+   Maximum absolute diff: (rel)   9.6129175124666977E-014  (abs)    5.3776427755281020E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.7267192896041216E-014  (abs)    2.5153212845907547E-012
+   Maximum absolute diff: (rel)   1.8104212398267894E-014  (abs)    2.5238477974198759E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   8.1132169702542039E-014  (abs)    2.4158453015843406E-012
+   Maximum absolute diff: (rel)   8.1132169702542039E-014  (abs)    2.4158453015843406E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   4.3955805136169346E-014  (abs)    4.7251091928046662E-013
+   Maximum absolute diff: (rel)   4.3955805136169346E-014  (abs)    4.7251091928046662E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   4.9867729911704716E-014  (abs)    1.6164847238542279E-013
+   Maximum absolute diff: (rel)   4.9867729911704716E-014  (abs)    1.6164847238542279E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.6981313615034686E-014  (abs)    1.9539925233402755E-014
+   Maximum absolute diff: (rel)   1.6981313615034686E-014  (abs)    1.9539925233402755E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   6.8373581205202604E-013  (abs)    8.0310758043822261E-014
+   Maximum absolute diff: (rel)   6.8373581205202604E-013  (abs)    8.0310758043822261E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            4  fields.
+   Maximum relative diff: (rel)   3.5356221171810484E-011  (abs)    6.7998449752859624E-016
+   Maximum absolute diff: (rel)   6.6755597898213992E-014  (abs)    2.2482016248659420E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.6682472586563810E-014  (abs)    2.3874235921539366E-012
+   Maximum absolute diff: (rel)   1.6682472586563810E-014  (abs)    2.3874235921539366E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.4427171872890876E-014  (abs)    1.3877787807814457E-015
+   Maximum absolute diff: (rel)   1.4427171872890876E-014  (abs)    1.3877787807814457E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   6.4025039627574642E-014  (abs)    3.8440362004621420E-012
+   Maximum absolute diff: (rel)   1.9279788480884210E-014  (abs)    3.9221959013957530E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   4.9592829159722354E-014  (abs)    9.9226182825873366E-016
+   Maximum absolute diff: (rel)   4.9592829159722354E-014  (abs)    9.9226182825873366E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.9430322392419752E-012  (abs)    4.9694790504872799E-009
+   Maximum absolute diff: (rel)   2.4967377060321882E-014  (abs)    1.7695128917694092E-008
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   5.5668436693523368E-014  (abs)    4.7073456244106637E-013
+   Maximum absolute diff: (rel)   2.3725107443555687E-014  (abs)    5.0803805606847163E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   4.2718716480656223E-014  (abs)    1.0764722446765518E-012
+   Maximum absolute diff: (rel)   4.2718716480656223E-014  (abs)    1.0764722446765518E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.5463564759154922E-014  (abs)    6.5938365878537297E-012
+   Maximum absolute diff: (rel)   1.5463564759154922E-014  (abs)    6.5938365878537297E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in           22  fields.
+   Maximum relative diff: (rel)   1.1454715326099588E-011  (abs)    3.4949820815199928E-012
+   Maximum absolute diff: (rel)   1.8399745713139950E-014  (abs)    5.4569682106375694E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.6548804295366452E-014  (abs)    5.3114490583539009E-010
+   Maximum absolute diff: (rel)   1.6548804295366452E-014  (abs)    5.3114490583539009E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            4  fields.
+   Maximum relative diff: (rel)   1.8688342756064337E-013  (abs)    2.5951463200613034E-015
+   Maximum absolute diff: (rel)   1.2138001036288458E-014  (abs)    9.6589403142388619E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.1443833064795838E-013  (abs)    3.8077180297690916E-016
+   Maximum absolute diff: (rel)   6.6847138615112017E-014  (abs)    4.0523140398818214E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            4  fields.
+   Maximum relative diff: (rel)   4.9659295756504299E-013  (abs)    1.4415135751733033E-012
+   Maximum absolute diff: (rel)   4.9659295756504299E-013  (abs)    1.4415135751733033E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.7611701463176415E-014  (abs)    1.2490009027033011E-015
+   Maximum absolute diff: (rel)   1.7611701463176415E-014  (abs)    1.2490009027033011E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.4637118509761566E-014  (abs)    3.3750779948604759E-013
+   Maximum absolute diff: (rel)   1.4637118509761566E-014  (abs)    3.3750779948604759E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.4557495570621859E-014  (abs)    4.6895820560166612E-013
+   Maximum absolute diff: (rel)   2.4557495570621859E-014  (abs)    4.6895820560166612E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in           11  fields.
+   Maximum relative diff: (rel)   2.9352249239589775E-014  (abs)    5.8264504332328215E-013
+   Maximum absolute diff: (rel)   2.9352249239589775E-014  (abs)    5.8264504332328215E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   3.0006396948788224E-014  (abs)    1.3944401189291966E-013
+   Maximum absolute diff: (rel)   1.1764766244163944E-014  (abs)    2.7739588404074311E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.4354173414160900E-014  (abs)    6.6058269965196814E-015
+   Maximum absolute diff: (rel)   2.4354173414160900E-014  (abs)    6.6058269965196814E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.2114516738269119E-014  (abs)    4.8572257327350599E-016
+   Maximum absolute diff: (rel)   1.0617817276188240E-014  (abs)    4.1300296516055823E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.2258085790429614E-014  (abs)    1.9468870959826745E-012
+   Maximum absolute diff: (rel)   2.2258085790429614E-014  (abs)    1.9468870959826745E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.4463560487675478E-014  (abs)    7.8409501114151681E-016
+   Maximum absolute diff: (rel)   2.4463560487675478E-014  (abs)    7.8409501114151681E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0425240011253326E-014  (abs)    3.2418512319054571E-014
+   Maximum absolute diff: (rel)   1.0425240011253326E-014  (abs)    3.2418512319054571E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.2646922656571424E-013  (abs)    4.3698378249246161E-013
+   Maximum absolute diff: (rel)   1.2655448732607145E-014  (abs)    9.5496943686157465E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.1863534805014051E-014  (abs)    2.5934809855243657E-013
+   Maximum absolute diff: (rel)   1.1863534805014051E-014  (abs)    2.5934809855243657E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.4473827308356438E-014  (abs)    9.1858964879065752E-011
+   Maximum absolute diff: (rel)   1.4473827308356438E-014  (abs)    9.1858964879065752E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.6072369078320448E-013  (abs)    2.4265034426207421E-012
+   Maximum absolute diff: (rel)   1.6072369078320448E-013  (abs)    2.4265034426207421E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in           21  fields.
+   Maximum relative diff: (rel)   4.4665311553055601E-011  (abs)    1.3060663661690342E-012
+   Maximum absolute diff: (rel)   3.8202364885124506E-013  (abs)    5.3645976549887564E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.2155576513266389E-014  (abs)    6.4028427004814148E-010
+   Maximum absolute diff: (rel)   1.2155576513266389E-014  (abs)    6.4028427004814148E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.1234002246335072E-014  (abs)    2.8865798640254070E-015
+   Maximum absolute diff: (rel)   1.1234002246335072E-014  (abs)    2.8865798640254070E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.4873510764519038E-014  (abs)    1.4460965758189559E-010
+   Maximum absolute diff: (rel)   2.4873510764519038E-014  (abs)    1.4460965758189559E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   4.7090715680736760E-014  (abs)    1.8252066524837574E-013
+   Maximum absolute diff: (rel)   4.7090715680736760E-014  (abs)    1.8252066524837574E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   4.9612119622257704E-014  (abs)    6.9055872131684737E-014
+   Maximum absolute diff: (rel)   4.9612119622257704E-014  (abs)    6.9055872131684737E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.0161020281285801E-014  (abs)    5.1514348342607263E-014
+   Maximum absolute diff: (rel)   2.0161020281285801E-014  (abs)    5.1514348342607263E-014
+   Maximum relative diff: (rel)   9.3921477003270287E-014  (abs)    4.7875801101326942E-009
+   Maximum absolute diff: (rel)   9.3921477003270287E-014  (abs)    4.7875801101326942E-009
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            9  fields.
+   Maximum relative diff: (rel)   9.5430293633927293E-014  (abs)    5.4534154969587689E-013
+   Maximum absolute diff: (rel)   1.4762714176993218E-014  (abs)    7.3896444519050419E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.0171114095673453E-014  (abs)    1.2989609388114332E-014
+   Maximum absolute diff: (rel)   2.0171114095673453E-014  (abs)    1.2989609388114332E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   6.0635597428160667E-014  (abs)    1.7097434579227411E-013
+   Maximum absolute diff: (rel)   6.0635597428160667E-014  (abs)    1.7097434579227411E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   4.0971397314641749E-014  (abs)    1.6768808563938364E-012
+   Maximum absolute diff: (rel)   2.8958277820747084E-014  (abs)    2.6574298317427747E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   6.0791773813546599E-014  (abs)    3.8337388819087437E-016
+   Maximum absolute diff: (rel)   3.2732510867699846E-014  (abs)    4.4929338027799304E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   5.4248647299165142E-014  (abs)    3.5527136788005009E-013
+   Maximum absolute diff: (rel)   1.1711419672467281E-014  (abs)    5.1727511163335294E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.0625293667523292E-014  (abs)    7.5495165674510645E-014
+   Maximum absolute diff: (rel)   2.0625293667523292E-014  (abs)    7.5495165674510645E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.4314693514407486E-014  (abs)    1.6626700016786344E-012
+   Maximum absolute diff: (rel)   1.1465829923152623E-014  (abs)    1.0686562745831907E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   3.2345851976072181E-014  (abs)    3.3167912860676552E-015
+   Maximum absolute diff: (rel)   3.2345851976072181E-014  (abs)    3.3167912860676552E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.2927191846116834E-014  (abs)    9.9920072216264089E-016
+   Maximum absolute diff: (rel)   2.2927191846116834E-014  (abs)    9.9920072216264089E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            9  fields.
+   Maximum relative diff: (rel)   3.0393998520584215E-014  (abs)    7.7022832556394860E-012
+   Maximum absolute diff: (rel)   3.0393998520584215E-014  (abs)    7.7022832556394860E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.5019400761499204E-014  (abs)    5.7980287238024175E-012
+   Maximum absolute diff: (rel)   1.5019400761499204E-014  (abs)    5.7980287238024175E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.9471593900471021E-014  (abs)    6.3837823915946501E-016
+   Maximum absolute diff: (rel)   1.9471593900471021E-014  (abs)    6.3837823915946501E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0108483320839147E-013  (abs)    1.8349055608268827E-010
+   Maximum absolute diff: (rel)   1.0108483320839147E-013  (abs)    1.8349055608268827E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.9763861712691970E-014  (abs)    6.2527760746888816E-013
+   Maximum absolute diff: (rel)   2.9763861712691970E-014  (abs)    6.2527760746888816E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in           14  fields.
+   Maximum relative diff: (rel)   2.0914019622241530E-013  (abs)    1.0447198661722723E-013
+   Maximum absolute diff: (rel)   5.4034347817207276E-014  (abs)    1.2896350654045818E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0707318281805270E-014  (abs)    2.8421709430404007E-012
+   Maximum absolute diff: (rel)   1.0707318281805270E-014  (abs)    2.8421709430404007E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   7.7337538861253752E-014  (abs)    2.9420910152566648E-014
+   Maximum absolute diff: (rel)   1.2531101029065798E-014  (abs)    1.7621459846850485E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.3172372832895127E-014  (abs)    4.5796699765787707E-016
+   Maximum absolute diff: (rel)   1.3172372832895127E-014  (abs)    4.5796699765787707E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.1185910984069131E-014  (abs)    5.4622972811557702E-014
+   Maximum absolute diff: (rel)   2.1185910984069131E-014  (abs)    5.4622972811557702E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            4  fields.
+   Maximum relative diff: (rel)   8.2771001039293414E-014  (abs)    2.1627144519698049E-013
+   Maximum absolute diff: (rel)   1.2225891875229651E-014  (abs)    8.6401996668428183E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   3.0624676902104473E-014  (abs)    4.4053649617126212E-012
+   Maximum absolute diff: (rel)   3.0624676902104473E-014  (abs)    4.4053649617126212E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.1895120489158269E-014  (abs)    1.1723955140041653E-013
+   Maximum absolute diff: (rel)   1.1895120489158269E-014  (abs)    1.1723955140041653E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0481384124942043E-014  (abs)    6.9348971010185778E-012
+   Maximum absolute diff: (rel)   1.0481384124942043E-014  (abs)    6.9348971010185778E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            7  fields.
+   Maximum relative diff: (rel)   4.9301371746265182E-014  (abs)    3.2684965844964609E-013
+   Maximum absolute diff: (rel)   3.4418844441158344E-014  (abs)    2.2311041902867146E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.1979284307076900E-014  (abs)    1.1350493878126144E-009
+   Maximum absolute diff: (rel)   1.1979284307076900E-014  (abs)    1.1350493878126144E-009
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   1.5278012099517950E-014  (abs)    3.2741809263825417E-010
+   Maximum absolute diff: (rel)   1.5278012099517950E-014  (abs)    3.2741809263825417E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.4088809886866600E-014  (abs)    6.6613381477509392E-014
+   Maximum absolute diff: (rel)   1.2597203675699029E-014  (abs)    1.3500311979441904E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   3.6620161106874865E-014  (abs)    4.1922021409845911E-013
+   Maximum absolute diff: (rel)   3.6620161106874865E-014  (abs)    4.1922021409845911E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            8  fields.
+   Maximum relative diff: (rel)   1.1547442573665779E-013  (abs)    5.0981441290787188E-013
+   Maximum absolute diff: (rel)   1.1566981590340675E-014  (abs)    4.9453774408902973E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   5.0462022907741394E-014  (abs)    6.0229599085914742E-015
+   Maximum absolute diff: (rel)   5.0462022907741394E-014  (abs)    6.0229599085914742E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            4  fields.
+   Maximum relative diff: (rel)   1.0212120350480127E-013  (abs)    1.3500311979441904E-013
+   Maximum absolute diff: (rel)   3.0541806686143376E-014  (abs)    1.6342482922482304E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   6.5521099518490653E-012  (abs)    2.5466295738851841E-012
+   Maximum absolute diff: (rel)   1.1411256423811421E-014  (abs)    7.8443918027915061E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   4.5919590814751503E-014  (abs)    2.6076918402395677E-012
+   Maximum absolute diff: (rel)   4.5919590814751503E-014  (abs)    2.6076918402395677E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0488160496046123E-014  (abs)    8.6686213762732223E-013
+   Maximum absolute diff: (rel)   1.0488160496046123E-014  (abs)    8.6686213762732223E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   8.4974141899203622E-014  (abs)    2.0738966099997924E-013
+   Maximum absolute diff: (rel)   3.0807555605866224E-014  (abs)    2.2453150450019166E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   4.5108436673654064E-013  (abs)    1.1062262217365060E-012
+   Maximum absolute diff: (rel)   4.5108436673654064E-013  (abs)    1.1062262217365060E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in           15  fields.
+   Maximum relative diff: (rel)   1.1441283427494864E-013  (abs)    4.5901060730102472E-012
+   Maximum absolute diff: (rel)   4.7551205580244942E-014  (abs)    5.9685589803848416E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   3.2581169793459670E-014  (abs)    2.6822988274943782E-013
+   Maximum absolute diff: (rel)   1.3020049113949271E-014  (abs)    1.8474111129762605E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            4  fields.
+   Maximum relative diff: (rel)   7.1259165053176353E-014  (abs)    3.1398494915180208E-016
+   Maximum absolute diff: (rel)   5.0862465810117647E-014  (abs)    1.0769163338864018E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            6  fields.
+   Maximum relative diff: (rel)   1.2627192871397880E-013  (abs)    3.2063240951174521E-013
+   Maximum absolute diff: (rel)   1.3502814219070196E-014  (abs)    4.5474735088646412E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   6.4333639734030051E-013  (abs)    1.0918483894784003E-009
+   Maximum absolute diff: (rel)   6.4333639734030051E-013  (abs)    1.0918483894784003E-009
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   3.7285512733596916E-013  (abs)    5.8015814374812180E-012
+   Maximum absolute diff: (rel)   3.7285512733596916E-013  (abs)    5.8015814374812180E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.1963124662898617E-013  (abs)    4.2064129956997931E-010
+   Maximum absolute diff: (rel)   1.1963124662898617E-013  (abs)    4.2064129956997931E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.8113318781808249E-014  (abs)    1.5543122344752192E-015
+   Maximum absolute diff: (rel)   1.3438128451103885E-014  (abs)    2.7977620220553945E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.4739068515569107E-014  (abs)    3.4194869158454821E-014
+   Maximum absolute diff: (rel)   1.4739068515569107E-014  (abs)    3.4194869158454821E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.0042898488189229E-014  (abs)    8.1712414612411521E-013
+   Maximum absolute diff: (rel)   2.0042898488189229E-014  (abs)    8.1712414612411521E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.1246411524646729E-014  (abs)    7.8159700933611020E-014
+   Maximum absolute diff: (rel)   1.1246411524646729E-014  (abs)    7.8159700933611020E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   8.0142993137066246E-014  (abs)    9.0726037793587011E-016
+   Maximum absolute diff: (rel)   8.0142993137066246E-014  (abs)    9.0726037793587011E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.2104702385603660E-013  (abs)    2.7533531010703882E-012
+   Maximum absolute diff: (rel)   1.2104702385603660E-013  (abs)    2.7533531010703882E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.1421079484797723E-014  (abs)    3.9079850466805510E-013
+   Maximum absolute diff: (rel)   1.1421079484797723E-014  (abs)    3.9079850466805510E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   2.4713319697658372E-014  (abs)    4.8885340220294893E-012
+   Maximum absolute diff: (rel)   2.4713319697658372E-014  (abs)    4.8885340220294893E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            4  fields.
+   Maximum relative diff: (rel)   3.0481573507045989E-014  (abs)    5.3645976549887564E-013
+   Maximum absolute diff: (rel)   1.2999802836488992E-014  (abs)    3.6948222259525210E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   3.7273267492395548E-014  (abs)    3.3861802251067274E-015
+   Maximum absolute diff: (rel)   3.7273267492395548E-014  (abs)    3.3861802251067274E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0311964477886173E-014  (abs)    1.6530975699424744E-008
+   Maximum absolute diff: (rel)   1.0311964477886173E-014  (abs)    1.6530975699424744E-008
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   6.4594497297972840E-013  (abs)    9.0352614279254340E-011
+   Maximum absolute diff: (rel)   1.3171030864207055E-014  (abs)    2.5102053768932819E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            6  fields.
+   Maximum relative diff: (rel)   2.7018876606967562E-014  (abs)    1.6342482922482304E-012
+   Maximum absolute diff: (rel)   1.8660116307998476E-014  (abs)    6.5483618527650833E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            4  fields.
+   Maximum relative diff: (rel)   6.4171632690545488E-014  (abs)    1.0906830993917538E-012
+   Maximum absolute diff: (rel)   1.7775241088601041E-014  (abs)    6.0822458181064576E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            7  fields.
+   Maximum relative diff: (rel)   5.4769075493727106E-014  (abs)    1.5010215292932116E-013
+   Maximum absolute diff: (rel)   4.7067852044071119E-014  (abs)    1.9397816686250735E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            5  fields.
+   Maximum relative diff: (rel)   4.7907212468581104E-014  (abs)    5.3113069498067489E-013
+   Maximum absolute diff: (rel)   1.8848168065677121E-014  (abs)    1.0942358130705543E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   3.0235679990281381E-013  (abs)    2.9654056987737931E-013
+   Maximum absolute diff: (rel)   1.2351569080267436E-014  (abs)    3.0198066269804258E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   4.3261303914946073E-014  (abs)    2.1371793224034263E-015
+   Maximum absolute diff: (rel)   4.3261303914946073E-014  (abs)    2.1371793224034263E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   4.0090132719563486E-014  (abs)    2.0122792321330962E-015
+   Maximum absolute diff: (rel)   4.0090132719563486E-014  (abs)    2.0122792321330962E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.2596043514956448E-014  (abs)    3.2196467714129540E-015
+   Maximum absolute diff: (rel)   1.2596043514956448E-014  (abs)    3.2196467714129540E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0767548151172818E-014  (abs)    3.6237679523765109E-013
+   Maximum absolute diff: (rel)   1.0767548151172818E-014  (abs)    3.6237679523765109E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   7.3685174578635745E-014  (abs)    2.5863755581667647E-012
+   Maximum absolute diff: (rel)   7.3685174578635745E-014  (abs)    2.5863755581667647E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   3.9385560534135050E-014  (abs)    1.0436096431476471E-013
+   Maximum absolute diff: (rel)   3.9385560534135050E-014  (abs)    1.0436096431476471E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   2.1331103287126313E-014  (abs)    1.6164847238542279E-013
+   Maximum absolute diff: (rel)   2.1331103287126313E-014  (abs)    1.6164847238542279E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.2392987934795608E-014  (abs)    2.5920599000528455E-011
+   Maximum absolute diff: (rel)   2.2392987934795608E-014  (abs)    2.5920599000528455E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            6  fields.
+   Maximum relative diff: (rel)   1.6809107940829081E-013  (abs)    9.4257934790675790E-014
+   Maximum absolute diff: (rel)   2.0160945343547264E-014  (abs)    2.2026824808563106E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   4.1905173357524642E-014  (abs)    1.1057821325266559E-013
+   Maximum absolute diff: (rel)   2.0242650832140178E-014  (abs)    2.7569058147491887E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   3.8219743116380660E-011  (abs)    8.9902044142498028E-016
+   Maximum absolute diff: (rel)   3.8219743116380660E-011  (abs)    8.9902044142498028E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0928582939431889E-014  (abs)    1.5279510989785194E-010
+   Maximum absolute diff: (rel)   1.0928582939431889E-014  (abs)    1.5279510989785194E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   5.2535103119526697E-014  (abs)    8.7985174701543656E-015
+   Maximum absolute diff: (rel)   5.2535103119526697E-014  (abs)    8.7985174701543656E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.5028962660845268E-014  (abs)    2.4286128663675299E-017
+   Maximum absolute diff: (rel)   1.5028962660845268E-014  (abs)    2.4286128663675299E-017
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   2.1908559562256332E-013  (abs)    2.3963053763509379E-012
+   Maximum absolute diff: (rel)   2.1908559562256332E-013  (abs)    2.3963053763509379E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.7475867426240727E-014  (abs)    2.8643754035329039E-014
+   Maximum absolute diff: (rel)   1.1331514451250136E-014  (abs)    2.9309887850104133E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   3.1328195980847467E-014  (abs)    2.4702462297909733E-015
+   Maximum absolute diff: (rel)   3.1328195980847467E-014  (abs)    2.4702462297909733E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   3.4719888614230209E-014  (abs)    2.0645529730245471E-010
+   Maximum absolute diff: (rel)   3.4719888614230209E-014  (abs)    2.0645529730245471E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.1302627171997620E-013  (abs)    2.5890400934258651E-013
+   Maximum absolute diff: (rel)   4.0174279583476545E-014  (abs)    3.2329694477084558E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.8019730402484866E-014  (abs)    2.1760371282653068E-013
+   Maximum absolute diff: (rel)   2.8019730402484866E-014  (abs)    2.1760371282653068E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.3015986968845145E-014  (abs)    1.3500311979441904E-012
+   Maximum absolute diff: (rel)   1.3015986968845145E-014  (abs)    1.3500311979441904E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.3250507925485103E-014  (abs)    1.1490808304870370E-014
+   Maximum absolute diff: (rel)   2.3250507925485103E-014  (abs)    1.1490808304870370E-014
+   Maximum relative diff: (rel)   1.6812320260248695E-014  (abs)    9.2287288921966137E-016
+   Maximum absolute diff: (rel)   1.6812320260248695E-014  (abs)    9.2287288921966137E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   3.2153810693029088E-014  (abs)    2.3874235921539366E-012
+   Maximum absolute diff: (rel)   3.2153810693029088E-014  (abs)    2.3874235921539366E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   6.8224128412545791E-014  (abs)    1.9775847626135601E-016
+   Maximum absolute diff: (rel)   3.3571992110763370E-014  (abs)    1.6237011735142914E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.4932365347398491E-014  (abs)    2.3939183968479938E-016
+   Maximum absolute diff: (rel)   2.4096135187893372E-014  (abs)    2.4008572907519010E-015
+   Maximum relative diff: (rel)   2.2003690348865281E-014  (abs)    5.6843418860808015E-014
+   Maximum absolute diff: (rel)   2.2003690348865281E-014  (abs)    5.6843418860808015E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   3.2533514018211743E-014  (abs)    9.1926466438962962E-014
+   Maximum absolute diff: (rel)   3.2533514018211743E-014  (abs)    9.1926466438962962E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   4.6277400994099788E-013  (abs)    2.6466295821592212E-010
+   Maximum absolute diff: (rel)   4.6277400994099788E-013  (abs)    2.6466295821592212E-010
+   Maximum relative diff: (rel)   1.2552846303894219E-014  (abs)    1.6653345369377348E-014
+   Maximum absolute diff: (rel)   1.2552846303894219E-014  (abs)    1.6653345369377348E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   9.2169786817500735E-014  (abs)    1.5230872119076366E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.8992367058217562E-014  (abs)    1.2490009027033011E-015
+   Maximum absolute diff: (rel)   1.8992367058217562E-014  (abs)    1.2490009027033011E-015
+   Maximum absolute diff: (rel)   9.2169786817500735E-014  (abs)    1.5230872119076366E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.1218701388379016E-014  (abs)    1.8908485888147197E-016
+   Maximum absolute diff: (rel)   2.1218701388379016E-014  (abs)    1.8908485888147197E-016
+   Maximum relative diff: (rel)   1.9124412847818819E-014  (abs)    4.6185277824406512E-014
+   Maximum absolute diff: (rel)   1.9124412847818819E-014  (abs)    4.6185277824406512E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.2076785437636777E-014  (abs)    3.0468072509393096E-011
+   Maximum absolute diff: (rel)   1.1981821162524910E-014  (abs)    5.8207660913467407E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.1150165343662664E-014  (abs)    2.5757174171303632E-014
+   Maximum absolute diff: (rel)   1.1150165343662664E-014  (abs)    2.5757174171303632E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   2.6068682594142661E-013  (abs)    1.4290790772975015E-012
+   Maximum absolute diff: (rel)   2.6068682594142661E-013  (abs)    1.4290790772975015E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0495329259220652E-014  (abs)    6.2172489379008766E-014
+   Maximum absolute diff: (rel)   1.0495329259220652E-014  (abs)    6.2172489379008766E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.1014967946907784E-014  (abs)    4.7961634663806763E-014
+   Maximum absolute diff: (rel)   1.1014967946907784E-014  (abs)    4.7961634663806763E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            4  fields.
+   Maximum relative diff: (rel)   1.9434761669108254E-013  (abs)    1.3817072486155269E-015
+   Maximum absolute diff: (rel)   1.1816575520247240E-014  (abs)    1.9706458687096529E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   7.5894118899096412E-014  (abs)    3.6914915568786455E-015
+   Maximum absolute diff: (rel)   7.5894118899096412E-014  (abs)    3.6914915568786455E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.4754575718420786E-014  (abs)    1.0011717677116394E-008
+   Maximum absolute diff: (rel)   1.4754575718420786E-014  (abs)    1.0011717677116394E-008
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.4176097241912355E-014  (abs)    4.0145664570445661E-013
+   Maximum absolute diff: (rel)   1.4176097241912355E-014  (abs)    4.0145664570445661E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.9185245374635606E-014  (abs)    4.9960036108132044E-015
+   Maximum absolute diff: (rel)   1.9185245374635606E-014  (abs)    4.9960036108132044E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            4  fields.
+   Maximum relative diff: (rel)   6.5419993432888846E-013  (abs)    1.6875606814736877E-016
+   Maximum absolute diff: (rel)   6.4911526921322989E-013  (abs)    9.5930208221517432E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.6005182233403696E-014  (abs)    6.0396132539608516E-013
+   Maximum absolute diff: (rel)   1.6005182233403696E-014  (abs)    6.0396132539608516E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.6039248277128248E-014  (abs)    2.6922908347160046E-015
+   Maximum absolute diff: (rel)   2.6039248277128248E-014  (abs)    2.6922908347160046E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   3.4586912326422875E-014  (abs)    1.2221335055073723E-011
+   Maximum absolute diff: (rel)   3.4586912326422875E-014  (abs)    1.2221335055073723E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.3861333476456935E-014  (abs)    1.6653345369377348E-015
+   Maximum absolute diff: (rel)   1.3861333476456935E-014  (abs)    1.6653345369377348E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   4.1211067820462218E-014  (abs)    2.7426949600339867E-012
+   Maximum absolute diff: (rel)   4.1211067820462218E-014  (abs)    2.7426949600339867E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   5.7978151116412363E-014  (abs)    1.3749001936957939E-012
+   Maximum absolute diff: (rel)   5.7978151116412363E-014  (abs)    1.3749001936957939E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.6316915305614478E-014  (abs)    6.3837823915946501E-015
+   Maximum absolute diff: (rel)   1.6316915305614478E-014  (abs)    6.3837823915946501E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.9953363813294370E-014  (abs)    9.1517904365900904E-012
+   Maximum absolute diff: (rel)   1.9953363813294370E-014  (abs)    9.1517904365900904E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.3601278559625482E-014  (abs)    2.2191670723259449E-010
+   Maximum absolute diff: (rel)   1.3601278559625482E-014  (abs)    2.2191670723259449E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   5.7892670767828061E-014  (abs)    1.6375789613221059E-014
+   Maximum absolute diff: (rel)   1.5520927828522945E-014  (abs)    3.4958702599396929E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.2269858183772095E-013  (abs)    6.7714722717937548E-012
+   Maximum absolute diff: (rel)   1.2253762874574138E-014  (abs)    7.3896444519050419E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            6  fields.
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.7832354091731141E-014  (abs)    1.0769163338864018E-014
+   Maximum absolute diff: (rel)   1.7832354091731141E-014  (abs)    1.0769163338864018E-014
+   Maximum relative diff: (rel)   3.1401284364702627E-014  (abs)    1.1439738045737613E-012
+   Maximum absolute diff: (rel)   2.4693934551244081E-014  (abs)    2.1316282072803006E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.7812889387137445E-014  (abs)    1.7408297026122455E-013
+   Maximum absolute diff: (rel)   1.7812889387137445E-014  (abs)    1.7408297026122455E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.6279306056594568E-014  (abs)    1.3947176746853529E-015
+   Maximum absolute diff: (rel)   2.6279306056594568E-014  (abs)    1.3947176746853529E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   3.8079064445330691E-014  (abs)    1.2398231774568558E-008
+   Maximum absolute diff: (rel)   3.8079064445330691E-014  (abs)    1.2398231774568558E-008
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.2551872737328405E-014  (abs)    6.2172489379008766E-013
+   Maximum absolute diff: (rel)   2.2551872737328405E-014  (abs)    6.2172489379008766E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   3.4411010008887474E-014  (abs)    3.8580250105724190E-015
+   Maximum absolute diff: (rel)   3.4411010008887474E-014  (abs)    3.8580250105724190E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.0184194655732368E-014  (abs)    1.1795009413617663E-012
+   Maximum absolute diff: (rel)   2.0184194655732368E-014  (abs)    1.1795009413617663E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   4.0452047896718680E-014  (abs)    1.2836953722228372E-015
+   Maximum absolute diff: (rel)   2.6978510582301343E-014  (abs)    1.6583956430338276E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   1.7283301273802107E-013  (abs)    2.2659825404947043E-016
+   Maximum absolute diff: (rel)   2.8780242080861978E-014  (abs)    1.2212453270876722E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   1.1281753084109417E-013  (abs)    2.7193891583010554E-010
+   Maximum absolute diff: (rel)   1.1281753084109417E-013  (abs)    2.7193891583010554E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   1.8943165103250909E-014  (abs)    9.0594198809412774E-014
+   Maximum absolute diff: (rel)   1.4742291268216169E-014  (abs)    1.8296475445822580E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   4.4203946416898120E-014  (abs)    2.1163626406917047E-016
+   Maximum absolute diff: (rel)   1.0322166190299875E-014  (abs)    5.2041704279304213E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.6477543647683220E-014  (abs)    2.0816681711721685E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.7417228370831269E-014  (abs)    1.2767564783189300E-014
+   Maximum absolute diff: (rel)   1.7417228370831269E-014  (abs)    1.2767564783189300E-014
+   Maximum absolute diff: (rel)   2.6477543647683220E-014  (abs)    2.0816681711721685E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.1785319425876422E-014  (abs)    1.7097434579227411E-014
+   Maximum absolute diff: (rel)   1.1785319425876422E-014  (abs)    1.7097434579227411E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   4.3383595561393674E-014  (abs)    7.3612227424746379E-012
+   Maximum absolute diff: (rel)   4.3383595561393674E-014  (abs)    7.3612227424746379E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   6.7346283461386901E-014  (abs)    8.8373752760162461E-014
+   Maximum absolute diff: (rel)   6.7346283461386901E-014  (abs)    8.8373752760162461E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   3.2795625289022109E-014  (abs)    1.8474111129762605E-013
+   Maximum absolute diff: (rel)   1.0176330239282266E-014  (abs)    1.7621459846850485E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   2.0037124137730595E-014  (abs)    2.4513724383723456E-013
+   Maximum absolute diff: (rel)   1.1023055143833344E-014  (abs)    3.5527136788005009E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.9066171142658582E-014  (abs)    4.1389114358025836E-013
+   Maximum absolute diff: (rel)   2.9066171142658582E-014  (abs)    4.1389114358025836E-013
+   Maximum relative diff: (rel)   1.7942776401094711E-014  (abs)    2.1316282072803006E-014
+   Maximum absolute diff: (rel)   1.0746079253582248E-014  (abs)    1.4921397450962104E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.7261833364304689E-014  (abs)    2.6822988274943782E-013
+   Maximum absolute diff: (rel)   1.5933864848974324E-014  (abs)    5.1727511163335294E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.6206565968933529E-014  (abs)    1.0824674490095276E-015
+   Maximum absolute diff: (rel)   1.6206565968933529E-014  (abs)    1.0824674490095276E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.3287442101830062E-014  (abs)    9.1593399531575415E-016
+   Maximum absolute diff: (rel)   1.3287442101830062E-014  (abs)    9.1593399531575415E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.4729639680793297E-013  (abs)    8.8284934918192448E-013
+   Maximum absolute diff: (rel)   9.6054393487911874E-014  (abs)    2.5975168682634830E-009
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   4.8810253949882058E-014  (abs)    6.6266436782314031E-016
+   Maximum absolute diff: (rel)   4.8810253949882058E-014  (abs)    6.6266436782314031E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   3.5619478485200117E-014  (abs)    7.5317529990570620E-013
+   Maximum absolute diff: (rel)   3.5619478485200117E-014  (abs)    7.5317529990570620E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   6.9641141119217668E-014  (abs)    7.4593109467002705E-016
+   Maximum absolute diff: (rel)   1.0706416156104304E-014  (abs)    3.6082248300317588E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   5.5534580469194701E-013  (abs)    2.4737156767429269E-015
+   Maximum absolute diff: (rel)   5.5534580469194701E-013  (abs)    2.4737156767429269E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   9.1508992950065468E-011  (abs)    1.9758317648665980E-008
+   Maximum absolute diff: (rel)   9.1508992950065468E-011  (abs)    1.9758317648665980E-008
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.5125912612686535E-014  (abs)    9.8532293435482643E-016
+   Maximum absolute diff: (rel)   1.5125912612686535E-014  (abs)    9.8532293435482643E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.1127288271166051E-014  (abs)    1.5916157281026244E-012
+   Maximum absolute diff: (rel)   1.1127288271166051E-014  (abs)    1.5916157281026244E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.2487051433784898E-013  (abs)    3.0002667017470230E-012
+   Maximum absolute diff: (rel)   2.2487051433784898E-013  (abs)    3.0002667017470230E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.5360737920096411E-014  (abs)    1.7763568394002505E-012
+   Maximum absolute diff: (rel)   1.5360737920096411E-014  (abs)    1.7763568394002505E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.8697076748803837E-014  (abs)    1.9602375278537920E-016
+   Maximum absolute diff: (rel)   1.2992498315424125E-014  (abs)    1.3600232051658168E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.8607524141138951E-014  (abs)    2.8405338525772095E-008
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   5.5383940347579900E-014  (abs)    1.1622647289044608E-015
+   Maximum absolute diff: (rel)   5.5383940347579900E-014  (abs)    1.1622647289044608E-015
+   Maximum absolute diff: (rel)   1.8607524141138951E-014  (abs)    2.8405338525772095E-008
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.8334707849472346E-014  (abs)    1.2345680033831741E-013
+   Maximum absolute diff: (rel)   1.8334707849472346E-014  (abs)    1.2345680033831741E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.2447068945572219E-014  (abs)    7.3718808835110394E-014
+   Maximum absolute diff: (rel)   2.2107819395837665E-014  (abs)    3.2862601528904634E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.2555077137586240E-014  (abs)    5.2402526762307389E-014
+   Maximum absolute diff: (rel)   1.0805896409966578E-014  (abs)    1.3642420526593924E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   8.3382791399127709E-013  (abs)    9.2263974238449009E-012
+   Maximum absolute diff: (rel)   8.3382791399127709E-013  (abs)    9.2263974238449009E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            4  fields.
+   Maximum relative diff: (rel)   5.5814210077263073E-014  (abs)    2.5465740627339528E-015
+   Maximum absolute diff: (rel)   1.3492452175754945E-014  (abs)    4.5297099404706387E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   4.2509615985567158E-013  (abs)    8.7716500729584368E-012
+   Maximum absolute diff: (rel)   4.2509615985567158E-013  (abs)    8.7716500729584368E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0263261742446206E-014  (abs)    2.9309887850104133E-014
+   Maximum absolute diff: (rel)   1.0263261742446206E-014  (abs)    2.9309887850104133E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0941684550279698E-014  (abs)    1.4324541552923620E-011
+   Maximum absolute diff: (rel)   1.0941684550279698E-014  (abs)    1.4324541552923620E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   4.0792040003320891E-014  (abs)    1.1136924715771102E-015
+   Maximum absolute diff: (rel)   4.0792040003320891E-014  (abs)    1.1136924715771102E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.3648035864219032E-014  (abs)    5.1625370645069779E-015
+   Maximum absolute diff: (rel)   1.3648035864219032E-014  (abs)    5.1625370645069779E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.0821149469061268E-014  (abs)    5.6399329650957952E-014
+   Maximum absolute diff: (rel)   2.0821149469061268E-014  (abs)    5.6399329650957952E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   5.2229633914307124E-014  (abs)    7.7271522513910895E-013
+   Maximum absolute diff: (rel)   5.2229633914307124E-014  (abs)    7.7271522513910895E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.6515710814065142E-014  (abs)    1.1990408665951691E-013
+   Maximum absolute diff: (rel)   1.6515710814065142E-014  (abs)    1.1990408665951691E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   6.9290490481896586E-014  (abs)    3.9701575360595598E-013
+   Maximum absolute diff: (rel)   6.9290490481896586E-014  (abs)    3.9701575360595598E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.4924737320720366E-014  (abs)    1.5631940186722204E-013
+   Maximum absolute diff: (rel)   1.4924737320720366E-014  (abs)    1.5631940186722204E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   1.6226978108432025E-013  (abs)    2.7235158572835871E-015
+   Maximum absolute diff: (rel)   1.6226978108432025E-013  (abs)    2.7235158572835871E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.0095183140329952E-013  (abs)    3.9940273310890007E-014
+   Maximum absolute diff: (rel)   2.0095183140329952E-013  (abs)    3.9940273310890007E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.0505205926453486E-014  (abs)    3.9204750557075840E-016
+   Maximum absolute diff: (rel)   2.0505205926453486E-014  (abs)    3.9204750557075840E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.6407576226840813E-014  (abs)    7.4942363426089287E-010
+   Maximum absolute diff: (rel)   1.1973686007943344E-014  (abs)    1.7927959561347961E-008
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   4.0258852803602736E-014  (abs)    4.4936314225196838E-008
+   Maximum absolute diff: (rel)   4.0258852803602736E-014  (abs)    4.4936314225196838E-008
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.5115245038159741E-014  (abs)    2.2551405187698492E-016
+   Maximum absolute diff: (rel)   2.5115245038159741E-014  (abs)    2.2551405187698492E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   2.2041375968042590E-014  (abs)    7.1942451995710144E-014
+   Maximum absolute diff: (rel)   2.2041375968042590E-014  (abs)    7.1942451995710144E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0678267325497962E-014  (abs)    4.1211478674085811E-013
+   Maximum absolute diff: (rel)   1.0678267325497962E-014  (abs)    4.1211478674085811E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   3.5200162955442214E-014  (abs)    8.7752027866372373E-013
+   Maximum absolute diff: (rel)   3.5200162955442214E-014  (abs)    8.7752027866372373E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.2065322365224847E-014  (abs)    5.0626169922907138E-014
+   Maximum absolute diff: (rel)   2.2065322365224847E-014  (abs)    5.0626169922907138E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.6482782320761630E-014  (abs)    1.6479873021779667E-016
+   Maximum absolute diff: (rel)   1.6482782320761630E-014  (abs)    1.6479873021779667E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.4437179665978781E-014  (abs)    8.8817841970012523E-016
+   Maximum absolute diff: (rel)   2.4437179665978781E-014  (abs)    8.8817841970012523E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.1194165024026580E-013  (abs)    8.2245321664231597E-013
+   Maximum absolute diff: (rel)   2.1194165024026580E-013  (abs)    8.2245321664231597E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   3.9151102461799066E-014  (abs)    1.6079866327345371E-009
+   Maximum absolute diff: (rel)   3.9151102461799066E-014  (abs)    1.6079866327345371E-009
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.7157718882937429E-014  (abs)    5.8980598183211441E-016
+   Maximum absolute diff: (rel)   2.7157718882937429E-014  (abs)    5.8980598183211441E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   3.7220313783090778E-014  (abs)    8.6597395920762210E-014
+   Maximum absolute diff: (rel)   1.4293003167181777E-014  (abs)    1.1027623258996755E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   3.6552997107813988E-012  (abs)    5.6933624481558809E-015
+   Maximum absolute diff: (rel)   1.3757638231856338E-014  (abs)    1.4388490399142029E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.0187543953995955E-014  (abs)    3.8857805861880479E-015
+   Maximum absolute diff: (rel)   2.0187543953995955E-014  (abs)    3.8857805861880479E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   6.3670924577985163E-014  (abs)    1.0516032489249483E-012
+   Maximum absolute diff: (rel)   6.3670924577985163E-014  (abs)    1.0516032489249483E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.7107231617002498E-014  (abs)    3.7747582837255322E-015
+   Maximum absolute diff: (rel)   1.7107231617002498E-014  (abs)    3.7747582837255322E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   6.9605078268336081E-014  (abs)    2.5153490401663703E-016
+   Maximum absolute diff: (rel)   2.5941914367167666E-014  (abs)    6.8278716014447127E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   3.2264817337332218E-014  (abs)    1.9498291869979312E-015
+   Maximum absolute diff: (rel)   1.0268196622094257E-014  (abs)    1.3926637620897964E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   2.3767715539292859E-014  (abs)    3.8426151149906218E-011
+   Maximum absolute diff: (rel)   2.3767715539292859E-014  (abs)    3.8426151149906218E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   4.4302668477276868E-014  (abs)    1.6956921977673289E-016
+   Maximum absolute diff: (rel)   2.8406368847738113E-014  (abs)    3.9968028886505635E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.2967431512305374E-014  (abs)    9.8587804586713901E-014
+   Maximum absolute diff: (rel)   1.2967431512305374E-014  (abs)    9.8587804586713901E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.9015285956842886E-014  (abs)    1.4571677198205180E-015
+   Maximum absolute diff: (rel)   2.9015285956842886E-014  (abs)    1.4571677198205180E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.7615153652790461E-014  (abs)    1.4921397450962104E-013
+   Maximum absolute diff: (rel)   1.7615153652790461E-014  (abs)    1.4921397450962104E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            6  fields.
+   Maximum relative diff: (rel)   3.3552261979140996E-013  (abs)    1.5404344466674047E-015
+   Maximum absolute diff: (rel)   3.3552261979140996E-013  (abs)    1.5404344466674047E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.1745944676435646E-014  (abs)    2.6020852139652106E-016
+   Maximum absolute diff: (rel)   1.1745944676435646E-014  (abs)    2.6020852139652106E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   2.5561003740327538E-014  (abs)    1.9667822925839573E-011
+   Maximum absolute diff: (rel)   2.5561003740327538E-014  (abs)    1.9667822925839573E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.1627363535478508E-014  (abs)    1.5454304502782179E-013
+   Maximum absolute diff: (rel)   1.1627363535478508E-014  (abs)    1.5454304502782179E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   5.9015939395453539E-014  (abs)    2.0556473190325164E-016
+   Maximum absolute diff: (rel)   5.9015939395453539E-014  (abs)    2.0556473190325164E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.5916781967580135E-014  (abs)    2.2964741219766438E-011
+   Maximum absolute diff: (rel)   1.5916781967580135E-014  (abs)    2.2964741219766438E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0073068961363011E-014  (abs)    4.7606363295926712E-013
+   Maximum absolute diff: (rel)   1.0073068961363011E-014  (abs)    4.7606363295926712E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   4.2620199762519326E-014  (abs)    4.1211478674085811E-013
+   Maximum absolute diff: (rel)   4.2620199762519326E-014  (abs)    4.1211478674085811E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   3.9185611009605236E-014  (abs)    2.1094237467877974E-015
+   Maximum absolute diff: (rel)   3.9185611009605236E-014  (abs)    2.1094237467877974E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   1.2576772959989722E-013  (abs)    7.4332900945606184E-016
+   Maximum absolute diff: (rel)   2.7558215381472362E-014  (abs)    4.4906300900038332E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.8784910745420061E-014  (abs)    8.9812601800076663E-012
+   Maximum absolute diff: (rel)   1.8784910745420061E-014  (abs)    8.9812601800076663E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0569740388506134E-014  (abs)    2.7533531010703882E-014
+   Maximum absolute diff: (rel)   1.0569740388506134E-014  (abs)    2.7533531010703882E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   8.4642317171202215E-014  (abs)    4.4075854077618715E-014
+   Maximum absolute diff: (rel)   1.3400777360966425E-014  (abs)    6.3948846218409017E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.1408711678858001E-013  (abs)    3.9701575360595598E-013
+   Maximum absolute diff: (rel)   2.1408711678858001E-013  (abs)    3.9701575360595598E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            4  fields.
+   Maximum relative diff: (rel)   4.7760460282868736E-014  (abs)    1.3877787807814457E-015
+   Maximum absolute diff: (rel)   4.7760460282868736E-014  (abs)    1.3877787807814457E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            6  fields.
+   Maximum relative diff: (rel)   3.1590559066582329E-014  (abs)    3.8546943414985435E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.2596914864681397E-014  (abs)    5.8264504332328215E-013
+   Maximum absolute diff: (rel)   2.4442848065896646E-014  (abs)    6.1461946643248666E-013
+   Maximum absolute diff: (rel)   2.2596914864681397E-014  (abs)    5.8264504332328215E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   3.4421700460834375E-014  (abs)    9.7144514654701197E-016
+   Maximum absolute diff: (rel)   3.4421700460834375E-014  (abs)    9.7144514654701197E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            4  fields.
+   Maximum relative diff: (rel)   2.6694681723376720E-013  (abs)    2.4355517602714372E-014
+   Maximum absolute diff: (rel)   3.5806687947323798E-014  (abs)    3.0375701953744283E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.2240884807623826E-014  (abs)    1.9744038581848145E-007
+   Maximum absolute diff: (rel)   2.2240884807623826E-014  (abs)    1.9744038581848145E-007
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            7  fields.
+   Maximum relative diff: (rel)   2.6117715327119375E-013  (abs)    4.6379566853715914E-014
+   Maximum absolute diff: (rel)   3.5687670834471436E-014  (abs)    7.6383344094210770E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   1.9769600242842925E-014  (abs)    8.0491169285323849E-015
+   Maximum absolute diff: (rel)   1.9769600242842925E-014  (abs)    8.0491169285323849E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   3.0041016221296875E-014  (abs)    2.4980018054066022E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.6388520679900403E-014  (abs)    3.8653524825349450E-011
+   Maximum absolute diff: (rel)   1.6388520679900403E-014  (abs)    3.8653524825349450E-011
+   Maximum absolute diff: (rel)   3.0041016221296875E-014  (abs)    2.4980018054066022E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   3.8263568858694281E-014  (abs)    8.1001871876651421E-013
+   Maximum absolute diff: (rel)   3.8263568858694281E-014  (abs)    8.1001871876651421E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.4561614796992108E-014  (abs)    3.6834535421803594E-011
+   Maximum absolute diff: (rel)   1.4561614796992108E-014  (abs)    3.6834535421803594E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.5939069859766440E-014  (abs)    1.0658141036401503E-013
+   Maximum absolute diff: (rel)   1.5939069859766440E-014  (abs)    1.0658141036401503E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.3198417208564105E-013  (abs)    2.8137492336099967E-012
+   Maximum absolute diff: (rel)   1.3198417208564105E-013  (abs)    2.8137492336099967E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.6156428421544482E-014  (abs)    9.3258734068513149E-015
+   Maximum absolute diff: (rel)   1.6156428421544482E-014  (abs)    9.3258734068513149E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   6.8879644847396738E-014  (abs)    2.0122570276726037E-011
+   Maximum absolute diff: (rel)   6.8879644847396738E-014  (abs)    2.0122570276726037E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.3582968020586835E-014  (abs)    1.5543122344752192E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum absolute diff: (rel)   1.3582968020586835E-014  (abs)    1.5543122344752192E-014
+   Maximum relative diff: (rel)   1.0109213338283529E-014  (abs)    8.5265128291212022E-014
+   Maximum absolute diff: (rel)   1.0109213338283529E-014  (abs)    8.5265128291212022E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   4.5765810546780345E-014  (abs)    1.9151347174783950E-014
+   Maximum absolute diff: (rel)   4.5765810546780345E-014  (abs)    1.9151347174783950E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.4462405511870443E-014  (abs)    1.6653345369377348E-015
+   Maximum absolute diff: (rel)   1.4462405511870443E-014  (abs)    1.6653345369377348E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.7947430184602133E-014  (abs)    3.9435121834685560E-013
+   Maximum absolute diff: (rel)   1.7947430184602133E-014  (abs)    3.9435121834685560E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   3.8643577477934459E-014  (abs)    3.0819791163594346E-013
+   Maximum absolute diff: (rel)   3.8643577477934459E-014  (abs)    3.0819791163594346E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.0074143011582799E-014  (abs)    1.2363443602225743E-012
+   Maximum absolute diff: (rel)   2.0074143011582799E-014  (abs)    1.2363443602225743E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            5  fields.
+   Maximum relative diff: (rel)   8.8002566916036311E-014  (abs)    7.4419637119405024E-016
+   Maximum absolute diff: (rel)   2.0123666285087995E-014  (abs)    1.7069679003611782E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   6.9207360502351015E-014  (abs)    1.2378986724570495E-014
+   Maximum absolute diff: (rel)   1.0729233894052671E-014  (abs)    6.9633188104489818E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            8  fields.
+   Maximum relative diff: (rel)   4.3640991481126723E-014  (abs)    2.7089441800853820E-014
+   Maximum absolute diff: (rel)   1.4045003293631872E-014  (abs)    9.6857547760009766E-008
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   2.1985732234316508E-014  (abs)    4.7073456244106637E-014
+   Maximum absolute diff: (rel)   1.7359489531273767E-014  (abs)    3.1263880373444408E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.2075814559448522E-014  (abs)    4.8225312632155237E-016
+   Maximum absolute diff: (rel)   2.2075814559448522E-014  (abs)    4.8225312632155237E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   5.2485832823857601E-014  (abs)    1.8301332671555315E-016
+   Maximum absolute diff: (rel)   5.2485832823857601E-014  (abs)    1.8301332671555315E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0148824199219615E-014  (abs)    8.7041485130612273E-014
+   Maximum absolute diff: (rel)   1.0148824199219615E-014  (abs)    8.7041485130612273E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            4  fields.
+   Maximum relative diff: (rel)   1.9099120505129136E-013  (abs)    2.6091129257110879E-011
+   Maximum absolute diff: (rel)   1.9099120505129136E-013  (abs)    2.6091129257110879E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.7079748650844980E-014  (abs)    1.9326762412674725E-012
+   Maximum absolute diff: (rel)   2.7079748650844980E-014  (abs)    1.9326762412674725E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.5971323990424636E-013  (abs)    2.0872192862952943E-014
+   Maximum absolute diff: (rel)   2.5971323990424636E-013  (abs)    2.0872192862952943E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   8.6229035061615964E-013  (abs)    3.4916070035251323E-011
+   Maximum absolute diff: (rel)   8.6229035061615964E-013  (abs)    3.4916070035251323E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   6.0538333262923039E-014  (abs)    2.2453150450019166E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum absolute diff: (rel)   6.0538333262923039E-014  (abs)    2.2453150450019166E-012
+   Maximum relative diff: (rel)   7.2422018996863898E-014  (abs)    5.6760152133961128E-015
+   Maximum absolute diff: (rel)   7.2422018996863898E-014  (abs)    5.6760152133961128E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   8.3812233961214410E-014  (abs)    2.9132252166164108E-013
+   Maximum absolute diff: (rel)   1.1246862140384172E-014  (abs)    1.8189894035458565E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            4  fields.
+   Maximum relative diff: (rel)   1.8072130697889638E-013  (abs)    7.0849637268111110E-010
+   Maximum absolute diff: (rel)   1.8072130697889638E-013  (abs)    7.0849637268111110E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   1.1063009304933296E-011  (abs)    1.3537615473069309E-011
+   Maximum absolute diff: (rel)   1.1886396922840663E-014  (abs)    3.8653524825349450E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.6711394032267490E-014  (abs)    1.7763568394002505E-012
+   Maximum absolute diff: (rel)   2.6711394032267490E-014  (abs)    1.7763568394002505E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   5.1791765583131463E-014  (abs)    9.0372154204487742E-014
+   Maximum absolute diff: (rel)   2.2871045389875367E-014  (abs)    1.0480505352461478E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   3.6403933784604729E-014  (abs)    7.3899220076611982E-016
+   Maximum absolute diff: (rel)   2.0575960485750279E-014  (abs)    2.6867397195928788E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.2010801987278154E-014  (abs)    4.0500935938325711E-013
+   Maximum absolute diff: (rel)   1.2010801987278154E-014  (abs)    4.0500935938325711E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   1.8805802236661142E-014  (abs)    7.0031092036515474E-011
+   Maximum absolute diff: (rel)   1.4763799687168214E-014  (abs)    6.0390448197722435E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   3.1477857343052311E-014  (abs)    6.8922645368729718E-013
+   Maximum absolute diff: (rel)   3.1477857343052311E-014  (abs)    6.8922645368729718E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   7.0447806585191935E-014  (abs)    9.0483176506950258E-015
+   Maximum absolute diff: (rel)   7.0447806585191935E-014  (abs)    9.0483176506950258E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.5403448471477827E-014  (abs)    1.8457457784393227E-015
+   Maximum absolute diff: (rel)   2.5403448471477827E-014  (abs)    1.8457457784393227E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            4  fields.
+   Maximum relative diff: (rel)   1.9774391400283670E-014  (abs)    3.0010716134398763E-016
+   Maximum absolute diff: (rel)   1.9501273599853979E-014  (abs)    1.9290125052862095E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            5  fields.
+   Maximum relative diff: (rel)   5.6252829739331846E-014  (abs)    1.5143442055887135E-013
+   Maximum absolute diff: (rel)   5.6252829739331846E-014  (abs)    1.5143442055887135E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.3496690087149822E-013  (abs)    3.6237679523765109E-012
+   Maximum absolute diff: (rel)   7.8203853727433207E-014  (abs)    1.0300027497578412E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   2.9648717518657090E-014  (abs)    1.4988010832439613E-015
+   Maximum absolute diff: (rel)   1.4978027896597919E-014  (abs)    3.0808688933348094E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0342571047110915E-014  (abs)    6.8389738316909643E-014
+   Maximum absolute diff: (rel)   1.0342571047110915E-014  (abs)    6.8389738316909643E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.9026764065889467E-014  (abs)    1.9255430583342559E-016
+   Maximum absolute diff: (rel)   2.9026764065889467E-014  (abs)    1.9255430583342559E-016
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   5.8295204175589085E-014  (abs)    4.3964831775156199E-014
+   Maximum absolute diff: (rel)   5.8295204175589085E-014  (abs)    4.3964831775156199E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   5.3672325075882478E-014  (abs)    1.0408340855860843E-015
+   Maximum absolute diff: (rel)   5.3672325075882478E-014  (abs)    1.0408340855860843E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   5.8611082592527635E-014  (abs)    3.3750779948604759E-013
+   Maximum absolute diff: (rel)   5.8611082592527635E-014  (abs)    3.3750779948604759E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0171423213808774E-014  (abs)    1.3187673175707459E-011
+   Maximum absolute diff: (rel)   1.0171423213808774E-014  (abs)    1.3187673175707459E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   5.5162421043458254E-014  (abs)    4.9205084451386938E-013
+   Maximum absolute diff: (rel)   5.5162421043458254E-014  (abs)    4.9205084451386938E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   2.9557927868524860E-014  (abs)    1.0857093002414331E-011
+   Maximum absolute diff: (rel)   2.9557927868524860E-014  (abs)    1.0857093002414331E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   1.7786469717895376E-014  (abs)    5.9685589803848416E-012
+   Maximum absolute diff: (rel)   1.7786469717895376E-014  (abs)    5.9685589803848416E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in          121  fields.
+   Maximum relative diff: (rel)   3.5008440590900136E-011  (abs)    3.5008440590900136E-011
+   Maximum absolute diff: (rel)   3.5008440590900136E-011  (abs)    3.5008440590900136E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.5743175921204749E-013  (abs)    1.0757617019407917E-011
+   Maximum absolute diff: (rel)   2.5743175921204749E-013  (abs)    1.0757617019407917E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.7809488858288511E-013  (abs)    5.1603166184577276E-013
+   Maximum absolute diff: (rel)   1.7809488858288511E-013  (abs)    5.1603166184577276E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.2855150319367367E-014  (abs)    3.8085090636741370E-012
+   Maximum absolute diff: (rel)   1.2855150319367367E-014  (abs)    3.8085090636741370E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.5708637174544458E-014  (abs)    4.4053649617126212E-013
+   Maximum absolute diff: (rel)   1.5708637174544458E-014  (abs)    4.4053649617126212E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   6.4449313312908907E-014  (abs)    3.0997426847534371E-013
+   Maximum absolute diff: (rel)   6.4449313312908907E-014  (abs)    3.0997426847534371E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   1.6860963191597063E-013  (abs)    3.8510861166685117E-015
+   Maximum absolute diff: (rel)   1.7430681600856266E-014  (abs)    6.9388939039072284E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.8907534990272653E-014  (abs)    1.6306400674181987E-015
+   Maximum absolute diff: (rel)   2.8907534990272653E-014  (abs)    1.6306400674181987E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   3.5465243035596422E-013  (abs)    5.3915205633359164E-015
+   Maximum absolute diff: (rel)   3.5465243035596422E-013  (abs)    5.3915205633359164E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   7.3395356651997989E-013  (abs)    1.4266365866433262E-013
+   Maximum absolute diff: (rel)   1.2977019399333719E-014  (abs)    6.9849193096160889E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.1440978854390118E-014  (abs)    8.9338259012805565E-017
+   Maximum absolute diff: (rel)   1.3472587973745186E-014  (abs)    1.4016565685892601E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.4612125110250130E-014  (abs)    7.6738615462090820E-013
+   Maximum absolute diff: (rel)   1.4612125110250130E-014  (abs)    7.6738615462090820E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0871897981952055E-014  (abs)    6.0396132539608516E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.4933850388135283E-014  (abs)    5.6274984672199935E-012
+   Maximum absolute diff: (rel)   1.4933850388135283E-014  (abs)    5.6274984672199935E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   3.6164121179600911E-012  (abs)    8.8149973431761453E-015
+   Maximum absolute diff: (rel)   3.6164121179600911E-012  (abs)    8.8149973431761453E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.3257388876384496E-014  (abs)    6.7146288529329468E-013
+   Maximum absolute diff: (rel)   2.3257388876384496E-014  (abs)    6.7146288529329468E-013
+   Maximum absolute diff: (rel)   1.0871897981952055E-014  (abs)    6.0396132539608516E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.7321545408843202E-014  (abs)    2.8990143619012088E-012
+   Maximum absolute diff: (rel)   1.2071534926696333E-014  (abs)    3.7471181713044643E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   3.3671016611930395E-014  (abs)    4.6611603465862572E-012
+   Maximum absolute diff: (rel)   3.3671016611930395E-014  (abs)    4.6611603465862572E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.1231249841028666E-014  (abs)    3.8999132812023163E-009
+   Maximum absolute diff: (rel)   1.1231249841028666E-014  (abs)    3.8999132812023163E-009
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.3227528206991924E-014  (abs)    7.9936057773011271E-015
+   Maximum absolute diff: (rel)   1.2720461685252011E-014  (abs)    7.7852746471762657E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   3.6132897651875438E-014  (abs)    5.1841198001056910E-010
+   Maximum absolute diff: (rel)   3.6132897651875438E-014  (abs)    5.1841198001056910E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0192574555205069E-014  (abs)    3.5971225997855072E-014
+   Maximum absolute diff: (rel)   1.0192574555205069E-014  (abs)    3.5971225997855072E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.4170184594043343E-013  (abs)    7.8248518775581033E-013
+   Maximum absolute diff: (rel)   1.4170184594043343E-013  (abs)    7.8248518775581033E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   9.2724528797869546E-014  (abs)    3.3195668436292181E-014
+   Maximum absolute diff: (rel)   9.2724528797869546E-014  (abs)    3.3195668436292181E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.8823491212534855E-013  (abs)    9.1732177409653559E-015
+   Maximum absolute diff: (rel)   1.8823491212534855E-013  (abs)    9.1732177409653559E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   8.6866986382363859E-014  (abs)    5.7189026847481728E-009
+   Maximum absolute diff: (rel)   8.6866986382363859E-014  (abs)    5.7189026847481728E-009
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.5797745646995226E-014  (abs)    2.1645973902195692E-010
+   Maximum absolute diff: (rel)   1.5797745646995226E-014  (abs)    2.1645973902195692E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.3683997828742898E-013  (abs)    1.0440999176353216E-009
+   Maximum absolute diff: (rel)   2.3683997828742898E-013  (abs)    1.0440999176353216E-009
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   3.7456488773160118E-014  (abs)    3.8814437774981059E-017
+   Maximum absolute diff: (rel)   2.1266401236753596E-014  (abs)    5.5944832100252029E-017
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   6.1003041850028505E-014  (abs)    3.4461322684364859E-013
+   Maximum absolute diff: (rel)   6.1003041850028505E-014  (abs)    3.4461322684364859E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.1972210479394221E-014  (abs)    5.2224891078367364E-013
+   Maximum absolute diff: (rel)   2.1972210479394221E-014  (abs)    5.2224891078367364E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   5.8824829386422496E-014  (abs)    1.8607337892717624E-013
+   Maximum absolute diff: (rel)   1.2305242888814833E-014  (abs)    2.6290081223123707E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.4662639585784183E-014  (abs)    8.0824236192711396E-014
+   Maximum absolute diff: (rel)   1.4662639585784183E-014  (abs)    8.0824236192711396E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0267705761284106E-014  (abs)    2.4442670110147446E-012
+   Maximum absolute diff: (rel)   1.0267705761284106E-014  (abs)    2.4442670110147446E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.2712609385003428E-013  (abs)    6.9411143499564787E-013
+   Maximum absolute diff: (rel)   1.1796165671121477E-013  (abs)    2.1067592115286971E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            5  fields.
+   Maximum relative diff: (rel)   3.0892460371524046E-014  (abs)    2.5224267119483557E-013
+   Maximum absolute diff: (rel)   1.8854396550503210E-014  (abs)    3.7800873542437330E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   5.4331097961284491E-014  (abs)    1.4876988529977098E-013
+   Maximum absolute diff: (rel)   5.4331097961284491E-014  (abs)    1.4876988529977098E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   4.7111018839310006E-014  (abs)    3.1419311596891930E-014
+   Maximum absolute diff: (rel)   3.9301122171397564E-014  (abs)    1.1146639167236572E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.1347530179957779E-014  (abs)    3.9108272176235914E-011
+   Maximum absolute diff: (rel)   1.1347530179957779E-014  (abs)    3.9108272176235914E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.8778087469420973E-014  (abs)    1.6875389974302379E-014
+   Maximum absolute diff: (rel)   2.8033633841276122E-014  (abs)    7.4214767664670944E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.4503650913808755E-014  (abs)    4.0927261579781771E-011
+   Maximum absolute diff: (rel)   1.4503650913808755E-014  (abs)    4.0927261579781771E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0891935197406319E-014  (abs)    3.5971225997855072E-014
+   Maximum absolute diff: (rel)   1.0891935197406319E-014  (abs)    3.5971225997855072E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0612039593201378E-014  (abs)    1.8829382497642655E-013
+   Maximum absolute diff: (rel)   1.0612039593201378E-014  (abs)    1.8829382497642655E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   4.6969479889095319E-013  (abs)    1.7669199436909366E-013
+   Maximum absolute diff: (rel)   4.6969479889095319E-013  (abs)    1.7669199436909366E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            5  fields.
+   Maximum relative diff: (rel)   1.2524970116349357E-013  (abs)    6.1817218011128716E-013
+   Maximum absolute diff: (rel)   1.8521668014229365E-014  (abs)    1.1297629498585593E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0480993057201252E-014  (abs)    1.2212453270876722E-015
+   Maximum absolute diff: (rel)   1.0480993057201252E-014  (abs)    1.2212453270876722E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.3485866684878424E-013  (abs)    3.8791192480402970E-013
+   Maximum absolute diff: (rel)   2.3485866684878424E-013  (abs)    3.8791192480402970E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   4.4122821907121488E-014  (abs)    2.3980817331903381E-014
+   Maximum absolute diff: (rel)   1.7084922903097653E-014  (abs)    1.5825207810848951E-010
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0263968308440901E-014  (abs)    6.3282712403633923E-015
+   Maximum absolute diff: (rel)   1.0263968308440901E-014  (abs)    6.3282712403633923E-015
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.4096538450276358E-014  (abs)    1.3211653993039363E-014
+   Maximum absolute diff: (rel)   1.4096538450276358E-014  (abs)    1.3211653993039363E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   2.3538854613692724E-014  (abs)    5.7287508070658077E-014
+   Maximum absolute diff: (rel)   1.7289546049438046E-014  (abs)    6.3948846218409017E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.0665067044739218E-014  (abs)    3.2969182939268649E-011
+   Maximum absolute diff: (rel)   2.0665067044739218E-014  (abs)    3.2969182939268649E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   3.7979627588164572E-013  (abs)    3.7261860263981816E-015
+   Maximum absolute diff: (rel)   1.8004827861253949E-014  (abs)    6.2527760746888816E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.3479208752692523E-014  (abs)    4.9737991503207013E-013
+   Maximum absolute diff: (rel)   1.3479208752692523E-014  (abs)    4.9737991503207013E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            7  fields.
+   Maximum relative diff: (rel)   6.6299212419465122E-013  (abs)    1.0075273948473296E-013
+   Maximum absolute diff: (rel)   1.1595310686193485E-014  (abs)    5.4001247917767614E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   4.1039737445175367E-014  (abs)    1.2378986724570495E-014
+   Maximum absolute diff: (rel)   4.1039737445175367E-014  (abs)    1.2378986724570495E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0512906251339749E-014  (abs)    4.0472514228895307E-011
+   Maximum absolute diff: (rel)   1.0512906251339749E-014  (abs)    4.0472514228895307E-011
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.4393340199753399E-014  (abs)    7.0343730840249918E-013
+   Maximum absolute diff: (rel)   1.4393340199753399E-014  (abs)    7.0343730840249918E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.8195446113686369E-014  (abs)    2.6822988274943782E-013
+   Maximum absolute diff: (rel)   2.8195446113686369E-014  (abs)    2.6822988274943782E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.9287129750728235E-014  (abs)    6.1106675275368616E-013
+   Maximum absolute diff: (rel)   1.9287129750728235E-014  (abs)    6.1106675275368616E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   4.7698950766928503E-014  (abs)    8.5620399659092072E-013
+   Maximum absolute diff: (rel)   4.7698950766928503E-014  (abs)    8.5620399659092072E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.2082671665579343E-014  (abs)    1.5454304502782179E-013
+   Maximum absolute diff: (rel)   1.2082671665579343E-014  (abs)    1.5454304502782179E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.1251553638400411E-014  (abs)    1.6200374375330284E-012
+   Maximum absolute diff: (rel)   1.1251553638400411E-014  (abs)    1.6200374375330284E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0974798729833423E-014  (abs)    2.7711166694643907E-013
+   Maximum absolute diff: (rel)   1.0974798729833423E-014  (abs)    2.7711166694643907E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   3.2359529916458926E-014  (abs)    7.1764816311770119E-013
+   Maximum absolute diff: (rel)   3.2359529916458926E-014  (abs)    7.1764816311770119E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.0273800291593286E-013  (abs)    2.0672352718520415E-013
+   Maximum absolute diff: (rel)   8.9481397613113634E-014  (abs)    6.5192296005989192E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   6.9498076290689829E-014  (abs)    1.8518520050747611E-013
+   Maximum absolute diff: (rel)   6.9498076290689829E-014  (abs)    1.8518520050747611E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   2.5827037656594868E-014  (abs)    6.3593574850528967E-013
+   Maximum absolute diff: (rel)   2.5827037656594868E-014  (abs)    6.3593574850528967E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0280607657613066E-014  (abs)    5.5422333389287814E-013
+   Maximum absolute diff: (rel)   1.0280607657613066E-014  (abs)    5.5422333389287814E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   4.1908682745563470E-012  (abs)    1.0380585280245214E-013
+   Maximum absolute diff: (rel)   4.1908682745563470E-012  (abs)    1.0380585280245214E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.3648698668291930E-014  (abs)    6.3238303482648917E-013
+   Maximum absolute diff: (rel)   1.3648698668291930E-014  (abs)    6.3238303482648917E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            5  fields.
+   Maximum relative diff: (rel)   4.2846598859390500E-014  (abs)    5.6310511808987940E-013
+   Maximum absolute diff: (rel)   2.9299291558558978E-014  (abs)    2.5011104298755527E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.4816737504523047E-014  (abs)    3.4283687000424834E-013
+   Maximum absolute diff: (rel)   2.4816737504523047E-014  (abs)    3.4283687000424834E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   9.7886533473241796E-014  (abs)    4.7073456244106637E-013
+   Maximum absolute diff: (rel)   1.9531515780202139E-014  (abs)    1.0871303857129533E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   1.5375310649801153E-014  (abs)    1.5987211554602254E-014
+   Maximum absolute diff: (rel)   1.3163269657666279E-014  (abs)    3.2684965844964609E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.3647126551126975E-014  (abs)    2.0463630789890885E-012
+   Maximum absolute diff: (rel)   1.3647126551126975E-014  (abs)    2.0463630789890885E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   3.5963369750551085E-014  (abs)    5.8975047068088315E-013
+   Maximum absolute diff: (rel)   3.5963369750551085E-014  (abs)    5.8975047068088315E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   2.1505680356810874E-013  (abs)    2.0927704014184201E-013
+   Maximum absolute diff: (rel)   2.1505680356810874E-013  (abs)    2.0927704014184201E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   3.9347350695142043E-013  (abs)    7.0554673214928698E-014
+   Maximum absolute diff: (rel)   3.9347350695142043E-013  (abs)    7.0554673214928698E-014
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            2  fields.
+   Maximum relative diff: (rel)   1.1198144971075284E-014  (abs)    1.2931877790833823E-012
+   Maximum absolute diff: (rel)   1.1198144971075284E-014  (abs)    1.2931877790833823E-012
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            3  fields.
+   Maximum relative diff: (rel)   6.6772321300541598E-014  (abs)    4.4142467459096224E-013
+   Maximum absolute diff: (rel)   1.7643033296077358E-014  (abs)    5.1514348342607263E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.0877619381271574E-014  (abs)    7.6738615462090820E-013
+   Maximum absolute diff: (rel)   1.0877619381271574E-014  (abs)    7.6738615462090820E-013
+ par_xsum: difference between integer vector and floating point sums  exceeds tolerance in            1  fields.
+   Maximum relative diff: (rel)   1.9044185809807116E-014  (abs)    5.0803805606847163E-013
+   Maximum absolute diff: (rel)   1.9044185809807116E-014  (abs)    5.0803805606847163E-013
+ WXSAMI3 phi payload was not ready before timeout
+#0  0x149e96a24171 in ???
+#1  0xe24e40 in ???
+#2  0x7d535c in ???
+#3  0x7e4954 in ???
+#4  0x5121f6 in ???
+#5  0x4ff59d in ???
+#6  0x149e983e0554 in ???
+#7  0x149e983e0972 in ???
+#8  0x149e983e2202 in ???
+#9  0x149e985ce0a5 in ???
+#10  0x149e98d73726 in ???
+#11  0x149e98147ef6 in ???
+#12  0x149e9814826a in ???
+#13  0x149e984907f7 in ???
+#14  0x149e9848339a in ???
+#15  0x149e981461f3 in ???
+#16  0x149e986c1035 in ???
+#17  0x149e989a64b8 in ???
+#18  0x149e98d25bf5 in ???
+#19  0x149e983e0554 in ???
+#20  0x149e983e0972 in ???
+#21  0x149e983e2202 in ???
+#22  0x149e985ce0a5 in ???
+#23  0x149e98d1b999 in ???
+#24  0x149e98147ef6 in ???
+#25  0x149e9814826a in ???
+#26  0x149e984907f7 in ???
+#27  0x149e9848339a in ???
+#28  0x149e981461f3 in ???
+#29  0x149e986c1035 in ???
+#30  0x149e989a64b8 in ???
+#31  0x149e98d25bf5 in ???
+#32  0x149e983e0554 in ???
+#33  0x149e983e0972 in ???
+#34  0x149e983e2202 in ???
+#35  0x149e985ce0a5 in ???
+#36  0x149e98d1b999 in ???
+#37  0x149e98147ef6 in ???
+#38  0x149e9814826a in ???
+#39  0x149e984907f7 in ???
+#40  0x149e9848339a in ???
+#41  0x149e981461f3 in ???
+#42  0x149e986c1035 in ???
+#43  0x149e989a64b8 in ???
+#44  0x41dc25 in ???
+#45  0x412576 in ???
+#46  0x149e92fe5d84 in ???
+#47  0x4125ad in ???
+#48  0xffffffffffffffff in ???
+--------------------------------------------------------------------------
+MPI_ABORT was invoked on rank 0 in communicator MPI COMMUNICATOR 3 CREATE FROM 0
+  Proc: [[46771,2],0]
+  Errorcode: 1
+
+NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.
+You may or may not see output from other processes, depending on
+exactly when Open MPI kills them.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+prte has exited due to process rank 0 with PID 0 on node qhcn425 calling
+"abort". This may have caused other processes in the application to be
+terminated by signals sent by prte (as reported here).
+--------------------------------------------------------------------------
+

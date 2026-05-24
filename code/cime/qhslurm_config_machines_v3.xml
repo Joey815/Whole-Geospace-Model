@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<config_machines version="3.0">
+  <NODENAME_REGEX>
+    <value MACH="qhslurm">(login[0-9]+|qhcn[0-9]+)</value>
+  </NODENAME_REGEX>
+  <machine MACH="qhslurm">
+    <DESC>Local Slurm cluster on login/qhcn nodes for CESM WACCM-X coupling work</DESC>
+    <OS>LINUX</OS>
+    <COMPILERS>gnu</COMPILERS>
+    <MPILIBS>openmpi,mpi-serial</MPILIBS>
+    <PROJECT>none</PROJECT>
+    <CIME_OUTPUT_ROOT>/online1/jiaoy_group/jiaoy/cesm/scratch</CIME_OUTPUT_ROOT>
+    <DIN_LOC_ROOT>/apps/public_data/inputdata</DIN_LOC_ROOT>
+    <DIN_LOC_ROOT_CLMFORC>/apps/public_data/inputdata/atm/datm7</DIN_LOC_ROOT_CLMFORC>
+    <DOUT_S_ROOT>/online1/jiaoy_group/jiaoy/cesm/scratch/archive/$CASE</DOUT_S_ROOT>
+    <BASELINE_ROOT>/online1/jiaoy_group/jiaoy/cesm/cesm_baselines</BASELINE_ROOT>
+    <CCSM_CPRNC>$CIMEROOT/tools/cprnc/cprnc</CCSM_CPRNC>
+    <GMAKE>make</GMAKE>
+    <GMAKE_J>16</GMAKE_J>
+    <BATCH_SYSTEM>slurm</BATCH_SYSTEM>
+    <SUPPORTED_BY>local</SUPPORTED_BY>
+    <MAX_TASKS_PER_NODE>64</MAX_TASKS_PER_NODE>
+    <MAX_MPITASKS_PER_NODE>64</MAX_MPITASKS_PER_NODE>
+    <PROJECT_REQUIRED>FALSE</PROJECT_REQUIRED>
+    <mpirun mpilib="default">
+      <executable>mpirun</executable>
+      <arguments>
+        <arg name="num_tasks">-np {{ total_tasks }}</arg>
+      </arguments>
+    </mpirun>
+    <module_system type="none"/>
+    <environment_variables>
+      <env name="OMP_STACKSIZE">256M</env>
+      <env name="PATH">/apps/support/intel_spr_rocky8.9/cmake/3.19.8/bin:/apps/support/intel_spr_rocky8.9/openmpi/5.0.3/gcc8.5.0/bin:/apps/support/intel_spr_rocky8.9/netcdf/4.7.4/gcc8.5.0_ompi5.0.3/bin:/apps/support/intel_spr_rocky8.9/pnetcdf/1.12.2/gcc8.5.0_ompi5.0.3/bin:$ENV{PATH}</env>
+      <env name="LD_LIBRARY_PATH">/apps/support/intel_spr_rocky8.9/openmpi/5.0.3/gcc8.5.0/lib:/apps/support/intel_spr_rocky8.9/netcdf/4.7.4/gcc8.5.0_ompi5.0.3/lib:/apps/support/intel_spr_rocky8.9/pnetcdf/1.12.2/gcc8.5.0_ompi5.0.3/lib:/apps/support/intel_spr_rocky8.9/lapack/3.12.1</env>
+      <env name="LIBRARY_PATH">/apps/support/intel_spr_rocky8.9/openmpi/5.0.3/gcc8.5.0/lib:/apps/support/intel_spr_rocky8.9/netcdf/4.7.4/gcc8.5.0_ompi5.0.3/lib:/apps/support/intel_spr_rocky8.9/pnetcdf/1.12.2/gcc8.5.0_ompi5.0.3/lib:/apps/support/intel_spr_rocky8.9/lapack/3.12.1</env>
+      <env name="CPATH">/apps/support/intel_spr_rocky8.9/openmpi/5.0.3/gcc8.5.0/include:/apps/support/intel_spr_rocky8.9/netcdf/4.7.4/gcc8.5.0_ompi5.0.3/include:/apps/support/intel_spr_rocky8.9/pnetcdf/1.12.2/gcc8.5.0_ompi5.0.3/include</env>
+      <env name="FPATH">/apps/support/intel_spr_rocky8.9/netcdf/4.7.4/gcc8.5.0_ompi5.0.3/include:/apps/support/intel_spr_rocky8.9/pnetcdf/1.12.2/gcc8.5.0_ompi5.0.3/include</env>
+      <env name="NETCDF">/apps/support/intel_spr_rocky8.9/netcdf/4.7.4/gcc8.5.0_ompi5.0.3</env>
+      <env name="NETCDF_PATH">/apps/support/intel_spr_rocky8.9/netcdf/4.7.4/gcc8.5.0_ompi5.0.3</env>
+      <env name="PNETCDF">/apps/support/intel_spr_rocky8.9/pnetcdf/1.12.2/gcc8.5.0_ompi5.0.3</env>
+      <env name="PNETCDF_PATH">/apps/support/intel_spr_rocky8.9/pnetcdf/1.12.2/gcc8.5.0_ompi5.0.3</env>
+      <env name="LAPACK_PATH">/apps/support/intel_spr_rocky8.9/lapack/3.12.1</env>
+      <env name="LAPACK_LIBDIR">/apps/support/intel_spr_rocky8.9/lapack/3.12.1</env>
+      <env name="ESMFMKFILE">/apps/support/intel_spr_rocky8.9/spack/0.22.0/opt/spack/linux-rocky8-icelake/gcc-8.5.0/esmf-8.6.0-bzofgqehyzd6va4cbmujyaexnwvji5kh/lib/esmf.mk</env>
+    </environment_variables>
+    <resource_limits>
+      <resource name="RLIMIT_STACK">-1</resource>
+    </resource_limits>
+  </machine>
+</config_machines>

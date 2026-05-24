@@ -1651,7 +1651,8 @@ contains
          inquire(file=trim(phi_payload_file), exist=exists, size=file_size)
          if (exists .and. file_size >= 20) then
             open(unit=122, file=trim(phi_payload_file), form='unformatted', &
-                 access='stream', status='old', action='read', iostat=ios)
+                 access='stream', convert='little_endian', status='old', &
+                 action='read', iostat=ios)
             if (ios == 0) then
                read(122, iostat=ios) file_header
                close(122)
