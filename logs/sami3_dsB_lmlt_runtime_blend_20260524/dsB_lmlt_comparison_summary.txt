@@ -1,0 +1,40 @@
+alpha0_vs_base_raiCpl
+  datasets = 36
+  max_abs = 0.0
+  max_rel = 0.0
+alpha0_vs_base_raiju
+  datasets = 47
+  max_abs = 0.0
+  max_rel = 0.0
+blend_formula_checks
+  Pavg
+    alpha = 0.2
+    max_abs = 2.2351741776893697e-09
+    max_rel = 7.109258276005708e-08
+    base_mean = 0.00043784124116159
+    input_mean = 0.023705169558525085
+    got_mean = 0.005091306774030979
+  Davg
+    alpha = 1.0
+    max_abs = 0.0
+    max_rel = 0.0
+    base_mean = 0.05433108774465307
+    input_mean = 1985.4757080078125
+    got_mean = 1985.4755887433569
+  Pstd
+    alpha = 0.0
+    max_abs = 0.0
+    max_rel = 0.0
+    base_mean = 0.0001685590862329495
+    input_mean = 0.08824501931667328
+    got_mean = 0.0001685590862329495
+  Dstd
+    alpha = 0.0
+    max_abs = 0.0
+    max_rel = 0.0
+    base_mean = 0.008178260314749292
+    input_mean = 5179.2646484375
+    got_mean = 0.008178260314749292
+blend_raiCpl nonfinite_datasets = []
+blend_raiju nonfinite_datasets = []
+blend_gamera nonfinite_datasets = []
