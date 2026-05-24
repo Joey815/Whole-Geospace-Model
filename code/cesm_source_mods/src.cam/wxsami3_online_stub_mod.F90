@@ -28,6 +28,10 @@ module wxsami3_online_stub_mod
    integer, parameter :: tag_vf     = 210
    integer, parameter :: tag_wf     = 211
    integer, parameter :: tag_source_flags = 212
+   integer, parameter :: tag_phi_header = 220
+   integer, parameter :: tag_phi_hour = 221
+   integer, parameter :: tag_phi_valid_until = 222
+   integer, parameter :: tag_phi_data = 223
    integer, parameter :: tag_done   = 299
 
    integer, parameter :: source_flag_waccmx_valid = 1
@@ -50,9 +54,12 @@ module wxsami3_online_stub_mod
    logical :: live_dump_enabled = .false.
    logical :: live_dump_meta_written = .false.
    logical :: max_packets_logged = .false.
+   logical :: phi_payload_enabled = .false.
+   logical :: phi_payload_sent = .false.
    integer :: live_dump_max = 1
    character(len=512) :: port_file = ''
    character(len=512) :: payload_prefix = ''
+   character(len=512) :: phi_payload_file = ''
    character(len=32) :: payload_mode = 'file'
    character(len=16) :: n2_negative_mode = 'floor'
    character(len=512) :: meta_file = ''
@@ -60,6 +67,10 @@ module wxsami3_online_stub_mod
    character(len=512) :: live_map_file = ''
 
    integer, parameter :: payload_magic = 20260522
+   integer, parameter :: phi_magic = 20260524
+   integer, parameter :: phi_version = 1
+   integer, parameter :: phi_nlat = 125
+   integer, parameter :: phi_nlon = 97
    integer, parameter :: live_map_magic = 20260524
    integer, parameter :: sami_nz = 304
    integer, parameter :: sami_nf = 124
@@ -136,6 +147,13 @@ contains
       call get_environment_variable('WXSAMI3_META_FILE', meta_file, length=lenval, status=stat)
       if (stat /= 0 .or. lenval <= 0) meta_file = ''
 
+      phi_payload_file = ''
+      call get_environment_variable('WXSAMI3_PHI_PAYLOAD_FILE', phi_payload_file, length=lenval, status=stat)
+      if (stat == 0 .and. lenval > 0) then
+         phi_payload_file = adjustl(phi_payload_file(1:lenval))
+         phi_payload_enabled = .true.
+      endif
+
       live_dump_prefix = ''
       call get_environment_variable('WXSAMI3_LIVE_DUMP_PREFIX', live_dump_prefix, length=lenval, status=stat)
       if (stat == 0 .and. lenval > 0) live_dump_enabled = .true.
@@ -177,6 +195,8 @@ contains
          write(iulog,*) 'WXSAMI3 N2 negative residual mode: ', trim(n2_negative_mode)
          write(iulog,*) 'WXSAMI3 live phys_state diagnostics: ', live_diag_enabled
          if (len_trim(meta_file) > 0) write(iulog,*) 'WXSAMI3 metadata file: ', trim(meta_file)
+         write(iulog,*) 'WXSAMI3 phi payload enabled: ', phi_payload_enabled
+         if (phi_payload_enabled) write(iulog,*) 'WXSAMI3 phi payload file: ', trim(phi_payload_file)
          write(iulog,*) 'WXSAMI3 live state dump enabled: ', live_dump_enabled
          if (live_dump_enabled) then
             write(iulog,*) 'WXSAMI3 live state dump prefix: ', trim(live_dump_prefix)
@@ -265,6 +285,9 @@ contains
          enddo
          write(iulog,*) 'WXSAMI3 sent neutral packet: nstep,packet_hour,count=', &
                         nstep, packet_hour, packet_count
+      endif
+      if (masterproc .and. phi_payload_enabled .and. .not. phi_payload_sent) then
+         call wxsami3_send_phi_payload()
       endif
       packet_count = packet_count + 1
 
@@ -1592,6 +1615,77 @@ contains
 
    end subroutine wxsami3_send_worker_arrays
 
+   subroutine wxsami3_send_phi_payload()
+
+      include 'mpif.h'
+
+      integer :: ios
+      integer :: file_header(5)
+      integer :: frame_header(6)
+      integer :: frame_index
+      integer :: iframe, nframes, nphi
+      real :: frame_meta(2)
+      real, allocatable :: phi(:)
+
+      if (.not. masterproc) return
+      if (.not. phi_payload_enabled) return
+      if (phi_payload_sent) return
+
+      open(unit=121, file=trim(phi_payload_file), form='unformatted', &
+           access='stream', convert='little_endian', status='old', &
+           action='read', iostat=ios)
+      if (ios /= 0) call endrun('WXSAMI3 failed to open phi payload file')
+
+      read(121, iostat=ios) file_header
+      if (ios /= 0) call endrun('WXSAMI3 failed to read phi payload header')
+      if (file_header(1) /= phi_magic .or. file_header(2) /= phi_version .or. &
+          file_header(3) /= phi_nlat .or. file_header(4) /= phi_nlon) then
+         write(iulog,*) 'WXSAMI3 phi payload header mismatch: ', file_header
+         call endrun('WXSAMI3 phi payload header mismatch')
+      endif
+
+      nframes = file_header(5)
+      if (nframes < 1) call endrun('WXSAMI3 phi payload contains no frames')
+      nphi = phi_nlat * phi_nlon
+      allocate(phi(nphi))
+
+      do iframe = 0, nframes - 1
+         read(121, iostat=ios) frame_index
+         if (ios /= 0) call endrun('WXSAMI3 failed to read phi frame index')
+         if (frame_index /= iframe) call endrun('WXSAMI3 phi frame index mismatch')
+         read(121, iostat=ios) frame_meta
+         if (ios /= 0) call endrun('WXSAMI3 failed to read phi frame metadata')
+         read(121, iostat=ios) phi
+         if (ios /= 0) call endrun('WXSAMI3 failed to read phi frame data')
+
+         frame_header(1) = phi_magic
+         frame_header(2) = phi_version
+         frame_header(3) = phi_nlat
+         frame_header(4) = phi_nlon
+         frame_header(5) = frame_index
+         frame_header(6) = nframes
+
+         call MPI_Send(frame_header, 6, MPI_INTEGER, 0, tag_phi_header, peer_comm, ios)
+         if (ios /= MPI_SUCCESS) call endrun('WXSAMI3 MPI_Send phi header failed')
+         call MPI_Send(frame_meta(1), 1, MPI_REAL, 0, tag_phi_hour, peer_comm, ios)
+         if (ios /= MPI_SUCCESS) call endrun('WXSAMI3 MPI_Send phi hour failed')
+         call MPI_Send(frame_meta(2), 1, MPI_REAL, 0, tag_phi_valid_until, peer_comm, ios)
+         if (ios /= MPI_SUCCESS) call endrun('WXSAMI3 MPI_Send phi valid_until failed')
+         call MPI_Send(phi, nphi, MPI_REAL, 0, tag_phi_data, peer_comm, ios)
+         if (ios /= MPI_SUCCESS) call endrun('WXSAMI3 MPI_Send phi data failed')
+
+         write(iulog,*) 'WXSAMI3 sent phi frame: iframe,nframes,hour,valid_until,min,max=', &
+                        frame_index, nframes, frame_meta(1), frame_meta(2), &
+                        minval(phi), maxval(phi)
+      enddo
+
+      close(121)
+      deallocate(phi)
+      phi_payload_sent = .true.
+      write(iulog,*) 'WXSAMI3 sent phi payload frames: ', nframes
+
+   end subroutine wxsami3_send_phi_payload
+
    subroutine wxsami3_cam_finalize()
 
       include 'mpif.h'
@@ -1603,6 +1697,9 @@ contains
       if (.not. is_connected) return
 
       if (masterproc) then
+         if (phi_payload_enabled .and. .not. phi_payload_sent .and. packet_count > 0) then
+            call wxsami3_send_phi_payload()
+         endif
          done_value = packet_count
          do worker = 0, num_workers
             call MPI_Send(done_value, 1, MPI_INTEGER, worker, tag_done, peer_comm, ierr)

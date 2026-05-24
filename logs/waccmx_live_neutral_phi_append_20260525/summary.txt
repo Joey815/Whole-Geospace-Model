@@ -1,0 +1,72 @@
+WACCM-X live neutral + REMIX/Voltron phi append validation
+Date: 2026-05-25 CST
+
+Goal:
+  Validate that the CESM/WACCM-X online sender can send live neutral forcing
+  and a REMIX/Voltron-derived SAMI3 Weimer phi payload through the same MPI
+  intercommunicator accepted by the SAMI3 receiver.
+
+Code change:
+  code/cesm_source_mods/src.cam/wxsami3_online_stub_mod.F90 now accepts
+  WXSAMI3_PHI_PAYLOAD_FILE. If set, rank 0 reads the remix_sami3_phi_payload.v1
+  binary payload and sends phi frames with MPI tags 220-223 after the first
+  neutral packet and before the done tag.
+
+Build:
+  Case: /home/jiaoy_group/jiaoy/data/CESM/cases/mage_qpx2000_f19_sami3_live_neutral_20260523
+  Deployed SourceMod:
+    SourceMods/src.cam/wxsami3_online_stub_mod.F90
+  Incremental case.build completed successfully:
+    MODEL BUILD HAS FINISHED SUCCESSFULLY
+
+Run:
+  Slurm job: 7658397
+  State: COMPLETED
+  ExitCode: 0:0
+  Elapsed: 00:03:31
+  Launcher:
+    slurm/run_waccmx_cam_sami3_live_payload_f19_topblend_phi_append_20260525.sbatch
+  Run directory:
+    /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_phi_append_20260525_0000
+
+Configuration:
+  WXSAMI3_PAYLOAD_MODE=live
+  WXSAMI3_MAX_PACKETS=1
+  WXSAMI3_LIVE_DUMP_MAX=1
+  WXSAMI3_TOP_BLEND_MODE=linear
+  WXSAMI3_BLEND_BOTTOM_KM=600
+  WXSAMI3_BLEND_TOP_KM=720
+  SAMI3_USE_ONLINE_PHI_WEIMER=1
+  WXSAMI3_PHI_PAYLOAD_FILE=
+    logs/remix_sami3_phi_weimer_voltron_bridge_runtime_20260524/remix_sami3_phi_payload_from_voltron_bridge_7656022.bin
+
+CESM/WACCM-X sender evidence:
+  WXSAMI3 phi payload enabled: T
+  WXSAMI3 sent live neutral packet: nstep=0 packet_hour=0 count=0
+  WXSAMI3 sent phi frame: iframe=0 nframes=1 hour=0 valid_until=1.00000002E+30
+    min=-36.9306145 max=31.4838161
+  WXSAMI3 sent phi payload frames: 1
+  WXSAMI3 sent done signal to SAMI3
+  WXSAMI3 disconnected from SAMI3
+  END OF MODEL RUN
+
+SAMI3 receiver evidence:
+  WACCMX online sender connected
+  WACCMX_RECV_QC received live neutral packet for ranks 1..32
+  SAMI3_USE_ONLINE_PHI_WEIMER: using online MPI phi_weimer payload
+  WACCMX_PHI_RECV 0 1 0.00000000 0.00000000 1.00000002E+30 -36.9306145 31.4838161
+  hrutw2 = 0.00000000 1.00000002E+30
+  nweimer 1
+  MASTER: All Done!
+  WACCMX online done signal received: 1
+
+Replay/QC:
+  live dump files: 16 ranks, total_cols=13824, pver=126
+  WACCMX_RECV_QC compare ok: ranks=32 occurrence=0 step_set=[0]
+  packet_hour_set=[0.0] max_abs=2.08794e+06 max_rel=4.83248e-13
+
+Current status:
+  The WACCM-X/CESM sender can now carry live neutral forcing and a
+  REMIX/Voltron-derived phi payload over the existing single-peer SAMI3 online
+  MPI protocol. This avoids the receiver-side two-client MPI blocker for the
+  current prototype stage.
