@@ -261,6 +261,14 @@ def main():
             ni, nj, runtime_channels = runtime_layout["fortran_shape"]
             if runtime_channels != n_channels:
                 raise AssertionError("runtime channel count does not match nFluidIn+1")
+            runtime_valid = None
+            if "MappingQuality/runtime_valid_mask" in d:
+                runtime_valid = require_dataset(
+                    d, "MappingQuality/runtime_valid_mask"
+                )[:].astype(np.uint8)
+                if runtime_valid.shape != (nj, ni):
+                    raise AssertionError("MappingQuality/runtime_valid_mask shape mismatch")
+                runtime_valid = runtime_valid > 0
             for path in (
                 "RaiCplMomentsOnly/Pavg",
                 "RaiCplMomentsOnly/Davg",
@@ -274,10 +282,33 @@ def main():
                 mask = require_dataset(d, "{0}_mask".format(path))[:].astype(np.float64)
                 if mask.shape != arr.shape:
                     raise AssertionError("{0}_mask shape mismatch".format(path))
+                if runtime_valid is not None:
+                    expected_mask = np.zeros_like(mask, dtype=np.float64)
+                    expected_mask[bulk_channel, :, :] = (
+                        np.isfinite(arr[bulk_channel, :, :]) & runtime_valid
+                    ).astype(np.float64)
+                    require_close(
+                        "{0}_mask runtime coverage".format(path),
+                        mask,
+                        expected_mask,
+                        rtol=0.0,
+                        atol=0.0,
+                    )
             runtime_tiote = require_dataset(d, "RaiCplMomentsOnly/tiote")[:].astype(np.float64)
             if runtime_tiote.shape != (nj, ni):
                 raise AssertionError("RaiCplMomentsOnly/tiote runtime shape mismatch")
             require_finite("RaiCplMomentsOnly/tiote", runtime_tiote)
+            runtime_tiote_mask = require_dataset(d, "RaiCplMomentsOnly/tiote_mask")[:].astype(np.float64)
+            if runtime_tiote_mask.shape != (nj, ni):
+                raise AssertionError("RaiCplMomentsOnly/tiote_mask runtime shape mismatch")
+            if runtime_valid is not None:
+                require_close(
+                    "RaiCplMomentsOnly/tiote_mask runtime coverage",
+                    runtime_tiote_mask,
+                    (np.isfinite(runtime_tiote) & runtime_valid).astype(np.float64),
+                    rtol=0.0,
+                    atol=0.0,
+                )
             if runtime_mapping_quality is not None:
                 if "MappingQuality" not in d:
                     raise AssertionError("metadata advertises mapping quality but /MappingQuality is missing")
@@ -337,8 +368,13 @@ def main():
                         if arr.shape != shape:
                             raise AssertionError("{0} shape {1} != {2}".format(path, arr.shape, shape))
                     weight_sum = require_dataset(d, "MappingQuality/weight_sum_runtime")[:].astype(np.float64)
-                    if np.any(~np.isfinite(weight_sum)) or np.any(weight_sum <= 0.0):
+                    if np.any(~np.isfinite(weight_sum)):
                         raise AssertionError("MappingQuality weight_sum_runtime contains invalid values")
+                    if runtime_valid is None:
+                        if np.any(weight_sum <= 0.0):
+                            raise AssertionError("MappingQuality weight_sum_runtime contains invalid values")
+                    elif np.any(runtime_valid & (weight_sum <= 0.0)):
+                        raise AssertionError("runtime-valid cells have non-positive weight_sum_runtime")
                     optional_shapes = (
                         ("MappingQuality/target_bvol_cc", (nj, ni)),
                         ("MappingQuality/target_bvol_corner", (nj + 1, ni + 1)),

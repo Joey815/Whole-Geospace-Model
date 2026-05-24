@@ -119,6 +119,20 @@ def parse_args():
         ),
     )
     parser.add_argument(
+        "--runtime-mask-policy",
+        choices=("finite", "coverage", "coverage_closed", "coverage_closed_no_extrap"),
+        default="finite",
+        help=(
+            "Coverage policy used for /RaiCplMomentsOnly runtime masks. finite "
+            "keeps the historical behavior and masks only non-finite mapped "
+            "values. coverage additionally requires positive sparse mapping "
+            "coverage and weight sum. coverage_closed also requires the "
+            "mapping-file closed_field_mask. coverage_closed_no_extrap also "
+            "rejects extrapolated cells. Non-finite policies other than finite "
+            "require --mapping-mode weights. Default: finite."
+        ),
+    )
+    parser.add_argument(
         "--sami3-grid-dir",
         default=None,
         help=(
@@ -629,7 +643,9 @@ def map_weight_file_2d(arr, weight_info):
     return runtime.T
 
 
-def build_mapping_quality_from_weights(mapped, target_shape, weight_info):
+def build_mapping_quality_from_weights(
+    mapped, target_shape, weight_info, runtime_valid_mask=None, runtime_mask_policy="finite"
+):
     result = build_mapping_quality("weights", mapped, target_shape)
     datasets = result["datasets"]
     summary = result["summary"]
@@ -639,6 +655,7 @@ def build_mapping_quality_from_weights(mapped, target_shape, weight_info):
     attrs["weight_file_physical_validity"] = str(
         weight_info["summary"]["weight_file_physical_validity"]
     )
+    attrs["runtime_mask_policy"] = runtime_mask_policy
     datasets.update(
         {
             "source_l": {
@@ -683,6 +700,22 @@ def build_mapping_quality_from_weights(mapped, target_shape, weight_info):
             },
         }
     )
+    if runtime_valid_mask is not None:
+        datasets["runtime_valid_mask"] = {
+            "data": runtime_valid_mask.astype(np.uint8),
+            "units": "logical",
+            "description": (
+                "Final runtime coverage mask applied to /RaiCplMomentsOnly/*_mask; "
+                "HDF5 order j,i."
+            ),
+        }
+        summary["runtime_mask_policy"] = runtime_mask_policy
+        summary["runtime_valid_cell_count"] = int(np.count_nonzero(runtime_valid_mask))
+        summary["runtime_valid_fraction"] = (
+            float(np.count_nonzero(runtime_valid_mask)) / float(runtime_valid_mask.size)
+            if runtime_valid_mask.size
+            else 0.0
+        )
     optional_geometry = {
         "target_bvol_cc": (
             "target_bvol_cc",
@@ -736,6 +769,24 @@ def build_mapping_quality_from_weights(mapped, target_shape, weight_info):
             }
     summary.update(weight_info["summary"])
     return result
+
+
+def build_runtime_valid_mask_j_i(policy, mapping_mode, target_shape, weight_info=None):
+    ni, nj = target_shape
+    if policy == "finite":
+        return np.ones((nj, ni), dtype=bool)
+    if mapping_mode != "weights" or weight_info is None:
+        raise ValueError(
+            "--runtime-mask-policy {0} requires --mapping-mode weights".format(policy)
+        )
+    coverage = weight_info["coverage_count"] > 0
+    weight_sum_ok = np.isfinite(weight_info["weight_sum"]) & (weight_info["weight_sum"] > TINY)
+    valid = coverage & weight_sum_ok
+    if policy in ("coverage_closed", "coverage_closed_no_extrap"):
+        valid &= weight_info["closed_field_mask"].astype(bool)
+    if policy == "coverage_closed_no_extrap":
+        valid &= ~weight_info["extrapolation_flag"].astype(bool)
+    return valid
 
 
 def build_mapping_metadata_from_weights(target_shape, weight_info):
@@ -956,7 +1007,9 @@ def build_raicpl_runtime_layout(
     sami3_grid_dir,
     template_path,
     mapping_weight_file,
+    runtime_mask_policy,
 ):
+    weight_info = None
     if mapping_mode == "index":
         mapped = {name: resize_2d(arrays[name], target_shape) for name in MOMENTS}
         mapping_metadata = build_mapping_metadata("index", target_shape)
@@ -996,19 +1049,40 @@ def build_raicpl_runtime_layout(
             for name in MOMENTS
         }
         mapping_metadata = build_mapping_metadata_from_weights(target_shape, weight_info)
-        mapping_quality = build_mapping_quality_from_weights(mapped, target_shape, weight_info)
+        runtime_valid_mask = build_runtime_valid_mask_j_i(
+            runtime_mask_policy, mapping_mode, target_shape, weight_info
+        )
+        mapping_quality = build_mapping_quality_from_weights(
+            mapped,
+            target_shape,
+            weight_info,
+            runtime_valid_mask=runtime_valid_mask,
+            runtime_mask_policy=runtime_mask_policy,
+        )
     else:
         raise ValueError("unsupported mapping mode: {0}".format(mapping_mode))
 
+    runtime_valid_mask = build_runtime_valid_mask_j_i(
+        runtime_mask_policy, mapping_mode, target_shape, weight_info
+    )
     out = {}
     masks = {}
     for name in ("Pavg", "Davg", "Pstd", "Dstd"):
         out[name] = np.zeros((n_channels, target_shape[1], target_shape[0]), dtype=np.float32)
         masks[name] = np.zeros_like(out[name], dtype=np.float32)
         out[name][channel, :, :] = mapped[name].T.astype(np.float32)
-        masks[name][channel, :, :] = np.isfinite(mapped[name]).T.astype(np.float32)
+        masks[name][channel, :, :] = (
+            np.isfinite(mapped[name]).T & runtime_valid_mask
+        ).astype(np.float32)
     out["tiote"] = mapped["tiote"].T.astype(np.float32)
-    masks["tiote"] = np.isfinite(mapped["tiote"]).T.astype(np.float32)
+    masks["tiote"] = (np.isfinite(mapped["tiote"]).T & runtime_valid_mask).astype(np.float32)
+    mapping_metadata["runtime_mask_policy"] = runtime_mask_policy
+    mapping_metadata["runtime_valid_cell_count"] = int(np.count_nonzero(runtime_valid_mask))
+    mapping_metadata["runtime_valid_fraction"] = (
+        float(np.count_nonzero(runtime_valid_mask)) / float(runtime_valid_mask.size)
+        if runtime_valid_mask.size
+        else 0.0
+    )
     mapping_metadata["mapped_stats"] = [
         finite_stats("RaiCplMomentsOnly.Pavg_mapped", mapped["Pavg"]),
         finite_stats("RaiCplMomentsOnly.Davg_mapped", mapped["Davg"]),
@@ -1273,6 +1347,7 @@ def main():
             args.sami3_grid_dir,
             args.raicpl_template,
             args.mapping_weight_file,
+            args.runtime_mask_policy,
         )
         raicpl_runtime_layout["mapping_mode"] = args.mapping_mode
     elif args.mapping_mode != "index":

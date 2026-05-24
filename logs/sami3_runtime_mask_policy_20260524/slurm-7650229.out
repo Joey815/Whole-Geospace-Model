@@ -1,0 +1,34 @@
+job_id=7650229
+partition=intel
+node_list=qhcn335
+start_time=2026-05-24 20:04:15 +0800
+run_dir=/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_policy_mask_20260524
+voltron_exe=/home/jiaoy_group/jiaoy/data/MAGE1.25/build_gr_sami3_moments_20260523/bin/voltron.x
+hostname=qhcn335
+python=/apps/support/intel_spr_rocky8.9/anaconda/2024.10/bin/python
+omp_threads=8
+kmp_stacksize=512M
+omp_stacksize=512M
+ldd_missing=0
+
+===== BASELINE POLICY-MASK SMOKE =====
+===== VOLTRON TUBESHELL LON0 POLICY-MASK PRODUCT SMOKE =====
+run_complete=1
+end_time=2026-05-24 20:06:18 +0800
+-rw-r--r-- 1 jiaoy jiaoy_group  63M May 24 20:06 sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.gam.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   78 May 24 20:06 sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.gam.Res.XXXXX.h5 -> sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.gam.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  59M May 24 20:06 sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.gam.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  19M May 24 20:06 sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.gamCpl.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   81 May 24 20:06 sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.gamCpl.Res.XXXXX.h5 -> sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.gamCpl.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 1.7M May 24 20:06 sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.gamCpl.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 6.3M May 24 20:06 sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.mix.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   78 May 24 20:06 sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.mix.Res.XXXXX.h5 -> sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.mix.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  33M May 24 20:06 sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.mix.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 3.6M May 24 20:06 sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.raiCpl.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   81 May 24 20:06 sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.raiCpl.Res.XXXXX.h5 -> sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.raiCpl.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 129M May 24 20:06 sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.raiju.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   80 May 24 20:06 sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.raiju.Res.XXXXX.h5 -> sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.raiju.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  38M May 24 20:06 sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.raiju.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  27M May 24 20:06 sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.volt.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   79 May 24 20:06 sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.volt.Res.XXXXX.h5 -> sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.volt.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  19M May 24 20:06 sami3_moments_tubeshell_lon0_policy_mask_D005_P005_stateTiote.volt.h5
