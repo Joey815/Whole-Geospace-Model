@@ -213,8 +213,9 @@ Strict validation and HDF5 summary artifacts have been committed and pushed.
    and push to GitHub.
 5. If the full WACCM-X jobs remain queued, continue implementation work on the
    remaining production blockers:
-   - strict same-call-site live-vs-offline source-state validation,
-   - production top-blend policy,
+   - production cadence/f09 live source-state validation beyond the current
+     f19 same-call-site replay gate,
+   - production top-blend height and per-variable policy,
    - direct live REMIX/Voltron phi producer to online MPI sender path,
    - true traced flux-tube volume map for SAMI3 -> RAIJU/GAMERA,
    - finer f09/distributed remap design.
@@ -233,3 +234,6 @@ The mapping-product validator now gates `/RaiCplMomentsOnly` plus
 `/MappingQuality` products before runtime ingest.  The direct-wait validator
 now distinguishes a completed pre-generated phi payload from a same-job
 producer/waiter path.
+
+The WACCM-X archive gate now also checks the live metadata schema, phi payload
+content, top-blend policy diagnostics, and runtime-map/ESMF weight consistency.

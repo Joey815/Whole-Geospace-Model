@@ -432,10 +432,10 @@ Do not describe this snapshot as production live WACCM-X neutral forcing until
 these are handled:
 
 ```text
-strict same-call-site offline-vs-live source-state validation
+production cadence/f09 live source-state validation beyond the current f19 live-dump replay gate
 production choice of WACCM-X-top blending heights and per-variable policy
-He native/MSIS fallback policy hardening
-W-off / vertical-wind policy validation
+He native/MSIS fallback policy review beyond the current enforced native fallback
+W-off / vertical-wind policy review beyond the current enforced zero-W payload
 REMIX -> SAMI3 potential/E-field forcing
 connect the live REMIX producer directly to the online MPI phi payload path
 and remove the replayed HDF5/source-package stage
@@ -443,7 +443,7 @@ production SAMI3 -> RAIJU/GAMERA Voltron-consistent flux-tube weighting
 replace prototype lon0/bin-center bvol weighting with a true traced-tube flux-volume map
 production SAMI3 -> RAIJU/GAMERA geometry/mask coverage policy
 longer runtime scans for density, pressure, and tiote blending
-longer-duration stability scan beyond the 900 second recommended prototype
+complete and archive the running 1800 second recommended prototype
 f09/finer distributed remap design
 ```
 
