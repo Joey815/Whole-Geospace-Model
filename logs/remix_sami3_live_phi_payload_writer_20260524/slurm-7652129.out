@@ -1,0 +1,15 @@
+job_id=7652129
+partition=intel
+node_list=qhcn290
+start_time=2026-05-24 22:59:27 +0800
+run_dir=/home/jiaoy_group/jiaoy/data/MAGE1.25/experiments/remix_sami3_live_phi_payload_writer_20260524
+voltron_exe=/home/jiaoy_group/jiaoy/data/MAGE1.25/build_gr_sami3_moments_20260523/bin/voltron.x
+hostname=qhcn290
+python=/apps/support/intel_spr_rocky8.9/anaconda/2024.10/bin/python
+omp_threads=8
+kmp_stacksize=512M
+omp_stacksize=512M
+ldd_missing=0
+weimer_grid=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_20260523_0000/weimer_grid.dat
+
+slurmstepd-qhcn290: error: *** JOB 7652129 ON qhcn290 CANCELLED AT 2026-05-24T23:03:36 ***

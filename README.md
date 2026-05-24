@@ -5,8 +5,9 @@ Snapshot date: 2026-05-24 CST
 This repository is a compact collaboration package for the local
 MAGE1.25-WACCMX and WACCM-X -> SAMI3 online MPI coupling work.  It intentionally
 contains code, notes, run scripts, and small verification artifacts, but not
-large model outputs, compiled executables, generated payload binaries, full
-CESM/MAGE/SAMI3 source trees, or input datasets.
+large model outputs, compiled executables, full CESM/MAGE/SAMI3 source trees,
+or input datasets.  A few small generated payloads/HDF5 files are included
+only when they are direct validation evidence.
 
 ## Current Status
 
@@ -92,6 +93,14 @@ auto-detecting `remix_sami3_phi_payload.v1`, sending two frames over the same
 MPI tags 220-223, SAMI3 advancing from `hrutw2=1.0e-3` to the final `1.0e30`
 marker, receiver QC replay again matching to `4.86991e-13`, and
 `MASTER: All Done!`.
+The Kaiju/Voltron-side live REMIX POT writer is now implemented behind
+`WACCMX_SAMI3_PHI_PAYLOAD_FILE`.  The writer converts captured runtime
+`gcm%APEX%gcmOutput(...,POT)` to the same `remix_sami3_phi_payload.v1` binary
+schema.  Smoke job 7652185 wrote a valid one-frame 125x97 payload with
+min/max `-36.93061447143555 / 31.483816146850586 statV`; comparison against
+the Python HDF5 adapter from the same package gave `max_abs_diff=3.8147e-06
+statV`.  The job was cancelled after artifact validation, so this validates
+the writer and payload contents, not a clean Voltron exit condition.
 Runtime blending is validated with alpha=0 exact baseline recovery.
 Density alpha scan is finite and continuous through alphaDavg=0.20.
 Pressure alpha scan at alphaDavg=0.05 is finite for alphaPavg=0.05 and 0.10.
@@ -130,6 +139,7 @@ remix phi 2frame rt  = 7651608, COMPLETED, exit 0:0
 remix phi append rt  = 7651789, COMPLETED, exit 0:0
 remix phi mpi rt     = 7651874, COMPLETED, exit 0:0
 remix phi bin mpi rt = 7651957, COMPLETED, exit 0:0
+remix live writer    = 7652185, payload validated, cancelled after evidence
 ```
 
 Latest receiver checks:

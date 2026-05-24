@@ -1,0 +1,76 @@
+REMIX runtime POT -> SAMI3 phi binary payload writer smoke, 2026-05-24
+
+Goal:
+  Add an env-gated Kaiju/Voltron-side writer that converts runtime REMIX POT
+  to the existing remix_sami3_phi_payload.v1 binary schema consumed by the
+  SAMI3 online phi receiver path.
+
+Source tree:
+  /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523
+
+Build:
+  git diff --check -- src/remix/waccmx_stub_backend.F90
+  make -C /home/jiaoy_group/jiaoy/data/MAGE1.25/build_gr_sami3_moments_20260523 remixlib voltron.x -j 4
+  Result: [100%] Built target voltron.x
+
+Runtime smoke:
+  Run directory:
+    /home/jiaoy_group/jiaoy/data/MAGE1.25/experiments/remix_sami3_live_phi_payload_writer_20260524
+  Slurm script:
+    run_live_phi_payload_writer.sbatch
+  Final evidence job:
+    7652185 on qhcn290
+  Note:
+    The job was cancelled after the payload and HDF5 comparison artifacts were
+    written, to avoid holding the compute node while the shortened smoke loop
+    continued. This validates the writer path and payload contents, not a
+    clean end-to-end Voltron exit condition.
+
+Payload file:
+  remix_sami3_phi_payload_live_from_remix.bin
+
+Payload readback:
+  bytes = 48532
+  header = [20260524, 1, 125, 97, 1]
+  frame_index = 0
+  frame_hour = 0.0
+  valid_until = 1.0000000150474662e+30
+  nvalues = 12125
+  min/max statV = -36.93061447143555 / 31.483816146850586
+  finite = True
+  nonzero_count = 3492
+
+Voltron log evidence:
+  source_min/max kV = -11.1173050129855 / 9.57916846795794
+  payload_min/max statV = -36.93061 / 31.48382
+
+Python adapter comparison against the same HDF5 package:
+  HDF5 package = waccmx_voltron_forward_package.h5
+  HDF5 group = NORTH_APEX
+  Fortran writer min/max statV = -36.93061447143555 / 31.483816146850586
+  Python adapter min/max statV  = -36.93061447143555 / 31.483814239501953
+  max_abs_diff_statV = 3.814697265625e-06
+  rms_diff_statV = 2.3203213410765008e-07
+  finite_fortran = True
+  finite_python = True
+  nonzero_fortran = 3492
+  nonzero_python = 3492
+
+Issues found and fixed during this smoke:
+  1. weimer_grid.dat is written as one formatted record containing both target
+     latitude and longitude arrays. The first Fortran reader incorrectly
+     assumed one value per read.
+  2. The writer now uses the captured APEX POT export
+     gcm%APEX%gcmOutput(hemi,1)%var, matching the HDF5 package source field.
+  3. Kaiju/Fortran REMIX arrays are native (lon,lat), while the Python/HDF5
+     view is (lat,lon). The writer now transposes to an internal (lat,lon)
+     interpolation buffer before remapping to the SAMI3 Weimer grid.
+
+Remaining limitations:
+  - This is still a file-boundary payload writer, not direct Voltron -> SAMI3
+    MPI transfer.
+  - NORTH was validated. SOUTH is selectable through WACCMX_SAMI3_PHI_HEMI but
+    still needs a separate smoke.
+  - The shortened WACCMX_FILE smoke did not provide a clean natural exit before
+    cancellation; add a one-shot writer/exit guard or a smaller dedicated
+    writer unit smoke before treating this as a production run harness.

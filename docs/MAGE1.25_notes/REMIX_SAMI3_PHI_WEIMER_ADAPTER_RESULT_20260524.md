@@ -570,25 +570,90 @@ logs/remix_sami3_phi_weimer_mpi_payload_bin_runtime_20260524/slurm_7651957.err
 ```
 
 This removes the SAMI3 file-format dependency from the sender-side replay path.
-The remaining replay element is now the HDF5 source-package stage: the payload
-is generated from archived `waccmx_voltron_forward_package.h5` files, not yet
-from a live REMIX runtime call.
+
+## Runtime REMIX Payload Writer
+
+The next file-boundary step is now implemented in the copied Kaiju tree:
+
+```text
+/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523
+```
+
+Code archived here:
+
+```text
+code/kaiju_sami3_moments/src/remix/waccmx_stub_backend.F90
+```
+
+The `WACCMX_FILE`/stub package writer now has an env-gated producer:
+
+```text
+WACCMX_SAMI3_PHI_PAYLOAD_FILE=/path/remix_sami3_phi_payload_live_from_remix.bin
+WACCMX_SAMI3_WEIMER_GRID=/path/weimer_grid.dat
+WACCMX_SAMI3_PHI_HEMI=NORTH|SOUTH
+WACCMX_SAMI3_PHI_FRAME_HOUR=...
+WACCMX_SAMI3_PHI_VALID_UNTIL_HOUR=...
+```
+
+When enabled, it converts the captured live REMIX APEX `POT` export into the
+same `remix_sami3_phi_payload.v1` binary schema used by the validated online
+MPI sender:
+
+```text
+int32 header = [20260524, 1, nlat, nlon, nframes]
+int32 frame_index
+float32 frame_hour
+float32 valid_until_hour
+float32 phi_statV(nlat,nlon), Fortran order
+```
+
+The runtime smoke used:
+
+```text
+logs/remix_sami3_live_phi_payload_writer_20260524/run_live_phi_payload_writer.sbatch
+logs/remix_sami3_live_phi_payload_writer_20260524/live_phi_payload_writer.out
+logs/remix_sami3_live_phi_payload_writer_20260524/remix_sami3_phi_payload_live_from_remix.bin
+logs/remix_sami3_live_phi_payload_writer_20260524/waccmx_voltron_forward_package.h5
+logs/remix_sami3_live_phi_payload_writer_20260524/comparison_summary.txt
+```
+
+Validation result:
+
+```text
+payload header = [20260524, 1, 125, 97, 1]
+payload min/max = -36.93061447143555 / 31.483816146850586 statV
+finite = True
+nonzero_count = 3492
+
+Fortran writer vs Python adapter from the same HDF5 package:
+max_abs_diff_statV = 3.814697265625e-06
+rms_diff_statV = 2.3203213410765008e-07
+```
+
+Important implementation fixes from the smoke:
+
+```text
+weimer_grid.dat is one formatted record containing both target arrays
+Kaiju REMIX arrays are native (lon,lat), while HDF5/Python views are (lat,lon)
+the writer must use captured gcm%APEX%gcmOutput(...,POT), matching the package
+```
 
 ## Current Limitation
 
 This adapter proves the file-format bridge and static SAMI3 runtime ingestion
 path, a two-frame runtime transition through SAMI3's existing Weimer reader,
 and a runtime append stream visible to that reader.  It now also proves the
-rank-0 online MPI phi payload path and a sender-side versioned binary payload
-that no longer depends on `phi_weimer.inp`.  It does not yet prove production
-REMIX -> SAMI3 electrodynamic consistency.
+rank-0 online MPI phi payload path, a sender-side versioned binary payload
+that no longer depends on `phi_weimer.inp`, and a Kaiju/Voltron-side live REMIX
+POT -> binary payload writer.  It does not yet prove production REMIX -> SAMI3
+electrodynamic consistency.
 
 Known limitations:
 
 ```text
 uses NORTH_APEX only by default
-the latest smoke still generates payloads from archived REMIX HDF5 packages
-instead of a live REMIX runtime producer
+the latest live REMIX producer still writes a file-boundary payload rather than
+direct Voltron -> SAMI3 MPI
 does not yet handle southern-hemisphere sign/mirroring policy
 uses direct mlat/mlon interpolation, not a full SAMI3 field-line mapping
 sets target mlat < 45 deg to zero because the source package is high-lat only
@@ -596,12 +661,13 @@ sets target mlat < 45 deg to zero because the source package is high-lat only
 
 ## Next Step
 
-The next implementation step is connecting the live REMIX producer directly to
-the validated versioned MPI phi payload:
+The next implementation step is replacing the file boundary between the live
+REMIX producer and SAMI3 with direct MPI or a synchronized append/update
+contract:
 
 ```text
 REMIX/POT live time sequence
--> versioned phi payload
+-> versioned phi payload frames
 -> SAMI3 potential.f90:weimer read/update at coupling cadence
 -> exb(hrut, phi)
 ```

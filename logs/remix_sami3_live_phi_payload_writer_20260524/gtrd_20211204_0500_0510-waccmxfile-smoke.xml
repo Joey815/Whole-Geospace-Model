@@ -1,0 +1,46 @@
+<Kaiju>
+  <REMIX>
+    <conductance doStarlight="T" apply_cap="T" const_sigma="F" />
+    <precipitation aurora_model_type="LINMRG" beta="0.2" doAuroralSmooth="F" />
+  </REMIX>
+  <Gamera>
+    <sim runid="gtrd_20211204_0500_0510" doH5g="T" H5Grid="lfmD.h5" icType="user" pdmb="0.75" rmeth="8C" />
+    <floors dFloor="1.0e-4" pFloor="1.0e-6" />
+    <timestep doCPR="T" limCPR="0.20" />
+    <restart doRes="T" resID="gtrd_20211204_0500_0510" nRes="0" />
+    <physics doMHD="T" doBoris="T" Ca="10.0" />
+    <ring gid="lfm" doRing="T" />
+    <wind tsfile="bcwind.h5" />
+    <source doSource="T" doWolfLim="T" doBounceDT="T" nBounce="1.0" />
+    <iPdir N="1" bcPeriodic="F" />
+    <jPdir N="1" bcPeriodic="F" />
+    <kPdir N="1" bcPeriodic="T" />
+    <coupling blockHalo="T" />
+  </Gamera>
+  <RAIJU>
+    <output loudConsole="F" />
+    <grid gType="SHGRID" ThetaL="15" />
+    <domain tail_buffer="15.0" sun_buffer="15.0" tail_active="12.0" sun_active="12.0" />
+    <config fname="raijuconfig.h5" />
+    <plasmasphere doPsphere="T" doExcessMap="T" />
+    <losses doLosses="T" doCX="T" doCC="T" doEWM="T" ewmType="SS" />
+    <cpl nFluidsIn="1" startupTscl="7200.0" />
+    <fluidIn1 imhd="0" flav="2" excessToPsph="T" />
+  </RAIJU>
+  <CHIMP>
+    <units uid="EARTHCODE" />
+    <fields grType="lfm" />
+    <domain dtype="MAGE" />
+    <tracer epsds="0.05" />
+  </CHIMP>
+  <VOLTRON>
+    <time tFin="6.0" />
+    <spinup doSpin="F" tSpin="7200.0" />
+    <output dtOut="300.0" dtCon="300" />
+    <coupling doGCM="T" gcmBackend="WACCMX_FILE" dtCouple="5.0" imType="RAIJU" doQkSquish="T" qkSquishStride="2" doAsyncCoupling="F" />
+    <restart dtRes="600.0" />
+    <imag doInit="T" />
+    <helpers numHelpers="0" useHelpers="F" doSquishHelp="F" />
+    <waccmxFile contractFile="waccmx_voltron_contract.txt" exchangeFile="waccmx_voltron_exchange.md" packageFile="waccmx_voltron_forward_package.h5" feedbackFile="waccmx_voltron_feedback_package.h5" sigmap_floor="5.0" sigmah_floor="2.0" sigmap_oval="10.0" sigmah_oval="6.0" stopAfterExport="T" />
+  </VOLTRON>
+</Kaiju>
