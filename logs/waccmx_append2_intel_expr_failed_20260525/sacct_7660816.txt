@@ -1,0 +1,4 @@
+JobID|JobName|State|ExitCode|Elapsed|NodeList|MaxRSS
+7660816|wxsami3_ap2x|FAILED|1:0|00:00:01|qhcn817|
+7660816.batch|batch|FAILED|1:0|00:00:01|qhcn817|0
+7660816.extern|extern|COMPLETED|0:0|00:00:01|qhcn817|0
