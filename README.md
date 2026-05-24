@@ -56,6 +56,14 @@ The same `bin_bvol_cc` mapping also validates with `density-mode=massEq` and
 `pressure-mode=total`: job 7651166 completed 0:0 with conservative
 alphaDavg/alphaPavg=0.01, exact blend formula checks, and no non-finite checked
 RAIJU physics fields.
+The stage-2 mapping products now have a repeatable HDF5 QC gate:
+`scripts/validate_sami3_raiju_mapping_product.py` validates
+`/RaiCplMomentsOnly` and `/MappingQuality` finite values, masks, coverage,
+extrapolation, coordinate ranges, and sparse weight sums.  The existing inline
+L/MLT product validates with 100% runtime coverage, and the current
+Voltron TubeShell `bin_bvol_cc` product validates with 70.21% runtime coverage,
+positive coverage on all valid cells, no extrapolation, and weight-sum
+deviation `1.19e-7`.
 The REMIX -> SAMI3 electric-potential path now has an offline prototype
 adapter: `scripts/remix_sami3/remix_pot_to_sami3_phi_weimer.py` maps a
 MAGE/REMIX `POT[kV]` HDF5 export to SAMI3's existing `phi_weimer.inp` route.
@@ -248,6 +256,7 @@ docs/MAGE1.25_notes/SAMI3_RAIJU_VOLTRON_SHELL_RUNTIME_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_VOLTRON_TUBESHELL_WEIGHT_FILE_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_TUBESHELL_BIN_BVOLCC_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_TUBESHELL_BIN_BVOLCC_MASSEQ_TOTAL_RESULT_20260524.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_MAPPING_PRODUCT_VALIDATOR_20260525.md
 docs/MAGE1.25_notes/REMIX_SAMI3_PHI_WEIMER_ADAPTER_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_RUNTIME_BLEND_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_STAGE2_SOURCE_MODES_RESULT_20260524.md
@@ -299,6 +308,7 @@ Current SAMI3 -> RAIJU validation/archive scripts:
 scripts/validate_sami3_raiju_longrun.py
 scripts/summarize_sami3_raiju_longrun.py
 scripts/archive_sami3_raiju_longrun_result.py
+scripts/validate_sami3_raiju_mapping_product.py
 ```
 
 Current SAMI3 -> RAIJU scalar-moments adapter snapshot:
@@ -388,6 +398,7 @@ logs/sami3_voltron_shell_runtime_20260524/
 logs/sami3_voltron_tubeshell_weightfile_20260524/
 logs/sami3_tubeshell_bin_bvolcc_20260524/
 logs/sami3_tubeshell_bin_bvolcc_massEq_total_20260524/
+logs/sami3_mapping_product_validation_20260525/
 ```
 
 ## Known Physical Blockers
