@@ -316,6 +316,7 @@ Current WACCM-X -> SAMI3 validation scripts:
 ```text
 scripts/validate_wxsami3_live_packet_contract.py
 scripts/validate_wxsami3_topblend_policy.py
+scripts/validate_wxsami3_runtime_map.py
 scripts/validate_wxsami3_append2_run.py
 scripts/archive_wxsami3_append2_result.py
 scripts/compare_wxsami3_recv_qc.py
@@ -414,6 +415,7 @@ logs/waccmx_topblend_policy_validation_20260525/
 logs/waccmx_phi_payload_content_validation_20260525/
 logs/waccmx_live_meta_contract_20260525/
 logs/waccmx_runtime_map_dynamic_nsource_20260525/
+logs/waccmx_runtime_map_validation_20260525/
 logs/sami3_weightfile_mapping_20260524/
 logs/sami3_weightfile_bvol_geometry_20260524/
 logs/sami3_voltron_shell_weightfile_20260524/

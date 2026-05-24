@@ -39,6 +39,24 @@ removes a concrete f19-only assumption from the runtime-map artifact schema.
 
 ## Validation
 
+Runtime map validator:
+
+```text
+scripts/validate_wxsami3_runtime_map.py
+```
+
+It checks:
+
+```text
+runtime-map header magic/version/npoints/nsource
+binary size against header dimensions
+zalt finite
+row_start/row_count consistency
+col range within nsource
+weight finite values
+ESMF dimensions n_a/n_b/n_s match runtime-map nsource/npoints/n_s
+```
+
 Syntax check with the available NetCDF module:
 
 ```bash
@@ -65,10 +83,27 @@ dynamic test header = (20260524, 1, 304, 124, 96, 3618816, 14475264, 13824)
 
 The temporary map itself is not committed.
 
+Existing f19 runtime map validation:
+
+```text
+runtime_map = wxsami3_runtime_map_f19_20260523.bin
+weights_nc = weights_bilinear_f19_live.nc
+npoints = 3618816
+n_s = 14475264
+nsource = 13824
+zalt min/max = 81.54248046875 / 6046060.0
+row_count_sum = 14475264
+col min/max = 1 / 13824
+weight min/max = 0.0 / 0.9995620663524324
+weights n_a/n_b/n_s match runtime-map nsource/npoints/n_s
+overall = ok
+```
+
 ## Evidence
 
 Archived under:
 
 ```text
 logs/waccmx_runtime_map_dynamic_nsource_20260525/
+logs/waccmx_runtime_map_validation_20260525/
 ```
