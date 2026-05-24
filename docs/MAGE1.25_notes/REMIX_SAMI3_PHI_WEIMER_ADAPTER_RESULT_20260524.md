@@ -16,8 +16,8 @@ MAGE/REMIX POT[kV]
 -> exb(hrut, phi)
 ```
 
-This is an offline adapter and format validator.  It is not yet live REMIX
-forcing inside the online MPI loop.
+This is an offline adapter plus static-file runtime validator.  It is not yet
+live REMIX forcing inside the online MPI loop.
 
 ## Source-Code Audit Result
 
@@ -130,10 +130,79 @@ record 1 length = 4 bytes
 record 2 length = 48500 bytes = 125 * 97 * 4
 ```
 
+## SAMI3 Runtime Smoke
+
+A copied SAMI3 OpenMPI work tree was patched with:
+
+```text
+code/sami3_receiver/patches/use_existing_phi_weimer.patch
+```
+
+This adds `SAMI3_USE_EXISTING_PHI_WEIMER=1`, which tells SAMI3 not to run
+`test_w05sc` over the externally generated `phi_weimer.inp`.
+
+Runtime launcher:
+
+```text
+slurm/run_sami3_online_receiver_remix_phi_weimer_20260524.sbatch
+```
+
+The first run, job 7651322, timed out because the replay sender compiled by
+the launcher did not send the receiver's current `source_flags` payload
+(`tag=212`).  That blocked workers in `waccmx_recv_neutral_online`; it was not
+a REMIX-phi file-format failure.
+
+The sender stub was updated to send fallback source flags derived from the
+first neutral-density species:
+
+```text
+scripts/wxsami3_neutral_sender_stub.c
+source_flag = WACCMX_VALID if denni[0:nlocal] >= 0
+source_flag = OTHER_INVALID otherwise
+```
+
+Validated rerun:
+
+```text
+job: 7651485
+state: COMPLETED
+exit: 0:0
+elapsed: 00:01:18
+node: qhcn025
+MaxRSS: 39601304K
+```
+
+Runtime evidence:
+
+```text
+SAMI3_USE_EXISTING_PHI_WEIMER: using preexisting phi_weimer.inp
+hrutw2 = 0.00000000  1.00000002E+30
+WACCMX_RECV_QC compare ok: ranks=32 occurrence=0 step_set=[0]
+packet_hour_set=[0.0] max_abs=2.1033e+06 max_rel=4.86991e-13
+MASTER: All Done!
+WACCMX online done signal received: 1
+```
+
+No `fatal`, `forrtl`, `NaN`, `Abort`, `EOF`, or `header mismatch` markers were
+found in the runtime logs.
+
+Archived evidence:
+
+```text
+logs/remix_sami3_phi_weimer_runtime_20260524/sacct_7651485.txt
+logs/remix_sami3_phi_weimer_runtime_20260524/receiver_markers_7651485.txt
+logs/remix_sami3_phi_weimer_runtime_20260524/recv_qc_compare_7651485.txt
+logs/remix_sami3_phi_weimer_runtime_20260524/sami3_online_receiver_7651485.out
+logs/remix_sami3_phi_weimer_runtime_20260524/neutral_sender_7651485.out
+logs/remix_sami3_phi_weimer_runtime_20260524/slurm_7651485.out
+logs/remix_sami3_phi_weimer_runtime_20260524/slurm_7651485.err
+```
+
 ## Current Limitation
 
-This adapter proves the file-format and first-order grid bridge only.  It does
-not yet prove production REMIX -> SAMI3 electrodynamic consistency.
+This adapter proves the file-format bridge and static SAMI3 runtime ingestion
+path.  It does not yet prove production REMIX -> SAMI3 electrodynamic
+consistency.
 
 Known limitations:
 
@@ -143,27 +212,20 @@ does not yet handle a time sequence of REMIX potentials
 does not yet handle southern-hemisphere sign/mirroring policy
 uses direct mlat/mlon interpolation, not a full SAMI3 field-line mapping
 sets target mlat < 45 deg to zero because the source package is high-lat only
-has not yet run a SAMI3 smoke with this generated phi_weimer.inp
 ```
 
 ## Next Step
 
-Run a controlled SAMI3 smoke with:
+The next implementation step is to replace the static replay with a time-aware
+REMIX potential feed:
 
 ```text
-lweimer = T
-phi_weimer.inp = logs/remix_sami3_phi_weimer_20260524/phi_weimer_remix_north_static.inp
+REMIX/POT time sequence
+-> versioned phi payload or regenerated phi_weimer.inp sidecar
+-> SAMI3 potential.f90:weimer read/update at coupling cadence
+-> exb(hrut, phi)
 ```
 
-Compare against the current Weimer baseline:
-
-```text
-phiu.dat
-vexb-related outputs if enabled
-runtime log lines from potential.f90:weimer
-no NaN/Inf and no EOF from phi_weimer.inp
-```
-
-If that passes, the next implementation step is to add an online sender-side
-`POT` packet or sidecar update that refreshes `phi_weimer` at the coupling
-cadence, while keeping the static-file path as the replay baseline.
+Keep the static-file path as the replay baseline.  For the physical path, add
+time metadata, hemisphere policy, and a validation comparison against the
+current Weimer baseline (`phiu.dat` and E x B diagnostics if enabled).

@@ -18,7 +18,11 @@
 #define TAG_UF     209
 #define TAG_VF     210
 #define TAG_WF     211
+#define TAG_SOURCE_FLAGS 212
 #define TAG_DONE   299
+
+#define SOURCE_FLAG_WACCMX_VALID 1
+#define SOURCE_FLAG_OTHER_INVALID 4
 
 static void die(const char *msg)
 {
@@ -66,6 +70,7 @@ static void send_rank_payload(MPI_Comm peer, const char *prefix, int rank,
     size_t nlocal, nlocal4;
     float *denni, *tni, *ui, *vi, *wi;
     float *dennf, *tnf, *uf, *vf, *wf;
+    int *source_flags;
 
     snprintf(path, sizeof(path), "%s%04d.bin", prefix, rank);
     fp = fopen(path, "rb");
@@ -92,8 +97,9 @@ static void send_rank_payload(MPI_Comm peer, const char *prefix, int rank,
     uf    = malloc(nlocal  * sizeof(float));
     vf    = malloc(nlocal  * sizeof(float));
     wf    = malloc(nlocal  * sizeof(float));
+    source_flags = malloc(nlocal * sizeof(int));
     if (!denni || !tni || !ui || !vi || !wi ||
-        !dennf || !tnf || !uf || !vf || !wf) {
+        !dennf || !tnf || !uf || !vf || !wf || !source_flags) {
         die("allocation failed");
     }
 
@@ -116,6 +122,11 @@ static void send_rank_payload(MPI_Comm peer, const char *prefix, int rank,
     header[4] = nneut;
     header[5] = step;
 
+    for (size_t i = 0; i < nlocal; ++i) {
+        source_flags[i] = (denni[i] >= 0.0f) ?
+            SOURCE_FLAG_WACCMX_VALID : SOURCE_FLAG_OTHER_INVALID;
+    }
+
     MPI_Send(header, 6, MPI_INT, rank, TAG_HEADER, peer);
     MPI_Send(&packet_hour, 1, MPI_FLOAT, rank, TAG_HR, peer);
     MPI_Send(denni, (int)nlocal4, MPI_FLOAT, rank, TAG_DENNI, peer);
@@ -128,9 +139,11 @@ static void send_rank_payload(MPI_Comm peer, const char *prefix, int rank,
     MPI_Send(uf,    (int)nlocal,  MPI_FLOAT, rank, TAG_UF, peer);
     MPI_Send(vf,    (int)nlocal,  MPI_FLOAT, rank, TAG_VF, peer);
     MPI_Send(wf,    (int)nlocal,  MPI_FLOAT, rank, TAG_WF, peer);
+    MPI_Send(source_flags, (int)nlocal, MPI_INT, rank, TAG_SOURCE_FLAGS, peer);
 
     free(denni); free(tni); free(ui); free(vi); free(wi);
     free(dennf); free(tnf); free(uf); free(vf); free(wf);
+    free(source_flags);
 }
 
 int main(int argc, char **argv)

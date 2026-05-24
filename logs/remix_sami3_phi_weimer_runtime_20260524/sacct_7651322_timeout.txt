@@ -1,0 +1,5 @@
+JobID                               JobName      State ExitCode    Elapsed        NodeList     MaxRSS 
+------------ ------------------------------ ---------- -------- ---------- --------------- ---------- 
+7651322                     sami3_remix_phi     FAILED    124:0   00:15:28         qhcn025            
+7651322.bat+                          batch     FAILED    124:0   00:15:28         qhcn025  16319312K 
+7651322.ext+                         extern  COMPLETED      0:0   00:15:28         qhcn025          0 

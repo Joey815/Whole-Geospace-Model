@@ -1,0 +1,38 @@
+--- a/sami3-3.22.f90
++++ b/sami3-3.22.f90
+@@
+-	    real    :: phionrdt_euvac(linesuv_euvac,5)
++	    real    :: phionrdt_euvac(linesuv_euvac,5)
++	    logical :: use_existing_phi_weimer, phi_weimer_exists
++	    character(len=32) :: use_existing_phi_weimer_env
+@@
+-	! set up weimer by master: weimer grid / data
++	! set up weimer by master: weimer grid / data
+ 
+ 	    if ( taskid == 0 .AND. lweimer) then
+-	      call weimer_omni(imonth_1,iday_1,&
+-	           imonth_2,iday_2,iyear)  ! generates 'weiwer_data.inp'
+-	      call weimer_grid  ! generates 'weimer_grid.dat'
+-	      call test_w05sc   ! generates 'phi_weimer.inp'
++	      use_existing_phi_weimer = .false.
++	      call get_environment_variable('SAMI3_USE_EXISTING_PHI_WEIMER', &
++	           use_existing_phi_weimer_env)
++	      if (trim(use_existing_phi_weimer_env) == '1' .OR. &
++	          trim(use_existing_phi_weimer_env) == 'true' .OR. &
++	          trim(use_existing_phi_weimer_env) == 'TRUE') then
++	        use_existing_phi_weimer = .true.
++	      endif
++	      if (use_existing_phi_weimer) then
++	        inquire(file='phi_weimer.inp', exist=phi_weimer_exists)
++	        if (.NOT. phi_weimer_exists) then
++	          print *,'SAMI3_USE_EXISTING_PHI_WEIMER requested but phi_weimer.inp is missing'
++	          stop 73
++	        endif
++	        print *,'SAMI3_USE_EXISTING_PHI_WEIMER: using preexisting phi_weimer.inp'
++	      else
++	        call weimer_omni(imonth_1,iday_1,&
++	             imonth_2,iday_2,iyear)  ! generates 'weiwer_data.inp'
++	        call weimer_grid  ! generates 'weimer_grid.dat'
++	        call test_w05sc   ! generates 'phi_weimer.inp'
++	      endif
+ 	    endif

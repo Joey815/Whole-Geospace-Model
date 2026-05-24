@@ -60,8 +60,11 @@ adapter: `scripts/remix_sami3/remix_pot_to_sami3_phi_weimer.py` maps a
 MAGE/REMIX `POT[kV]` HDF5 export to SAMI3's existing `phi_weimer.inp` route.
 The first NORTH_APEX static product validates the sequential-unformatted
 layout, `kV -> statV` conversion, 125x97 target shape, and readback to
-float32 roundoff.  A SAMI3 runtime smoke using this generated file is still
-the next validation step.
+float32 roundoff.  Static runtime ingestion is validated: job 7651485 completed
+0:0 with `SAMI3_USE_EXISTING_PHI_WEIMER=1`, `hrutw2` reading the static
+`1e30` valid-until marker, exact online receiver QC replay comparison to
+4.86991e-13 relative error, `MASTER: All Done!`, and online done signal
+received.
 Runtime blending is validated with alpha=0 exact baseline recovery.
 Density alpha scan is finite and continuous through alphaDavg=0.20.
 Pressure alpha scan at alphaDavg=0.05 is finite for alphaPavg=0.05 and 0.10.
@@ -224,6 +227,8 @@ Current REMIX -> SAMI3 electric-potential offline adapter:
 ```text
 scripts/remix_sami3/remix_pot_to_sami3_phi_weimer.py
 logs/remix_sami3_phi_weimer_20260524/
+logs/remix_sami3_phi_weimer_runtime_20260524/
+slurm/run_sami3_online_receiver_remix_phi_weimer_20260524.sbatch
 ```
 
 Latest two-packet smoke launcher:
@@ -295,7 +300,7 @@ production choice of WACCM-X-top blending heights and per-variable policy
 He native/MSIS fallback policy hardening
 W-off / vertical-wind policy validation
 REMIX -> SAMI3 potential/E-field forcing
-SAMI3 runtime smoke using generated REMIX-derived phi_weimer.inp
+time-aware REMIX -> SAMI3 potential refresh beyond static phi_weimer replay
 production SAMI3 -> RAIJU/GAMERA Voltron-consistent flux-tube weighting
 replace prototype lon0/bin-center bvol weighting with a true traced-tube flux-volume map
 production SAMI3 -> RAIJU/GAMERA geometry/mask coverage policy
