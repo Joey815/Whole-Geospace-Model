@@ -30,12 +30,12 @@ RUNS = {
         "extra_flags": [],
     },
     "directwait": {
-        "job_id": "7661005",
+        "job_id": "7665666",
         "run_dir": (
             "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/"
             "waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000"
         ),
-        "archive_dir": "logs/waccmx_append2_directwait_20260525",
+        "archive_dir": "logs/waccmx_append2_directwait_fixed_20260525",
         "extra_flags": ["--expect-phi-wait-marker", "--expect-direct-wait-mode"],
     },
 }

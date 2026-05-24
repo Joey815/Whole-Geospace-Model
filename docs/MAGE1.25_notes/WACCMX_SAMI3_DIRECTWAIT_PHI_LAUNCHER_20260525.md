@@ -102,3 +102,21 @@ DIRECT_WAIT_MODE=1
 VOLTRON_WRITER_PID=<pid>
 WXSAMI3 phi payload ready after wait
 ```
+
+## Fixed Result
+
+The fixed direct-wait job completed successfully after the little-endian wait
+patch:
+
+```text
+jobid = 7665666
+state = COMPLETED
+exit = 0:0
+archive = logs/waccmx_append2_directwait_fixed_20260525/
+result note = docs/MAGE1.25_notes/WACCMX_SAMI3_DIRECTWAIT_FIXED_RESULT_20260525.md
+```
+
+The launcher now stops the background Voltron writer after CESM/SAMI3 have
+completed, because the direct-wait validation only needs the generated payload
+and receiver confirmation.  This prevents the Slurm job from idling after the
+online path itself has already passed.

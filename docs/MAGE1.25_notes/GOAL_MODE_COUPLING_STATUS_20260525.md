@@ -250,3 +250,59 @@ Next immediate gate: commit/push this failure archive and endian wait fix, then
 rerun direct-wait.  Acceptance is no timeout, two sender phi frames, two
 receiver `WACCMX_PHI_RECV` records, receiver `MASTER: All Done!`, and strict
 direct-wait archive `ok=true`.
+
+## 2026-05-25 05:14 CST Update
+
+The fixed direct-wait run passed:
+
+```text
+jobid = 7665666
+jobname = wxsami3_ap2w
+state = COMPLETED
+exit = 0:0
+elapsed = 00:08:05
+node = qhcn644
+archive = logs/waccmx_append2_directwait_fixed_20260525/
+doc = docs/MAGE1.25_notes/WACCMX_SAMI3_DIRECTWAIT_FIXED_RESULT_20260525.md
+archive ok = true
+```
+
+Key online markers:
+
+```text
+VOLTRON_WRITER_PID=2928528
+DIRECT_WAIT_MODE=1
+WXSAMI3 phi payload ready after wait ... size=97044 elapsed=1
+WXSAMI3 sent phi payload frames: 2
+WACCMX_PHI_RECV records: 2
+MASTER: All Done!
+END OF MODEL RUN
+```
+
+Strict gates passed:
+
+```text
+validate_wxsami3_append2_run = overall=ok
+validate_remix_sami3_phi_payload = overall=ok
+validate_wxsami3_source_flag_balance = overall=ok
+validate_wxsami3_live_packet_contract = returncode 0
+validate_wxsami3_time_axis = returncode 0
+validate_wxsami3_topblend_policy = returncode 0
+validate_wxsami3_runtime_map = returncode 0
+```
+
+The direct-wait launcher is patched so future runs stop the background Voltron
+writer after CESM/SAMI3 complete.  In this fixed run the writer had already
+produced the two-frame payload and the receiver had completed; manual stop was
+used only to let the Slurm script continue to summary/replay QC instead of
+idling on the standalone writer.
+
+Immediate next work should move from control-path validation to production
+coupling hardening:
+
+```text
+1. Replace file payload phi producer with a direct REMIX/Voltron -> SAMI3 online handoff.
+2. Make f09/distributed live neutral remap explicit instead of f19 root-gather prototype.
+3. Turn the top-blend policy into a production per-variable contract.
+4. Continue SAMI3 -> RAIJU/GAMERA physical blockers: traced flux-tube weighting and geometry mapping.
+```

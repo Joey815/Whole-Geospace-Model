@@ -1,0 +1,160 @@
+{
+  "checks": [
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000",
+      "name": "run_dir_exists",
+      "ok": true
+    },
+    {
+      "detail": "sender_packets=1 expected=1",
+      "name": "sender_neutral_packet_count",
+      "ok": true
+    },
+    {
+      "detail": "receiver_packets=1 expected=1",
+      "name": "receiver_neutral_packet_count",
+      "ok": true
+    },
+    {
+      "detail": "{0: {'count': 51, 'unique_tasks': 32, 'hour_min': 0.0, 'hour_max': 0.0}}",
+      "name": "receiver_packet_hours_consistent",
+      "ok": true
+    },
+    {
+      "detail": "receiver_hours=[0.0]",
+      "name": "receiver_packet_hours_monotonic",
+      "ok": true
+    },
+    {
+      "detail": "unique_tasks=[32] expected=32",
+      "name": "receiver_worker_coverage",
+      "ok": true
+    },
+    {
+      "detail": "matched=1 sender_hours=[0.0] receiver_hours=[0.0]",
+      "name": "sender_receiver_neutral_hours_match",
+      "ok": true
+    },
+    {
+      "detail": "frames=2 expected=2",
+      "name": "phi_payload_frame_count",
+      "ok": true
+    },
+    {
+      "detail": "hours=[0.0, 0.0013888889225199819]",
+      "name": "phi_payload_hours_strictly_increasing",
+      "ok": true
+    },
+    {
+      "detail": "hours=[0.0, 0.0013888889225199819] valid_until=[0.0013888889225199819, 1.0000000150474662e+30]",
+      "name": "phi_payload_valid_until_links",
+      "ok": true
+    },
+    {
+      "detail": "uncovered_neutral_hours=[]",
+      "name": "phi_payload_covers_neutral_packets",
+      "ok": true
+    },
+    {
+      "detail": "receiver_phi_records=2 expected_min=2",
+      "name": "receiver_phi_frame_count",
+      "ok": true
+    },
+    {
+      "detail": "records=2",
+      "name": "receiver_phi_records_within_validity",
+      "ok": true
+    }
+  ],
+  "meta": {
+    "log_files": [
+      "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000/slurm-7661005.out",
+      "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000/slurm-7665666.out",
+      "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000/slurm-7661005.err",
+      "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000/slurm-7665666.err",
+      "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000/waccmx_cesm.out",
+      "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000/sami3_online_receiver.out"
+    ],
+    "phi_payload": {
+      "expected_size": 97044,
+      "frame_diffs": [
+        {
+          "finite_pairs": 12125,
+          "from_frame": 0,
+          "max_abs": 3.5858945846557617,
+          "rms": 0.687325617779858,
+          "to_frame": 1
+        }
+      ],
+      "frames": [
+        {
+          "finite_count": 12125,
+          "frame_index": 0,
+          "hour": 0.0,
+          "max": 31.483816146850586,
+          "mean": -0.20725942691636887,
+          "min": -36.93061447143555,
+          "nonzero_count": 3492,
+          "valid_until": 0.0013888889225199819
+        },
+        {
+          "finite_count": 12125,
+          "frame_index": 1,
+          "hour": 0.0013888889225199819,
+          "max": 31.891191482543945,
+          "mean": -0.23144256678969208,
+          "min": -37.68301773071289,
+          "nonzero_count": 3492,
+          "valid_until": 1.0000000150474662e+30
+        }
+      ],
+      "header": {
+        "magic": 20260524,
+        "nframes": 2,
+        "nlat": 125,
+        "nlon": 97,
+        "version": 1
+      },
+      "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000/voltron_phi_writer/remix_sami3_phi_payload_from_voltron_live_append2.bin",
+      "size": 97044,
+      "trailing_bytes": 0
+    },
+    "receiver_neutral_packet_summary": {
+      "0": {
+        "count": 51,
+        "hour_max": 0.0,
+        "hour_min": 0.0,
+        "unique_tasks": 32
+      }
+    },
+    "receiver_phi_records": [
+      {
+        "frame_hour": 0.0,
+        "frame_index": 0,
+        "hrut": 0.0,
+        "max": 31.4838161,
+        "min": -36.9306145,
+        "nframes": 2,
+        "valid_until": 0.00138888892
+      },
+      {
+        "frame_hour": 0.00138888892,
+        "frame_index": 1,
+        "hrut": 0.00222222228,
+        "max": 31.8911915,
+        "min": -37.6830177,
+        "nframes": 2,
+        "valid_until": 1.00000002e+30
+      }
+    ],
+    "run_dir": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000",
+    "sender_neutral_packets": [
+      {
+        "nstep": 0,
+        "packet_hour": 0.0,
+        "packet_index": 0
+      }
+    ]
+  },
+  "ok": true
+}

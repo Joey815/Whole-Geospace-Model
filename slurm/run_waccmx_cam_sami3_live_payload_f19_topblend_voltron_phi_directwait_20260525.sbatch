@@ -308,6 +308,10 @@ sami3_pid=
 pterm --dvm-uri "file:$DVM_URI" || true
 
 if [ -n "${voltron_pid:-}" ]; then
+  if kill -0 "$voltron_pid" 2>/dev/null; then
+    echo "Stopping Voltron writer after CESM/SAMI3 direct-wait completion"
+    kill "$voltron_pid" 2>/dev/null || true
+  fi
   wait "$voltron_pid" || true
   voltron_pid=
 fi

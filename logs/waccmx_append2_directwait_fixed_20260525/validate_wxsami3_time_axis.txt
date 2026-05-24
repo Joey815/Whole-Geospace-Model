@@ -1,0 +1,14 @@
+ok   run_dir_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000
+ok   sender_neutral_packet_count: sender_packets=1 expected=1
+ok   receiver_neutral_packet_count: receiver_packets=1 expected=1
+ok   receiver_packet_hours_consistent: {0: {'count': 51, 'unique_tasks': 32, 'hour_min': 0.0, 'hour_max': 0.0}}
+ok   receiver_packet_hours_monotonic: receiver_hours=[0.0]
+ok   receiver_worker_coverage: unique_tasks=[32] expected=32
+ok   sender_receiver_neutral_hours_match: matched=1 sender_hours=[0.0] receiver_hours=[0.0]
+ok   phi_payload_frame_count: frames=2 expected=2
+ok   phi_payload_hours_strictly_increasing: hours=[0.0, 0.0013888889225199819]
+ok   phi_payload_valid_until_links: hours=[0.0, 0.0013888889225199819] valid_until=[0.0013888889225199819, 1.0000000150474662e+30]
+ok   phi_payload_covers_neutral_packets: uncovered_neutral_hours=[]
+ok   receiver_phi_frame_count: receiver_phi_records=2 expected_min=2
+ok   receiver_phi_records_within_validity: records=2
+overall=ok

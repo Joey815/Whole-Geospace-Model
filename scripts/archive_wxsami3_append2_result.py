@@ -37,12 +37,14 @@ def run_checked(cmd, stdout_path):
     return proc.returncode
 
 
-def collect_files(run_dir):
+def collect_files(run_dir, job_id=None):
     files = []
     seen = set()
     for pattern in COPY_PATTERNS:
         for path in sorted(run_dir.glob(pattern)):
             if not path.is_file():
+                continue
+            if job_id and path.name.startswith("slurm-") and not path.name.startswith(f"slurm-{job_id}."):
                 continue
             if path.suffix in SKIP_SUFFIXES:
                 continue
@@ -317,7 +319,7 @@ def main():
             "expected_nsource": args.expected_runtime_map_nsource,
         }
 
-    copied = copy_files(collect_files(run_dir), archive_dir)
+    copied = copy_files(collect_files(run_dir, args.job_id), archive_dir)
     sacct = write_sacct(args.job_id, archive_dir)
 
     summary = {
