@@ -8,6 +8,7 @@ module wxsami3_online_stub_mod
    use ppgrid,          only: pver
    use constituents,    only: cnst_get_ind, cnst_name, cnst_mw, cnst_type
    use air_composition, only: mbarv
+   use shr_sys_mod,     only: shr_sys_sleep
 
    implicit none
    private
@@ -56,6 +57,8 @@ module wxsami3_online_stub_mod
    logical :: max_packets_logged = .false.
    logical :: phi_payload_enabled = .false.
    logical :: phi_payload_sent = .false.
+   integer :: phi_payload_wait_seconds = 0
+   integer :: phi_payload_stable_seconds = 1
    integer :: live_dump_max = 1
    character(len=512) :: port_file = ''
    character(len=512) :: payload_prefix = ''
@@ -154,6 +157,16 @@ contains
          phi_payload_enabled = .true.
       endif
 
+      value = ''
+      call get_environment_variable('WXSAMI3_PHI_PAYLOAD_WAIT_SECONDS', value, length=lenval, status=stat)
+      if (stat == 0 .and. lenval > 0) read(value,*) phi_payload_wait_seconds
+      if (phi_payload_wait_seconds < 0) phi_payload_wait_seconds = 0
+
+      value = ''
+      call get_environment_variable('WXSAMI3_PHI_PAYLOAD_STABLE_SECONDS', value, length=lenval, status=stat)
+      if (stat == 0 .and. lenval > 0) read(value,*) phi_payload_stable_seconds
+      if (phi_payload_stable_seconds < 0) phi_payload_stable_seconds = 0
+
       live_dump_prefix = ''
       call get_environment_variable('WXSAMI3_LIVE_DUMP_PREFIX', live_dump_prefix, length=lenval, status=stat)
       if (stat == 0 .and. lenval > 0) live_dump_enabled = .true.
@@ -197,6 +210,8 @@ contains
          if (len_trim(meta_file) > 0) write(iulog,*) 'WXSAMI3 metadata file: ', trim(meta_file)
          write(iulog,*) 'WXSAMI3 phi payload enabled: ', phi_payload_enabled
          if (phi_payload_enabled) write(iulog,*) 'WXSAMI3 phi payload file: ', trim(phi_payload_file)
+         if (phi_payload_enabled) write(iulog,*) 'WXSAMI3 phi payload wait seconds: ', phi_payload_wait_seconds
+         if (phi_payload_enabled) write(iulog,*) 'WXSAMI3 phi payload stable seconds: ', phi_payload_stable_seconds
          write(iulog,*) 'WXSAMI3 live state dump enabled: ', live_dump_enabled
          if (live_dump_enabled) then
             write(iulog,*) 'WXSAMI3 live state dump prefix: ', trim(live_dump_prefix)
@@ -1615,6 +1630,68 @@ contains
 
    end subroutine wxsami3_send_worker_arrays
 
+   subroutine wxsami3_wait_for_phi_payload()
+
+      integer :: elapsed, stable_count, ios
+      integer :: file_size, previous_size, expected_size
+      integer :: file_header(5), nframes, nphi, frame_size
+      logical :: exists, ready
+
+      if (phi_payload_wait_seconds <= 0) return
+
+      elapsed = 0
+      stable_count = 0
+      previous_size = -1
+      ready = .false.
+
+      do
+         exists = .false.
+         file_size = -1
+         inquire(file=trim(phi_payload_file), exist=exists, size=file_size)
+         if (exists .and. file_size >= 20) then
+            open(unit=122, file=trim(phi_payload_file), form='unformatted', &
+                 access='stream', status='old', action='read', iostat=ios)
+            if (ios == 0) then
+               read(122, iostat=ios) file_header
+               close(122)
+               if (ios == 0 .and. file_header(1) == phi_magic .and. &
+                   file_header(2) == phi_version .and. &
+                   file_header(3) == phi_nlat .and. file_header(4) == phi_nlon) then
+                  nframes = file_header(5)
+                  nphi = phi_nlat * phi_nlon
+                  frame_size = 12 + 4*nphi
+                  expected_size = 20 + nframes*frame_size
+                  if (nframes >= 1 .and. file_size >= expected_size) then
+                     if (file_size == previous_size) then
+                        stable_count = stable_count + 1
+                     else
+                        stable_count = 0
+                     endif
+                     if (stable_count >= phi_payload_stable_seconds) then
+                        ready = .true.
+                        exit
+                     endif
+                  endif
+               endif
+            endif
+         endif
+
+         if (elapsed >= phi_payload_wait_seconds) exit
+         previous_size = file_size
+         call shr_sys_sleep(1._r8)
+         elapsed = elapsed + 1
+      enddo
+
+      if (.not. ready) then
+         write(iulog,*) 'WXSAMI3 phi payload wait timed out: file,size,elapsed=', &
+                        trim(phi_payload_file), file_size, elapsed
+         call endrun('WXSAMI3 phi payload was not ready before timeout')
+      endif
+      write(iulog,*) 'WXSAMI3 phi payload ready after wait: file,size,elapsed=', &
+                     trim(phi_payload_file), file_size, elapsed
+
+   end subroutine wxsami3_wait_for_phi_payload
+
    subroutine wxsami3_send_phi_payload()
 
       include 'mpif.h'
@@ -1630,6 +1707,8 @@ contains
       if (.not. masterproc) return
       if (.not. phi_payload_enabled) return
       if (phi_payload_sent) return
+
+      call wxsami3_wait_for_phi_payload()
 
       open(unit=121, file=trim(phi_payload_file), form='unformatted', &
            access='stream', convert='little_endian', status='old', &

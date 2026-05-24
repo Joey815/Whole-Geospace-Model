@@ -1,0 +1,56 @@
+Building case in directory /online1/jiaoy_group/jiaoy/CESM/cases/mage_qpx2000_f19_sami3_live_neutral_20260523
+sharedlib_only is False
+model_only is False
+Detected diff in locked file 'env_build.xml'
+Setting resource.RLIMIT_STACK to -1 from (-1, -1)
+Generating component namelists as part of build
+  2026-05-25 02:20:40 atm
+Create namelist for component cam
+   Calling /online1/jiaoy_group/jiaoy/CESM/cesm_official_probe/cime/../components/cam//cime_config/buildnml
+     ...calling cam buildcpp to set build time options
+CAM namelist copy: file1 /home/jiaoy_group/jiaoy/data/CESM/cases/mage_qpx2000_f19_sami3_live_neutral_20260523/Buildconf/camconf/atm_in file2 /home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm_in
+  2026-05-25 02:20:41 lnd
+Create namelist for component slnd
+   Calling /online1/jiaoy_group/jiaoy/CESM/cesm_official_probe/cime/CIME/non_py/src/components/stub_comps_nuopc/slnd/cime_config/buildnml
+  2026-05-25 02:20:41 ice
+Create namelist for component sice
+   Calling /online1/jiaoy_group/jiaoy/CESM/cesm_official_probe/cime/CIME/non_py/src/components/stub_comps_nuopc/sice/cime_config/buildnml
+  2026-05-25 02:20:41 ocn
+Create namelist for component docn
+   Calling /online1/jiaoy_group/jiaoy/CESM/cesm_official_probe/cime/../components/cdeps/docn/cime_config/buildnml
+docn_mode is sst_aquap3
+  2026-05-25 02:20:41 rof
+Create namelist for component srof
+   Calling /online1/jiaoy_group/jiaoy/CESM/cesm_official_probe/cime/CIME/non_py/src/components/stub_comps_nuopc/srof/cime_config/buildnml
+  2026-05-25 02:20:41 glc
+Create namelist for component sglc
+   Calling /online1/jiaoy_group/jiaoy/CESM/cesm_official_probe/cime/CIME/non_py/src/components/stub_comps_nuopc/sglc/cime_config/buildnml
+  2026-05-25 02:20:41 wav
+Create namelist for component swav
+   Calling /online1/jiaoy_group/jiaoy/CESM/cesm_official_probe/cime/CIME/non_py/src/components/stub_comps_nuopc/swav/cime_config/buildnml
+  2026-05-25 02:20:41 esp
+Create namelist for component sesp
+   Calling /online1/jiaoy_group/jiaoy/CESM/cesm_official_probe/cime/CIME/non_py/src/components/stub_comps_nuopc/sesp/cime_config/buildnml
+  2026-05-25 02:20:41 cpl
+Create namelist for component drv
+   Calling /online1/jiaoy_group/jiaoy/CESM/cesm_official_probe/cime/../components/cmeps/cime_config/buildnml
+Writing nuopc_runconfig for components ['CPL', 'ATM', 'OCN']
+libs from case_support_libraries ['gptl', 'pio', 'csm_share', 'FTorch', 'CDEPS']
+Building gptl with output to file /home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/bld/gptl.bldlog.260525-022040
+   Calling /online1/jiaoy_group/jiaoy/CESM/cesm_official_probe/cime/CIME/build_scripts/buildlib.gptl
+Building pio with output to file /home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/bld/pio.bldlog.260525-022040
+   Calling /online1/jiaoy_group/jiaoy/CESM/cesm_official_probe/cime/CIME/build_scripts/buildlib.pio
+Building csm_share with output to file /home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/bld/csm_share.bldlog.260525-022040
+   Calling /online1/jiaoy_group/jiaoy/CESM/cesm_official_probe/cime/../share/buildlib.csm_share
+Build script /online1/jiaoy_group/jiaoy/CESM/cesm_official_probe/cime/../libraries/FTorch/buildlib for component FTorch not found.
+Building CDEPS with output to file /home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/bld/CDEPS.bldlog.260525-022040
+   Calling /online1/jiaoy_group/jiaoy/CESM/cesm_official_probe/cime/../components/cdeps/cime_config/buildlib
+         - Building atm Library
+Building atm with output to /home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/bld/atm.bldlog.260525-022040
+         - Building ocn Library
+Building ocn with output to /home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/bld/ocn.bldlog.260525-022040
+docn built in 1.736622 seconds
+cam built in 18.332353 seconds
+Building cesm from /online1/jiaoy_group/jiaoy/CESM/cesm_official_probe/cime/../components/cmeps/cime_config/buildexe with output to /home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/bld/cesm.bldlog.260525-022040
+Total build time: 33.637465 seconds
+MODEL BUILD HAS FINISHED SUCCESSFULLY
