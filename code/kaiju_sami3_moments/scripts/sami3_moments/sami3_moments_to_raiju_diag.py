@@ -372,6 +372,171 @@ def map_l_mlt_2d(arr, source_grid, target_grid):
     return out
 
 
+def linear_interp_brackets(source, target):
+    source = np.asarray(source, dtype=np.float64)
+    target = np.asarray(target, dtype=np.float64)
+    order = np.argsort(source)
+    sorted_source = source[order]
+    right = np.searchsorted(sorted_source, target, side="right")
+    outside = (target < sorted_source[0]) | (target > sorted_source[-1])
+    right = np.clip(right, 1, sorted_source.size - 1)
+    left = right - 1
+    denom = np.maximum(sorted_source[right] - sorted_source[left], TINY)
+    weight = (target - sorted_source[left]) / denom
+    weight = np.clip(weight, 0.0, 1.0)
+    left = np.where(target <= sorted_source[0], 0, left)
+    right = np.where(target <= sorted_source[0], 0, right)
+    left = np.where(target >= sorted_source[-1], sorted_source.size - 1, left)
+    right = np.where(target >= sorted_source[-1], sorted_source.size - 1, right)
+    weight = np.where(outside, 0.0, weight)
+    return {
+        "left_source_index": order[left].astype(np.int32),
+        "right_source_index": order[right].astype(np.int32),
+        "interp_weight": weight.astype(np.float32),
+        "outside": outside,
+    }
+
+
+def periodic_interp_brackets_deg(source_deg, target_deg):
+    source = np.mod(np.asarray(source_deg, dtype=np.float64), 360.0)
+    target = np.mod(np.asarray(target_deg, dtype=np.float64), 360.0)
+    order = np.argsort(source)
+    source_sorted = source[order]
+    source_ext = np.concatenate((source_sorted - 360.0, source_sorted, source_sorted + 360.0))
+    order_ext = np.concatenate((order, order, order))
+    right = np.searchsorted(source_ext, target, side="right")
+    right = np.clip(right, 1, source_ext.size - 1)
+    left = right - 1
+    denom = np.maximum(source_ext[right] - source_ext[left], TINY)
+    weight = (target - source_ext[left]) / denom
+    return {
+        "left_source_index": order_ext[left].astype(np.int32),
+        "right_source_index": order_ext[right].astype(np.int32),
+        "interp_weight": np.clip(weight, 0.0, 1.0).astype(np.float32),
+    }
+
+
+def build_mapping_quality(mode, mapped, target_shape, source_grid=None, target_grid=None):
+    ni, nj = target_shape
+    finite_count = np.zeros((nj, ni), dtype=np.int16)
+    for name in MOMENTS:
+        finite_count += np.isfinite(mapped[name]).T.astype(np.int16)
+    finite_all = finite_count == len(MOMENTS)
+
+    datasets = {
+        "finite_moment_count_runtime": {
+            "data": finite_count,
+            "units": "count",
+            "description": "Number of finite mapped moment fields at each runtime cell; HDF5 order j,i.",
+        },
+        "finite_all_moments_runtime_mask": {
+            "data": finite_all.astype(np.uint8),
+            "units": "logical",
+            "description": "1 where all mapped moment fields are finite; HDF5 order j,i.",
+        },
+    }
+    summary = {
+        "mode": mode,
+        "target_runtime_shape_j_i": [int(nj), int(ni)],
+        "finite_all_cell_count": int(np.count_nonzero(finite_all)),
+        "finite_all_fraction": float(np.count_nonzero(finite_all)) / float(finite_all.size),
+        "finite_moment_count_min": int(np.min(finite_count)),
+        "finite_moment_count_max": int(np.max(finite_count)),
+    }
+    attrs = {
+        "mapping_mode": mode,
+        "runtime_layout": "j,i for 2-D mapping-quality masks",
+    }
+
+    if mode == "l_mlt":
+        lq = linear_interp_brackets(source_grid["source_l"], target_grid["target_l"])
+        mltq = periodic_interp_brackets_deg(
+            source_grid["source_lon_deg"], target_grid["target_lon_deg"]
+        )
+        l_extrap_i = lq["outside"].astype(np.uint8)
+        l_extrap_runtime = np.tile(l_extrap_i.reshape(1, ni), (nj, 1)).astype(np.uint8)
+        datasets.update(
+            {
+                "source_l": {
+                    "data": source_grid["source_l"].astype(np.float32),
+                    "units": "Re",
+                    "description": "SAMI3 source shell coordinate by nf index.",
+                },
+                "source_mlt_deg": {
+                    "data": source_grid["source_lon_deg"].astype(np.float32),
+                    "units": "degrees",
+                    "description": "SAMI3 periodic source longitude/MLT coordinate by nlt index.",
+                },
+                "target_l": {
+                    "data": target_grid["target_l"].astype(np.float32),
+                    "units": "Re",
+                    "description": "RAIJU target shell coordinate by i index.",
+                },
+                "target_mlt_deg": {
+                    "data": target_grid["target_lon_deg"].astype(np.float32),
+                    "units": "degrees",
+                    "description": "RAIJU target periodic longitude/MLT coordinate by j index.",
+                },
+                "l_left_source_index": {
+                    "data": lq["left_source_index"],
+                    "units": "index",
+                    "description": "Lower SAMI3 nf source index used for each target i.",
+                },
+                "l_right_source_index": {
+                    "data": lq["right_source_index"],
+                    "units": "index",
+                    "description": "Upper SAMI3 nf source index used for each target i.",
+                },
+                "l_interp_weight": {
+                    "data": lq["interp_weight"],
+                    "units": "normalized",
+                    "description": "Linear interpolation weight toward l_right_source_index for each target i.",
+                },
+                "l_extrapolated_i": {
+                    "data": l_extrap_i,
+                    "units": "logical",
+                    "description": "1 where target L is outside the SAMI3 source L range and was clamped.",
+                },
+                "l_extrapolated_runtime_mask": {
+                    "data": l_extrap_runtime,
+                    "units": "logical",
+                    "description": "Runtime j,i mask for L-clamped target cells.",
+                },
+                "mlt_left_source_index": {
+                    "data": mltq["left_source_index"],
+                    "units": "index",
+                    "description": "Left periodic SAMI3 nlt source index used for each target j.",
+                },
+                "mlt_right_source_index": {
+                    "data": mltq["right_source_index"],
+                    "units": "index",
+                    "description": "Right periodic SAMI3 nlt source index used for each target j.",
+                },
+                "mlt_interp_weight": {
+                    "data": mltq["interp_weight"],
+                    "units": "normalized",
+                    "description": "Periodic interpolation weight toward mlt_right_source_index for each target j.",
+                },
+            }
+        )
+        summary.update(
+            {
+                "periodic_mlt": True,
+                "l_extrapolated_i_count": int(np.count_nonzero(l_extrap_i)),
+                "l_extrapolated_cell_count": int(np.count_nonzero(l_extrap_runtime)),
+                "l_extrapolated_fraction": float(np.count_nonzero(l_extrap_runtime))
+                / float(l_extrap_runtime.size),
+                "source_l_min": float(np.min(source_grid["source_l"])),
+                "source_l_max": float(np.max(source_grid["source_l"])),
+                "target_l_min": float(np.min(target_grid["target_l"])),
+                "target_l_max": float(np.max(target_grid["target_l"])),
+            }
+        )
+        attrs["periodic_mlt"] = "true"
+
+    return {"attrs": attrs, "datasets": datasets, "summary": summary}
+
+
 def build_mapping_metadata(mode, target_shape, source_grid=None, target_grid=None):
     if mode == "index":
         return {
@@ -450,6 +615,7 @@ def build_raicpl_runtime_layout(
     if mapping_mode == "index":
         mapped = {name: resize_2d(arrays[name], target_shape) for name in MOMENTS}
         mapping_metadata = build_mapping_metadata("index", target_shape)
+        mapping_quality = build_mapping_quality("index", mapped, target_shape)
     elif mapping_mode == "l_mlt":
         if not template_path:
             raise ValueError("--mapping-mode l_mlt requires --raicpl-template")
@@ -471,6 +637,9 @@ def build_raicpl_runtime_layout(
         mapping_metadata = build_mapping_metadata(
             "l_mlt", target_shape, source_grid=source_grid, target_grid=target_grid
         )
+        mapping_quality = build_mapping_quality(
+            "l_mlt", mapped, target_shape, source_grid=source_grid, target_grid=target_grid
+        )
     else:
         raise ValueError("unsupported mapping mode: {0}".format(mapping_mode))
 
@@ -490,7 +659,8 @@ def build_raicpl_runtime_layout(
         finite_stats("RaiCplMomentsOnly.Dstd_mapped", mapped["Dstd"]),
         finite_stats("RaiCplMomentsOnly.tiote_mapped", mapped["tiote"]),
     ]
-    return out, masks, mapping_metadata
+    mapping_metadata["quality_summary"] = mapping_quality["summary"]
+    return out, masks, mapping_metadata, mapping_quality
 
 
 def make_channel_array(arr, n_channels, channel):
@@ -581,6 +751,16 @@ def write_raiju_coupler_fields_runtime(group, runtime_arrays, runtime_masks):
         )
 
 
+def write_mapping_quality(handle, mapping_quality):
+    if mapping_quality is None:
+        return
+    group = handle.create_group("MappingQuality")
+    for key, value in mapping_quality.get("attrs", {}).items():
+        group.attrs[key] = value
+    for name, spec in mapping_quality.get("datasets", {}).items():
+        create_dataset(group, name, spec["data"], spec["units"], spec["description"])
+
+
 def write_product(path, arrays, channel_arrays, masks, metadata):
     h5py = require_h5py()
     string_dtype = h5py.string_dtype(encoding="utf-8")
@@ -640,6 +820,8 @@ def write_product(path, arrays, channel_arrays, masks, metadata):
         )
         create_dataset(rai_state, "tiote", arrays["tiote"].astype(np.float32), "normalized", "RAIJU State tiote")
 
+        write_mapping_quality(handle, metadata.get("_internal_mapping_quality"))
+
         meta = handle.create_group("metadata")
         meta.create_dataset(
             "json",
@@ -691,6 +873,7 @@ def main():
     raicpl_runtime_arrays = None
     raicpl_runtime_masks = None
     raicpl_runtime_mapping = None
+    raicpl_runtime_mapping_quality = None
     if args.raicpl_template:
         raicpl_runtime_layout = infer_raicpl_template(args.raicpl_template, n_channels)
     if args.target_raicpl_shape:
@@ -708,6 +891,7 @@ def main():
             raicpl_runtime_arrays,
             raicpl_runtime_masks,
             raicpl_runtime_mapping,
+            raicpl_runtime_mapping_quality,
         ) = build_raicpl_runtime_layout(
             arrays,
             n_channels,
@@ -763,6 +947,11 @@ def main():
         "pressure_mode": args.pressure_mode,
         "moment_source_selection": source_selection,
         "raicpl_runtime_mapping": raicpl_runtime_mapping,
+        "raicpl_runtime_mapping_quality": (
+            raicpl_runtime_mapping_quality["summary"]
+            if raicpl_runtime_mapping_quality is not None
+            else None
+        ),
         "std_source_warning": (
             "Pstd/Dstd are still read from the existing ion/number-density std fields. "
             "For massEq density, total pressure, or prototype weighted-moment runs, "
@@ -810,6 +999,7 @@ def main():
         "_internal_tubeshell_masks": tubeshell_masks,
         "_internal_raicpl_runtime_arrays": raicpl_runtime_arrays,
         "_internal_raicpl_runtime_masks": raicpl_runtime_masks,
+        "_internal_mapping_quality": raicpl_runtime_mapping_quality,
         "raicpl_runtime_layout": raicpl_runtime_layout,
         "validation": {
             "nonfinite_counts": nonfinite,

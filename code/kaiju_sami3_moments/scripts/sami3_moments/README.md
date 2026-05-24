@@ -203,6 +203,7 @@ Second-stage diagnostic HDF5 groups:
 /RAIJU_State/Pstd
 /RAIJU_State/Dstd
 /RAIJU_State/tiote
+/MappingQuality/*
 /metadata/json
 ```
 
@@ -252,6 +253,29 @@ MLT/longitude interpolation is periodic using SAMI3 `blonu` and RAIJU
 `ShellGrid/phi` cell centers modulo 360 degrees.  Metadata records
 `raicpl_runtime_mapping.mode`, source/target ranges, and L extrapolation counts.
 This is still a prototype mapping, not a Voltron traced-tube `bvol` mapping.
+When a runtime layout is requested, the product also writes explicit
+`/MappingQuality` datasets.  For `l_mlt` these include:
+
+```text
+/MappingQuality/source_l
+/MappingQuality/source_mlt_deg
+/MappingQuality/target_l
+/MappingQuality/target_mlt_deg
+/MappingQuality/l_left_source_index
+/MappingQuality/l_right_source_index
+/MappingQuality/l_interp_weight
+/MappingQuality/l_extrapolated_i
+/MappingQuality/l_extrapolated_runtime_mask
+/MappingQuality/mlt_left_source_index
+/MappingQuality/mlt_right_source_index
+/MappingQuality/mlt_interp_weight
+/MappingQuality/finite_moment_count_runtime
+/MappingQuality/finite_all_moments_runtime_mask
+```
+
+The 2-D quality masks use runtime HDF5 order `(NJ, NI)` to match
+`/RaiCplMomentsOnly/tiote`.  The same summary is mirrored in
+`metadata/json.raicpl_runtime_mapping_quality`.
 
 `TubeShellMomentsOnly` uses the fixed `TubeShell_T` moment channel count:
 

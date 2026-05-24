@@ -256,6 +256,7 @@ def main():
 
         runtime_layout = metadata.get("raicpl_runtime_layout")
         runtime_mapping = metadata.get("raicpl_runtime_mapping") or {}
+        runtime_mapping_quality = metadata.get("raicpl_runtime_mapping_quality")
         if runtime_layout is not None:
             ni, nj, runtime_channels = runtime_layout["fortran_shape"]
             if runtime_channels != n_channels:
@@ -277,6 +278,50 @@ def main():
             if runtime_tiote.shape != (nj, ni):
                 raise AssertionError("RaiCplMomentsOnly/tiote runtime shape mismatch")
             require_finite("RaiCplMomentsOnly/tiote", runtime_tiote)
+            if runtime_mapping_quality is not None:
+                if "MappingQuality" not in d:
+                    raise AssertionError("metadata advertises mapping quality but /MappingQuality is missing")
+                finite_count = require_dataset(
+                    d, "MappingQuality/finite_moment_count_runtime"
+                )[:].astype(np.int16)
+                finite_all = require_dataset(
+                    d, "MappingQuality/finite_all_moments_runtime_mask"
+                )[:].astype(np.uint8)
+                if finite_count.shape != (nj, ni):
+                    raise AssertionError("MappingQuality/finite_moment_count_runtime shape mismatch")
+                if finite_all.shape != (nj, ni):
+                    raise AssertionError("MappingQuality/finite_all_moments_runtime_mask shape mismatch")
+                if np.any(finite_count < 0) or np.any(finite_count > 5):
+                    raise AssertionError("MappingQuality finite moment count outside 0..5")
+                require_close(
+                    "MappingQuality finite all mask",
+                    finite_all,
+                    (finite_count == 5).astype(np.uint8),
+                    rtol=0.0,
+                    atol=0.0,
+                )
+                if runtime_mapping.get("mode") == "l_mlt":
+                    for path, shape in (
+                        ("MappingQuality/source_l", (nf,)),
+                        ("MappingQuality/source_mlt_deg", (nlt,)),
+                        ("MappingQuality/target_l", (ni,)),
+                        ("MappingQuality/target_mlt_deg", (nj,)),
+                        ("MappingQuality/l_left_source_index", (ni,)),
+                        ("MappingQuality/l_right_source_index", (ni,)),
+                        ("MappingQuality/l_interp_weight", (ni,)),
+                        ("MappingQuality/l_extrapolated_i", (ni,)),
+                        ("MappingQuality/l_extrapolated_runtime_mask", (nj, ni)),
+                        ("MappingQuality/mlt_left_source_index", (nj,)),
+                        ("MappingQuality/mlt_right_source_index", (nj,)),
+                        ("MappingQuality/mlt_interp_weight", (nj,)),
+                    ):
+                        arr = require_dataset(d, path)[:]
+                        if arr.shape != shape:
+                            raise AssertionError("{0} shape {1} != {2}".format(path, arr.shape, shape))
+                    l_extrap = require_dataset(d, "MappingQuality/l_extrapolated_runtime_mask")[:]
+                    expected_count = int(runtime_mapping_quality.get("l_extrapolated_cell_count", -1))
+                    if expected_count >= 0 and int(np.count_nonzero(l_extrap)) != expected_count:
+                        raise AssertionError("MappingQuality L extrapolated count mismatch")
 
         for path, units in (
             ("RAIJU_Coupler/Pavg", "nPa"),
@@ -301,6 +346,13 @@ def main():
     if metadata.get("raicpl_runtime_layout") is not None:
         mapping = metadata.get("raicpl_runtime_mapping") or {}
         print("runtime_mapping={0}".format(mapping.get("mode", "unknown")))
+        quality = metadata.get("raicpl_runtime_mapping_quality") or {}
+        if quality:
+            print(
+                "runtime_mapping_quality finite_all_fraction={0}".format(
+                    quality.get("finite_all_fraction")
+                )
+            )
 
 
 if __name__ == "__main__":
