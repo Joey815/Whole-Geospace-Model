@@ -29,8 +29,15 @@ The validator checks:
 
 ```text
 wxsami3_live_meta.json payload_version/runtime_source/transport
+payload header magic/nz/nf/nl/nneut
 runtime_map source column count
-source unit and fallback policy contract
+source units and payload units
+density conversion string
+source species order and payload species order
+source flag MPI tag and values
+CAM constituent indices for O/O2/H/N/NO
+N2 residual and He native index policy
+fallback policy contract
 N2 negative residual mode
 source flag count closure
 sender checksum count closure
@@ -46,10 +53,14 @@ Default f19 source geometry:
 
 ```text
 expected_source_columns = 144 * 96 = 13824
+expected_payload_header = magic=20260522, nz=304, nf=124, nl=5, nneut=7
 expected_receiver_ranks = 32
 expected_n2_mode = invalid
 max_qc_rel = 1e-6
 ```
+
+The validator accepts both `slurm-*.out` and older archived `slurm_*.out`
+names when collecting sender-side markers.
 
 ## Validation Runs
 
@@ -99,6 +110,22 @@ sender_live_packet_count = 2
 receiver_qc_line_count >= 64
 sami3_done = true
 waccmx_done = true
+overall = ok
+```
+
+The metadata/schema-expanded validator was rerun on the archived top-blend
+evidence and now also confirms:
+
+```text
+source_units = T K, wind m/s, pressure Pa, height m, composition mass_mixing_ratio
+payload_units = density cm^-3, temperature K, wind cm/s
+source_species_order = O,O2,H,N,NO,N2,He
+payload_species_order = H,O,NO,O2,He,N2,N
+source_flag_mpi_tag = 212
+source_flag_values = 1/2/3/4 for valid/above_top/N2_invalid/other_invalid
+CAM constituent indices O=57, O2=58, H=37, N=51, NO=54
+N2 index = -1 residual policy
+He index = -1 native/MSIS policy
 overall = ok
 ```
 
@@ -155,6 +182,7 @@ Archived under:
 
 ```text
 logs/waccmx_live_packet_contract_20260525/
+logs/waccmx_live_meta_contract_20260525/
 ```
 
 including text and JSON validator outputs for both checked runs.

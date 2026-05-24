@@ -1,0 +1,74 @@
+ok   run_dir_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/topblend_20260524
+ok   live_meta_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/topblend_20260524/wxsami3_live_meta.json
+ok   meta_payload_version: wxsami3-live-payload-v2
+ok   meta_runtime_source: CAM phys_state(:)
+ok   meta_actual_transport: runtime_live_packet
+ok   meta_last_packet_index: packet_index=1 expected=1
+ok   meta_payload_header_magic: 20260522 expected=20260522
+ok   meta_payload_header_nz: 304 expected=304
+ok   meta_payload_header_nf: 124 expected=124
+ok   meta_payload_header_nl: 5 expected=5
+ok   meta_payload_header_nneut: 7 expected=7
+ok   meta_runtime_map_source_columns: source_columns=13824 expected=13824
+ok   meta_runtime_map_npoints: npoints=3618816
+ok   meta_source_unit_temperature: K expected=K
+ok   meta_source_unit_wind: m/s expected=m/s
+ok   meta_source_unit_pressure: Pa expected=Pa
+ok   meta_source_unit_height: m expected=m
+ok   meta_source_unit_composition: mass_mixing_ratio expected=mass_mixing_ratio
+ok   meta_payload_unit_density: cm^-3 expected=cm^-3
+ok   meta_payload_unit_temperature: K expected=K
+ok   meta_payload_unit_wind: cm/s expected=cm/s
+ok   meta_density_conversion: q*mbarv/species_mw*pmid/(kB*T)*1e-6 -> cm^-3
+ok   meta_source_species_order: ['O', 'O2', 'H', 'N', 'NO', 'N2', 'He']
+ok   meta_payload_species_order: ['H', 'O', 'NO', 'O2', 'He', 'N2', 'N']
+ok   meta_source_flag_mpi_tag: 212
+ok   meta_source_flag_values: {'WACCMX_VALID': 1, 'SAMI3_NATIVE_ABOVE_TOP': 2, 'SAMI3_NATIVE_N2_INVALID': 3, 'SAMI3_NATIVE_OTHER_INVALID': 4}
+ok   meta_species_index_O: 57
+ok   meta_species_index_O2: 58
+ok   meta_species_index_H: 37
+ok   meta_species_index_N: 51
+ok   meta_species_index_NO: 54
+ok   meta_species_index_N2_residual: -1
+ok   meta_species_index_He_native: -1
+ok   meta_n2_negative_mode: invalid
+ok   meta_he_policy: payload value -1 so SAMI3 native/MSIS He is retained
+ok   meta_w_policy: payload value 0; CAM omega diagnostic only
+ok   meta_source_flags_sum: flag_total=6031360 samples=6031360
+ok   meta_invalid_sum: invalid=1819902 above+n2+other=1819902
+ok   meta_checksum_valid_counts: valid_i=4211458 valid_f=4211458 source_valid=4211458
+ok   meta_checksum_invalid_counts: invalid_i=1819902 invalid_f=1819902 runtime_invalid=1819902
+ok   packet0_summary_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/topblend_20260524/live_dump_summary_pkt000000.txt
+ok   packet0_replay_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/topblend_20260524/replay_builder_pkt000000.out
+ok   packet0_recv_compare_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/topblend_20260524/recv_qc_compare_pkt000000.txt
+ok   packet0_summary_source_columns: total_cols=13824 expected=13824
+ok   packet0_summary_packet_index: packets=[0]
+ok   packet0_summary_no_bad_size_files: bad_size_files_present=False
+ok   packet0_replay_source_coverage: source_cols=13824 filled=13824 expected=13824
+ok   packet0_replay_n2_mode: invalid
+ok   packet0_replay_bad_weighted_z: bad_weighted_z=0
+ok   packet0_replay_samples_positive: samples=6031360
+ok   packet0_recv_compare_ok: ok_marker=True
+ok   packet0_recv_compare_ranks: ranks=32 expected=32
+ok   packet0_recv_compare_occurrence: occurrence=0 expected=0
+ok   packet0_recv_compare_max_rel: max_rel=4.83248e-13 limit=1e-06
+ok   packet1_summary_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/topblend_20260524/live_dump_summary_pkt000001.txt
+ok   packet1_replay_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/topblend_20260524/replay_builder_pkt000001.out
+ok   packet1_recv_compare_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/topblend_20260524/recv_qc_compare_pkt000001.txt
+ok   packet1_summary_source_columns: total_cols=13824 expected=13824
+ok   packet1_summary_packet_index: packets=[1]
+ok   packet1_summary_no_bad_size_files: bad_size_files_present=False
+ok   packet1_replay_source_coverage: source_cols=13824 filled=13824 expected=13824
+ok   packet1_replay_n2_mode: invalid
+ok   packet1_replay_bad_weighted_z: bad_weighted_z=0
+ok   packet1_replay_samples_positive: samples=6031360
+ok   packet1_recv_compare_ok: ok_marker=True
+ok   packet1_recv_compare_ranks: ranks=32 expected=32
+ok   packet1_recv_compare_occurrence: occurrence=1 expected=1
+ok   packet1_recv_compare_max_rel: max_rel=6.76502e-13 limit=1e-06
+ok   sender_live_packet_count: sent_packets=2 expected=2
+ok   receiver_qc_line_count: qc_lines=82 expected_min=64
+ok   sami3_done: present=True
+ok   waccmx_done: present=True
+ok   fatal_markers_absent: matches=0
+overall=ok

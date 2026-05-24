@@ -196,7 +196,10 @@ The same-call-site live neutral packet contract now has a dedicated validator:
 receiver QC can be reconstructed from the CAM `phys_state(:)` live dump through
 the offline replay builder.  It passes the one-packet Voltron-phi runtime
 (`max_rel=4.83248e-13`) and the two-packet top-blend runtime
-(`max_rel<=6.76502e-13`).
+(`max_rel<=6.76502e-13`).  The validator now also gates the live metadata
+schema: payload header, source/payload units, density conversion, species order,
+source flag tag/value contract, CAM constituent indices, N2 residual policy,
+and native He/W fallback policy.
 The receiver-side WACCM-X top-blend/source-policy diagnostics now also have a
 dedicated validator: `scripts/validate_wxsami3_topblend_policy.py`.  It passes
 on the existing f19 600-720 km linear top-blend evidence with 424 apply-blend
@@ -406,6 +409,7 @@ logs/sami3_mapping_quality_20260524/
 logs/sami3_mapping_quality_runtime_20260524/
 logs/waccmx_topblend_policy_validation_20260525/
 logs/waccmx_phi_payload_content_validation_20260525/
+logs/waccmx_live_meta_contract_20260525/
 logs/sami3_weightfile_mapping_20260524/
 logs/sami3_weightfile_bvol_geometry_20260524/
 logs/sami3_voltron_shell_weightfile_20260524/

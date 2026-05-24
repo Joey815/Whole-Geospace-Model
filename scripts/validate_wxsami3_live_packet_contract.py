@@ -57,7 +57,7 @@ def collect_run_text(run_dir, paths):
     for path in paths:
         if path is not None:
             chunks.append(read_text(path))
-    for pattern in ("slurm-*.out", "slurm-*.err"):
+    for pattern in ("slurm-*.out", "slurm-*.err", "slurm_*.out", "slurm_*.err"):
         for path in sorted(run_dir.glob(pattern)):
             chunks.append(read_text(path))
     return "\n".join(chunk for chunk in chunks if chunk)
@@ -184,6 +184,22 @@ def check_meta(checks, meta, args):
         "packet_index={} expected={}".format(meta.get("packet_index"), args.expected_packets - 1),
     )
 
+    header = meta.get("payload_header", {})
+    expected_header = {
+        "magic": 20260522,
+        "nz": args.expected_payload_nz,
+        "nf": args.expected_payload_nf,
+        "nl": args.expected_payload_nl,
+        "nneut": args.expected_payload_nneut,
+    }
+    for key, expected in expected_header.items():
+        add_check(
+            checks,
+            "meta_payload_header_{}".format(key),
+            header.get(key) == expected,
+            "{} expected={}".format(header.get(key), expected),
+        )
+
     runtime_map = meta.get("runtime_map", {})
     add_check(
         checks,
@@ -200,6 +216,90 @@ def check_meta(checks, meta, args):
         "npoints={}".format(runtime_map.get("npoints")),
     )
 
+    source_units = meta.get("source_units", {})
+    expected_source_units = {
+        "temperature": "K",
+        "wind": "m/s",
+        "pressure": "Pa",
+        "height": "m",
+        "composition": "mass_mixing_ratio",
+    }
+    for key, expected in expected_source_units.items():
+        add_check(
+            checks,
+            "meta_source_unit_{}".format(key),
+            source_units.get(key) == expected,
+            "{} expected={}".format(source_units.get(key), expected),
+        )
+
+    payload_units = meta.get("payload_units", {})
+    expected_payload_units = {
+        "density": "cm^-3",
+        "temperature": "K",
+        "wind": "cm/s",
+    }
+    for key, expected in expected_payload_units.items():
+        add_check(
+            checks,
+            "meta_payload_unit_{}".format(key),
+            payload_units.get(key) == expected,
+            "{} expected={}".format(payload_units.get(key), expected),
+        )
+
+    add_check(
+        checks,
+        "meta_density_conversion",
+        "1e-6 -> cm^-3" in meta.get("density_conversion", ""),
+        meta.get("density_conversion", ""),
+    )
+    add_check(
+        checks,
+        "meta_source_species_order",
+        meta.get("source_species_order") == ["O", "O2", "H", "N", "NO", "N2", "He"],
+        meta.get("source_species_order"),
+    )
+    add_check(
+        checks,
+        "meta_payload_species_order",
+        meta.get("payload_species_order") == ["H", "O", "NO", "O2", "He", "N2", "N"],
+        meta.get("payload_species_order"),
+    )
+    add_check(
+        checks,
+        "meta_source_flag_mpi_tag",
+        meta.get("source_flag_mpi_tag") == 212,
+        meta.get("source_flag_mpi_tag"),
+    )
+    expected_flag_values = {
+        "WACCMX_VALID": 1,
+        "SAMI3_NATIVE_ABOVE_TOP": 2,
+        "SAMI3_NATIVE_N2_INVALID": 3,
+        "SAMI3_NATIVE_OTHER_INVALID": 4,
+    }
+    add_check(
+        checks,
+        "meta_source_flag_values",
+        meta.get("source_flag_values") == expected_flag_values,
+        meta.get("source_flag_values"),
+    )
+
+    species_indices = {
+        item.get("name"): item.get("index")
+        for item in meta.get("source_species_indices", [])
+        if isinstance(item, dict)
+    }
+    for name in ["O", "O2", "H", "N", "NO"]:
+        add_check(
+            checks,
+            "meta_species_index_{}".format(name),
+            isinstance(species_indices.get(name), int) and species_indices.get(name) >= 0,
+            species_indices.get(name),
+        )
+    if args.expect_n2_residual:
+        add_check(checks, "meta_species_index_N2_residual", species_indices.get("N2") == -1, species_indices.get("N2"))
+    if args.expect_he_native:
+        add_check(checks, "meta_species_index_He_native", species_indices.get("He") == -1, species_indices.get("He"))
+
     fallback = meta.get("fallback_policy", {})
     add_check(
         checks,
@@ -210,7 +310,9 @@ def check_meta(checks, meta, args):
     add_check(
         checks,
         "meta_he_policy",
-        "SAMI3 native" in fallback.get("He", "") or "MSIS" in fallback.get("He", ""),
+        (not args.expect_he_native)
+        or "SAMI3 native" in fallback.get("He", "")
+        or "MSIS" in fallback.get("He", ""),
         fallback.get("He", ""),
     )
     add_check(
@@ -450,7 +552,13 @@ def main():
     parser.add_argument("--expected-packets", type=int, default=1)
     parser.add_argument("--expected-source-columns", type=int, default=DEFAULT_SOURCE_COLUMNS)
     parser.add_argument("--expected-receiver-ranks", type=int, default=DEFAULT_RECEIVER_RANKS)
+    parser.add_argument("--expected-payload-nz", type=int, default=304)
+    parser.add_argument("--expected-payload-nf", type=int, default=124)
+    parser.add_argument("--expected-payload-nl", type=int, default=5)
+    parser.add_argument("--expected-payload-nneut", type=int, default=7)
     parser.add_argument("--expected-n2-mode", default="invalid", choices=["floor", "invalid", "fail"])
+    parser.add_argument("--expect-n2-residual", action="store_true", default=True)
+    parser.add_argument("--expect-he-native", action="store_true", default=True)
     parser.add_argument("--max-qc-rel", type=float, default=DEFAULT_QC_MAX_REL)
     parser.add_argument("--allow-incomplete", action="store_true")
     parser.add_argument("--json-output", default=None)
