@@ -61,7 +61,8 @@ Use the same validator as the pre-generated append2 full integration run:
 ```bash
 python3 scripts/validate_wxsami3_append2_run.py \
   --run-dir /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000 \
-  --expected-phi-frames 2
+  --expected-phi-frames 2 \
+  --expect-phi-wait-marker
 ```
 
 Additional expected marker from the CESM sender log:

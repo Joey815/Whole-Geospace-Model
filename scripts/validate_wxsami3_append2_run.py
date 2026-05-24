@@ -115,7 +115,7 @@ def validate(args):
     checks = []
     meta = {"run_dir": str(run_dir)}
 
-    add_check(checks, "run_dir_exists", run_dir.is_dir(), str(run_dir))
+    add_check(checks, "run_dir_exists", run_dir.is_dir() or args.allow_incomplete, str(run_dir))
     paths = existing_logs(run_dir)
     text = collect_text(paths)
     meta["log_files"] = [str(path) for path in paths]
@@ -175,6 +175,15 @@ def validate(args):
             "no sender payload-frame marker",
         )
 
+    if args.expect_phi_wait_marker:
+        wait_markers = count(r"WXSAMI3 phi payload ready after wait", text)
+        add_check(
+            checks,
+            "sender_phi_wait_marker",
+            wait_markers >= 1 or args.allow_incomplete,
+            f"wait_markers={wait_markers}",
+        )
+
     recv_frames = count(r"WACCMX_PHI_RECV", text)
     add_check(
         checks,
@@ -214,6 +223,7 @@ def main() -> int:
     parser.add_argument("--expected-phi-frames", type=int, default=2)
     parser.add_argument("--hour-tol", type=float, default=1.0e-7)
     parser.add_argument("--allow-incomplete", action="store_true")
+    parser.add_argument("--expect-phi-wait-marker", action="store_true")
     parser.add_argument("--json-output", default=None)
     args = parser.parse_args()
 
