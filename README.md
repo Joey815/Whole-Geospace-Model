@@ -27,6 +27,7 @@ ds_over_B field-line weighting prototype is available.
 L/MLT RAIJU mapping prototype is available.
 Runtime blending is validated with alpha=0 exact baseline recovery.
 Density alpha scan is finite and continuous through alphaDavg=0.20.
+Pressure alpha scan at alphaDavg=0.05 is finite for alphaPavg=0.05 and 0.10.
 RAIJU moment semantics audit is complete for Pavg/Davg/Pstd/Dstd/tiote.
 Gridded State%tiote can now be enabled for moment-to-eta mapping with
 moments/useStateTioteForIngest=T; default behavior remains unchanged.
@@ -122,6 +123,7 @@ docs/MAGE1.25_notes/SAMI3_RAIJU_RUNTIME_BLEND_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_STAGE2_SOURCE_MODES_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_DSB_LMLT_RUNTIME_BLEND_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_DSB_LMLT_ALPHA_SCAN_RESULT_20260524.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_DSB_LMLT_PRESSURE_SCAN_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_MOMENT_SEMANTICS_TIOTE_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_GAMERA_PHYSICS_REVIEW_20260523.md
 ```
