@@ -55,6 +55,13 @@ The same `bin_bvol_cc` mapping also validates with `density-mode=massEq` and
 `pressure-mode=total`: job 7651166 completed 0:0 with conservative
 alphaDavg/alphaPavg=0.01, exact blend formula checks, and no non-finite checked
 RAIJU physics fields.
+The REMIX -> SAMI3 electric-potential path now has an offline prototype
+adapter: `scripts/remix_sami3/remix_pot_to_sami3_phi_weimer.py` maps a
+MAGE/REMIX `POT[kV]` HDF5 export to SAMI3's existing `phi_weimer.inp` route.
+The first NORTH_APEX static product validates the sequential-unformatted
+layout, `kV -> statV` conversion, 125x97 target shape, and readback to
+float32 roundoff.  A SAMI3 runtime smoke using this generated file is still
+the next validation step.
 Runtime blending is validated with alpha=0 exact baseline recovery.
 Density alpha scan is finite and continuous through alphaDavg=0.20.
 Pressure alpha scan at alphaDavg=0.05 is finite for alphaPavg=0.05 and 0.10.
@@ -170,6 +177,7 @@ docs/MAGE1.25_notes/SAMI3_RAIJU_VOLTRON_SHELL_RUNTIME_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_VOLTRON_TUBESHELL_WEIGHT_FILE_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_TUBESHELL_BIN_BVOLCC_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_TUBESHELL_BIN_BVOLCC_MASSEQ_TOTAL_RESULT_20260524.md
+docs/MAGE1.25_notes/REMIX_SAMI3_PHI_WEIMER_ADAPTER_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_RUNTIME_BLEND_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_STAGE2_SOURCE_MODES_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_DSB_LMLT_RUNTIME_BLEND_RESULT_20260524.md
@@ -209,6 +217,13 @@ code/kaiju_sami3_moments/scripts/sami3_moments/
 code/kaiju_sami3_moments/src/voltron/modelInterfaces/
 code/kaiju_sami3_moments/src/raiju/
 code/kaiju_sami3_moments/src/base/types/
+```
+
+Current REMIX -> SAMI3 electric-potential offline adapter:
+
+```text
+scripts/remix_sami3/remix_pot_to_sami3_phi_weimer.py
+logs/remix_sami3_phi_weimer_20260524/
 ```
 
 Latest two-packet smoke launcher:
@@ -280,6 +295,7 @@ production choice of WACCM-X-top blending heights and per-variable policy
 He native/MSIS fallback policy hardening
 W-off / vertical-wind policy validation
 REMIX -> SAMI3 potential/E-field forcing
+SAMI3 runtime smoke using generated REMIX-derived phi_weimer.inp
 production SAMI3 -> RAIJU/GAMERA Voltron-consistent flux-tube weighting
 replace prototype lon0/bin-center bvol weighting with a true traced-tube flux-volume map
 production SAMI3 -> RAIJU/GAMERA geometry/mask coverage policy
