@@ -135,7 +135,9 @@ module raijuCplHelper
         real(rp), dimension(:,:,:), allocatable :: Pavg0, Davg0, Pstd0, Dstd0
         real(rp), dimension(:,:), allocatable :: tiote0
         logical, dimension(:,:,:), allocatable :: PavgMask0, DavgMask0, PstdMask0, DstdMask0
+        logical, dimension(:,:,:), allocatable :: PavgUseMask, DavgUseMask, PstdUseMask, DstdUseMask
         logical, dimension(:,:), allocatable :: tioteMask0
+        logical, dimension(:,:), allocatable :: tioteUseMask
         integer :: i0, i1, j0, j1, k0, k1, k
         logical :: fExist
 
@@ -162,6 +164,10 @@ module raijuCplHelper
         allocate(DavgMask0(i0:i1,j0:j1,k0:k1))
         allocate(PstdMask0(i0:i1,j0:j1,k0:k1))
         allocate(DstdMask0(i0:i1,j0:j1,k0:k1))
+        allocate(PavgUseMask(i0:i1,j0:j1,k0:k1))
+        allocate(DavgUseMask(i0:i1,j0:j1,k0:k1))
+        allocate(PstdUseMask(i0:i1,j0:j1,k0:k1))
+        allocate(DstdUseMask(i0:i1,j0:j1,k0:k1))
         do k=k0,k1
             Pavg0(:,:,k) = raiCpl%Pavg(k)%data
             Davg0(:,:,k) = raiCpl%Davg(k)%data
@@ -177,10 +183,20 @@ module raijuCplHelper
             lbound(raiCpl%tiote%data,2):ubound(raiCpl%tiote%data,2)))
         allocate(tioteMask0(lbound(raiCpl%tiote%mask,1):ubound(raiCpl%tiote%mask,1), &
             lbound(raiCpl%tiote%mask,2):ubound(raiCpl%tiote%mask,2)))
+        allocate(tioteUseMask(lbound(raiCpl%tiote%mask,1):ubound(raiCpl%tiote%mask,1), &
+            lbound(raiCpl%tiote%mask,2):ubound(raiCpl%tiote%mask,2)))
         tiote0 = raiCpl%tiote%data
         tioteMask0 = raiCpl%tiote%mask
 
         call readSami3RaiCplMoments(raiCpl, trim(raiCpl%sami3MomentsFile), trim(raiCpl%sami3MomentsGroup))
+
+        do k=k0,k1
+            PavgUseMask(:,:,k) = raiCpl%Pavg(k)%mask
+            DavgUseMask(:,:,k) = raiCpl%Davg(k)%mask
+            PstdUseMask(:,:,k) = raiCpl%Pstd(k)%mask
+            DstdUseMask(:,:,k) = raiCpl%Dstd(k)%mask
+        enddo
+        tioteUseMask = raiCpl%tiote%mask
 
         do k=k0,k1
             raiCpl%Pavg(k)%mask = PavgMask0(:,:,k)
@@ -188,19 +204,24 @@ module raijuCplHelper
             raiCpl%Pstd(k)%mask = PstdMask0(:,:,k)
             raiCpl%Dstd(k)%mask = DstdMask0(:,:,k)
             call blendFloorSami3Moment(raiCpl%Pavg(k)%data, Pavg0(:,:,k), &
+                PavgUseMask(:,:,k), &
                 raiCpl%sami3AlphaPavg, raiCpl%sami3PressureFloor, "Pavg", k, &
                 raiCpl%sami3AbortOnNonfinite)
             call blendFloorSami3Moment(raiCpl%Davg(k)%data, Davg0(:,:,k), &
+                DavgUseMask(:,:,k), &
                 raiCpl%sami3AlphaDavg, raiCpl%sami3DensityFloor, "Davg", k, &
                 raiCpl%sami3AbortOnNonfinite)
             call blendFloorSami3Moment(raiCpl%Pstd(k)%data, Pstd0(:,:,k), &
+                PstdUseMask(:,:,k), &
                 raiCpl%sami3AlphaPstd, 0.0_rp, "Pstd", k, raiCpl%sami3AbortOnNonfinite)
             call blendFloorSami3Moment(raiCpl%Dstd(k)%data, Dstd0(:,:,k), &
+                DstdUseMask(:,:,k), &
                 raiCpl%sami3AlphaDstd, 0.0_rp, "Dstd", k, raiCpl%sami3AbortOnNonfinite)
         enddo
         raiCpl%tiote%mask = tioteMask0
         call blendClampSami3Moment(raiCpl%tiote%data, tiote0, raiCpl%sami3AlphaTiote, &
-            raiCpl%sami3TioteMin, raiCpl%sami3TioteMax, "tiote", raiCpl%sami3AbortOnNonfinite)
+            tioteUseMask, raiCpl%sami3TioteMin, raiCpl%sami3TioteMax, "tiote", &
+            raiCpl%sami3AbortOnNonfinite)
 
         if (.not. raiCpl%sami3MomentsReported) then
             write(*,*) "SAMI3 moments ingest applied after RAIJU realtime pack: ", &
@@ -208,6 +229,9 @@ module raijuCplHelper
             write(*,*) "SAMI3 moments Pavg(0) min/max:", minval(raiCpl%Pavg(0)%data), maxval(raiCpl%Pavg(0)%data)
             write(*,*) "SAMI3 moments Davg(0) min/max:", minval(raiCpl%Davg(0)%data), maxval(raiCpl%Davg(0)%data)
             write(*,*) "SAMI3 moments tiote min/max:", minval(raiCpl%tiote%data), maxval(raiCpl%tiote%data)
+            write(*,*) "SAMI3 moments valid mask counts Pavg/Davg/Pstd/Dstd/tiote:", &
+                count(PavgUseMask), count(DavgUseMask), count(PstdUseMask), count(DstdUseMask), &
+                count(tioteUseMask)
             raiCpl%sami3MomentsReported = .true.
         endif
 
@@ -236,9 +260,10 @@ module raijuCplHelper
     end function clamp01
 
 
-    subroutine blendFloorSami3Moment(data, baseData, alpha, floorVal, fieldName, channel, abortOnBad)
+    subroutine blendFloorSami3Moment(data, baseData, inputMask, alpha, floorVal, fieldName, channel, abortOnBad)
         real(rp), dimension(:,:), intent(inout) :: data
         real(rp), dimension(:,:), intent(in) :: baseData
+        logical, dimension(:,:), intent(in) :: inputMask
         real(rp), intent(in) :: alpha, floorVal
         character(len=*), intent(in) :: fieldName
         integer, intent(in) :: channel
@@ -249,28 +274,37 @@ module raijuCplHelper
         if (alpha <= 0.0_rp) then
             data = baseData
         else
-            nBad = count(.not. ieee_is_finite(data))
+            nBad = count(inputMask .and. (.not. ieee_is_finite(data)))
             if (nBad > 0) then
                 write(*,*) "SAMI3 moments non-finite input: ", trim(fieldName), &
                     " channel=", channel, " count=", nBad
                 if (abortOnBad) stop
-                where (.not. ieee_is_finite(data))
+                where (inputMask .and. (.not. ieee_is_finite(data)))
                     data = baseData
                 end where
             endif
             if (alpha < 1.0_rp) then
-                data = (1.0_rp-alpha)*baseData + alpha*data
+                where (inputMask)
+                    data = (1.0_rp-alpha)*baseData + alpha*data
+                elsewhere
+                    data = baseData
+                end where
+            else
+                where (.not. inputMask)
+                    data = baseData
+                end where
             endif
         endif
-        where (data < floorVal)
+        where (inputMask .and. (data < floorVal))
             data = floorVal
         end where
     end subroutine blendFloorSami3Moment
 
 
-    subroutine blendClampSami3Moment(data, baseData, alpha, minVal, maxVal, fieldName, abortOnBad)
+    subroutine blendClampSami3Moment(data, baseData, alpha, inputMask, minVal, maxVal, fieldName, abortOnBad)
         real(rp), dimension(:,:), intent(inout) :: data
         real(rp), dimension(:,:), intent(in) :: baseData
+        logical, dimension(:,:), intent(in) :: inputMask
         real(rp), intent(in) :: alpha, minVal, maxVal
         character(len=*), intent(in) :: fieldName
         logical, intent(in) :: abortOnBad
@@ -280,22 +314,30 @@ module raijuCplHelper
         if (alpha <= 0.0_rp) then
             data = baseData
         else
-            nBad = count(.not. ieee_is_finite(data))
+            nBad = count(inputMask .and. (.not. ieee_is_finite(data)))
             if (nBad > 0) then
                 write(*,*) "SAMI3 moments non-finite input: ", trim(fieldName), " count=", nBad
                 if (abortOnBad) stop
-                where (.not. ieee_is_finite(data))
+                where (inputMask .and. (.not. ieee_is_finite(data)))
                     data = baseData
                 end where
             endif
             if (alpha < 1.0_rp) then
-                data = (1.0_rp-alpha)*baseData + alpha*data
+                where (inputMask)
+                    data = (1.0_rp-alpha)*baseData + alpha*data
+                elsewhere
+                    data = baseData
+                end where
+            else
+                where (.not. inputMask)
+                    data = baseData
+                end where
             endif
         endif
-        where (data < minVal)
+        where (inputMask .and. (data < minVal))
             data = minVal
         end where
-        where (data > maxVal)
+        where (inputMask .and. (data > maxVal))
             data = maxVal
         end where
     end subroutine blendClampSami3Moment
