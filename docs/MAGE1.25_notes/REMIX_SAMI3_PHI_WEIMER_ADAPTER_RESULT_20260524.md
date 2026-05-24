@@ -255,11 +255,76 @@ Record parser output confirms the SAMI3 reader contract:
 4 ('hour', 4, 1.0000000150474662e+30)
 ```
 
+## Two-Frame Runtime Transition Smoke
+
+A diagnostic fast-transition file was generated from the same two source
+packages with frame hours `[0.0, 0.001]` so SAMI3 could advance to the second
+frame during a short run:
+
+```text
+logs/remix_sami3_phi_weimer_transition_runtime_20260524/phi_weimer_remix_north_2frame_fast.inp
+logs/remix_sami3_phi_weimer_transition_runtime_20260524/phi_weimer_remix_north_2frame_fast.json
+logs/remix_sami3_phi_weimer_transition_runtime_20260524/phi_weimer_remix_north_2frame_fast_diag.h5
+```
+
+Launcher:
+
+```text
+slurm/run_sami3_online_receiver_remix_phi_weimer_2frame_fast_20260524.sbatch
+```
+
+Namelist overrides:
+
+```text
+maxstep = 20
+hrmax = 0.020000 h
+tphi = 1 s
+```
+
+Validated run:
+
+```text
+job: 7651608
+state: COMPLETED
+exit: 0:0
+elapsed: 00:01:22
+node: qhcn025
+MaxRSS: 30174892K
+```
+
+Key evidence:
+
+```text
+hrutw2 = 0.00000000       1.00000005E-03
+hrutw2 = 2.22222228E-03   1.00000002E+30
+MASTER: All Done!
+WACCMX online done signal received: 1
+WACCMX_RECV_QC compare ok: ranks=32 occurrence=0 step_set=[0]
+packet_hour_set=[0.0] max_abs=2.1033e+06 max_rel=4.86991e-13
+```
+
+This proves SAMI3's existing `potential.f90:weimer` reader can advance from a
+REMIX-derived frame to a second REMIX-derived frame during runtime without
+changing the transport equations.
+
+Archived evidence:
+
+```text
+logs/remix_sami3_phi_weimer_transition_runtime_20260524/sacct_7651608.txt
+logs/remix_sami3_phi_weimer_transition_runtime_20260524/receiver_markers_7651608.txt
+logs/remix_sami3_phi_weimer_transition_runtime_20260524/recv_qc_compare_7651608.txt
+logs/remix_sami3_phi_weimer_transition_runtime_20260524/sami3_online_receiver_7651608.out
+logs/remix_sami3_phi_weimer_transition_runtime_20260524/neutral_sender_7651608.out
+logs/remix_sami3_phi_weimer_transition_runtime_20260524/slurm_7651608.out
+logs/remix_sami3_phi_weimer_transition_runtime_20260524/slurm_7651608.err
+```
+
 ## Current Limitation
 
 This adapter proves the file-format bridge and static SAMI3 runtime ingestion
-path, plus a two-frame time-series replay file contract.  It does not yet
-prove production REMIX -> SAMI3 electrodynamic consistency.
+path, plus a two-frame runtime transition through SAMI3's existing Weimer
+reader.  It does not yet prove production REMIX -> SAMI3 electrodynamic
+consistency.
 
 Known limitations:
 
@@ -273,9 +338,8 @@ sets target mlat < 45 deg to zero because the source package is high-lat only
 
 ## Next Step
 
-The next implementation step is a controlled runtime test that forces SAMI3 to
-read the second `phi_weimer` frame, then replacing replay files with a live
-REMIX potential feed:
+The next implementation step is replacing replay files with a live REMIX
+potential feed:
 
 ```text
 REMIX/POT time sequence
