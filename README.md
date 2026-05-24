@@ -114,6 +114,11 @@ phi receiver path: job 7652220 completed 0:0, the C sender detected
 `remix_sami3_phi_payload.v1 nframes=1`, SAMI3 logged `WACCMX_PHI_RECV` with
 the same `-36.9306145 / 31.4838161 statV` min/max, `MASTER: All Done!`, online
 done signal 1, and neutral receiver QC remained at `max_rel=4.86991e-13`.
+Phi payload content QC now checks finite values, time ordering, valid-until
+ordering, and optional nonzero/changing-frame probes.  The current two-frame
+Voltron payload passes finite/nonzero/time-order checks but the two frames are
+numerically identical, so changing-frame detection remains a diagnostic probe
+instead of a hard append2 gate.
 Runtime blending is validated with alpha=0 exact baseline recovery.
 Density alpha scan is finite and continuous through alphaDavg=0.20.
 Pressure alpha scan at alphaDavg=0.05 is finite for alphaPavg=0.05 and 0.10.
@@ -249,6 +254,7 @@ docs/MAGE1.25_notes/WACCMX_SAMI3_PHI_PAYLOAD_WAIT_BUILD_RESULT_20260525.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_APPEND2_INTEL_EXPR_ATTEMPT_20260525.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_DIRECTWAIT_PHI_LAUNCHER_20260525.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_APPEND2_ARCHIVE_WORKFLOW_20260525.md
+docs/MAGE1.25_notes/WACCMX_SAMI3_PHI_PAYLOAD_CONTENT_QC_20260525.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_WEIGHTING_CONTRACT_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_EXTENDED_DIAGNOSTICS_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_DS_OVER_B_WEIGHTING_RESULT_20260524.md
@@ -399,6 +405,7 @@ Latest SAMI3 -> RAIJU/GAMERA mapping quality evidence:
 logs/sami3_mapping_quality_20260524/
 logs/sami3_mapping_quality_runtime_20260524/
 logs/waccmx_topblend_policy_validation_20260525/
+logs/waccmx_phi_payload_content_validation_20260525/
 logs/sami3_weightfile_mapping_20260524/
 logs/sami3_weightfile_bvol_geometry_20260524/
 logs/sami3_voltron_shell_weightfile_20260524/

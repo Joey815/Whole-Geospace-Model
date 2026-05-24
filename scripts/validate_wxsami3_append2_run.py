@@ -13,6 +13,7 @@ for the current integration smoke:
 
 import argparse
 import json
+import math
 import re
 import struct
 from pathlib import Path
@@ -64,6 +65,8 @@ def parse_phi_payload(path):
     magic, version, nlat, nlon, nframes = struct.unpack_from("<5i", raw, 0)
     off = 20
     frames = []
+    frame_diffs = []
+    prev_vals = None
     for iframe in range(nframes):
         need = off + 4 + 8 + nlat * nlon * 4
         if len(raw) < need:
@@ -74,21 +77,47 @@ def parse_phi_payload(path):
         off += 8
         vals = struct.unpack_from(f"<{nlat*nlon}f", raw, off)
         off += nlat * nlon * 4
+        finite_count = sum(1 for value in vals if math.isfinite(value))
+        finite_vals = [value for value in vals if math.isfinite(value)]
+        if prev_vals is not None:
+            diffs = [
+                value - prev
+                for value, prev in zip(vals, prev_vals)
+                if math.isfinite(value) and math.isfinite(prev)
+            ]
+            if diffs:
+                max_abs = max(abs(value) for value in diffs)
+                rms = math.sqrt(sum(value * value for value in diffs) / len(diffs))
+            else:
+                max_abs = float("nan")
+                rms = float("nan")
+            frame_diffs.append(
+                {
+                    "from_frame": iframe - 1,
+                    "to_frame": iframe,
+                    "finite_pairs": len(diffs),
+                    "max_abs": max_abs,
+                    "rms": rms,
+                }
+            )
         frames.append(
             {
                 "frame_index": frame_index,
                 "hour": hour,
                 "valid_until": valid_until,
-                "min": min(vals),
-                "max": max(vals),
+                "finite_count": finite_count,
+                "min": min(finite_vals) if finite_vals else None,
+                "max": max(finite_vals) if finite_vals else None,
                 "nonzero": sum(1 for value in vals if value != 0.0),
             }
         )
+        prev_vals = vals
     return {
         "path": str(path),
         "size": len(raw),
         "header": [magic, version, nlat, nlon, nframes],
         "frames": frames,
+        "frame_diffs": frame_diffs,
     }
 
 
@@ -148,6 +177,43 @@ def validate(args):
                 first_hour is not None and abs(first_hour) <= args.hour_tol,
                 f"first_hour={first_hour}",
             )
+            frame_cells = header[2] * header[3]
+            finite_frames = all(frame["finite_count"] == frame_cells for frame in phi["frames"])
+            add_check(
+                checks,
+                "phi_payload_frames_finite",
+                finite_frames,
+                "finite_counts={}".format([frame["finite_count"] for frame in phi["frames"]]),
+            )
+            hours = [frame["hour"] for frame in phi["frames"]]
+            valid_until = [frame["valid_until"] for frame in phi["frames"]]
+            add_check(
+                checks,
+                "phi_payload_hours_nondecreasing",
+                all(hours[idx] >= hours[idx - 1] - args.hour_tol for idx in range(1, len(hours))),
+                f"hours={hours}",
+            )
+            add_check(
+                checks,
+                "phi_payload_valid_until_after_hour",
+                all(v >= h - args.hour_tol for h, v in zip(hours, valid_until)),
+                f"hours={hours} valid_until={valid_until}",
+            )
+            if args.require_nonzero_phi:
+                add_check(
+                    checks,
+                    "phi_payload_nonzero",
+                    all(frame["nonzero"] > 0 for frame in phi["frames"]),
+                    "nonzero_counts={}".format([frame["nonzero"] for frame in phi["frames"]]),
+                )
+            if args.require_changing_phi_frames and nframes > 1:
+                max_diff = max(diff["max_abs"] for diff in phi["frame_diffs"]) if phi["frame_diffs"] else 0.0
+                add_check(
+                    checks,
+                    "phi_payload_frame_change",
+                    max_diff >= args.min_phi_frame_max_abs_diff,
+                    "max_abs_diff={} min={}".format(max_diff, args.min_phi_frame_max_abs_diff),
+                )
         except Exception as exc:  # noqa: BLE001 - report validation detail
             add_check(checks, "phi_payload_parse", False, str(exc))
 
@@ -241,6 +307,9 @@ def main() -> int:
     parser.add_argument("--allow-incomplete", action="store_true")
     parser.add_argument("--expect-phi-wait-marker", action="store_true")
     parser.add_argument("--expect-direct-wait-mode", action="store_true")
+    parser.add_argument("--require-nonzero-phi", action="store_true")
+    parser.add_argument("--require-changing-phi-frames", action="store_true")
+    parser.add_argument("--min-phi-frame-max-abs-diff", type=float, default=1.0e-6)
     parser.add_argument("--json-output", default=None)
     args = parser.parse_args()
 

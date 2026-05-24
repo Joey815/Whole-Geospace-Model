@@ -82,6 +82,7 @@ python3 scripts/archive_wxsami3_append2_result.py \
   --job-id 7659727 \
   --expected-phi-frames 2 \
   --expected-live-packets 1 \
+  --require-nonzero-phi \
   --expect-top-blend-mode linear \
   --expect-blend-bottom-km 600 \
   --expect-blend-top-km 720 \
@@ -111,6 +112,7 @@ python3 scripts/archive_wxsami3_append2_result.py \
   --expected-live-packets 1 \
   --expect-phi-wait-marker \
   --expect-direct-wait-mode \
+  --require-nonzero-phi \
   --expect-top-blend-mode linear \
   --expect-blend-bottom-km 600 \
   --expect-blend-top-km 720 \
@@ -126,6 +128,7 @@ Passing this workflow means:
 
 ```text
 Voltron/REMIX phi payload has the expected two-frame binary schema
+phi payload frames are finite, time-ordered, valid-until ordered, and nonzero
 WACCM-X sender sent the expected phi frames
 direct-wait runs show a same-job Voltron writer PID and sender wait marker
 top-blend diagnostics show linear 600-720 km blending and nonzero blend cells
@@ -141,3 +144,8 @@ small evidence bundle is ready for GitHub
 It still does not close the production physics blockers around top-blend
 policy, He fallback, W/vertical-wind policy, f09 distributed remap, and
 production SAMI3 -> RAIJU/GAMERA mapping.
+
+The append2 validator also has an optional `--require-changing-phi-frames`
+probe.  It is deliberately not part of the current hard gate because the
+existing two-frame Voltron payload is finite and nonzero but numerically
+identical between the two short-window frames.

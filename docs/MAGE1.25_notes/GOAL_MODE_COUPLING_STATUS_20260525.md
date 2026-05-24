@@ -54,7 +54,15 @@ python3 scripts/archive_wxsami3_append2_result.py \
   --archive-dir logs/waccmx_append2_full_20260525 \
   --job-id 7659727 \
   --expected-phi-frames 2 \
-  --expected-live-packets 1
+  --expected-live-packets 1 \
+  --require-nonzero-phi \
+  --expect-top-blend-mode linear \
+  --expect-blend-bottom-km 600 \
+  --expect-blend-top-km 720 \
+  --min-total-blend-cells 1 \
+  --require-zero-unknown-source-flags \
+  --require-he-native \
+  --require-w-zero
 ```
 
 This must show:
@@ -104,7 +112,15 @@ python3 scripts/archive_wxsami3_append2_result.py \
   --expected-phi-frames 2 \
   --expected-live-packets 1 \
   --expect-phi-wait-marker \
-  --expect-direct-wait-mode
+  --expect-direct-wait-mode \
+  --require-nonzero-phi \
+  --expect-top-blend-mode linear \
+  --expect-blend-bottom-km 600 \
+  --expect-blend-top-km 720 \
+  --min-total-blend-cells 1 \
+  --require-zero-unknown-source-flags \
+  --require-he-native \
+  --require-w-zero
 ```
 
 This must additionally show:
@@ -205,6 +221,7 @@ Strict validation and HDF5 summary artifacts have been committed and pushed.
 scripts/validate_sami3_raiju_mapping_product.py
 scripts/validate_wxsami3_append2_run.py --expect-direct-wait-mode
 scripts/archive_wxsami3_append2_result.py --expect-direct-wait-mode
+scripts/validate_wxsami3_topblend_policy.py
 ```
 
 The mapping-product validator now gates `/RaiCplMomentsOnly` plus
