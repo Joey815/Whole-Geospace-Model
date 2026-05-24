@@ -216,6 +216,7 @@ scripts/validate_remix_sami3_phi_payload.py
 scripts/validate_wxsami3_time_axis.py
 scripts/validate_sami3_raiju_summary.py
 scripts/validate_wxsami3_replay_cadence.py
+scripts/archive_current_goal_mode_runs.py
 ```
 
 The mapping-product validator now gates `/RaiCplMomentsOnly` plus
@@ -255,3 +256,8 @@ The SAMI3 -> RAIJU/GAMERA long-run archive now turns summary diagnostics into a
 hard gate: exact Pavg/Davg/Pstd/Dstd blending formula residuals, positive
 Pavg/Davg inputs, empty nonfinite restart lists, matching RAIJU/GAMERA history
 steps, and finite restart/history response metrics.
+
+`archive_current_goal_mode_runs.py` freezes the strict append2 and direct-wait
+archive commands for the active 2026-05-25 goal-mode jobs.  It checks `sacct`
+first, skips incomplete jobs by default, and can be used with
+`--allow-incomplete` only for explicit partial evidence snapshots.
