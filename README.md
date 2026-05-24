@@ -34,6 +34,10 @@ with max_rel=1.19e-7.
 The mapping weight schema now carries RAIJU target bvol/topo/Bmin geometry and
 derives closed_field_mask from the same four-corner topology rule used by
 RAIJU.
+Schema v3 Voltron-shell intermediate mapping weights are implemented and
+validated: SAMI3 -> Voltron TubeShell ShellGrid -> RAIJU ShellGrid reproduces
+the inline L/MLT product with max_rel=1.19e-7 while carrying Voltron
+TubeShell bVol/topo/Lb/bmin/nTrc geometry.
 Runtime blending is validated with alpha=0 exact baseline recovery.
 Density alpha scan is finite and continuous through alphaDavg=0.20.
 Pressure alpha scan at alphaDavg=0.05 is finite for alphaPavg=0.05 and 0.10.
@@ -141,6 +145,7 @@ docs/MAGE1.25_notes/SAMI3_RAIJU_MAPPING_QUALITY_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_MAPPING_QUALITY_RUNTIME_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_EXPLICIT_WEIGHT_FILE_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_WEIGHT_FILE_BVOL_GEOMETRY_RESULT_20260524.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_VOLTRON_SHELL_WEIGHT_FILE_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_RUNTIME_BLEND_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_STAGE2_SOURCE_MODES_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_DSB_LMLT_RUNTIME_BLEND_RESULT_20260524.md
@@ -233,6 +238,7 @@ logs/sami3_mapping_quality_20260524/
 logs/sami3_mapping_quality_runtime_20260524/
 logs/sami3_weightfile_mapping_20260524/
 logs/sami3_weightfile_bvol_geometry_20260524/
+logs/sami3_voltron_shell_weightfile_20260524/
 ```
 
 ## Known Physical Blockers

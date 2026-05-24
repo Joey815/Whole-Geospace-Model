@@ -307,6 +307,49 @@ For the current `ds_over_B + l_mlt` smoke, the weight-file path matches the old
 inline `l_mlt` path to `max_rel=1.19e-7`; the remaining differences are
 `float32` HDF5 write-rounding.
 
+The weight generator also supports a Voltron-shell intermediate path:
+
+```text
+build_sami3_to_raiju_weights.py \
+  sami3_moments_stubpayload_ds_over_B_20260524.h5 \
+  --out sami3_to_raiju_weights_voltron_shell_l_mlt_20260524 \
+  --raicpl-template sami3_moments_base_control.raiCpl.Res.00000.h5 \
+  --voltron-template sami3_moments_base_control.volt.Res.00000.h5 \
+  --mapping-mode voltron_shell_l_mlt
+```
+
+This writes `schema_version=3` and composes:
+
+```text
+SAMI3 L/MLT grid -> Voltron TubeShell ShellGrid -> RAIJU ShellGrid
+```
+
+The generated HDF5 adds:
+
+```text
+/intermediate/L
+/intermediate/MLT_deg
+/intermediate/bvol_corner
+/intermediate/bvol_cc
+/intermediate/topo_corner
+/intermediate/closed_cell_mask
+/intermediate/Lb_corner
+/intermediate/Lb_cc
+/intermediate/bmin_corner
+/intermediate/bmin_cc
+/intermediate/nTrc_corner
+/intermediate/nTrc_cc
+/intermediate/sami3_to_voltron/*
+/intermediate/voltron_to_raiju/*
+```
+
+`--apply-voltron-closed-mask` can skip intermediate Voltron cells whose four
+TubeShell topology corners are not `TUBE_CLOSED`.  In the current tiny smoke
+template, the active RAIJU target region does not sample the open Voltron cells,
+so masked and unmasked generation have the same target coverage.  This remains
+a Voltron-shell-aware L/MLT prototype, not a production traced-tube or
+`bvol`-weighted mapping.
+
 When a runtime layout is requested, the product also writes explicit
 `/MappingQuality` datasets.  For `l_mlt` these include:
 
