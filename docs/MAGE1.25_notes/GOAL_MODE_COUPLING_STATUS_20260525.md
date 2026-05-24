@@ -20,7 +20,7 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-25 03:24:57 CST.
+Status refreshed: 2026-05-25 03:51:14 CST.
 
 ### Full WACCM-X/CESM -> SAMI3 Append2 Integration
 
@@ -148,7 +148,7 @@ jobid = 7663122
 jobname = sami3_rai_long1800
 state = RUNNING
 node = qhcn065
-elapsed = 00:13:11 at 2026-05-25 03:24:57 CST
+elapsed = 00:39:28 at 2026-05-25 03:51:14 CST
 settings = alphaDavg=0.05, alphaPavg=0.05, alphaTiote=1.0, alphaPstd=0, alphaDstd=0
 ```
 
@@ -232,6 +232,7 @@ scripts/validate_wxsami3_append2_run.py --expect-direct-wait-mode
 scripts/archive_wxsami3_append2_result.py --expect-direct-wait-mode
 scripts/validate_wxsami3_topblend_policy.py
 scripts/validate_wxsami3_runtime_map.py
+scripts/validate_wxsami3_live_packet_contract.py field-stat gates
 ```
 
 The mapping-product validator now gates `/RaiCplMomentsOnly` plus
@@ -241,3 +242,6 @@ producer/waiter path.
 
 The WACCM-X archive gate now also checks the live metadata schema, phi payload
 content, top-blend policy diagnostics, and runtime-map/ESMF weight consistency.
+The live packet contract validator now also checks live dump field bad-counts
+and plausible ranges before replay, covering lat/lon, T, U/V, pressure, height,
+mean molecular mass, and the major CAM species used for residual N2.

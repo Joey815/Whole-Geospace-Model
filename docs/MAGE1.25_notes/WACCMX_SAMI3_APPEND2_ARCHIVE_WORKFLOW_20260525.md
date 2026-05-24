@@ -145,6 +145,7 @@ direct-wait runs show a same-job Voltron writer PID and sender wait marker
 top-blend diagnostics show linear 600-720 km blending and nonzero blend cells
 source-flag unknown counts remain zero
 He remains native and W remains zero for valid payload cells
+live dump fields have zero bad counts and plausible ranges for T/U/V/pressure/height/major species
 runtime map header and row/col/weight arrays match the ESMF weights file
 SAMI3 received the expected phi frames
 SAMI3 reached MASTER: All Done!

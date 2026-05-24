@@ -13,6 +13,7 @@ reconstructed from the live dump written at the sender call site.
 """
 
 import argparse
+import ast
 import json
 import math
 import re
@@ -74,7 +75,7 @@ def parse_int_list(text):
 
 def parse_summary(path):
     text = read_text(path)
-    out = {"path": str(path), "text": text}
+    out = {"path": str(path), "text": text, "field_stats": {}}
     m = re.search(r"files=(\d+)\s+ranks=(\d+)\s+total_cols=(\d+)", text)
     if m:
         out["files"] = int(m.group(1))
@@ -85,6 +86,13 @@ def parse_summary(path):
         out["packets"] = parse_int_list(m.group(1))
         out["nsteps"] = parse_int_list(m.group(2))
     out["has_bad_size_files"] = "bad_size_files=" in text
+    for label, raw in re.findall(r"([A-Za-z0-9_]+)=({[^}]*})", text):
+        try:
+            value = ast.literal_eval(raw)
+        except (SyntaxError, ValueError):
+            continue
+        if isinstance(value, dict):
+            out["field_stats"][label] = value
     return out
 
 
@@ -420,6 +428,69 @@ def check_packet_artifacts(checks, meta_out, run_dir, packet, args):
             not summary.get("has_bad_size_files"),
             "bad_size_files_present={}".format(summary.get("has_bad_size_files")),
         )
+        field_stats = summary.get("field_stats", {})
+        zero_bad_fields = [
+            "lat_deg",
+            "lon_deg",
+            "T_K",
+            "U_m_s",
+            "V_m_s",
+            "PMID_Pa",
+            "ZM_m",
+            "MBARV_kg_mol",
+            "q_O",
+            "q_O2",
+            "q_H",
+            "q_N",
+            "q_NO",
+        ]
+        for label in zero_bad_fields:
+            stat = field_stats.get(label, {})
+            add_check(
+                checks,
+                "packet{}_summary_{}_bad".format(packet, label),
+                stat.get("bad") == 0,
+                "bad={}".format(stat.get("bad")),
+            )
+        cid = field_stats.get("cid", {})
+        add_check(
+            checks,
+            "packet{}_summary_cid_coverage".format(packet),
+            cid.get("missing") == 0
+            and cid.get("unique") == args.expected_source_columns,
+            "missing={} unique={} expected={}".format(
+                cid.get("missing"), cid.get("unique"), args.expected_source_columns
+            ),
+        )
+
+        range_limits = {
+            "lat_deg": (-90.0, 90.0),
+            "lon_deg": (0.0, 360.0),
+            "T_K": (50.0, 5000.0),
+            "U_m_s": (-5000.0, 5000.0),
+            "V_m_s": (-5000.0, 5000.0),
+            "PMID_Pa": (0.0, 2.0e5),
+            "ZM_m": (-1.0e3, 2.0e6),
+            "MBARV_kg_mol": (1.0, 60.0),
+            "q_O": (-1.0e-12, 1.1),
+            "q_O2": (-1.0e-12, 1.1),
+            "q_H": (-1.0e-12, 1.1),
+            "q_N": (-1.0e-12, 1.1),
+            "q_NO": (-1.0e-12, 1.1),
+        }
+        for label, (lo, hi) in range_limits.items():
+            stat = field_stats.get(label, {})
+            got_min = stat.get("min")
+            got_max = stat.get("max")
+            add_check(
+                checks,
+                "packet{}_summary_{}_range".format(packet, label),
+                numeric(got_min)
+                and numeric(got_max)
+                and float(got_min) >= lo
+                and float(got_max) <= hi,
+                "min={} max={} allowed=[{},{}]".format(got_min, got_max, lo, hi),
+            )
 
     if replay_path.exists():
         replay = parse_replay_builder(replay_path)

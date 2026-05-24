@@ -42,6 +42,7 @@ N2 negative residual mode
 source flag count closure
 sender checksum count closure
 per-packet live_dump_summary files
+per-packet live-dump field bad-count and range checks
 per-packet replay_builder outputs
 per-packet recv_qc_compare outputs
 SAMI3 receiver completion marker
@@ -129,6 +130,24 @@ He index = -1 native/MSIS policy
 overall = ok
 ```
 
+The field-stat gate now also checks the live dump itself before replay:
+
+```text
+cid missing = 0
+cid unique = 13824
+lat/lon bad = 0 and ranges within [-90,90] / [0,360]
+T_K bad = 0 and range within [50,5000] K
+U_m_s/V_m_s bad = 0 and ranges within +/-5000 m/s
+PMID_Pa bad = 0 and range within (0,2e5] Pa
+ZM_m bad = 0 and range within [-1e3,2e6] m
+MBARV_kg_mol bad = 0 and range within [1,60]
+q_O/q_O2/q_H/q_N/q_NO bad = 0 and ranges within [-1e-12,1.1]
+```
+
+N2 and He are intentionally not required to be finite in the live dump summary
+because the current f19 physical prototype uses residual N2 and native/MSIS He
+fallbacks.
+
 ## Use On Append2 Runs
 
 The queued full append2 and direct-wait jobs use:
@@ -170,7 +189,8 @@ model phase and may carry time-mean semantics.
 
 The current live packet contract validator proves the packet delivered to SAMI3
 can be regenerated from the sender's same-call-site live dump with receiver QC
-agreement at roughly 1e-12 relative error.
+agreement at roughly 1e-12 relative error, and that the live neutral fields used
+for that replay have finite, plausible runtime ranges.
 
 This does not make the full system production coupling yet.  Remaining neutral
 path blockers include the production top-blend policy, He fallback hardening,
