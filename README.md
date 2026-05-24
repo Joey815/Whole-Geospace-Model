@@ -33,6 +33,8 @@ Gridded State%tiote can now be enabled for moment-to-eta mapping with
 moments/useStateTioteForIngest=T; default behavior remains unchanged.
 Recommended short prototype is validated with alphaDavg=0.05, alphaPavg=0.05,
 alphaTiote=1, alphaPstd=0, alphaDstd=0, and useStateTioteForIngest=T.
+Recommended prototype also passes a 60 second baseline/control smoke with no
+non-finite physics fields.
 ```
 
 Latest verified jobs:
@@ -128,6 +130,7 @@ docs/MAGE1.25_notes/SAMI3_RAIJU_DSB_LMLT_ALPHA_SCAN_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_DSB_LMLT_PRESSURE_SCAN_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_MOMENT_SEMANTICS_TIOTE_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_RECOMMENDED_PROTOTYPE_RESULT_20260524.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_RECOMMENDED_LONG60_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_GAMERA_PHYSICS_REVIEW_20260523.md
 ```
 
@@ -212,7 +215,7 @@ REMIX -> SAMI3 potential/E-field forcing
 production SAMI3 -> RAIJU/GAMERA Voltron-consistent flux-tube weighting
 production SAMI3 -> RAIJU/GAMERA geometry/mask coverage policy
 longer runtime scans for density, pressure, and tiote blending
-longer runtime stability scan for the recommended short prototype
+multi-minute or Slurm runtime stability scan for the recommended prototype
 f09/finer distributed remap design
 ```
 
