@@ -73,6 +73,8 @@ def main():
     parser.add_argument("--summary-python", default="/home/jiaoy_group/jiaoy/.venvs/mage-vis/bin/python")
     parser.add_argument("--mapping-python", default="/home/jiaoy_group/jiaoy/.venvs/mage-vis/bin/python")
     parser.add_argument("--skip-summary", action="store_true")
+    parser.add_argument("--formula-abs-tol", type=float, default=1.0e-12)
+    parser.add_argument("--formula-rel-tol", type=float, default=1.0e-12)
     parser.add_argument("--skip-mapping-product", action="store_true")
     parser.add_argument("--expect-mapping-mode", default="l_mlt")
     parser.add_argument("--min-mapping-valid-fraction", type=float, default=1.0)
@@ -121,11 +123,31 @@ def main():
         if args.job_id:
             summary_cmd.extend(["--job-id", str(args.job_id)])
         summary_rc = run_checked(summary_cmd, summary_stdout)
+        summary_validate_stdout = archive_dir / "validate_sami3_raiju_summary.txt"
+        summary_validate_json = archive_dir / "validate_sami3_raiju_summary.json"
+        summary_validate_cmd = [
+            sys.executable,
+            str(repo / "scripts" / "validate_sami3_raiju_summary.py"),
+            "--summary-json",
+            str(summary_json),
+            "--formula-abs-tol",
+            str(args.formula_abs_tol),
+            "--formula-rel-tol",
+            str(args.formula_rel_tol),
+            "--require-positive-inputs",
+            "--require-matching-history-step",
+            "--json-output",
+            str(summary_validate_json),
+        ]
+        summary_validate_rc = run_checked(summary_validate_cmd, summary_validate_stdout)
         summary_info = {
             "returncode": summary_rc,
             "stdout": str(summary_stdout),
             "json": str(summary_json),
             "text": str(summary_txt),
+            "validation_returncode": summary_validate_rc,
+            "validation_text": str(summary_validate_stdout),
+            "validation_json": str(summary_validate_json),
             "python": args.summary_python,
         }
 
@@ -170,7 +192,10 @@ def main():
 
     archive_ok = (
         validator_rc == 0
-        and (summary_info is None or summary_info["returncode"] == 0)
+        and (
+            summary_info is None
+            or (summary_info["returncode"] == 0 and summary_info["validation_returncode"] == 0)
+        )
         and (mapping_info is None or mapping_info["returncode"] == 0)
     )
     summary = {
@@ -199,6 +224,7 @@ def main():
         "job_id: {}".format(args.job_id if args.job_id else ""),
         "validator_returncode: {}".format(validator_rc),
         "summary_returncode: {}".format(summary_info["returncode"] if summary_info else ""),
+        "summary_validation_returncode: {}".format(summary_info["validation_returncode"] if summary_info else ""),
         "mapping_product_returncode: {}".format(mapping_info["returncode"] if mapping_info else ""),
         "copied_files: {}".format(len(copied)),
         "overall: {}".format("ok" if summary["ok"] else "FAIL"),
@@ -206,6 +232,7 @@ def main():
         "Validator text output:",
         "",
         "- validate_sami3_raiju_longrun.txt",
+        "- validate_sami3_raiju_summary.txt",
         "- validate_sami3_raiju_mapping_product.txt",
     ]
     (archive_dir / "README.md").write_text("\n".join(lines) + "\n")

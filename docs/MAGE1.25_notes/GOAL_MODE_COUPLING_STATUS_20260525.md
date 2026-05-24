@@ -236,6 +236,7 @@ scripts/validate_wxsami3_live_packet_contract.py field-stat gates
 scripts/validate_sami3_raiju_mapping_product.py strict moment gates
 scripts/validate_remix_sami3_phi_payload.py
 scripts/validate_wxsami3_time_axis.py
+scripts/validate_sami3_raiju_summary.py
 ```
 
 The mapping-product validator now gates `/RaiCplMomentsOnly` plus
@@ -260,3 +261,8 @@ The online WACCM-X/SAMI3 evidence gate now also checks timeline consistency:
 sender and receiver neutral packet hours, receiver worker coverage, phi-frame
 validity intervals, and whether neutral packet hours are covered by the
 available phi payload frames.
+
+The SAMI3 -> RAIJU/GAMERA long-run archive now turns summary diagnostics into a
+hard gate: exact Pavg/Davg/Pstd/Dstd blending formula residuals, positive
+Pavg/Davg inputs, empty nonfinite restart lists, matching RAIJU/GAMERA history
+steps, and finite restart/history response metrics.
