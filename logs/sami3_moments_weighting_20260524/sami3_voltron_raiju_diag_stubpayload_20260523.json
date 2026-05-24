@@ -1,0 +1,375 @@
+{
+  "MAXTUBEFLUIDS": 5,
+  "bulk_channel": 0,
+  "channel_semantics": {
+    "0": "bulk SAMI3 ion moment mapped to MAGE BLK channel"
+  },
+  "compatibility": {
+    "gamera_equation_change": false,
+    "note": "Field-name and unit diagnostic product only; a production restart requires ShellGrid, topology, magnetic geometry, potentials, masks, and timing.",
+    "rai_cpl_restart": false,
+    "tube_shell_restart": false
+  },
+  "mage_read_groups": {
+    "/RaiCplMomentsOnly": "moments-only raijuCoupler_T field group; Pavg/Davg/Pstd/Dstd have nFluidIn+1 channels",
+    "/TubeShellMomentsOnly": "moments-only TubeShell_T field group; avgP/avgN/stdP/stdN have MAXTUBEFLUIDS+1 channels"
+  },
+  "nFluidIn": 0,
+  "n_channels": 1,
+  "normalization": {
+    "Dstd": "RAIJU_State.Dstd = RAIJU_Coupler.Dstd / max(Davg, 1e-30)",
+    "Pstd": "RAIJU_State.Pstd = RAIJU_Coupler.Pstd / max(Pavg, 1e-30)"
+  },
+  "output_hdf5": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_20260523.h5",
+  "product": "sami3_voltron_raiju_moments_diagnostic",
+  "raicpl_runtime_layout": null,
+  "schema_version": 1,
+  "source_attrs": {
+    "Davg": {
+      "units": "#/cc"
+    },
+    "Dstd": {
+      "units": "#/cc"
+    },
+    "Pavg": {
+      "units": "nPa"
+    },
+    "Pstd": {
+      "units": "nPa"
+    },
+    "tiote": {
+      "units": "normalized"
+    }
+  },
+  "source_metadata": {
+    "compatibility": {
+      "intermediate_hdf5": true,
+      "note": "This is a diagnostic intermediate product, not a complete Voltron TubeShell restart.",
+      "target_fields": [
+        "Pavg",
+        "Davg",
+        "Pstd",
+        "Dstd",
+        "tiote"
+      ],
+      "tube_shell_restart": false
+    },
+    "coordinate_sources": {
+      "balt_mean_km": "baltu.dat",
+      "blat_mean_deg": "blatu.dat",
+      "blon_mean_deg": "blonu.dat",
+      "glat_mean_deg": "glatu.dat",
+      "glon_mean_deg": "glonu.dat",
+      "zalt_mean_km": "zaltu.dat"
+    },
+    "density_units": "#/cc",
+    "dimensions": {
+      "nf": 124,
+      "nion": 7,
+      "nlt": 96,
+      "nz": 304
+    },
+    "ion_order": [
+      "H+",
+      "O+",
+      "NO+",
+      "O2+",
+      "He+",
+      "N2+",
+      "N+"
+    ],
+    "moment_weighting": "simple",
+    "ne_source": "deneu.dat",
+    "output_hdf5": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_moments_stubpayload_20260523.h5",
+    "output_npz": null,
+    "physical_validity": "smoke_only",
+    "pressure_conversion": {
+      "formula": "p_nPa = deni_cm3 * ti_K * 1.38044e-8",
+      "kB_cgs_times_dyn_cm2_to_nPa": 1.38044e-08
+    },
+    "pressure_units": "nPa",
+    "product": "sami3_voltron_moments_diagnostic",
+    "records": {
+      "deneu.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "deni1u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "deni2u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "deni3u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "deni4u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "deni5u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "deni6u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "deni7u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "teu.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "ti1u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "ti2u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "ti3u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "ti4u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "ti5u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "ti6u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      },
+      "ti7u.dat": {
+        "record_count": 1,
+        "record_index": 0
+      }
+    },
+    "run_dir": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_online_stubpayload_20231013_0000",
+    "schema_version": 1,
+    "stats": [
+      {
+        "finite_count": 11904,
+        "max": 2.0364253520965576,
+        "mean": 0.7830304503440857,
+        "min": 0.004729345440864563,
+        "name": "Pavg",
+        "shape": [
+          124,
+          96
+        ]
+      },
+      {
+        "finite_count": 11904,
+        "max": 109530.53125,
+        "mean": 49818.8671875,
+        "min": 1641.177490234375,
+        "name": "Davg",
+        "shape": [
+          124,
+          96
+        ]
+      },
+      {
+        "finite_count": 11904,
+        "max": 2.7519729137420654,
+        "mean": 1.2812246084213257,
+        "min": 0.0018463247688487172,
+        "name": "Pstd",
+        "shape": [
+          124,
+          96
+        ]
+      },
+      {
+        "finite_count": 11904,
+        "max": 141351.25,
+        "mean": 75490.8046875,
+        "min": 585.6715087890625,
+        "name": "Dstd",
+        "shape": [
+          124,
+          96
+        ]
+      },
+      {
+        "finite_count": 11904,
+        "max": 1.0003948211669922,
+        "mean": 0.9015442132949829,
+        "min": 0.13054083287715912,
+        "name": "tiote",
+        "shape": [
+          124,
+          96
+        ]
+      },
+      {
+        "finite_count": 11904,
+        "max": 1363.3099365234375,
+        "mean": 951.3583374023438,
+        "min": 200.0,
+        "name": "Ti_eff",
+        "shape": [
+          124,
+          96
+        ]
+      },
+      {
+        "finite_count": 11904,
+        "max": 5367.71923828125,
+        "mean": 1151.0050048828125,
+        "min": 200.0,
+        "name": "Te_eff",
+        "shape": [
+          124,
+          96
+        ]
+      }
+    ],
+    "std_units": {
+      "Dstd": "#/cc absolute; RAIJU normalizes later",
+      "Pstd": "nPa absolute; RAIJU normalizes later"
+    },
+    "temperature_units": "K",
+    "time_rows": [
+      [
+        "1",
+        "0",
+        "0",
+        "0",
+        "0.0000E+00"
+      ]
+    ],
+    "weighting": {
+      "mode": "simple",
+      "note": "No SAMI3 vol array was provided; output is not a true Voltron flux-tube-volume moment.",
+      "physical_validity": "smoke_only",
+      "source": "unit_weights_along_sami3_nz"
+    }
+  },
+  "source_moments_h5": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_moments_stubpayload_20260523.h5",
+  "stats": [
+    {
+      "finite_count": 11904,
+      "max": 2.0364253520965576,
+      "mean": 0.7830304202769732,
+      "min": 0.004729345440864563,
+      "name": "Voltron.avgP/RAIJU.Pavg",
+      "shape": [
+        124,
+        96
+      ],
+      "total_count": 11904
+    },
+    {
+      "finite_count": 11904,
+      "max": 109530.53125,
+      "mean": 49818.86485054672,
+      "min": 1641.177490234375,
+      "name": "Voltron.avgN/RAIJU.Davg",
+      "shape": [
+        124,
+        96
+      ],
+      "total_count": 11904
+    },
+    {
+      "finite_count": 11904,
+      "max": 2.7519729137420654,
+      "mean": 1.2812245837360943,
+      "min": 0.0018463247688487172,
+      "name": "Voltron.stdP absolute",
+      "shape": [
+        124,
+        96
+      ],
+      "total_count": 11904
+    },
+    {
+      "finite_count": 11904,
+      "max": 141351.25,
+      "mean": 75490.79899460782,
+      "min": 585.6715087890625,
+      "name": "Voltron.stdN absolute",
+      "shape": [
+        124,
+        96
+      ],
+      "total_count": 11904
+    },
+    {
+      "finite_count": 11904,
+      "max": 1.9337904320821773,
+      "mean": 1.455078550979336,
+      "min": 0.3531407846198924,
+      "name": "RAIJU_State.Pstd normalized",
+      "shape": [
+        124,
+        96
+      ],
+      "total_count": 11904
+    },
+    {
+      "finite_count": 11904,
+      "max": 1.7525325005393901,
+      "mean": 1.3428616555745496,
+      "min": 0.3521828148046795,
+      "name": "RAIJU_State.Dstd normalized",
+      "shape": [
+        124,
+        96
+      ],
+      "total_count": 11904
+    },
+    {
+      "finite_count": 11904,
+      "max": 1.0003948211669922,
+      "mean": 0.9015442374680612,
+      "min": 0.13054083287715912,
+      "name": "tiote",
+      "shape": [
+        124,
+        96
+      ],
+      "total_count": 11904
+    }
+  ],
+  "tubeshell_moments_channels": 6,
+  "units": {
+    "RAIJU_Coupler.Dstd": "#/cc absolute",
+    "RAIJU_Coupler.Pstd": "nPa absolute",
+    "RAIJU_State.Dstd": "normalized by Davg",
+    "RAIJU_State.Pstd": "normalized by Pavg",
+    "TubeShellMomentsOnly.stdN": "#/cc absolute",
+    "TubeShellMomentsOnly.stdP": "nPa absolute",
+    "Voltron.Tiote0": "normalized Ti/Te",
+    "Voltron.avgN": "#/cc",
+    "Voltron.avgP": "nPa",
+    "Voltron.stdN": "#/cc absolute",
+    "Voltron.stdP": "nPa absolute"
+  },
+  "validation": {
+    "negative_or_zero_counts": {
+      "Davg": 0,
+      "Pavg": 0,
+      "tiote": 0
+    },
+    "nonfinite_counts": {
+      "Davg": 0,
+      "Dstd": 0,
+      "Pavg": 0,
+      "Pstd": 0,
+      "tiote": 0
+    }
+  }
+}

@@ -102,6 +102,7 @@ docs/MAGE1.25_notes/WACCMX_SAMI3_SOURCE_FLAGS_METADATA_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_RECEIVER_SOURCE_FLAGS_RESULT_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_SOURCE_REASON_FLAGS_RESULT_20260524.md
 docs/MAGE1.25_notes/WACCMX_SAMI3_TOP_BLEND_RESULT_20260524.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_WEIGHTING_CONTRACT_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_GAMERA_PHYSICS_REVIEW_20260523.md
 ```
 
@@ -123,6 +124,13 @@ Current receiver implementation:
 ```text
 code/sami3_receiver/waccmx_neutral_mod.f90
 code/sami3_receiver/Makefile
+```
+
+Current SAMI3 -> RAIJU scalar-moments adapter snapshot:
+
+```text
+code/kaiju_sami3_moments/scripts/sami3_moments/
+code/kaiju_sami3_moments/src/voltron/modelInterfaces/
 ```
 
 Latest two-packet smoke launcher:
@@ -174,7 +182,8 @@ production choice of WACCM-X-top blending heights and per-variable policy
 He native/MSIS fallback policy hardening
 W-off / vertical-wind policy validation
 REMIX -> SAMI3 potential/E-field forcing
-SAMI3 -> RAIJU/GAMERA flux-tube weighting and L/MLT mapping
+production SAMI3 -> RAIJU/GAMERA ds/B or Voltron flux-tube weighting
+SAMI3 -> RAIJU/GAMERA L/MLT mapping
 f09/finer distributed remap design
 ```
 
