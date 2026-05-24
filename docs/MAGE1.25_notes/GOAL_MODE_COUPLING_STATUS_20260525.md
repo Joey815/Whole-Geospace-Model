@@ -264,6 +264,10 @@ sender and receiver neutral packet hours, receiver worker coverage, phi-frame
 validity intervals, and whether neutral packet hours are covered by the
 available phi payload frames.
 
+The live neutral contract gate now also closes fallback accounting: above-top
+cells, N2-negative residual cells, unknown invalid cells, and replay
+initial/final fallback counts must agree with the source-flag metadata.
+
 The SAMI3 -> RAIJU/GAMERA long-run archive now turns summary diagnostics into a
 hard gate: exact Pavg/Davg/Pstd/Dstd blending formula residuals, positive
 Pavg/Davg inputs, empty nonfinite restart lists, matching RAIJU/GAMERA history

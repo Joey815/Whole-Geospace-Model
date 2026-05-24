@@ -359,6 +359,29 @@ def check_meta(checks, meta, args):
             + int(source_flags.get("SAMI3_NATIVE_OTHER_INVALID", 0)),
         ),
     )
+    add_check(
+        checks,
+        "meta_above_top_flag_count",
+        runtime_qc.get("above_live_top") == source_flags.get("SAMI3_NATIVE_ABOVE_TOP"),
+        "above_live_top={} source_flag={}".format(
+            runtime_qc.get("above_live_top"), source_flags.get("SAMI3_NATIVE_ABOVE_TOP")
+        ),
+    )
+    add_check(
+        checks,
+        "meta_n2_invalid_flag_count",
+        runtime_qc.get("n2_residual_negative") == source_flags.get("SAMI3_NATIVE_N2_INVALID"),
+        "n2_residual_negative={} source_flag={}".format(
+            runtime_qc.get("n2_residual_negative"), source_flags.get("SAMI3_NATIVE_N2_INVALID")
+        ),
+    )
+    if args.require_zero_unknown_source_flags:
+        add_check(
+            checks,
+            "meta_other_invalid_zero",
+            int(source_flags.get("SAMI3_NATIVE_OTHER_INVALID", -1)) == 0,
+            source_flags.get("SAMI3_NATIVE_OTHER_INVALID"),
+        )
 
     checksum = meta.get("sender_checksum", {})
     add_check(
@@ -511,6 +534,7 @@ def check_packet_artifacts(checks, meta_out, run_dir, packet, args):
             replay.get("n2_mode"),
         )
         final_qc = replay.get("final", {})
+        initial_qc = replay.get("initial", {})
         add_check(
             checks,
             "packet{}_replay_bad_weighted_z".format(packet),
@@ -523,6 +547,30 @@ def check_packet_artifacts(checks, meta_out, run_dir, packet, args):
             final_qc.get("samples", 0) > 0,
             "samples={}".format(final_qc.get("samples")),
         )
+        for key in ("samples", "invalid", "above_live_top", "n2_residual_used", "n2_residual_negative"):
+            add_check(
+                checks,
+                "packet{}_replay_initial_final_{}".format(packet, key),
+                initial_qc.get(key) == final_qc.get(key),
+                "initial={} final={}".format(initial_qc.get(key), final_qc.get(key)),
+            )
+        if args.expect_n2_residual:
+            add_check(
+                checks,
+                "packet{}_replay_n2_residual_used_positive".format(packet),
+                final_qc.get("n2_residual_used", 0) > 0,
+                "n2_residual_used={}".format(final_qc.get("n2_residual_used")),
+            )
+            add_check(
+                checks,
+                "packet{}_replay_n2_residual_bounds".format(packet),
+                numeric(final_qc.get("n2_residual_min"))
+                and numeric(final_qc.get("n2_residual_max"))
+                and final_qc.get("n2_residual_min") <= final_qc.get("n2_residual_max"),
+                "min={} max={}".format(
+                    final_qc.get("n2_residual_min"), final_qc.get("n2_residual_max")
+                ),
+            )
 
     if compare_path.exists():
         compare = parse_recv_compare(compare_path)
@@ -630,6 +678,7 @@ def main():
     parser.add_argument("--expected-n2-mode", default="invalid", choices=["floor", "invalid", "fail"])
     parser.add_argument("--expect-n2-residual", action="store_true", default=True)
     parser.add_argument("--expect-he-native", action="store_true", default=True)
+    parser.add_argument("--require-zero-unknown-source-flags", action="store_true")
     parser.add_argument("--max-qc-rel", type=float, default=DEFAULT_QC_MAX_REL)
     parser.add_argument("--allow-incomplete", action="store_true")
     parser.add_argument("--json-output", default=None)

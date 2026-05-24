@@ -224,6 +224,8 @@ def main():
     ]
     if args.allow_incomplete:
         contract_cmd.append("--allow-incomplete")
+    if args.require_zero_unknown_source_flags:
+        contract_cmd.append("--require-zero-unknown-source-flags")
     contract_rc = run_checked(contract_cmd, contract_txt)
 
     topblend_rc = 0
