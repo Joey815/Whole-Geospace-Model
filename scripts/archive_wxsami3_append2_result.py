@@ -105,6 +105,7 @@ def main():
     parser.add_argument("--min-phi-frame-max-abs-diff", type=float, default=1.0e-6)
     parser.add_argument("--require-receiver-phi-values", action="store_true")
     parser.add_argument("--phi-value-tol", type=float, default=1.0e-4)
+    parser.add_argument("--max-abs-phi-statv", type=float, default=None)
     parser.add_argument("--expect-top-blend-mode", choices=["linear", "none"], default=None)
     parser.add_argument("--expect-blend-bottom-km", type=float, default=None)
     parser.add_argument("--expect-blend-top-km", type=float, default=None)
@@ -151,6 +152,37 @@ def main():
     if args.allow_incomplete:
         append2_cmd.append("--allow-incomplete")
     append2_rc = run_checked(append2_cmd, append2_txt)
+
+    phi_contract_json = archive_dir / "validate_remix_sami3_phi_payload.json"
+    phi_contract_txt = archive_dir / "validate_remix_sami3_phi_payload.txt"
+    phi_contract_cmd = [
+        sys.executable,
+        str(repo / "scripts" / "validate_remix_sami3_phi_payload.py"),
+        "--run-dir",
+        str(run_dir),
+        "--expected-frames",
+        str(args.expected_phi_frames),
+        "--expected-first-hour",
+        str(args.expected_first_phi_hour),
+        "--require-linked-valid-until",
+        "--json-output",
+        str(phi_contract_json),
+    ]
+    if args.require_nonzero_phi:
+        phi_contract_cmd.append("--require-nonzero-phi")
+    if args.require_changing_phi_frames:
+        phi_contract_cmd.extend(
+            [
+                "--require-changing-phi-frames",
+                "--min-phi-frame-max-abs-diff",
+                str(args.min_phi_frame_max_abs_diff),
+            ]
+        )
+    if args.max_abs_phi_statv is not None:
+        phi_contract_cmd.extend(["--max-abs-phi-statv", str(args.max_abs_phi_statv)])
+    if args.allow_incomplete:
+        phi_contract_cmd.append("--allow-incomplete")
+    phi_contract_rc = run_checked(phi_contract_cmd, phi_contract_txt)
 
     contract_json = archive_dir / "validate_wxsami3_live_packet_contract.json"
     contract_txt = archive_dir / "validate_wxsami3_live_packet_contract.txt"
@@ -244,6 +276,7 @@ def main():
 
     summary = {
         "ok": append2_rc == 0
+        and phi_contract_rc == 0
         and contract_rc == 0
         and topblend_rc == 0
         and (runtime_map_info is None or runtime_map_info["returncode"] == 0),
@@ -259,6 +292,11 @@ def main():
             "returncode": contract_rc,
             "text": str(contract_txt),
             "json": str(contract_json),
+        },
+        "phi_payload_contract_validator": {
+            "returncode": phi_contract_rc,
+            "text": str(phi_contract_txt),
+            "json": str(phi_contract_json),
         },
         "topblend_policy_validator": {
             "returncode": topblend_rc,
@@ -277,6 +315,7 @@ def main():
         "run_dir: {}".format(run_dir),
         "job_id: {}".format(args.job_id if args.job_id else ""),
         "append2_validator_returncode: {}".format(append2_rc),
+        "phi_payload_contract_returncode: {}".format(phi_contract_rc),
         "live_packet_contract_returncode: {}".format(contract_rc),
         "topblend_policy_returncode: {}".format(topblend_rc),
         "runtime_map_returncode: {}".format(runtime_map_info["returncode"] if runtime_map_info else ""),
@@ -286,6 +325,7 @@ def main():
         "Validator text outputs:",
         "",
         "- validate_wxsami3_append2_run.txt",
+        "- validate_remix_sami3_phi_payload.txt",
         "- validate_wxsami3_live_packet_contract.txt",
         "- validate_wxsami3_topblend_policy.txt",
         "- validate_wxsami3_runtime_map.txt",

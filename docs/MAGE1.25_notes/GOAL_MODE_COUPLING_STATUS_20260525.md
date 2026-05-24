@@ -234,6 +234,7 @@ scripts/validate_wxsami3_topblend_policy.py
 scripts/validate_wxsami3_runtime_map.py
 scripts/validate_wxsami3_live_packet_contract.py field-stat gates
 scripts/validate_sami3_raiju_mapping_product.py strict moment gates
+scripts/validate_remix_sami3_phi_payload.py
 ```
 
 The mapping-product validator now gates `/RaiCplMomentsOnly` plus
@@ -248,3 +249,8 @@ content, top-blend policy diagnostics, and runtime-map/ESMF weight consistency.
 The live packet contract validator now also checks live dump field bad-counts
 and plausible ranges before replay, covering lat/lon, T, U/V, pressure, height,
 mean molecular mass, and the major CAM species used for residual N2.
+
+The REMIX/Voltron phi payload now has an independent binary contract gate before
+online send: exact schema/version/grid, exact byte size, finite/nonzero values,
+strictly increasing frame hours, next-frame `valid_until` linkage, and optional
+time-varying-frame enforcement.

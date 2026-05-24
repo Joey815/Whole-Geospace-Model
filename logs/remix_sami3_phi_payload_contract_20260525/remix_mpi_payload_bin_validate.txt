@@ -1,0 +1,12 @@
+ok   phi_payload_exists: logs/remix_sami3_phi_weimer_mpi_payload_bin_20260524/remix_sami3_phi_payload_north_2frame_fast.bin
+ok   phi_payload_header: {'magic': 20260524, 'version': 1, 'nlat': 125, 'nlon': 97, 'nframes': 2}
+ok   phi_payload_frame_count: nframes=2 expected=2
+ok   phi_payload_exact_size: size=97044 expected=97044 trailing=0
+ok   phi_payload_frame_indices: indices=[0, 1]
+ok   phi_payload_frames_finite: finite_counts=[12125, 12125]
+ok   phi_payload_hours_strictly_increasing: hours=[0.0, 0.0010000000474974513]
+ok   phi_payload_valid_until_after_hour: hours=[0.0, 0.0010000000474974513] valid_until=[0.0010000000474974513, 1.0000000150474662e+30]
+ok   phi_payload_valid_until_links_next_hour: hours=[0.0, 0.0010000000474974513] valid_until=[0.0010000000474974513, 1.0000000150474662e+30]
+ok   phi_payload_first_hour: first_hour=0.0 expected=0.0
+ok   phi_payload_nonzero: nonzero_counts=[3492, 3492]
+overall=ok
