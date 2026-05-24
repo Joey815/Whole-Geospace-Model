@@ -59,11 +59,12 @@ def parse_args():
     )
     parser.add_argument(
         "--weight-mode",
-        choices=("simple", "external"),
+        choices=("simple", "external", "ds_over_B"),
         default=None,
         help=(
             "Moment weighting contract. Default is inferred: simple when "
-            "--weight-file is omitted, external when --weight-file is present."
+            "--weight-file is omitted, external when --weight-file is present. "
+            "ds_over_B builds prototype flux-tube weights from xsu/ysu/zsu/bmstu."
         ),
     )
     parser.add_argument(
@@ -72,6 +73,15 @@ def parse_args():
         help=(
             "Optional Fortran-unformatted weight array with shape (nz,nf,nlt). "
             "If omitted, simple along-field averaging is used."
+        ),
+    )
+    parser.add_argument(
+        "--weight-bmin",
+        type=float,
+        default=1.0e-4,
+        help=(
+            "Minimum normalized B/B0 used by --weight-mode ds_over_B. "
+            "Default: 1.0e-4."
         ),
     )
     parser.add_argument(
@@ -310,6 +320,79 @@ def maybe_read_coord(run_dir, name, shape, record_arg):
     return np.mean(arr, axis=0).astype(np.float32)
 
 
+def build_ds_over_b_weights(run_dir, shape, bmin):
+    """Build prototype flux-tube-volume weights proportional to ds/B.
+
+    SAMI3 writes xsu/ysu/zsu on the s-grid in km and bmstu as b/b0.  The
+    absolute constants cancel in weighted means, so we use km/(b/b0).
+    """
+    if shape[0] < 2:
+        raise ValueError("ds_over_B weighting requires nz >= 2")
+    if not np.isfinite(bmin) or bmin <= 0.0:
+        raise ValueError("--weight-bmin must be finite and positive")
+
+    grid = {}
+    records = {}
+    for fname, key in (
+        ("xsu.dat", "x"),
+        ("ysu.dat", "y"),
+        ("zsu.dat", "z"),
+        ("bmstu.dat", "bms"),
+    ):
+        arr, rec_idx, n_rec = read_fortran_record(
+            require_file(os.path.join(run_dir, fname)), shape, "last"
+        )
+        grid[key] = arr.astype(np.float64)
+        records[fname] = {
+            "record_index": int(rec_idx),
+            "record_count": int(n_rec),
+        }
+
+    ds = np.empty(shape, dtype=np.float64)
+    dx = np.diff(grid["x"], axis=0)
+    dy = np.diff(grid["y"], axis=0)
+    dz = np.diff(grid["z"], axis=0)
+    ds[:-1, :, :] = np.sqrt(dx * dx + dy * dy + dz * dz)
+    ds[-1, :, :] = ds[-2, :, :]
+
+    bad_bms = np.count_nonzero((~np.isfinite(grid["bms"])) | (grid["bms"] <= 0.0))
+    if bad_bms:
+        raise ValueError("bmstu.dat contains {0} non-finite/non-positive cells".format(int(bad_bms)))
+
+    bms_floor_hits = grid["bms"] < bmin
+    bms_eff = np.where(bms_floor_hits, bmin, grid["bms"])
+    weights = ds / bms_eff
+    bad = np.count_nonzero((~np.isfinite(weights)) | (weights <= 0.0))
+    if bad:
+        raise ValueError("ds_over_B weights contain {0} non-finite/non-positive cells".format(int(bad)))
+
+    metadata = {
+        "mode": "ds_over_B",
+        "source": "xsu/ysu/zsu center spacing divided by bmstu",
+        "grid_files": records,
+        "ds_units": "km",
+        "b_source": "bmstu.dat, normalized B=b/b0",
+        "bms_floor": float(bmin),
+        "bms_floor_hit_count": int(np.count_nonzero(bms_floor_hits)),
+        "bms_floor_hit_fraction": float(np.count_nonzero(bms_floor_hits)) / float(np.prod(shape)),
+        "physical_validity": "prototype",
+        "note": (
+            "Weights are proportional to ds/B using SAMI3 s-grid centers. "
+            "This is a prototype flux-tube-volume quadrature, not yet a "
+            "Voltron traced-tube bvol-aligned production mapping.  The "
+            "normalized magnetic field is floored by --weight-bmin to prevent "
+            "pathological near-zero bmstu samples from dominating the mean."
+        ),
+        "stats": [
+            finite_stats("ds_km", ds),
+            finite_stats("bms", grid["bms"]),
+            finite_stats("bms_effective", bms_eff),
+            finite_stats("ds_over_B_weight", weights),
+        ],
+    }
+    return weights, metadata, records
+
+
 def main():
     args = parse_args()
     run_dir = os.path.abspath(args.run_dir)
@@ -355,8 +438,8 @@ def main():
         weight_mode = "external" if args.weight_file else "simple"
     if weight_mode == "external" and not args.weight_file:
         raise ValueError("--weight-mode external requires --weight-file")
-    if weight_mode == "simple" and args.weight_file:
-        raise ValueError("--weight-mode simple cannot be combined with --weight-file")
+    if weight_mode in ("simple", "ds_over_B") and args.weight_file:
+        raise ValueError("--weight-mode {0} cannot be combined with --weight-file".format(weight_mode))
 
     dene_path = os.path.join(run_dir, "deneu.dat")
     if os.path.isfile(dene_path):
@@ -389,6 +472,9 @@ def main():
                 "ds/B, SAMI3 cell volume, or Voltron-equivalent flux-tube weights."
             ),
         }
+    elif weight_mode == "ds_over_B":
+        weights, weighting, weight_records = build_ds_over_b_weights(run_dir, shape, args.weight_bmin)
+        records.update(weight_records)
     else:
         weights = np.ones(shape, dtype=np.float64)
         weighting = {

@@ -527,8 +527,8 @@ def main():
         "moment_source_selection": source_selection,
         "std_source_warning": (
             "Pstd/Dstd are still read from the existing ion/number-density std fields. "
-            "For massEq density or total pressure modes, use runtime alphaPstd/alphaDstd=0 "
-            "unless matching std definitions are added."
+            "For massEq density, total pressure, or prototype weighted-moment runs, "
+            "use runtime alphaPstd/alphaDstd=0 unless matching std definitions are added."
         ),
         "channel_semantics": {
             str(args.bulk_channel): "bulk SAMI3 ion moment mapped to MAGE BLK channel",

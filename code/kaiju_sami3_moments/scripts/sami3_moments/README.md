@@ -299,9 +299,9 @@ metadata/json.density_mode
 metadata/json.pressure_mode
 ```
 
-`Pstd/Dstd` still come from the existing std fields.  For `massEq` or `total`
-prototype runs, use runtime `alphaPstd=0` and `alphaDstd=0` unless matching
-mass-equivalent and total-pressure std definitions are added.
+`Pstd/Dstd` still come from the existing std fields.  For `massEq`, `total`,
+or prototype weighted-moment runs, use runtime `alphaPstd=0` and
+`alphaDstd=0` unless matching std definitions are added.
 
 ## Current Limit
 
@@ -314,20 +314,49 @@ The stage-1 adapter now exposes an explicit weighting contract:
 ```text
 --weight-mode simple      # unit weights over nz, physical_validity=smoke_only
 --weight-mode external    # requires --weight-file, physical_validity=prototype
+--weight-mode ds_over_B   # uses xsu/ysu/zsu center spacing divided by bmstu
 ```
 
 If `--weight-mode` is omitted, the mode is inferred from `--weight-file`.
 The first-stage HDF5 and JSON metadata write:
 
 ```text
-moment_weighting = simple | external
+moment_weighting = simple | external | ds_over_B
 physical_validity = smoke_only | prototype
 ```
 
+`ds_over_B` reads:
+
+```text
+xsu.dat
+ysu.dat
+zsu.dat
+bmstu.dat
+```
+
+It computes:
+
+```text
+ds_k = |x_{k+1} - x_k|
+weight_k = ds_k / max(bms_k, bms_floor)
+```
+
+where `x/y/z` are SAMI3 s-grid center coordinates in km and `bmstu` is the
+normalized magnetic field `B/B0`.  The absolute constants cancel in weighted
+means.  The default floor is:
+
+```text
+--weight-bmin 1.0e-4
+```
+
+The metadata records the floor and hit count.  This is a prototype
+flux-tube-volume quadrature; it is still not a Voltron traced-tube `bvol`
+mapping.
+
 An external weight file is only physically meaningful if it encodes `ds/B`,
 SAMI3 cell volume, or a Voltron-equivalent flux-tube quadrature.  A later
-version should either expose SAMI3 `vol`, implement a real `ds_over_B` builder,
-or map onto real Voltron traced-tube weights before writing a TubeShell restart.
+version should either expose SAMI3 `vol` directly or map onto real Voltron
+traced-tube weights before writing a TubeShell restart.
 
 The Fortran hook was syntax-checked against the existing local GR build module
 files with the HDF5 include path recorded in that build, then built through the
