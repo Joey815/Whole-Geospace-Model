@@ -123,6 +123,8 @@ Recommended prototype now also passes a 900 second Slurm baseline/control run:
 job 7660334 completed 0:0, both runs reached Fin, strict validator checks
 passed, final raiCpl blend formula checks are exact, and checked RAIJU/GAMERA
 physics fields contain no NaN/Inf.
+A 1800 second recommended prototype stability check is running as job 7663122;
+it keeps the same conservative moment settings and only extends tFin.
 ```
 
 Latest verified jobs:
@@ -257,6 +259,7 @@ docs/MAGE1.25_notes/SAMI3_RAIJU_RECOMMENDED_PROTOTYPE_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_RECOMMENDED_LONG60_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_RECOMMENDED_LONG300_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_RECOMMENDED_LONG900_RESULT_20260525.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_RECOMMENDED_LONG1800_LAUNCH_20260525.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_GAMERA_PHYSICS_REVIEW_20260523.md
 ```
 
