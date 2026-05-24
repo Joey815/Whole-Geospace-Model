@@ -559,19 +559,70 @@ contains
     real(real32), intent(in) :: phi_statv(:,:)
     real(rp), intent(in) :: frame_hour, valid_until
 
-    integer :: unitno
+    character(len=strLen) :: value
+    integer :: unitno, ios, stat, lenval, file_size
     integer(int32) :: header(5), frame_index
     real(real32) :: frame_meta(2)
+    real(rp) :: frame_valid_until, valid_hours, final_valid_until
+    integer :: max_frames
+    logical :: exists
 
-    header = [sami3_phi_magic, sami3_phi_version, int(size(phi_statv,1), int32), &
-      int(size(phi_statv,2), int32), 1_int32]
-    frame_index = 0_int32
-    frame_meta = [real(frame_hour, real32), real(valid_until, real32)]
+    valid_hours = -1.0_rp
+    value = ''
+    call get_environment_variable('WACCMX_SAMI3_PHI_VALID_HOURS', value, &
+      length=lenval, status=stat)
+    if (stat == 0 .and. len_trim(value) > 0) read(value,*,iostat=ios) valid_hours
+
+    max_frames = -1
+    value = ''
+    call get_environment_variable('WACCMX_SAMI3_PHI_MAX_FRAMES', value, &
+      length=lenval, status=stat)
+    if (stat == 0 .and. len_trim(value) > 0) read(value,*,iostat=ios) max_frames
+
+    final_valid_until = valid_until
+    value = ''
+    call get_environment_variable('WACCMX_SAMI3_PHI_FINAL_VALID_UNTIL_HOUR', value, &
+      length=lenval, status=stat)
+    if (stat == 0 .and. len_trim(value) > 0) read(value,*,iostat=ios) final_valid_until
+
+    inquire(file=trim(path), exist=exists, size=file_size)
+    if ((.not. exists) .or. file_size < 20) then
+      header = [sami3_phi_magic, sami3_phi_version, int(size(phi_statv,1), int32), &
+        int(size(phi_statv,2), int32), 0_int32]
+      open(newunit=unitno, file=trim(path), form='unformatted', access='stream', &
+        status='replace', action='write')
+      write(unitno) header
+      close(unitno)
+      inquire(file=trim(path), exist=exists, size=file_size)
+    end if
 
     open(newunit=unitno, file=trim(path), form='unformatted', access='stream', &
-      status='replace', action='write')
-    write(unitno) header
-    write(unitno) frame_index
+      status='old', action='readwrite')
+    read(unitno, pos=1, iostat=ios) header
+    if (ios /= 0) stop 'Failed reading existing SAMI3 phi payload header.'
+    if (header(1) /= sami3_phi_magic .or. header(2) /= sami3_phi_version .or. &
+        header(3) /= int(size(phi_statv,1), int32) .or. &
+        header(4) /= int(size(phi_statv,2), int32)) then
+      close(unitno)
+      stop 'Existing SAMI3 phi payload header is incompatible.'
+    end if
+
+    frame_index = header(5)
+    if (max_frames > 0 .and. int(frame_index) >= max_frames) then
+      close(unitno)
+      return
+    end if
+
+    frame_valid_until = valid_until
+    if (valid_hours > 0.0_rp) frame_valid_until = frame_hour + valid_hours
+    if (max_frames > 0 .and. int(frame_index) + 1 >= max_frames) then
+      frame_valid_until = final_valid_until
+    end if
+    frame_meta = [real(frame_hour, real32), real(frame_valid_until, real32)]
+
+    header(5) = header(5) + 1_int32
+    write(unitno, pos=1) header
+    write(unitno, pos=file_size+1) frame_index
     write(unitno) frame_meta
     write(unitno) phi_statv
     close(unitno)

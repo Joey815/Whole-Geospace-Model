@@ -1,0 +1,1 @@
+/var/spool/slurmd/job7659655/slurm_script: line 115: 3824755 Terminated              ( cd "$VOLTRON_RUN"; echo "ldd_missing=$(ldd ./voltron.x | grep -c 'not found' || true)"; ./voltron.x "$VOLTRON_XML" ) > "$VOLTRON_RUN/live_phi_payload_writer_voltron_append.out" 2>&1
