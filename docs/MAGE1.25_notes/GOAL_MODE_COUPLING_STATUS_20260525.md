@@ -153,6 +153,7 @@ scripts/archive_wxsami3_append2_result.py --expect-direct-wait-mode
 scripts/validate_wxsami3_topblend_policy.py
 scripts/validate_wxsami3_runtime_map.py
 scripts/validate_wxsami3_live_packet_contract.py field-stat gates
+scripts/validate_wxsami3_source_flag_balance.py
 scripts/validate_sami3_raiju_mapping_product.py strict moment gates
 scripts/validate_remix_sami3_phi_payload.py
 scripts/validate_wxsami3_time_axis.py
@@ -173,6 +174,10 @@ content, top-blend policy diagnostics, and runtime-map/ESMF weight consistency.
 The live packet contract validator now also checks live dump field bad-counts
 and plausible ranges before replay, covering lat/lon, T, U/V, pressure, height,
 mean molecular mass, and the major CAM species used for residual N2.
+The source-flag balance validator now closes receiver-side source flags and
+per-shell apply diagnostics against `wxsami3_live_meta.json`: total samples,
+valid/invalid, above-top, N2 residual invalid, unknown flags, He native fallback,
+W zero policy, and top-blend partitions must all agree.
 
 The REMIX/Voltron phi payload now has an independent binary contract gate before
 online send: exact schema/version/grid, exact byte size, finite/nonzero values,

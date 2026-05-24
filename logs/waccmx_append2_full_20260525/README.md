@@ -6,6 +6,7 @@ append2_validator_returncode: 0
 phi_payload_contract_returncode: 0
 time_axis_returncode: 0
 live_packet_contract_returncode: 0
+source_flag_balance_returncode: 0
 topblend_policy_returncode: 0
 runtime_map_returncode: 0
 copied_files: 9
@@ -17,5 +18,6 @@ Validator text outputs:
 - validate_remix_sami3_phi_payload.txt
 - validate_wxsami3_time_axis.txt
 - validate_wxsami3_live_packet_contract.txt
+- validate_wxsami3_source_flag_balance.txt
 - validate_wxsami3_topblend_policy.txt
 - validate_wxsami3_runtime_map.txt

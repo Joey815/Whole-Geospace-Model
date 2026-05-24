@@ -228,6 +228,24 @@ def main():
         contract_cmd.append("--require-zero-unknown-source-flags")
     contract_rc = run_checked(contract_cmd, contract_txt)
 
+    source_balance_json = archive_dir / "validate_wxsami3_source_flag_balance.json"
+    source_balance_txt = archive_dir / "validate_wxsami3_source_flag_balance.txt"
+    source_balance_cmd = [
+        sys.executable,
+        str(repo / "scripts" / "validate_wxsami3_source_flag_balance.py"),
+        "--run-dir",
+        str(run_dir),
+        "--json-output",
+        str(source_balance_json),
+    ]
+    if args.expected_sami3_workers is not None:
+        source_balance_cmd.extend(["--expected-sami3-workers", str(args.expected_sami3_workers)])
+    if args.min_total_blend_cells:
+        source_balance_cmd.extend(["--min-total-blend-cells", str(args.min_total_blend_cells)])
+    if args.allow_incomplete:
+        source_balance_cmd.append("--allow-incomplete")
+    source_balance_rc = run_checked(source_balance_cmd, source_balance_txt)
+
     topblend_rc = 0
     topblend_txt = None
     topblend_json = None
@@ -307,6 +325,7 @@ def main():
         and phi_contract_rc == 0
         and time_axis_rc == 0
         and contract_rc == 0
+        and source_balance_rc == 0
         and topblend_rc == 0
         and (runtime_map_info is None or runtime_map_info["returncode"] == 0),
         "run_dir": str(run_dir),
@@ -321,6 +340,11 @@ def main():
             "returncode": contract_rc,
             "text": str(contract_txt),
             "json": str(contract_json),
+        },
+        "source_flag_balance_validator": {
+            "returncode": source_balance_rc,
+            "text": str(source_balance_txt),
+            "json": str(source_balance_json),
         },
         "phi_payload_contract_validator": {
             "returncode": phi_contract_rc,
@@ -352,6 +376,7 @@ def main():
         "phi_payload_contract_returncode: {}".format(phi_contract_rc),
         "time_axis_returncode: {}".format(time_axis_rc),
         "live_packet_contract_returncode: {}".format(contract_rc),
+        "source_flag_balance_returncode: {}".format(source_balance_rc),
         "topblend_policy_returncode: {}".format(topblend_rc),
         "runtime_map_returncode: {}".format(runtime_map_info["returncode"] if runtime_map_info else ""),
         "copied_files: {}".format(len(copied)),
@@ -363,6 +388,7 @@ def main():
         "- validate_remix_sami3_phi_payload.txt",
         "- validate_wxsami3_time_axis.txt",
         "- validate_wxsami3_live_packet_contract.txt",
+        "- validate_wxsami3_source_flag_balance.txt",
         "- validate_wxsami3_topblend_policy.txt",
         "- validate_wxsami3_runtime_map.txt",
     ]

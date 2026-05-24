@@ -58,6 +58,7 @@ validate_wxsami3_append2_run = 0
 validate_remix_sami3_phi_payload = 0
 validate_wxsami3_time_axis = 0
 validate_wxsami3_live_packet_contract = 0
+validate_wxsami3_source_flag_balance = 0
 validate_wxsami3_topblend_policy = 0
 validate_wxsami3_runtime_map = 0
 ```
@@ -135,6 +136,26 @@ n2_residual_negative = 178219
 other_invalid = 0
 valid_i = valid_f = source_valid = 4211765
 invalid_i = invalid_f = runtime_invalid = 1819595
+```
+
+The receiver-side source-flag balance gate also closed the same counts after
+MPI receive and per-shell apply:
+
+```text
+recv_source_flag_lines = 32
+apply_source_flag_lines = 160
+apply_qc_lines = 160
+apply_blend_lines = 160
+recv/apply samples = 6031360
+recv/apply valid = 4211765
+recv/apply above_live_top = 1641376
+recv/apply n2_residual_negative = 178219
+recv/apply other_invalid = 0
+recv/apply unknown = 0
+He native counts = 4211765
+W zero counts = 4211765
+blend_i + blend_f = 2708
+blend partitions close back to valid_i and valid_f
 ```
 
 The live-dump range and replay checks also passed:

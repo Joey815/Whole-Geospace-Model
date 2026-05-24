@@ -78,6 +78,11 @@
     "path": "logs/waccmx_append2_full_20260525/sacct_7659727.txt",
     "returncode": 0
   },
+  "source_flag_balance_validator": {
+    "json": "logs/waccmx_append2_full_20260525/validate_wxsami3_source_flag_balance.json",
+    "returncode": 0,
+    "text": "logs/waccmx_append2_full_20260525/validate_wxsami3_source_flag_balance.txt"
+  },
   "time_axis_validator": {
     "json": "logs/waccmx_append2_full_20260525/validate_wxsami3_time_axis.json",
     "returncode": 0,
