@@ -139,6 +139,53 @@ def count(pattern, text):
     return len(re.findall(pattern, text))
 
 
+def numeric_tokens(text):
+    out = []
+    for token in text.split():
+        try:
+            out.append(float(token))
+        except ValueError:
+            pass
+    return out
+
+
+def parse_receiver_phi_records(text):
+    records = []
+    seen = set()
+    for line in text.splitlines():
+        if "WACCMX_PHI_RECV" not in line:
+            continue
+        values = numeric_tokens(line.split("WACCMX_PHI_RECV", 1)[1])
+        if len(values) < 7:
+            continue
+        rec = {
+            "frame_index": int(values[0]),
+            "nframes": int(values[1]),
+            "hrut": values[2],
+            "frame_hour": values[3],
+            "valid_until": values[4],
+            "min": values[5],
+            "max": values[6],
+        }
+        key = (
+            rec["nframes"],
+            rec["frame_index"],
+            round(rec["frame_hour"], 9),
+            round(rec["valid_until"], 6) if abs(rec["valid_until"]) < 1.0e20 else "huge",
+            round(rec["min"], 6),
+            round(rec["max"], 6),
+        )
+        if key in seen:
+            continue
+        seen.add(key)
+        records.append(rec)
+    return records
+
+
+def close(a, b, tol):
+    return abs(float(a) - float(b)) <= tol
+
+
 def validate(args):
     run_dir = Path(args.run_dir).expanduser().resolve()
     checks = []
@@ -213,6 +260,39 @@ def validate(args):
                     "phi_payload_frame_change",
                     max_diff >= args.min_phi_frame_max_abs_diff,
                     "max_abs_diff={} min={}".format(max_diff, args.min_phi_frame_max_abs_diff),
+                )
+            if args.require_receiver_phi_values:
+                recv_phi = parse_receiver_phi_records(text)
+                meta["receiver_phi_records"] = recv_phi
+                add_check(
+                    checks,
+                    "receiver_phi_records_parseable",
+                    len(recv_phi) >= args.expected_phi_frames or args.allow_incomplete,
+                    "records={} expected_min={}".format(len(recv_phi), args.expected_phi_frames),
+                )
+                matched = 0
+                for frame in phi["frames"]:
+                    ok = False
+                    for rec in recv_phi:
+                        if (
+                            rec["frame_index"] == frame["frame_index"]
+                            and close(rec["frame_hour"], frame["hour"], args.hour_tol)
+                            and (
+                                close(rec["valid_until"], frame["valid_until"], args.phi_value_tol)
+                                or (abs(rec["valid_until"]) > 1.0e20 and abs(frame["valid_until"]) > 1.0e20)
+                            )
+                            and close(rec["min"], frame["min"], args.phi_value_tol)
+                            and close(rec["max"], frame["max"], args.phi_value_tol)
+                        ):
+                            ok = True
+                            break
+                    if ok:
+                        matched += 1
+                add_check(
+                    checks,
+                    "receiver_phi_values_match_payload",
+                    matched == len(phi["frames"]) or args.allow_incomplete,
+                    "matched={} payload_frames={}".format(matched, len(phi["frames"])),
                 )
         except Exception as exc:  # noqa: BLE001 - report validation detail
             add_check(checks, "phi_payload_parse", False, str(exc))
@@ -310,6 +390,8 @@ def main() -> int:
     parser.add_argument("--require-nonzero-phi", action="store_true")
     parser.add_argument("--require-changing-phi-frames", action="store_true")
     parser.add_argument("--min-phi-frame-max-abs-diff", type=float, default=1.0e-6)
+    parser.add_argument("--require-receiver-phi-values", action="store_true")
+    parser.add_argument("--phi-value-tol", type=float, default=1.0e-4)
     parser.add_argument("--json-output", default=None)
     args = parser.parse_args()
 

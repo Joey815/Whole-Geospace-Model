@@ -84,6 +84,7 @@ python3 scripts/archive_wxsami3_append2_result.py \
   --expected-phi-frames 2 \
   --expected-live-packets 1 \
   --require-nonzero-phi \
+  --require-receiver-phi-values \
   --expect-top-blend-mode linear \
   --expect-blend-bottom-km 600 \
   --expect-blend-top-km 720 \
@@ -116,6 +117,7 @@ python3 scripts/archive_wxsami3_append2_result.py \
   --expect-phi-wait-marker \
   --expect-direct-wait-mode \
   --require-nonzero-phi \
+  --require-receiver-phi-values \
   --expect-top-blend-mode linear \
   --expect-blend-bottom-km 600 \
   --expect-blend-top-km 720 \
@@ -134,6 +136,7 @@ Passing this workflow means:
 ```text
 Voltron/REMIX phi payload has the expected two-frame binary schema
 phi payload frames are finite, time-ordered, valid-until ordered, and nonzero
+SAMI3 `WACCMX_PHI_RECV` frame hour/valid-until/min/max match the payload
 WACCM-X sender sent the expected phi frames
 direct-wait runs show a same-job Voltron writer PID and sender wait marker
 top-blend diagnostics show linear 600-720 km blending and nonzero blend cells

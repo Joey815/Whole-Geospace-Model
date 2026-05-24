@@ -28,6 +28,7 @@ Optional checks:
 
 ```text
 --require-nonzero-phi
+--require-receiver-phi-values
 --require-changing-phi-frames
 --min-phi-frame-max-abs-diff <value>
 ```
@@ -42,6 +43,7 @@ finite_counts = [12125, 12125]
 hours = [0.0, 0.0010000000474974513]
 valid_until = [0.0010000000474974513, 1.0000000150474662e+30]
 nonzero_counts = [3492, 3492]
+receiver_phi_values_match_payload = matched 2 of 2
 overall = ok
 ```
 
@@ -64,6 +66,7 @@ The queued append2 and direct-wait archive commands should include:
 
 ```text
 --require-nonzero-phi
+--require-receiver-phi-values
 ```
 
 Do not add `--require-changing-phi-frames` until a test case is chosen where

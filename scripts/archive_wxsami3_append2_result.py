@@ -102,6 +102,8 @@ def main():
     parser.add_argument("--require-nonzero-phi", action="store_true")
     parser.add_argument("--require-changing-phi-frames", action="store_true")
     parser.add_argument("--min-phi-frame-max-abs-diff", type=float, default=1.0e-6)
+    parser.add_argument("--require-receiver-phi-values", action="store_true")
+    parser.add_argument("--phi-value-tol", type=float, default=1.0e-4)
     parser.add_argument("--expect-top-blend-mode", choices=["linear", "none"], default=None)
     parser.add_argument("--expect-blend-bottom-km", type=float, default=None)
     parser.add_argument("--expect-blend-top-km", type=float, default=None)
@@ -141,6 +143,8 @@ def main():
         append2_cmd.append("--require-nonzero-phi")
     if args.require_changing_phi_frames:
         append2_cmd.extend(["--require-changing-phi-frames", "--min-phi-frame-max-abs-diff", str(args.min_phi_frame_max_abs_diff)])
+    if args.require_receiver_phi_values:
+        append2_cmd.extend(["--require-receiver-phi-values", "--phi-value-tol", str(args.phi_value_tol)])
     if args.allow_incomplete:
         append2_cmd.append("--allow-incomplete")
     append2_rc = run_checked(append2_cmd, append2_txt)

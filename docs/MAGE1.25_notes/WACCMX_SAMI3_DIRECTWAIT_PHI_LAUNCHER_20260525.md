@@ -78,6 +78,7 @@ python3 scripts/archive_wxsami3_append2_result.py \
   --expect-phi-wait-marker \
   --expect-direct-wait-mode \
   --require-nonzero-phi \
+  --require-receiver-phi-values \
   --expect-top-blend-mode linear \
   --expect-blend-bottom-km 600 \
   --expect-blend-top-km 720 \
