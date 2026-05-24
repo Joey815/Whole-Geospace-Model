@@ -276,6 +276,11 @@ The resulting file has the contract:
 /dst/MLT_deg
 /dst/shell_index
 /dst/mlt_index
+/dst/bvol_corner
+/dst/bvol_cc
+/dst/topo_corner
+/dst/Bmin_mag_corner
+/dst/Bmin_mag_cc
 
 /map/dst_index   # sparse runtime j,i target indices
 /map/src_index   # sparse SAMI3 nf,nlt source indices
@@ -287,6 +292,9 @@ The resulting file has the contract:
 /quality/extrapolation_flag
 /quality/closed_field_mask
 ```
+
+`closed_field_mask` follows the RAIJU runtime copy rule: a target cell is closed
+only when all four surrounding `topo_corner` values are `RAIJUCLOSED`.
 
 Stage 2 can then consume the file with:
 

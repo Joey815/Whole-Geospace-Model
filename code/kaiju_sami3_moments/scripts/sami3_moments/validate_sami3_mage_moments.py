@@ -339,6 +339,18 @@ def main():
                     weight_sum = require_dataset(d, "MappingQuality/weight_sum_runtime")[:].astype(np.float64)
                     if np.any(~np.isfinite(weight_sum)) or np.any(weight_sum <= 0.0):
                         raise AssertionError("MappingQuality weight_sum_runtime contains invalid values")
+                    optional_shapes = (
+                        ("MappingQuality/target_bvol_cc", (nj, ni)),
+                        ("MappingQuality/target_bvol_corner", (nj + 1, ni + 1)),
+                        ("MappingQuality/target_Bmin_mag_cc", (nj, ni)),
+                        ("MappingQuality/target_Bmin_mag_corner", (nj + 1, ni + 1)),
+                        ("MappingQuality/target_topo_corner", (nj + 1, ni + 1)),
+                    )
+                    for path, shape in optional_shapes:
+                        if path in d:
+                            arr = require_dataset(d, path)[:]
+                            if arr.shape != shape:
+                                raise AssertionError("{0} shape {1} != {2}".format(path, arr.shape, shape))
 
         for path, units in (
             ("RAIJU_Coupler/Pavg", "nPa"),

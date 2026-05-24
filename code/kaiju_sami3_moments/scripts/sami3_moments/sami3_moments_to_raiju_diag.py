@@ -491,6 +491,11 @@ def read_mapping_weight_file(path, target_shape, source_shape):
         weight_sum = read_optional_h5_dataset(handle, "quality/weight_sum")
         extrap = read_optional_h5_dataset(handle, "quality/extrapolation_flag")
         closed = read_optional_h5_dataset(handle, "quality/closed_field_mask")
+        target_bvol_cc = read_optional_h5_dataset(handle, "dst/bvol_cc")
+        target_bvol_corner = read_optional_h5_dataset(handle, "dst/bvol_corner")
+        target_bmin_mag_cc = read_optional_h5_dataset(handle, "dst/Bmin_mag_cc")
+        target_bmin_mag_corner = read_optional_h5_dataset(handle, "dst/Bmin_mag_corner")
+        target_topo_corner = read_optional_h5_dataset(handle, "dst/topo_corner")
         corner = read_optional_h5_dataset(handle, "map/corner")
         l_left = read_optional_h5_dataset(handle, "map/l_left_source_index")
         l_right = read_optional_h5_dataset(handle, "map/l_right_source_index")
@@ -543,6 +548,15 @@ def read_mapping_weight_file(path, target_shape, source_shape):
     closed = closed.astype(np.uint8)
     if extrap.shape != (nj, ni) or closed.shape != (nj, ni):
         raise ValueError("mapping flag arrays must use runtime shape (NJ, NI)")
+    for name, value, shape in (
+        ("dst/bvol_cc", target_bvol_cc, (nj, ni)),
+        ("dst/bvol_corner", target_bvol_corner, (nj + 1, ni + 1)),
+        ("dst/Bmin_mag_cc", target_bmin_mag_cc, (nj, ni)),
+        ("dst/Bmin_mag_corner", target_bmin_mag_corner, (nj + 1, ni + 1)),
+        ("dst/topo_corner", target_topo_corner, (nj + 1, ni + 1)),
+    ):
+        if value is not None and value.shape != shape:
+            raise ValueError("{0} shape {1} does not match {2}".format(name, value.shape, shape))
 
     summary = {
         "weight_file": os.path.abspath(path),
@@ -558,9 +572,21 @@ def read_mapping_weight_file(path, target_shape, source_shape):
         "weight_sum_max": float(np.max(weight_sum)),
         "extrapolated_cell_count": int(np.count_nonzero(extrap)),
         "closed_field_mask_zero_count": int(closed.size - np.count_nonzero(closed)),
+        "closed_field_fraction": float(np.count_nonzero(closed)) / float(closed.size),
+        "target_bvol_cc_min": (
+            float(np.nanmin(target_bvol_cc)) if target_bvol_cc is not None else None
+        ),
+        "target_bvol_cc_max": (
+            float(np.nanmax(target_bvol_cc)) if target_bvol_cc is not None else None
+        ),
     }
     optional = {
         "corner": corner,
+        "target_bvol_cc": target_bvol_cc,
+        "target_bvol_corner": target_bvol_corner,
+        "target_bmin_mag_cc": target_bmin_mag_cc,
+        "target_bmin_mag_corner": target_bmin_mag_corner,
+        "target_topo_corner": target_topo_corner,
         "l_left_source_index": l_left,
         "l_right_source_index": l_right,
         "l_interp_weight": l_weight,
@@ -657,6 +683,41 @@ def build_mapping_quality_from_weights(mapped, target_shape, weight_info):
             },
         }
     )
+    optional_geometry = {
+        "target_bvol_cc": (
+            "target_bvol_cc",
+            "Rx/nT",
+            "RAIJU target cell-centered flux-tube volume from mapping weight file.",
+        ),
+        "target_bvol_corner": (
+            "target_bvol_corner",
+            "Rx/nT",
+            "RAIJU target corner flux-tube volume from mapping weight file.",
+        ),
+        "target_bmin_mag_cc": (
+            "target_Bmin_mag_cc",
+            "nT",
+            "RAIJU target cell-centered Bmin magnitude from mapping weight file.",
+        ),
+        "target_bmin_mag_corner": (
+            "target_Bmin_mag_corner",
+            "nT",
+            "RAIJU target corner Bmin magnitude from mapping weight file.",
+        ),
+        "target_topo_corner": (
+            "target_topo_corner",
+            "0=open,1=closed",
+            "RAIJU target corner topology from mapping weight file.",
+        ),
+    }
+    for source_name, (dataset_name, units, description) in optional_geometry.items():
+        value = weight_info["optional"].get(source_name)
+        if value is not None:
+            datasets[dataset_name] = {
+                "data": value.astype(np.float32),
+                "units": units,
+                "description": description,
+            }
     optional_shapes = {
         "l_left_source_index": ("index", "Lower SAMI3 nf source index used for each target i."),
         "l_right_source_index": ("index", "Upper SAMI3 nf source index used for each target i."),

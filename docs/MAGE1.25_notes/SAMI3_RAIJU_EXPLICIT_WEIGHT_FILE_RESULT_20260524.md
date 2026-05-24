@@ -8,6 +8,11 @@ This checkpoint moves the current prototype `L/MLT` runtime mapping out of the
 stage-2 adapter's inline code path and into an explicit sparse HDF5 weight-file
 contract.
 
+Note: this first explicit-weight checkpoint used schema version 1.  The current
+schema has since been extended to version 2 with target-side `bvol/topo/Bmin`
+geometry; see
+`SAMI3_RAIJU_WEIGHT_FILE_BVOL_GEOMETRY_RESULT_20260524.md`.
+
 The generated file is still based on the existing separable `L/MLT`
 interpolation.  It is not yet a Voltron traced-tube or `bvol` production
 mapping.  The purpose of this step is to make the mapping interface explicit,
