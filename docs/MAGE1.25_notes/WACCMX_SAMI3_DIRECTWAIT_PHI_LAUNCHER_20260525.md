@@ -63,7 +63,10 @@ python3 scripts/validate_wxsami3_append2_run.py \
   --run-dir /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000 \
   --expected-phi-frames 2 \
   --expect-phi-wait-marker \
-  --expect-direct-wait-mode
+  --expect-direct-wait-mode \
+  --require-nonzero-phi \
+  --require-receiver-phi-values \
+  --require-changing-phi-frames
 ```
 
 The archive helper should use the same direct-wait checks:
@@ -79,6 +82,7 @@ python3 scripts/archive_wxsami3_append2_result.py \
   --expect-direct-wait-mode \
   --require-nonzero-phi \
   --require-receiver-phi-values \
+  --require-changing-phi-frames \
   --expect-top-blend-mode linear \
   --expect-blend-bottom-km 600 \
   --expect-blend-top-km 720 \

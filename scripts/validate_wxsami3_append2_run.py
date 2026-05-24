@@ -218,11 +218,12 @@ def validate(args):
                 f"nframes={nframes}, expected={args.expected_phi_frames}",
             )
             first_hour = phi["frames"][0]["hour"] if phi["frames"] else None
+            expected_first_hour = args.expected_first_phi_hour
             add_check(
                 checks,
-                "phi_payload_starts_at_zero",
-                first_hour is not None and abs(first_hour) <= args.hour_tol,
-                f"first_hour={first_hour}",
+                "phi_payload_first_hour",
+                first_hour is not None and close(first_hour, expected_first_hour, args.hour_tol),
+                f"first_hour={first_hour} expected={expected_first_hour}",
             )
             frame_cells = header[2] * header[3]
             finite_frames = all(frame["finite_count"] == frame_cells for frame in phi["frames"])
@@ -297,8 +298,16 @@ def validate(args):
         except Exception as exc:  # noqa: BLE001 - report validation detail
             add_check(checks, "phi_payload_parse", False, str(exc))
 
-    sender_frames = count(r"WXSAMI3 sent phi frame:", text)
-    sender_payload_frames = re.findall(r"WXSAMI3 sent phi payload frames:\s+(\d+)", text)
+    if args.sender_kind == "neutral_phi_stub":
+        sender_frames = count(r"NEUTRAL_PHI_SENDER sent phi frame=", text)
+        sender_payload_frames = re.findall(r"NEUTRAL_PHI_SENDER phi_payload_format=.* nframes=(\d+)", text)
+        sender_done_ok = "NEUTRAL_PHI_SENDER done" in text
+        sender_done_detail = "NEUTRAL_PHI_SENDER done" if sender_done_ok else "missing"
+    else:
+        sender_frames = count(r"WXSAMI3 sent phi frame:", text)
+        sender_payload_frames = re.findall(r"WXSAMI3 sent phi payload frames:\s+(\d+)", text)
+        sender_done_ok = "END OF MODEL RUN" in text
+        sender_done_detail = "END OF MODEL RUN" if sender_done_ok else "missing"
     add_check(
         checks,
         "sender_phi_frames",
@@ -363,8 +372,8 @@ def validate(args):
     add_check(
         checks,
         "sender_done",
-        "END OF MODEL RUN" in text or args.allow_incomplete,
-        "END OF MODEL RUN" if "END OF MODEL RUN" in text else "missing",
+        sender_done_ok or args.allow_incomplete,
+        sender_done_detail,
     )
     qc_ok = count(r"WACCMX_RECV_QC compare ok", text)
     add_check(
@@ -383,8 +392,15 @@ def main() -> int:
     parser.add_argument("--run-dir", required=True)
     parser.add_argument("--phi-payload", default=None)
     parser.add_argument("--expected-phi-frames", type=int, default=2)
+    parser.add_argument("--expected-first-phi-hour", type=float, default=0.0)
     parser.add_argument("--hour-tol", type=float, default=1.0e-7)
     parser.add_argument("--allow-incomplete", action="store_true")
+    parser.add_argument(
+        "--sender-kind",
+        choices=["waccmx", "neutral_phi_stub"],
+        default="waccmx",
+        help="Which sender log markers to require.",
+    )
     parser.add_argument("--expect-phi-wait-marker", action="store_true")
     parser.add_argument("--expect-direct-wait-mode", action="store_true")
     parser.add_argument("--require-nonzero-phi", action="store_true")

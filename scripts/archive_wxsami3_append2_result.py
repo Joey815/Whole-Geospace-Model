@@ -96,6 +96,7 @@ def main():
     parser.add_argument("--archive-dir", required=True)
     parser.add_argument("--job-id", default=None)
     parser.add_argument("--expected-phi-frames", type=int, default=2)
+    parser.add_argument("--expected-first-phi-hour", type=float, default=0.0)
     parser.add_argument("--expected-live-packets", type=int, default=1)
     parser.add_argument("--expect-phi-wait-marker", action="store_true")
     parser.add_argument("--expect-direct-wait-mode", action="store_true")
@@ -132,6 +133,8 @@ def main():
         str(run_dir),
         "--expected-phi-frames",
         str(args.expected_phi_frames),
+        "--expected-first-phi-hour",
+        str(args.expected_first_phi_hour),
         "--json-output",
         str(append2_json),
     ]
