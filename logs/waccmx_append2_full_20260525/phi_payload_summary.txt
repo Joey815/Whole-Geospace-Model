@@ -1,0 +1,10 @@
+path=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_append2_20260525_0000/voltron_phi_writer/remix_sami3_phi_payload_from_voltron_live_append2.bin
+size=97044
+header=[20260524, 1, 125, 97, 2]
+frame=0 frame_index=0 hour=0 valid_until=0.0013888889 min=-36.930614 max=31.483816 finite=True nonzero=3492
+path=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_append2_20260525_0000/voltron_phi_writer/remix_sami3_phi_payload_from_voltron_live_append2.bin
+size=97044
+header=[20260524, 1, 125, 97, 2]
+frame=1 frame_index=1 hour=0.0013888889 valid_until=1e+30 min=-37.683018 max=31.891191 finite=True nonzero=3492
+frame1_minus_frame0_max_abs=3.5858946
+frame1_minus_frame0_rms=0.68732566

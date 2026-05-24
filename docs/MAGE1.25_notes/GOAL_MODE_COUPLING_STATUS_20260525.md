@@ -20,68 +20,7 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-25 04:37:48 CST.
-
-### Full WACCM-X/CESM -> SAMI3 Append2 Integration
-
-Slurm:
-
-```text
-jobid = 7659727
-jobname = wxsami3_ap2
-state = RUNNING
-node = qhcn332
-elapsed = 00:01:14 at 2026-05-25 04:37:48 CST
-requested = 1 intel node, 49 tasks, 296G
-```
-
-Launcher:
-
-```text
-slurm/run_waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_append2_20260525.sbatch
-```
-
-Run directory:
-
-```text
-/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_append2_20260525_0000
-```
-
-Completion gate:
-
-```bash
-python3 scripts/archive_wxsami3_append2_result.py \
-  --run-dir /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_append2_20260525_0000 \
-  --archive-dir logs/waccmx_append2_full_20260525 \
-  --job-id 7659727 \
-  --expected-phi-frames 2 \
-  --expected-live-packets 1 \
-  --expected-sami3-workers 32 \
-  --require-nonzero-phi \
-  --require-receiver-phi-values \
-  --require-changing-phi-frames \
-  --expect-top-blend-mode linear \
-  --expect-blend-bottom-km 600 \
-  --expect-blend-top-km 720 \
-  --min-total-blend-cells 1 \
-  --require-zero-unknown-source-flags \
-  --require-he-native \
-  --require-w-zero \
-  --weights-nc /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/weights_bilinear_f19_live.nc \
-  --expected-runtime-map-nsource 13824
-```
-
-This must show:
-
-```text
-Voltron append2 phi payload starts at hour=0
-WACCM-X sender reports two phi frames
-SAMI3 receiver logs the expected WACCMX_PHI_RECV frames
-SAMI3 reaches MASTER: All Done!
-CESM/WACCM-X reaches END OF MODEL RUN
-neutral receiver replay QC passes
-fatal markers absent
-```
+Status refreshed: 2026-05-25 04:42:02 CST.
 
 ### WACCM-X/CESM -> SAMI3 Direct-Wait Phi Integration
 
@@ -91,8 +30,7 @@ Slurm:
 jobid = 7661005
 jobname = wxsami3_ap2w
 state = PENDING
-reason = Dependency
-dependency = afterok:7659727
+reason = Priority
 requested = 1 intel node, 49 tasks, 296G
 ```
 
@@ -111,38 +49,44 @@ Run directory:
 Completion gate:
 
 ```bash
-python3 scripts/archive_wxsami3_append2_result.py \
-  --run-dir /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000 \
-  --archive-dir logs/waccmx_append2_directwait_20260525 \
-  --job-id 7661005 \
-  --expected-phi-frames 2 \
-  --expected-live-packets 1 \
-  --expected-sami3-workers 32 \
-  --expect-phi-wait-marker \
-  --expect-direct-wait-mode \
-  --require-nonzero-phi \
-  --require-receiver-phi-values \
-  --require-changing-phi-frames \
-  --expect-top-blend-mode linear \
-  --expect-blend-bottom-km 600 \
-  --expect-blend-top-km 720 \
-  --min-total-blend-cells 1 \
-  --require-zero-unknown-source-flags \
-  --require-he-native \
-  --require-w-zero \
-  --weights-nc /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/weights_bilinear_f19_live.nc \
-  --expected-runtime-map-nsource 13824
+python3 scripts/archive_current_goal_mode_runs.py --target directwait
 ```
 
-This must additionally show:
+This must show:
 
 ```text
+Voltron append2 phi payload starts at hour=0
+WACCM-X sender reports two phi frames
+SAMI3 receiver logs the expected WACCMX_PHI_RECV frames
+SAMI3 reaches MASTER: All Done!
+CESM/WACCM-X reaches END OF MODEL RUN
+neutral receiver replay QC passes
+fatal markers absent
 DIRECT_WAIT_MODE=1
 VOLTRON_WRITER_PID=<pid>
 WXSAMI3 phi payload ready after wait
 ```
 
 ### Completed Stability Gates
+
+The full append2 WACCM-X/CESM -> SAMI3 online integration gate is complete:
+
+```text
+jobid = 7659727
+jobname = wxsami3_ap2
+state = COMPLETED
+exit = 0:0
+elapsed = 00:05:18
+node = qhcn332
+batch MaxRSS = 60176444K
+archive = logs/waccmx_append2_full_20260525/
+```
+
+Strict validation returned `overall=ok` for append2 online logs, phi payload
+content, time-axis consistency, live packet contract, top-blend policy, and the
+f19 runtime-map/ESMF-weight product.  SAMI3 reached `MASTER: All Done!`, WACCM-X
+reached `END OF MODEL RUN`, and receiver-side neutral replay matched with
+`max_rel=4.83248e-13`.
 
 The 1800 second recommended prototype gate is complete:
 
@@ -180,13 +124,11 @@ Strict validation and HDF5 summary artifacts have been committed and pushed.
 
 ## Next Work Order
 
-1. Keep polling jobs `7659727` and `7661005`.
-2. When `7659727` completes, run the append2 archiver, archive the compact
-   full-integration evidence, write the result note, and push to GitHub.
-3. When dependency job `7661005` completes, run the direct-wait archiver with
+1. Keep polling job `7661005`.
+2. When dependency job `7661005` completes, run the direct-wait archiver with
    `--expect-phi-wait-marker --expect-direct-wait-mode`, write the result note,
    and push to GitHub.
-4. If the full WACCM-X jobs remain queued or running, continue implementation work on the
+3. If the direct-wait job remains queued or running, continue implementation work on the
    remaining production blockers:
    - production cadence/f09 live source-state validation beyond the current
      f19 same-call-site replay gate,

@@ -1,0 +1,19 @@
+ok   run_dir_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_append2_20260525_0000
+ok   phi_payload_header: [20260524, 1, 125, 97, 2]
+ok   phi_payload_frame_count: nframes=2, expected=2
+ok   phi_payload_first_hour: first_hour=0.0 expected=0.0
+ok   phi_payload_frames_finite: finite_counts=[12125, 12125]
+ok   phi_payload_hours_nondecreasing: hours=[0.0, 0.0013888889225199819]
+ok   phi_payload_valid_until_after_hour: hours=[0.0, 0.0013888889225199819] valid_until=[0.0013888889225199819, 1.0000000150474662e+30]
+ok   phi_payload_nonzero: nonzero_counts=[3492, 3492]
+ok   phi_payload_frame_change: max_abs_diff=3.5858945846557617 min=1e-06
+ok   receiver_phi_records_parseable: records=2 expected_min=2
+ok   receiver_phi_values_match_payload: matched=2 payload_frames=2
+ok   sender_phi_frames: sender_phi_frame_markers=2
+ok   sender_phi_payload_frame_count: reported=2, expected=2
+ok   receiver_phi_frames: receiver_phi_markers=4
+ok   receiver_done: MASTER: All Done!
+ok   sender_done: END OF MODEL RUN
+ok   neutral_replay_qc: qc_ok_markers=2
+ok   fatal_markers_absent: matches=0
+overall=ok
