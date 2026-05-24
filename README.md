@@ -119,6 +119,10 @@ non-finite physics fields.
 Recommended prototype now also passes a 300 second Slurm baseline/control smoke:
 job 7648350 completed 0:0, both runs reached Fin, final raiCpl blend formula
 checks are exact, and checked physics fields contain no NaN/Inf.
+Recommended prototype now also passes a 900 second Slurm baseline/control run:
+job 7660334 completed 0:0, both runs reached Fin, strict validator checks
+passed, final raiCpl blend formula checks are exact, and checked RAIJU/GAMERA
+physics fields contain no NaN/Inf.
 ```
 
 Latest verified jobs:
@@ -135,6 +139,7 @@ reason flag sidecar   = 7645354, COMPLETED, exit 0:0
 file tag212 regression= 7645380, COMPLETED, exit 0:0
 stub tag212 runtime   = 7645415, COMPLETED, exit 0:0
 sami3 raiju long300   = 7648350, COMPLETED, exit 0:0
+sami3 raiju long900   = 7660334, COMPLETED, exit 0:0
 sami3 mapq runtime    = 7648737, COMPLETED, exit 0:0
 sami3 volshell runtime= 7649439, COMPLETED, exit 0:0
 sami3 bin-bvolcc rt = 7651071, COMPLETED, exit 0:0
@@ -242,6 +247,7 @@ docs/MAGE1.25_notes/SAMI3_RAIJU_MOMENT_SEMANTICS_TIOTE_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_RECOMMENDED_PROTOTYPE_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_RECOMMENDED_LONG60_RESULT_20260524.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_RECOMMENDED_LONG300_RESULT_20260524.md
+docs/MAGE1.25_notes/SAMI3_RAIJU_RECOMMENDED_LONG900_RESULT_20260525.md
 docs/MAGE1.25_notes/SAMI3_RAIJU_GAMERA_PHYSICS_REVIEW_20260523.md
 ```
 
@@ -337,6 +343,7 @@ Latest SAMI3 -> RAIJU/GAMERA recommended prototype runtime evidence:
 
 ```text
 logs/sami3_dsB_lmlt_recommended_long300_20260524/
+logs/sami3_dsB_lmlt_recommended_long900_20260525/
 ```
 
 Latest SAMI3 -> RAIJU/GAMERA mapping quality evidence:
@@ -370,7 +377,7 @@ production SAMI3 -> RAIJU/GAMERA Voltron-consistent flux-tube weighting
 replace prototype lon0/bin-center bvol weighting with a true traced-tube flux-volume map
 production SAMI3 -> RAIJU/GAMERA geometry/mask coverage policy
 longer runtime scans for density, pressure, and tiote blending
-longer-duration stability scan beyond the 300 second recommended prototype
+longer-duration stability scan beyond the 900 second recommended prototype
 f09/finer distributed remap design
 ```
 
