@@ -41,6 +41,7 @@ New optional writer controls:
 WACCMX_SAMI3_PHI_VALID_HOURS
 WACCMX_SAMI3_PHI_MAX_FRAMES
 WACCMX_SAMI3_PHI_FINAL_VALID_UNTIL_HOUR
+WACCMX_SAMI3_PHI_FRAME_HOUR_OFFSET
 ```
 
 ## Build
@@ -69,10 +70,10 @@ slurm/run_voltron_phi_append_writer_2frame_20260525.sbatch
 Slurm:
 
 ```text
-jobid: 7659655
+jobid: 7659705
 state: COMPLETED
 exit: 0:0
-elapsed: 00:01:06
+elapsed: 00:00:57
 node: qhcn118
 ```
 
@@ -85,7 +86,7 @@ Run directory:
 Archived evidence:
 
 ```text
-logs/voltron_phi_append_writer_2frame_20260525/
+logs/voltron_phi_append_writer_2frame_offset_20260525/
 ```
 
 ## Payload Result
@@ -101,8 +102,8 @@ Summary:
 ```text
 size=97044
 header=[20260524, 1, 125, 97, 2]
-frame=0 frame_index=0 hour=0.0013888889 valid_until=0.0027777778 min=-36.930614 max=31.483816 finite=True nonzero=3492
-frame=1 frame_index=1 hour=0.0027777778 valid_until=1e+30 min=-37.683018 max=31.891191 finite=True nonzero=3492
+frame=0 frame_index=0 hour=0 valid_until=0.0013888889 min=-36.930614 max=31.483816 finite=True nonzero=3492
+frame=1 frame_index=1 hour=0.0013888889 valid_until=1e+30 min=-37.683018 max=31.891191 finite=True nonzero=3492
 frame1_minus_frame0_max_abs=3.5858946
 frame1_minus_frame0_rms=0.68732566
 ```
@@ -111,10 +112,15 @@ Interpretation:
 
 ```text
 1. The payload contains two frames written by the Voltron/REMIX runtime writer.
-2. The frame hours come from Voltron model time, not from a fixed override.
+2. The frame hours come from Voltron model time with a 5-second offset so the
+   first SAMI3 valid interval starts at hrut=0.
 3. The second frame is not a duplicate of the first frame.
 4. The final frame uses the configured sentinel valid_until=1e30.
 ```
+
+Note: the unshifted first writer smoke, job 7659655, produced the same two
+finite, distinct fields but started at hour 0.0013888889. The offset run above
+is the corrected payload contract for SAMI3 runtime time-gating.
 
 ## Remaining End-To-End Check
 
@@ -122,7 +128,7 @@ The full integrated smoke is queued as:
 
 ```text
 slurm/run_waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_append2_20260525.sbatch
-jobid: 7659629
+jobid: 7659727
 ```
 
 That queued run should verify:

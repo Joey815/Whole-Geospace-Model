@@ -359,7 +359,7 @@ contains
 
     character(len=strLen) :: payload_file, grid_file, hemi_env, value
     integer :: stat, lenval, hemi, ios
-    real(rp) :: frame_hour, valid_until
+    real(rp) :: frame_hour, frame_hour_offset, valid_until
     real(rp) :: target_mlat(sami3_phi_nlat), target_mlon(sami3_phi_nlon)
     real(real32) :: phi_statv(sami3_phi_nlat, sami3_phi_nlon)
 
@@ -404,6 +404,14 @@ contains
     call get_environment_variable('WACCMX_SAMI3_PHI_FRAME_HOUR', value, &
       length=lenval, status=stat)
     if (stat == 0 .and. len_trim(value) > 0) read(value,*,iostat=ios) frame_hour
+
+    frame_hour_offset = 0.0_rp
+    value = ''
+    call get_environment_variable('WACCMX_SAMI3_PHI_FRAME_HOUR_OFFSET', value, &
+      length=lenval, status=stat)
+    if (stat == 0 .and. len_trim(value) > 0) read(value,*,iostat=ios) frame_hour_offset
+    frame_hour = frame_hour - frame_hour_offset
+    if (frame_hour < 0.0_rp .and. abs(frame_hour) < 1.0e-9_rp) frame_hour = 0.0_rp
 
     valid_until = 1.0e30_rp
     value = ''

@@ -84,6 +84,7 @@ export LD_LIBRARY_PATH="/apps/support/intel_spr_rocky8.9/oneapi/2023.2.0/compile
 export WACCMX_SAMI3_PHI_PAYLOAD_FILE="$PHI_PAYLOAD"
 export WACCMX_SAMI3_WEIMER_GRID="$WEIMER_GRID"
 export WACCMX_SAMI3_PHI_HEMI=NORTH
+export WACCMX_SAMI3_PHI_FRAME_HOUR_OFFSET=0.0013888889
 export WACCMX_SAMI3_PHI_VALID_HOURS=0.0013888889
 export WACCMX_SAMI3_PHI_MAX_FRAMES=2
 export WACCMX_SAMI3_PHI_FINAL_VALID_UNTIL_HOUR=1.0e30
@@ -112,6 +113,7 @@ PY
   cd "$VOLTRON_RUN"
   echo "voltron_exe=$VOLTRON_EXE"
   echo "weimer_grid=$WEIMER_GRID"
+  echo "phi_frame_hour_offset=$WACCMX_SAMI3_PHI_FRAME_HOUR_OFFSET"
   echo "phi_valid_hours=$WACCMX_SAMI3_PHI_VALID_HOURS"
   echo "phi_max_frames=$WACCMX_SAMI3_PHI_MAX_FRAMES"
   echo "omp_threads=$OMP_NUM_THREADS"
