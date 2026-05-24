@@ -98,6 +98,8 @@ def main():
     parser.add_argument("--expected-phi-frames", type=int, default=2)
     parser.add_argument("--expected-first-phi-hour", type=float, default=0.0)
     parser.add_argument("--expected-live-packets", type=int, default=1)
+    parser.add_argument("--expected-sami3-workers", type=int, default=None)
+    parser.add_argument("--expected-neutral-cadence-hours", type=float, default=None)
     parser.add_argument("--expect-phi-wait-marker", action="store_true")
     parser.add_argument("--expect-direct-wait-mode", action="store_true")
     parser.add_argument("--require-nonzero-phi", action="store_true")
@@ -183,6 +185,30 @@ def main():
     if args.allow_incomplete:
         phi_contract_cmd.append("--allow-incomplete")
     phi_contract_rc = run_checked(phi_contract_cmd, phi_contract_txt)
+
+    time_axis_json = archive_dir / "validate_wxsami3_time_axis.json"
+    time_axis_txt = archive_dir / "validate_wxsami3_time_axis.txt"
+    time_axis_cmd = [
+        sys.executable,
+        str(repo / "scripts" / "validate_wxsami3_time_axis.py"),
+        "--run-dir",
+        str(run_dir),
+        "--expected-neutral-packets",
+        str(args.expected_live_packets),
+        "--expected-phi-frames",
+        str(args.expected_phi_frames),
+        "--json-output",
+        str(time_axis_json),
+    ]
+    if args.expected_sami3_workers is not None:
+        time_axis_cmd.extend(["--expected-sami3-workers", str(args.expected_sami3_workers)])
+    if args.expected_neutral_cadence_hours is not None:
+        time_axis_cmd.extend(
+            ["--expected-neutral-cadence-hours", str(args.expected_neutral_cadence_hours)]
+        )
+    if args.allow_incomplete:
+        time_axis_cmd.append("--allow-incomplete")
+    time_axis_rc = run_checked(time_axis_cmd, time_axis_txt)
 
     contract_json = archive_dir / "validate_wxsami3_live_packet_contract.json"
     contract_txt = archive_dir / "validate_wxsami3_live_packet_contract.txt"
@@ -277,6 +303,7 @@ def main():
     summary = {
         "ok": append2_rc == 0
         and phi_contract_rc == 0
+        and time_axis_rc == 0
         and contract_rc == 0
         and topblend_rc == 0
         and (runtime_map_info is None or runtime_map_info["returncode"] == 0),
@@ -298,6 +325,11 @@ def main():
             "text": str(phi_contract_txt),
             "json": str(phi_contract_json),
         },
+        "time_axis_validator": {
+            "returncode": time_axis_rc,
+            "text": str(time_axis_txt),
+            "json": str(time_axis_json),
+        },
         "topblend_policy_validator": {
             "returncode": topblend_rc,
             "text": str(topblend_txt) if topblend_txt else None,
@@ -316,6 +348,7 @@ def main():
         "job_id: {}".format(args.job_id if args.job_id else ""),
         "append2_validator_returncode: {}".format(append2_rc),
         "phi_payload_contract_returncode: {}".format(phi_contract_rc),
+        "time_axis_returncode: {}".format(time_axis_rc),
         "live_packet_contract_returncode: {}".format(contract_rc),
         "topblend_policy_returncode: {}".format(topblend_rc),
         "runtime_map_returncode: {}".format(runtime_map_info["returncode"] if runtime_map_info else ""),
@@ -326,6 +359,7 @@ def main():
         "",
         "- validate_wxsami3_append2_run.txt",
         "- validate_remix_sami3_phi_payload.txt",
+        "- validate_wxsami3_time_axis.txt",
         "- validate_wxsami3_live_packet_contract.txt",
         "- validate_wxsami3_topblend_policy.txt",
         "- validate_wxsami3_runtime_map.txt",

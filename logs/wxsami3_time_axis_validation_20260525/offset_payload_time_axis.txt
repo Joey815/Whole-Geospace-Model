@@ -1,0 +1,9 @@
+ok   run_dir_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/voltron_phi_append_writer_2frame_offset_20260525
+ok   receiver_packet_hours_consistent: {}
+ok   receiver_packet_hours_monotonic: receiver_hours=[]
+ok   phi_payload_frame_count: frames=2 expected=2
+ok   phi_payload_hours_strictly_increasing: hours=[0.0, 0.0013888889225199819]
+ok   phi_payload_valid_until_links: hours=[0.0, 0.0013888889225199819] valid_until=[0.0013888889225199819, 1.0000000150474662e+30]
+ok   receiver_phi_frame_count: receiver_phi_records=0 expected_min=2
+ok   receiver_phi_records_within_validity: records=0
+overall=ok

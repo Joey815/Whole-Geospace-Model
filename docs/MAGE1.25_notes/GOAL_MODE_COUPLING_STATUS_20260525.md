@@ -235,6 +235,7 @@ scripts/validate_wxsami3_runtime_map.py
 scripts/validate_wxsami3_live_packet_contract.py field-stat gates
 scripts/validate_sami3_raiju_mapping_product.py strict moment gates
 scripts/validate_remix_sami3_phi_payload.py
+scripts/validate_wxsami3_time_axis.py
 ```
 
 The mapping-product validator now gates `/RaiCplMomentsOnly` plus
@@ -254,3 +255,8 @@ The REMIX/Voltron phi payload now has an independent binary contract gate before
 online send: exact schema/version/grid, exact byte size, finite/nonzero values,
 strictly increasing frame hours, next-frame `valid_until` linkage, and optional
 time-varying-frame enforcement.
+
+The online WACCM-X/SAMI3 evidence gate now also checks timeline consistency:
+sender and receiver neutral packet hours, receiver worker coverage, phi-frame
+validity intervals, and whether neutral packet hours are covered by the
+available phi payload frames.

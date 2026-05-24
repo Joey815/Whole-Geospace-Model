@@ -1,0 +1,158 @@
+{
+  "checks": [
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/waccmx_live_neutral_voltron_phi_2frame_20260525",
+      "name": "run_dir_exists",
+      "ok": true
+    },
+    {
+      "detail": "sender_packets=1 expected=1",
+      "name": "sender_neutral_packet_count",
+      "ok": true
+    },
+    {
+      "detail": "receiver_packets=1 expected=1",
+      "name": "receiver_neutral_packet_count",
+      "ok": true
+    },
+    {
+      "detail": "{0: {'count': 53, 'unique_tasks': 32, 'hour_min': 0.0, 'hour_max': 0.0}}",
+      "name": "receiver_packet_hours_consistent",
+      "ok": true
+    },
+    {
+      "detail": "receiver_hours=[0.0]",
+      "name": "receiver_packet_hours_monotonic",
+      "ok": true
+    },
+    {
+      "detail": "unique_tasks=[32] expected=32",
+      "name": "receiver_worker_coverage",
+      "ok": true
+    },
+    {
+      "detail": "matched=1 sender_hours=[0.0] receiver_hours=[0.0]",
+      "name": "sender_receiver_neutral_hours_match",
+      "ok": true
+    },
+    {
+      "detail": "frames=2 expected=2",
+      "name": "phi_payload_frame_count",
+      "ok": true
+    },
+    {
+      "detail": "hours=[0.0, 0.0010000000474974513]",
+      "name": "phi_payload_hours_strictly_increasing",
+      "ok": true
+    },
+    {
+      "detail": "hours=[0.0, 0.0010000000474974513] valid_until=[0.0010000000474974513, 1.0000000150474662e+30]",
+      "name": "phi_payload_valid_until_links",
+      "ok": true
+    },
+    {
+      "detail": "uncovered_neutral_hours=[]",
+      "name": "phi_payload_covers_neutral_packets",
+      "ok": true
+    },
+    {
+      "detail": "receiver_phi_records=2 expected_min=2",
+      "name": "receiver_phi_frame_count",
+      "ok": true
+    },
+    {
+      "detail": "records=2",
+      "name": "receiver_phi_records_within_validity",
+      "ok": true
+    }
+  ],
+  "meta": {
+    "log_files": [
+      "/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/waccmx_live_neutral_voltron_phi_2frame_20260525/slurm-7659383.out",
+      "/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/waccmx_live_neutral_voltron_phi_2frame_20260525/slurm-7659383.err",
+      "/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/waccmx_live_neutral_voltron_phi_2frame_20260525/waccmx_cesm.out",
+      "/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/waccmx_live_neutral_voltron_phi_2frame_20260525/sami3_online_receiver.out"
+    ],
+    "phi_payload": {
+      "expected_size": 97044,
+      "frame_diffs": [
+        {
+          "finite_pairs": 12125,
+          "from_frame": 0,
+          "max_abs": 0.0,
+          "rms": 0.0,
+          "to_frame": 1
+        }
+      ],
+      "frames": [
+        {
+          "finite_count": 12125,
+          "frame_index": 0,
+          "hour": 0.0,
+          "max": 31.483816146850586,
+          "mean": -0.20725942691636887,
+          "min": -36.93061447143555,
+          "nonzero_count": 3492,
+          "valid_until": 0.0010000000474974513
+        },
+        {
+          "finite_count": 12125,
+          "frame_index": 1,
+          "hour": 0.0010000000474974513,
+          "max": 31.483816146850586,
+          "mean": -0.20725942691636887,
+          "min": -36.93061447143555,
+          "nonzero_count": 3492,
+          "valid_until": 1.0000000150474662e+30
+        }
+      ],
+      "header": {
+        "magic": 20260524,
+        "nframes": 2,
+        "nlat": 125,
+        "nlon": 97,
+        "version": 1
+      },
+      "path": "/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/waccmx_live_neutral_voltron_phi_2frame_20260525/remix_sami3_phi_payload_from_voltron_live_append_2frame.bin",
+      "size": 97044,
+      "trailing_bytes": 0
+    },
+    "receiver_neutral_packet_summary": {
+      "0": {
+        "count": 53,
+        "hour_max": 0.0,
+        "hour_min": 0.0,
+        "unique_tasks": 32
+      }
+    },
+    "receiver_phi_records": [
+      {
+        "frame_hour": 0.0,
+        "frame_index": 0,
+        "hrut": 0.0,
+        "max": 31.4838161,
+        "min": -36.9306145,
+        "nframes": 2,
+        "valid_until": 0.00100000005
+      },
+      {
+        "frame_hour": 0.00100000005,
+        "frame_index": 1,
+        "hrut": 0.00222222228,
+        "max": 31.4838161,
+        "min": -36.9306145,
+        "nframes": 2,
+        "valid_until": 1.00000002e+30
+      }
+    ],
+    "run_dir": "/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/waccmx_live_neutral_voltron_phi_2frame_20260525",
+    "sender_neutral_packets": [
+      {
+        "nstep": 0,
+        "packet_hour": 0.0,
+        "packet_index": 0
+      }
+    ]
+  },
+  "ok": true
+}
