@@ -475,6 +475,14 @@ logs/sami3_dsB_lmlt_recommended_long300_20260524/
 logs/sami3_dsB_lmlt_recommended_long900_20260525/
 ```
 
+Latest WACCM-X/CAM -> SAMI3 live-neutral plus Voltron/REMIX direct-phi
+online MPI evidence:
+
+```text
+docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_DIRECTMPI_NOSMOKE_6PKT_6PHI_RESULT_20260526.md
+logs/waccmx_live_directmpi_nosmoke_dt300_6pkt_6phi_hrmax2_20260526/
+```
+
 Latest SAMI3 -> RAIJU/GAMERA mapping quality evidence:
 
 ```text
@@ -501,7 +509,8 @@ Do not describe this snapshot as production live WACCM-X neutral forcing until
 these are handled:
 
 ```text
-production cadence/f09 live source-state validation beyond the current f19 live-dump replay gate
+production cadence/f09 live source-state validation beyond the current f19 6pkt/6phi gate
+longer-than-6-packet production cadence and restart/stability testing
 production choice of WACCM-X-top blending heights and per-variable policy
 He native/MSIS fallback policy review beyond the current enforced native fallback
 W-off / vertical-wind policy review beyond the current enforced zero-W payload

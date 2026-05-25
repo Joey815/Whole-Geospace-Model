@@ -1,0 +1,16 @@
+ok   logs_present: ['/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_6pkt_6phi_hrmax2_maxstep400_20260526_0000/sami3_online_receiver.out', '/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_6pkt_6phi_hrmax2_maxstep400_20260526_0000/slurm-7678504.out']
+ok   topblend_policy_logged: {'mode': 'linear', 'bottom_km': 600.0, 'top_km': 720.0}
+ok   topblend_mode: actual=linear expected=linear
+ok   topblend_bottom_km: actual=600.0 expected=600.0 tol=0.0001
+ok   topblend_top_km: actual=720.0 expected=720.0 tol=0.0001
+ok   apply_blend_line_count: count=960 min=0
+ok   apply_blend_parseable: 960 of 960
+ok   blend_cell_total: total=13532 min=1
+ok   blend_enabled: [1]
+ok   apply_blend_bottom_km: min=600.0 max=600.0 expected=600.0
+ok   apply_blend_top_km: min=720.0 max=720.0 expected=720.0
+ok   apply_source_unknown_zero: total=0
+ok   recv_source_unknown_zero: total=0
+ok   he_native_matches_valid: checked_lines=960
+ok   w_zero_matches_valid: checked_lines=960
+overall=ok

@@ -2064,3 +2064,51 @@ Next implementation target: add a neutral-cadence synchronization policy rather
 than tuning `DT0` further.  Candidate paths are a SAMI3 wait-at-coupling-boundary
 mode, a CESM pre-send/startup gate, or a shared coupling clock that prevents
 SAMI3 from advancing beyond the available WACCM-X packet stream.
+
+## 2026-05-26 02:31 CST Update
+
+The f19 WACCM-X/CAM live-neutral plus Voltron/REMIX direct-phi path now has a
+validated six-cadence no-smoke result:
+
+```text
+jobid = 7678504
+state = COMPLETED
+exit = 0:0
+elapsed = 00:25:56
+node = qhcn657
+archive = logs/waccmx_live_directmpi_nosmoke_dt300_6pkt_6phi_hrmax2_20260526/
+doc = docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_DIRECTMPI_NOSMOKE_6PKT_6PHI_RESULT_20260526.md
+```
+
+Validated settings:
+
+```text
+SAMI3_MAXSTEP = 400
+SAMI3_HRMAX = 2.000000
+SAMI3_DT0 = 300.
+MAX_PACKETS = 6
+PHI_MAX_FRAMES = 6
+CESM_STOP_N = 2100
+```
+
+All archived validators returned `overall=ok`, including the live packet
+contract, source-flag balance, time-axis gate, top-blend policy, direct-phi
+strict run validator, phi-payload validator, and runtime-map validator.
+
+The key operational lesson is that the six-packet cadence depends on `HRMAX` as
+well as `MAXSTEP`.  Attempts with `HRMAX=.700000` stopped too early even when
+`MAXSTEP` was raised, because the effective `ntmmax` stayed too small for all
+six five-minute packet/frame cadences.
+
+Current goal-mode baseline:
+
+```text
+WACCM-X/CAM live phys_state(:) extraction: validated at f19 for six packets
+SAMI3 online receiver and worker distribution: validated for six packets
+Voltron/REMIX direct-MPI phi producer: validated for six changing frames
+Done/finalize path: validated
+```
+
+Next target is to return to the SAMI3 -> Voltron/RAIJU/GAMERA adapter line and
+continue from the existing `Pavg/Davg/Pstd/Dstd/tiote` interface, using the
+domain-aware Voltron/RAIJU mapping and blending controls already established.
