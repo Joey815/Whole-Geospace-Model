@@ -1,0 +1,4 @@
+JobID|JobName|State|ExitCode|Elapsed|MaxRSS
+7670231|wxsami3_ndone|COMPLETED|0:0|00:08:52|
+7670231.batch|batch|COMPLETED|0:0|00:08:52|64922552K
+7670231.extern|extern|COMPLETED|0:0|00:08:52|0

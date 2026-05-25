@@ -20,37 +20,39 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-25 10:28:11 CST.
+Status refreshed: 2026-05-25 12:36:36 CST.
 
-### Latest Completed Gate: Live Neutral + Direct Voltron Phi, Four Frames
+### Latest Completed Gate: Live Neutral Cadence + Direct Voltron Phi
 
-The current same-stack WACCM-X/CESM + SAMI3 + OpenMPI Voltron direct-MPI gate is
-complete:
+The current same-stack WACCM-X/CESM + SAMI3 + OpenMPI Voltron direct-MPI
+cadence gate is complete:
 
 ```text
-jobid = 7668967
-jobname = wxsami3_dm4t1
+jobid = 7670231
+jobname = wxsami3_ndone
 state = COMPLETED
 exit = 0:0
-elapsed = 00:10:06
-node = qhcn182
-batch MaxRSS = 63607068K
-archive = logs/waccmx_live_directmpi4_tphi1_20260525/
-doc = docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_DIRECTMPI4_RESULT_20260525.md
+elapsed = 00:08:52
+node = qhcn119
+batch MaxRSS = 64922552K
+archive = logs/waccmx_live_directmpi_neutral_doneaware_dt300_20260525/
+doc = docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_DIRECTMPI_NEUTRAL_DONEAWARE_DT300_RESULT_20260525.md
 ```
 
 This run validated the integrated online path:
 
 ```text
-WACCM-X/CESM live neutral packet from CAM phys_state(:)
+WACCM-X/CESM live neutral packets from CAM phys_state(:)
 OpenMPI Voltron direct-MPI REMIX phi sender
 SAMI3 online neutral receiver
 SAMI3 direct phi receiver
-four changing phi frames
+two neutral packets at the 300 s CESM cadence
+three changing phi frames
 neutral/phi time-axis consistency
+done-aware neutral receive/finalize ordering
 ```
 
-All seven validators returned `overall=ok`:
+All archived validators returned `overall=ok`:
 
 ```text
 validate_remix_sami3_phi_payload
@@ -62,17 +64,28 @@ validate_wxsami3_topblend_policy
 validate_wxsami3_runtime_map
 ```
 
-Cadence conclusion: for the current five-second Voltron direct-phi frame
-spacing, `SAMI3_TPHI=1.` is required.  The earlier four-frame attempts with
-`SAMI3_TPHI=7.` completed the communication chain but failed the time-axis
-validator because SAMI3 pulled frame 1/2 after their validity windows.
+Cadence conclusion: the SAMI3 neutral update gate must be tied to the CESM
+packet cadence for multi-packet tests.  The receiver now uses:
+
+```text
+WXSAMI3_NEUTRAL_UPDATE_HOURS
+WXSAMI3_NEUTRAL_SPAN_HOURS
+```
+
+with defaults preserving the older 0.25 hour behavior.  For this run both were
+set to `0.08333333333333333`, matching the 300 s CESM packet cadence.
+
+The neutral receiver is also done-aware: workers probe the next MPI tag before
+expecting a neutral header, so a done tag arriving after the final packet is
+stored and consumed during finalize instead of stranding the worker.
 
 Next work order after this gate:
 
 ```text
-1. Turn the direct-MPI smoke into a multi-neutral-packet cadence test.
-2. Replace SAMI3_PHI_SKIP_MADALA_AFTER_FINAL / WACCMX_SAMI3_PHI_STOP_AFTER_DONE
+1. Replace SAMI3_PHI_SKIP_MADALA_AFTER_FINAL / WACCMX_SAMI3_PHI_STOP_AFTER_DONE
    with a continued production cadence policy.
+2. Run a longer continued neutral/phi cadence case after the final-frame smoke
+   policy is removed.
 3. Keep f19 as the validated development grid, then design the f09/distributed
    live-neutral remap once cadence is stable.
 4. Return to SAMI3 -> RAIJU/GAMERA physics blockers: traced flux-tube weighting,
@@ -86,9 +99,10 @@ Slurm:
 ```text
 jobid = 7661005
 jobname = wxsami3_ap2w
-state = PENDING
-reason = Priority
-requested = 1 intel node, 49 tasks, 296G
+state = FAILED
+exit = 1:0
+elapsed = 00:06:23
+batch MaxRSS = 60350988K
 ```
 
 Launcher:
@@ -103,26 +117,9 @@ Run directory:
 /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directwait_20260525_0000
 ```
 
-Completion gate:
-
-```bash
-python3 scripts/archive_current_goal_mode_runs.py --target directwait
-```
-
-This must show:
-
-```text
-Voltron append2 phi payload starts at hour=0
-WACCM-X sender reports two phi frames
-SAMI3 receiver logs the expected WACCMX_PHI_RECV frames
-SAMI3 reaches MASTER: All Done!
-CESM/WACCM-X reaches END OF MODEL RUN
-neutral receiver replay QC passes
-fatal markers absent
-DIRECT_WAIT_MODE=1
-VOLTRON_WRITER_PID=<pid>
-WXSAMI3 phi payload ready after wait
-```
+This direct-wait file-based variant is no longer the active gate.  The current
+active path is the direct-MPI Voltron sender on the same PRTE DVM, which is the
+path validated by job `7670231`.
 
 ### Completed Stability Gates
 
@@ -144,6 +141,24 @@ content, time-axis consistency, live packet contract, top-blend policy, and the
 f19 runtime-map/ESMF-weight product.  SAMI3 reached `MASTER: All Done!`, WACCM-X
 reached `END OF MODEL RUN`, and receiver-side neutral replay matched with
 `max_rel=4.83248e-13`.
+
+The earlier direct-MPI four-frame gate is complete:
+
+```text
+jobid = 7668967
+jobname = wxsami3_dm4t1
+state = COMPLETED
+exit = 0:0
+elapsed = 00:10:06
+node = qhcn182
+batch MaxRSS = 63607068K
+archive = logs/waccmx_live_directmpi4_tphi1_20260525/
+doc = docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_DIRECTMPI4_RESULT_20260525.md
+```
+
+It validated one live neutral packet and four changing direct-MPI phi frames.
+The follow-on `7670231` gate above extends this to two live neutral packets and
+done-aware finalization.
 
 The 1800 second recommended prototype gate is complete:
 
@@ -181,18 +196,20 @@ Strict validation and HDF5 summary artifacts have been committed and pushed.
 
 ## Next Work Order
 
-1. Keep polling job `7661005`.
-2. When dependency job `7661005` completes, run the direct-wait archiver with
-   `--expect-phi-wait-marker --expect-direct-wait-mode`, write the result note,
-   and push to GitHub.
-3. If the direct-wait job remains queued or running, continue implementation work on the
-   remaining production blockers:
-   - production cadence/f09 live source-state validation beyond the current
-     f19 same-call-site replay gate,
-   - production top-blend height and per-variable policy,
-   - direct live REMIX/Voltron phi producer to online MPI sender path,
-   - true traced flux-tube volume map for SAMI3 -> RAIJU/GAMERA,
-   - finer f09/distributed remap design.
+1. Remove the smoke final-frame controls from the direct-MPI phi path and
+   replace them with a continued cadence/cache policy:
+   - `SAMI3_PHI_SKIP_MADALA_AFTER_FINAL`
+   - `WACCMX_SAMI3_PHI_STOP_AFTER_DONE`
+2. Run a longer f19 direct-MPI cadence case with more than two neutral packets
+   and more than three phi frames, keeping the same validator set.
+3. Keep f19 as the development grid for now.  Design f09/distributed live
+   neutral remap only after the continued cadence path is stable.
+4. Resume the SAMI3 -> RAIJU/GAMERA physical-moment blockers:
+   - traced flux-tube volume weighting instead of simple/index weighting,
+   - L/MLT or magnetic-tube geometry mapping instead of index resize,
+   - explicit scalar-moment semantics for `Pavg/Davg/Pstd/Dstd/tiote`,
+   - runtime blending/floors so density, pressure, std, and tiote can be staged
+     independently.
 
 `intel_expr` fallback note: the previous append2 expr job failed because
 `module load` returned nonzero on a non-fatal `.modulerc` `module-hide` warning.

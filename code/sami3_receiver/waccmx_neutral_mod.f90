@@ -38,12 +38,17 @@ module waccmx_neutral_mod
     logical :: waccmx_apply_policy_logged = .false.
     logical :: waccmx_top_blend_initialized = .false.
     logical :: waccmx_top_blend_enabled = .false.
+    logical :: waccmx_neutral_timing_initialized = .false.
     real :: waccmx_top_blend_bottom_km = 0.0
     real :: waccmx_top_blend_top_km = 0.0
+    real :: waccmx_neutral_update_hours_value = 0.25
+    real :: waccmx_neutral_span_hours_value = 0.25
     integer :: waccmx_peer_comm = -1
     integer :: waccmx_phi_peer_comm = -1
     integer :: waccmx_online_packet_count = 0
+    integer :: waccmx_online_done_value = -1
     real :: waccmx_loaded_request_hr = -1.0e30
+    logical :: waccmx_online_done_received = .false.
     character(len=256) :: waccmx_online_port_name = ''
     character(len=256) :: waccmx_phi_direct_port_name = ''
     character(len=512) :: waccmx_phi_direct_port_file = ''
@@ -145,6 +150,63 @@ contains
         waccmx_phi_final_frame_seen = waccmx_phi_direct_final_seen
 
     end function waccmx_phi_final_frame_seen
+
+    subroutine waccmx_init_neutral_timing_policy()
+
+        integer :: stat, lenval, ios
+        character(len=64) :: value
+
+        if (waccmx_neutral_timing_initialized) return
+
+        waccmx_neutral_update_hours_value = 0.25
+        value = ''
+        call get_environment_variable('WXSAMI3_NEUTRAL_UPDATE_HOURS', &
+                                      value, length=lenval, status=stat)
+        if (stat == 0 .and. lenval > 0) then
+            read(value,*,iostat=ios) waccmx_neutral_update_hours_value
+            if (ios /= 0 .or. waccmx_neutral_update_hours_value <= 0.0) then
+                print *, 'WACCMX neutral timing invalid WXSAMI3_NEUTRAL_UPDATE_HOURS=', &
+                         trim(value)
+                stop
+            endif
+        endif
+
+        waccmx_neutral_span_hours_value = waccmx_neutral_update_hours_value
+        value = ''
+        call get_environment_variable('WXSAMI3_NEUTRAL_SPAN_HOURS', &
+                                      value, length=lenval, status=stat)
+        if (stat == 0 .and. lenval > 0) then
+            read(value,*,iostat=ios) waccmx_neutral_span_hours_value
+            if (ios /= 0 .or. waccmx_neutral_span_hours_value <= 0.0) then
+                print *, 'WACCMX neutral timing invalid WXSAMI3_NEUTRAL_SPAN_HOURS=', &
+                         trim(value)
+                stop
+            endif
+        endif
+
+        if (taskid == 1 .and. lwaccmx_neutral) then
+            print *, 'WACCMX neutral timing policy: update_hours,span_hours=', &
+                     waccmx_neutral_update_hours_value, &
+                     waccmx_neutral_span_hours_value
+        endif
+
+        waccmx_neutral_timing_initialized = .true.
+
+    end subroutine waccmx_init_neutral_timing_policy
+
+    real function waccmx_neutral_update_hours()
+
+        call waccmx_init_neutral_timing_policy()
+        waccmx_neutral_update_hours = waccmx_neutral_update_hours_value
+
+    end function waccmx_neutral_update_hours
+
+    real function waccmx_neutral_span_hours()
+
+        call waccmx_init_neutral_timing_policy()
+        waccmx_neutral_span_hours = waccmx_neutral_span_hours_value
+
+    end function waccmx_neutral_span_hours
 
     subroutine waccmx_phi_direct_init()
 
@@ -466,11 +528,18 @@ contains
 
         if (.not. waccmx_online_connected) return
 
-        call MPI_Recv(done_value, 1, MPI_INTEGER, 0, waccmx_tag_done, &
-                      waccmx_peer_comm, MPI_STATUS_IGNORE, ierr)
-        if (ierr /= MPI_SUCCESS) then
-            print *, 'WACCMX online done receive failed taskid,ierr=', taskid, ierr
-            call MPI_Abort(sami3_comm, ierr, ierr)
+        if (waccmx_online_done_received) then
+            done_value = waccmx_online_done_value
+        else
+            call MPI_Recv(done_value, 1, MPI_INTEGER, 0, waccmx_tag_done, &
+                          waccmx_peer_comm, MPI_STATUS_IGNORE, ierr)
+            if (ierr /= MPI_SUCCESS) then
+                print *, 'WACCMX online done receive failed taskid,ierr=', &
+                         taskid, ierr
+                call MPI_Abort(sami3_comm, ierr, ierr)
+            endif
+            waccmx_online_done_received = .true.
+            waccmx_online_done_value = done_value
         endif
         if (taskid == 0) print *, 'WACCMX online done signal received:', done_value
 
@@ -503,6 +572,8 @@ contains
         integer :: header(6)
         real :: packet_hour
         integer :: nlocal, nlocal4
+        integer :: status(MPI_STATUS_SIZE)
+        integer :: msg_tag
 
         if (.not. lwaccmx_neutral_online) return
         if (.not. waccmx_online_connected) then
@@ -510,10 +581,37 @@ contains
             call MPI_Abort(sami3_comm, 9001, ierr)
         endif
         if (taskid <= 0) return
+        if (waccmx_online_done_received) return
 
         call waccmx_alloc_arrays()
         nlocal = nz*nf*nl
         nlocal4 = nlocal*nneut
+
+        call MPI_Probe(0, MPI_ANY_TAG, waccmx_peer_comm, status, ierr)
+        if (ierr /= MPI_SUCCESS) then
+            print *, 'WACCMX online probe failed taskid,ierr=', taskid, ierr
+            call MPI_Abort(sami3_comm, ierr, ierr)
+        endif
+
+        msg_tag = status(MPI_TAG)
+        if (msg_tag == waccmx_tag_done) then
+            call MPI_Recv(waccmx_online_done_value, 1, MPI_INTEGER, 0, &
+                          waccmx_tag_done, waccmx_peer_comm, &
+                          MPI_STATUS_IGNORE, ierr)
+            if (ierr /= MPI_SUCCESS) then
+                print *, 'WACCMX online done receive during neutral failed taskid,ierr=', &
+                         taskid, ierr
+                call MPI_Abort(sami3_comm, ierr, ierr)
+            endif
+            waccmx_online_done_received = .true.
+            print *, 'WACCMX online done signal received during neutral receive:', &
+                     taskid, waccmx_online_done_value
+            return
+        else if (msg_tag /= waccmx_tag_header) then
+            print *, 'WACCMX online unexpected tag while waiting neutral header taskid,tag=', &
+                     taskid, msg_tag
+            call MPI_Abort(sami3_comm, 9003, ierr)
+        endif
 
         call MPI_Recv(header, 6, MPI_INTEGER, 0, waccmx_tag_header, &
                       waccmx_peer_comm, MPI_STATUS_IGNORE, ierr)

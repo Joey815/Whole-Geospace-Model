@@ -1,0 +1,108 @@
+{
+  "checks": [
+    {
+      "detail": "['/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_neutral_doneaware_dt300_20260525_0000/sami3_online_receiver.out', '/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_neutral_doneaware_dt300_20260525_0000/slurm-7670231.out']",
+      "name": "logs_present",
+      "ok": true
+    },
+    {
+      "detail": "{'mode': 'linear', 'bottom_km': 600.0, 'top_km': 720.0}",
+      "name": "topblend_policy_logged",
+      "ok": true
+    },
+    {
+      "detail": "actual=linear expected=linear",
+      "name": "topblend_mode",
+      "ok": true
+    },
+    {
+      "detail": "actual=600.0 expected=600.0 tol=0.0001",
+      "name": "topblend_bottom_km",
+      "ok": true
+    },
+    {
+      "detail": "actual=720.0 expected=720.0 tol=0.0001",
+      "name": "topblend_top_km",
+      "ok": true
+    },
+    {
+      "detail": "count=480 min=0",
+      "name": "apply_blend_line_count",
+      "ok": true
+    },
+    {
+      "detail": "480 of 480",
+      "name": "apply_blend_parseable",
+      "ok": true
+    },
+    {
+      "detail": "total=7696 min=1",
+      "name": "blend_cell_total",
+      "ok": true
+    },
+    {
+      "detail": "[1]",
+      "name": "blend_enabled",
+      "ok": true
+    },
+    {
+      "detail": "min=600.0 max=600.0 expected=600.0",
+      "name": "apply_blend_bottom_km",
+      "ok": true
+    },
+    {
+      "detail": "min=720.0 max=720.0 expected=720.0",
+      "name": "apply_blend_top_km",
+      "ok": true
+    },
+    {
+      "detail": "total=0",
+      "name": "apply_source_unknown_zero",
+      "ok": true
+    },
+    {
+      "detail": "total=0",
+      "name": "recv_source_unknown_zero",
+      "ok": true
+    },
+    {
+      "detail": "checked_lines=480",
+      "name": "he_native_matches_valid",
+      "ok": true
+    },
+    {
+      "detail": "checked_lines=480",
+      "name": "w_zero_matches_valid",
+      "ok": true
+    }
+  ],
+  "meta": {
+    "apply_blend_lines": 480,
+    "apply_blend_parseable_lines": 480,
+    "apply_qc_lines": 480,
+    "apply_source_flag_lines": 480,
+    "blend_cell_total": 7696,
+    "blend_enabled_values": [
+      1
+    ],
+    "blend_f_total": 3848,
+    "blend_i_total": 3848,
+    "full_f_total": 12630833,
+    "full_i_total": 12630833,
+    "log_files": [
+      "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_neutral_doneaware_dt300_20260525_0000/sami3_online_receiver.out",
+      "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_neutral_doneaware_dt300_20260525_0000/slurm-7670231.out"
+    ],
+    "native_top_f_total": 0,
+    "native_top_i_total": 0,
+    "policy": {
+      "bottom_km": 600.0,
+      "mode": "linear",
+      "top_km": 720.0
+    },
+    "recv_source_flag_lines": 64,
+    "unknown_apply_total": 0,
+    "unknown_recv_total": 0
+  },
+  "ok": true
+}

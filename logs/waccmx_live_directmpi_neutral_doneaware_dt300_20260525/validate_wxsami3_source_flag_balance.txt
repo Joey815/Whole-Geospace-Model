@@ -1,0 +1,35 @@
+ok   receiver_log_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_neutral_doneaware_dt300_20260525_0000/sami3_online_receiver.out
+ok   live_meta_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_neutral_doneaware_dt300_20260525_0000/wxsami3_live_meta.json
+ok   apply_hour_selected: packet_index=1 apply_hour=0.0833333358
+ok   recv_source_flag_lines: lines=32 expected_min=32
+ok   apply_source_flag_lines: lines=160 expected=160
+ok   apply_qc_lines: lines=160 expected=160
+ok   apply_blend_lines: lines=160 expected=160
+ok   recv_samples_match_meta: actual=6031360 expected=6031360
+ok   recv_valid_match_meta: actual=4211458 expected=4211458
+ok   recv_above_top_match_meta: actual=1642002 expected=1642002
+ok   recv_n2_invalid_match_meta: actual=177900 expected=177900
+ok   recv_other_invalid_match_meta: actual=0 expected=0
+ok   recv_unknown_zero: unknown=0
+ok   recv_valid_i_match_checksum: actual=4211458 expected=4211458
+ok   recv_invalid_i_match_checksum: actual=1819902 expected=1819902
+ok   recv_valid_f_match_checksum: actual=4211458 expected=4211458
+ok   recv_invalid_f_match_checksum: actual=1819902 expected=1819902
+ok   recv_he_native_matches_valid: he_i=4211458 he_f=4211458 valid=4211458
+ok   recv_w_zero_matches_valid: w_i=4211458 w_f=4211458 valid=4211458
+ok   apply_samples_match_meta: actual=6031360 expected=6031360
+ok   apply_valid_match_meta: actual=4211458 expected=4211458
+ok   apply_above_top_match_meta: actual=1642002 expected=1642002
+ok   apply_n2_invalid_match_meta: actual=177900 expected=177900
+ok   apply_other_invalid_match_meta: actual=0 expected=0
+ok   apply_unknown_zero: unknown=0
+ok   apply_qc_valid_i_match_meta: actual=4211458 expected=4211458
+ok   apply_qc_invalid_i_match_meta: actual=1819902 expected=1819902
+ok   apply_qc_valid_f_match_meta: actual=4211458 expected=4211458
+ok   apply_qc_invalid_f_match_meta: actual=1819902 expected=1819902
+ok   apply_qc_he_native_matches_valid: he_i=4211458 he_f=4211458 valid=4211458
+ok   apply_qc_w_zero_matches_valid: w_i=4211458 w_f=4211458 valid=4211458
+ok   blend_i_partition_valid: full+blend+native=4211458 valid=4211458
+ok   blend_f_partition_valid: full+blend+native=4211458 valid=4211458
+ok   blend_cells_min: blend_i+blend_f=2494 min=1
+overall=ok
