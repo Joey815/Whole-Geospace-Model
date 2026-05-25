@@ -1,0 +1,4 @@
+JobID|JobName|State|ExitCode|Elapsed|MaxRSS|NodeList
+7670003|wxsami3_p2p3d300|CANCELLED by 3446|0:0|00:09:05||qhcn005
+7670003.batch|batch|CANCELLED|0:15|00:09:07|64891092K|qhcn005
+7670003.extern|extern|COMPLETED|0:0|00:09:05|0|qhcn005

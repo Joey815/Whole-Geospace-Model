@@ -1,0 +1,13 @@
+receiver_packet_counts
+     32 0 0.00000000
+phi_recv
+ WACCMX_PHI_RECV           0           3   0.00000000       0.00000000       8.33333358E-02  -36.9728775       31.5048161    
+ WACCMX_PHI_RECV           1           3   8.33333358E-02   8.33333358E-02  0.166666672      -37.7063637       31.7590370    
+ WACCMX_PHI_RECV           2           3  0.166666672      0.166666672       1.00000002E+30  -38.2232933       32.1930008    
+voltron_phi_sent
+ WACCMX_SAMI3_PHI_DIRECT sent frame=           0  nframes=           3  hour=   0.00000000      valid_until=   8.33333358E-02  min/max=  -36.9728775       31.5048161    
+ WACCMX_SAMI3_PHI_DIRECT sent frame=           1  nframes=           3  hour=   8.33333358E-02  valid_until=  0.166666672      min/max=  -37.7063637       31.7590370    
+ WACCMX_SAMI3_PHI_DIRECT sent frame=           2  nframes=           3  hour=  0.166666672      valid_until=   1.00000002E+30  min/max=  -38.2232933       32.1930008    
+done_markers
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_2pkt_phi3_dt300_20260525_0000/sami3_online_receiver.out: MASTER: All Done!
+fatal_markers

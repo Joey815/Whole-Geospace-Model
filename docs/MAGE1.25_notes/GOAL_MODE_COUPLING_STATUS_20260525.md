@@ -900,3 +900,69 @@ production-cadence hardening: more than one SAMI3 dynamic step, repeated
 Voltron/REMIX phi frames without final-frame cache dependence, and then the
 f09/distributed neutral remap plus SAMI3 -> RAIJU/GAMERA physical weighting and
 geometry mapping blockers.
+
+## 2026-05-25 12:04 CST Update
+
+The follow-on repeated-cadence diagnostic with smaller `SAMI3_DT0` was
+intentionally cancelled after it exposed the next blocker:
+
+```text
+jobid = 7670003
+jobname = wxsami3_p2p3d300
+state = CANCELLED by user
+batch exit = 0:15
+elapsed = 00:09:07
+node = qhcn005
+archive = logs/waccmx_live_directmpi_2pkt_phi3_dt300_diag_20260525/
+doc = docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_DIRECTMPI_2PKT_3PHI_DT300_DIAGNOSTIC_20260525.md
+```
+
+This run used:
+
+```text
+SAMI3_MAXSTEP = 2
+SAMI3_DT0 = 300.
+PHI_MAX_FRAMES = 3
+PHI_FRAME_HOUR_STEP = 0.08333333333333333
+PHI_VALID_HOURS = 0.08333333333333333
+MAX_PACKETS = 2
+```
+
+Positive evidence:
+
+```text
+No Time step too small marker
+No MPI_ERRORS_ARE_FATAL marker
+Voltron sent phi frames at hours 0.0, 0.0833333358, 0.166666672
+SAMI3 received all three WACCMX_PHI_RECV frames
+SAMI3 reached MASTER: All Done!
+validate_remix_sami3_phi_payload = overall=ok
+validate_wxsami3_time_axis_allow_incomplete = overall=ok
+```
+
+Blocker:
+
+```text
+SAMI3 received only WACCM-X neutral packet 0:
+  receiver packet count = 32 rows for packet 0, 0 rows for packet 1
+
+Missing markers:
+  WACCMX online done signal received
+  SAMI3 direct phi done signal received
+  WACCMX_SAMI3_PHI_DIRECT sent done
+  WXSAMI3 sent done signal to SAMI3
+  END OF MODEL RUN
+```
+
+Interpretation:
+
+```text
+DT0=300 removes the immediate SAMI3 numerical abort seen at DT0=900,
+but SAMI3 can now outrun CESM/WACCM-X and finalize before the second live
+neutral packet arrives.
+```
+
+Next implementation target: add a neutral-cadence synchronization policy rather
+than tuning `DT0` further.  Candidate paths are a SAMI3 wait-at-coupling-boundary
+mode, a CESM pre-send/startup gate, or a shared coupling clock that prevents
+SAMI3 from advancing beyond the available WACCM-X packet stream.
