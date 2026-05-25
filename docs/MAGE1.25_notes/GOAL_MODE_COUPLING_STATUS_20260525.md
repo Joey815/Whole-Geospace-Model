@@ -755,3 +755,61 @@ This closes the clean 2-packet coexistence gate.  The next target is production
 cadence hardening: replace this forced `SAMI3_DT0=900.` / one-final-phi-frame
 smoke with repeated neutral consumption and repeated Voltron/REMIX phi frames
 without relying on the final-frame cache.
+
+## 2026-05-25 11:32 CST Update
+
+The next controlled 2-packet + 2-direct-phi cadence run was diagnostic rather
+than successful:
+
+```text
+jobid = 7669625
+jobname = wxsami3_p2p2
+state = FAILED
+exit = 16:0
+elapsed = 00:05:51
+node = qhcn660
+archive = logs/waccmx_live_directmpi_2pkt_phi2_dt900_diag_20260525/
+doc = docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_DIRECTMPI_2PKT_2PHI_DIAGNOSTIC_20260525.md
+```
+
+Positive evidence:
+
+```text
+SAMI3 received WACCM-X packet 0 on 32 workers
+SAMI3 received WACCM-X packet 1 on 32 workers
+SAMI3 received direct phi frame 0 of 2
+SAMI3 received direct phi frame 1 of 2
+packet0 replay/QC max_rel = 4.83248e-13
+packet1 replay/QC max_rel = 6.76502e-13
+validate_remix_sami3_phi_payload = overall=ok
+validate_wxsami3_time_axis_allow_incomplete = overall=ok
+```
+
+Failure mode:
+
+```text
+SAMI3 did not reach MASTER: All Done!
+WACCM-X done and direct-phi done were not received before abort
+SAMI3 printed Time step too small / vparallel diagnostics
+PRTE reported MPI_ERRORS_ARE_FATAL
+```
+
+The run also exposed a sender metadata issue: `PHI_FRAME_HOUR_OFFSET` is
+subtracted from Voltron runtime, not used as a frame interval.  With
+`PHI_FRAME_HOUR_OFFSET=0.25`, the emitted frame hours were negative:
+
+```text
+frame0 hour = -0.248611107
+frame1 hour = -0.247222215
+```
+
+Next implementation step: add an explicit diagnostic frame-hour override to the
+Voltron sender, for example:
+
+```text
+WACCMX_SAMI3_PHI_FRAME_HOUR_BASE
+WACCMX_SAMI3_PHI_FRAME_HOUR_STEP
+```
+
+so controlled cadence tests can emit `frame_hour = base + frame_index * step`
+without changing the existing runtime-time based path.
