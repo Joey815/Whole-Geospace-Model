@@ -1,0 +1,74 @@
+{
+  "checks": [
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_voltron_tubeshell_l_mlt_lon0_bin_bvol_overlap_exclude_lmax_20260526.h5",
+      "name": "product_exists",
+      "ok": true
+    },
+    {
+      "detail": "sami3_voltron_raiju_moments_diagnostic",
+      "name": "product_kind",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_voltron_tubeshell_l_mlt_lon0_bin_bvol_overlap_exclude_lmax_20260526.h5",
+      "name": "weight_file_resolved",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_voltron_tubeshell_l_mlt_lon0_bin_bvol_overlap_exclude_lmax_20260526.h5",
+      "name": "weight_file_exists",
+      "ok": true
+    },
+    {
+      "detail": "sami3_to_raiju_mapping_weights",
+      "name": "weight_product_kind",
+      "ok": true
+    },
+    {
+      "detail": "exclude_above_target_lmax",
+      "name": "source_domain_policy_known",
+      "ok": true
+    },
+    {
+      "detail": "0.999595965103914",
+      "name": "source_domain_skipped_above_lmax_fraction_finite",
+      "ok": true
+    },
+    {
+      "detail": "fraction=0.999595965103914 max=0.05",
+      "name": "production_source_domain_skip_threshold",
+      "ok": false
+    },
+    {
+      "detail": "product=unknown weight=prototype",
+      "name": "production_label",
+      "ok": false
+    },
+    {
+      "detail": "0.9574468085106383",
+      "name": "runtime_valid_fraction",
+      "ok": true
+    }
+  ],
+  "meta": {
+    "classification": "diagnostic_only",
+    "high_source_domain_skip": true,
+    "max_production_source_above_lmax_fraction": 0.05,
+    "mode": "production-readiness",
+    "product": "sami3_voltron_raiju_moments_diagnostic",
+    "product_h5": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_voltron_tubeshell_l_mlt_lon0_bin_bvol_overlap_exclude_lmax_20260526.h5",
+    "product_note": "Field-name and unit diagnostic product only; a production restart requires ShellGrid, topology, magnetic geometry, potentials, masks, and timing.",
+    "product_physical_validity": "unknown",
+    "source_domain": {
+      "policy": "exclude_above_target_lmax",
+      "positive_bvol_sum": 2268463.99523794,
+      "skipped_above_lmax_fraction": 0.999595965103914,
+      "target_l_max": 33.16343747752636,
+      "target_l_min": 1.4902905965657023
+    },
+    "weight_file": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_voltron_tubeshell_l_mlt_lon0_bin_bvol_overlap_exclude_lmax_20260526.h5",
+    "weight_physical_validity": "prototype"
+  },
+  "ok": false
+}

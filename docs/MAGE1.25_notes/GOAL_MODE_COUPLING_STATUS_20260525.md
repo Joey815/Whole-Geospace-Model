@@ -2203,3 +2203,37 @@ Next target is again the SAMI3 -> Voltron/RAIJU/GAMERA adapter line.  The
 remaining blocker is not the WACCM-X/SAMI3 control path; it is the physical
 source-domain policy for SAMI3-derived scalar moments before they can be
 treated as production RAIJU/GAMERA feedback.
+
+## 2026-05-26 07:28 CST Update
+
+Added a production-contract guardrail for the SAMI3 -> RAIJU exclude-Lmax
+product:
+
+```text
+script = scripts/validate_sami3_raiju_production_contract.py
+diagnostic_contract = logs/sami3_exclude_lmax_density_tiote_long1800_20260526/validate_sami3_raiju_production_contract_diagnostic.txt
+production_readiness = logs/sami3_exclude_lmax_density_tiote_long1800_20260526/validate_sami3_raiju_production_contract_production.txt
+```
+
+The diagnostic-contract mode passes and classifies the product as
+`diagnostic_only`:
+
+```text
+source_domain_policy = exclude_above_target_lmax
+source_domain_skipped_above_lmax_fraction = 0.999595965103914
+overall = ok
+```
+
+The production-readiness mode intentionally fails:
+
+```text
+FAIL production_source_domain_skip_threshold: fraction=0.999595965103914 max=0.05
+FAIL production_label: product=unknown weight=prototype
+classification = diagnostic_only
+overall = FAIL
+```
+
+This turns the current physics caveat into an executable gate.  The adapter can
+continue to be used for runtime diagnostics and controlled alpha/blending tests,
+but it cannot be accidentally promoted to production plasma feedback without
+passing a source-domain closure policy.

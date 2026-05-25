@@ -17,4 +17,13 @@ Validator text output:
 - validate_sami3_raiju_mapping_product.txt
 - validate_sami3_raiju_tiote_hook.txt
 - tiote_vs_density_only_comparison.txt
+- validate_sami3_raiju_production_contract_diagnostic.txt
+- validate_sami3_raiju_production_contract_production.txt
 - run_exclude_lmax_density_tiote_long1800.sbatch
+
+Production-contract guardrail:
+
+- `diagnostic-contract` mode passes and classifies this product as
+  `diagnostic_only`.
+- `production-readiness` mode intentionally fails because
+  `source_domain_skipped_above_lmax_bvol_fraction=0.999595965103914`.

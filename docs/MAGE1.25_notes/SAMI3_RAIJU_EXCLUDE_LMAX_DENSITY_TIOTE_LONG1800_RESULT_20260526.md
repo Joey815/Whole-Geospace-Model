@@ -164,6 +164,44 @@ The archives include XML decks, the Slurm script, run logs, `sacct_7678667.txt`,
 standard validator JSON/TXT, mapping-product validator JSON/TXT, tiote hook
 validator JSON/TXT, and `tiote_vs_density_only_comparison.json/txt`.
 
+## Production-Contract Guardrail
+
+A product-semantics validator was added:
+
+```text
+scripts/validate_sami3_raiju_production_contract.py
+```
+
+It reads the stage-2 `/RaiCplMomentsOnly` product, follows the referenced
+mapping weight file, and checks whether source-domain exclusion is compatible
+with any production claim.
+
+For the current exclude-Lmax product, the diagnostic contract passes:
+
+```text
+validate_sami3_raiju_production_contract_diagnostic.txt
+classification = diagnostic_only
+overall = ok
+source_domain_policy = exclude_above_target_lmax
+source_domain_skipped_above_lmax_fraction = 0.999595965103914
+```
+
+The same product intentionally fails production-readiness mode:
+
+```text
+validate_sami3_raiju_production_contract_production.txt
+FAIL production_source_domain_skip_threshold:
+  fraction=0.999595965103914 max=0.05
+FAIL production_label:
+  product=unknown weight=prototype
+classification = diagnostic_only
+overall = FAIL
+```
+
+This is now a machine-readable guardrail: the current product is runtime-valid
+but explicitly diagnostic-only until the source-domain L policy is physically
+resolved.
+
 ## Interpretation
 
 The current schema v7 exclude-Lmax product now has:
@@ -175,6 +213,8 @@ runtime alpha=0 baseline recovery: ok
 runtime alphaDavg=0.05 short smoke: ok
 runtime alphaDavg=0.05 1800s density-only: ok
 runtime alphaDavg=0.05 + alphaTiote=1.0 1800s: ok
+diagnostic production-contract guardrail: ok
+production-readiness guardrail: expected FAIL
 ```
 
 This validates the adapter mechanics for the conservative target-domain product

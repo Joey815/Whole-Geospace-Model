@@ -138,6 +138,11 @@ would require `Lmax=317.8696` near 3.2 degrees; capturing 90% would require
 `Lmax=530.3418` near 2.5 degrees.  The current safe decision is to freeze the
 schema v7 exclude-Lmax path as a diagnostic/runtime adapter rather than forcing
 the RAIJU target grid to L~300-550 without a separate grid physics review.
+The new `scripts/validate_sami3_raiju_production_contract.py` guardrail makes
+that decision executable: diagnostic-contract mode passes for the current
+exclude-Lmax product, while production-readiness mode intentionally fails on
+`source_domain_skipped_above_lmax_bvol_fraction=0.999595965103914` and the
+non-production product labels.
 The stage-2 mapping products now have a repeatable HDF5 QC gate:
 `scripts/validate_sami3_raiju_mapping_product.py` validates
 `/RaiCplMomentsOnly` and `/MappingQuality` finite values, masks, coverage,
@@ -523,7 +528,7 @@ Do not describe this snapshot as production live WACCM-X neutral forcing until
 these are handled:
 
 ```text
-production cadence/f09 live source-state validation beyond the current f19 6pkt/6phi gate
+production cadence/f09 live source-state validation beyond the current f19 12pkt/12phi gate
 longer-than-6-packet production cadence and restart/stability testing
 production choice of WACCM-X-top blending heights and per-variable policy
 He native/MSIS fallback policy review beyond the current enforced native fallback
