@@ -107,6 +107,14 @@ resulting target-admissible closure gate passes
 weight-sum max deviation `1.19e-7`.  This is an auditable conservative
 target-domain product, not production physics, because nearly all positive
 active Voltron source bVol remains outside the current RAIJU target L range.
+That schema v7 product now also passes a runtime ingest smoke.  Job 7678065
+completed 0:0 on qhcn067, running paired alpha-zero and density-only short
+cases.  The alpha-zero case exactly recovers the baseline in checked final
+RAIJU/GAMERA restart fields (`State/Pavg_in`, `State/Davg_in`, `State/eta`,
+`State/Density`, `State/Pressure`, and `Gas0` all have max_abs=0).  The
+`alphaDavg=0.05` density-only case passes formula checks for Pavg/Davg/Pstd/Dstd
+with no non-finite checked physics fields and a finite response in
+`State/Davg_in`, `State/Density`, and `Gas0`.
 The stage-2 mapping products now have a repeatable HDF5 QC gate:
 `scripts/validate_sami3_raiju_mapping_product.py` validates
 `/RaiCplMomentsOnly` and `/MappingQuality` finite values, masks, coverage,

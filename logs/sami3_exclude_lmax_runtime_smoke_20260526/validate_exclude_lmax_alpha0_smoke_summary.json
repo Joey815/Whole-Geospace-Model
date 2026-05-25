@@ -1,0 +1,105 @@
+{
+  "checks": [
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvol_overlap_exclude_lmax_smoke_20260526/exclude_lmax_alpha0_smoke_summary.json",
+      "name": "summary_json_exists",
+      "ok": true
+    },
+    {
+      "detail": "max_abs=0.0 tol=1e-12",
+      "name": "Pavg_formula_abs",
+      "ok": true
+    },
+    {
+      "detail": "max_rel=0.0 tol=1e-12",
+      "name": "Pavg_formula_rel",
+      "ok": true
+    },
+    {
+      "detail": "mean=0.00043784124116159 max=0.0045781374009727024",
+      "name": "Pavg_positive_actual",
+      "ok": true
+    },
+    {
+      "detail": "max_abs=0.0 tol=1e-12",
+      "name": "Davg_formula_abs",
+      "ok": true
+    },
+    {
+      "detail": "max_rel=0.0 tol=1e-12",
+      "name": "Davg_formula_rel",
+      "ok": true
+    },
+    {
+      "detail": "mean=0.05433108774465306 max=0.20822635501307935",
+      "name": "Davg_positive_actual",
+      "ok": true
+    },
+    {
+      "detail": "max_abs=0.0 tol=1e-12",
+      "name": "Pstd_formula_abs",
+      "ok": true
+    },
+    {
+      "detail": "max_rel=0.0 tol=1e-12",
+      "name": "Pstd_formula_rel",
+      "ok": true
+    },
+    {
+      "detail": "max_abs=0.0 tol=1e-12",
+      "name": "Dstd_formula_abs",
+      "ok": true
+    },
+    {
+      "detail": "max_rel=0.0 tol=1e-12",
+      "name": "Dstd_formula_rel",
+      "ok": true
+    },
+    {
+      "detail": "[]",
+      "name": "nonfinite_base_raiju_res_empty",
+      "ok": true
+    },
+    {
+      "detail": "[]",
+      "name": "nonfinite_proto_raiju_res_empty",
+      "ok": true
+    },
+    {
+      "detail": "[]",
+      "name": "nonfinite_base_gam_res_empty",
+      "ok": true
+    },
+    {
+      "detail": "[]",
+      "name": "nonfinite_proto_gam_res_empty",
+      "ok": true
+    },
+    {
+      "detail": "{'gam': 'Step#3', 'raiju': 'Step#3'}",
+      "name": "history_last_steps_exist",
+      "ok": true
+    },
+    {
+      "detail": "{'gam': 'Step#3', 'raiju': 'Step#3'}",
+      "name": "history_last_steps_match",
+      "ok": true
+    },
+    {
+      "detail": "[]",
+      "name": "comparison_fields_present",
+      "ok": true
+    },
+    {
+      "detail": "[]",
+      "name": "comparison_stats_finite",
+      "ok": true
+    }
+  ],
+  "meta": {
+    "label": "exclude_lmax_alpha0_smoke",
+    "run_dir": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvol_overlap_exclude_lmax_smoke_20260526",
+    "summary_json": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvol_overlap_exclude_lmax_smoke_20260526/exclude_lmax_alpha0_smoke_summary.json"
+  },
+  "ok": true
+}

@@ -20,9 +20,86 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-26 00:20:00 CST.
+Status refreshed: 2026-05-26 00:29:00 CST.
 
-### Latest Completed Gate: Explicit Source-Domain Policy Product
+### Latest Completed Gate: Exclude-Lmax Runtime Smoke
+
+The schema v7 `exclude_above_target_lmax` stage-2 product now has a runtime
+ingest smoke:
+
+```text
+archive = logs/sami3_exclude_lmax_runtime_smoke_20260526/
+doc = docs/MAGE1.25_notes/SAMI3_RAIJU_EXCLUDE_LMAX_RUNTIME_SMOKE_20260526.md
+jobid = 7678065
+state = COMPLETED
+exit = 0:0
+elapsed = 00:04:10
+node = qhcn067
+```
+
+The smoke ran two paired short checks:
+
+```text
+alpha=0 baseline recovery:
+  alphaPavg=0 alphaDavg=0 alphaPstd=0 alphaDstd=0 alphaTiote=0
+
+density-only response:
+  alphaPavg=0 alphaDavg=0.05 alphaPstd=0 alphaDstd=0 alphaTiote=0
+```
+
+Both validators passed:
+
+```text
+validate_exclude_lmax_alpha0_smoke_summary: overall=ok
+validate_exclude_lmax_dens005_smoke_summary: overall=ok
+Pavg/Davg/Pstd/Dstd formula_max_abs = 0 for both labels
+nonfinite physics fields = []
+history_last_steps = Step#3 / Step#3
+```
+
+Alpha-zero baseline recovery is exact for checked final restart fields:
+
+```text
+State/Pavg_in max_abs = 0
+State/Davg_in max_abs = 0
+State/eta max_abs = 0
+State/Density max_abs = 0
+State/Pressure max_abs = 0
+Gas0 max_abs = 0
+```
+
+Density-only alpha produces finite, formula-consistent response:
+
+```text
+State/Davg_in max_abs = 870.24472656250009
+State/Density max_abs = 4.3658608802500751
+Gas0 max_abs = 4.2673096857777404
+```
+
+Interpretation:
+
+```text
+The explicit source-domain policy product is now validated through the runtime
+RAIJU ingest hook for baseline recovery and density-only response.  It remains
+diagnostic/prototype physics because the source-domain accounting still excludes
+about 99.96% of positive active Voltron source bVol above the current RAIJU
+target Lmax.
+```
+
+Next work order after this gate:
+
+```text
+1. Decide the physical policy for excluded high-L source volume:
+   extend the RAIJU target domain, derive an inner-domain source subset, or keep
+   this product diagnostic-only.
+2. If staying diagnostic-only, freeze this adapter as the current safe runtime
+   path and move back to WACCM-X live neutral extraction / REMIX potential
+   completion.
+3. If extending the domain, regenerate the target grid and rerun the full
+   offline plus runtime closure gates.
+```
+
+### Previous Completed Gate: Explicit Source-Domain Policy Product
 
 The stage-2 sparse weight builder now has an explicit source-domain policy for
 Voltron TubeShell source cells outside the current RAIJU target L range:
@@ -72,28 +149,6 @@ finite_all_fraction = 1.0
 extrapolated_fraction = 0.0
 weight_sum_valid_near_one max_dev = 1.1920928955078125e-07
 tiote masked range = 0.8749623894691467 / 1.0004475116729736
-```
-
-Interpretation:
-
-```text
-This is now an auditable conservative target-domain product: high-L source bVol
-is explicitly excluded before overlap construction and recorded in metadata.
-It is still not production physics coupling because the current RAIJU target
-grid excludes about 99.96% of positive active Voltron source bVol.
-```
-
-Next work order after this gate:
-
-```text
-1. Decide the physical policy for the excluded high-L source volume:
-   extend the RAIJU target domain, derive an inner-domain source subset, or keep
-   this product diagnostic-only.
-2. If retaining the current domain, run a runtime ingest smoke with the schema
-   v7 exclude-Lmax product and alpha=0 baseline-recovery plus density-only
-   alpha checks.
-3. If extending the domain, regenerate the target grid and rerun the full
-   target-domain closure gate.
 ```
 
 ### Previous Completed Gate: Voltron Trace-Line Debug Export Smoke
