@@ -20,11 +20,75 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-25 15:27:47 CST.
+Status refreshed: 2026-05-25 17:08:17 CST.
 
-### Latest Completed Gate: No-Smoke 3pkt/3phi Direct-MPI Cadence
+### Latest Completed Gate: SAMI3 -> RAIJU Conservative bin_bvolcc Long1800
 
-The current same-stack WACCM-X/CESM + SAMI3 + OpenMPI Voltron direct-MPI
+The current SAMI3 -> RAIJU/GAMERA scalar-moment gate is complete for the
+conservative traced TubeShell bVol-binned mapping path:
+
+```text
+jobid = 7671981
+jobname = sami3_bvcc_l1800
+state = COMPLETED
+exit = 0:0
+elapsed = 01:21:54
+node = qhcn075
+batch MaxRSS = 1179452K
+archive = logs/sami3_tubeshell_bin_bvolcc_conservative_long1800_20260525/
+doc = docs/MAGE1.25_notes/SAMI3_RAIJU_TUBESHELL_BIN_BVOLCC_CONSERVATIVE_LONG1800_RESULT_20260525.md
+```
+
+Runtime settings:
+
+```text
+mapping product = ds_over_B + voltron_tubeshell_l_mlt + lon0 + bin_bvol_cc
+runtime mapping = weights
+alphaDavg = 0.05
+alphaPavg = 0.0
+alphaPstd = 0.0
+alphaDstd = 0.0
+alphaTiote = 0.0
+```
+
+Validated runtime facts:
+
+```text
+baseline/prototype both reached Fin
+baseline_raiju_writes = 362
+prototype_raiju_writes = 362
+baseline_gamera_writes = 364
+prototype_gamera_writes = 364
+fatal marker matches = 0
+slurm_run_complete = 1
+Pavg/Davg/Pstd/Dstd final formula checks = exact
+checked RAIJU/GAMERA restart physics arrays contain no non-finite values
+```
+
+The product gate also passed:
+
+```text
+mapping_mode = weights
+runtime_valid_fraction = 0.7021276595744681
+extrapolated_fraction = 0.0
+coverage_valid_positive = valid_min 4
+weight_sum_valid_max_deviation = 1.1920928955078125e-07
+```
+
+Next work order after this gate:
+
+```text
+1. Add a separate tiote-only scan on the same bin_bvolcc long1800 setup:
+   alphaDavg=0.05, alphaPavg=0.0, alphaTiote=1.0 with
+   moments/useStateTioteForIngest=T.
+2. Keep pressure disabled until Pavg production semantics are settled.
+3. Start replacing lon0 cell-center binning with a true traced-tube
+   flux-volume map.
+```
+
+### Previous Completed Gate: No-Smoke 3pkt/3phi Direct-MPI Cadence
+
+The previous same-stack WACCM-X/CESM + SAMI3 + OpenMPI Voltron direct-MPI
 no-smoke continued-cadence gate is complete:
 
 ```text

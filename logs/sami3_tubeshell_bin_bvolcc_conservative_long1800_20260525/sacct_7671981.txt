@@ -1,0 +1,4 @@
+JobID|JobName|State|ExitCode|Elapsed|NodeList|MaxRSS
+7671981|sami3_bvcc_l1800|COMPLETED|0:0|01:21:54|qhcn075|
+7671981.batch|batch|COMPLETED|0:0|01:21:54|qhcn075|1179452K
+7671981.extern|extern|COMPLETED|0:0|01:21:54|qhcn075|0
