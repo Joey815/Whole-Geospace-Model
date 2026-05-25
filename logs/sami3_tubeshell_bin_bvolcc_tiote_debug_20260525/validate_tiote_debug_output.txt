@@ -1,0 +1,6 @@
+ok   raiju_tiote_dataset_exists: ['tiote']
+ok   tiote_finite: True
+ok   tiote_nondefault_count_positive: 4680
+ok   product_mask_count_5940: 5940
+ok   tiote_min_below_default: 0.8914262056350708
+overall=ok

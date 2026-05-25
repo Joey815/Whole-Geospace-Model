@@ -20,11 +20,56 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-25 18:00:22 CST.
+Status refreshed: 2026-05-25 18:06:58 CST.
 
-### Latest Completed Gate: SAMI3 -> RAIJU bin_bvolcc tiote Long1800
+### Latest Completed Gate: RAIJU direct tiote debug output
 
-The current SAMI3 -> RAIJU/GAMERA scalar-moment gate is complete for the
+The direct tiote diagnostic gate is complete:
+
+```text
+jobid = 7673602
+jobname = sami3_tiote_dbg
+state = COMPLETED
+exit = 0:0
+elapsed = 00:01:04
+node = qhcn075
+batch MaxRSS = 1197564K
+archive = logs/sami3_tubeshell_bin_bvolcc_tiote_debug_20260525/
+doc = docs/MAGE1.25_notes/SAMI3_RAIJU_TIOTE_DEBUG_OUTPUT_RESULT_20260525.md
+```
+
+Validated runtime facts:
+
+```text
+RAIJU/output doDebug = T exposes State tiote in raiju.h5
+last_step = Step#3
+last_step_keys_with_tiote = ["tiote"]
+tiote_shape = [180, 37]
+tiote_finite = true
+tiote_min/max = 0.8914262056350708 / 4.0
+tiote_nondefault_count = 4680
+```
+
+Interpretation:
+
+```text
+No Fortran output change is required for direct State%tiote diagnostics.
+Future tiote scans can turn on RAIJU doDebug for short diagnostic checks, while
+long production-style runs can keep doDebug disabled to avoid larger outputs.
+```
+
+Next work order after this gate:
+
+```text
+1. Keep pressure disabled until Pavg production semantics are settled.
+2. Start replacing lon0 cell-center binning with a true traced-tube
+   flux-volume map.
+3. Use doDebug=T only for short tiote diagnostic gates, not default long runs.
+```
+
+### Previous Completed Gate: SAMI3 -> RAIJU bin_bvolcc tiote Long1800
+
+The previous SAMI3 -> RAIJU/GAMERA scalar-moment gate is complete for the
 tiote-enabled traced TubeShell bVol-binned mapping path:
 
 ```text
