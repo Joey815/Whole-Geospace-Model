@@ -652,3 +652,59 @@ Next work should move from online handoff validation to production hardening:
 multi-cycle REMIX/SAMI3 cadence, f09/distributed live-neutral remap,
 production top-blend/fallback policy, and the SAMI3 -> RAIJU/GAMERA traced
 flux-tube weighting plus L/MLT mapping.
+
+## 2026-05-25 11:10 CST Update
+
+The first controlled 2-packet live-neutral plus direct-Voltron-phi run completed
+the model runtime path but exposed a validator semantics bug:
+
+```text
+jobid = 7669353
+jobname = wxsami3_p2p1
+state = FAILED
+exit = 1:0
+elapsed = 00:06:50
+node = qhcn005
+archive = logs/waccmx_live_directmpi_2pkt_phi1_postfix_20260525/
+doc = docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_DIRECTMPI_2PKT_POSTFIX_RESULT_20260525.md
+```
+
+Runtime markers showed the coupling path succeeded:
+
+```text
+CESM sent live neutral packet 0 at hour 0.00000000
+CESM sent live neutral packet 1 at hour 0.0833333358
+SAMI3 received 32 worker QC rows for packet 0
+SAMI3 received 32 worker QC rows for packet 1
+Voltron sent one direct phi frame with final-valid cache
+SAMI3 received WACCMX_PHI_RECV frame 0
+MASTER: All Done!
+WACCMX online done signal received: 2
+SAMI3 direct phi done signal received: 1
+```
+
+The failed validator was not filtering apply diagnostics correctly.  Receiver
+diagnostics carry WACCM-X packet hour, but `WACCMX_APPLY_*` diagnostics carry
+SAMI3 apply hour.  For this run packet 1 has receiver hour `0.0833333358` but
+apply hour `0.25`.  The validator now selects the packet-index-th distinct
+apply-hour block unless `--apply-hour` is provided.
+
+Post-fix validation on the same run logs is fully green:
+
+```text
+validate_remix_sami3_phi_payload = overall=ok
+validate_sami3_direct_phi_run_strict = overall=ok
+validate_wxsami3_live_packet_contract = overall=ok
+validate_wxsami3_source_flag_balance = overall=ok
+validate_wxsami3_time_axis = overall=ok
+validate_wxsami3_topblend_policy = overall=ok
+validate_wxsami3_runtime_map = overall=ok
+```
+
+A clean rerun with the fixed validator is active:
+
+```text
+jobid = 7669527
+run = /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_2pkt_phi1_clean_20260525_0000
+purpose = produce a Slurm COMPLETED record for the same 2-packet + direct-phi gate
+```

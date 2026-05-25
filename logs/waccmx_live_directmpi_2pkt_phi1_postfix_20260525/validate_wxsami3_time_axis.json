@@ -1,0 +1,142 @@
+{
+  "checks": [
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_2pkt_phi1_20260525_0000",
+      "name": "run_dir_exists",
+      "ok": true
+    },
+    {
+      "detail": "sender_packets=2 expected=2",
+      "name": "sender_neutral_packet_count",
+      "ok": true
+    },
+    {
+      "detail": "receiver_packets=2 expected=2",
+      "name": "receiver_neutral_packet_count",
+      "ok": true
+    },
+    {
+      "detail": "{0: {'count': 32, 'unique_tasks': 32, 'hour_min': 0.0, 'hour_max': 0.0}, 1: {'count': 32, 'unique_tasks': 32, 'hour_min': 0.0833333358, 'hour_max': 0.0833333358}}",
+      "name": "receiver_packet_hours_consistent",
+      "ok": true
+    },
+    {
+      "detail": "receiver_hours=[0.0, 0.0833333358]",
+      "name": "receiver_packet_hours_monotonic",
+      "ok": true
+    },
+    {
+      "detail": "unique_tasks=[32, 32] expected=32",
+      "name": "receiver_worker_coverage",
+      "ok": true
+    },
+    {
+      "detail": "matched=2 sender_hours=[0.0, 0.0833333358] receiver_hours=[0.0, 0.0833333358]",
+      "name": "sender_receiver_neutral_hours_match",
+      "ok": true
+    },
+    {
+      "detail": "frames=1 expected=1",
+      "name": "phi_payload_frame_count",
+      "ok": true
+    },
+    {
+      "detail": "hours=[0.0]",
+      "name": "phi_payload_hours_strictly_increasing",
+      "ok": true
+    },
+    {
+      "detail": "hours=[0.0] valid_until=[1.0000000150474662e+30]",
+      "name": "phi_payload_valid_until_overlaps_next",
+      "ok": true
+    },
+    {
+      "detail": "uncovered_neutral_hours=[]",
+      "name": "phi_payload_covers_neutral_packets",
+      "ok": true
+    },
+    {
+      "detail": "receiver_phi_records=1 expected_min=1",
+      "name": "receiver_phi_frame_count",
+      "ok": true
+    },
+    {
+      "detail": "records=1",
+      "name": "receiver_phi_records_within_validity",
+      "ok": true
+    }
+  ],
+  "meta": {
+    "log_files": [
+      "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_2pkt_phi1_20260525_0000/slurm-7669353.out",
+      "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_2pkt_phi1_20260525_0000/slurm-7669353.err",
+      "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_2pkt_phi1_20260525_0000/waccmx_cesm.out",
+      "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_2pkt_phi1_20260525_0000/sami3_online_receiver.out"
+    ],
+    "phi_payload": {
+      "expected_size": 48532,
+      "frame_diffs": [],
+      "frames": [
+        {
+          "finite_count": 12125,
+          "frame_index": 0,
+          "hour": 0.0,
+          "max": 31.50481605529785,
+          "mean": -0.21076431384213634,
+          "min": -36.972877502441406,
+          "nonzero_count": 3492,
+          "valid_until": 1.0000000150474662e+30
+        }
+      ],
+      "header": {
+        "magic": 20260524,
+        "nframes": 1,
+        "nlat": 125,
+        "nlon": 97,
+        "version": 1
+      },
+      "path": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_2pkt_phi1_20260525_0000/voltron_runtime_direct_phi/remix_sami3_phi_payload_runtime_direct_openmpi.bin",
+      "size": 48532,
+      "trailing_bytes": 0
+    },
+    "receiver_neutral_packet_summary": {
+      "0": {
+        "count": 32,
+        "hour_max": 0.0,
+        "hour_min": 0.0,
+        "unique_tasks": 32
+      },
+      "1": {
+        "count": 32,
+        "hour_max": 0.0833333358,
+        "hour_min": 0.0833333358,
+        "unique_tasks": 32
+      }
+    },
+    "receiver_phi_records": [
+      {
+        "frame_hour": 0.0,
+        "frame_index": 0,
+        "hrut": 0.0,
+        "max": 31.5048161,
+        "min": -36.9728775,
+        "nframes": 1,
+        "valid_until": 1.00000002e+30
+      }
+    ],
+    "run_dir": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_2pkt_phi1_20260525_0000",
+    "sender_neutral_packets": [
+      {
+        "nstep": 0,
+        "packet_hour": 0.0,
+        "packet_index": 0
+      },
+      {
+        "nstep": 1,
+        "packet_hour": 0.0833333358,
+        "packet_index": 1
+      }
+    ]
+  },
+  "ok": true
+}

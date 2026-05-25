@@ -1,0 +1,17 @@
+ok   receiver_log_exists: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_2pkt_phi1_20260525_0000/sami3_online_receiver.out
+ok   phi_sender_log_exists: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_2pkt_phi1_20260525_0000/voltron_runtime_direct.out
+ok   recv_qc_compare_exists: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_2pkt_phi1_20260525_0000/recv_qc_compare_pkt000000.txt
+ok   no_fatal_markers: none
+ok   direct_phi_port_ready: marker
+ok   direct_phi_connected: marker
+ok   master_done: marker
+ok   neutral_done_received: marker
+ok   direct_phi_done_received: marker
+ok   phi_recv_frame_count: observed=1 expected=1
+ok   phi_recv_frame_indices: [0]
+ok   phi_recv_total_frames: [1]
+ok   phi_recv_finite_range: [(-36.9728775, 31.5048161)]
+ok   phi_sender_sent_frames: count=1
+ok   phi_sender_sent_done: marker
+ok   recv_qc_compare_ok: WACCMX_RECV_QC compare ok: ranks=32 occurrence=0 step_set=[0] packet_hour_set=[0.0] max_abs=2.08794e+06 max_rel=4.83248e-13
+overall=ok

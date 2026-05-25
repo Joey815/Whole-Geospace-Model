@@ -4,6 +4,11 @@
 This validator is intentionally receiver-log driven.  It checks that the
 source-flag totals received by SAMI3 and the per-shell apply diagnostics close
 against the live-packet metadata written by the WACCM-X sender.
+
+Receiver diagnostics carry the WACCM-X packet hour, while apply diagnostics
+carry the SAMI3 apply hour.  For multi-packet smokes these are not the same
+number, so apply rows are selected from the packet-index-th distinct apply-hour
+block unless an explicit --apply-hour is provided.
 """
 
 import argparse
@@ -78,6 +83,38 @@ def filter_packet_rows(rows, packet_index=None, packet_col=None, packet_hour=Non
     return filtered
 
 
+def distinct_hours(rows, hour_col, hour_tol):
+    hours = []
+    for row in rows:
+        if len(row) <= hour_col:
+            continue
+        hour = float(row[hour_col])
+        if not any(close_float(hour, existing, hour_tol) for existing in hours):
+            hours.append(hour)
+    return sorted(hours)
+
+
+def choose_apply_hour(rows_by_marker, packet_index, explicit_hour, hour_col, hour_tol):
+    if explicit_hour is not None:
+        return explicit_hour
+    if packet_index is None:
+        return None
+
+    all_rows = []
+    for rows in rows_by_marker:
+        all_rows.extend(rows)
+    hours = distinct_hours(all_rows, hour_col, hour_tol)
+    if not hours:
+        return None
+
+    idx = int(packet_index)
+    if idx < 0:
+        idx = 0
+    if idx >= len(hours):
+        idx = len(hours) - 1
+    return hours[idx]
+
+
 def validate(args):
     run_dir = Path(args.run_dir).expanduser().resolve()
     receiver_log = Path(args.receiver_log).expanduser().resolve() if args.receiver_log else run_dir / "sami3_online_receiver.out"
@@ -124,23 +161,30 @@ def validate(args):
         hour_col=2,
         hour_tol=args.packet_hour_tol,
     )
+    selected_apply_hour = choose_apply_hour(
+        [apply_source_rows, apply_qc_rows, apply_blend_rows],
+        selected_packet_index,
+        args.apply_hour,
+        hour_col=2,
+        hour_tol=args.apply_hour_tol,
+    )
     apply_source_rows = filter_packet_rows(
         apply_source_rows,
-        packet_hour=selected_packet_hour,
+        packet_hour=selected_apply_hour,
         hour_col=2,
-        hour_tol=args.packet_hour_tol,
+        hour_tol=args.apply_hour_tol,
     )
     apply_qc_rows = filter_packet_rows(
         apply_qc_rows,
-        packet_hour=selected_packet_hour,
+        packet_hour=selected_apply_hour,
         hour_col=2,
-        hour_tol=args.packet_hour_tol,
+        hour_tol=args.apply_hour_tol,
     )
     apply_blend_rows = filter_packet_rows(
         apply_blend_rows,
-        packet_hour=selected_packet_hour,
+        packet_hour=selected_apply_hour,
         hour_col=2,
-        hour_tol=args.packet_hour_tol,
+        hour_tol=args.apply_hour_tol,
     )
 
     recv_rows, recv_sum = sum_columns(recv_source_rows, 17)
@@ -156,6 +200,14 @@ def validate(args):
     }
     meta["selected_packet_index"] = selected_packet_index
     meta["selected_packet_hour"] = selected_packet_hour
+    meta["selected_apply_hour"] = selected_apply_hour
+    if selected_packet_index is not None and selected_apply_hour is not None:
+        add(
+            checks,
+            "apply_hour_selected",
+            True,
+            "packet_index={} apply_hour={}".format(selected_packet_index, selected_apply_hour),
+        )
     add(
         checks,
         "recv_source_flag_lines",
@@ -246,6 +298,8 @@ def main():
     parser.add_argument("--packet-index", type=int, default=None)
     parser.add_argument("--packet-hour", type=float, default=None)
     parser.add_argument("--packet-hour-tol", type=float, default=1.0e-6)
+    parser.add_argument("--apply-hour", type=float, default=None)
+    parser.add_argument("--apply-hour-tol", type=float, default=1.0e-6)
     parser.add_argument("--allow-incomplete", action="store_true")
     parser.add_argument("--json-output", default=None)
     args = parser.parse_args()
