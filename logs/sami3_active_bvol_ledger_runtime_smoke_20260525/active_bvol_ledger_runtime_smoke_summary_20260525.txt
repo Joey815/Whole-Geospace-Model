@@ -1,0 +1,10 @@
+active bVol ledger runtime smoke summary
+JobID|JobName|State|ExitCode|Elapsed|NodeList|MaxRSS
+7677534|active_bvol_smk2|COMPLETED|0:0|00:01:00|qhcn349|
+7677534.batch|batch|COMPLETED|0:0|00:01:00|qhcn349|1026064K
+7677534.extern|extern|COMPLETED|0:0|00:01:00|qhcn349|0
+fatal_marker_count=0
+TubeShell/bVolActive exists=True max=18541.31774786079
+active_ratio={'count': 33655, 'min': 1.0, 'max': 1.0, 'mean': 1.0, 'max_abs_diff_vs_field': 0.0}
+weight_compare={'extra_recomputed_terms': 0, 'max_abs_diff': 1.4889254773553517e-08, 'mean_abs_diff': 2.8356879701624347e-09, 'missing_stored_terms': 0, 'recomputed_count': 39853, 'stored_count': 39853}
+source_bvol_active_by_status={'0': {'count': 15040, 'fraction_of_valid_bvol_active': 0.00040379562605685195, 'label': 'used', 'positive_bvol_active_sum': 915.9958391445339}, '1': {'count': 164, 'fraction_of_valid_bvol_active': 0.0, 'label': 'bad_bvol', 'positive_bvol_active_sum': 0.0}, '2': {'count': 0, 'fraction_of_valid_bvol_active': 0.0, 'label': 'bad_geometry', 'positive_bvol_active_sum': 0.0}, '3': {'count': 1392, 'fraction_of_valid_bvol_active': 0.9384275226700948, 'label': 'large_footprint', 'positive_bvol_active_sum': 2128789.047317451}, '4': {'count': 17244, 'fraction_of_valid_bvol_active': 0.061168681703848454, 'label': 'outside_target', 'positive_bvol_active_sum': 138758.9520813503}, '5': {'count': 0, 'fraction_of_valid_bvol_active': 0.0, 'label': 'no_terms', 'positive_bvol_active_sum': 0.0}}

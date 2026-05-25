@@ -1,0 +1,174 @@
+diff --git a/src/base/types/voltCplTypes.F90 b/src/base/types/voltCplTypes.F90
+index 463edce..11d2f3a 100644
+--- a/src/base/types/voltCplTypes.F90
++++ b/src/base/types/voltCplTypes.F90
+@@ -26,6 +26,10 @@ module voltCplTypes
+         !! Minimum B along field line [nT] and coordinates [Rx]
+         real(rp) :: bVol
+         !! Flux-tube volume [Rx/nT]
++        real(rp) :: bVolActive
++        !! Active-domain flux-tube volume used by FLThermo averages [Rx/nT]
++        real(rp) :: bVolActiveFrac
++        !! bVolActive / bVol, diagnostic only
+         real(rp) :: Lb
+         !! Length of field line [Rx]
+         real(rp) :: Tb
+@@ -65,6 +69,10 @@ module voltCplTypes
+             !! (NDIM) xyz-SM location of bmin surface
+         type(ShellGridVar_T) :: bVol
+             !! Flux tube volume [Rx/nT]
++        type(ShellGridVar_T) :: bVolActive
++            !! Active-domain flux tube volume used by FLThermo averages [Rx/nT]
++        type(ShellGridVar_T) :: bVolActiveFrac
++            !! bVolActive / bVol, diagnostic only
+         type(ShellGridVar_T) :: Lb
+             !! Length of field line [Rx]
+         type(ShellGridVar_T) :: Tb
+@@ -110,4 +118,4 @@ module voltCplTypes
+         real(rp) :: Veb  ! [km/s]
+     end type IMAGTube_T
+ 
+-end module voltCplTypes
+\ No newline at end of file
++end module voltCplTypes
+diff --git a/src/chimp/streamline.F90 b/src/chimp/streamline.F90
+index 4126ed7..6f5240c 100644
+--- a/src/chimp/streamline.F90
++++ b/src/chimp/streamline.F90
+@@ -287,13 +287,14 @@ module streamline
+     end function FLAlfvenX
+ 
+     !Averaged density/pressure (of species sOpt or BLK)
+-    subroutine FLThermo(Model,ebGr,bTrc,bD,bP,dvB,bBetaO,sOpt)
++    subroutine FLThermo(Model,ebGr,bTrc,bD,bP,dvB,bBetaO,sOpt,dvBActiveO)
+         type(chmpModel_T), intent(in) :: Model
+         type(ebGrid_T)   , intent(in) :: ebGr
+         type(magLine_T  ), intent(in) :: bTrc
+         real(rp), intent(out) :: bD,bP,dvB
+         real(rp), intent(out), optional :: bBetaO
+         integer , intent(in ), optional :: sOpt 
++        real(rp), intent(out), optional :: dvBActiveO
+ 
+         integer :: k,s0
+         real(rp) :: dvB_active,bMag,dl,eP,eD,ePb !Edge-centered values
+@@ -361,6 +362,9 @@ module streamline
+         if (present(bBetaO)) then
+             bBetaO = bBeta
+         endif
++        if (present(dvBActiveO)) then
++            dvBActiveO = dvB_active
++        endif
+ 
+         end associate
+     end subroutine FLThermo
+diff --git a/src/voltron/tubehelper.F90 b/src/voltron/tubehelper.F90
+index 9bf0347..676df5d 100644
+--- a/src/voltron/tubehelper.F90
++++ b/src/voltron/tubehelper.F90
+@@ -44,6 +44,8 @@ module tubehelper
+         call initShellVar(sh, SHGR_CORNER, tubeShell%topo   )
+         call initShellVar(sh, SHGR_CORNER, tubeShell%bmin   )
+         call initShellVar(sh, SHGR_CORNER, tubeShell%bVol   )
++        call initShellVar(sh, SHGR_CORNER, tubeShell%bVolActive    )
++        call initShellVar(sh, SHGR_CORNER, tubeShell%bVolActiveFrac)
+         call initShellVar(sh, SHGR_CORNER, tubeShell%Lb     )
+         call initShellVar(sh, SHGR_CORNER, tubeShell%Tb     )
+         call initShellVar(sh, SHGR_CORNER, tubeShell%wMAG   )
+@@ -103,6 +105,8 @@ module tubehelper
+         bTube%bmin = abs(P%magMoment)*G2T*1.0e+9/L**3.0 !Min B in nT
+         bTube%X_bmin = L*[cos(bTube%lon0),sin(bTube%lon0),0.0_rp]
+         bTube%bVol = DipFTV_L(L,P%magMoment) !Rx/nT
++        bTube%bVolActive = bTube%bVol
++        bTube%bVolActiveFrac = 1.0
+         bTube%Lb = L !Just lazily using L shell
+         bTube%rCurv = L/3.0
+         bTube%wMAG = 1.0
+@@ -132,7 +136,7 @@ module tubehelper
+         type(Tube_T)    , intent(out) :: bTube
+ 
+         integer :: OCb, s
+-        real(rp) :: bD,bP,bD_rc,bP_rc,dvB,bBeta,stdD,stdP,bmin
++        real(rp) :: bD,bP,bD_rc,bP_rc,dvB,dvBActive,bBeta,stdD,stdP,bmin
+         real(rp) :: bIon,bIonC,rCurv,VebMKS,VaMKS,TiEV,CsMKS
+ 
+         real(rp), dimension(NDIM) :: bEq,xyzC,xyzIonC
+@@ -163,8 +167,13 @@ module tubehelper
+         !Right now doing species loop for open or closed
+         !TODO: Rewrite open to get near-earth average instead of field line average
+ 
++        dvBActive = 0.0
+         do s=0,ebModel%nSpc
+-            call FLThermo(ebModel,ebGr,bTrc,bD,bP,dvB,bBeta,s)
++            if (s == BLK) then
++                call FLThermo(ebModel,ebGr,bTrc,bD,bP,dvB,bBeta,s,dvBActive)
++            else
++                call FLThermo(ebModel,ebGr,bTrc,bD,bP,dvB,bBeta,s)
++            endif
+             call FLStdev (ebModel,ebGr,bTrc,bD,bP,stdD,stdP,s)
+             bTube%avgP(s) = bP
+             bTube%stdP(s) = stdP
+@@ -178,6 +187,8 @@ module tubehelper
+         if (bTube%topo == TUBE_CLOSED) then
+         !Do closed field line stuff
+             bTube%bVol = dvB/oBScl !Rx/EB => Rx/nT
++            bTube%bVolActive = dvBActive/oBScl !Rx/EB => Rx/nT
++            bTube%bVolActiveFrac = bTube%bVolActive/max(bTube%bVol,TINY)
+ 
+         !Minimal surface (bEq in Rp, bMin in EB)
+             call FLEq(ebModel,bTrc,bEq,bmin)
+@@ -318,6 +329,8 @@ module tubehelper
+         bTube%bmin = 0.0
+         bTube%X_bmin = 0.0
+         bTube%bVol = 0.0
++        bTube%bVolActive = 0.0
++        bTube%bVolActiveFrac = 0.0
+         bTube%Lb = 0.0
+         bTube%Tb = 0.0
+ 
+@@ -374,6 +387,8 @@ module tubehelper
+                 tubeShell%topo   %data(i,j) = ijTubes(i,j)%topo
+                 tubeShell%bmin   %data(i,j) = ijTubes(i,j)%bmin
+                 tubeShell%bVol   %data(i,j) = ijTubes(i,j)%bVol
++                tubeShell%bVolActive    %data(i,j) = ijTubes(i,j)%bVolActive
++                tubeShell%bVolActiveFrac%data(i,j) = ijTubes(i,j)%bVolActiveFrac
+                 tubeShell%Lb     %data(i,j) = ijTubes(i,j)%Lb
+                 tubeShell%Tb     %data(i,j) = ijTubes(i,j)%Tb
+                 tubeShell%wMAG   %data(i,j) = ijTubes(i,j)%wMAG
+@@ -405,6 +420,8 @@ module tubehelper
+         call wrapJ_SGV(shGr, tubeShell%topo   )
+         call wrapJ_SGV(shGr, tubeShell%bmin   )
+         call wrapJ_SGV(shGr, tubeShell%bVol   )
++        call wrapJ_SGV(shGr, tubeShell%bVolActive    )
++        call wrapJ_SGV(shGr, tubeShell%bVolActiveFrac)
+         call wrapJ_SGV(shGr, tubeShell%Lb     )
+         call wrapJ_SGV(shGr, tubeShell%Tb     )
+         call wrapJ_SGV(shGr, tubeShell%wMAG   )
+@@ -438,6 +455,8 @@ module tubehelper
+         tubeShell%lonc   %mask(:,:) = topoMask
+         tubeShell%bmin   %mask(:,:) = topoMask
+         tubeShell%bVol   %mask(:,:) = topoMask
++        tubeShell%bVolActive    %mask(:,:) = topoMask
++        tubeShell%bVolActiveFrac%mask(:,:) = topoMask
+         tubeShell%Lb     %mask(:,:) = topoMask
+         tubeShell%Tb     %mask(:,:) = topoMask
+         tubeShell%wMAG   %mask(:,:) = topoMask
+@@ -461,7 +480,7 @@ module tubehelper
+         character(len=strLen), intent(in), optional :: gStrO
+             !! Group name to use instead of 'TubeShell' at root level
+ 
+-        type(IOVAR_T), dimension(50) :: IOVars
++        type(IOVAR_T), dimension(60) :: IOVars
+         
+         call AddOutSGV(IOVars,"xyz0"     ,tubeShell%xyz0     , doWriteMaskO=.true., uStr="Rp")
+         call AddOutSGV(IOVars,"X_bmin"   ,tubeShell%X_bmin   , doWriteMaskO=.true., uStr="Rp")
+@@ -473,6 +492,10 @@ module tubehelper
+         call AddOutSGV(IOVars,"topo"     ,tubeShell%topo     , doWriteMaskO=.true., uStr="enum")
+         call AddOutSGV(IOVars,"bmin"     ,tubeShell%bmin     , doWriteMaskO=.true., uStr="nT")
+         call AddOutSGV(IOVars,"bVol"     ,tubeShell%bVol     , doWriteMaskO=.true., uStr="Rp/nT")
++        call AddOutSGV(IOVars,"bVolActive",tubeShell%bVolActive, &
++                       doWriteMaskO=.true., uStr="Rp/nT")
++        call AddOutSGV(IOVars,"bVolActiveFrac",tubeShell%bVolActiveFrac, &
++                       doWriteMaskO=.true., uStr="normalized")
+         call AddOutSGV(IOVars,"Lb"       ,tubeShell%Lb       , doWriteMaskO=.true., uStr="Rp")
+         call AddOutSGV(IOVars,"Tb"       ,tubeShell%Tb       , doWriteMaskO=.true., uStr="s")
+         call AddOutSGV(IOVars,"wMAG"     ,tubeShell%wMAG     , doWriteMaskO=.true., uStr="normalized")

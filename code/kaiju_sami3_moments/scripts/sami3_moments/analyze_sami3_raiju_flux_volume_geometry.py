@@ -58,6 +58,12 @@ def read_required(handle, name):
     return handle[name][:]
 
 
+def read_optional(handle, name):
+    if name in handle:
+        return handle[name][:]
+    return None
+
+
 def finite_summary(arr):
     values = np.asarray(arr)
     finite = np.isfinite(values)
@@ -92,6 +98,8 @@ def load_weight_geometry(path):
         metadata = {}
         if "metadata/json" in handle:
             metadata = json.loads(decode_h5_text(handle["metadata/json"][()]))
+        bvol_active_cc = read_optional(handle, "intermediate/bvol_active_cc")
+        bvol_active_frac_cc = read_optional(handle, "intermediate/bvol_active_frac_cc")
         data = {
             "metadata": metadata,
             "target_l_edge": read_required(handle, "dst/L_edge").astype(np.float64),
@@ -105,6 +113,10 @@ def load_weight_geometry(path):
             "stored_v2r_weight": read_required(handle, "intermediate/voltron_to_raiju/weight").astype(np.float64),
             "voltron_l_corner": read_required(handle, "intermediate/Lb_corner").astype(np.float64),
             "voltron_bvol_cc": read_required(handle, "intermediate/bvol_cc").astype(np.float64),
+            "voltron_bvol_active_cc": bvol_active_cc.astype(np.float64) if bvol_active_cc is not None else None,
+            "voltron_bvol_active_frac_cc": (
+                bvol_active_frac_cc.astype(np.float64) if bvol_active_frac_cc is not None else None
+            ),
             "voltron_closed_mask": read_required(handle, "intermediate/closed_cell_mask").astype(np.uint8),
             "voltron_l_cc": read_required(handle, "intermediate/Lb_cc").astype(np.float64),
             "voltron_lon0_cc": read_required(handle, "intermediate/lon0_cc_deg").astype(np.float64),
@@ -290,6 +302,18 @@ def build_summary(data, audit, weight_compare, args, longitude_key, out_h5):
     target_bvol_sum_positive = float(np.sum(data["target_bvol_cc"][target_bvol_positive]))
     target_bvol_sum_closed_positive = float(np.sum(data["target_bvol_cc"][target_closed_positive]))
     source_bvol_by_status = {}
+    source_bvol_active_by_status = None
+    active = data["voltron_bvol_active_cc"]
+    active_frac = data["voltron_bvol_active_frac_cc"]
+    source_valid_active = None
+    total_valid_active = None
+    if active is not None:
+        source_valid_active = np.isfinite(active) & (active > 0.0)
+        source_active_positive = np.where(source_valid_active, active, 0.0)
+        total_valid_active = float(np.sum(active[source_valid_active]))
+        source_bvol_active_by_status = {}
+    else:
+        source_active_positive = None
     for code, label in (
         (STATUS_USED, "used"),
         (STATUS_BAD_BVOL, "bad_bvol"),
@@ -306,6 +330,16 @@ def build_summary(data, audit, weight_compare, args, longitude_key, out_h5):
             "positive_bvol_sum": bvol_sum,
             "fraction_of_valid_bvol": float(bvol_sum / total_valid_bvol) if total_valid_bvol > 0.0 else None,
         }
+        if source_bvol_active_by_status is not None:
+            active_sum = float(np.sum(source_active_positive[mask]))
+            source_bvol_active_by_status[str(code)] = {
+                "label": label,
+                "count": int(np.count_nonzero(mask)),
+                "positive_bvol_active_sum": active_sum,
+                "fraction_of_valid_bvol_active": (
+                    float(active_sum / total_valid_active) if total_valid_active and total_valid_active > 0.0 else None
+                ),
+            }
     return {
         "product": "sami3_raiju_flux_volume_geometry_audit",
         "weight_file": os.path.abspath(args.weight_file),
@@ -333,6 +367,13 @@ def build_summary(data, audit, weight_compare, args, longitude_key, out_h5):
         "source_mapped_bvol_sum": float(mapped_bvol),
         "source_mapped_bvol_fraction_of_valid": float(mapped_bvol / total_valid_bvol) if total_valid_bvol > 0.0 else None,
         "source_bvol_by_status": source_bvol_by_status,
+        "source_valid_bvol_active_sum": total_valid_active,
+        "source_bvol_active_by_status": source_bvol_active_by_status,
+        "source_bvol_active_frac_stats_valid": (
+            finite_summary(active_frac[source_valid_active])
+            if active_frac is not None and source_valid_active is not None
+            else None
+        ),
         "target_domain_proxy_closure": {
             "raw_bvol_sum_total": raw_bvol_sum_total,
             "target_bvol_sum_positive": target_bvol_sum_positive,
@@ -394,6 +435,10 @@ def write_audit(path, summary, data, audit):
         create_dataset(source, "mapped_fraction", audit["source_mapped_fraction"].astype(np.float32), "fraction", "Sum of target-bin overlap fractions accepted for each source cell.")
         create_dataset(source, "mapped_bvol", audit["source_mapped_bvol"].astype(np.float32), "Voltron bVol units", "Source bVol multiplied by mapped_fraction.")
         create_dataset(source, "bvol_cc", data["voltron_bvol_cc"].astype(np.float32), "Voltron bVol units", "Voltron TubeShell cell-centered bVol.")
+        if data["voltron_bvol_active_cc"] is not None:
+            create_dataset(source, "bvol_active_cc", data["voltron_bvol_active_cc"].astype(np.float32), "Voltron bVol units", "Voltron TubeShell cell-centered active-domain bVol.")
+        if data["voltron_bvol_active_frac_cc"] is not None:
+            create_dataset(source, "bvol_active_frac_cc", data["voltron_bvol_active_frac_cc"].astype(np.float32), "normalized", "Voltron TubeShell cell-centered active-domain bVol fraction.")
         create_dataset(source, "closed_cell_mask", data["voltron_closed_mask"].astype(np.uint8), "logical", "Voltron TubeShell closed-cell mask.")
         create_dataset(source, "l_span", audit["source_l_span"].astype(np.float32), "Re", "Source TubeShell corner Lb span.")
         create_dataset(source, "lon_span", audit["source_lon_span"].astype(np.float32), "degrees", "Source TubeShell corner longitude span after periodic unwrapping.")
@@ -407,6 +452,13 @@ def write_audit(path, summary, data, audit):
         ]
         create_dataset(source, "status_bvol_sum", np.asarray([item["positive_bvol_sum"] for item in status_items], dtype=np.float64), "Voltron bVol units", "Positive source bVol sum by audit status code.")
         create_dataset(source, "status_bvol_fraction_of_valid", np.asarray([item["fraction_of_valid_bvol"] or 0.0 for item in status_items], dtype=np.float64), "fraction", "Positive source bVol fraction by audit status code, normalized by valid positive source bVol.")
+        if summary["source_bvol_active_by_status"] is not None:
+            active_status_items = [
+                summary["source_bvol_active_by_status"][str(code)]
+                for code in range(6)
+            ]
+            create_dataset(source, "status_bvol_active_sum", np.asarray([item["positive_bvol_active_sum"] for item in active_status_items], dtype=np.float64), "Voltron bVol units", "Positive active-domain source bVol sum by audit status code.")
+            create_dataset(source, "status_bvol_active_fraction_of_valid", np.asarray([item["fraction_of_valid_bvol_active"] or 0.0 for item in active_status_items], dtype=np.float64), "fraction", "Positive active-domain source bVol fraction by audit status code.")
 
         sparse = handle.create_group("sparse")
         create_dataset(sparse, "dst_index", audit["dst_index"], "index", "Recomputed sparse destination indices, columns are j,i.")

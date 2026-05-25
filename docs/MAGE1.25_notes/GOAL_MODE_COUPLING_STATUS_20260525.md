@@ -20,9 +20,99 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-25 20:25:20 CST.
+Status refreshed: 2026-05-25 23:09:00 CST.
 
-### Latest Completed Gate: SAMI3 -> RAIJU Flux-Volume Geometry Audit
+### Latest Completed Gate: Voltron Active bVol Ledger Runtime Smoke
+
+The target-domain volume-accounting step is now built, smoke-tested, and
+audited:
+
+```text
+patch = code/kaiju_sami3_moments/patches/voltron_active_bvol_ledger_20260525.patch
+doc = docs/MAGE1.25_notes/SAMI3_VOLTRON_ACTIVE_BVOL_LEDGER_20260525.md
+reader-smoke = logs/sami3_active_bvol_ledger_reader_smoke_20260525/
+runtime-smoke = logs/sami3_active_bvol_ledger_runtime_smoke_20260525/
+```
+
+What changed:
+
+```text
+FLThermo now exposes optional dvBActiveO.
+Line2Tube records bVolActive = dvBActive / oBScl.
+Line2Tube records bVolActiveFrac = bVolActive / bVol.
+TubeShell restart writer emits /TubeShell/bVolActive and
+/TubeShell/bVolActiveFrac.
+The Python stage-2 weight builder carries those fields into /intermediate
+when they are present, while preserving compatibility with older templates.
+The flux-volume geometry audit now reports active-domain bVol sums by mapping
+status and active-fraction statistics.
+```
+
+Validation completed:
+
+```text
+Fortran patch whitespace check = pass
+Python mapper py_compile = pass
+old-template optional-reader smoke = pass
+runtime sparse map unchanged:
+  map/weight max_abs_diff = 0
+  intermediate/voltron_to_raiju/weight max_abs_diff = 0
+Kaiju rebuild = pass, [100%] Built target voltron.x
+active-ledger runtime smoke = pass, job 7677534 COMPLETED 0:0
+```
+
+Runtime note:
+
+```text
+The first active-ledger smoke, job 7677510, found an IO chain capacity bug after
+the two new TubeShell restart fields were added.  The fix was to raise
+writeTubeShellRestart's local IOVars capacity from 50 to 60.  The rerun,
+job 7677534, completed cleanly:
+
+  elapsed = 00:01:00
+  node = qhcn349
+  batch MaxRSS = 1026064K
+  run_complete = 1
+```
+
+Restart validation:
+
+```text
+/TubeShell/bVolActive exists and is finite: 34209/34209
+/TubeShell/bVolActiveFrac exists and is finite: 34209/34209
+/TubeShell/bVolActiveFrac min/max/mean = 0/1/0.9838054313192435
+positive-bVol bVolActive/bVol min/max/mean = 1/1/1
+positive-bVol max_abs_diff_vs_bVolActiveFrac = 0
+```
+
+Active-ledger audit:
+
+```text
+weight_compare stored/recomputed = 39853/39853
+weight_compare missing/extra = 0/0
+weight_compare max_abs_diff = 1.4889254773553517e-08
+source_valid_bvol_active_sum = 2268463.9952379456
+
+used fraction_of_valid_bvol_active = 0.00040379562605685195
+large_footprint fraction_of_valid_bvol_active = 0.9384275226700948
+outside_target fraction_of_valid_bvol_active = 0.061168681703848454
+
+active_frac finite_count/total = 33676/33676
+active_frac min/p01/p05/median/mean/max = 0.25/0.5/1/1/0.994061052381518/1
+```
+
+Next work order after this gate:
+
+```text
+1. Treat /TubeShell/bVolActive and /TubeShell/bVolActiveFrac as the compact
+   active-domain ledger for new TubeShell mapping audits.
+2. Define a target-domain closure acceptance rule using used, large_footprint,
+   outside_target, and active-domain volume.
+3. Only if that compact ledger is insufficient, add optional full traced-line
+   debug export for xyz(s), B(s), dl/B, and active-domain flags.
+```
+
+### Previous Completed Gate: SAMI3 -> RAIJU Flux-Volume Geometry Audit
 
 The bVol-overlap mapping is now independently auditable from its own HDF5
 artifact:

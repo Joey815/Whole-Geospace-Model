@@ -937,6 +937,8 @@ def read_voltron_tubeshell_geometry(template_path):
         latc = handle["TubeShell/latc"][:].astype(np.float64)
         wmag = read_optional_dataset(handle, "TubeShell/wMAG")
         tb = read_optional_dataset(handle, "TubeShell/Tb")
+        bvol_active = read_optional_dataset(handle, "TubeShell/bVolActive")
+        bvol_active_frac = read_optional_dataset(handle, "TubeShell/bVolActiveFrac")
 
     for name, value in (
         ("TubeShell/bVol", bvol),
@@ -955,6 +957,10 @@ def read_voltron_tubeshell_geometry(template_path):
         raise ValueError("TubeShell/wMAG shape {0} does not match {1}".format(wmag.shape, corner_shape))
     if tb is not None and tb.shape != corner_shape:
         raise ValueError("TubeShell/Tb shape {0} does not match {1}".format(tb.shape, corner_shape))
+    if bvol_active is not None and bvol_active.shape != corner_shape:
+        raise ValueError("TubeShell/bVolActive shape {0} does not match {1}".format(bvol_active.shape, corner_shape))
+    if bvol_active_frac is not None and bvol_active_frac.shape != corner_shape:
+        raise ValueError("TubeShell/bVolActiveFrac shape {0} does not match {1}".format(bvol_active_frac.shape, corner_shape))
 
     closed_cell_mask = (
         (topo[:-1, :-1] == TUBE_CLOSED)
@@ -963,6 +969,8 @@ def read_voltron_tubeshell_geometry(template_path):
         & (topo[1:, 1:] == TUBE_CLOSED)
     ).astype(np.uint8)
     bvol_cc = center_corners_2d(bvol)
+    bvol_active_cc = center_corners_2d(bvol_active) if bvol_active is not None else None
+    bvol_active_frac_cc = center_corners_2d(bvol_active_frac) if bvol_active_frac is not None else None
     lb_cc = center_corners_2d(lb)
     bmin_cc = center_corners_2d(bmin)
     ntrc_cc = center_corners_2d(ntrc)
@@ -975,6 +983,10 @@ def read_voltron_tubeshell_geometry(template_path):
     stats = shell_grid["stats"] + [
         finite_stats("voltron_tubeshell_bVol_corner", bvol),
         finite_stats("voltron_tubeshell_bVol_cc", bvol_cc),
+        finite_stats_optional("voltron_tubeshell_bVolActive_corner", bvol_active),
+        finite_stats_optional("voltron_tubeshell_bVolActive_cc", bvol_active_cc),
+        finite_stats_optional("voltron_tubeshell_bVolActiveFrac_corner", bvol_active_frac),
+        finite_stats_optional("voltron_tubeshell_bVolActiveFrac_cc", bvol_active_frac_cc),
         finite_stats("voltron_tubeshell_Lb_corner", lb),
         finite_stats("voltron_tubeshell_Lb_cc", lb_cc),
         finite_stats("voltron_tubeshell_lon0_cc_deg", lon0_cc_deg),
@@ -994,6 +1006,10 @@ def read_voltron_tubeshell_geometry(template_path):
         "target_lon_deg": shell_grid["target_lon_deg"],
         "bvol": bvol,
         "bvol_cc": bvol_cc,
+        "bvol_active": bvol_active,
+        "bvol_active_cc": bvol_active_cc,
+        "bvol_active_frac": bvol_active_frac,
+        "bvol_active_frac_cc": bvol_active_frac_cc,
         "topo": topo,
         "closed_cell_mask": closed_cell_mask,
         "Lb": lb,
@@ -1034,6 +1050,14 @@ def write_intermediate_group(handle, intermediate):
     create_dataset(group, "MLT_deg", intermediate["target_lon_deg"].astype(np.float64), "degrees", "Voltron ShellGrid cell-center periodic MLT by j index.")
     create_dataset(group, "bvol_corner", intermediate["bvol"].astype(np.float64), "Rp/nT", "Voltron TubeShell corner bVol.")
     create_dataset(group, "bvol_cc", intermediate["bvol_cc"].astype(np.float64), "Rp/nT", "Voltron TubeShell cell-centered bVol.")
+    if intermediate.get("bvol_active") is not None:
+        create_dataset(group, "bvol_active_corner", intermediate["bvol_active"].astype(np.float64), "Rp/nT", "Voltron TubeShell corner active-domain bVol from FLThermo.")
+    if intermediate.get("bvol_active_cc") is not None:
+        create_dataset(group, "bvol_active_cc", intermediate["bvol_active_cc"].astype(np.float64), "Rp/nT", "Voltron TubeShell cell-centered active-domain bVol from FLThermo.")
+    if intermediate.get("bvol_active_frac") is not None:
+        create_dataset(group, "bvol_active_frac_corner", intermediate["bvol_active_frac"].astype(np.float64), "normalized", "Voltron TubeShell corner bVolActive / bVol.")
+    if intermediate.get("bvol_active_frac_cc") is not None:
+        create_dataset(group, "bvol_active_frac_cc", intermediate["bvol_active_frac_cc"].astype(np.float64), "normalized", "Voltron TubeShell cell-centered bVolActive / bVol.")
     create_dataset(group, "topo_corner", intermediate["topo"].astype(np.int16), "enum", "Voltron TubeShell corner topology; TUBE_CLOSED=2.")
     create_dataset(group, "closed_cell_mask", intermediate["closed_cell_mask"].astype(np.uint8), "logical", "Voltron cell mask, 1 where all four TubeShell topo corners are TUBE_CLOSED.")
     create_dataset(group, "Lb_corner", intermediate["Lb"].astype(np.float64), "Rp", "Voltron TubeShell corner Lb.")

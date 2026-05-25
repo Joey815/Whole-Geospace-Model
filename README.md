@@ -58,6 +58,13 @@ The same `bin_bvol_cc` mapping also validates with `density-mode=massEq` and
 `pressure-mode=total`: job 7651166 completed 0:0 with conservative
 alphaDavg/alphaPavg=0.01, exact blend formula checks, and no non-finite checked
 RAIJU physics fields.
+The newer `bin_bvol_overlap` mapping is the current conservative density-only
+prototype.  Its schema v6 artifact stores enough TubeShell corner and RAIJU
+target-edge geometry for independent overlap recomputation.  The active bVol
+ledger patch now exposes Voltron's `dvB_active` as compact
+`/TubeShell/bVolActive` and `/TubeShell/bVolActiveFrac` diagnostics; the
+patched Voltron smoke job 7677534 completed 0:0 and the active-ledger audit
+recomputes all 39853 sparse terms with no missing/extra terms.
 The stage-2 mapping products now have a repeatable HDF5 QC gate:
 `scripts/validate_sami3_raiju_mapping_product.py` validates
 `/RaiCplMomentsOnly` and `/MappingQuality` finite values, masks, coverage,

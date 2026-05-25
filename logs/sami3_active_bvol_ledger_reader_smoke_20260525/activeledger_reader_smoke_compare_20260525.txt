@@ -1,0 +1,8 @@
+active bVol ledger reader smoke
+map/dst_index: {'equal': True}
+map/src_index: {'equal': True}
+map/weight: {'max_abs_diff': 0.0}
+intermediate/voltron_to_raiju/weight: {'max_abs_diff': 0.0}
+quality/coverage_count: {'equal': True}
+quality/weight_sum: {'max_abs_diff': 0.0}
+optional_active_datasets_present: {'intermediate/bvol_active_corner': False, 'intermediate/bvol_active_cc': False, 'intermediate/bvol_active_frac_corner': False, 'intermediate/bvol_active_frac_cc': False}
