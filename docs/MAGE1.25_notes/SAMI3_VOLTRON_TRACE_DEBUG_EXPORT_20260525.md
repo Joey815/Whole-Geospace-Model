@@ -211,6 +211,7 @@ The targeted trace was compared against the no-span closure audit and RAIJU
 target grid:
 
 ```text
+classifier = scripts/classify_sami3_raiju_target_domain.py
 trace_vs_audit = logs/sami3_trace_debug_target_i005_j095_20260525/trace_debug_target_i005_j095_vs_audit_20260525.txt
 lrange_classification = logs/sami3_trace_debug_target_i005_j095_20260525/trace_debug_outside_target_lrange_classification_20260525.txt
 ```
@@ -238,12 +239,12 @@ target_L_edge_max = 33.16343747752636
 
 positive_all active_bvol_sum = 2268464.0
 positive_all above_target_Lmax_bvol_sum = 2267547.5
-positive_all above_target_Lmax_bvol_fraction = 0.9995959997177124
+positive_all above_target_Lmax_bvol_fraction = 0.9995959821271133
 positive_all inside_target_Lrange_bvol_sum = 915.995849609375
-positive_all inside_target_Lrange_bvol_fraction = 0.0004037956241518259
+positive_all inside_target_Lrange_bvol_fraction = 0.000403795629822371
 
 outside_target active_bvol_sum = 2013959.0
-outside_target above_target_Lmax_bvol_fraction = 0.9999998211860657
+outside_target above_target_Lmax_bvol_fraction = 0.9999998137995858
 ```
 
 Important nuance:

@@ -86,7 +86,7 @@ The trace/audit comparison shows the dominant target-closure blocker is source
 volume outside the current RAIJU target L domain: the target outer L edge is
 `33.16343747752636`, while the sampled outside-target source has
 `Lb_cc=450.2276916503906`; across positive active bVol,
-`0.9995959997177124` lies above the target L max.  The next geometry step is
+`0.9995959821271133` lies above the target L max.  The next geometry step is
 to define the physical policy for that outside-domain source volume before
 rebuilding a trace-edge sparse product.
 The stage-2 mapping products now have a repeatable HDF5 QC gate:

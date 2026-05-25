@@ -100,9 +100,9 @@ Global no-span classification by positive active bVol:
 ```text
 positive_all active_bvol_sum = 2268464.0
 positive_all above_target_Lmax_bvol_sum = 2267547.5
-positive_all above_target_Lmax_bvol_fraction = 0.9995959997177124
-positive_all inside_target_Lrange_bvol_fraction = 0.0004037956241518259
-outside_target above_target_Lmax_bvol_fraction = 0.9999998211860657
+positive_all above_target_Lmax_bvol_fraction = 0.9995959821271133
+positive_all inside_target_Lrange_bvol_fraction = 0.000403795629822371
+outside_target above_target_Lmax_bvol_fraction = 0.9999998137995858
 ```
 
 Interpretation: the closure blocker is dominated by Voltron source tube volume
