@@ -94,6 +94,19 @@ The target-closure gate is now domain-aware: with
 for the small amount of source bVol inside the current RAIJU target L range
 (`target_admissible_used_fraction=1.0`), while a strict source-domain policy
 still fails because `source_above_target_Lmax_fraction=0.9995959821271133`.
+The stage-2 sparse product now records an explicit source-domain policy for the
+conservative target-domain case.  With
+`--voltron-source-domain-policy exclude_above_target_lmax`, the schema v7 weight
+file writes `/intermediate/voltron_to_raiju/source_domain_excluded_mask`,
+skips 5852 source cells above the RAIJU target Lmax, and records
+`source_domain_skipped_above_lmax_bvol_fraction=0.999595965103914`.  The
+resulting target-admissible closure gate passes
+(`target_admissible_used_fraction=1.0`) and the generated stage-2
+`/RaiCplMomentsOnly` product passes the mapping-product QC gate with
+`runtime_valid_fraction=0.9574468085106383`, no extrapolated runtime cells, and
+weight-sum max deviation `1.19e-7`.  This is an auditable conservative
+target-domain product, not production physics, because nearly all positive
+active Voltron source bVol remains outside the current RAIJU target L range.
 The stage-2 mapping products now have a repeatable HDF5 QC gate:
 `scripts/validate_sami3_raiju_mapping_product.py` validates
 `/RaiCplMomentsOnly` and `/MappingQuality` finite values, masks, coverage,

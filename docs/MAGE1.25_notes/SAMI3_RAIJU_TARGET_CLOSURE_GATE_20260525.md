@@ -259,16 +259,31 @@ physical domain-policy decision, not as an overlap-threshold tuning problem.
 
 ## Next Gate
 
-The next implementation step should not tune scalar moment blending.  It should
-make the source-domain policy explicit:
+The next implementation step has been completed for the conservative exclude
+case.  See:
 
 ```text
-1. Choose and implement the policy for source bVol above the RAIJU target Lmax:
-   exclude from target-domain coupling, diagnostic clamp/project only, or extend
-   the target domain.
-2. Build the sparse SAMI3 -> Voltron -> RAIJU product with that policy recorded
-   in metadata.
-3. Require both checks before claiming production physics:
-   target-admissible closure passes;
-   strict source-domain policy is physically justified or passes its threshold.
+docs/MAGE1.25_notes/SAMI3_RAIJU_SOURCE_DOMAIN_POLICY_EXCLUDE_LMAX_20260526.md
+logs/sami3_tubeshell_bin_bvol_overlap_exclude_lmax_20260526/
+```
+
+Implemented policy:
+
+```text
+--voltron-source-domain-policy exclude_above_target_lmax
+schema_version = 7
+source_domain_skipped_above_lmax = 5852
+source_domain_skipped_above_lmax_bvol_fraction = 0.999595965103914
+target_admissible_used_fraction = 1.0
+stage2_mapping_product_overall = ok
+runtime_valid_fraction = 0.9574468085106383
+```
+
+This resolves the engineering ambiguity by recording the skipped source-domain
+volume directly in the product.  It does not resolve the physics blocker:
+almost all positive active Voltron source bVol is still outside the current
+RAIJU target L range.  The remaining physics decision is whether to extend the
+target domain, define a separate inner-domain source subset, or keep this as a
+diagnostic/runtime adapter.
+
 ```

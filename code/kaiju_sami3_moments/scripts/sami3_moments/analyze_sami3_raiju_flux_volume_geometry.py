@@ -111,6 +111,9 @@ def load_weight_geometry(path):
             "stored_v2r_dst": read_required(handle, "intermediate/voltron_to_raiju/dst_index").astype(np.int32),
             "stored_v2r_src": read_required(handle, "intermediate/voltron_to_raiju/src_index").astype(np.int32),
             "stored_v2r_weight": read_required(handle, "intermediate/voltron_to_raiju/weight").astype(np.float64),
+            "source_domain_excluded_mask": (
+                read_optional(handle, "intermediate/voltron_to_raiju/source_domain_excluded_mask")
+            ),
             "voltron_l_corner": read_required(handle, "intermediate/Lb_corner").astype(np.float64),
             "voltron_bvol_cc": read_required(handle, "intermediate/bvol_cc").astype(np.float64),
             "voltron_bvol_active_cc": bvol_active_cc.astype(np.float64) if bvol_active_cc is not None else None,
@@ -122,6 +125,8 @@ def load_weight_geometry(path):
             "voltron_lon0_cc": read_required(handle, "intermediate/lon0_cc_deg").astype(np.float64),
             "voltron_lonc_cc": read_required(handle, "intermediate/lonc_cc_deg").astype(np.float64),
         }
+        if data["source_domain_excluded_mask"] is not None:
+            data["source_domain_excluded_mask"] = data["source_domain_excluded_mask"].astype(np.uint8)
         if "intermediate/lon0_corner_rad" not in handle or "intermediate/lonc_corner_rad" not in handle:
             raise KeyError(
                 "weight file is missing TubeShell corner longitude datasets; regenerate with the updated writer"
@@ -153,6 +158,7 @@ def recompute_overlap(data, longitude_key, bvol_floor, max_l_span, max_lon_span)
     source_lon_span = np.full(src_bvol.shape, np.nan, dtype=np.float64)
     source_terms = np.zeros(src_bvol.shape, dtype=np.int32)
     source_mapped_bvol = np.zeros(src_bvol.shape, dtype=np.float64)
+    source_domain_excluded_mask = data.get("source_domain_excluded_mask")
 
     rows_dst = []
     rows_src = []
@@ -164,6 +170,8 @@ def recompute_overlap(data, longitude_key, bvol_floor, max_l_span, max_lon_span)
         "outside_target": 0,
         "no_terms": 0,
         "used": 0,
+        "source_domain_excluded_above_lmax": 0,
+        "source_domain_excluded_below_lmin": 0,
     }
 
     for jv in range(src_bvol.shape[0]):
@@ -173,6 +181,16 @@ def recompute_overlap(data, longitude_key, bvol_floor, max_l_span, max_lon_span)
                 source_status[jv, iv] = STATUS_BAD_BVOL
                 skipped["bad_bvol"] += 1
                 continue
+            if source_domain_excluded_mask is not None:
+                exclusion_code = int(source_domain_excluded_mask[jv, iv])
+                if exclusion_code != 0:
+                    source_status[jv, iv] = STATUS_OUTSIDE_TARGET
+                    skipped["outside_target"] += 1
+                    if exclusion_code == 1:
+                        skipped["source_domain_excluded_above_lmax"] += 1
+                    elif exclusion_code == 2:
+                        skipped["source_domain_excluded_below_lmin"] += 1
+                    continue
             l_corners = src_l_corner[jv : jv + 2, iv : iv + 2]
             lon_corners = src_lon_corner[jv : jv + 2, iv : iv + 2]
             if np.count_nonzero(np.isfinite(l_corners)) != 4 or np.count_nonzero(np.isfinite(lon_corners)) != 4:

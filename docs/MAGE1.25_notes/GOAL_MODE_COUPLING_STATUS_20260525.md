@@ -20,59 +20,80 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-26 00:04:00 CST.
+Status refreshed: 2026-05-26 00:20:00 CST.
 
-### Latest Completed Gate: Domain-Aware Target Closure Gate
+### Latest Completed Gate: Explicit Source-Domain Policy Product
 
-The target-domain closure validator now separates all-source closure from
-target-admissible L-range closure:
+The stage-2 sparse weight builder now has an explicit source-domain policy for
+Voltron TubeShell source cells outside the current RAIJU target L range:
 
 ```text
-validator = scripts/validate_sami3_raiju_target_closure.py
-classifier = scripts/classify_sami3_raiju_target_domain.py
-archive = logs/sami3_raiju_target_closure_domainaware_20260526/
-closure-denominator = target-admissible-lrange
+--voltron-source-domain-policy exclude_above_target_lmax
+archive = logs/sami3_tubeshell_bin_bvol_overlap_exclude_lmax_20260526/
+doc = docs/MAGE1.25_notes/SAMI3_RAIJU_SOURCE_DOMAIN_POLICY_EXCLUDE_LMAX_20260526.md
 ```
 
-Domain-aware no-span result:
+The generated weight file is schema v7 and writes:
+
+```text
+/intermediate/voltron_to_raiju/source_domain_excluded_mask
+0 = included
+1 = source Lb_cc above target Lmax
+2 = source Lb_cc below target Lmin
+```
+
+Source-domain accounting:
+
+```text
+schema_version = 7
+target_L_edge_max = 33.16343747752636
+source_domain_skipped_above_lmax = 5852
+source_domain_skipped_above_lmax_bvol_fraction = 0.999595965103914
+source_domain_skipped_below_lmin = 0
+```
+
+Independent geometry audit and target-domain closure:
+
+```text
+stored_count = 39853
+recomputed_count = 39853
+weight_compare_max_abs_diff = 1.4889254773553517e-08
+target_admissible_used_fraction = 1.0
+target_admissible_outside_target_fraction = 0.0
+```
+
+The stage-2 `/RaiCplMomentsOnly` product made with this weight file passes the
+repeatable mapping-product QC gate:
 
 ```text
 overall = ok
-target_admissible_bvol_positive = 915.995849609375
-target_admissible_fraction_sum = 1.0
-target_admissible_used_fraction = 1.0
-target_admissible_large_footprint_fraction = 0.0
-target_admissible_outside_target_fraction = 0.0
-target_admissible_bad_bvol_fraction = 0.0
-target_admissible_bad_geometry_fraction = 0.0
-target_admissible_no_terms_fraction = 0.0
-```
-
-Strict source-domain policy result:
-
-```text
-overall = FAIL
-source_above_target_Lmax_fraction = 0.9995959821271133 > 0.05
+runtime_valid_fraction = 0.9574468085106383
+finite_all_fraction = 1.0
+extrapolated_fraction = 0.0
+weight_sum_valid_near_one max_dev = 1.1920928955078125e-07
+tiote masked range = 0.8749623894691467 / 1.0004475116729736
 ```
 
 Interpretation:
 
 ```text
-The current no-span geometry closes within the RAIJU target L range, but it is
-not a production coupling because almost all positive active source bVol lies
-above the RAIJU target outer L edge.  The next implementation step must encode
-the outside-domain policy explicitly instead of forcing that volume into the
-target grid.
+This is now an auditable conservative target-domain product: high-L source bVol
+is explicitly excluded before overlap construction and recorded in metadata.
+It is still not production physics coupling because the current RAIJU target
+grid excludes about 99.96% of positive active Voltron source bVol.
 ```
 
 Next work order after this gate:
 
 ```text
-1. Implement an explicit source-domain policy in the stage-2 sparse product:
-   start with exclude_above_target_lmax as the conservative option.
-2. Record excluded source bVol fractions in /MappingQuality and metadata.
-3. Validate target-admissible closure and strict source-domain diagnostics on
-   the generated product.
+1. Decide the physical policy for the excluded high-L source volume:
+   extend the RAIJU target domain, derive an inner-domain source subset, or keep
+   this product diagnostic-only.
+2. If retaining the current domain, run a runtime ingest smoke with the schema
+   v7 exclude-Lmax product and alpha=0 baseline-recovery plus density-only
+   alpha checks.
+3. If extending the domain, regenerate the target grid and rerun the full
+   target-domain closure gate.
 ```
 
 ### Previous Completed Gate: Voltron Trace-Line Debug Export Smoke

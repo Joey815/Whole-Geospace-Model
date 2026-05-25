@@ -127,6 +127,19 @@ def parse_args():
         ),
     )
     parser.add_argument(
+        "--voltron-source-domain-policy",
+        choices=("none", "exclude_above_target_lmax", "exclude_outside_target_lrange"),
+        default="none",
+        help=(
+            "For --voltron-compose-weight-mode=bin_bvol_overlap, choose how to "
+            "handle Voltron TubeShell source cells whose cell-centered Lb is "
+            "outside the RAIJU target L range. none preserves legacy behavior. "
+            "exclude_above_target_lmax skips source cells with Lb_cc above the "
+            "target outer L edge. exclude_outside_target_lrange also skips cells "
+            "below the target inner L edge. Default: none."
+        ),
+    )
+    parser.add_argument(
         "--sami3-grid-dir",
         default=None,
         help="SAMI3 run directory containing baltu/blatu/blonu.dat. Defaults to stage-1 metadata run_dir.",
@@ -628,6 +641,7 @@ def build_sparse_voltron_to_raiju_bvol_overlap(
     bvol_floor=0.0,
     max_l_span=20.0,
     max_lon_span=10.0,
+    source_domain_policy="none",
 ):
     target_l_edge = np.asarray(target_grid["target_l_edge"], dtype=np.float64)
     target_lon_edge = np.asarray(
@@ -641,6 +655,7 @@ def build_sparse_voltron_to_raiju_bvol_overlap(
         raise ValueError("target grid edges imply an empty target grid")
 
     src_l_corner = np.asarray(voltron_geometry["Lb"], dtype=np.float64)
+    src_l_center = np.asarray(voltron_geometry["Lb_cc"], dtype=np.float64)
     src_lon_corner = np.asarray(voltron_geometry[longitude_key], dtype=np.float64)
     src_bvol = np.asarray(voltron_geometry["bvol_cc"], dtype=np.float64)
     if src_l_corner.shape != src_lon_corner.shape:
@@ -651,9 +666,18 @@ def build_sparse_voltron_to_raiju_bvol_overlap(
                 src_bvol.shape, src_l_corner.shape
             )
         )
+    if src_l_center.shape != src_bvol.shape:
+        raise ValueError(
+            "Voltron TubeShell Lb center shape {0} does not match bVol center shape {1}".format(
+                src_l_center.shape, src_bvol.shape
+            )
+        )
 
     l_low = np.minimum(target_l_edge[:-1], target_l_edge[1:])
     l_high = np.maximum(target_l_edge[:-1], target_l_edge[1:])
+    target_l_min = float(np.min(l_low))
+    target_l_max = float(np.max(l_high))
+    source_domain_excluded_mask = np.zeros(src_bvol.shape, dtype=np.uint8)
     dst_rows = []
     src_rows = []
     weight_rows = []
@@ -663,6 +687,11 @@ def build_sparse_voltron_to_raiju_bvol_overlap(
     skipped_bad_bvol = 0
     skipped_bad_geometry = 0
     skipped_large_footprint = 0
+    skipped_source_domain_above_lmax = 0
+    skipped_source_domain_below_lmin = 0
+    skipped_source_domain_above_lmax_bvol = 0.0
+    skipped_source_domain_below_lmin_bvol = 0.0
+    source_domain_positive_bvol_sum = 0.0
     split_term_count = 0
     max_terms_per_source_cell = 0
     source_fraction_sums = []
@@ -674,6 +703,26 @@ def build_sparse_voltron_to_raiju_bvol_overlap(
             bvol = float(src_bvol[jv, iv])
             if (not np.isfinite(bvol)) or bvol <= bvol_floor:
                 skipped_bad_bvol += 1
+                continue
+            source_domain_positive_bvol_sum += bvol
+            lb_cc = float(src_l_center[jv, iv])
+            if (
+                source_domain_policy in ("exclude_above_target_lmax", "exclude_outside_target_lrange")
+                and np.isfinite(lb_cc)
+                and lb_cc > target_l_max
+            ):
+                source_domain_excluded_mask[jv, iv] = 1
+                skipped_source_domain_above_lmax += 1
+                skipped_source_domain_above_lmax_bvol += bvol
+                continue
+            if (
+                source_domain_policy == "exclude_outside_target_lrange"
+                and np.isfinite(lb_cc)
+                and lb_cc < target_l_min
+            ):
+                source_domain_excluded_mask[jv, iv] = 2
+                skipped_source_domain_below_lmin += 1
+                skipped_source_domain_below_lmin_bvol += bvol
                 continue
             l_corners = src_l_corner[jv : jv + 2, iv : iv + 2]
             lon_corners_rad = src_lon_corner[jv : jv + 2, iv : iv + 2]
@@ -760,6 +809,25 @@ def build_sparse_voltron_to_raiju_bvol_overlap(
         "skipped_bad_bvol": int(skipped_bad_bvol),
         "skipped_bad_geometry": int(skipped_bad_geometry),
         "skipped_large_footprint": int(skipped_large_footprint),
+        "source_domain_policy": source_domain_policy,
+        "source_domain_target_l_min": target_l_min,
+        "source_domain_target_l_max": target_l_max,
+        "source_domain_excluded_mask": source_domain_excluded_mask,
+        "source_domain_positive_bvol_sum": float(source_domain_positive_bvol_sum),
+        "source_domain_skipped_above_lmax": int(skipped_source_domain_above_lmax),
+        "source_domain_skipped_above_lmax_bvol": float(skipped_source_domain_above_lmax_bvol),
+        "source_domain_skipped_above_lmax_bvol_fraction": (
+            float(skipped_source_domain_above_lmax_bvol / source_domain_positive_bvol_sum)
+            if source_domain_positive_bvol_sum > 0.0
+            else None
+        ),
+        "source_domain_skipped_below_lmin": int(skipped_source_domain_below_lmin),
+        "source_domain_skipped_below_lmin_bvol": float(skipped_source_domain_below_lmin_bvol),
+        "source_domain_skipped_below_lmin_bvol_fraction": (
+            float(skipped_source_domain_below_lmin_bvol / source_domain_positive_bvol_sum)
+            if source_domain_positive_bvol_sum > 0.0
+            else None
+        ),
         "overlap_split_term_count": int(split_term_count),
         "overlap_max_terms_per_source_cell": int(max_terms_per_source_cell),
         "overlap_source_fraction_sum_min": float(np.min(source_fraction_sums))
@@ -1094,6 +1162,14 @@ def write_intermediate_group(handle, intermediate):
         create_dataset(sub, "dst_index", item["dst_index"], "index", "RAIJU destination indices; columns are j,i.")
         create_dataset(sub, "src_index", item["src_index"], "index", "Voltron source indices; columns are j,i.")
         create_dataset(sub, "weight", item["weight"].astype(np.float32), "normalized", "Voltron-to-RAIJU sparse weights.")
+        if "source_domain_excluded_mask" in item:
+            create_dataset(
+                sub,
+                "source_domain_excluded_mask",
+                item["source_domain_excluded_mask"].astype(np.uint8),
+                "enum",
+                "Voltron source-domain exclusion mask: 0=included, 1=Lb_cc above target Lmax, 2=Lb_cc below target Lmin.",
+            )
 
 
 def write_weight_file(path, metadata, source_grid, target_grid, target_geometry, sparse, intermediate=None):
@@ -1128,6 +1204,9 @@ def write_weight_file(path, metadata, source_grid, target_grid, target_geometry,
             metadata["voltron_overlap_max_lon_span"]
             if metadata.get("voltron_overlap_max_lon_span") is not None
             else -1.0
+        )
+        handle.attrs["voltron_source_domain_policy"] = (
+            metadata.get("voltron_source_domain_policy") or "none"
         )
         if metadata["voltron_template"] is not None:
             handle.attrs["voltron_template"] = metadata["voltron_template"]
@@ -1323,6 +1402,7 @@ def main():
                     args.voltron_bvol_floor,
                     args.voltron_overlap_max_l_span,
                     args.voltron_overlap_max_lon_span,
+                    args.voltron_source_domain_policy,
                 )
         else:
             voltron_to_raiju = build_sparse_grid_to_grid(
@@ -1357,7 +1437,13 @@ def main():
             schema_version = 4
         elif args.voltron_compose_weight_mode == "bin_bvol_overlap":
             physical_note += " with Voltron TubeShell bVol_cc target-cell L/longitude overlap binning"
-            schema_version = 6
+            if args.voltron_source_domain_policy != "none":
+                physical_note += " and source-domain policy {0}".format(
+                    args.voltron_source_domain_policy
+                )
+                schema_version = 7
+            else:
+                schema_version = 6
         else:
             schema_version = 3
         voltron_template = os.path.abspath(args.voltron_template)
@@ -1394,6 +1480,11 @@ def main():
         ),
         "voltron_overlap_max_lon_span": (
             float(args.voltron_overlap_max_lon_span)
+            if args.voltron_compose_weight_mode == "bin_bvol_overlap"
+            else None
+        ),
+        "voltron_source_domain_policy": (
+            args.voltron_source_domain_policy
             if args.voltron_compose_weight_mode == "bin_bvol_overlap"
             else None
         ),
@@ -1490,6 +1581,51 @@ def main():
         ),
         "voltron_to_raiju_bvol_overlap_used_lon_span_max": (
             voltron_to_raiju.get("overlap_used_lon_span_max")
+            if args.mapping_mode != "l_mlt_separable"
+            else None
+        ),
+        "voltron_to_raiju_source_domain_target_l_min": (
+            voltron_to_raiju.get("source_domain_target_l_min")
+            if args.mapping_mode != "l_mlt_separable"
+            else None
+        ),
+        "voltron_to_raiju_source_domain_target_l_max": (
+            voltron_to_raiju.get("source_domain_target_l_max")
+            if args.mapping_mode != "l_mlt_separable"
+            else None
+        ),
+        "voltron_to_raiju_source_domain_positive_bvol_sum": (
+            voltron_to_raiju.get("source_domain_positive_bvol_sum")
+            if args.mapping_mode != "l_mlt_separable"
+            else None
+        ),
+        "voltron_to_raiju_source_domain_skipped_above_lmax": (
+            voltron_to_raiju.get("source_domain_skipped_above_lmax")
+            if args.mapping_mode != "l_mlt_separable"
+            else None
+        ),
+        "voltron_to_raiju_source_domain_skipped_above_lmax_bvol": (
+            voltron_to_raiju.get("source_domain_skipped_above_lmax_bvol")
+            if args.mapping_mode != "l_mlt_separable"
+            else None
+        ),
+        "voltron_to_raiju_source_domain_skipped_above_lmax_bvol_fraction": (
+            voltron_to_raiju.get("source_domain_skipped_above_lmax_bvol_fraction")
+            if args.mapping_mode != "l_mlt_separable"
+            else None
+        ),
+        "voltron_to_raiju_source_domain_skipped_below_lmin": (
+            voltron_to_raiju.get("source_domain_skipped_below_lmin")
+            if args.mapping_mode != "l_mlt_separable"
+            else None
+        ),
+        "voltron_to_raiju_source_domain_skipped_below_lmin_bvol": (
+            voltron_to_raiju.get("source_domain_skipped_below_lmin_bvol")
+            if args.mapping_mode != "l_mlt_separable"
+            else None
+        ),
+        "voltron_to_raiju_source_domain_skipped_below_lmin_bvol_fraction": (
+            voltron_to_raiju.get("source_domain_skipped_below_lmin_bvol_fraction")
             if args.mapping_mode != "l_mlt_separable"
             else None
         ),
