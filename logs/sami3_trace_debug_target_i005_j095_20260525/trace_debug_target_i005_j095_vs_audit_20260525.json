@@ -1,0 +1,54 @@
+{
+  "audit": {
+    "Lb_cc": 450.2276916503906,
+    "bvol_active_cc": 14539.833984375,
+    "bvol_active_frac_cc": 1.0,
+    "bvol_cc": 14539.833984375,
+    "closed_cell_mask": 1,
+    "l_span": 145.25592041015625,
+    "lon0_cc_deg": 181.0,
+    "lon_span": 2.0,
+    "lonc_cc_deg": 181.0027313232422,
+    "mapped_bvol": 0.0,
+    "mapped_fraction": 0.0,
+    "status_code": 4,
+    "status_label": "outside_target",
+    "term_count": 0
+  },
+  "diagnostic_ratios": {
+    "bvol_active_over_trace_dlb_active": 4.157944278661308,
+    "source_Lb_over_target_L_edge_max": 13.576026066522608,
+    "trace_Rmax_over_target_L_edge_max": 5.739728252832102
+  },
+  "interpretation": {
+    "caution": "trace dl/B sum is not directly equal to TubeShell bVolActive; TubeShell bVol includes angular/bin geometry scaling.",
+    "likely_failure": "source Lb is far outside RAIJU target L-edge range, so overlap binning produces zero target terms"
+  },
+  "source_i": 5,
+  "source_j": 95,
+  "target": {
+    "L_edge_max": 33.16343747752636,
+    "L_edge_min": 1.4902905965657023,
+    "L_max": 30.111605578372767,
+    "L_min": 1.508787000709922,
+    "MLT_deg_max": 359.0,
+    "MLT_deg_min": 1.0,
+    "MLT_edge_deg_max": 358.0,
+    "MLT_edge_deg_min": 0.0
+  },
+  "trace": {
+    "active_edge_count": 834,
+    "active_edge_fraction": 1.0,
+    "dl_over_B_sum_active": 3496.8804317541853,
+    "dl_over_B_sum_all": 3496.8804317541853,
+    "edge_count": 834,
+    "magB_max": 209029.91481621846,
+    "magB_min": 0.031217495075644537,
+    "node_count": 835,
+    "r_max": 190.34911905078903,
+    "r_min": 1.019112274816384,
+    "source_i": 5,
+    "source_j": 95,
+    "trace_count": 1
+  }
+}

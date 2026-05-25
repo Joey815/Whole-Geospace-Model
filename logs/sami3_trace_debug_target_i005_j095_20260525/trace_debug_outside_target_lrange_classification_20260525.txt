@@ -1,0 +1,69 @@
+classification_basis=status_code with positive bvol_active_cc; no source closed_cell_mask filter
+target_L_edge_min=1.4902905965657023
+target_L_edge_max=33.16343747752636
+[used]
+count=15440
+active_bvol_sum=254504.859375
+Lb_min=1.500771403312683
+Lb_max=292.3548889160156
+Lb_mean_bvol_weighted=228.27700805664062
+above_target_Lmax_count=400
+above_target_Lmax_bvol_sum=253588.84375
+above_target_Lmax_bvol_fraction=0.996400773525238
+below_target_Lmin_count=0
+below_target_Lmin_bvol_sum=0.0
+below_target_Lmin_bvol_fraction=0.0
+inside_target_Lrange_count=15040
+inside_target_Lrange_bvol_sum=915.995849609375
+inside_target_Lrange_bvol_fraction=0.0035991291515529156
+[outside_target]
+count=18236
+active_bvol_sum=2013959.0
+Lb_min=1.0192675590515137
+Lb_max=553.7752075195312
+Lb_mean_bvol_weighted=370.010986328125
+above_target_Lmax_count=5452
+above_target_Lmax_bvol_sum=2013958.625
+above_target_Lmax_bvol_fraction=0.9999998211860657
+below_target_Lmin_count=12784
+below_target_Lmin_bvol_sum=0.5427754521369934
+below_target_Lmin_bvol_fraction=2.695066996238893e-07
+inside_target_Lrange_count=0
+inside_target_Lrange_bvol_sum=0.0
+inside_target_Lrange_bvol_fraction=0.0
+[positive_all]
+count=33676
+active_bvol_sum=2268464.0
+Lb_min=1.0192675590515137
+Lb_max=553.7752075195312
+Lb_mean_bvol_weighted=354.1094665527344
+above_target_Lmax_count=5852
+above_target_Lmax_bvol_sum=2267547.5
+above_target_Lmax_bvol_fraction=0.9995959997177124
+below_target_Lmin_count=12784
+below_target_Lmin_bvol_sum=0.5427754521369934
+below_target_Lmin_bvol_fraction=2.3927003667267854e-07
+inside_target_Lrange_count=15040
+inside_target_Lrange_bvol_sum=915.995849609375
+inside_target_Lrange_bvol_fraction=0.0004037956241518259
+[top_outside_target_by_bvol]
+source_i=5 source_j=95 bvol_active=14539.834 Lb_cc=450.227692 term_count=0 mapped_fraction=0.0
+source_i=176 source_j=95 bvol_active=14539.709 Lb_cc=450.227417 term_count=0 mapped_fraction=0.0
+source_i=5 source_j=94 bvol_active=14537.8428 Lb_cc=450.222351 term_count=0 mapped_fraction=0.0
+source_i=176 source_j=94 bvol_active=14537.7188 Lb_cc=450.222076 term_count=0 mapped_fraction=0.0
+source_i=5 source_j=96 bvol_active=14037.6787 Lb_cc=449.672852 term_count=0 mapped_fraction=0.0
+source_i=176 source_j=96 bvol_active=14037.5625 Lb_cc=449.672607 term_count=0 mapped_fraction=0.0
+source_i=5 source_j=93 bvol_active=14033.165 Lb_cc=449.660431 term_count=0 mapped_fraction=0.0
+source_i=176 source_j=93 bvol_active=14033.0488 Lb_cc=449.660156 term_count=0 mapped_fraction=0.0
+source_i=4 source_j=95 bvol_active=13558.3652 Lb_cc=553.774841 term_count=0 mapped_fraction=0.0
+source_i=177 source_j=95 bvol_active=13558.2988 Lb_cc=553.775208 term_count=0 mapped_fraction=0.0
+source_i=4 source_j=94 bvol_active=13556.415 Lb_cc=553.755249 term_count=0 mapped_fraction=0.0
+source_i=177 source_j=94 bvol_active=13556.3496 Lb_cc=553.755615 term_count=0 mapped_fraction=0.0
+source_i=5 source_j=97 bvol_active=13282.9619 Lb_cc=448.25708 term_count=0 mapped_fraction=0.0
+source_i=176 source_j=97 bvol_active=13282.8535 Lb_cc=448.256836 term_count=0 mapped_fraction=0.0
+source_i=5 source_j=92 bvol_active=13277.4668 Lb_cc=448.244019 term_count=0 mapped_fraction=0.0
+source_i=176 source_j=92 bvol_active=13277.3574 Lb_cc=448.243774 term_count=0 mapped_fraction=0.0
+source_i=4 source_j=96 bvol_active=12958.5625 Lb_cc=551.023438 term_count=0 mapped_fraction=0.0
+source_i=177 source_j=96 bvol_active=12958.5 Lb_cc=551.023743 term_count=0 mapped_fraction=0.0
+source_i=4 source_j=93 bvol_active=12953.5488 Lb_cc=550.985413 term_count=0 mapped_fraction=0.0
+source_i=177 source_j=93 bvol_active=12953.4873 Lb_cc=550.985718 term_count=0 mapped_fraction=0.0

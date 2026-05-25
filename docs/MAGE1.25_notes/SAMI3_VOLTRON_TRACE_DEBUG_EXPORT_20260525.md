@@ -205,6 +205,57 @@ failure is caused by target L-range limits, line-end topology, or how the
 TubeShell corner geometry is being collapsed into the overlap bins.
 ```
 
+## Target-Domain L-Range Classification
+
+The targeted trace was compared against the no-span closure audit and RAIJU
+target grid:
+
+```text
+trace_vs_audit = logs/sami3_trace_debug_target_i005_j095_20260525/trace_debug_target_i005_j095_vs_audit_20260525.txt
+lrange_classification = logs/sami3_trace_debug_target_i005_j095_20260525/trace_debug_outside_target_lrange_classification_20260525.txt
+```
+
+For source `(i=5,j=95)`:
+
+```text
+source Lb_cc = 450.2276916503906
+target L_edge_max = 33.16343747752636
+source_Lb_over_target_L_edge_max = 13.576026066522608
+trace_Rmax_over_target_L_edge_max = 5.739728252832102
+bvol_active / trace_dlB_active = 4.157944278661308
+```
+
+The `bvol_active / trace_dlB_active` ratio is diagnostic only; `bVolActive`
+contains shell-cell geometry scaling and is not expected to equal the simple
+trace-edge `sum(dl/B)`.
+
+Global classification using the no-span closure-audit status codes and
+positive `bvol_active_cc`:
+
+```text
+target_L_edge_min = 1.4902905965657023
+target_L_edge_max = 33.16343747752636
+
+positive_all active_bvol_sum = 2268464.0
+positive_all above_target_Lmax_bvol_sum = 2267547.5
+positive_all above_target_Lmax_bvol_fraction = 0.9995959997177124
+positive_all inside_target_Lrange_bvol_sum = 915.995849609375
+positive_all inside_target_Lrange_bvol_fraction = 0.0004037956241518259
+
+outside_target active_bvol_sum = 2013959.0
+outside_target above_target_Lmax_bvol_fraction = 0.9999998211860657
+```
+
+Important nuance:
+
+```text
+Some high-L source cells are marked used because their huge footprint clips a
+small part of the RAIJU target L domain.  The target-domain failure is still
+dominated by source tube volume far outside the RAIJU target L range; tuning
+the overlap threshold cannot make that volume physically close inside a
+target grid whose outer L edge is about 33.16.
+```
+
 ## Validation Commands
 
 Serial Voltron build:
@@ -234,10 +285,10 @@ git apply --check --reverse code/kaiju_sami3_moments/patches/voltron_trace_debug
 Use this diagnostic to close the geometry blocker:
 
 ```text
-1. Compare targeted trace quadrature against current TubeShell bVolActive
-   ledger for the same source cell.
-2. Classify outside-target failures by trace extent, topology, and RAIJU target
-   L-range.
-3. Rebuild the SAMI3 -> Voltron -> RAIJU sparse product from trace edges.
-4. Keep the target-domain closure validator as the acceptance gate.
+1. Decide the physical policy for source volume with `Lb` outside the RAIJU
+   target L range: exclude, project/clamp only for diagnostics, or extend the
+   target domain.
+2. Rebuild the SAMI3 -> Voltron -> RAIJU sparse product from trace edges only
+   for physically admissible target-domain volume.
+3. Keep the target-domain closure validator as the acceptance gate.
 ```

@@ -85,15 +85,40 @@ This targeted cell is the largest active-bVol `outside_target` source in the
 no-span closure audit: `bvol_active=14539.834`, `Lb_cc=450.228`,
 `mapped_fraction=0`, `term_count=0`.
 
+The targeted trace and no-span audit were then compared against the RAIJU target
+L range:
+
+```text
+target_L_edge_max = 33.16343747752636
+source_i=5, source_j=95 Lb_cc = 450.2276916503906
+source_Lb_over_target_L_edge_max = 13.576026066522608
+trace_Rmax_over_target_L_edge_max = 5.739728252832102
+```
+
+Global no-span classification by positive active bVol:
+
+```text
+positive_all active_bvol_sum = 2268464.0
+positive_all above_target_Lmax_bvol_sum = 2267547.5
+positive_all above_target_Lmax_bvol_fraction = 0.9995959997177124
+positive_all inside_target_Lrange_bvol_fraction = 0.0004037956241518259
+outside_target above_target_Lmax_bvol_fraction = 0.9999998211860657
+```
+
+Interpretation: the closure blocker is dominated by Voltron source tube volume
+outside the current RAIJU target L range.  Some high-L cells still get marked
+`used` because their footprint clips a small target-domain sliver, but the
+dominant active bVol cannot close into a target grid whose outer L edge is only
+about 33.16.
+
 Next work order after this gate:
 
 ```text
-1. Compare trace-edge ds/B quadrature with the active bVol ledger for the same
-   source cell.
-2. Classify outside-target failures by trace extent, topology, and RAIJU target
-   L-range.
-3. Build the next sparse SAMI3 -> Voltron -> RAIJU product from trace edges.
-4. Re-run the target-domain closure validator as the acceptance gate.
+1. Decide the physical policy for source volume outside the RAIJU target
+   L range: exclude, diagnostic project/clamp, or extend target domain.
+2. Build the next sparse SAMI3 -> Voltron -> RAIJU product from trace edges for
+   physically admissible target-domain volume.
+3. Re-run the target-domain closure validator as the acceptance gate.
 ```
 
 ### Previous Completed Gate: Active bVol Helper MPI Datatype Fix

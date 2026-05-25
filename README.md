@@ -82,8 +82,13 @@ edge masks, and source indices.  The checked HDF5 datasets are finite.  The
 export also supports `VOLTRON_TRACE_DEBUG_SOURCE_I/J`; targeted smoke job
 7677907 completed 0:0 for closure-failing source `(i=5,j=95)`, producing one
 finite trace with `Rmax=190.349119 Rp` and active `dl/B` sum `3496.88043`.
-The next geometry step is to compare this trace quadrature against the active
-bVol ledger and rebuild the sparse product from trace-edge quadrature.
+The trace/audit comparison shows the dominant target-closure blocker is source
+volume outside the current RAIJU target L domain: the target outer L edge is
+`33.16343747752636`, while the sampled outside-target source has
+`Lb_cc=450.2276916503906`; across positive active bVol,
+`0.9995959997177124` lies above the target L max.  The next geometry step is
+to define the physical policy for that outside-domain source volume before
+rebuilding a trace-edge sparse product.
 The stage-2 mapping products now have a repeatable HDF5 QC gate:
 `scripts/validate_sami3_raiju_mapping_product.py` validates
 `/RaiCplMomentsOnly` and `/MappingQuality` finite values, masks, coverage,
