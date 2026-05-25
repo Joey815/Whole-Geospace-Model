@@ -1,0 +1,4966 @@
+{
+  "checks": [
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000",
+      "name": "run_dir_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/wxsami3_live_meta.json",
+      "name": "live_meta_exists",
+      "ok": true
+    },
+    {
+      "detail": "wxsami3-live-payload-v2",
+      "name": "meta_payload_version",
+      "ok": true
+    },
+    {
+      "detail": "CAM phys_state(:)",
+      "name": "meta_runtime_source",
+      "ok": true
+    },
+    {
+      "detail": "runtime_live_packet",
+      "name": "meta_actual_transport",
+      "ok": true
+    },
+    {
+      "detail": "packet_index=11 expected=11",
+      "name": "meta_last_packet_index",
+      "ok": true
+    },
+    {
+      "detail": "300.0",
+      "name": "meta_dtime_phys_positive",
+      "ok": true
+    },
+    {
+      "detail": "1",
+      "name": "meta_send_every_nsteps_positive",
+      "ok": true
+    },
+    {
+      "detail": "packet_hour=0.916666687 expected=0.9166666666666666",
+      "name": "meta_packet_hour_matches_nstep_dtime",
+      "ok": true
+    },
+    {
+      "detail": "20260522 expected=20260522",
+      "name": "meta_payload_header_magic",
+      "ok": true
+    },
+    {
+      "detail": "304 expected=304",
+      "name": "meta_payload_header_nz",
+      "ok": true
+    },
+    {
+      "detail": "124 expected=124",
+      "name": "meta_payload_header_nf",
+      "ok": true
+    },
+    {
+      "detail": "5 expected=5",
+      "name": "meta_payload_header_nl",
+      "ok": true
+    },
+    {
+      "detail": "7 expected=7",
+      "name": "meta_payload_header_nneut",
+      "ok": true
+    },
+    {
+      "detail": "source_columns=13824 expected=13824",
+      "name": "meta_runtime_map_source_columns",
+      "ok": true
+    },
+    {
+      "detail": "npoints=3618816",
+      "name": "meta_runtime_map_npoints",
+      "ok": true
+    },
+    {
+      "detail": "K expected=K",
+      "name": "meta_source_unit_temperature",
+      "ok": true
+    },
+    {
+      "detail": "m/s expected=m/s",
+      "name": "meta_source_unit_wind",
+      "ok": true
+    },
+    {
+      "detail": "Pa expected=Pa",
+      "name": "meta_source_unit_pressure",
+      "ok": true
+    },
+    {
+      "detail": "m expected=m",
+      "name": "meta_source_unit_height",
+      "ok": true
+    },
+    {
+      "detail": "mass_mixing_ratio expected=mass_mixing_ratio",
+      "name": "meta_source_unit_composition",
+      "ok": true
+    },
+    {
+      "detail": "cm^-3 expected=cm^-3",
+      "name": "meta_payload_unit_density",
+      "ok": true
+    },
+    {
+      "detail": "K expected=K",
+      "name": "meta_payload_unit_temperature",
+      "ok": true
+    },
+    {
+      "detail": "cm/s expected=cm/s",
+      "name": "meta_payload_unit_wind",
+      "ok": true
+    },
+    {
+      "detail": "q*mbarv/species_mw*pmid/(kB*T)*1e-6 -> cm^-3",
+      "name": "meta_density_conversion",
+      "ok": true
+    },
+    {
+      "detail": "['O', 'O2', 'H', 'N', 'NO', 'N2', 'He']",
+      "name": "meta_source_species_order",
+      "ok": true
+    },
+    {
+      "detail": "['H', 'O', 'NO', 'O2', 'He', 'N2', 'N']",
+      "name": "meta_payload_species_order",
+      "ok": true
+    },
+    {
+      "detail": "212",
+      "name": "meta_source_flag_mpi_tag",
+      "ok": true
+    },
+    {
+      "detail": "{'WACCMX_VALID': 1, 'SAMI3_NATIVE_ABOVE_TOP': 2, 'SAMI3_NATIVE_N2_INVALID': 3, 'SAMI3_NATIVE_OTHER_INVALID': 4}",
+      "name": "meta_source_flag_values",
+      "ok": true
+    },
+    {
+      "detail": "57",
+      "name": "meta_species_index_O",
+      "ok": true
+    },
+    {
+      "detail": "58",
+      "name": "meta_species_index_O2",
+      "ok": true
+    },
+    {
+      "detail": "37",
+      "name": "meta_species_index_H",
+      "ok": true
+    },
+    {
+      "detail": "51",
+      "name": "meta_species_index_N",
+      "ok": true
+    },
+    {
+      "detail": "54",
+      "name": "meta_species_index_NO",
+      "ok": true
+    },
+    {
+      "detail": "-1",
+      "name": "meta_species_index_N2_residual",
+      "ok": true
+    },
+    {
+      "detail": "-1",
+      "name": "meta_species_index_He_native",
+      "ok": true
+    },
+    {
+      "detail": "invalid",
+      "name": "meta_n2_negative_mode",
+      "ok": true
+    },
+    {
+      "detail": "payload value -1 so SAMI3 native/MSIS He is retained",
+      "name": "meta_he_policy",
+      "ok": true
+    },
+    {
+      "detail": "payload value 0; CAM omega diagnostic only",
+      "name": "meta_w_policy",
+      "ok": true
+    },
+    {
+      "detail": "flag_total=6031360 samples=6031360",
+      "name": "meta_source_flags_sum",
+      "ok": true
+    },
+    {
+      "detail": "invalid=1824310 above+n2+other=1824310",
+      "name": "meta_invalid_sum",
+      "ok": true
+    },
+    {
+      "detail": "above_live_top=1650666 source_flag=1650666",
+      "name": "meta_above_top_flag_count",
+      "ok": true
+    },
+    {
+      "detail": "n2_residual_negative=173644 source_flag=173644",
+      "name": "meta_n2_invalid_flag_count",
+      "ok": true
+    },
+    {
+      "detail": "0",
+      "name": "meta_other_invalid_zero",
+      "ok": true
+    },
+    {
+      "detail": "valid_i=4207050 valid_f=4207050 source_valid=4207050",
+      "name": "meta_checksum_valid_counts",
+      "ok": true
+    },
+    {
+      "detail": "invalid_i=1824310 invalid_f=1824310 runtime_invalid=1824310",
+      "name": "meta_checksum_invalid_counts",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000000.txt",
+      "name": "packet0_summary_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000000.out",
+      "name": "packet0_replay_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000000.txt",
+      "name": "packet0_recv_compare_exists",
+      "ok": true
+    },
+    {
+      "detail": "total_cols=13824 expected=13824",
+      "name": "packet0_summary_source_columns",
+      "ok": true
+    },
+    {
+      "detail": "packets=[0]",
+      "name": "packet0_summary_packet_index",
+      "ok": true
+    },
+    {
+      "detail": "bad_size_files_present=False",
+      "name": "packet0_summary_no_bad_size_files",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_lat_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_lon_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_T_K_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_U_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_V_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_PMID_Pa_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_ZM_m_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_MBARV_kg_mol_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_q_O_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_q_O2_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_q_H_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_q_N_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_q_NO_bad",
+      "ok": true
+    },
+    {
+      "detail": "missing=0 unique=13824 expected=13824",
+      "name": "packet0_summary_cid_coverage",
+      "ok": true
+    },
+    {
+      "detail": "min=-90.0 max=90.0 allowed=[-90.0,90.0]",
+      "name": "packet0_summary_lat_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=0.0 max=357.5 allowed=[0.0,360.0]",
+      "name": "packet0_summary_lon_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=113.19272490765026 max=1522.7628810979916 allowed=[50.0,5000.0]",
+      "name": "packet0_summary_T_K_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-925.7242161594645 max=769.7344197674036 allowed=[-5000.0,5000.0]",
+      "name": "packet0_summary_U_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-845.8062460574145 max=736.3650929706123 allowed=[-5000.0,5000.0]",
+      "name": "packet0_summary_V_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=4.055140885992663e-08 max=107321.3890267048 allowed=[0.0,200000.0]",
+      "name": "packet0_summary_PMID_Pa_range",
+      "ok": true
+    },
+    {
+      "detail": "min=48.56266690499009 max=720507.7580399793 allowed=[-1000.0,2000000.0]",
+      "name": "packet0_summary_ZM_m_range",
+      "ok": true
+    },
+    {
+      "detail": "min=14.895337165442252 max=28.874522993878628 allowed=[1.0,60.0]",
+      "name": "packet0_summary_MBARV_kg_mol_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.20521131163437e-25 max=0.9999399874408939 allowed=[-1e-12,1.1]",
+      "name": "packet0_summary_q_O_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.229295650411587e-06 max=0.23732970847615611 allowed=[-1e-12,1.1]",
+      "name": "packet0_summary_q_O2_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.913249081948255e-28 max=0.0050683000424878695 allowed=[-1e-12,1.1]",
+      "name": "packet0_summary_q_H_range",
+      "ok": true
+    },
+    {
+      "detail": "min=1.885260804240404e-23 max=0.060584943671142005 allowed=[-1e-12,1.1]",
+      "name": "packet0_summary_q_N_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.01142764707503e-19 max=0.0014346353422642934 allowed=[-1e-12,1.1]",
+      "name": "packet0_summary_q_NO_range",
+      "ok": true
+    },
+    {
+      "detail": "source_cols=13824 filled=13824 expected=13824",
+      "name": "packet0_replay_source_coverage",
+      "ok": true
+    },
+    {
+      "detail": "invalid",
+      "name": "packet0_replay_n2_mode",
+      "ok": true
+    },
+    {
+      "detail": "bad_weighted_z=0",
+      "name": "packet0_replay_bad_weighted_z",
+      "ok": true
+    },
+    {
+      "detail": "samples=6031360",
+      "name": "packet0_replay_samples_positive",
+      "ok": true
+    },
+    {
+      "detail": "initial=6031360 final=6031360",
+      "name": "packet0_replay_initial_final_samples",
+      "ok": true
+    },
+    {
+      "detail": "initial=1819595 final=1819595",
+      "name": "packet0_replay_initial_final_invalid",
+      "ok": true
+    },
+    {
+      "detail": "initial=1641376 final=1641376",
+      "name": "packet0_replay_initial_final_above_live_top",
+      "ok": true
+    },
+    {
+      "detail": "initial=4389984 final=4389984",
+      "name": "packet0_replay_initial_final_n2_residual_used",
+      "ok": true
+    },
+    {
+      "detail": "initial=178219 final=178219",
+      "name": "packet0_replay_initial_final_n2_residual_negative",
+      "ok": true
+    },
+    {
+      "detail": "n2_residual_used=4389984",
+      "name": "packet0_replay_n2_residual_used_positive",
+      "ok": true
+    },
+    {
+      "detail": "min=-0.053314608006139914 max=0.8129786925378699",
+      "name": "packet0_replay_n2_residual_bounds",
+      "ok": true
+    },
+    {
+      "detail": "ok_marker=True",
+      "name": "packet0_recv_compare_ok",
+      "ok": true
+    },
+    {
+      "detail": "ranks=32 expected=32",
+      "name": "packet0_recv_compare_ranks",
+      "ok": true
+    },
+    {
+      "detail": "occurrence=0 expected=0",
+      "name": "packet0_recv_compare_occurrence",
+      "ok": true
+    },
+    {
+      "detail": "max_rel=4.83248e-13 limit=1e-06",
+      "name": "packet0_recv_compare_max_rel",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000001.txt",
+      "name": "packet1_summary_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000001.out",
+      "name": "packet1_replay_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000001.txt",
+      "name": "packet1_recv_compare_exists",
+      "ok": true
+    },
+    {
+      "detail": "total_cols=13824 expected=13824",
+      "name": "packet1_summary_source_columns",
+      "ok": true
+    },
+    {
+      "detail": "packets=[1]",
+      "name": "packet1_summary_packet_index",
+      "ok": true
+    },
+    {
+      "detail": "bad_size_files_present=False",
+      "name": "packet1_summary_no_bad_size_files",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet1_summary_lat_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet1_summary_lon_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet1_summary_T_K_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet1_summary_U_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet1_summary_V_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet1_summary_PMID_Pa_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet1_summary_ZM_m_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet1_summary_MBARV_kg_mol_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet1_summary_q_O_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet1_summary_q_O2_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet1_summary_q_H_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet1_summary_q_N_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet1_summary_q_NO_bad",
+      "ok": true
+    },
+    {
+      "detail": "missing=0 unique=13824 expected=13824",
+      "name": "packet1_summary_cid_coverage",
+      "ok": true
+    },
+    {
+      "detail": "min=-90.0 max=90.0 allowed=[-90.0,90.0]",
+      "name": "packet1_summary_lat_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=0.0 max=357.5 allowed=[0.0,360.0]",
+      "name": "packet1_summary_lon_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=113.11677799602712 max=1525.6802633198183 allowed=[50.0,5000.0]",
+      "name": "packet1_summary_T_K_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-908.2869163996029 max=746.2280684569153 allowed=[-5000.0,5000.0]",
+      "name": "packet1_summary_U_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-848.8983623659324 max=724.3955292789938 allowed=[-5000.0,5000.0]",
+      "name": "packet1_summary_V_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=4.055140885992663e-08 max=107228.60855014052 allowed=[0.0,200000.0]",
+      "name": "packet1_summary_PMID_Pa_range",
+      "ok": true
+    },
+    {
+      "detail": "min=48.739033121328895 max=722021.9350605857 allowed=[-1000.0,2000000.0]",
+      "name": "packet1_summary_ZM_m_range",
+      "ok": true
+    },
+    {
+      "detail": "min=14.914851476788279 max=28.874494448016016 allowed=[1.0,60.0]",
+      "name": "packet1_summary_MBARV_kg_mol_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.3076025385839838e-25 max=0.9999399904225778 allowed=[-1e-12,1.1]",
+      "name": "packet1_summary_q_O_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.192934879215706e-06 max=0.2373272779100491 allowed=[-1e-12,1.1]",
+      "name": "packet1_summary_q_O2_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.974939423330202e-28 max=0.004977793598453359 allowed=[-1e-12,1.1]",
+      "name": "packet1_summary_q_H_range",
+      "ok": true
+    },
+    {
+      "detail": "min=1.8931286575806156e-23 max=0.060367837412881126 allowed=[-1e-12,1.1]",
+      "name": "packet1_summary_q_N_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.042922746523819e-19 max=0.0013771497728481319 allowed=[-1e-12,1.1]",
+      "name": "packet1_summary_q_NO_range",
+      "ok": true
+    },
+    {
+      "detail": "source_cols=13824 filled=13824 expected=13824",
+      "name": "packet1_replay_source_coverage",
+      "ok": true
+    },
+    {
+      "detail": "invalid",
+      "name": "packet1_replay_n2_mode",
+      "ok": true
+    },
+    {
+      "detail": "bad_weighted_z=0",
+      "name": "packet1_replay_bad_weighted_z",
+      "ok": true
+    },
+    {
+      "detail": "samples=6031360",
+      "name": "packet1_replay_samples_positive",
+      "ok": true
+    },
+    {
+      "detail": "initial=6031360 final=6031360",
+      "name": "packet1_replay_initial_final_samples",
+      "ok": true
+    },
+    {
+      "detail": "initial=1819902 final=1819902",
+      "name": "packet1_replay_initial_final_invalid",
+      "ok": true
+    },
+    {
+      "detail": "initial=1642002 final=1642002",
+      "name": "packet1_replay_initial_final_above_live_top",
+      "ok": true
+    },
+    {
+      "detail": "initial=4389358 final=4389358",
+      "name": "packet1_replay_initial_final_n2_residual_used",
+      "ok": true
+    },
+    {
+      "detail": "initial=177900 final=177900",
+      "name": "packet1_replay_initial_final_n2_residual_negative",
+      "ok": true
+    },
+    {
+      "detail": "n2_residual_used=4389358",
+      "name": "packet1_replay_n2_residual_used_positive",
+      "ok": true
+    },
+    {
+      "detail": "min=-0.05293758530917447 max=0.8130488452756442",
+      "name": "packet1_replay_n2_residual_bounds",
+      "ok": true
+    },
+    {
+      "detail": "ok_marker=True",
+      "name": "packet1_recv_compare_ok",
+      "ok": true
+    },
+    {
+      "detail": "ranks=32 expected=32",
+      "name": "packet1_recv_compare_ranks",
+      "ok": true
+    },
+    {
+      "detail": "occurrence=1 expected=1",
+      "name": "packet1_recv_compare_occurrence",
+      "ok": true
+    },
+    {
+      "detail": "max_rel=6.76502e-13 limit=1e-06",
+      "name": "packet1_recv_compare_max_rel",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000002.txt",
+      "name": "packet2_summary_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000002.out",
+      "name": "packet2_replay_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000002.txt",
+      "name": "packet2_recv_compare_exists",
+      "ok": true
+    },
+    {
+      "detail": "total_cols=13824 expected=13824",
+      "name": "packet2_summary_source_columns",
+      "ok": true
+    },
+    {
+      "detail": "packets=[2]",
+      "name": "packet2_summary_packet_index",
+      "ok": true
+    },
+    {
+      "detail": "bad_size_files_present=False",
+      "name": "packet2_summary_no_bad_size_files",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet2_summary_lat_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet2_summary_lon_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet2_summary_T_K_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet2_summary_U_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet2_summary_V_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet2_summary_PMID_Pa_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet2_summary_ZM_m_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet2_summary_MBARV_kg_mol_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet2_summary_q_O_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet2_summary_q_O2_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet2_summary_q_H_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet2_summary_q_N_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet2_summary_q_NO_bad",
+      "ok": true
+    },
+    {
+      "detail": "missing=0 unique=13824 expected=13824",
+      "name": "packet2_summary_cid_coverage",
+      "ok": true
+    },
+    {
+      "detail": "min=-90.0 max=90.0 allowed=[-90.0,90.0]",
+      "name": "packet2_summary_lat_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=0.0 max=357.5 allowed=[0.0,360.0]",
+      "name": "packet2_summary_lon_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=113.0644853198483 max=1540.7848935057236 allowed=[50.0,5000.0]",
+      "name": "packet2_summary_T_K_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-877.2344652281657 max=693.8229320516241 allowed=[-5000.0,5000.0]",
+      "name": "packet2_summary_U_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-848.9056040321143 max=717.712734883699 allowed=[-5000.0,5000.0]",
+      "name": "packet2_summary_V_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=4.055140885992663e-08 max=107010.83809744766 allowed=[0.0,200000.0]",
+      "name": "packet2_summary_PMID_Pa_range",
+      "ok": true
+    },
+    {
+      "detail": "min=49.27837860726639 max=726340.8423637329 allowed=[-1000.0,2000000.0]",
+      "name": "packet2_summary_ZM_m_range",
+      "ok": true
+    },
+    {
+      "detail": "min=14.923714119000463 max=28.87446960393479 allowed=[1.0,60.0]",
+      "name": "packet2_summary_MBARV_kg_mol_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.6478441759302645e-25 max=0.9999399361824781 allowed=[-1e-12,1.1]",
+      "name": "packet2_summary_q_O_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.17273404897657e-06 max=0.2373244729492434 allowed=[-1e-12,1.1]",
+      "name": "packet2_summary_q_O2_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.8195367284956676e-28 max=0.0049428888078698946 allowed=[-1e-12,1.1]",
+      "name": "packet2_summary_q_H_range",
+      "ok": true
+    },
+    {
+      "detail": "min=1.8976942230578848e-23 max=0.060084517945671836 allowed=[-1e-12,1.1]",
+      "name": "packet2_summary_q_N_range",
+      "ok": true
+    },
+    {
+      "detail": "min=8.958463204892557e-19 max=0.0013294114301633402 allowed=[-1e-12,1.1]",
+      "name": "packet2_summary_q_NO_range",
+      "ok": true
+    },
+    {
+      "detail": "source_cols=13824 filled=13824 expected=13824",
+      "name": "packet2_replay_source_coverage",
+      "ok": true
+    },
+    {
+      "detail": "invalid",
+      "name": "packet2_replay_n2_mode",
+      "ok": true
+    },
+    {
+      "detail": "bad_weighted_z=0",
+      "name": "packet2_replay_bad_weighted_z",
+      "ok": true
+    },
+    {
+      "detail": "samples=6031360",
+      "name": "packet2_replay_samples_positive",
+      "ok": true
+    },
+    {
+      "detail": "initial=6031360 final=6031360",
+      "name": "packet2_replay_initial_final_samples",
+      "ok": true
+    },
+    {
+      "detail": "initial=1819998 final=1819998",
+      "name": "packet2_replay_initial_final_invalid",
+      "ok": true
+    },
+    {
+      "detail": "initial=1642906 final=1642906",
+      "name": "packet2_replay_initial_final_above_live_top",
+      "ok": true
+    },
+    {
+      "detail": "initial=4388454 final=4388454",
+      "name": "packet2_replay_initial_final_n2_residual_used",
+      "ok": true
+    },
+    {
+      "detail": "initial=177092 final=177092",
+      "name": "packet2_replay_initial_final_n2_residual_negative",
+      "ok": true
+    },
+    {
+      "detail": "n2_residual_used=4388454",
+      "name": "packet2_replay_n2_residual_used_positive",
+      "ok": true
+    },
+    {
+      "detail": "min=-0.0527296433438709 max=0.8130316307720772",
+      "name": "packet2_replay_n2_residual_bounds",
+      "ok": true
+    },
+    {
+      "detail": "ok_marker=True",
+      "name": "packet2_recv_compare_ok",
+      "ok": true
+    },
+    {
+      "detail": "ranks=32 expected=32",
+      "name": "packet2_recv_compare_ranks",
+      "ok": true
+    },
+    {
+      "detail": "occurrence=2 expected=2",
+      "name": "packet2_recv_compare_occurrence",
+      "ok": true
+    },
+    {
+      "detail": "max_rel=5.30439e-13 limit=1e-06",
+      "name": "packet2_recv_compare_max_rel",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000003.txt",
+      "name": "packet3_summary_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000003.out",
+      "name": "packet3_replay_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000003.txt",
+      "name": "packet3_recv_compare_exists",
+      "ok": true
+    },
+    {
+      "detail": "total_cols=13824 expected=13824",
+      "name": "packet3_summary_source_columns",
+      "ok": true
+    },
+    {
+      "detail": "packets=[3]",
+      "name": "packet3_summary_packet_index",
+      "ok": true
+    },
+    {
+      "detail": "bad_size_files_present=False",
+      "name": "packet3_summary_no_bad_size_files",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet3_summary_lat_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet3_summary_lon_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet3_summary_T_K_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet3_summary_U_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet3_summary_V_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet3_summary_PMID_Pa_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet3_summary_ZM_m_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet3_summary_MBARV_kg_mol_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet3_summary_q_O_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet3_summary_q_O2_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet3_summary_q_H_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet3_summary_q_N_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet3_summary_q_NO_bad",
+      "ok": true
+    },
+    {
+      "detail": "missing=0 unique=13824 expected=13824",
+      "name": "packet3_summary_cid_coverage",
+      "ok": true
+    },
+    {
+      "detail": "min=-90.0 max=90.0 allowed=[-90.0,90.0]",
+      "name": "packet3_summary_lat_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=0.0 max=357.5 allowed=[0.0,360.0]",
+      "name": "packet3_summary_lon_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=113.01640250137358 max=1554.4369000772058 allowed=[50.0,5000.0]",
+      "name": "packet3_summary_T_K_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-845.0018988897118 max=641.8661345067314 allowed=[-5000.0,5000.0]",
+      "name": "packet3_summary_U_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-824.6634660178233 max=718.0000932645536 allowed=[-5000.0,5000.0]",
+      "name": "packet3_summary_V_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=4.055140885992663e-08 max=106842.37266247693 allowed=[0.0,200000.0]",
+      "name": "packet3_summary_PMID_Pa_range",
+      "ok": true
+    },
+    {
+      "detail": "min=49.52816692598835 max=730915.5635162641 allowed=[-1000.0,2000000.0]",
+      "name": "packet3_summary_ZM_m_range",
+      "ok": true
+    },
+    {
+      "detail": "min=14.917211514206858 max=28.874447877643064 allowed=[1.0,60.0]",
+      "name": "packet3_summary_MBARV_kg_mol_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.6849738410329256e-25 max=0.9999414355618477 allowed=[-1e-12,1.1]",
+      "name": "packet3_summary_q_O_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.117495546026029e-06 max=0.23732133674528533 allowed=[-1e-12,1.1]",
+      "name": "packet3_summary_q_O2_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.679661130325278e-28 max=0.005007941289057978 allowed=[-1e-12,1.1]",
+      "name": "packet3_summary_q_H_range",
+      "ok": true
+    },
+    {
+      "detail": "min=1.9037905891011585e-23 max=0.0597552186105634 allowed=[-1e-12,1.1]",
+      "name": "packet3_summary_q_N_range",
+      "ok": true
+    },
+    {
+      "detail": "min=8.971190705027605e-19 max=0.0012912508047011634 allowed=[-1e-12,1.1]",
+      "name": "packet3_summary_q_NO_range",
+      "ok": true
+    },
+    {
+      "detail": "source_cols=13824 filled=13824 expected=13824",
+      "name": "packet3_replay_source_coverage",
+      "ok": true
+    },
+    {
+      "detail": "invalid",
+      "name": "packet3_replay_n2_mode",
+      "ok": true
+    },
+    {
+      "detail": "bad_weighted_z=0",
+      "name": "packet3_replay_bad_weighted_z",
+      "ok": true
+    },
+    {
+      "detail": "samples=6031360",
+      "name": "packet3_replay_samples_positive",
+      "ok": true
+    },
+    {
+      "detail": "initial=6031360 final=6031360",
+      "name": "packet3_replay_initial_final_samples",
+      "ok": true
+    },
+    {
+      "detail": "initial=1820305 final=1820305",
+      "name": "packet3_replay_initial_final_invalid",
+      "ok": true
+    },
+    {
+      "detail": "initial=1643828 final=1643828",
+      "name": "packet3_replay_initial_final_above_live_top",
+      "ok": true
+    },
+    {
+      "detail": "initial=4387532 final=4387532",
+      "name": "packet3_replay_initial_final_n2_residual_used",
+      "ok": true
+    },
+    {
+      "detail": "initial=176477 final=176477",
+      "name": "packet3_replay_initial_final_n2_residual_negative",
+      "ok": true
+    },
+    {
+      "detail": "n2_residual_used=4387532",
+      "name": "packet3_replay_n2_residual_used_positive",
+      "ok": true
+    },
+    {
+      "detail": "min=-0.05347604405152857 max=0.8131186872649505",
+      "name": "packet3_replay_n2_residual_bounds",
+      "ok": true
+    },
+    {
+      "detail": "ok_marker=True",
+      "name": "packet3_recv_compare_ok",
+      "ok": true
+    },
+    {
+      "detail": "ranks=32 expected=32",
+      "name": "packet3_recv_compare_ranks",
+      "ok": true
+    },
+    {
+      "detail": "occurrence=3 expected=3",
+      "name": "packet3_recv_compare_occurrence",
+      "ok": true
+    },
+    {
+      "detail": "max_rel=2.52762e-13 limit=1e-06",
+      "name": "packet3_recv_compare_max_rel",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000004.txt",
+      "name": "packet4_summary_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000004.out",
+      "name": "packet4_replay_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000004.txt",
+      "name": "packet4_recv_compare_exists",
+      "ok": true
+    },
+    {
+      "detail": "total_cols=13824 expected=13824",
+      "name": "packet4_summary_source_columns",
+      "ok": true
+    },
+    {
+      "detail": "packets=[4]",
+      "name": "packet4_summary_packet_index",
+      "ok": true
+    },
+    {
+      "detail": "bad_size_files_present=False",
+      "name": "packet4_summary_no_bad_size_files",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet4_summary_lat_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet4_summary_lon_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet4_summary_T_K_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet4_summary_U_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet4_summary_V_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet4_summary_PMID_Pa_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet4_summary_ZM_m_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet4_summary_MBARV_kg_mol_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet4_summary_q_O_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet4_summary_q_O2_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet4_summary_q_H_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet4_summary_q_N_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet4_summary_q_NO_bad",
+      "ok": true
+    },
+    {
+      "detail": "missing=0 unique=13824 expected=13824",
+      "name": "packet4_summary_cid_coverage",
+      "ok": true
+    },
+    {
+      "detail": "min=-90.0 max=90.0 allowed=[-90.0,90.0]",
+      "name": "packet4_summary_lat_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=0.0 max=357.5 allowed=[0.0,360.0]",
+      "name": "packet4_summary_lon_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=112.9720736494699 max=1565.041791993268 allowed=[50.0,5000.0]",
+      "name": "packet4_summary_T_K_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-813.1849555043013 max=614.0455679674606 allowed=[-5000.0,5000.0]",
+      "name": "packet4_summary_U_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-787.7497309409229 max=728.4191157309506 allowed=[-5000.0,5000.0]",
+      "name": "packet4_summary_V_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=4.055140885992663e-08 max=106663.43035858625 allowed=[0.0,200000.0]",
+      "name": "packet4_summary_PMID_Pa_range",
+      "ok": true
+    },
+    {
+      "detail": "min=49.76555893227433 max=733884.7007234112 allowed=[-1000.0,2000000.0]",
+      "name": "packet4_summary_ZM_m_range",
+      "ok": true
+    },
+    {
+      "detail": "min=14.901979924460834 max=28.874428792449706 allowed=[1.0,60.0]",
+      "name": "packet4_summary_MBARV_kg_mol_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.720146330990414e-25 max=0.9999434266361716 allowed=[-1e-12,1.1]",
+      "name": "packet4_summary_q_O_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.003527460055274e-06 max=0.23731787686633707 allowed=[-1e-12,1.1]",
+      "name": "packet4_summary_q_O2_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.6200000942339235e-28 max=0.005097787016311002 allowed=[-1e-12,1.1]",
+      "name": "packet4_summary_q_H_range",
+      "ok": true
+    },
+    {
+      "detail": "min=1.9045879088100767e-23 max=0.059394373369606936 allowed=[-1e-12,1.1]",
+      "name": "packet4_summary_q_N_range",
+      "ok": true
+    },
+    {
+      "detail": "min=8.989008571007448e-19 max=0.001261007487019198 allowed=[-1e-12,1.1]",
+      "name": "packet4_summary_q_NO_range",
+      "ok": true
+    },
+    {
+      "detail": "source_cols=13824 filled=13824 expected=13824",
+      "name": "packet4_replay_source_coverage",
+      "ok": true
+    },
+    {
+      "detail": "invalid",
+      "name": "packet4_replay_n2_mode",
+      "ok": true
+    },
+    {
+      "detail": "bad_weighted_z=0",
+      "name": "packet4_replay_bad_weighted_z",
+      "ok": true
+    },
+    {
+      "detail": "samples=6031360",
+      "name": "packet4_replay_samples_positive",
+      "ok": true
+    },
+    {
+      "detail": "initial=6031360 final=6031360",
+      "name": "packet4_replay_initial_final_samples",
+      "ok": true
+    },
+    {
+      "detail": "initial=1820718 final=1820718",
+      "name": "packet4_replay_initial_final_invalid",
+      "ok": true
+    },
+    {
+      "detail": "initial=1644826 final=1644826",
+      "name": "packet4_replay_initial_final_above_live_top",
+      "ok": true
+    },
+    {
+      "detail": "initial=4386534 final=4386534",
+      "name": "packet4_replay_initial_final_n2_residual_used",
+      "ok": true
+    },
+    {
+      "detail": "initial=175892 final=175892",
+      "name": "packet4_replay_initial_final_n2_residual_negative",
+      "ok": true
+    },
+    {
+      "detail": "n2_residual_used=4386534",
+      "name": "packet4_replay_n2_residual_used_positive",
+      "ok": true
+    },
+    {
+      "detail": "min=-0.053003590641177836 max=0.8131236419298921",
+      "name": "packet4_replay_n2_residual_bounds",
+      "ok": true
+    },
+    {
+      "detail": "ok_marker=True",
+      "name": "packet4_recv_compare_ok",
+      "ok": true
+    },
+    {
+      "detail": "ranks=32 expected=32",
+      "name": "packet4_recv_compare_ranks",
+      "ok": true
+    },
+    {
+      "detail": "occurrence=4 expected=4",
+      "name": "packet4_recv_compare_occurrence",
+      "ok": true
+    },
+    {
+      "detail": "max_rel=3.00666e-13 limit=1e-06",
+      "name": "packet4_recv_compare_max_rel",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000005.txt",
+      "name": "packet5_summary_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000005.out",
+      "name": "packet5_replay_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000005.txt",
+      "name": "packet5_recv_compare_exists",
+      "ok": true
+    },
+    {
+      "detail": "total_cols=13824 expected=13824",
+      "name": "packet5_summary_source_columns",
+      "ok": true
+    },
+    {
+      "detail": "packets=[5]",
+      "name": "packet5_summary_packet_index",
+      "ok": true
+    },
+    {
+      "detail": "bad_size_files_present=False",
+      "name": "packet5_summary_no_bad_size_files",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet5_summary_lat_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet5_summary_lon_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet5_summary_T_K_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet5_summary_U_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet5_summary_V_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet5_summary_PMID_Pa_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet5_summary_ZM_m_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet5_summary_MBARV_kg_mol_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet5_summary_q_O_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet5_summary_q_O2_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet5_summary_q_H_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet5_summary_q_N_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet5_summary_q_NO_bad",
+      "ok": true
+    },
+    {
+      "detail": "missing=0 unique=13824 expected=13824",
+      "name": "packet5_summary_cid_coverage",
+      "ok": true
+    },
+    {
+      "detail": "min=-90.0 max=90.0 allowed=[-90.0,90.0]",
+      "name": "packet5_summary_lat_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=0.0 max=357.5 allowed=[0.0,360.0]",
+      "name": "packet5_summary_lon_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=112.92969080955675 max=1583.6031751786186 allowed=[50.0,5000.0]",
+      "name": "packet5_summary_T_K_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-800.7816452908263 max=599.5548137655209 allowed=[-5000.0,5000.0]",
+      "name": "packet5_summary_U_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-764.5496695424649 max=740.2349483942965 allowed=[-5000.0,5000.0]",
+      "name": "packet5_summary_V_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=4.055140885992663e-08 max=106383.81338777236 allowed=[0.0,200000.0]",
+      "name": "packet5_summary_PMID_Pa_range",
+      "ok": true
+    },
+    {
+      "detail": "min=50.10417454632065 max=736357.3624242225 allowed=[-1000.0,2000000.0]",
+      "name": "packet5_summary_ZM_m_range",
+      "ok": true
+    },
+    {
+      "detail": "min=14.894285495167319 max=28.874411927744568 allowed=[1.0,60.0]",
+      "name": "packet5_summary_MBARV_kg_mol_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.7622672954843068e-25 max=0.9999431510126201 allowed=[-1e-12,1.1]",
+      "name": "packet5_summary_q_O_range",
+      "ok": true
+    },
+    {
+      "detail": "min=8.935581617136682e-06 max=0.23731408308606658 allowed=[-1e-12,1.1]",
+      "name": "packet5_summary_q_O2_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.6034592980171363e-28 max=0.005113776206462248 allowed=[-1e-12,1.1]",
+      "name": "packet5_summary_q_H_range",
+      "ok": true
+    },
+    {
+      "detail": "min=1.89789570073296e-23 max=0.05905851201876043 allowed=[-1e-12,1.1]",
+      "name": "packet5_summary_q_N_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.00771840542955e-19 max=0.0012361502170916616 allowed=[-1e-12,1.1]",
+      "name": "packet5_summary_q_NO_range",
+      "ok": true
+    },
+    {
+      "detail": "source_cols=13824 filled=13824 expected=13824",
+      "name": "packet5_replay_source_coverage",
+      "ok": true
+    },
+    {
+      "detail": "invalid",
+      "name": "packet5_replay_n2_mode",
+      "ok": true
+    },
+    {
+      "detail": "bad_weighted_z=0",
+      "name": "packet5_replay_bad_weighted_z",
+      "ok": true
+    },
+    {
+      "detail": "samples=6031360",
+      "name": "packet5_replay_samples_positive",
+      "ok": true
+    },
+    {
+      "detail": "initial=6031360 final=6031360",
+      "name": "packet5_replay_initial_final_samples",
+      "ok": true
+    },
+    {
+      "detail": "initial=1821217 final=1821217",
+      "name": "packet5_replay_initial_final_invalid",
+      "ok": true
+    },
+    {
+      "detail": "initial=1645762 final=1645762",
+      "name": "packet5_replay_initial_final_above_live_top",
+      "ok": true
+    },
+    {
+      "detail": "initial=4385598 final=4385598",
+      "name": "packet5_replay_initial_final_n2_residual_used",
+      "ok": true
+    },
+    {
+      "detail": "initial=175455 final=175455",
+      "name": "packet5_replay_initial_final_n2_residual_negative",
+      "ok": true
+    },
+    {
+      "detail": "n2_residual_used=4385598",
+      "name": "packet5_replay_n2_residual_used_positive",
+      "ok": true
+    },
+    {
+      "detail": "min=-0.0526776490482023 max=0.8130948104122964",
+      "name": "packet5_replay_n2_residual_bounds",
+      "ok": true
+    },
+    {
+      "detail": "ok_marker=True",
+      "name": "packet5_recv_compare_ok",
+      "ok": true
+    },
+    {
+      "detail": "ranks=32 expected=32",
+      "name": "packet5_recv_compare_ranks",
+      "ok": true
+    },
+    {
+      "detail": "occurrence=5 expected=5",
+      "name": "packet5_recv_compare_occurrence",
+      "ok": true
+    },
+    {
+      "detail": "max_rel=3.26109e-13 limit=1e-06",
+      "name": "packet5_recv_compare_max_rel",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000006.txt",
+      "name": "packet6_summary_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000006.out",
+      "name": "packet6_replay_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000006.txt",
+      "name": "packet6_recv_compare_exists",
+      "ok": true
+    },
+    {
+      "detail": "total_cols=13824 expected=13824",
+      "name": "packet6_summary_source_columns",
+      "ok": true
+    },
+    {
+      "detail": "packets=[6]",
+      "name": "packet6_summary_packet_index",
+      "ok": true
+    },
+    {
+      "detail": "bad_size_files_present=False",
+      "name": "packet6_summary_no_bad_size_files",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet6_summary_lat_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet6_summary_lon_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet6_summary_T_K_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet6_summary_U_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet6_summary_V_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet6_summary_PMID_Pa_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet6_summary_ZM_m_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet6_summary_MBARV_kg_mol_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet6_summary_q_O_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet6_summary_q_O2_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet6_summary_q_H_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet6_summary_q_N_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet6_summary_q_NO_bad",
+      "ok": true
+    },
+    {
+      "detail": "missing=0 unique=13824 expected=13824",
+      "name": "packet6_summary_cid_coverage",
+      "ok": true
+    },
+    {
+      "detail": "min=-90.0 max=90.0 allowed=[-90.0,90.0]",
+      "name": "packet6_summary_lat_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=0.0 max=357.5 allowed=[0.0,360.0]",
+      "name": "packet6_summary_lon_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=112.8862970503258 max=1603.3092264007528 allowed=[50.0,5000.0]",
+      "name": "packet6_summary_T_K_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-784.4440402135879 max=596.8974476353948 allowed=[-5000.0,5000.0]",
+      "name": "packet6_summary_U_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-751.9128558953407 max=751.4303784646067 allowed=[-5000.0,5000.0]",
+      "name": "packet6_summary_V_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=4.055140885992663e-08 max=106140.57189865205 allowed=[0.0,200000.0]",
+      "name": "packet6_summary_PMID_Pa_range",
+      "ok": true
+    },
+    {
+      "detail": "min=50.44039289982515 max=739725.6508083901 allowed=[-1000.0,2000000.0]",
+      "name": "packet6_summary_ZM_m_range",
+      "ok": true
+    },
+    {
+      "detail": "min=14.908000537985751 max=28.874396973057816 allowed=[1.0,60.0]",
+      "name": "packet6_summary_MBARV_kg_mol_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.7848513033134e-25 max=0.9999416031176125 allowed=[-1e-12,1.1]",
+      "name": "packet6_summary_q_O_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.032465731026367e-06 max=0.23730991819378897 allowed=[-1e-12,1.1]",
+      "name": "packet6_summary_q_O2_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.61282236908899e-28 max=0.005018312810685206 allowed=[-1e-12,1.1]",
+      "name": "packet6_summary_q_H_range",
+      "ok": true
+    },
+    {
+      "detail": "min=1.8924060532821897e-23 max=0.05878055012891286 allowed=[-1e-12,1.1]",
+      "name": "packet6_summary_q_N_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.02758504508696e-19 max=0.0012137224878968481 allowed=[-1e-12,1.1]",
+      "name": "packet6_summary_q_NO_range",
+      "ok": true
+    },
+    {
+      "detail": "source_cols=13824 filled=13824 expected=13824",
+      "name": "packet6_replay_source_coverage",
+      "ok": true
+    },
+    {
+      "detail": "invalid",
+      "name": "packet6_replay_n2_mode",
+      "ok": true
+    },
+    {
+      "detail": "bad_weighted_z=0",
+      "name": "packet6_replay_bad_weighted_z",
+      "ok": true
+    },
+    {
+      "detail": "samples=6031360",
+      "name": "packet6_replay_samples_positive",
+      "ok": true
+    },
+    {
+      "detail": "initial=6031360 final=6031360",
+      "name": "packet6_replay_initial_final_samples",
+      "ok": true
+    },
+    {
+      "detail": "initial=1821798 final=1821798",
+      "name": "packet6_replay_initial_final_invalid",
+      "ok": true
+    },
+    {
+      "detail": "initial=1646720 final=1646720",
+      "name": "packet6_replay_initial_final_above_live_top",
+      "ok": true
+    },
+    {
+      "detail": "initial=4384640 final=4384640",
+      "name": "packet6_replay_initial_final_n2_residual_used",
+      "ok": true
+    },
+    {
+      "detail": "initial=175078 final=175078",
+      "name": "packet6_replay_initial_final_n2_residual_negative",
+      "ok": true
+    },
+    {
+      "detail": "n2_residual_used=4384640",
+      "name": "packet6_replay_n2_residual_used_positive",
+      "ok": true
+    },
+    {
+      "detail": "min=-0.05249618472831976 max=0.8130441492844651",
+      "name": "packet6_replay_n2_residual_bounds",
+      "ok": true
+    },
+    {
+      "detail": "ok_marker=True",
+      "name": "packet6_recv_compare_ok",
+      "ok": true
+    },
+    {
+      "detail": "ranks=32 expected=32",
+      "name": "packet6_recv_compare_ranks",
+      "ok": true
+    },
+    {
+      "detail": "occurrence=6 expected=6",
+      "name": "packet6_recv_compare_occurrence",
+      "ok": true
+    },
+    {
+      "detail": "max_rel=3.14605e-13 limit=1e-06",
+      "name": "packet6_recv_compare_max_rel",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000007.txt",
+      "name": "packet7_summary_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000007.out",
+      "name": "packet7_replay_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000007.txt",
+      "name": "packet7_recv_compare_exists",
+      "ok": true
+    },
+    {
+      "detail": "total_cols=13824 expected=13824",
+      "name": "packet7_summary_source_columns",
+      "ok": true
+    },
+    {
+      "detail": "packets=[7]",
+      "name": "packet7_summary_packet_index",
+      "ok": true
+    },
+    {
+      "detail": "bad_size_files_present=False",
+      "name": "packet7_summary_no_bad_size_files",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet7_summary_lat_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet7_summary_lon_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet7_summary_T_K_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet7_summary_U_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet7_summary_V_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet7_summary_PMID_Pa_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet7_summary_ZM_m_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet7_summary_MBARV_kg_mol_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet7_summary_q_O_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet7_summary_q_O2_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet7_summary_q_H_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet7_summary_q_N_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet7_summary_q_NO_bad",
+      "ok": true
+    },
+    {
+      "detail": "missing=0 unique=13824 expected=13824",
+      "name": "packet7_summary_cid_coverage",
+      "ok": true
+    },
+    {
+      "detail": "min=-90.0 max=90.0 allowed=[-90.0,90.0]",
+      "name": "packet7_summary_lat_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=0.0 max=357.5 allowed=[0.0,360.0]",
+      "name": "packet7_summary_lon_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=112.83900645465735 max=1611.345359620181 allowed=[50.0,5000.0]",
+      "name": "packet7_summary_T_K_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-771.1467729580015 max=599.5196810208836 allowed=[-5000.0,5000.0]",
+      "name": "packet7_summary_U_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-741.3314972984058 max=763.3488381458534 allowed=[-5000.0,5000.0]",
+      "name": "packet7_summary_V_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=4.055140885992663e-08 max=106815.168864745 allowed=[0.0,200000.0]",
+      "name": "packet7_summary_PMID_Pa_range",
+      "ok": true
+    },
+    {
+      "detail": "min=50.75643610669817 max=740357.9387347881 allowed=[-1000.0,2000000.0]",
+      "name": "packet7_summary_ZM_m_range",
+      "ok": true
+    },
+    {
+      "detail": "min=14.933417250189432 max=28.874383973054613 allowed=[1.0,60.0]",
+      "name": "packet7_summary_MBARV_kg_mol_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.807482026528988e-25 max=0.9999396362943496 allowed=[-1e-12,1.1]",
+      "name": "packet7_summary_q_O_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.253453681333084e-06 max=0.23730537000124838 allowed=[-1e-12,1.1]",
+      "name": "packet7_summary_q_O2_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.6412198124189405e-28 max=0.004868094668285564 allowed=[-1e-12,1.1]",
+      "name": "packet7_summary_q_H_range",
+      "ok": true
+    },
+    {
+      "detail": "min=1.8723591218673658e-23 max=0.058808860101338574 allowed=[-1e-12,1.1]",
+      "name": "packet7_summary_q_N_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.050477544562768e-19 max=0.001192660629159529 allowed=[-1e-12,1.1]",
+      "name": "packet7_summary_q_NO_range",
+      "ok": true
+    },
+    {
+      "detail": "source_cols=13824 filled=13824 expected=13824",
+      "name": "packet7_replay_source_coverage",
+      "ok": true
+    },
+    {
+      "detail": "invalid",
+      "name": "packet7_replay_n2_mode",
+      "ok": true
+    },
+    {
+      "detail": "bad_weighted_z=0",
+      "name": "packet7_replay_bad_weighted_z",
+      "ok": true
+    },
+    {
+      "detail": "samples=6031360",
+      "name": "packet7_replay_samples_positive",
+      "ok": true
+    },
+    {
+      "detail": "initial=6031360 final=6031360",
+      "name": "packet7_replay_initial_final_samples",
+      "ok": true
+    },
+    {
+      "detail": "initial=1822221 final=1822221",
+      "name": "packet7_replay_initial_final_invalid",
+      "ok": true
+    },
+    {
+      "detail": "initial=1647614 final=1647614",
+      "name": "packet7_replay_initial_final_above_live_top",
+      "ok": true
+    },
+    {
+      "detail": "initial=4383746 final=4383746",
+      "name": "packet7_replay_initial_final_n2_residual_used",
+      "ok": true
+    },
+    {
+      "detail": "initial=174607 final=174607",
+      "name": "packet7_replay_initial_final_n2_residual_negative",
+      "ok": true
+    },
+    {
+      "detail": "n2_residual_used=4383746",
+      "name": "packet7_replay_n2_residual_used_positive",
+      "ok": true
+    },
+    {
+      "detail": "min=-0.05112346729885 max=0.8130905455337173",
+      "name": "packet7_replay_n2_residual_bounds",
+      "ok": true
+    },
+    {
+      "detail": "ok_marker=True",
+      "name": "packet7_recv_compare_ok",
+      "ok": true
+    },
+    {
+      "detail": "ranks=32 expected=32",
+      "name": "packet7_recv_compare_ranks",
+      "ok": true
+    },
+    {
+      "detail": "occurrence=7 expected=7",
+      "name": "packet7_recv_compare_occurrence",
+      "ok": true
+    },
+    {
+      "detail": "max_rel=3.05377e-13 limit=1e-06",
+      "name": "packet7_recv_compare_max_rel",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000008.txt",
+      "name": "packet8_summary_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000008.out",
+      "name": "packet8_replay_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000008.txt",
+      "name": "packet8_recv_compare_exists",
+      "ok": true
+    },
+    {
+      "detail": "total_cols=13824 expected=13824",
+      "name": "packet8_summary_source_columns",
+      "ok": true
+    },
+    {
+      "detail": "packets=[8]",
+      "name": "packet8_summary_packet_index",
+      "ok": true
+    },
+    {
+      "detail": "bad_size_files_present=False",
+      "name": "packet8_summary_no_bad_size_files",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet8_summary_lat_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet8_summary_lon_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet8_summary_T_K_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet8_summary_U_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet8_summary_V_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet8_summary_PMID_Pa_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet8_summary_ZM_m_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet8_summary_MBARV_kg_mol_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet8_summary_q_O_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet8_summary_q_O2_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet8_summary_q_H_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet8_summary_q_N_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet8_summary_q_NO_bad",
+      "ok": true
+    },
+    {
+      "detail": "missing=0 unique=13824 expected=13824",
+      "name": "packet8_summary_cid_coverage",
+      "ok": true
+    },
+    {
+      "detail": "min=-90.0 max=90.0 allowed=[-90.0,90.0]",
+      "name": "packet8_summary_lat_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=0.0 max=357.5 allowed=[0.0,360.0]",
+      "name": "packet8_summary_lon_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=112.77993812637337 max=1606.0738315484616 allowed=[50.0,5000.0]",
+      "name": "packet8_summary_T_K_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-750.9832891380154 max=606.6442327878394 allowed=[-5000.0,5000.0]",
+      "name": "packet8_summary_U_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-731.6146963876928 max=774.2968585985947 allowed=[-5000.0,5000.0]",
+      "name": "packet8_summary_V_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=4.055140885992663e-08 max=108330.48786031271 allowed=[0.0,200000.0]",
+      "name": "packet8_summary_PMID_Pa_range",
+      "ok": true
+    },
+    {
+      "detail": "min=51.05178934769112 max=736332.3812588599 allowed=[-1000.0,2000000.0]",
+      "name": "packet8_summary_ZM_m_range",
+      "ok": true
+    },
+    {
+      "detail": "min=14.965151866881525 max=28.8743723188066 allowed=[1.0,60.0]",
+      "name": "packet8_summary_MBARV_kg_mol_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.8891072271537584e-25 max=0.9999742535993903 allowed=[-1e-12,1.1]",
+      "name": "packet8_summary_q_O_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.085525725920446e-06 max=0.2373004444012463 allowed=[-1e-12,1.1]",
+      "name": "packet8_summary_q_O2_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.6894259203054206e-28 max=0.004712064773000994 allowed=[-1e-12,1.1]",
+      "name": "packet8_summary_q_H_range",
+      "ok": true
+    },
+    {
+      "detail": "min=1.6561088891488677e-23 max=0.05864291622117647 allowed=[-1e-12,1.1]",
+      "name": "packet8_summary_q_N_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.079430634345543e-19 max=0.001180392896945 allowed=[-1e-12,1.1]",
+      "name": "packet8_summary_q_NO_range",
+      "ok": true
+    },
+    {
+      "detail": "source_cols=13824 filled=13824 expected=13824",
+      "name": "packet8_replay_source_coverage",
+      "ok": true
+    },
+    {
+      "detail": "invalid",
+      "name": "packet8_replay_n2_mode",
+      "ok": true
+    },
+    {
+      "detail": "bad_weighted_z=0",
+      "name": "packet8_replay_bad_weighted_z",
+      "ok": true
+    },
+    {
+      "detail": "samples=6031360",
+      "name": "packet8_replay_samples_positive",
+      "ok": true
+    },
+    {
+      "detail": "initial=6031360 final=6031360",
+      "name": "packet8_replay_initial_final_samples",
+      "ok": true
+    },
+    {
+      "detail": "initial=1822641 final=1822641",
+      "name": "packet8_replay_initial_final_invalid",
+      "ok": true
+    },
+    {
+      "detail": "initial=1648485 final=1648485",
+      "name": "packet8_replay_initial_final_above_live_top",
+      "ok": true
+    },
+    {
+      "detail": "initial=4382875 final=4382875",
+      "name": "packet8_replay_initial_final_n2_residual_used",
+      "ok": true
+    },
+    {
+      "detail": "initial=174156 final=174156",
+      "name": "packet8_replay_initial_final_n2_residual_negative",
+      "ok": true
+    },
+    {
+      "detail": "n2_residual_used=4382875",
+      "name": "packet8_replay_n2_residual_used_positive",
+      "ok": true
+    },
+    {
+      "detail": "min=-0.04995603732663364 max=0.8130472567155591",
+      "name": "packet8_replay_n2_residual_bounds",
+      "ok": true
+    },
+    {
+      "detail": "ok_marker=True",
+      "name": "packet8_recv_compare_ok",
+      "ok": true
+    },
+    {
+      "detail": "ranks=32 expected=32",
+      "name": "packet8_recv_compare_ranks",
+      "ok": true
+    },
+    {
+      "detail": "occurrence=8 expected=8",
+      "name": "packet8_recv_compare_occurrence",
+      "ok": true
+    },
+    {
+      "detail": "max_rel=3.5766e-13 limit=1e-06",
+      "name": "packet8_recv_compare_max_rel",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000009.txt",
+      "name": "packet9_summary_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000009.out",
+      "name": "packet9_replay_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000009.txt",
+      "name": "packet9_recv_compare_exists",
+      "ok": true
+    },
+    {
+      "detail": "total_cols=13824 expected=13824",
+      "name": "packet9_summary_source_columns",
+      "ok": true
+    },
+    {
+      "detail": "packets=[9]",
+      "name": "packet9_summary_packet_index",
+      "ok": true
+    },
+    {
+      "detail": "bad_size_files_present=False",
+      "name": "packet9_summary_no_bad_size_files",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet9_summary_lat_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet9_summary_lon_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet9_summary_T_K_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet9_summary_U_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet9_summary_V_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet9_summary_PMID_Pa_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet9_summary_ZM_m_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet9_summary_MBARV_kg_mol_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet9_summary_q_O_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet9_summary_q_O2_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet9_summary_q_H_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet9_summary_q_N_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet9_summary_q_NO_bad",
+      "ok": true
+    },
+    {
+      "detail": "missing=0 unique=13824 expected=13824",
+      "name": "packet9_summary_cid_coverage",
+      "ok": true
+    },
+    {
+      "detail": "min=-90.0 max=90.0 allowed=[-90.0,90.0]",
+      "name": "packet9_summary_lat_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=0.0 max=357.5 allowed=[0.0,360.0]",
+      "name": "packet9_summary_lon_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=112.69934768699987 max=1607.2995998985575 allowed=[50.0,5000.0]",
+      "name": "packet9_summary_T_K_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-723.6277324456746 max=619.1691915763445 allowed=[-5000.0,5000.0]",
+      "name": "packet9_summary_U_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-721.4378403366709 max=781.3567410790919 allowed=[-5000.0,5000.0]",
+      "name": "packet9_summary_V_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=4.055140885992663e-08 max=108718.3770173474 allowed=[0.0,200000.0]",
+      "name": "packet9_summary_PMID_Pa_range",
+      "ok": true
+    },
+    {
+      "detail": "min=51.33259183823597 max=734132.261017062 allowed=[-1000.0,2000000.0]",
+      "name": "packet9_summary_ZM_m_range",
+      "ok": true
+    },
+    {
+      "detail": "min=14.986577976792809 max=28.874361814288367 allowed=[1.0,60.0]",
+      "name": "packet9_summary_MBARV_kg_mol_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.929773479387581e-25 max=0.9999757236848792 allowed=[-1e-12,1.1]",
+      "name": "packet9_summary_q_O_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.06216440438987e-06 max=0.237295165219069 allowed=[-1e-12,1.1]",
+      "name": "packet9_summary_q_O2_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.71142215551383e-28 max=0.0046277029577667505 allowed=[-1e-12,1.1]",
+      "name": "packet9_summary_q_H_range",
+      "ok": true
+    },
+    {
+      "detail": "min=1.487424350374527e-23 max=0.058031385883066056 allowed=[-1e-12,1.1]",
+      "name": "packet9_summary_q_N_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.118162898387395e-19 max=0.0011695556456044578 allowed=[-1e-12,1.1]",
+      "name": "packet9_summary_q_NO_range",
+      "ok": true
+    },
+    {
+      "detail": "source_cols=13824 filled=13824 expected=13824",
+      "name": "packet9_replay_source_coverage",
+      "ok": true
+    },
+    {
+      "detail": "invalid",
+      "name": "packet9_replay_n2_mode",
+      "ok": true
+    },
+    {
+      "detail": "bad_weighted_z=0",
+      "name": "packet9_replay_bad_weighted_z",
+      "ok": true
+    },
+    {
+      "detail": "samples=6031360",
+      "name": "packet9_replay_samples_positive",
+      "ok": true
+    },
+    {
+      "detail": "initial=6031360 final=6031360",
+      "name": "packet9_replay_initial_final_samples",
+      "ok": true
+    },
+    {
+      "detail": "initial=1823177 final=1823177",
+      "name": "packet9_replay_initial_final_invalid",
+      "ok": true
+    },
+    {
+      "detail": "initial=1649240 final=1649240",
+      "name": "packet9_replay_initial_final_above_live_top",
+      "ok": true
+    },
+    {
+      "detail": "initial=4382120 final=4382120",
+      "name": "packet9_replay_initial_final_n2_residual_used",
+      "ok": true
+    },
+    {
+      "detail": "initial=173937 final=173937",
+      "name": "packet9_replay_initial_final_n2_residual_negative",
+      "ok": true
+    },
+    {
+      "detail": "n2_residual_used=4382120",
+      "name": "packet9_replay_n2_residual_used_positive",
+      "ok": true
+    },
+    {
+      "detail": "min=-0.05081495884854379 max=0.8130157394701916",
+      "name": "packet9_replay_n2_residual_bounds",
+      "ok": true
+    },
+    {
+      "detail": "ok_marker=True",
+      "name": "packet9_recv_compare_ok",
+      "ok": true
+    },
+    {
+      "detail": "ranks=32 expected=32",
+      "name": "packet9_recv_compare_ranks",
+      "ok": true
+    },
+    {
+      "detail": "occurrence=9 expected=9",
+      "name": "packet9_recv_compare_occurrence",
+      "ok": true
+    },
+    {
+      "detail": "max_rel=1.08667e-12 limit=1e-06",
+      "name": "packet9_recv_compare_max_rel",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000010.txt",
+      "name": "packet10_summary_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000010.out",
+      "name": "packet10_replay_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000010.txt",
+      "name": "packet10_recv_compare_exists",
+      "ok": true
+    },
+    {
+      "detail": "total_cols=13824 expected=13824",
+      "name": "packet10_summary_source_columns",
+      "ok": true
+    },
+    {
+      "detail": "packets=[10]",
+      "name": "packet10_summary_packet_index",
+      "ok": true
+    },
+    {
+      "detail": "bad_size_files_present=False",
+      "name": "packet10_summary_no_bad_size_files",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet10_summary_lat_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet10_summary_lon_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet10_summary_T_K_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet10_summary_U_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet10_summary_V_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet10_summary_PMID_Pa_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet10_summary_ZM_m_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet10_summary_MBARV_kg_mol_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet10_summary_q_O_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet10_summary_q_O2_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet10_summary_q_H_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet10_summary_q_N_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet10_summary_q_NO_bad",
+      "ok": true
+    },
+    {
+      "detail": "missing=0 unique=13824 expected=13824",
+      "name": "packet10_summary_cid_coverage",
+      "ok": true
+    },
+    {
+      "detail": "min=-90.0 max=90.0 allowed=[-90.0,90.0]",
+      "name": "packet10_summary_lat_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=0.0 max=357.5 allowed=[0.0,360.0]",
+      "name": "packet10_summary_lon_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=112.58623930914314 max=1629.6768622786237 allowed=[50.0,5000.0]",
+      "name": "packet10_summary_T_K_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-708.6957327054135 max=640.2294298030135 allowed=[-5000.0,5000.0]",
+      "name": "packet10_summary_U_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-709.393236201818 max=783.4646580652172 allowed=[-5000.0,5000.0]",
+      "name": "packet10_summary_V_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=4.055140885992663e-08 max=108182.78718980134 allowed=[0.0,200000.0]",
+      "name": "packet10_summary_PMID_Pa_range",
+      "ok": true
+    },
+    {
+      "detail": "min=51.62649811451934 max=741507.4873420591 allowed=[-1000.0,2000000.0]",
+      "name": "packet10_summary_ZM_m_range",
+      "ok": true
+    },
+    {
+      "detail": "min=14.997902284180185 max=28.874352283481564 allowed=[1.0,60.0]",
+      "name": "packet10_summary_MBARV_kg_mol_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.945886566927292e-25 max=0.9999845918711789 allowed=[-1e-12,1.1]",
+      "name": "packet10_summary_q_O_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.212828606095263e-06 max=0.2372895729071999 allowed=[-1e-12,1.1]",
+      "name": "packet10_summary_q_O2_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.738532862700321e-28 max=0.004576181715723077 allowed=[-1e-12,1.1]",
+      "name": "packet10_summary_q_H_range",
+      "ok": true
+    },
+    {
+      "detail": "min=1.3841848845006846e-23 max=0.05733515616141806 allowed=[-1e-12,1.1]",
+      "name": "packet10_summary_q_N_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.170498173568672e-19 max=0.0011600140209696791 allowed=[-1e-12,1.1]",
+      "name": "packet10_summary_q_NO_range",
+      "ok": true
+    },
+    {
+      "detail": "source_cols=13824 filled=13824 expected=13824",
+      "name": "packet10_replay_source_coverage",
+      "ok": true
+    },
+    {
+      "detail": "invalid",
+      "name": "packet10_replay_n2_mode",
+      "ok": true
+    },
+    {
+      "detail": "bad_weighted_z=0",
+      "name": "packet10_replay_bad_weighted_z",
+      "ok": true
+    },
+    {
+      "detail": "samples=6031360",
+      "name": "packet10_replay_samples_positive",
+      "ok": true
+    },
+    {
+      "detail": "initial=6031360 final=6031360",
+      "name": "packet10_replay_initial_final_samples",
+      "ok": true
+    },
+    {
+      "detail": "initial=1823757 final=1823757",
+      "name": "packet10_replay_initial_final_invalid",
+      "ok": true
+    },
+    {
+      "detail": "initial=1649968 final=1649968",
+      "name": "packet10_replay_initial_final_above_live_top",
+      "ok": true
+    },
+    {
+      "detail": "initial=4381392 final=4381392",
+      "name": "packet10_replay_initial_final_n2_residual_used",
+      "ok": true
+    },
+    {
+      "detail": "initial=173789 final=173789",
+      "name": "packet10_replay_initial_final_n2_residual_negative",
+      "ok": true
+    },
+    {
+      "detail": "n2_residual_used=4381392",
+      "name": "packet10_replay_n2_residual_used_positive",
+      "ok": true
+    },
+    {
+      "detail": "min=-0.051497711148991744 max=0.8130402418435313",
+      "name": "packet10_replay_n2_residual_bounds",
+      "ok": true
+    },
+    {
+      "detail": "ok_marker=True",
+      "name": "packet10_recv_compare_ok",
+      "ok": true
+    },
+    {
+      "detail": "ranks=32 expected=32",
+      "name": "packet10_recv_compare_ranks",
+      "ok": true
+    },
+    {
+      "detail": "occurrence=10 expected=10",
+      "name": "packet10_recv_compare_occurrence",
+      "ok": true
+    },
+    {
+      "detail": "max_rel=1.12426e-12 limit=1e-06",
+      "name": "packet10_recv_compare_max_rel",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000011.txt",
+      "name": "packet11_summary_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000011.out",
+      "name": "packet11_replay_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000011.txt",
+      "name": "packet11_recv_compare_exists",
+      "ok": true
+    },
+    {
+      "detail": "total_cols=13824 expected=13824",
+      "name": "packet11_summary_source_columns",
+      "ok": true
+    },
+    {
+      "detail": "packets=[11]",
+      "name": "packet11_summary_packet_index",
+      "ok": true
+    },
+    {
+      "detail": "bad_size_files_present=False",
+      "name": "packet11_summary_no_bad_size_files",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet11_summary_lat_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet11_summary_lon_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet11_summary_T_K_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet11_summary_U_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet11_summary_V_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet11_summary_PMID_Pa_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet11_summary_ZM_m_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet11_summary_MBARV_kg_mol_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet11_summary_q_O_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet11_summary_q_O2_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet11_summary_q_H_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet11_summary_q_N_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet11_summary_q_NO_bad",
+      "ok": true
+    },
+    {
+      "detail": "missing=0 unique=13824 expected=13824",
+      "name": "packet11_summary_cid_coverage",
+      "ok": true
+    },
+    {
+      "detail": "min=-90.0 max=90.0 allowed=[-90.0,90.0]",
+      "name": "packet11_summary_lat_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=0.0 max=357.5 allowed=[0.0,360.0]",
+      "name": "packet11_summary_lon_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=112.32377107860121 max=1643.600705057556 allowed=[50.0,5000.0]",
+      "name": "packet11_summary_T_K_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-739.5447831323606 max=657.670743765975 allowed=[-5000.0,5000.0]",
+      "name": "packet11_summary_U_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-694.9091290445584 max=778.1777413678637 allowed=[-5000.0,5000.0]",
+      "name": "packet11_summary_V_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=4.055140885992663e-08 max=108513.78050768837 allowed=[0.0,200000.0]",
+      "name": "packet11_summary_PMID_Pa_range",
+      "ok": true
+    },
+    {
+      "detail": "min=51.943574295154505 max=745887.7050799255 allowed=[-1000.0,2000000.0]",
+      "name": "packet11_summary_ZM_m_range",
+      "ok": true
+    },
+    {
+      "detail": "min=15.00767116473243 max=28.874343551691148 allowed=[1.0,60.0]",
+      "name": "packet11_summary_MBARV_kg_mol_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.90417644360738e-25 max=0.9999878199723679 allowed=[-1e-12,1.1]",
+      "name": "packet11_summary_q_O_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.13582940823605e-06 max=0.23728371859287964 allowed=[-1e-12,1.1]",
+      "name": "packet11_summary_q_O2_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.7746098443354035e-28 max=0.004535982488227458 allowed=[-1e-12,1.1]",
+      "name": "packet11_summary_q_H_range",
+      "ok": true
+    },
+    {
+      "detail": "min=1.3321079790425603e-23 max=0.056953197885272575 allowed=[-1e-12,1.1]",
+      "name": "packet11_summary_q_N_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.239251612371511e-19 max=0.001153983945344796 allowed=[-1e-12,1.1]",
+      "name": "packet11_summary_q_NO_range",
+      "ok": true
+    },
+    {
+      "detail": "source_cols=13824 filled=13824 expected=13824",
+      "name": "packet11_replay_source_coverage",
+      "ok": true
+    },
+    {
+      "detail": "invalid",
+      "name": "packet11_replay_n2_mode",
+      "ok": true
+    },
+    {
+      "detail": "bad_weighted_z=0",
+      "name": "packet11_replay_bad_weighted_z",
+      "ok": true
+    },
+    {
+      "detail": "samples=6031360",
+      "name": "packet11_replay_samples_positive",
+      "ok": true
+    },
+    {
+      "detail": "initial=6031360 final=6031360",
+      "name": "packet11_replay_initial_final_samples",
+      "ok": true
+    },
+    {
+      "detail": "initial=1824310 final=1824310",
+      "name": "packet11_replay_initial_final_invalid",
+      "ok": true
+    },
+    {
+      "detail": "initial=1650666 final=1650666",
+      "name": "packet11_replay_initial_final_above_live_top",
+      "ok": true
+    },
+    {
+      "detail": "initial=4380694 final=4380694",
+      "name": "packet11_replay_initial_final_n2_residual_used",
+      "ok": true
+    },
+    {
+      "detail": "initial=173644 final=173644",
+      "name": "packet11_replay_initial_final_n2_residual_negative",
+      "ok": true
+    },
+    {
+      "detail": "n2_residual_used=4380694",
+      "name": "packet11_replay_n2_residual_used_positive",
+      "ok": true
+    },
+    {
+      "detail": "min=-0.05139328739477049 max=0.8130616881473688",
+      "name": "packet11_replay_n2_residual_bounds",
+      "ok": true
+    },
+    {
+      "detail": "ok_marker=True",
+      "name": "packet11_recv_compare_ok",
+      "ok": true
+    },
+    {
+      "detail": "ranks=32 expected=32",
+      "name": "packet11_recv_compare_ranks",
+      "ok": true
+    },
+    {
+      "detail": "occurrence=11 expected=11",
+      "name": "packet11_recv_compare_occurrence",
+      "ok": true
+    },
+    {
+      "detail": "max_rel=1.12911e-12 limit=1e-06",
+      "name": "packet11_recv_compare_max_rel",
+      "ok": true
+    },
+    {
+      "detail": "sent_packets=12 expected=12",
+      "name": "sender_live_packet_count",
+      "ok": true
+    },
+    {
+      "detail": "qc_lines=384 expected_min=384",
+      "name": "receiver_qc_line_count",
+      "ok": true
+    },
+    {
+      "detail": "present=True",
+      "name": "sami3_done",
+      "ok": true
+    },
+    {
+      "detail": "present=True",
+      "name": "waccmx_done",
+      "ok": true
+    },
+    {
+      "detail": "matches=0",
+      "name": "fatal_markers_absent",
+      "ok": true
+    }
+  ],
+  "meta": {
+    "live_meta": {
+      "actual_transport": "runtime_live_packet",
+      "density_conversion": "q*mbarv/species_mw*pmid/(kB*T)*1e-6 -> cm^-3",
+      "dtime_phys_s": 300.0,
+      "fallback_policy": {
+        "He": "payload value -1 so SAMI3 native/MSIS He is retained",
+        "N2": "CAM N2 if finite, otherwise residual closure from major species",
+        "N2_negative_mode": "invalid",
+        "W": "payload value 0; CAM omega diagnostic only",
+        "above_live_top": "payload sample marked invalid so SAMI3 native neutral state is retained",
+        "remap_scaling": "gather-to-root prototype; runtime_map_source_columns=13824; f09 production still needs distributed remap"
+      },
+      "max_packets": 12,
+      "nstep": 11,
+      "packet_hour": 0.916666687,
+      "packet_index": 11,
+      "payload_header": {
+        "magic": 20260522,
+        "nf": 124,
+        "nl": 5,
+        "nneut": 7,
+        "nz": 304
+      },
+      "payload_mode": "live",
+      "payload_species_order": [
+        "H",
+        "O",
+        "NO",
+        "O2",
+        "He",
+        "N2",
+        "N"
+      ],
+      "payload_units": {
+        "density": "cm^-3",
+        "temperature": "K",
+        "wind": "cm/s"
+      },
+      "payload_version": "wxsami3-live-payload-v2",
+      "runtime_map": {
+        "file": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/wxsami3_runtime_map_f19_20260523.bin",
+        "magic": 20260524,
+        "n_s": 14475264,
+        "npoints": 3618816,
+        "source_columns": 13824
+      },
+      "runtime_qc": {
+        "above_live_top": 1650666,
+        "invalid": 1824310,
+        "n2_residual_max": 0.8130616881473688,
+        "n2_residual_min": -0.05139328739477049,
+        "n2_residual_negative": 173644,
+        "n2_residual_used": 4380694,
+        "samples": 6031360
+      },
+      "runtime_source": "CAM phys_state(:)",
+      "send_every_nsteps": 1,
+      "sender_checksum": {
+        "invalid_f": 1824310,
+        "invalid_i": 1824310,
+        "scope": "sum over all runtime-sent worker payload arrays",
+        "sum_dennf": 1.4103125074051113e+20,
+        "sum_denni": 1.4103125074051113e+20,
+        "sum_tnf": 2493380651.543762,
+        "sum_tni": 2493380651.543762,
+        "sum_uf": -2933764567.589423,
+        "sum_ui": -2933764567.589423,
+        "sum_vf": 2926363023.374868,
+        "sum_vi": 2926363023.374868,
+        "sum_wf": 0.0,
+        "sum_wi": 0.0,
+        "valid_f": 4207050,
+        "valid_i": 4207050
+      },
+      "source_flag_mpi_tag": 212,
+      "source_flag_values": {
+        "SAMI3_NATIVE_ABOVE_TOP": 2,
+        "SAMI3_NATIVE_N2_INVALID": 3,
+        "SAMI3_NATIVE_OTHER_INVALID": 4,
+        "WACCMX_VALID": 1
+      },
+      "source_flags": {
+        "SAMI3_NATIVE_ABOVE_TOP": 1650666,
+        "SAMI3_NATIVE_HE": "policy: He payload value -1",
+        "SAMI3_NATIVE_N2_INVALID": 173644,
+        "SAMI3_NATIVE_OTHER_INVALID": 0,
+        "SAMI3_NATIVE_W": "policy: W payload value 0",
+        "WACCMX_VALID": 4207050
+      },
+      "source_species_indices": [
+        {
+          "index": 57,
+          "name": "O"
+        },
+        {
+          "index": 58,
+          "name": "O2"
+        },
+        {
+          "index": 37,
+          "name": "H"
+        },
+        {
+          "index": 51,
+          "name": "N"
+        },
+        {
+          "index": 54,
+          "name": "NO"
+        },
+        {
+          "index": -1,
+          "name": "N2"
+        },
+        {
+          "index": -1,
+          "name": "He"
+        }
+      ],
+      "source_species_order": [
+        "O",
+        "O2",
+        "H",
+        "N",
+        "NO",
+        "N2",
+        "He"
+      ],
+      "source_units": {
+        "composition": "mass_mixing_ratio",
+        "height": "m",
+        "omega": "Pa/s diagnostic only",
+        "pressure": "Pa",
+        "temperature": "K",
+        "wind": "m/s"
+      }
+    },
+    "logs": {
+      "sami3_online_receiver": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/sami3_online_receiver.out",
+      "waccmx_cesm": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/waccmx_cesm.out"
+    },
+    "packets": {
+      "0": {
+        "recv_compare": {
+          "max_abs": 2087940.0,
+          "max_rel": 4.83248e-13,
+          "occurrence": 0,
+          "ok_marker": true,
+          "packet_hour_set": [
+            0.0
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000000.txt",
+          "ranks": 32,
+          "step_set": [
+            0
+          ]
+        },
+        "replay": {
+          "filled": 13824,
+          "final": {
+            "above_live_top": 1641376,
+            "bad_weighted_z": 0,
+            "invalid": 1819595,
+            "n2_residual_max": 0.8129786925378699,
+            "n2_residual_min": -0.053314608006139914,
+            "n2_residual_negative": 178219,
+            "n2_residual_used": 4389984,
+            "samples": 6031360
+          },
+          "initial": {
+            "above_live_top": 1641376,
+            "bad_weighted_z": 0,
+            "invalid": 1819595,
+            "n2_residual_max": 0.8129786925378699,
+            "n2_residual_min": -0.053314608006139914,
+            "n2_residual_negative": 178219,
+            "n2_residual_used": 4389984,
+            "samples": 6031360
+          },
+          "n2_mode": "invalid",
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000000.out",
+          "payload_prefix": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_pkt000000/waccmx_neutral_rank",
+          "pver": 126,
+          "source_cols": 13824
+        },
+        "summary": {
+          "field_stats": {
+            "MBARV_kg_mol": {
+              "bad": 0,
+              "max": 28.874522993878628,
+              "min": 14.895337165442252
+            },
+            "PMID_Pa": {
+              "bad": 0,
+              "max": 107321.3890267048,
+              "min": 4.055140885992663e-08
+            },
+            "T_K": {
+              "bad": 0,
+              "max": 1522.7628810979916,
+              "min": 113.19272490765026
+            },
+            "U_m_s": {
+              "bad": 0,
+              "max": 769.7344197674036,
+              "min": -925.7242161594645
+            },
+            "V_m_s": {
+              "bad": 0,
+              "max": 736.3650929706123,
+              "min": -845.8062460574145
+            },
+            "ZM_m": {
+              "bad": 0,
+              "max": 720507.7580399793,
+              "min": 48.56266690499009
+            },
+            "cid": {
+              "max": 13824,
+              "min": 1,
+              "missing": 0,
+              "unique": 13824
+            },
+            "lat_deg": {
+              "bad": 0,
+              "max": 90.0,
+              "min": -90.0
+            },
+            "lon_deg": {
+              "bad": 0,
+              "max": 357.5,
+              "min": 0.0
+            },
+            "q_H": {
+              "bad": 0,
+              "max": 0.0050683000424878695,
+              "min": 2.913249081948255e-28
+            },
+            "q_He": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_N": {
+              "bad": 0,
+              "max": 0.060584943671142005,
+              "min": 1.885260804240404e-23
+            },
+            "q_N2": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_NO": {
+              "bad": 0,
+              "max": 0.0014346353422642934,
+              "min": 9.01142764707503e-19
+            },
+            "q_O": {
+              "bad": 0,
+              "max": 0.9999399874408939,
+              "min": 2.20521131163437e-25
+            },
+            "q_O2": {
+              "bad": 0,
+              "max": 0.23732970847615611,
+              "min": 9.229295650411587e-06
+            }
+          },
+          "files": 16,
+          "has_bad_size_files": false,
+          "nsteps": [
+            0
+          ],
+          "packets": [
+            0
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000000.txt",
+          "ranks": 16,
+          "total_cols": 13824
+        }
+      },
+      "1": {
+        "recv_compare": {
+          "max_abs": 2693630.0,
+          "max_rel": 6.76502e-13,
+          "occurrence": 1,
+          "ok_marker": true,
+          "packet_hour_set": [
+            0.0833333358
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000001.txt",
+          "ranks": 32,
+          "step_set": [
+            1
+          ]
+        },
+        "replay": {
+          "filled": 13824,
+          "final": {
+            "above_live_top": 1642002,
+            "bad_weighted_z": 0,
+            "invalid": 1819902,
+            "n2_residual_max": 0.8130488452756442,
+            "n2_residual_min": -0.05293758530917447,
+            "n2_residual_negative": 177900,
+            "n2_residual_used": 4389358,
+            "samples": 6031360
+          },
+          "initial": {
+            "above_live_top": 1642002,
+            "bad_weighted_z": 0,
+            "invalid": 1819902,
+            "n2_residual_max": 0.8130488452756442,
+            "n2_residual_min": -0.05293758530917447,
+            "n2_residual_negative": 177900,
+            "n2_residual_used": 4389358,
+            "samples": 6031360
+          },
+          "n2_mode": "invalid",
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000001.out",
+          "payload_prefix": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_pkt000001/waccmx_neutral_rank",
+          "pver": 126,
+          "source_cols": 13824
+        },
+        "summary": {
+          "field_stats": {
+            "MBARV_kg_mol": {
+              "bad": 0,
+              "max": 28.874494448016016,
+              "min": 14.914851476788279
+            },
+            "PMID_Pa": {
+              "bad": 0,
+              "max": 107228.60855014052,
+              "min": 4.055140885992663e-08
+            },
+            "T_K": {
+              "bad": 0,
+              "max": 1525.6802633198183,
+              "min": 113.11677799602712
+            },
+            "U_m_s": {
+              "bad": 0,
+              "max": 746.2280684569153,
+              "min": -908.2869163996029
+            },
+            "V_m_s": {
+              "bad": 0,
+              "max": 724.3955292789938,
+              "min": -848.8983623659324
+            },
+            "ZM_m": {
+              "bad": 0,
+              "max": 722021.9350605857,
+              "min": 48.739033121328895
+            },
+            "cid": {
+              "max": 13824,
+              "min": 1,
+              "missing": 0,
+              "unique": 13824
+            },
+            "lat_deg": {
+              "bad": 0,
+              "max": 90.0,
+              "min": -90.0
+            },
+            "lon_deg": {
+              "bad": 0,
+              "max": 357.5,
+              "min": 0.0
+            },
+            "q_H": {
+              "bad": 0,
+              "max": 0.004977793598453359,
+              "min": 2.974939423330202e-28
+            },
+            "q_He": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_N": {
+              "bad": 0,
+              "max": 0.060367837412881126,
+              "min": 1.8931286575806156e-23
+            },
+            "q_N2": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_NO": {
+              "bad": 0,
+              "max": 0.0013771497728481319,
+              "min": 9.042922746523819e-19
+            },
+            "q_O": {
+              "bad": 0,
+              "max": 0.9999399904225778,
+              "min": 2.3076025385839838e-25
+            },
+            "q_O2": {
+              "bad": 0,
+              "max": 0.2373272779100491,
+              "min": 9.192934879215706e-06
+            }
+          },
+          "files": 16,
+          "has_bad_size_files": false,
+          "nsteps": [
+            1
+          ],
+          "packets": [
+            1
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000001.txt",
+          "ranks": 16,
+          "total_cols": 13824
+        }
+      },
+      "10": {
+        "recv_compare": {
+          "max_abs": 5231620.0,
+          "max_rel": 1.12426e-12,
+          "occurrence": 10,
+          "ok_marker": true,
+          "packet_hour_set": [
+            0.833333313
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000010.txt",
+          "ranks": 32,
+          "step_set": [
+            10
+          ]
+        },
+        "replay": {
+          "filled": 13824,
+          "final": {
+            "above_live_top": 1649968,
+            "bad_weighted_z": 0,
+            "invalid": 1823757,
+            "n2_residual_max": 0.8130402418435313,
+            "n2_residual_min": -0.051497711148991744,
+            "n2_residual_negative": 173789,
+            "n2_residual_used": 4381392,
+            "samples": 6031360
+          },
+          "initial": {
+            "above_live_top": 1649968,
+            "bad_weighted_z": 0,
+            "invalid": 1823757,
+            "n2_residual_max": 0.8130402418435313,
+            "n2_residual_min": -0.051497711148991744,
+            "n2_residual_negative": 173789,
+            "n2_residual_used": 4381392,
+            "samples": 6031360
+          },
+          "n2_mode": "invalid",
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000010.out",
+          "payload_prefix": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_pkt000010/waccmx_neutral_rank",
+          "pver": 126,
+          "source_cols": 13824
+        },
+        "summary": {
+          "field_stats": {
+            "MBARV_kg_mol": {
+              "bad": 0,
+              "max": 28.874352283481564,
+              "min": 14.997902284180185
+            },
+            "PMID_Pa": {
+              "bad": 0,
+              "max": 108182.78718980134,
+              "min": 4.055140885992663e-08
+            },
+            "T_K": {
+              "bad": 0,
+              "max": 1629.6768622786237,
+              "min": 112.58623930914314
+            },
+            "U_m_s": {
+              "bad": 0,
+              "max": 640.2294298030135,
+              "min": -708.6957327054135
+            },
+            "V_m_s": {
+              "bad": 0,
+              "max": 783.4646580652172,
+              "min": -709.393236201818
+            },
+            "ZM_m": {
+              "bad": 0,
+              "max": 741507.4873420591,
+              "min": 51.62649811451934
+            },
+            "cid": {
+              "max": 13824,
+              "min": 1,
+              "missing": 0,
+              "unique": 13824
+            },
+            "lat_deg": {
+              "bad": 0,
+              "max": 90.0,
+              "min": -90.0
+            },
+            "lon_deg": {
+              "bad": 0,
+              "max": 357.5,
+              "min": 0.0
+            },
+            "q_H": {
+              "bad": 0,
+              "max": 0.004576181715723077,
+              "min": 2.738532862700321e-28
+            },
+            "q_He": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_N": {
+              "bad": 0,
+              "max": 0.05733515616141806,
+              "min": 1.3841848845006846e-23
+            },
+            "q_N2": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_NO": {
+              "bad": 0,
+              "max": 0.0011600140209696791,
+              "min": 9.170498173568672e-19
+            },
+            "q_O": {
+              "bad": 0,
+              "max": 0.9999845918711789,
+              "min": 2.945886566927292e-25
+            },
+            "q_O2": {
+              "bad": 0,
+              "max": 0.2372895729071999,
+              "min": 9.212828606095263e-06
+            }
+          },
+          "files": 16,
+          "has_bad_size_files": false,
+          "nsteps": [
+            10
+          ],
+          "packets": [
+            10
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000010.txt",
+          "ranks": 16,
+          "total_cols": 13824
+        }
+      },
+      "11": {
+        "recv_compare": {
+          "max_abs": 5300220.0,
+          "max_rel": 1.12911e-12,
+          "occurrence": 11,
+          "ok_marker": true,
+          "packet_hour_set": [
+            0.916666687
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000011.txt",
+          "ranks": 32,
+          "step_set": [
+            11
+          ]
+        },
+        "replay": {
+          "filled": 13824,
+          "final": {
+            "above_live_top": 1650666,
+            "bad_weighted_z": 0,
+            "invalid": 1824310,
+            "n2_residual_max": 0.8130616881473688,
+            "n2_residual_min": -0.05139328739477049,
+            "n2_residual_negative": 173644,
+            "n2_residual_used": 4380694,
+            "samples": 6031360
+          },
+          "initial": {
+            "above_live_top": 1650666,
+            "bad_weighted_z": 0,
+            "invalid": 1824310,
+            "n2_residual_max": 0.8130616881473688,
+            "n2_residual_min": -0.05139328739477049,
+            "n2_residual_negative": 173644,
+            "n2_residual_used": 4380694,
+            "samples": 6031360
+          },
+          "n2_mode": "invalid",
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000011.out",
+          "payload_prefix": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_pkt000011/waccmx_neutral_rank",
+          "pver": 126,
+          "source_cols": 13824
+        },
+        "summary": {
+          "field_stats": {
+            "MBARV_kg_mol": {
+              "bad": 0,
+              "max": 28.874343551691148,
+              "min": 15.00767116473243
+            },
+            "PMID_Pa": {
+              "bad": 0,
+              "max": 108513.78050768837,
+              "min": 4.055140885992663e-08
+            },
+            "T_K": {
+              "bad": 0,
+              "max": 1643.600705057556,
+              "min": 112.32377107860121
+            },
+            "U_m_s": {
+              "bad": 0,
+              "max": 657.670743765975,
+              "min": -739.5447831323606
+            },
+            "V_m_s": {
+              "bad": 0,
+              "max": 778.1777413678637,
+              "min": -694.9091290445584
+            },
+            "ZM_m": {
+              "bad": 0,
+              "max": 745887.7050799255,
+              "min": 51.943574295154505
+            },
+            "cid": {
+              "max": 13824,
+              "min": 1,
+              "missing": 0,
+              "unique": 13824
+            },
+            "lat_deg": {
+              "bad": 0,
+              "max": 90.0,
+              "min": -90.0
+            },
+            "lon_deg": {
+              "bad": 0,
+              "max": 357.5,
+              "min": 0.0
+            },
+            "q_H": {
+              "bad": 0,
+              "max": 0.004535982488227458,
+              "min": 2.7746098443354035e-28
+            },
+            "q_He": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_N": {
+              "bad": 0,
+              "max": 0.056953197885272575,
+              "min": 1.3321079790425603e-23
+            },
+            "q_N2": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_NO": {
+              "bad": 0,
+              "max": 0.001153983945344796,
+              "min": 9.239251612371511e-19
+            },
+            "q_O": {
+              "bad": 0,
+              "max": 0.9999878199723679,
+              "min": 2.90417644360738e-25
+            },
+            "q_O2": {
+              "bad": 0,
+              "max": 0.23728371859287964,
+              "min": 9.13582940823605e-06
+            }
+          },
+          "files": 16,
+          "has_bad_size_files": false,
+          "nsteps": [
+            11
+          ],
+          "packets": [
+            11
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000011.txt",
+          "ranks": 16,
+          "total_cols": 13824
+        }
+      },
+      "2": {
+        "recv_compare": {
+          "max_abs": 2265090.0,
+          "max_rel": 5.30439e-13,
+          "occurrence": 2,
+          "ok_marker": true,
+          "packet_hour_set": [
+            0.166666672
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000002.txt",
+          "ranks": 32,
+          "step_set": [
+            2
+          ]
+        },
+        "replay": {
+          "filled": 13824,
+          "final": {
+            "above_live_top": 1642906,
+            "bad_weighted_z": 0,
+            "invalid": 1819998,
+            "n2_residual_max": 0.8130316307720772,
+            "n2_residual_min": -0.0527296433438709,
+            "n2_residual_negative": 177092,
+            "n2_residual_used": 4388454,
+            "samples": 6031360
+          },
+          "initial": {
+            "above_live_top": 1642906,
+            "bad_weighted_z": 0,
+            "invalid": 1819998,
+            "n2_residual_max": 0.8130316307720772,
+            "n2_residual_min": -0.0527296433438709,
+            "n2_residual_negative": 177092,
+            "n2_residual_used": 4388454,
+            "samples": 6031360
+          },
+          "n2_mode": "invalid",
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000002.out",
+          "payload_prefix": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_pkt000002/waccmx_neutral_rank",
+          "pver": 126,
+          "source_cols": 13824
+        },
+        "summary": {
+          "field_stats": {
+            "MBARV_kg_mol": {
+              "bad": 0,
+              "max": 28.87446960393479,
+              "min": 14.923714119000463
+            },
+            "PMID_Pa": {
+              "bad": 0,
+              "max": 107010.83809744766,
+              "min": 4.055140885992663e-08
+            },
+            "T_K": {
+              "bad": 0,
+              "max": 1540.7848935057236,
+              "min": 113.0644853198483
+            },
+            "U_m_s": {
+              "bad": 0,
+              "max": 693.8229320516241,
+              "min": -877.2344652281657
+            },
+            "V_m_s": {
+              "bad": 0,
+              "max": 717.712734883699,
+              "min": -848.9056040321143
+            },
+            "ZM_m": {
+              "bad": 0,
+              "max": 726340.8423637329,
+              "min": 49.27837860726639
+            },
+            "cid": {
+              "max": 13824,
+              "min": 1,
+              "missing": 0,
+              "unique": 13824
+            },
+            "lat_deg": {
+              "bad": 0,
+              "max": 90.0,
+              "min": -90.0
+            },
+            "lon_deg": {
+              "bad": 0,
+              "max": 357.5,
+              "min": 0.0
+            },
+            "q_H": {
+              "bad": 0,
+              "max": 0.0049428888078698946,
+              "min": 2.8195367284956676e-28
+            },
+            "q_He": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_N": {
+              "bad": 0,
+              "max": 0.060084517945671836,
+              "min": 1.8976942230578848e-23
+            },
+            "q_N2": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_NO": {
+              "bad": 0,
+              "max": 0.0013294114301633402,
+              "min": 8.958463204892557e-19
+            },
+            "q_O": {
+              "bad": 0,
+              "max": 0.9999399361824781,
+              "min": 2.6478441759302645e-25
+            },
+            "q_O2": {
+              "bad": 0,
+              "max": 0.2373244729492434,
+              "min": 9.17273404897657e-06
+            }
+          },
+          "files": 16,
+          "has_bad_size_files": false,
+          "nsteps": [
+            2
+          ],
+          "packets": [
+            2
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000002.txt",
+          "ranks": 16,
+          "total_cols": 13824
+        }
+      },
+      "3": {
+        "recv_compare": {
+          "max_abs": 1092610.0,
+          "max_rel": 2.52762e-13,
+          "occurrence": 3,
+          "ok_marker": true,
+          "packet_hour_set": [
+            0.25
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000003.txt",
+          "ranks": 32,
+          "step_set": [
+            3
+          ]
+        },
+        "replay": {
+          "filled": 13824,
+          "final": {
+            "above_live_top": 1643828,
+            "bad_weighted_z": 0,
+            "invalid": 1820305,
+            "n2_residual_max": 0.8131186872649505,
+            "n2_residual_min": -0.05347604405152857,
+            "n2_residual_negative": 176477,
+            "n2_residual_used": 4387532,
+            "samples": 6031360
+          },
+          "initial": {
+            "above_live_top": 1643828,
+            "bad_weighted_z": 0,
+            "invalid": 1820305,
+            "n2_residual_max": 0.8131186872649505,
+            "n2_residual_min": -0.05347604405152857,
+            "n2_residual_negative": 176477,
+            "n2_residual_used": 4387532,
+            "samples": 6031360
+          },
+          "n2_mode": "invalid",
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000003.out",
+          "payload_prefix": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_pkt000003/waccmx_neutral_rank",
+          "pver": 126,
+          "source_cols": 13824
+        },
+        "summary": {
+          "field_stats": {
+            "MBARV_kg_mol": {
+              "bad": 0,
+              "max": 28.874447877643064,
+              "min": 14.917211514206858
+            },
+            "PMID_Pa": {
+              "bad": 0,
+              "max": 106842.37266247693,
+              "min": 4.055140885992663e-08
+            },
+            "T_K": {
+              "bad": 0,
+              "max": 1554.4369000772058,
+              "min": 113.01640250137358
+            },
+            "U_m_s": {
+              "bad": 0,
+              "max": 641.8661345067314,
+              "min": -845.0018988897118
+            },
+            "V_m_s": {
+              "bad": 0,
+              "max": 718.0000932645536,
+              "min": -824.6634660178233
+            },
+            "ZM_m": {
+              "bad": 0,
+              "max": 730915.5635162641,
+              "min": 49.52816692598835
+            },
+            "cid": {
+              "max": 13824,
+              "min": 1,
+              "missing": 0,
+              "unique": 13824
+            },
+            "lat_deg": {
+              "bad": 0,
+              "max": 90.0,
+              "min": -90.0
+            },
+            "lon_deg": {
+              "bad": 0,
+              "max": 357.5,
+              "min": 0.0
+            },
+            "q_H": {
+              "bad": 0,
+              "max": 0.005007941289057978,
+              "min": 2.679661130325278e-28
+            },
+            "q_He": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_N": {
+              "bad": 0,
+              "max": 0.0597552186105634,
+              "min": 1.9037905891011585e-23
+            },
+            "q_N2": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_NO": {
+              "bad": 0,
+              "max": 0.0012912508047011634,
+              "min": 8.971190705027605e-19
+            },
+            "q_O": {
+              "bad": 0,
+              "max": 0.9999414355618477,
+              "min": 2.6849738410329256e-25
+            },
+            "q_O2": {
+              "bad": 0,
+              "max": 0.23732133674528533,
+              "min": 9.117495546026029e-06
+            }
+          },
+          "files": 16,
+          "has_bad_size_files": false,
+          "nsteps": [
+            3
+          ],
+          "packets": [
+            3
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000003.txt",
+          "ranks": 16,
+          "total_cols": 13824
+        }
+      },
+      "4": {
+        "recv_compare": {
+          "max_abs": 1346560.0,
+          "max_rel": 3.00666e-13,
+          "occurrence": 4,
+          "ok_marker": true,
+          "packet_hour_set": [
+            0.333333343
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000004.txt",
+          "ranks": 32,
+          "step_set": [
+            4
+          ]
+        },
+        "replay": {
+          "filled": 13824,
+          "final": {
+            "above_live_top": 1644826,
+            "bad_weighted_z": 0,
+            "invalid": 1820718,
+            "n2_residual_max": 0.8131236419298921,
+            "n2_residual_min": -0.053003590641177836,
+            "n2_residual_negative": 175892,
+            "n2_residual_used": 4386534,
+            "samples": 6031360
+          },
+          "initial": {
+            "above_live_top": 1644826,
+            "bad_weighted_z": 0,
+            "invalid": 1820718,
+            "n2_residual_max": 0.8131236419298921,
+            "n2_residual_min": -0.053003590641177836,
+            "n2_residual_negative": 175892,
+            "n2_residual_used": 4386534,
+            "samples": 6031360
+          },
+          "n2_mode": "invalid",
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000004.out",
+          "payload_prefix": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_pkt000004/waccmx_neutral_rank",
+          "pver": 126,
+          "source_cols": 13824
+        },
+        "summary": {
+          "field_stats": {
+            "MBARV_kg_mol": {
+              "bad": 0,
+              "max": 28.874428792449706,
+              "min": 14.901979924460834
+            },
+            "PMID_Pa": {
+              "bad": 0,
+              "max": 106663.43035858625,
+              "min": 4.055140885992663e-08
+            },
+            "T_K": {
+              "bad": 0,
+              "max": 1565.041791993268,
+              "min": 112.9720736494699
+            },
+            "U_m_s": {
+              "bad": 0,
+              "max": 614.0455679674606,
+              "min": -813.1849555043013
+            },
+            "V_m_s": {
+              "bad": 0,
+              "max": 728.4191157309506,
+              "min": -787.7497309409229
+            },
+            "ZM_m": {
+              "bad": 0,
+              "max": 733884.7007234112,
+              "min": 49.76555893227433
+            },
+            "cid": {
+              "max": 13824,
+              "min": 1,
+              "missing": 0,
+              "unique": 13824
+            },
+            "lat_deg": {
+              "bad": 0,
+              "max": 90.0,
+              "min": -90.0
+            },
+            "lon_deg": {
+              "bad": 0,
+              "max": 357.5,
+              "min": 0.0
+            },
+            "q_H": {
+              "bad": 0,
+              "max": 0.005097787016311002,
+              "min": 2.6200000942339235e-28
+            },
+            "q_He": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_N": {
+              "bad": 0,
+              "max": 0.059394373369606936,
+              "min": 1.9045879088100767e-23
+            },
+            "q_N2": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_NO": {
+              "bad": 0,
+              "max": 0.001261007487019198,
+              "min": 8.989008571007448e-19
+            },
+            "q_O": {
+              "bad": 0,
+              "max": 0.9999434266361716,
+              "min": 2.720146330990414e-25
+            },
+            "q_O2": {
+              "bad": 0,
+              "max": 0.23731787686633707,
+              "min": 9.003527460055274e-06
+            }
+          },
+          "files": 16,
+          "has_bad_size_files": false,
+          "nsteps": [
+            4
+          ],
+          "packets": [
+            4
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000004.txt",
+          "ranks": 16,
+          "total_cols": 13824
+        }
+      },
+      "5": {
+        "recv_compare": {
+          "max_abs": 1449470.0,
+          "max_rel": 3.26109e-13,
+          "occurrence": 5,
+          "ok_marker": true,
+          "packet_hour_set": [
+            0.416666657
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000005.txt",
+          "ranks": 32,
+          "step_set": [
+            5
+          ]
+        },
+        "replay": {
+          "filled": 13824,
+          "final": {
+            "above_live_top": 1645762,
+            "bad_weighted_z": 0,
+            "invalid": 1821217,
+            "n2_residual_max": 0.8130948104122964,
+            "n2_residual_min": -0.0526776490482023,
+            "n2_residual_negative": 175455,
+            "n2_residual_used": 4385598,
+            "samples": 6031360
+          },
+          "initial": {
+            "above_live_top": 1645762,
+            "bad_weighted_z": 0,
+            "invalid": 1821217,
+            "n2_residual_max": 0.8130948104122964,
+            "n2_residual_min": -0.0526776490482023,
+            "n2_residual_negative": 175455,
+            "n2_residual_used": 4385598,
+            "samples": 6031360
+          },
+          "n2_mode": "invalid",
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000005.out",
+          "payload_prefix": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_pkt000005/waccmx_neutral_rank",
+          "pver": 126,
+          "source_cols": 13824
+        },
+        "summary": {
+          "field_stats": {
+            "MBARV_kg_mol": {
+              "bad": 0,
+              "max": 28.874411927744568,
+              "min": 14.894285495167319
+            },
+            "PMID_Pa": {
+              "bad": 0,
+              "max": 106383.81338777236,
+              "min": 4.055140885992663e-08
+            },
+            "T_K": {
+              "bad": 0,
+              "max": 1583.6031751786186,
+              "min": 112.92969080955675
+            },
+            "U_m_s": {
+              "bad": 0,
+              "max": 599.5548137655209,
+              "min": -800.7816452908263
+            },
+            "V_m_s": {
+              "bad": 0,
+              "max": 740.2349483942965,
+              "min": -764.5496695424649
+            },
+            "ZM_m": {
+              "bad": 0,
+              "max": 736357.3624242225,
+              "min": 50.10417454632065
+            },
+            "cid": {
+              "max": 13824,
+              "min": 1,
+              "missing": 0,
+              "unique": 13824
+            },
+            "lat_deg": {
+              "bad": 0,
+              "max": 90.0,
+              "min": -90.0
+            },
+            "lon_deg": {
+              "bad": 0,
+              "max": 357.5,
+              "min": 0.0
+            },
+            "q_H": {
+              "bad": 0,
+              "max": 0.005113776206462248,
+              "min": 2.6034592980171363e-28
+            },
+            "q_He": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_N": {
+              "bad": 0,
+              "max": 0.05905851201876043,
+              "min": 1.89789570073296e-23
+            },
+            "q_N2": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_NO": {
+              "bad": 0,
+              "max": 0.0012361502170916616,
+              "min": 9.00771840542955e-19
+            },
+            "q_O": {
+              "bad": 0,
+              "max": 0.9999431510126201,
+              "min": 2.7622672954843068e-25
+            },
+            "q_O2": {
+              "bad": 0,
+              "max": 0.23731408308606658,
+              "min": 8.935581617136682e-06
+            }
+          },
+          "files": 16,
+          "has_bad_size_files": false,
+          "nsteps": [
+            5
+          ],
+          "packets": [
+            5
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000005.txt",
+          "ranks": 16,
+          "total_cols": 13824
+        }
+      },
+      "6": {
+        "recv_compare": {
+          "max_abs": 1404420.0,
+          "max_rel": 3.14605e-13,
+          "occurrence": 6,
+          "ok_marker": true,
+          "packet_hour_set": [
+            0.5
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000006.txt",
+          "ranks": 32,
+          "step_set": [
+            6
+          ]
+        },
+        "replay": {
+          "filled": 13824,
+          "final": {
+            "above_live_top": 1646720,
+            "bad_weighted_z": 0,
+            "invalid": 1821798,
+            "n2_residual_max": 0.8130441492844651,
+            "n2_residual_min": -0.05249618472831976,
+            "n2_residual_negative": 175078,
+            "n2_residual_used": 4384640,
+            "samples": 6031360
+          },
+          "initial": {
+            "above_live_top": 1646720,
+            "bad_weighted_z": 0,
+            "invalid": 1821798,
+            "n2_residual_max": 0.8130441492844651,
+            "n2_residual_min": -0.05249618472831976,
+            "n2_residual_negative": 175078,
+            "n2_residual_used": 4384640,
+            "samples": 6031360
+          },
+          "n2_mode": "invalid",
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000006.out",
+          "payload_prefix": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_pkt000006/waccmx_neutral_rank",
+          "pver": 126,
+          "source_cols": 13824
+        },
+        "summary": {
+          "field_stats": {
+            "MBARV_kg_mol": {
+              "bad": 0,
+              "max": 28.874396973057816,
+              "min": 14.908000537985751
+            },
+            "PMID_Pa": {
+              "bad": 0,
+              "max": 106140.57189865205,
+              "min": 4.055140885992663e-08
+            },
+            "T_K": {
+              "bad": 0,
+              "max": 1603.3092264007528,
+              "min": 112.8862970503258
+            },
+            "U_m_s": {
+              "bad": 0,
+              "max": 596.8974476353948,
+              "min": -784.4440402135879
+            },
+            "V_m_s": {
+              "bad": 0,
+              "max": 751.4303784646067,
+              "min": -751.9128558953407
+            },
+            "ZM_m": {
+              "bad": 0,
+              "max": 739725.6508083901,
+              "min": 50.44039289982515
+            },
+            "cid": {
+              "max": 13824,
+              "min": 1,
+              "missing": 0,
+              "unique": 13824
+            },
+            "lat_deg": {
+              "bad": 0,
+              "max": 90.0,
+              "min": -90.0
+            },
+            "lon_deg": {
+              "bad": 0,
+              "max": 357.5,
+              "min": 0.0
+            },
+            "q_H": {
+              "bad": 0,
+              "max": 0.005018312810685206,
+              "min": 2.61282236908899e-28
+            },
+            "q_He": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_N": {
+              "bad": 0,
+              "max": 0.05878055012891286,
+              "min": 1.8924060532821897e-23
+            },
+            "q_N2": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_NO": {
+              "bad": 0,
+              "max": 0.0012137224878968481,
+              "min": 9.02758504508696e-19
+            },
+            "q_O": {
+              "bad": 0,
+              "max": 0.9999416031176125,
+              "min": 2.7848513033134e-25
+            },
+            "q_O2": {
+              "bad": 0,
+              "max": 0.23730991819378897,
+              "min": 9.032465731026367e-06
+            }
+          },
+          "files": 16,
+          "has_bad_size_files": false,
+          "nsteps": [
+            6
+          ],
+          "packets": [
+            6
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000006.txt",
+          "ranks": 16,
+          "total_cols": 13824
+        }
+      },
+      "7": {
+        "recv_compare": {
+          "max_abs": 1337860.0,
+          "max_rel": 3.05377e-13,
+          "occurrence": 7,
+          "ok_marker": true,
+          "packet_hour_set": [
+            0.583333313
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000007.txt",
+          "ranks": 32,
+          "step_set": [
+            7
+          ]
+        },
+        "replay": {
+          "filled": 13824,
+          "final": {
+            "above_live_top": 1647614,
+            "bad_weighted_z": 0,
+            "invalid": 1822221,
+            "n2_residual_max": 0.8130905455337173,
+            "n2_residual_min": -0.05112346729885,
+            "n2_residual_negative": 174607,
+            "n2_residual_used": 4383746,
+            "samples": 6031360
+          },
+          "initial": {
+            "above_live_top": 1647614,
+            "bad_weighted_z": 0,
+            "invalid": 1822221,
+            "n2_residual_max": 0.8130905455337173,
+            "n2_residual_min": -0.05112346729885,
+            "n2_residual_negative": 174607,
+            "n2_residual_used": 4383746,
+            "samples": 6031360
+          },
+          "n2_mode": "invalid",
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000007.out",
+          "payload_prefix": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_pkt000007/waccmx_neutral_rank",
+          "pver": 126,
+          "source_cols": 13824
+        },
+        "summary": {
+          "field_stats": {
+            "MBARV_kg_mol": {
+              "bad": 0,
+              "max": 28.874383973054613,
+              "min": 14.933417250189432
+            },
+            "PMID_Pa": {
+              "bad": 0,
+              "max": 106815.168864745,
+              "min": 4.055140885992663e-08
+            },
+            "T_K": {
+              "bad": 0,
+              "max": 1611.345359620181,
+              "min": 112.83900645465735
+            },
+            "U_m_s": {
+              "bad": 0,
+              "max": 599.5196810208836,
+              "min": -771.1467729580015
+            },
+            "V_m_s": {
+              "bad": 0,
+              "max": 763.3488381458534,
+              "min": -741.3314972984058
+            },
+            "ZM_m": {
+              "bad": 0,
+              "max": 740357.9387347881,
+              "min": 50.75643610669817
+            },
+            "cid": {
+              "max": 13824,
+              "min": 1,
+              "missing": 0,
+              "unique": 13824
+            },
+            "lat_deg": {
+              "bad": 0,
+              "max": 90.0,
+              "min": -90.0
+            },
+            "lon_deg": {
+              "bad": 0,
+              "max": 357.5,
+              "min": 0.0
+            },
+            "q_H": {
+              "bad": 0,
+              "max": 0.004868094668285564,
+              "min": 2.6412198124189405e-28
+            },
+            "q_He": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_N": {
+              "bad": 0,
+              "max": 0.058808860101338574,
+              "min": 1.8723591218673658e-23
+            },
+            "q_N2": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_NO": {
+              "bad": 0,
+              "max": 0.001192660629159529,
+              "min": 9.050477544562768e-19
+            },
+            "q_O": {
+              "bad": 0,
+              "max": 0.9999396362943496,
+              "min": 2.807482026528988e-25
+            },
+            "q_O2": {
+              "bad": 0,
+              "max": 0.23730537000124838,
+              "min": 9.253453681333084e-06
+            }
+          },
+          "files": 16,
+          "has_bad_size_files": false,
+          "nsteps": [
+            7
+          ],
+          "packets": [
+            7
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000007.txt",
+          "ranks": 16,
+          "total_cols": 13824
+        }
+      },
+      "8": {
+        "recv_compare": {
+          "max_abs": 1668100.0,
+          "max_rel": 3.5766e-13,
+          "occurrence": 8,
+          "ok_marker": true,
+          "packet_hour_set": [
+            0.666666687
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000008.txt",
+          "ranks": 32,
+          "step_set": [
+            8
+          ]
+        },
+        "replay": {
+          "filled": 13824,
+          "final": {
+            "above_live_top": 1648485,
+            "bad_weighted_z": 0,
+            "invalid": 1822641,
+            "n2_residual_max": 0.8130472567155591,
+            "n2_residual_min": -0.04995603732663364,
+            "n2_residual_negative": 174156,
+            "n2_residual_used": 4382875,
+            "samples": 6031360
+          },
+          "initial": {
+            "above_live_top": 1648485,
+            "bad_weighted_z": 0,
+            "invalid": 1822641,
+            "n2_residual_max": 0.8130472567155591,
+            "n2_residual_min": -0.04995603732663364,
+            "n2_residual_negative": 174156,
+            "n2_residual_used": 4382875,
+            "samples": 6031360
+          },
+          "n2_mode": "invalid",
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000008.out",
+          "payload_prefix": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_pkt000008/waccmx_neutral_rank",
+          "pver": 126,
+          "source_cols": 13824
+        },
+        "summary": {
+          "field_stats": {
+            "MBARV_kg_mol": {
+              "bad": 0,
+              "max": 28.8743723188066,
+              "min": 14.965151866881525
+            },
+            "PMID_Pa": {
+              "bad": 0,
+              "max": 108330.48786031271,
+              "min": 4.055140885992663e-08
+            },
+            "T_K": {
+              "bad": 0,
+              "max": 1606.0738315484616,
+              "min": 112.77993812637337
+            },
+            "U_m_s": {
+              "bad": 0,
+              "max": 606.6442327878394,
+              "min": -750.9832891380154
+            },
+            "V_m_s": {
+              "bad": 0,
+              "max": 774.2968585985947,
+              "min": -731.6146963876928
+            },
+            "ZM_m": {
+              "bad": 0,
+              "max": 736332.3812588599,
+              "min": 51.05178934769112
+            },
+            "cid": {
+              "max": 13824,
+              "min": 1,
+              "missing": 0,
+              "unique": 13824
+            },
+            "lat_deg": {
+              "bad": 0,
+              "max": 90.0,
+              "min": -90.0
+            },
+            "lon_deg": {
+              "bad": 0,
+              "max": 357.5,
+              "min": 0.0
+            },
+            "q_H": {
+              "bad": 0,
+              "max": 0.004712064773000994,
+              "min": 2.6894259203054206e-28
+            },
+            "q_He": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_N": {
+              "bad": 0,
+              "max": 0.05864291622117647,
+              "min": 1.6561088891488677e-23
+            },
+            "q_N2": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_NO": {
+              "bad": 0,
+              "max": 0.001180392896945,
+              "min": 9.079430634345543e-19
+            },
+            "q_O": {
+              "bad": 0,
+              "max": 0.9999742535993903,
+              "min": 2.8891072271537584e-25
+            },
+            "q_O2": {
+              "bad": 0,
+              "max": 0.2373004444012463,
+              "min": 9.085525725920446e-06
+            }
+          },
+          "files": 16,
+          "has_bad_size_files": false,
+          "nsteps": [
+            8
+          ],
+          "packets": [
+            8
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000008.txt",
+          "ranks": 16,
+          "total_cols": 13824
+        }
+      },
+      "9": {
+        "recv_compare": {
+          "max_abs": 5019650.0,
+          "max_rel": 1.08667e-12,
+          "occurrence": 9,
+          "ok_marker": true,
+          "packet_hour_set": [
+            0.75
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000009.txt",
+          "ranks": 32,
+          "step_set": [
+            9
+          ]
+        },
+        "replay": {
+          "filled": 13824,
+          "final": {
+            "above_live_top": 1649240,
+            "bad_weighted_z": 0,
+            "invalid": 1823177,
+            "n2_residual_max": 0.8130157394701916,
+            "n2_residual_min": -0.05081495884854379,
+            "n2_residual_negative": 173937,
+            "n2_residual_used": 4382120,
+            "samples": 6031360
+          },
+          "initial": {
+            "above_live_top": 1649240,
+            "bad_weighted_z": 0,
+            "invalid": 1823177,
+            "n2_residual_max": 0.8130157394701916,
+            "n2_residual_min": -0.05081495884854379,
+            "n2_residual_negative": 173937,
+            "n2_residual_used": 4382120,
+            "samples": 6031360
+          },
+          "n2_mode": "invalid",
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000009.out",
+          "payload_prefix": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_pkt000009/waccmx_neutral_rank",
+          "pver": 126,
+          "source_cols": 13824
+        },
+        "summary": {
+          "field_stats": {
+            "MBARV_kg_mol": {
+              "bad": 0,
+              "max": 28.874361814288367,
+              "min": 14.986577976792809
+            },
+            "PMID_Pa": {
+              "bad": 0,
+              "max": 108718.3770173474,
+              "min": 4.055140885992663e-08
+            },
+            "T_K": {
+              "bad": 0,
+              "max": 1607.2995998985575,
+              "min": 112.69934768699987
+            },
+            "U_m_s": {
+              "bad": 0,
+              "max": 619.1691915763445,
+              "min": -723.6277324456746
+            },
+            "V_m_s": {
+              "bad": 0,
+              "max": 781.3567410790919,
+              "min": -721.4378403366709
+            },
+            "ZM_m": {
+              "bad": 0,
+              "max": 734132.261017062,
+              "min": 51.33259183823597
+            },
+            "cid": {
+              "max": 13824,
+              "min": 1,
+              "missing": 0,
+              "unique": 13824
+            },
+            "lat_deg": {
+              "bad": 0,
+              "max": 90.0,
+              "min": -90.0
+            },
+            "lon_deg": {
+              "bad": 0,
+              "max": 357.5,
+              "min": 0.0
+            },
+            "q_H": {
+              "bad": 0,
+              "max": 0.0046277029577667505,
+              "min": 2.71142215551383e-28
+            },
+            "q_He": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_N": {
+              "bad": 0,
+              "max": 0.058031385883066056,
+              "min": 1.487424350374527e-23
+            },
+            "q_N2": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_NO": {
+              "bad": 0,
+              "max": 0.0011695556456044578,
+              "min": 9.118162898387395e-19
+            },
+            "q_O": {
+              "bad": 0,
+              "max": 0.9999757236848792,
+              "min": 2.929773479387581e-25
+            },
+            "q_O2": {
+              "bad": 0,
+              "max": 0.237295165219069,
+              "min": 9.06216440438987e-06
+            }
+          },
+          "files": 16,
+          "has_bad_size_files": false,
+          "nsteps": [
+            9
+          ],
+          "packets": [
+            9
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000009.txt",
+          "ranks": 16,
+          "total_cols": 13824
+        }
+      }
+    },
+    "run_dir": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000"
+  },
+  "ok": true
+}

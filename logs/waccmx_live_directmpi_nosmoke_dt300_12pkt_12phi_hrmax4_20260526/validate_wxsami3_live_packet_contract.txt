@@ -1,0 +1,628 @@
+ok   run_dir_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000
+ok   live_meta_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/wxsami3_live_meta.json
+ok   meta_payload_version: wxsami3-live-payload-v2
+ok   meta_runtime_source: CAM phys_state(:)
+ok   meta_actual_transport: runtime_live_packet
+ok   meta_last_packet_index: packet_index=11 expected=11
+ok   meta_dtime_phys_positive: 300.0
+ok   meta_send_every_nsteps_positive: 1
+ok   meta_packet_hour_matches_nstep_dtime: packet_hour=0.916666687 expected=0.9166666666666666
+ok   meta_payload_header_magic: 20260522 expected=20260522
+ok   meta_payload_header_nz: 304 expected=304
+ok   meta_payload_header_nf: 124 expected=124
+ok   meta_payload_header_nl: 5 expected=5
+ok   meta_payload_header_nneut: 7 expected=7
+ok   meta_runtime_map_source_columns: source_columns=13824 expected=13824
+ok   meta_runtime_map_npoints: npoints=3618816
+ok   meta_source_unit_temperature: K expected=K
+ok   meta_source_unit_wind: m/s expected=m/s
+ok   meta_source_unit_pressure: Pa expected=Pa
+ok   meta_source_unit_height: m expected=m
+ok   meta_source_unit_composition: mass_mixing_ratio expected=mass_mixing_ratio
+ok   meta_payload_unit_density: cm^-3 expected=cm^-3
+ok   meta_payload_unit_temperature: K expected=K
+ok   meta_payload_unit_wind: cm/s expected=cm/s
+ok   meta_density_conversion: q*mbarv/species_mw*pmid/(kB*T)*1e-6 -> cm^-3
+ok   meta_source_species_order: ['O', 'O2', 'H', 'N', 'NO', 'N2', 'He']
+ok   meta_payload_species_order: ['H', 'O', 'NO', 'O2', 'He', 'N2', 'N']
+ok   meta_source_flag_mpi_tag: 212
+ok   meta_source_flag_values: {'WACCMX_VALID': 1, 'SAMI3_NATIVE_ABOVE_TOP': 2, 'SAMI3_NATIVE_N2_INVALID': 3, 'SAMI3_NATIVE_OTHER_INVALID': 4}
+ok   meta_species_index_O: 57
+ok   meta_species_index_O2: 58
+ok   meta_species_index_H: 37
+ok   meta_species_index_N: 51
+ok   meta_species_index_NO: 54
+ok   meta_species_index_N2_residual: -1
+ok   meta_species_index_He_native: -1
+ok   meta_n2_negative_mode: invalid
+ok   meta_he_policy: payload value -1 so SAMI3 native/MSIS He is retained
+ok   meta_w_policy: payload value 0; CAM omega diagnostic only
+ok   meta_source_flags_sum: flag_total=6031360 samples=6031360
+ok   meta_invalid_sum: invalid=1824310 above+n2+other=1824310
+ok   meta_above_top_flag_count: above_live_top=1650666 source_flag=1650666
+ok   meta_n2_invalid_flag_count: n2_residual_negative=173644 source_flag=173644
+ok   meta_other_invalid_zero: 0
+ok   meta_checksum_valid_counts: valid_i=4207050 valid_f=4207050 source_valid=4207050
+ok   meta_checksum_invalid_counts: invalid_i=1824310 invalid_f=1824310 runtime_invalid=1824310
+ok   packet0_summary_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000000.txt
+ok   packet0_replay_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000000.out
+ok   packet0_recv_compare_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000000.txt
+ok   packet0_summary_source_columns: total_cols=13824 expected=13824
+ok   packet0_summary_packet_index: packets=[0]
+ok   packet0_summary_no_bad_size_files: bad_size_files_present=False
+ok   packet0_summary_lat_deg_bad: bad=0
+ok   packet0_summary_lon_deg_bad: bad=0
+ok   packet0_summary_T_K_bad: bad=0
+ok   packet0_summary_U_m_s_bad: bad=0
+ok   packet0_summary_V_m_s_bad: bad=0
+ok   packet0_summary_PMID_Pa_bad: bad=0
+ok   packet0_summary_ZM_m_bad: bad=0
+ok   packet0_summary_MBARV_kg_mol_bad: bad=0
+ok   packet0_summary_q_O_bad: bad=0
+ok   packet0_summary_q_O2_bad: bad=0
+ok   packet0_summary_q_H_bad: bad=0
+ok   packet0_summary_q_N_bad: bad=0
+ok   packet0_summary_q_NO_bad: bad=0
+ok   packet0_summary_cid_coverage: missing=0 unique=13824 expected=13824
+ok   packet0_summary_lat_deg_range: min=-90.0 max=90.0 allowed=[-90.0,90.0]
+ok   packet0_summary_lon_deg_range: min=0.0 max=357.5 allowed=[0.0,360.0]
+ok   packet0_summary_T_K_range: min=113.19272490765026 max=1522.7628810979916 allowed=[50.0,5000.0]
+ok   packet0_summary_U_m_s_range: min=-925.7242161594645 max=769.7344197674036 allowed=[-5000.0,5000.0]
+ok   packet0_summary_V_m_s_range: min=-845.8062460574145 max=736.3650929706123 allowed=[-5000.0,5000.0]
+ok   packet0_summary_PMID_Pa_range: min=4.055140885992663e-08 max=107321.3890267048 allowed=[0.0,200000.0]
+ok   packet0_summary_ZM_m_range: min=48.56266690499009 max=720507.7580399793 allowed=[-1000.0,2000000.0]
+ok   packet0_summary_MBARV_kg_mol_range: min=14.895337165442252 max=28.874522993878628 allowed=[1.0,60.0]
+ok   packet0_summary_q_O_range: min=2.20521131163437e-25 max=0.9999399874408939 allowed=[-1e-12,1.1]
+ok   packet0_summary_q_O2_range: min=9.229295650411587e-06 max=0.23732970847615611 allowed=[-1e-12,1.1]
+ok   packet0_summary_q_H_range: min=2.913249081948255e-28 max=0.0050683000424878695 allowed=[-1e-12,1.1]
+ok   packet0_summary_q_N_range: min=1.885260804240404e-23 max=0.060584943671142005 allowed=[-1e-12,1.1]
+ok   packet0_summary_q_NO_range: min=9.01142764707503e-19 max=0.0014346353422642934 allowed=[-1e-12,1.1]
+ok   packet0_replay_source_coverage: source_cols=13824 filled=13824 expected=13824
+ok   packet0_replay_n2_mode: invalid
+ok   packet0_replay_bad_weighted_z: bad_weighted_z=0
+ok   packet0_replay_samples_positive: samples=6031360
+ok   packet0_replay_initial_final_samples: initial=6031360 final=6031360
+ok   packet0_replay_initial_final_invalid: initial=1819595 final=1819595
+ok   packet0_replay_initial_final_above_live_top: initial=1641376 final=1641376
+ok   packet0_replay_initial_final_n2_residual_used: initial=4389984 final=4389984
+ok   packet0_replay_initial_final_n2_residual_negative: initial=178219 final=178219
+ok   packet0_replay_n2_residual_used_positive: n2_residual_used=4389984
+ok   packet0_replay_n2_residual_bounds: min=-0.053314608006139914 max=0.8129786925378699
+ok   packet0_recv_compare_ok: ok_marker=True
+ok   packet0_recv_compare_ranks: ranks=32 expected=32
+ok   packet0_recv_compare_occurrence: occurrence=0 expected=0
+ok   packet0_recv_compare_max_rel: max_rel=4.83248e-13 limit=1e-06
+ok   packet1_summary_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000001.txt
+ok   packet1_replay_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000001.out
+ok   packet1_recv_compare_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000001.txt
+ok   packet1_summary_source_columns: total_cols=13824 expected=13824
+ok   packet1_summary_packet_index: packets=[1]
+ok   packet1_summary_no_bad_size_files: bad_size_files_present=False
+ok   packet1_summary_lat_deg_bad: bad=0
+ok   packet1_summary_lon_deg_bad: bad=0
+ok   packet1_summary_T_K_bad: bad=0
+ok   packet1_summary_U_m_s_bad: bad=0
+ok   packet1_summary_V_m_s_bad: bad=0
+ok   packet1_summary_PMID_Pa_bad: bad=0
+ok   packet1_summary_ZM_m_bad: bad=0
+ok   packet1_summary_MBARV_kg_mol_bad: bad=0
+ok   packet1_summary_q_O_bad: bad=0
+ok   packet1_summary_q_O2_bad: bad=0
+ok   packet1_summary_q_H_bad: bad=0
+ok   packet1_summary_q_N_bad: bad=0
+ok   packet1_summary_q_NO_bad: bad=0
+ok   packet1_summary_cid_coverage: missing=0 unique=13824 expected=13824
+ok   packet1_summary_lat_deg_range: min=-90.0 max=90.0 allowed=[-90.0,90.0]
+ok   packet1_summary_lon_deg_range: min=0.0 max=357.5 allowed=[0.0,360.0]
+ok   packet1_summary_T_K_range: min=113.11677799602712 max=1525.6802633198183 allowed=[50.0,5000.0]
+ok   packet1_summary_U_m_s_range: min=-908.2869163996029 max=746.2280684569153 allowed=[-5000.0,5000.0]
+ok   packet1_summary_V_m_s_range: min=-848.8983623659324 max=724.3955292789938 allowed=[-5000.0,5000.0]
+ok   packet1_summary_PMID_Pa_range: min=4.055140885992663e-08 max=107228.60855014052 allowed=[0.0,200000.0]
+ok   packet1_summary_ZM_m_range: min=48.739033121328895 max=722021.9350605857 allowed=[-1000.0,2000000.0]
+ok   packet1_summary_MBARV_kg_mol_range: min=14.914851476788279 max=28.874494448016016 allowed=[1.0,60.0]
+ok   packet1_summary_q_O_range: min=2.3076025385839838e-25 max=0.9999399904225778 allowed=[-1e-12,1.1]
+ok   packet1_summary_q_O2_range: min=9.192934879215706e-06 max=0.2373272779100491 allowed=[-1e-12,1.1]
+ok   packet1_summary_q_H_range: min=2.974939423330202e-28 max=0.004977793598453359 allowed=[-1e-12,1.1]
+ok   packet1_summary_q_N_range: min=1.8931286575806156e-23 max=0.060367837412881126 allowed=[-1e-12,1.1]
+ok   packet1_summary_q_NO_range: min=9.042922746523819e-19 max=0.0013771497728481319 allowed=[-1e-12,1.1]
+ok   packet1_replay_source_coverage: source_cols=13824 filled=13824 expected=13824
+ok   packet1_replay_n2_mode: invalid
+ok   packet1_replay_bad_weighted_z: bad_weighted_z=0
+ok   packet1_replay_samples_positive: samples=6031360
+ok   packet1_replay_initial_final_samples: initial=6031360 final=6031360
+ok   packet1_replay_initial_final_invalid: initial=1819902 final=1819902
+ok   packet1_replay_initial_final_above_live_top: initial=1642002 final=1642002
+ok   packet1_replay_initial_final_n2_residual_used: initial=4389358 final=4389358
+ok   packet1_replay_initial_final_n2_residual_negative: initial=177900 final=177900
+ok   packet1_replay_n2_residual_used_positive: n2_residual_used=4389358
+ok   packet1_replay_n2_residual_bounds: min=-0.05293758530917447 max=0.8130488452756442
+ok   packet1_recv_compare_ok: ok_marker=True
+ok   packet1_recv_compare_ranks: ranks=32 expected=32
+ok   packet1_recv_compare_occurrence: occurrence=1 expected=1
+ok   packet1_recv_compare_max_rel: max_rel=6.76502e-13 limit=1e-06
+ok   packet2_summary_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000002.txt
+ok   packet2_replay_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000002.out
+ok   packet2_recv_compare_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000002.txt
+ok   packet2_summary_source_columns: total_cols=13824 expected=13824
+ok   packet2_summary_packet_index: packets=[2]
+ok   packet2_summary_no_bad_size_files: bad_size_files_present=False
+ok   packet2_summary_lat_deg_bad: bad=0
+ok   packet2_summary_lon_deg_bad: bad=0
+ok   packet2_summary_T_K_bad: bad=0
+ok   packet2_summary_U_m_s_bad: bad=0
+ok   packet2_summary_V_m_s_bad: bad=0
+ok   packet2_summary_PMID_Pa_bad: bad=0
+ok   packet2_summary_ZM_m_bad: bad=0
+ok   packet2_summary_MBARV_kg_mol_bad: bad=0
+ok   packet2_summary_q_O_bad: bad=0
+ok   packet2_summary_q_O2_bad: bad=0
+ok   packet2_summary_q_H_bad: bad=0
+ok   packet2_summary_q_N_bad: bad=0
+ok   packet2_summary_q_NO_bad: bad=0
+ok   packet2_summary_cid_coverage: missing=0 unique=13824 expected=13824
+ok   packet2_summary_lat_deg_range: min=-90.0 max=90.0 allowed=[-90.0,90.0]
+ok   packet2_summary_lon_deg_range: min=0.0 max=357.5 allowed=[0.0,360.0]
+ok   packet2_summary_T_K_range: min=113.0644853198483 max=1540.7848935057236 allowed=[50.0,5000.0]
+ok   packet2_summary_U_m_s_range: min=-877.2344652281657 max=693.8229320516241 allowed=[-5000.0,5000.0]
+ok   packet2_summary_V_m_s_range: min=-848.9056040321143 max=717.712734883699 allowed=[-5000.0,5000.0]
+ok   packet2_summary_PMID_Pa_range: min=4.055140885992663e-08 max=107010.83809744766 allowed=[0.0,200000.0]
+ok   packet2_summary_ZM_m_range: min=49.27837860726639 max=726340.8423637329 allowed=[-1000.0,2000000.0]
+ok   packet2_summary_MBARV_kg_mol_range: min=14.923714119000463 max=28.87446960393479 allowed=[1.0,60.0]
+ok   packet2_summary_q_O_range: min=2.6478441759302645e-25 max=0.9999399361824781 allowed=[-1e-12,1.1]
+ok   packet2_summary_q_O2_range: min=9.17273404897657e-06 max=0.2373244729492434 allowed=[-1e-12,1.1]
+ok   packet2_summary_q_H_range: min=2.8195367284956676e-28 max=0.0049428888078698946 allowed=[-1e-12,1.1]
+ok   packet2_summary_q_N_range: min=1.8976942230578848e-23 max=0.060084517945671836 allowed=[-1e-12,1.1]
+ok   packet2_summary_q_NO_range: min=8.958463204892557e-19 max=0.0013294114301633402 allowed=[-1e-12,1.1]
+ok   packet2_replay_source_coverage: source_cols=13824 filled=13824 expected=13824
+ok   packet2_replay_n2_mode: invalid
+ok   packet2_replay_bad_weighted_z: bad_weighted_z=0
+ok   packet2_replay_samples_positive: samples=6031360
+ok   packet2_replay_initial_final_samples: initial=6031360 final=6031360
+ok   packet2_replay_initial_final_invalid: initial=1819998 final=1819998
+ok   packet2_replay_initial_final_above_live_top: initial=1642906 final=1642906
+ok   packet2_replay_initial_final_n2_residual_used: initial=4388454 final=4388454
+ok   packet2_replay_initial_final_n2_residual_negative: initial=177092 final=177092
+ok   packet2_replay_n2_residual_used_positive: n2_residual_used=4388454
+ok   packet2_replay_n2_residual_bounds: min=-0.0527296433438709 max=0.8130316307720772
+ok   packet2_recv_compare_ok: ok_marker=True
+ok   packet2_recv_compare_ranks: ranks=32 expected=32
+ok   packet2_recv_compare_occurrence: occurrence=2 expected=2
+ok   packet2_recv_compare_max_rel: max_rel=5.30439e-13 limit=1e-06
+ok   packet3_summary_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000003.txt
+ok   packet3_replay_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000003.out
+ok   packet3_recv_compare_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000003.txt
+ok   packet3_summary_source_columns: total_cols=13824 expected=13824
+ok   packet3_summary_packet_index: packets=[3]
+ok   packet3_summary_no_bad_size_files: bad_size_files_present=False
+ok   packet3_summary_lat_deg_bad: bad=0
+ok   packet3_summary_lon_deg_bad: bad=0
+ok   packet3_summary_T_K_bad: bad=0
+ok   packet3_summary_U_m_s_bad: bad=0
+ok   packet3_summary_V_m_s_bad: bad=0
+ok   packet3_summary_PMID_Pa_bad: bad=0
+ok   packet3_summary_ZM_m_bad: bad=0
+ok   packet3_summary_MBARV_kg_mol_bad: bad=0
+ok   packet3_summary_q_O_bad: bad=0
+ok   packet3_summary_q_O2_bad: bad=0
+ok   packet3_summary_q_H_bad: bad=0
+ok   packet3_summary_q_N_bad: bad=0
+ok   packet3_summary_q_NO_bad: bad=0
+ok   packet3_summary_cid_coverage: missing=0 unique=13824 expected=13824
+ok   packet3_summary_lat_deg_range: min=-90.0 max=90.0 allowed=[-90.0,90.0]
+ok   packet3_summary_lon_deg_range: min=0.0 max=357.5 allowed=[0.0,360.0]
+ok   packet3_summary_T_K_range: min=113.01640250137358 max=1554.4369000772058 allowed=[50.0,5000.0]
+ok   packet3_summary_U_m_s_range: min=-845.0018988897118 max=641.8661345067314 allowed=[-5000.0,5000.0]
+ok   packet3_summary_V_m_s_range: min=-824.6634660178233 max=718.0000932645536 allowed=[-5000.0,5000.0]
+ok   packet3_summary_PMID_Pa_range: min=4.055140885992663e-08 max=106842.37266247693 allowed=[0.0,200000.0]
+ok   packet3_summary_ZM_m_range: min=49.52816692598835 max=730915.5635162641 allowed=[-1000.0,2000000.0]
+ok   packet3_summary_MBARV_kg_mol_range: min=14.917211514206858 max=28.874447877643064 allowed=[1.0,60.0]
+ok   packet3_summary_q_O_range: min=2.6849738410329256e-25 max=0.9999414355618477 allowed=[-1e-12,1.1]
+ok   packet3_summary_q_O2_range: min=9.117495546026029e-06 max=0.23732133674528533 allowed=[-1e-12,1.1]
+ok   packet3_summary_q_H_range: min=2.679661130325278e-28 max=0.005007941289057978 allowed=[-1e-12,1.1]
+ok   packet3_summary_q_N_range: min=1.9037905891011585e-23 max=0.0597552186105634 allowed=[-1e-12,1.1]
+ok   packet3_summary_q_NO_range: min=8.971190705027605e-19 max=0.0012912508047011634 allowed=[-1e-12,1.1]
+ok   packet3_replay_source_coverage: source_cols=13824 filled=13824 expected=13824
+ok   packet3_replay_n2_mode: invalid
+ok   packet3_replay_bad_weighted_z: bad_weighted_z=0
+ok   packet3_replay_samples_positive: samples=6031360
+ok   packet3_replay_initial_final_samples: initial=6031360 final=6031360
+ok   packet3_replay_initial_final_invalid: initial=1820305 final=1820305
+ok   packet3_replay_initial_final_above_live_top: initial=1643828 final=1643828
+ok   packet3_replay_initial_final_n2_residual_used: initial=4387532 final=4387532
+ok   packet3_replay_initial_final_n2_residual_negative: initial=176477 final=176477
+ok   packet3_replay_n2_residual_used_positive: n2_residual_used=4387532
+ok   packet3_replay_n2_residual_bounds: min=-0.05347604405152857 max=0.8131186872649505
+ok   packet3_recv_compare_ok: ok_marker=True
+ok   packet3_recv_compare_ranks: ranks=32 expected=32
+ok   packet3_recv_compare_occurrence: occurrence=3 expected=3
+ok   packet3_recv_compare_max_rel: max_rel=2.52762e-13 limit=1e-06
+ok   packet4_summary_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000004.txt
+ok   packet4_replay_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000004.out
+ok   packet4_recv_compare_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000004.txt
+ok   packet4_summary_source_columns: total_cols=13824 expected=13824
+ok   packet4_summary_packet_index: packets=[4]
+ok   packet4_summary_no_bad_size_files: bad_size_files_present=False
+ok   packet4_summary_lat_deg_bad: bad=0
+ok   packet4_summary_lon_deg_bad: bad=0
+ok   packet4_summary_T_K_bad: bad=0
+ok   packet4_summary_U_m_s_bad: bad=0
+ok   packet4_summary_V_m_s_bad: bad=0
+ok   packet4_summary_PMID_Pa_bad: bad=0
+ok   packet4_summary_ZM_m_bad: bad=0
+ok   packet4_summary_MBARV_kg_mol_bad: bad=0
+ok   packet4_summary_q_O_bad: bad=0
+ok   packet4_summary_q_O2_bad: bad=0
+ok   packet4_summary_q_H_bad: bad=0
+ok   packet4_summary_q_N_bad: bad=0
+ok   packet4_summary_q_NO_bad: bad=0
+ok   packet4_summary_cid_coverage: missing=0 unique=13824 expected=13824
+ok   packet4_summary_lat_deg_range: min=-90.0 max=90.0 allowed=[-90.0,90.0]
+ok   packet4_summary_lon_deg_range: min=0.0 max=357.5 allowed=[0.0,360.0]
+ok   packet4_summary_T_K_range: min=112.9720736494699 max=1565.041791993268 allowed=[50.0,5000.0]
+ok   packet4_summary_U_m_s_range: min=-813.1849555043013 max=614.0455679674606 allowed=[-5000.0,5000.0]
+ok   packet4_summary_V_m_s_range: min=-787.7497309409229 max=728.4191157309506 allowed=[-5000.0,5000.0]
+ok   packet4_summary_PMID_Pa_range: min=4.055140885992663e-08 max=106663.43035858625 allowed=[0.0,200000.0]
+ok   packet4_summary_ZM_m_range: min=49.76555893227433 max=733884.7007234112 allowed=[-1000.0,2000000.0]
+ok   packet4_summary_MBARV_kg_mol_range: min=14.901979924460834 max=28.874428792449706 allowed=[1.0,60.0]
+ok   packet4_summary_q_O_range: min=2.720146330990414e-25 max=0.9999434266361716 allowed=[-1e-12,1.1]
+ok   packet4_summary_q_O2_range: min=9.003527460055274e-06 max=0.23731787686633707 allowed=[-1e-12,1.1]
+ok   packet4_summary_q_H_range: min=2.6200000942339235e-28 max=0.005097787016311002 allowed=[-1e-12,1.1]
+ok   packet4_summary_q_N_range: min=1.9045879088100767e-23 max=0.059394373369606936 allowed=[-1e-12,1.1]
+ok   packet4_summary_q_NO_range: min=8.989008571007448e-19 max=0.001261007487019198 allowed=[-1e-12,1.1]
+ok   packet4_replay_source_coverage: source_cols=13824 filled=13824 expected=13824
+ok   packet4_replay_n2_mode: invalid
+ok   packet4_replay_bad_weighted_z: bad_weighted_z=0
+ok   packet4_replay_samples_positive: samples=6031360
+ok   packet4_replay_initial_final_samples: initial=6031360 final=6031360
+ok   packet4_replay_initial_final_invalid: initial=1820718 final=1820718
+ok   packet4_replay_initial_final_above_live_top: initial=1644826 final=1644826
+ok   packet4_replay_initial_final_n2_residual_used: initial=4386534 final=4386534
+ok   packet4_replay_initial_final_n2_residual_negative: initial=175892 final=175892
+ok   packet4_replay_n2_residual_used_positive: n2_residual_used=4386534
+ok   packet4_replay_n2_residual_bounds: min=-0.053003590641177836 max=0.8131236419298921
+ok   packet4_recv_compare_ok: ok_marker=True
+ok   packet4_recv_compare_ranks: ranks=32 expected=32
+ok   packet4_recv_compare_occurrence: occurrence=4 expected=4
+ok   packet4_recv_compare_max_rel: max_rel=3.00666e-13 limit=1e-06
+ok   packet5_summary_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000005.txt
+ok   packet5_replay_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000005.out
+ok   packet5_recv_compare_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000005.txt
+ok   packet5_summary_source_columns: total_cols=13824 expected=13824
+ok   packet5_summary_packet_index: packets=[5]
+ok   packet5_summary_no_bad_size_files: bad_size_files_present=False
+ok   packet5_summary_lat_deg_bad: bad=0
+ok   packet5_summary_lon_deg_bad: bad=0
+ok   packet5_summary_T_K_bad: bad=0
+ok   packet5_summary_U_m_s_bad: bad=0
+ok   packet5_summary_V_m_s_bad: bad=0
+ok   packet5_summary_PMID_Pa_bad: bad=0
+ok   packet5_summary_ZM_m_bad: bad=0
+ok   packet5_summary_MBARV_kg_mol_bad: bad=0
+ok   packet5_summary_q_O_bad: bad=0
+ok   packet5_summary_q_O2_bad: bad=0
+ok   packet5_summary_q_H_bad: bad=0
+ok   packet5_summary_q_N_bad: bad=0
+ok   packet5_summary_q_NO_bad: bad=0
+ok   packet5_summary_cid_coverage: missing=0 unique=13824 expected=13824
+ok   packet5_summary_lat_deg_range: min=-90.0 max=90.0 allowed=[-90.0,90.0]
+ok   packet5_summary_lon_deg_range: min=0.0 max=357.5 allowed=[0.0,360.0]
+ok   packet5_summary_T_K_range: min=112.92969080955675 max=1583.6031751786186 allowed=[50.0,5000.0]
+ok   packet5_summary_U_m_s_range: min=-800.7816452908263 max=599.5548137655209 allowed=[-5000.0,5000.0]
+ok   packet5_summary_V_m_s_range: min=-764.5496695424649 max=740.2349483942965 allowed=[-5000.0,5000.0]
+ok   packet5_summary_PMID_Pa_range: min=4.055140885992663e-08 max=106383.81338777236 allowed=[0.0,200000.0]
+ok   packet5_summary_ZM_m_range: min=50.10417454632065 max=736357.3624242225 allowed=[-1000.0,2000000.0]
+ok   packet5_summary_MBARV_kg_mol_range: min=14.894285495167319 max=28.874411927744568 allowed=[1.0,60.0]
+ok   packet5_summary_q_O_range: min=2.7622672954843068e-25 max=0.9999431510126201 allowed=[-1e-12,1.1]
+ok   packet5_summary_q_O2_range: min=8.935581617136682e-06 max=0.23731408308606658 allowed=[-1e-12,1.1]
+ok   packet5_summary_q_H_range: min=2.6034592980171363e-28 max=0.005113776206462248 allowed=[-1e-12,1.1]
+ok   packet5_summary_q_N_range: min=1.89789570073296e-23 max=0.05905851201876043 allowed=[-1e-12,1.1]
+ok   packet5_summary_q_NO_range: min=9.00771840542955e-19 max=0.0012361502170916616 allowed=[-1e-12,1.1]
+ok   packet5_replay_source_coverage: source_cols=13824 filled=13824 expected=13824
+ok   packet5_replay_n2_mode: invalid
+ok   packet5_replay_bad_weighted_z: bad_weighted_z=0
+ok   packet5_replay_samples_positive: samples=6031360
+ok   packet5_replay_initial_final_samples: initial=6031360 final=6031360
+ok   packet5_replay_initial_final_invalid: initial=1821217 final=1821217
+ok   packet5_replay_initial_final_above_live_top: initial=1645762 final=1645762
+ok   packet5_replay_initial_final_n2_residual_used: initial=4385598 final=4385598
+ok   packet5_replay_initial_final_n2_residual_negative: initial=175455 final=175455
+ok   packet5_replay_n2_residual_used_positive: n2_residual_used=4385598
+ok   packet5_replay_n2_residual_bounds: min=-0.0526776490482023 max=0.8130948104122964
+ok   packet5_recv_compare_ok: ok_marker=True
+ok   packet5_recv_compare_ranks: ranks=32 expected=32
+ok   packet5_recv_compare_occurrence: occurrence=5 expected=5
+ok   packet5_recv_compare_max_rel: max_rel=3.26109e-13 limit=1e-06
+ok   packet6_summary_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000006.txt
+ok   packet6_replay_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000006.out
+ok   packet6_recv_compare_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000006.txt
+ok   packet6_summary_source_columns: total_cols=13824 expected=13824
+ok   packet6_summary_packet_index: packets=[6]
+ok   packet6_summary_no_bad_size_files: bad_size_files_present=False
+ok   packet6_summary_lat_deg_bad: bad=0
+ok   packet6_summary_lon_deg_bad: bad=0
+ok   packet6_summary_T_K_bad: bad=0
+ok   packet6_summary_U_m_s_bad: bad=0
+ok   packet6_summary_V_m_s_bad: bad=0
+ok   packet6_summary_PMID_Pa_bad: bad=0
+ok   packet6_summary_ZM_m_bad: bad=0
+ok   packet6_summary_MBARV_kg_mol_bad: bad=0
+ok   packet6_summary_q_O_bad: bad=0
+ok   packet6_summary_q_O2_bad: bad=0
+ok   packet6_summary_q_H_bad: bad=0
+ok   packet6_summary_q_N_bad: bad=0
+ok   packet6_summary_q_NO_bad: bad=0
+ok   packet6_summary_cid_coverage: missing=0 unique=13824 expected=13824
+ok   packet6_summary_lat_deg_range: min=-90.0 max=90.0 allowed=[-90.0,90.0]
+ok   packet6_summary_lon_deg_range: min=0.0 max=357.5 allowed=[0.0,360.0]
+ok   packet6_summary_T_K_range: min=112.8862970503258 max=1603.3092264007528 allowed=[50.0,5000.0]
+ok   packet6_summary_U_m_s_range: min=-784.4440402135879 max=596.8974476353948 allowed=[-5000.0,5000.0]
+ok   packet6_summary_V_m_s_range: min=-751.9128558953407 max=751.4303784646067 allowed=[-5000.0,5000.0]
+ok   packet6_summary_PMID_Pa_range: min=4.055140885992663e-08 max=106140.57189865205 allowed=[0.0,200000.0]
+ok   packet6_summary_ZM_m_range: min=50.44039289982515 max=739725.6508083901 allowed=[-1000.0,2000000.0]
+ok   packet6_summary_MBARV_kg_mol_range: min=14.908000537985751 max=28.874396973057816 allowed=[1.0,60.0]
+ok   packet6_summary_q_O_range: min=2.7848513033134e-25 max=0.9999416031176125 allowed=[-1e-12,1.1]
+ok   packet6_summary_q_O2_range: min=9.032465731026367e-06 max=0.23730991819378897 allowed=[-1e-12,1.1]
+ok   packet6_summary_q_H_range: min=2.61282236908899e-28 max=0.005018312810685206 allowed=[-1e-12,1.1]
+ok   packet6_summary_q_N_range: min=1.8924060532821897e-23 max=0.05878055012891286 allowed=[-1e-12,1.1]
+ok   packet6_summary_q_NO_range: min=9.02758504508696e-19 max=0.0012137224878968481 allowed=[-1e-12,1.1]
+ok   packet6_replay_source_coverage: source_cols=13824 filled=13824 expected=13824
+ok   packet6_replay_n2_mode: invalid
+ok   packet6_replay_bad_weighted_z: bad_weighted_z=0
+ok   packet6_replay_samples_positive: samples=6031360
+ok   packet6_replay_initial_final_samples: initial=6031360 final=6031360
+ok   packet6_replay_initial_final_invalid: initial=1821798 final=1821798
+ok   packet6_replay_initial_final_above_live_top: initial=1646720 final=1646720
+ok   packet6_replay_initial_final_n2_residual_used: initial=4384640 final=4384640
+ok   packet6_replay_initial_final_n2_residual_negative: initial=175078 final=175078
+ok   packet6_replay_n2_residual_used_positive: n2_residual_used=4384640
+ok   packet6_replay_n2_residual_bounds: min=-0.05249618472831976 max=0.8130441492844651
+ok   packet6_recv_compare_ok: ok_marker=True
+ok   packet6_recv_compare_ranks: ranks=32 expected=32
+ok   packet6_recv_compare_occurrence: occurrence=6 expected=6
+ok   packet6_recv_compare_max_rel: max_rel=3.14605e-13 limit=1e-06
+ok   packet7_summary_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000007.txt
+ok   packet7_replay_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000007.out
+ok   packet7_recv_compare_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000007.txt
+ok   packet7_summary_source_columns: total_cols=13824 expected=13824
+ok   packet7_summary_packet_index: packets=[7]
+ok   packet7_summary_no_bad_size_files: bad_size_files_present=False
+ok   packet7_summary_lat_deg_bad: bad=0
+ok   packet7_summary_lon_deg_bad: bad=0
+ok   packet7_summary_T_K_bad: bad=0
+ok   packet7_summary_U_m_s_bad: bad=0
+ok   packet7_summary_V_m_s_bad: bad=0
+ok   packet7_summary_PMID_Pa_bad: bad=0
+ok   packet7_summary_ZM_m_bad: bad=0
+ok   packet7_summary_MBARV_kg_mol_bad: bad=0
+ok   packet7_summary_q_O_bad: bad=0
+ok   packet7_summary_q_O2_bad: bad=0
+ok   packet7_summary_q_H_bad: bad=0
+ok   packet7_summary_q_N_bad: bad=0
+ok   packet7_summary_q_NO_bad: bad=0
+ok   packet7_summary_cid_coverage: missing=0 unique=13824 expected=13824
+ok   packet7_summary_lat_deg_range: min=-90.0 max=90.0 allowed=[-90.0,90.0]
+ok   packet7_summary_lon_deg_range: min=0.0 max=357.5 allowed=[0.0,360.0]
+ok   packet7_summary_T_K_range: min=112.83900645465735 max=1611.345359620181 allowed=[50.0,5000.0]
+ok   packet7_summary_U_m_s_range: min=-771.1467729580015 max=599.5196810208836 allowed=[-5000.0,5000.0]
+ok   packet7_summary_V_m_s_range: min=-741.3314972984058 max=763.3488381458534 allowed=[-5000.0,5000.0]
+ok   packet7_summary_PMID_Pa_range: min=4.055140885992663e-08 max=106815.168864745 allowed=[0.0,200000.0]
+ok   packet7_summary_ZM_m_range: min=50.75643610669817 max=740357.9387347881 allowed=[-1000.0,2000000.0]
+ok   packet7_summary_MBARV_kg_mol_range: min=14.933417250189432 max=28.874383973054613 allowed=[1.0,60.0]
+ok   packet7_summary_q_O_range: min=2.807482026528988e-25 max=0.9999396362943496 allowed=[-1e-12,1.1]
+ok   packet7_summary_q_O2_range: min=9.253453681333084e-06 max=0.23730537000124838 allowed=[-1e-12,1.1]
+ok   packet7_summary_q_H_range: min=2.6412198124189405e-28 max=0.004868094668285564 allowed=[-1e-12,1.1]
+ok   packet7_summary_q_N_range: min=1.8723591218673658e-23 max=0.058808860101338574 allowed=[-1e-12,1.1]
+ok   packet7_summary_q_NO_range: min=9.050477544562768e-19 max=0.001192660629159529 allowed=[-1e-12,1.1]
+ok   packet7_replay_source_coverage: source_cols=13824 filled=13824 expected=13824
+ok   packet7_replay_n2_mode: invalid
+ok   packet7_replay_bad_weighted_z: bad_weighted_z=0
+ok   packet7_replay_samples_positive: samples=6031360
+ok   packet7_replay_initial_final_samples: initial=6031360 final=6031360
+ok   packet7_replay_initial_final_invalid: initial=1822221 final=1822221
+ok   packet7_replay_initial_final_above_live_top: initial=1647614 final=1647614
+ok   packet7_replay_initial_final_n2_residual_used: initial=4383746 final=4383746
+ok   packet7_replay_initial_final_n2_residual_negative: initial=174607 final=174607
+ok   packet7_replay_n2_residual_used_positive: n2_residual_used=4383746
+ok   packet7_replay_n2_residual_bounds: min=-0.05112346729885 max=0.8130905455337173
+ok   packet7_recv_compare_ok: ok_marker=True
+ok   packet7_recv_compare_ranks: ranks=32 expected=32
+ok   packet7_recv_compare_occurrence: occurrence=7 expected=7
+ok   packet7_recv_compare_max_rel: max_rel=3.05377e-13 limit=1e-06
+ok   packet8_summary_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000008.txt
+ok   packet8_replay_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000008.out
+ok   packet8_recv_compare_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000008.txt
+ok   packet8_summary_source_columns: total_cols=13824 expected=13824
+ok   packet8_summary_packet_index: packets=[8]
+ok   packet8_summary_no_bad_size_files: bad_size_files_present=False
+ok   packet8_summary_lat_deg_bad: bad=0
+ok   packet8_summary_lon_deg_bad: bad=0
+ok   packet8_summary_T_K_bad: bad=0
+ok   packet8_summary_U_m_s_bad: bad=0
+ok   packet8_summary_V_m_s_bad: bad=0
+ok   packet8_summary_PMID_Pa_bad: bad=0
+ok   packet8_summary_ZM_m_bad: bad=0
+ok   packet8_summary_MBARV_kg_mol_bad: bad=0
+ok   packet8_summary_q_O_bad: bad=0
+ok   packet8_summary_q_O2_bad: bad=0
+ok   packet8_summary_q_H_bad: bad=0
+ok   packet8_summary_q_N_bad: bad=0
+ok   packet8_summary_q_NO_bad: bad=0
+ok   packet8_summary_cid_coverage: missing=0 unique=13824 expected=13824
+ok   packet8_summary_lat_deg_range: min=-90.0 max=90.0 allowed=[-90.0,90.0]
+ok   packet8_summary_lon_deg_range: min=0.0 max=357.5 allowed=[0.0,360.0]
+ok   packet8_summary_T_K_range: min=112.77993812637337 max=1606.0738315484616 allowed=[50.0,5000.0]
+ok   packet8_summary_U_m_s_range: min=-750.9832891380154 max=606.6442327878394 allowed=[-5000.0,5000.0]
+ok   packet8_summary_V_m_s_range: min=-731.6146963876928 max=774.2968585985947 allowed=[-5000.0,5000.0]
+ok   packet8_summary_PMID_Pa_range: min=4.055140885992663e-08 max=108330.48786031271 allowed=[0.0,200000.0]
+ok   packet8_summary_ZM_m_range: min=51.05178934769112 max=736332.3812588599 allowed=[-1000.0,2000000.0]
+ok   packet8_summary_MBARV_kg_mol_range: min=14.965151866881525 max=28.8743723188066 allowed=[1.0,60.0]
+ok   packet8_summary_q_O_range: min=2.8891072271537584e-25 max=0.9999742535993903 allowed=[-1e-12,1.1]
+ok   packet8_summary_q_O2_range: min=9.085525725920446e-06 max=0.2373004444012463 allowed=[-1e-12,1.1]
+ok   packet8_summary_q_H_range: min=2.6894259203054206e-28 max=0.004712064773000994 allowed=[-1e-12,1.1]
+ok   packet8_summary_q_N_range: min=1.6561088891488677e-23 max=0.05864291622117647 allowed=[-1e-12,1.1]
+ok   packet8_summary_q_NO_range: min=9.079430634345543e-19 max=0.001180392896945 allowed=[-1e-12,1.1]
+ok   packet8_replay_source_coverage: source_cols=13824 filled=13824 expected=13824
+ok   packet8_replay_n2_mode: invalid
+ok   packet8_replay_bad_weighted_z: bad_weighted_z=0
+ok   packet8_replay_samples_positive: samples=6031360
+ok   packet8_replay_initial_final_samples: initial=6031360 final=6031360
+ok   packet8_replay_initial_final_invalid: initial=1822641 final=1822641
+ok   packet8_replay_initial_final_above_live_top: initial=1648485 final=1648485
+ok   packet8_replay_initial_final_n2_residual_used: initial=4382875 final=4382875
+ok   packet8_replay_initial_final_n2_residual_negative: initial=174156 final=174156
+ok   packet8_replay_n2_residual_used_positive: n2_residual_used=4382875
+ok   packet8_replay_n2_residual_bounds: min=-0.04995603732663364 max=0.8130472567155591
+ok   packet8_recv_compare_ok: ok_marker=True
+ok   packet8_recv_compare_ranks: ranks=32 expected=32
+ok   packet8_recv_compare_occurrence: occurrence=8 expected=8
+ok   packet8_recv_compare_max_rel: max_rel=3.5766e-13 limit=1e-06
+ok   packet9_summary_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000009.txt
+ok   packet9_replay_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000009.out
+ok   packet9_recv_compare_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000009.txt
+ok   packet9_summary_source_columns: total_cols=13824 expected=13824
+ok   packet9_summary_packet_index: packets=[9]
+ok   packet9_summary_no_bad_size_files: bad_size_files_present=False
+ok   packet9_summary_lat_deg_bad: bad=0
+ok   packet9_summary_lon_deg_bad: bad=0
+ok   packet9_summary_T_K_bad: bad=0
+ok   packet9_summary_U_m_s_bad: bad=0
+ok   packet9_summary_V_m_s_bad: bad=0
+ok   packet9_summary_PMID_Pa_bad: bad=0
+ok   packet9_summary_ZM_m_bad: bad=0
+ok   packet9_summary_MBARV_kg_mol_bad: bad=0
+ok   packet9_summary_q_O_bad: bad=0
+ok   packet9_summary_q_O2_bad: bad=0
+ok   packet9_summary_q_H_bad: bad=0
+ok   packet9_summary_q_N_bad: bad=0
+ok   packet9_summary_q_NO_bad: bad=0
+ok   packet9_summary_cid_coverage: missing=0 unique=13824 expected=13824
+ok   packet9_summary_lat_deg_range: min=-90.0 max=90.0 allowed=[-90.0,90.0]
+ok   packet9_summary_lon_deg_range: min=0.0 max=357.5 allowed=[0.0,360.0]
+ok   packet9_summary_T_K_range: min=112.69934768699987 max=1607.2995998985575 allowed=[50.0,5000.0]
+ok   packet9_summary_U_m_s_range: min=-723.6277324456746 max=619.1691915763445 allowed=[-5000.0,5000.0]
+ok   packet9_summary_V_m_s_range: min=-721.4378403366709 max=781.3567410790919 allowed=[-5000.0,5000.0]
+ok   packet9_summary_PMID_Pa_range: min=4.055140885992663e-08 max=108718.3770173474 allowed=[0.0,200000.0]
+ok   packet9_summary_ZM_m_range: min=51.33259183823597 max=734132.261017062 allowed=[-1000.0,2000000.0]
+ok   packet9_summary_MBARV_kg_mol_range: min=14.986577976792809 max=28.874361814288367 allowed=[1.0,60.0]
+ok   packet9_summary_q_O_range: min=2.929773479387581e-25 max=0.9999757236848792 allowed=[-1e-12,1.1]
+ok   packet9_summary_q_O2_range: min=9.06216440438987e-06 max=0.237295165219069 allowed=[-1e-12,1.1]
+ok   packet9_summary_q_H_range: min=2.71142215551383e-28 max=0.0046277029577667505 allowed=[-1e-12,1.1]
+ok   packet9_summary_q_N_range: min=1.487424350374527e-23 max=0.058031385883066056 allowed=[-1e-12,1.1]
+ok   packet9_summary_q_NO_range: min=9.118162898387395e-19 max=0.0011695556456044578 allowed=[-1e-12,1.1]
+ok   packet9_replay_source_coverage: source_cols=13824 filled=13824 expected=13824
+ok   packet9_replay_n2_mode: invalid
+ok   packet9_replay_bad_weighted_z: bad_weighted_z=0
+ok   packet9_replay_samples_positive: samples=6031360
+ok   packet9_replay_initial_final_samples: initial=6031360 final=6031360
+ok   packet9_replay_initial_final_invalid: initial=1823177 final=1823177
+ok   packet9_replay_initial_final_above_live_top: initial=1649240 final=1649240
+ok   packet9_replay_initial_final_n2_residual_used: initial=4382120 final=4382120
+ok   packet9_replay_initial_final_n2_residual_negative: initial=173937 final=173937
+ok   packet9_replay_n2_residual_used_positive: n2_residual_used=4382120
+ok   packet9_replay_n2_residual_bounds: min=-0.05081495884854379 max=0.8130157394701916
+ok   packet9_recv_compare_ok: ok_marker=True
+ok   packet9_recv_compare_ranks: ranks=32 expected=32
+ok   packet9_recv_compare_occurrence: occurrence=9 expected=9
+ok   packet9_recv_compare_max_rel: max_rel=1.08667e-12 limit=1e-06
+ok   packet10_summary_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000010.txt
+ok   packet10_replay_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000010.out
+ok   packet10_recv_compare_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000010.txt
+ok   packet10_summary_source_columns: total_cols=13824 expected=13824
+ok   packet10_summary_packet_index: packets=[10]
+ok   packet10_summary_no_bad_size_files: bad_size_files_present=False
+ok   packet10_summary_lat_deg_bad: bad=0
+ok   packet10_summary_lon_deg_bad: bad=0
+ok   packet10_summary_T_K_bad: bad=0
+ok   packet10_summary_U_m_s_bad: bad=0
+ok   packet10_summary_V_m_s_bad: bad=0
+ok   packet10_summary_PMID_Pa_bad: bad=0
+ok   packet10_summary_ZM_m_bad: bad=0
+ok   packet10_summary_MBARV_kg_mol_bad: bad=0
+ok   packet10_summary_q_O_bad: bad=0
+ok   packet10_summary_q_O2_bad: bad=0
+ok   packet10_summary_q_H_bad: bad=0
+ok   packet10_summary_q_N_bad: bad=0
+ok   packet10_summary_q_NO_bad: bad=0
+ok   packet10_summary_cid_coverage: missing=0 unique=13824 expected=13824
+ok   packet10_summary_lat_deg_range: min=-90.0 max=90.0 allowed=[-90.0,90.0]
+ok   packet10_summary_lon_deg_range: min=0.0 max=357.5 allowed=[0.0,360.0]
+ok   packet10_summary_T_K_range: min=112.58623930914314 max=1629.6768622786237 allowed=[50.0,5000.0]
+ok   packet10_summary_U_m_s_range: min=-708.6957327054135 max=640.2294298030135 allowed=[-5000.0,5000.0]
+ok   packet10_summary_V_m_s_range: min=-709.393236201818 max=783.4646580652172 allowed=[-5000.0,5000.0]
+ok   packet10_summary_PMID_Pa_range: min=4.055140885992663e-08 max=108182.78718980134 allowed=[0.0,200000.0]
+ok   packet10_summary_ZM_m_range: min=51.62649811451934 max=741507.4873420591 allowed=[-1000.0,2000000.0]
+ok   packet10_summary_MBARV_kg_mol_range: min=14.997902284180185 max=28.874352283481564 allowed=[1.0,60.0]
+ok   packet10_summary_q_O_range: min=2.945886566927292e-25 max=0.9999845918711789 allowed=[-1e-12,1.1]
+ok   packet10_summary_q_O2_range: min=9.212828606095263e-06 max=0.2372895729071999 allowed=[-1e-12,1.1]
+ok   packet10_summary_q_H_range: min=2.738532862700321e-28 max=0.004576181715723077 allowed=[-1e-12,1.1]
+ok   packet10_summary_q_N_range: min=1.3841848845006846e-23 max=0.05733515616141806 allowed=[-1e-12,1.1]
+ok   packet10_summary_q_NO_range: min=9.170498173568672e-19 max=0.0011600140209696791 allowed=[-1e-12,1.1]
+ok   packet10_replay_source_coverage: source_cols=13824 filled=13824 expected=13824
+ok   packet10_replay_n2_mode: invalid
+ok   packet10_replay_bad_weighted_z: bad_weighted_z=0
+ok   packet10_replay_samples_positive: samples=6031360
+ok   packet10_replay_initial_final_samples: initial=6031360 final=6031360
+ok   packet10_replay_initial_final_invalid: initial=1823757 final=1823757
+ok   packet10_replay_initial_final_above_live_top: initial=1649968 final=1649968
+ok   packet10_replay_initial_final_n2_residual_used: initial=4381392 final=4381392
+ok   packet10_replay_initial_final_n2_residual_negative: initial=173789 final=173789
+ok   packet10_replay_n2_residual_used_positive: n2_residual_used=4381392
+ok   packet10_replay_n2_residual_bounds: min=-0.051497711148991744 max=0.8130402418435313
+ok   packet10_recv_compare_ok: ok_marker=True
+ok   packet10_recv_compare_ranks: ranks=32 expected=32
+ok   packet10_recv_compare_occurrence: occurrence=10 expected=10
+ok   packet10_recv_compare_max_rel: max_rel=1.12426e-12 limit=1e-06
+ok   packet11_summary_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/live_dump_summary_pkt000011.txt
+ok   packet11_replay_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/replay_builder_pkt000011.out
+ok   packet11_recv_compare_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/recv_qc_compare_pkt000011.txt
+ok   packet11_summary_source_columns: total_cols=13824 expected=13824
+ok   packet11_summary_packet_index: packets=[11]
+ok   packet11_summary_no_bad_size_files: bad_size_files_present=False
+ok   packet11_summary_lat_deg_bad: bad=0
+ok   packet11_summary_lon_deg_bad: bad=0
+ok   packet11_summary_T_K_bad: bad=0
+ok   packet11_summary_U_m_s_bad: bad=0
+ok   packet11_summary_V_m_s_bad: bad=0
+ok   packet11_summary_PMID_Pa_bad: bad=0
+ok   packet11_summary_ZM_m_bad: bad=0
+ok   packet11_summary_MBARV_kg_mol_bad: bad=0
+ok   packet11_summary_q_O_bad: bad=0
+ok   packet11_summary_q_O2_bad: bad=0
+ok   packet11_summary_q_H_bad: bad=0
+ok   packet11_summary_q_N_bad: bad=0
+ok   packet11_summary_q_NO_bad: bad=0
+ok   packet11_summary_cid_coverage: missing=0 unique=13824 expected=13824
+ok   packet11_summary_lat_deg_range: min=-90.0 max=90.0 allowed=[-90.0,90.0]
+ok   packet11_summary_lon_deg_range: min=0.0 max=357.5 allowed=[0.0,360.0]
+ok   packet11_summary_T_K_range: min=112.32377107860121 max=1643.600705057556 allowed=[50.0,5000.0]
+ok   packet11_summary_U_m_s_range: min=-739.5447831323606 max=657.670743765975 allowed=[-5000.0,5000.0]
+ok   packet11_summary_V_m_s_range: min=-694.9091290445584 max=778.1777413678637 allowed=[-5000.0,5000.0]
+ok   packet11_summary_PMID_Pa_range: min=4.055140885992663e-08 max=108513.78050768837 allowed=[0.0,200000.0]
+ok   packet11_summary_ZM_m_range: min=51.943574295154505 max=745887.7050799255 allowed=[-1000.0,2000000.0]
+ok   packet11_summary_MBARV_kg_mol_range: min=15.00767116473243 max=28.874343551691148 allowed=[1.0,60.0]
+ok   packet11_summary_q_O_range: min=2.90417644360738e-25 max=0.9999878199723679 allowed=[-1e-12,1.1]
+ok   packet11_summary_q_O2_range: min=9.13582940823605e-06 max=0.23728371859287964 allowed=[-1e-12,1.1]
+ok   packet11_summary_q_H_range: min=2.7746098443354035e-28 max=0.004535982488227458 allowed=[-1e-12,1.1]
+ok   packet11_summary_q_N_range: min=1.3321079790425603e-23 max=0.056953197885272575 allowed=[-1e-12,1.1]
+ok   packet11_summary_q_NO_range: min=9.239251612371511e-19 max=0.001153983945344796 allowed=[-1e-12,1.1]
+ok   packet11_replay_source_coverage: source_cols=13824 filled=13824 expected=13824
+ok   packet11_replay_n2_mode: invalid
+ok   packet11_replay_bad_weighted_z: bad_weighted_z=0
+ok   packet11_replay_samples_positive: samples=6031360
+ok   packet11_replay_initial_final_samples: initial=6031360 final=6031360
+ok   packet11_replay_initial_final_invalid: initial=1824310 final=1824310
+ok   packet11_replay_initial_final_above_live_top: initial=1650666 final=1650666
+ok   packet11_replay_initial_final_n2_residual_used: initial=4380694 final=4380694
+ok   packet11_replay_initial_final_n2_residual_negative: initial=173644 final=173644
+ok   packet11_replay_n2_residual_used_positive: n2_residual_used=4380694
+ok   packet11_replay_n2_residual_bounds: min=-0.05139328739477049 max=0.8130616881473688
+ok   packet11_recv_compare_ok: ok_marker=True
+ok   packet11_recv_compare_ranks: ranks=32 expected=32
+ok   packet11_recv_compare_occurrence: occurrence=11 expected=11
+ok   packet11_recv_compare_max_rel: max_rel=1.12911e-12 limit=1e-06
+ok   sender_live_packet_count: sent_packets=12 expected=12
+ok   receiver_qc_line_count: qc_lines=384 expected_min=384
+ok   sami3_done: present=True
+ok   waccmx_done: present=True
+ok   fatal_markers_absent: matches=0
+overall=ok

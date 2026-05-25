@@ -1,0 +1,539 @@
+{
+  "checks": [
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000",
+      "name": "run_dir_exists",
+      "ok": true
+    },
+    {
+      "detail": "sender_packets=12 expected=12",
+      "name": "sender_neutral_packet_count",
+      "ok": true
+    },
+    {
+      "detail": "receiver_packets=12 expected=12",
+      "name": "receiver_neutral_packet_count",
+      "ok": true
+    },
+    {
+      "detail": "{0: {'count': 32, 'unique_tasks': 32, 'hour_min': 0.0, 'hour_max': 0.0}, 1: {'count': 32, 'unique_tasks': 32, 'hour_min': 0.0833333358, 'hour_max': 0.0833333358}, 2: {'count': 32, 'unique_tasks': 32, 'hour_min': 0.166666672, 'hour_max': 0.166666672}, 3: {'count': 32, 'unique_tasks': 32, 'hour_min': 0.25, 'hour_max': 0.25}, 4: {'count': 32, 'unique_tasks': 32, 'hour_min': 0.333333343, 'hour_max': 0.333333343}, 5: {'count': 32, 'unique_tasks': 32, 'hour_min': 0.416666657, 'hour_max': 0.416666657}, 6: {'count': 32, 'unique_tasks': 32, 'hour_min': 0.5, 'hour_max': 0.5}, 7: {'count': 32, 'unique_tasks': 32, 'hour_min': 0.583333313, 'hour_max': 0.583333313}, 8: {'count': 32, 'unique_tasks': 32, 'hour_min': 0.666666687, 'hour_max': 0.666666687}, 9: {'count': 32, 'unique_tasks': 32, 'hour_min': 0.75, 'hour_max': 0.75}, 10: {'count': 32, 'unique_tasks': 32, 'hour_min': 0.833333313, 'hour_max': 0.833333313}, 11: {'count': 32, 'unique_tasks': 32, 'hour_min': 0.916666687, 'hour_max': 0.916666687}}",
+      "name": "receiver_packet_hours_consistent",
+      "ok": true
+    },
+    {
+      "detail": "receiver_hours=[0.0, 0.0833333358, 0.166666672, 0.25, 0.333333343, 0.416666657, 0.5, 0.583333313, 0.666666687, 0.75, 0.833333313, 0.916666687]",
+      "name": "receiver_packet_hours_monotonic",
+      "ok": true
+    },
+    {
+      "detail": "unique_tasks=[32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32] expected=32",
+      "name": "receiver_worker_coverage",
+      "ok": true
+    },
+    {
+      "detail": "matched=12 sender_hours=[0.0, 0.0833333358, 0.166666672, 0.25, 0.333333343, 0.416666657, 0.5, 0.583333313, 0.666666687, 0.75, 0.833333313, 0.916666687] receiver_hours=[0.0, 0.0833333358, 0.166666672, 0.25, 0.333333343, 0.416666657, 0.5, 0.583333313, 0.666666687, 0.75, 0.833333313, 0.916666687]",
+      "name": "sender_receiver_neutral_hours_match",
+      "ok": true
+    },
+    {
+      "detail": "frames=12 expected=12",
+      "name": "phi_payload_frame_count",
+      "ok": true
+    },
+    {
+      "detail": "hours=[0.0, 0.0833333358168602, 0.1666666716337204, 0.25, 0.3333333432674408, 0.4166666567325592, 0.5, 0.5833333134651184, 0.6666666865348816, 0.75, 0.8333333134651184, 0.9166666865348816]",
+      "name": "phi_payload_hours_strictly_increasing",
+      "ok": true
+    },
+    {
+      "detail": "hours=[0.0, 0.0833333358168602, 0.1666666716337204, 0.25, 0.3333333432674408, 0.4166666567325592, 0.5, 0.5833333134651184, 0.6666666865348816, 0.75, 0.8333333134651184, 0.9166666865348816] valid_until=[0.0833333358168602, 0.1666666716337204, 0.25, 0.3333333432674408, 0.4166666567325592, 0.5, 0.5833333134651184, 0.6666666865348816, 0.75, 0.8333333134651184, 0.9166666865348816, 1.0000000150474662e+30]",
+      "name": "phi_payload_valid_until_overlaps_next",
+      "ok": true
+    },
+    {
+      "detail": "uncovered_neutral_hours=[]",
+      "name": "phi_payload_covers_neutral_packets",
+      "ok": true
+    },
+    {
+      "detail": "receiver_phi_records=12 expected_min=12",
+      "name": "receiver_phi_frame_count",
+      "ok": true
+    },
+    {
+      "detail": "records=12",
+      "name": "receiver_phi_records_within_validity",
+      "ok": true
+    }
+  ],
+  "meta": {
+    "log_files": [
+      "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/slurm-7680171.out",
+      "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/slurm-7680171.err",
+      "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/waccmx_cesm.out",
+      "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/sami3_online_receiver.out"
+    ],
+    "phi_payload": {
+      "expected_size": 582164,
+      "frame_diffs": [
+        {
+          "finite_pairs": 12125,
+          "from_frame": 0,
+          "max_abs": 3.4961066246032715,
+          "rms": 0.6290284291170928,
+          "to_frame": 1
+        },
+        {
+          "finite_pairs": 12125,
+          "from_frame": 1,
+          "max_abs": 2.5031014680862427,
+          "rms": 0.34662386506792686,
+          "to_frame": 2
+        },
+        {
+          "finite_pairs": 12125,
+          "from_frame": 2,
+          "max_abs": 2.37591552734375,
+          "rms": 0.38385824283649694,
+          "to_frame": 3
+        },
+        {
+          "finite_pairs": 12125,
+          "from_frame": 3,
+          "max_abs": 2.289698600769043,
+          "rms": 0.36793557759482776,
+          "to_frame": 4
+        },
+        {
+          "finite_pairs": 12125,
+          "from_frame": 4,
+          "max_abs": 2.882493019104004,
+          "rms": 0.49043323484201373,
+          "to_frame": 5
+        },
+        {
+          "finite_pairs": 12125,
+          "from_frame": 5,
+          "max_abs": 2.8593616485595703,
+          "rms": 0.47181679768024903,
+          "to_frame": 6
+        },
+        {
+          "finite_pairs": 12125,
+          "from_frame": 6,
+          "max_abs": 2.2925376892089844,
+          "rms": 0.35503950957124336,
+          "to_frame": 7
+        },
+        {
+          "finite_pairs": 12125,
+          "from_frame": 7,
+          "max_abs": 2.363656997680664,
+          "rms": 0.3890114824314856,
+          "to_frame": 8
+        },
+        {
+          "finite_pairs": 12125,
+          "from_frame": 8,
+          "max_abs": 2.208375930786133,
+          "rms": 0.3489329362197277,
+          "to_frame": 9
+        },
+        {
+          "finite_pairs": 12125,
+          "from_frame": 9,
+          "max_abs": 2.008230209350586,
+          "rms": 0.2758661177074297,
+          "to_frame": 10
+        },
+        {
+          "finite_pairs": 12125,
+          "from_frame": 10,
+          "max_abs": 1.8809223175048828,
+          "rms": 0.28287450196134345,
+          "to_frame": 11
+        }
+      ],
+      "frames": [
+        {
+          "finite_count": 12125,
+          "frame_index": 0,
+          "hour": 0.0,
+          "max": 31.50481605529785,
+          "mean": -0.21076431384213634,
+          "min": -36.972877502441406,
+          "nonzero_count": 3492,
+          "valid_until": 0.0833333358168602
+        },
+        {
+          "finite_count": 12125,
+          "frame_index": 1,
+          "hour": 0.0833333358168602,
+          "max": 31.759037017822266,
+          "mean": -0.2430780580266383,
+          "min": -37.706363677978516,
+          "nonzero_count": 3492,
+          "valid_until": 0.1666666716337204
+        },
+        {
+          "finite_count": 12125,
+          "frame_index": 2,
+          "hour": 0.1666666716337204,
+          "max": 32.19300079345703,
+          "mean": -0.24535490300899285,
+          "min": -38.22329330444336,
+          "nonzero_count": 3492,
+          "valid_until": 0.25
+        },
+        {
+          "finite_count": 12125,
+          "frame_index": 3,
+          "hour": 0.25,
+          "max": 31.65413475036621,
+          "mean": -0.2551142560000597,
+          "min": -37.70856475830078,
+          "nonzero_count": 3492,
+          "valid_until": 0.3333333432674408
+        },
+        {
+          "finite_count": 12125,
+          "frame_index": 4,
+          "hour": 0.3333333432674408,
+          "max": 30.384998321533203,
+          "mean": -0.26287469724716295,
+          "min": -36.46513366699219,
+          "nonzero_count": 3492,
+          "valid_until": 0.4166666567325592
+        },
+        {
+          "finite_count": 12125,
+          "frame_index": 5,
+          "hour": 0.4166666567325592,
+          "max": 28.13518524169922,
+          "mean": -0.28814116038764004,
+          "min": -34.59793472290039,
+          "nonzero_count": 3492,
+          "valid_until": 0.5
+        },
+        {
+          "finite_count": 12125,
+          "frame_index": 6,
+          "hour": 0.5,
+          "max": 25.937503814697266,
+          "mean": -0.27244632385956896,
+          "min": -32.72685623168945,
+          "nonzero_count": 3492,
+          "valid_until": 0.5833333134651184
+        },
+        {
+          "finite_count": 12125,
+          "frame_index": 7,
+          "hour": 0.5833333134651184,
+          "max": 24.15878677368164,
+          "mean": -0.2805020455339919,
+          "min": -31.342710494995117,
+          "nonzero_count": 3492,
+          "valid_until": 0.6666666865348816
+        },
+        {
+          "finite_count": 12125,
+          "frame_index": 8,
+          "hour": 0.6666666865348816,
+          "max": 22.915939331054688,
+          "mean": -0.2923098809770374,
+          "min": -29.812246322631836,
+          "nonzero_count": 3492,
+          "valid_until": 0.75
+        },
+        {
+          "finite_count": 12125,
+          "frame_index": 9,
+          "hour": 0.75,
+          "max": 23.43190574645996,
+          "mean": -0.290189097959235,
+          "min": -28.25640296936035,
+          "nonzero_count": 3492,
+          "valid_until": 0.8333333134651184
+        },
+        {
+          "finite_count": 12125,
+          "frame_index": 10,
+          "hour": 0.8333333134651184,
+          "max": 23.785348892211914,
+          "mean": -0.2686998863888523,
+          "min": -26.669458389282227,
+          "nonzero_count": 3492,
+          "valid_until": 0.9166666865348816
+        },
+        {
+          "finite_count": 12125,
+          "frame_index": 11,
+          "hour": 0.9166666865348816,
+          "max": 24.287460327148438,
+          "mean": -0.2706177913851495,
+          "min": -25.142894744873047,
+          "nonzero_count": 3492,
+          "valid_until": 1.0000000150474662e+30
+        }
+      ],
+      "header": {
+        "magic": 20260524,
+        "nframes": 12,
+        "nlat": 125,
+        "nlon": 97,
+        "version": 1
+      },
+      "path": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/voltron_runtime_direct_phi/remix_sami3_phi_payload_runtime_direct_openmpi.bin",
+      "size": 582164,
+      "trailing_bytes": 0
+    },
+    "receiver_neutral_packet_summary": {
+      "0": {
+        "count": 32,
+        "hour_max": 0.0,
+        "hour_min": 0.0,
+        "unique_tasks": 32
+      },
+      "1": {
+        "count": 32,
+        "hour_max": 0.0833333358,
+        "hour_min": 0.0833333358,
+        "unique_tasks": 32
+      },
+      "10": {
+        "count": 32,
+        "hour_max": 0.833333313,
+        "hour_min": 0.833333313,
+        "unique_tasks": 32
+      },
+      "11": {
+        "count": 32,
+        "hour_max": 0.916666687,
+        "hour_min": 0.916666687,
+        "unique_tasks": 32
+      },
+      "2": {
+        "count": 32,
+        "hour_max": 0.166666672,
+        "hour_min": 0.166666672,
+        "unique_tasks": 32
+      },
+      "3": {
+        "count": 32,
+        "hour_max": 0.25,
+        "hour_min": 0.25,
+        "unique_tasks": 32
+      },
+      "4": {
+        "count": 32,
+        "hour_max": 0.333333343,
+        "hour_min": 0.333333343,
+        "unique_tasks": 32
+      },
+      "5": {
+        "count": 32,
+        "hour_max": 0.416666657,
+        "hour_min": 0.416666657,
+        "unique_tasks": 32
+      },
+      "6": {
+        "count": 32,
+        "hour_max": 0.5,
+        "hour_min": 0.5,
+        "unique_tasks": 32
+      },
+      "7": {
+        "count": 32,
+        "hour_max": 0.583333313,
+        "hour_min": 0.583333313,
+        "unique_tasks": 32
+      },
+      "8": {
+        "count": 32,
+        "hour_max": 0.666666687,
+        "hour_min": 0.666666687,
+        "unique_tasks": 32
+      },
+      "9": {
+        "count": 32,
+        "hour_max": 0.75,
+        "hour_min": 0.75,
+        "unique_tasks": 32
+      }
+    },
+    "receiver_phi_records": [
+      {
+        "frame_hour": 0.0,
+        "frame_index": 0,
+        "hrut": 0.0,
+        "max": 31.5048161,
+        "min": -36.9728775,
+        "nframes": 12,
+        "valid_until": 0.0833333358
+      },
+      {
+        "frame_hour": 0.0833333358,
+        "frame_index": 1,
+        "hrut": 0.0833333358,
+        "max": 31.759037,
+        "min": -37.7063637,
+        "nframes": 12,
+        "valid_until": 0.166666672
+      },
+      {
+        "frame_hour": 0.166666672,
+        "frame_index": 2,
+        "hrut": 0.166666672,
+        "max": 32.1930008,
+        "min": -38.2232933,
+        "nframes": 12,
+        "valid_until": 0.25
+      },
+      {
+        "frame_hour": 0.25,
+        "frame_index": 3,
+        "hrut": 0.250663817,
+        "max": 31.6541348,
+        "min": -37.7085648,
+        "nframes": 12,
+        "valid_until": 0.333333343
+      },
+      {
+        "frame_hour": 0.333333343,
+        "frame_index": 4,
+        "hrut": 0.333918184,
+        "max": 30.3849983,
+        "min": -36.4651337,
+        "nframes": 12,
+        "valid_until": 0.416666657
+      },
+      {
+        "frame_hour": 0.416666657,
+        "frame_index": 5,
+        "hrut": 0.417172581,
+        "max": 28.1351852,
+        "min": -34.5979347,
+        "nframes": 12,
+        "valid_until": 0.5
+      },
+      {
+        "frame_hour": 0.5,
+        "frame_index": 6,
+        "hrut": 0.500426948,
+        "max": 25.9375038,
+        "min": -32.7268562,
+        "nframes": 12,
+        "valid_until": 0.583333313
+      },
+      {
+        "frame_hour": 0.583333313,
+        "frame_index": 7,
+        "hrut": 0.583681345,
+        "max": 24.1587868,
+        "min": -31.3427105,
+        "nframes": 12,
+        "valid_until": 0.666666687
+      },
+      {
+        "frame_hour": 0.666666687,
+        "frame_index": 8,
+        "hrut": 0.666935742,
+        "max": 22.9159393,
+        "min": -29.8122463,
+        "nframes": 12,
+        "valid_until": 0.75
+      },
+      {
+        "frame_hour": 0.75,
+        "frame_index": 9,
+        "hrut": 0.750190139,
+        "max": 23.4319057,
+        "min": -28.256403,
+        "nframes": 12,
+        "valid_until": 0.833333313
+      },
+      {
+        "frame_hour": 0.833333313,
+        "frame_index": 10,
+        "hrut": 0.833444536,
+        "max": 23.7853489,
+        "min": -26.6694584,
+        "nframes": 12,
+        "valid_until": 0.916666687
+      },
+      {
+        "frame_hour": 0.916666687,
+        "frame_index": 11,
+        "hrut": 0.916698933,
+        "max": 24.2874603,
+        "min": -25.1428947,
+        "nframes": 12,
+        "valid_until": 1.00000002e+30
+      }
+    ],
+    "run_dir": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000",
+    "sender_neutral_packets": [
+      {
+        "nstep": 0,
+        "packet_hour": 0.0,
+        "packet_index": 0
+      },
+      {
+        "nstep": 1,
+        "packet_hour": 0.0833333358,
+        "packet_index": 1
+      },
+      {
+        "nstep": 2,
+        "packet_hour": 0.166666672,
+        "packet_index": 2
+      },
+      {
+        "nstep": 3,
+        "packet_hour": 0.25,
+        "packet_index": 3
+      },
+      {
+        "nstep": 4,
+        "packet_hour": 0.333333343,
+        "packet_index": 4
+      },
+      {
+        "nstep": 5,
+        "packet_hour": 0.416666657,
+        "packet_index": 5
+      },
+      {
+        "nstep": 6,
+        "packet_hour": 0.5,
+        "packet_index": 6
+      },
+      {
+        "nstep": 7,
+        "packet_hour": 0.583333313,
+        "packet_index": 7
+      },
+      {
+        "nstep": 8,
+        "packet_hour": 0.666666687,
+        "packet_index": 8
+      },
+      {
+        "nstep": 9,
+        "packet_hour": 0.75,
+        "packet_index": 9
+      },
+      {
+        "nstep": 10,
+        "packet_hour": 0.833333313,
+        "packet_index": 10
+      },
+      {
+        "nstep": 11,
+        "packet_hour": 0.916666687,
+        "packet_index": 11
+      }
+    ]
+  },
+  "ok": true
+}

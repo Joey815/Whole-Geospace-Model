@@ -14,11 +14,16 @@ only when they are direct validation evidence.
 The current verified WACCM-X -> SAMI3 status is:
 
 ```text
-f19 online runtime live neutral-packet prototype.
+f19 online runtime live neutral-packet plus REMIX/Voltron direct-phi prototype.
 Runtime map packing no longer hard-codes f19 source columns; nsource is read
 from the ESMF weight-file n_a dimension.
-Full SAMI3 smoke is validated for two packets plus done.
-Receiver-stub transport is validated for three live packets plus done.
+The current strongest no-smoke validation is a 12-cadence run:
+12 CAM phys_state(:) live-neutral packets and 12 changing direct-MPI phi frames.
+All seven strict validators pass for that 12pkt/12phi run, including live
+packet contract, direct phi, phi payload, source-flag balance, time axis,
+top-blend policy, and runtime-map gates.
+The archived 12pkt/12phi result is
+logs/waccmx_live_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_20260526/.
 File-mode fallback regression remains validated.
 Not production live WACCM-X neutral forcing yet.
 ```

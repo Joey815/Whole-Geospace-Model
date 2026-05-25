@@ -1,0 +1,37 @@
+path=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000/voltron_runtime_direct_phi/remix_sami3_phi_payload_runtime_direct_openmpi.bin
+size=582164
+header=[20260524, 1, 125, 97, 12]
+frame=0 frame_index=0 hour=0 valid_until=0.083333336 min=-36.972878 max=31.504816 finite=True nonzero=3492
+frame=1 frame_index=1 hour=0.083333336 valid_until=0.16666667 min=-37.706364 max=31.759037 finite=True nonzero=3492
+frame1_minus_frame0_max_abs=3.4961066
+frame1_minus_frame0_rms=0.62902843
+frame=2 frame_index=2 hour=0.16666667 valid_until=0.25 min=-38.223293 max=32.193001 finite=True nonzero=3492
+frame2_minus_frame1_max_abs=2.5031015
+frame2_minus_frame1_rms=0.34662387
+frame=3 frame_index=3 hour=0.25 valid_until=0.33333334 min=-37.708565 max=31.654135 finite=True nonzero=3492
+frame3_minus_frame2_max_abs=2.3759155
+frame3_minus_frame2_rms=0.38385824
+frame=4 frame_index=4 hour=0.33333334 valid_until=0.41666666 min=-36.465134 max=30.384998 finite=True nonzero=3492
+frame4_minus_frame3_max_abs=2.2896986
+frame4_minus_frame3_rms=0.36793558
+frame=5 frame_index=5 hour=0.41666666 valid_until=0.5 min=-34.597935 max=28.135185 finite=True nonzero=3492
+frame5_minus_frame4_max_abs=2.882493
+frame5_minus_frame4_rms=0.49043323
+frame=6 frame_index=6 hour=0.5 valid_until=0.58333331 min=-32.726856 max=25.937504 finite=True nonzero=3492
+frame6_minus_frame5_max_abs=2.8593616
+frame6_minus_frame5_rms=0.4718168
+frame=7 frame_index=7 hour=0.58333331 valid_until=0.66666669 min=-31.34271 max=24.158787 finite=True nonzero=3492
+frame7_minus_frame6_max_abs=2.2925377
+frame7_minus_frame6_rms=0.35503951
+frame=8 frame_index=8 hour=0.66666669 valid_until=0.75 min=-29.812246 max=22.915939 finite=True nonzero=3492
+frame8_minus_frame7_max_abs=2.363657
+frame8_minus_frame7_rms=0.38901148
+frame=9 frame_index=9 hour=0.75 valid_until=0.83333331 min=-28.256403 max=23.431906 finite=True nonzero=3492
+frame9_minus_frame8_max_abs=2.2083759
+frame9_minus_frame8_rms=0.34893294
+frame=10 frame_index=10 hour=0.83333331 valid_until=0.91666669 min=-26.669458 max=23.785349 finite=True nonzero=3492
+frame10_minus_frame9_max_abs=2.0082302
+frame10_minus_frame9_rms=0.27586612
+frame=11 frame_index=11 hour=0.91666669 valid_until=1e+30 min=-25.142895 max=24.28746 finite=True nonzero=3492
+frame11_minus_frame10_max_abs=1.8809223
+frame11_minus_frame10_rms=0.2828745

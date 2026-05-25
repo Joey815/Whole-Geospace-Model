@@ -2150,3 +2150,56 @@ exclude-Lmax product.  It remains prototype physics because the source-domain
 L scan still shows nearly all positive active Voltron bVol outside the current
 RAIJU target L range.  The next physics decision is target-domain extension
 versus a different source subset versus keeping this path diagnostic-only.
+
+## 2026-05-26 07:10 CST Update
+
+Returned to the WACCM-X/SAMI3 online-control side and extended the validated f19
+direct-MPI no-smoke cadence from 6 neutral/phi packets to 12:
+
+```text
+jobid = 7680171
+state = COMPLETED
+exit = 0:0
+elapsed = 00:48:27
+node = qhcn343
+run_dir = /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_maxstep1400_20260526_0000
+archive = logs/waccmx_live_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_20260526/
+doc = docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_DIRECTMPI_NOSMOKE_12PKT_12PHI_RESULT_20260526.md
+```
+
+Validated settings:
+
+```text
+SAMI3_MAXSTEP = 1400
+SAMI3_HRMAX = 4.000000
+SAMI3_DT0 = 300.
+MAX_PACKETS = 12
+PHI_MAX_FRAMES = 12
+CESM_STOP_N = 3900
+```
+
+All archived validators returned `overall=ok`.  The run consumed all 12 CAM
+live-neutral packets and all 12 REMIX/Voltron direct-phi frames, with SAMI3
+receiver packet hours from `0.0` through `0.916666687` h.  Replay/QC compare
+files exist for all 12 packets; the worst archived relative mismatch is
+`1.12911e-12`, far below the `1e-6` gate.
+
+The previous diagnostic attempt (`jobid=7680009`) with
+`SAMI3_MAXSTEP=800, SAMI3_HRMAX=3.0` consumed only 10/12 direct-phi frames
+before `MASTER: All Done!`; the successful setting fixes that by raising both
+the step and hour limits.
+
+Current goal-mode baseline:
+
+```text
+WACCM-X/CAM live phys_state(:) extraction: validated at f19 for 12 packets
+SAMI3 online receiver and worker distribution: validated for 12 packets
+Voltron/REMIX direct-MPI phi producer: validated for 12 changing frames
+Top-blend/source-flag/time-axis gates: validated
+Done/finalize path: validated
+```
+
+Next target is again the SAMI3 -> Voltron/RAIJU/GAMERA adapter line.  The
+remaining blocker is not the WACCM-X/SAMI3 control path; it is the physical
+source-domain policy for SAMI3-derived scalar moments before they can be
+treated as production RAIJU/GAMERA feedback.
