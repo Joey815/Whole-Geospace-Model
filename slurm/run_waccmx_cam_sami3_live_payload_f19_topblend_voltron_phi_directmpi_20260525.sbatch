@@ -15,7 +15,7 @@ BASE=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official
 COLLAB=/home/jiaoy_group/jiaoy/data/MAGE1.25/waccmx-sami3-collab-20260524
 MAGE=/home/jiaoy_group/jiaoy/data/MAGE1.25
 SAMI_SRC=$BASE/runs/sami3_waccmx_neutral_esmf_msis_top_weimer_20231013_0000
-RUN=$BASE/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000
+RUN=${WXSAMI3_DIRECTMPI_RUN_DIR:-$BASE/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000}
 PAY_FALLBACK=$BASE/runs/waccmx_payload_esmf_msis_top_20231013_0000/waccmx_neutral_rank
 MAP=$BASE/runs/esmf_regrid_f19_live_20260523/wxsami3_runtime_map_f19_20260523.bin
 WEIGHTS=$BASE/runs/esmf_regrid_f19_live_20260523/weights_bilinear_f19_live.nc
@@ -46,6 +46,13 @@ WXSAMI3_RUNTIME_LIBS=$WXSAMI3_LIB_COMPAT:$SPACK_GCC/netcdf-c-4.9.2-w7tqsh4u4adti
 SAMI3_RANKS=33
 CESM_RANKS=16
 VOLTRON_RANKS=1
+SAMI3_MAXSTEP=${WXSAMI3_DIRECTMPI_SAMI3_MAXSTEP:-20}
+SAMI3_HRMAX=${WXSAMI3_DIRECTMPI_SAMI3_HRMAX:-.020000}
+SAMI3_TPHI=${WXSAMI3_DIRECTMPI_SAMI3_TPHI:-1.}
+VOLTRON_TFIN=${WXSAMI3_DIRECTMPI_VOLTRON_TFIN:-10.25}
+PHI_MAX_FRAMES=${WXSAMI3_DIRECTMPI_PHI_MAX_FRAMES:-2}
+PHI_FRAME_HOUR_OFFSET=${WXSAMI3_DIRECTMPI_PHI_FRAME_HOUR_OFFSET:-0.0013888889}
+PHI_VALID_HOURS=${WXSAMI3_DIRECTMPI_PHI_VALID_HOURS:-0.0013888889}
 
 mkdir -p "$RUN" "$LIVE_DUMP_DIR" "$VOLTRON_RUN"
 
@@ -70,6 +77,13 @@ echo "CESM_RUNDIR=$CESM_RUNDIR"
 echo "START=$(date)"
 echo "HOST=$(hostname)"
 echo "DIRECT_PHI_MODE=1"
+echo "SAMI3_MAXSTEP=$SAMI3_MAXSTEP"
+echo "SAMI3_HRMAX=$SAMI3_HRMAX"
+echo "SAMI3_TPHI=$SAMI3_TPHI"
+echo "VOLTRON_TFIN=$VOLTRON_TFIN"
+echo "PHI_MAX_FRAMES=$PHI_MAX_FRAMES"
+echo "PHI_FRAME_HOUR_OFFSET=$PHI_FRAME_HOUR_OFFSET"
+echo "PHI_VALID_HOURS=$PHI_VALID_HOURS"
 
 source /etc/profile.d/modules.sh >/dev/null 2>&1 || true
 module purge >/dev/null 2>&1 || true
@@ -150,7 +164,7 @@ python3 - <<PY
 from pathlib import Path
 p = Path("$VOLTRON_RUN/$VOLTRON_XML")
 s = p.read_text()
-s = s.replace('<time tFin="6.0" />', '<time tFin="10.25" />')
+s = s.replace('<time tFin="6.0" />', '<time tFin="$VOLTRON_TFIN" />')
 s = s.replace('stopAfterExport="T"', 'stopAfterExport="F"')
 p.write_text(s)
 PY
@@ -161,9 +175,9 @@ from pathlib import Path
 import re
 p = Path('sami3-3.22.namelist')
 s = p.read_text()
-s = re.sub(r'^\\s*maxstep\\s*=.*?,', '  maxstep  =   20,', s, flags=re.MULTILINE)
-s = re.sub(r'^\\s*hrmax\\s*=.*?,', '  hrmax = .020000,', s, flags=re.MULTILINE)
-s = re.sub(r'^\\s*tphi\\s*=.*?,', '  tphi       = 1.,', s, flags=re.MULTILINE)
+s = re.sub(r'^\\s*maxstep\\s*=.*?,', '  maxstep  =   $SAMI3_MAXSTEP,', s, flags=re.MULTILINE)
+s = re.sub(r'^\\s*hrmax\\s*=.*?,', '  hrmax = $SAMI3_HRMAX,', s, flags=re.MULTILINE)
+s = re.sub(r'^\\s*tphi\\s*=.*?,', '  tphi       = $SAMI3_TPHI,', s, flags=re.MULTILINE)
 s = s.replace('  lwaccmx_neutral = .false.,', '  lwaccmx_neutral = .true.,')
 if 'lwaccmx_neutral_online' not in s:
     marker = "  waccmx_neutral_prefix = '/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_payload_esmf_msis_top_20231013_0000/waccmx_neutral_rank',"
@@ -285,9 +299,9 @@ fi
   export WACCMX_SAMI3_PHI_DIRECT_PORT_FILE="$PHI_PORT"
   export WACCMX_SAMI3_WEIMER_GRID="$WEIMER_GRID"
   export WACCMX_SAMI3_PHI_HEMI=NORTH
-  export WACCMX_SAMI3_PHI_FRAME_HOUR_OFFSET=0.0013888889
-  export WACCMX_SAMI3_PHI_VALID_HOURS=0.0013888889
-  export WACCMX_SAMI3_PHI_MAX_FRAMES=2
+  export WACCMX_SAMI3_PHI_FRAME_HOUR_OFFSET="$PHI_FRAME_HOUR_OFFSET"
+  export WACCMX_SAMI3_PHI_VALID_HOURS="$PHI_VALID_HOURS"
+  export WACCMX_SAMI3_PHI_MAX_FRAMES="$PHI_MAX_FRAMES"
   export WACCMX_SAMI3_PHI_FINAL_VALID_UNTIL_HOUR=1.0e30
   export WACCMX_SAMI3_PHI_STOP_AFTER_DONE=1
   export OMP_NUM_THREADS=8
@@ -386,7 +400,7 @@ done
 
 /usr/bin/python3 "$COLLAB/scripts/validate_remix_sami3_phi_payload.py" \
   --payload "$PHI_PAYLOAD" \
-  --expected-frames 2 \
+  --expected-frames "$PHI_MAX_FRAMES" \
   --require-changing-phi-frames \
   --json-output "$RUN/validate_remix_sami3_phi_payload.json" \
   > "$RUN/validate_remix_sami3_phi_payload.txt"
@@ -395,7 +409,7 @@ done
   --receiver-log "$RUN/sami3_online_receiver.out" \
   --phi-sender-log "$RUN/voltron_runtime_direct.out" \
   --recv-qc-compare "$RUN/recv_qc_compare_pkt000000.txt" \
-  --expected-frames 2 \
+  --expected-frames "$PHI_MAX_FRAMES" \
   --require-changing-phi \
   --json-output "$RUN/validate_sami3_direct_phi_run_strict.json" \
   > "$RUN/validate_sami3_direct_phi_run_strict.txt"
@@ -428,7 +442,7 @@ done
   --run-dir "$RUN" \
   --phi-payload "$PHI_PAYLOAD" \
   --expected-neutral-packets 1 \
-  --expected-phi-frames 2 \
+  --expected-phi-frames "$PHI_MAX_FRAMES" \
   --expected-sami3-workers 32 \
   --json-output "$RUN/validate_wxsami3_time_axis.json" \
   > "$RUN/validate_wxsami3_time_axis.txt"
