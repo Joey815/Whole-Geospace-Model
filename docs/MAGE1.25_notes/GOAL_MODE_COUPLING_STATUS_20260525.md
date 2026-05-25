@@ -708,3 +708,50 @@ jobid = 7669527
 run = /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_2pkt_phi1_clean_20260525_0000
 purpose = produce a Slurm COMPLETED record for the same 2-packet + direct-phi gate
 ```
+
+## 2026-05-25 11:15 CST Update
+
+The clean rerun completed successfully:
+
+```text
+jobid = 7669527
+jobname = wxsami3_p2p1c
+state = COMPLETED
+exit = 0:0
+elapsed = 00:06:54
+node = qhcn660
+batch MaxRSS = 64901032K
+archive = logs/waccmx_live_directmpi_2pkt_phi1_clean_20260525/
+doc = docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_DIRECTMPI_2PKT_CLEAN_RESULT_20260525.md
+```
+
+Runtime markers:
+
+```text
+CESM sent live neutral packet 0 at hour 0.00000000
+CESM sent live neutral packet 1 at hour 0.0833333358
+SAMI3 received packet 0 on 32 workers
+SAMI3 received packet 1 on 32 workers
+Voltron sent direct phi frame 0 with final-valid cache
+SAMI3 received WACCMX_PHI_RECV frame 0
+MASTER: All Done!
+WACCMX online done signal received: 2
+SAMI3 direct phi done signal received: 1
+```
+
+All batch validators passed:
+
+```text
+validate_remix_sami3_phi_payload = overall=ok
+validate_sami3_direct_phi_run_strict = overall=ok
+validate_wxsami3_live_packet_contract = overall=ok
+validate_wxsami3_source_flag_balance = overall=ok
+validate_wxsami3_time_axis = overall=ok
+validate_wxsami3_topblend_policy = overall=ok
+validate_wxsami3_runtime_map = overall=ok
+```
+
+This closes the clean 2-packet coexistence gate.  The next target is production
+cadence hardening: replace this forced `SAMI3_DT0=900.` / one-final-phi-frame
+smoke with repeated neutral consumption and repeated Voltron/REMIX phi frames
+without relying on the final-frame cache.
