@@ -49,6 +49,7 @@ VOLTRON_RANKS=1
 SAMI3_MAXSTEP=${WXSAMI3_DIRECTMPI_SAMI3_MAXSTEP:-20}
 SAMI3_HRMAX=${WXSAMI3_DIRECTMPI_SAMI3_HRMAX:-.020000}
 SAMI3_TPHI=${WXSAMI3_DIRECTMPI_SAMI3_TPHI:-1.}
+SAMI3_DT0=${WXSAMI3_DIRECTMPI_SAMI3_DT0:-}
 VOLTRON_TFIN=${WXSAMI3_DIRECTMPI_VOLTRON_TFIN:-10.25}
 PHI_MAX_FRAMES=${WXSAMI3_DIRECTMPI_PHI_MAX_FRAMES:-2}
 PHI_FRAME_HOUR_OFFSET=${WXSAMI3_DIRECTMPI_PHI_FRAME_HOUR_OFFSET:-0.0013888889}
@@ -84,6 +85,7 @@ echo "DIRECT_PHI_MODE=1"
 echo "SAMI3_MAXSTEP=$SAMI3_MAXSTEP"
 echo "SAMI3_HRMAX=$SAMI3_HRMAX"
 echo "SAMI3_TPHI=$SAMI3_TPHI"
+echo "SAMI3_DT0=${SAMI3_DT0:-<namelist-default>}"
 echo "VOLTRON_TFIN=$VOLTRON_TFIN"
 echo "PHI_MAX_FRAMES=$PHI_MAX_FRAMES"
 echo "PHI_FRAME_HOUR_OFFSET=$PHI_FRAME_HOUR_OFFSET"
@@ -183,6 +185,9 @@ s = p.read_text()
 s = re.sub(r'^\\s*maxstep\\s*=.*?,', '  maxstep  =   $SAMI3_MAXSTEP,', s, flags=re.MULTILINE)
 s = re.sub(r'^\\s*hrmax\\s*=.*?,', '  hrmax = $SAMI3_HRMAX,', s, flags=re.MULTILINE)
 s = re.sub(r'^\\s*tphi\\s*=.*?,', '  tphi       = $SAMI3_TPHI,', s, flags=re.MULTILINE)
+dt0 = "$SAMI3_DT0"
+if dt0:
+    s = re.sub(r'^\\s*dt0\\s*=.*?,', f'  dt0      =   {dt0},', s, flags=re.MULTILINE)
 s = s.replace('  lwaccmx_neutral = .false.,', '  lwaccmx_neutral = .true.,')
 if 'lwaccmx_neutral_online' not in s:
     marker = "  waccmx_neutral_prefix = '/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_payload_esmf_msis_top_20231013_0000/waccmx_neutral_rank',"
