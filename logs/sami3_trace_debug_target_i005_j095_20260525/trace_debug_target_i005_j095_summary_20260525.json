@@ -1,0 +1,252 @@
+{
+  "datasets": {
+    "Bxyz_node": {
+      "dtype": "float64",
+      "finite_count": 240024,
+      "inf_count": 0,
+      "max": 21645.703698699923,
+      "mean": -33.22838925131499,
+      "min": -207883.89643023588,
+      "nan_count": 0,
+      "shape": [
+        3,
+        8,
+        10001
+      ],
+      "total_count": 240024
+    },
+    "active_edge_mask": {
+      "dtype": "float64",
+      "finite_count": 80000,
+      "inf_count": 0,
+      "max": 1.0,
+      "mean": 0.010425,
+      "min": 0.0,
+      "nan_count": 0,
+      "shape": [
+        8,
+        10000
+      ],
+      "total_count": 80000
+    },
+    "dl_over_B_edge": {
+      "dtype": "float64",
+      "finite_count": 80000,
+      "inf_count": 0,
+      "max": 48.33110908242671,
+      "mean": 0.04371100539692731,
+      "min": 0.0,
+      "nan_count": 0,
+      "shape": [
+        8,
+        10000
+      ],
+      "total_count": 80000
+    },
+    "edge_count": {
+      "dtype": "float64",
+      "finite_count": 8,
+      "inf_count": 0,
+      "max": 834.0,
+      "mean": 104.25,
+      "min": 0.0,
+      "nan_count": 0,
+      "shape": [
+        8
+      ],
+      "total_count": 8
+    },
+    "edge_left_s_index": {
+      "dtype": "float64",
+      "finite_count": 80000,
+      "inf_count": 0,
+      "max": 0.0,
+      "mean": -4.3524375,
+      "min": -834.0,
+      "nan_count": 0,
+      "shape": [
+        8,
+        10000
+      ],
+      "total_count": 80000
+    },
+    "edge_right_s_index": {
+      "dtype": "float64",
+      "finite_count": 80000,
+      "inf_count": 0,
+      "max": 0.0,
+      "mean": -4.3420125,
+      "min": -833.0,
+      "nan_count": 0,
+      "shape": [
+        8,
+        10000
+      ],
+      "total_count": 80000
+    },
+    "ijk_node": {
+      "dtype": "float64",
+      "finite_count": 240024,
+      "inf_count": 0,
+      "max": 48.0,
+      "mean": 0.29495800419958,
+      "min": 0.0,
+      "nan_count": 0,
+      "shape": [
+        3,
+        8,
+        10001
+      ],
+      "total_count": 240024
+    },
+    "magB_node": {
+      "dtype": "float64",
+      "finite_count": 80008,
+      "inf_count": 0,
+      "max": 209029.91481621846,
+      "mean": 100.8912578800967,
+      "min": 0.0,
+      "nan_count": 0,
+      "shape": [
+        8,
+        10001
+      ],
+      "total_count": 80008
+    },
+    "node_count": {
+      "dtype": "float64",
+      "finite_count": 8,
+      "inf_count": 0,
+      "max": 835.0,
+      "mean": 104.375,
+      "min": 0.0,
+      "nan_count": 0,
+      "shape": [
+        8
+      ],
+      "total_count": 8
+    },
+    "node_s_index": {
+      "dtype": "float64",
+      "finite_count": 80008,
+      "inf_count": 0,
+      "max": 0.0,
+      "mean": -4.352002299770023,
+      "min": -834.0,
+      "nan_count": 0,
+      "shape": [
+        8,
+        10001
+      ],
+      "total_count": 80008
+    },
+    "source_Nm": {
+      "dtype": "float64",
+      "finite_count": 8,
+      "inf_count": 0,
+      "max": 834.0,
+      "mean": 104.25,
+      "min": 0.0,
+      "nan_count": 0,
+      "shape": [
+        8
+      ],
+      "total_count": 8
+    },
+    "source_Np": {
+      "dtype": "float64",
+      "finite_count": 8,
+      "inf_count": 0,
+      "max": 0.0,
+      "mean": 0.0,
+      "min": 0.0,
+      "nan_count": 0,
+      "shape": [
+        8
+      ],
+      "total_count": 8
+    },
+    "source_i": {
+      "dtype": "float64",
+      "finite_count": 8,
+      "inf_count": 0,
+      "max": 5.0,
+      "mean": 0.625,
+      "min": 0.0,
+      "nan_count": 0,
+      "shape": [
+        8
+      ],
+      "total_count": 8
+    },
+    "source_j": {
+      "dtype": "float64",
+      "finite_count": 8,
+      "inf_count": 0,
+      "max": 95.0,
+      "mean": 11.875,
+      "min": 0.0,
+      "nan_count": 0,
+      "shape": [
+        8
+      ],
+      "total_count": 8
+    },
+    "source_topo": {
+      "dtype": "float64",
+      "finite_count": 8,
+      "inf_count": 0,
+      "max": 2.0,
+      "mean": 0.25,
+      "min": 0.0,
+      "nan_count": 0,
+      "shape": [
+        8
+      ],
+      "total_count": 8
+    },
+    "xyz_node": {
+      "dtype": "float64",
+      "finite_count": 240024,
+      "inf_count": 0,
+      "max": 70.72036873454347,
+      "mean": -0.1447820817812695,
+      "min": -188.6223672427674,
+      "nan_count": 0,
+      "shape": [
+        3,
+        8,
+        10001
+      ],
+      "total_count": 240024
+    }
+  },
+  "exists": true,
+  "file": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_trace_debug_target_i005_j095_20260525/sami3_trace_debug_target_i005_j095.traceDebug.h5",
+  "group_attrs": {
+    "max_edges": 10000.0,
+    "max_nodes": 10001.0,
+    "trace_count": 1.0
+  },
+  "per_trace": [
+    {
+      "active_edge_count": 834,
+      "active_edge_fraction": 1.0,
+      "dl_over_B_sum_active": 3496.8804317541853,
+      "dl_over_B_sum_all": 3496.8804317541853,
+      "edge_count": 834,
+      "magB_max": 209029.91481621846,
+      "magB_min": 0.031217495075644537,
+      "node_count": 835,
+      "r_max": 190.34911905078903,
+      "r_min": 1.019112274816384,
+      "source_Nm": 834,
+      "source_Np": 0,
+      "source_i": 5,
+      "source_j": 95,
+      "source_topo": 2,
+      "trace_index": 0
+    }
+  ],
+  "size_bytes": 10254208
+}

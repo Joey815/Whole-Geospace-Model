@@ -79,8 +79,11 @@ A default-off Voltron traced-line debug export is now implemented and
 smoke-tested.  The smoke job 7677855 completed 0:0 and wrote
 `/TraceLineDebug` with 8 sampled field lines, `xyz(s)`, `B(s)`, `dl/B`, active
 edge masks, and source indices.  The checked HDF5 datasets are finite.  The
-next geometry step is to target the closure-failing source cells and rebuild
-the sparse product from trace-edge quadrature.
+export also supports `VOLTRON_TRACE_DEBUG_SOURCE_I/J`; targeted smoke job
+7677907 completed 0:0 for closure-failing source `(i=5,j=95)`, producing one
+finite trace with `Rmax=190.349119 Rp` and active `dl/B` sum `3496.88043`.
+The next geometry step is to compare this trace quadrature against the active
+bVol ledger and rebuild the sparse product from trace-edge quadrature.
 The stage-2 mapping products now have a repeatable HDF5 QC gate:
 `scripts/validate_sami3_raiju_mapping_product.py` validates
 `/RaiCplMomentsOnly` and `/MappingQuality` finite values, masks, coverage,

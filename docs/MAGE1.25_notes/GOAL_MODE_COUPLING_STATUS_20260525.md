@@ -20,7 +20,7 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-26 00:18:00 CST.
+Status refreshed: 2026-05-25 23:49:00 CST.
 
 ### Latest Completed Gate: Voltron Trace-Line Debug Export Smoke
 
@@ -57,12 +57,41 @@ smoke file has no NaN/Inf in checked datasets.  The current export rewrites the
 same HDF5 group on each `genVoltTubes` call, so it is a final-update debug
 snapshot, not a time-series format.
 
+The export now also supports targeted source-cell filtering:
+
+```text
+VOLTRON_TRACE_DEBUG_SOURCE_I
+VOLTRON_TRACE_DEBUG_SOURCE_J
+```
+
+Targeted closure-failure smoke:
+
+```text
+archive = logs/sami3_trace_debug_target_i005_j095_20260525/
+jobid = 7677907
+state = COMPLETED
+exit = 0:0
+source_i = 5
+source_j = 95
+trace_count = 1
+topo = 2
+Nm = 834
+Np = 0
+Rmax = 190.349119 Rp
+dl_over_B_sum_active = 3496.88043
+```
+
+This targeted cell is the largest active-bVol `outside_target` source in the
+no-span closure audit: `bvol_active=14539.834`, `Lb_cc=450.228`,
+`mapped_fraction=0`, `term_count=0`.
+
 Next work order after this gate:
 
 ```text
-1. Add source_i/source_j filtering so the export targets closure-failing source
-   cells instead of the first eligible tubes.
-2. Compare trace-edge ds/B quadrature with the active bVol ledger.
+1. Compare trace-edge ds/B quadrature with the active bVol ledger for the same
+   source cell.
+2. Classify outside-target failures by trace extent, topology, and RAIJU target
+   L-range.
 3. Build the next sparse SAMI3 -> Voltron -> RAIJU product from trace edges.
 4. Re-run the target-domain closure validator as the acceptance gate.
 ```

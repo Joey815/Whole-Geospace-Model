@@ -1,5 +1,5 @@
 diff --git a/src/voltron/voltCplHelper.F90 b/src/voltron/voltCplHelper.F90
-index 4a685b6..29b96c5 100644
+index 4a685b6..33c4f31 100644
 --- a/src/voltron/voltCplHelper.F90
 +++ b/src/voltron/voltCplHelper.F90
 @@ -4,6 +4,7 @@ module voltCplHelper
@@ -19,14 +19,15 @@ index 4a685b6..29b96c5 100644
      end subroutine genVoltTubes
  
      subroutine calcTubes(vApp)
-@@ -75,4 +78,157 @@ module voltCplHelper
+@@ -75,4 +78,176 @@ module voltCplHelper
  
      end subroutine calcTubes
  
-+    subroutine getTraceDebugConfig(doDebug, outFile, maxTubes)
++    subroutine getTraceDebugConfig(doDebug, outFile, maxTubes, targetI, targetJ)
 +        logical, intent(out) :: doDebug
 +        character(len=strLen), intent(out) :: outFile
 +        integer, intent(out) :: maxTubes
++        integer, intent(out) :: targetI, targetJ
 +
 +        character(len=strLen) :: envValue
 +        integer :: envLen, envStatus, ios
@@ -34,6 +35,8 @@ index 4a685b6..29b96c5 100644
 +        doDebug = .false.
 +        outFile = "NONE"
 +        maxTubes = 16
++        targetI = 0
++        targetJ = 0
 +
 +        call get_environment_variable("VOLTRON_TRACE_DEBUG_FILE", envValue, &
 +                                      length=envLen, status=envStatus)
@@ -50,6 +53,20 @@ index 4a685b6..29b96c5 100644
 +        endif
 +        maxTubes = max(1, min(maxTubes, 256))
 +
++        call get_environment_variable("VOLTRON_TRACE_DEBUG_SOURCE_I", envValue, &
++                                      length=envLen, status=envStatus)
++        if (envStatus == 0 .and. envLen > 0) then
++            read(envValue(1:envLen), *, iostat=ios) targetI
++            if (ios /= 0) targetI = 0
++        endif
++
++        call get_environment_variable("VOLTRON_TRACE_DEBUG_SOURCE_J", envValue, &
++                                      length=envLen, status=envStatus)
++        if (envStatus == 0 .and. envLen > 0) then
++            read(envValue(1:envLen), *, iostat=ios) targetJ
++            if (ios /= 0) targetJ = 0
++        endif
++
 +    end subroutine getTraceDebugConfig
 +
 +    subroutine writeTraceDebug(vApp)
@@ -57,7 +74,7 @@ index 4a685b6..29b96c5 100644
 +
 +        character(len=strLen) :: outFile
 +        logical :: doDebug, doSH, doNH
-+        integer :: maxTubes, maxNodes, maxEdges
++        integer :: maxTubes, maxNodes, maxEdges, targetI, targetJ
 +        integer :: i, j, k, n, node, edge, nNode, nEdge
 +        real(rp) :: seedR, eqR, mhd_Rin, dl, bMag
 +        real(rp), dimension(NDIM) :: xyz0
@@ -69,7 +86,7 @@ index 4a685b6..29b96c5 100644
 +        real(rp), allocatable :: xyz_node(:,:,:), bxyz_node(:,:,:), ijk_node(:,:,:)
 +        real(rp), allocatable :: magb_node(:,:), dl_over_b_edge(:,:), active_edge_mask(:,:)
 +
-+        call getTraceDebugConfig(doDebug, outFile, maxTubes)
++        call getTraceDebugConfig(doDebug, outFile, maxTubes, targetI, targetJ)
 +        if (.not. doDebug) return
 +
 +        maxNodes = 2*MaxFL + 1
@@ -96,6 +113,8 @@ index 4a685b6..29b96c5 100644
 +            do j=sh%js,sh%je+1
 +                do i=sh%is,sh%ie+1
 +                    if (n >= maxTubes) exit
++                    if (targetI > 0 .and. i /= targetI) cycle
++                    if (targetJ > 0 .and. j /= targetJ) cycle
 +                    xyz0 = seedR*[sin(sh%th(i))*cos(sh%ph(j)), &
 +                                  sin(sh%th(i))*sin(sh%ph(j)), &
 +                                  cos(sh%th(i))]

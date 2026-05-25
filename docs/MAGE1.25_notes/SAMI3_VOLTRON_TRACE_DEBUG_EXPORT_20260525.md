@@ -37,6 +37,8 @@ The export is controlled by environment variables:
 ```text
 VOLTRON_TRACE_DEBUG_FILE       # HDF5 output path; unset/NONE disables export
 VOLTRON_TRACE_DEBUG_MAX_TUBES  # optional sample count, default 16, clamped 1..256
+VOLTRON_TRACE_DEBUG_SOURCE_I   # optional single Voltron TubeShell i index
+VOLTRON_TRACE_DEBUG_SOURCE_J   # optional single Voltron TubeShell j index
 ```
 
 When enabled, `genVoltTubes` writes `/TraceLineDebug` after `tubes2Shell`.
@@ -139,6 +141,70 @@ closure-failing source cells.  The next geometry step should add source-cell
 selection/filtering so the export can target the source cells that the
 target-domain closure validator marks as outside-target or large-footprint.
 
+## Targeted Closure-Failure Smoke
+
+The export now supports optional `source_i/source_j` filtering.  A targeted
+smoke was run against the largest active-bVol outside-target source cell from
+the no-span closure audit:
+
+```text
+archive = logs/sami3_trace_debug_target_i005_j095_20260525/
+jobid = 7677907
+state = COMPLETED
+exit = 0:0
+elapsed = 00:01:10
+node = qhcn203
+batch MaxRSS = 1042088K
+VOLTRON_TRACE_DEBUG_SOURCE_I = 5
+VOLTRON_TRACE_DEBUG_SOURCE_J = 95
+```
+
+No-span closure-audit context for this source cell:
+
+```text
+status = outside_target
+source_i = 5
+source_j = 95
+bvol_active = 14539.834
+Lb_cc = 450.228
+lon0 = 181 deg
+mapped_fraction = 0
+term_count = 0
+```
+
+Targeted trace output:
+
+```text
+file = logs/sami3_trace_debug_target_i005_j095_20260525/sami3_trace_debug_target_i005_j095.traceDebug.h5
+trace_count = 1
+source = (i=5, j=95)
+topo = 2
+Nm = 834
+Np = 0
+node_count = 835
+edge_count = 834
+active_edge_count = 834
+active_edge_fraction = 1.0
+dl_over_B_sum_all = 3496.88043
+dl_over_B_sum_active = 3496.88043
+magB_min = 0.0312174951
+magB_max = 209029.915
+R_min = 1.01911227
+R_max = 190.349119
+```
+
+Interpretation:
+
+```text
+The targeted hook can now capture a specific closure-failing Voltron TubeShell
+source cell.  This particular outside-target cell traces to a very extended
+line with Rmax about 190 Rp and zero mapped RAIJU terms in the current
+overlap product.  The next step is to compare the exported trace-edge
+quadrature against the active-bVol ledger and decide whether the target-domain
+failure is caused by target L-range limits, line-end topology, or how the
+TubeShell corner geometry is being collapsed into the overlap bins.
+```
+
 ## Validation Commands
 
 Serial Voltron build:
@@ -168,9 +234,10 @@ git apply --check --reverse code/kaiju_sami3_moments/patches/voltron_trace_debug
 Use this diagnostic to close the geometry blocker:
 
 ```text
-1. Add source_i/source_j selection for closure-failing source cells.
-2. Export or reconstruct true ds/B quadrature for those cells.
-3. Compare trace quadrature against current TubeShell bVolActive ledger.
-4. Rebuild the SAMI3 -> Voltron -> RAIJU sparse product from trace edges.
-5. Keep the target-domain closure validator as the acceptance gate.
+1. Compare targeted trace quadrature against current TubeShell bVolActive
+   ledger for the same source cell.
+2. Classify outside-target failures by trace extent, topology, and RAIJU target
+   L-range.
+3. Rebuild the SAMI3 -> Voltron -> RAIJU sparse product from trace edges.
+4. Keep the target-domain closure validator as the acceptance gate.
 ```

@@ -1,0 +1,22 @@
+trace_debug_file=/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_trace_debug_target_i005_j095_20260525/sami3_trace_debug_target_i005_j095.traceDebug.h5
+size_bytes=10254208
+group_attrs={'max_edges': 10000.0, 'max_nodes': 10001.0, 'trace_count': 1.0}
+datasets:
+  Bxyz_node: shape=[3, 8, 10001] dtype=float64 finite=240024/240024 nan=0 inf=0
+  active_edge_mask: shape=[8, 10000] dtype=float64 finite=80000/80000 nan=0 inf=0
+  dl_over_B_edge: shape=[8, 10000] dtype=float64 finite=80000/80000 nan=0 inf=0
+  edge_count: shape=[8] dtype=float64 finite=8/8 nan=0 inf=0
+  edge_left_s_index: shape=[8, 10000] dtype=float64 finite=80000/80000 nan=0 inf=0
+  edge_right_s_index: shape=[8, 10000] dtype=float64 finite=80000/80000 nan=0 inf=0
+  ijk_node: shape=[3, 8, 10001] dtype=float64 finite=240024/240024 nan=0 inf=0
+  magB_node: shape=[8, 10001] dtype=float64 finite=80008/80008 nan=0 inf=0
+  node_count: shape=[8] dtype=float64 finite=8/8 nan=0 inf=0
+  node_s_index: shape=[8, 10001] dtype=float64 finite=80008/80008 nan=0 inf=0
+  source_Nm: shape=[8] dtype=float64 finite=8/8 nan=0 inf=0
+  source_Np: shape=[8] dtype=float64 finite=8/8 nan=0 inf=0
+  source_i: shape=[8] dtype=float64 finite=8/8 nan=0 inf=0
+  source_j: shape=[8] dtype=float64 finite=8/8 nan=0 inf=0
+  source_topo: shape=[8] dtype=float64 finite=8/8 nan=0 inf=0
+  xyz_node: shape=[3, 8, 10001] dtype=float64 finite=240024/240024 nan=0 inf=0
+per_trace:
+  trace=0 src=(5,95) topo=2 Nm=834 Np=0 nodes=835 edges=834 active=834 active_frac=1.000000 dlB_all=3496.88043 dlB_active=3496.88043 B=[0.0312174951,209029.915] R=[1.01911227,190.349119]
