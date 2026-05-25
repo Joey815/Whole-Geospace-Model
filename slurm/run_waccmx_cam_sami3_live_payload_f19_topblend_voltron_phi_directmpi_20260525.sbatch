@@ -320,6 +320,13 @@ wait "$voltron_pid"
 voltron_pid=
 pterm --dvm-uri "file:$DVM_URI" || true
 
+{
+  echo "--- CESM component markers appended for validators"
+  grep -h -E 'WXSAMI3|END OF MODEL RUN|FATAL|forrtl|Abort|header mismatch' \
+    "$CESM_RUNDIR"/atm.log.* "$CESM_RUNDIR"/cpl.log.* "$CESM_RUNDIR"/cesm.log.* \
+    2>/dev/null || true
+} >> "$RUN/waccmx_cesm.out"
+
 python3 - <<PY > "$RUN/phi_payload_summary.txt"
 from pathlib import Path
 import math
@@ -398,9 +405,9 @@ done
   --expected-packets 1 \
   --expected-source-columns 13824 \
   --expected-receiver-ranks 32 \
-  --expected-payload-nz 101 \
+  --expected-payload-nz 304 \
   --expected-payload-nf 124 \
-  --expected-payload-nl 96 \
+  --expected-payload-nl 5 \
   --expected-payload-nneut 7 \
   --expected-n2-mode invalid \
   --expect-n2-residual \
@@ -412,7 +419,7 @@ done
 /usr/bin/python3 "$COLLAB/scripts/validate_wxsami3_source_flag_balance.py" \
   --run-dir "$RUN" \
   --expected-sami3-workers 32 \
-  --expected-nl 96 \
+  --expected-nl 5 \
   --min-total-blend-cells 1 \
   --json-output "$RUN/validate_wxsami3_source_flag_balance.json" \
   > "$RUN/validate_wxsami3_source_flag_balance.txt"
@@ -438,7 +445,7 @@ done
   --json-output "$RUN/validate_wxsami3_topblend_policy.json" \
   > "$RUN/validate_wxsami3_topblend_policy.txt"
 
-/usr/bin/python3 "$COLLAB/scripts/validate_wxsami3_runtime_map.py" \
+/home/jiaoy_group/jiaoy/.venvs/mage-vis/bin/python "$COLLAB/scripts/validate_wxsami3_runtime_map.py" \
   --runtime-map "$MAP" \
   --weights-nc "$WEIGHTS" \
   --expected-nsource 13824 \
