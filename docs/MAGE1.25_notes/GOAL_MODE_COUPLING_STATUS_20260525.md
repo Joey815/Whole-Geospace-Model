@@ -2112,3 +2112,41 @@ Done/finalize path: validated
 Next target is to return to the SAMI3 -> Voltron/RAIJU/GAMERA adapter line and
 continue from the existing `Pavg/Davg/Pstd/Dstd/tiote` interface, using the
 domain-aware Voltron/RAIJU mapping and blending controls already established.
+
+## 2026-05-26 04:11 CST Update
+
+Returned to the SAMI3 -> Voltron/RAIJU/GAMERA scalar-moment adapter line and
+validated the latest schema v7 `exclude_above_target_lmax` product for 1800s
+runtime use:
+
+```text
+jobid = 7678667
+state = COMPLETED
+exit = 0:0
+elapsed = 01:22:42
+node = qhcn176
+run_dir = /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvol_overlap_exclude_lmax_tiote_long1800_20260526
+doc = docs/MAGE1.25_notes/SAMI3_RAIJU_EXCLUDE_LMAX_DENSITY_TIOTE_LONG1800_RESULT_20260526.md
+```
+
+Validated cases:
+
+```text
+long1800_exclude_lmax_dens005:
+  alphaDavg=0.05, alphaTiote=0.0
+
+long1800_exclude_lmax_dens005_tiote:
+  alphaDavg=0.05, alphaTiote=1.0
+  moments/useStateTioteForIngest=T
+```
+
+Both cases reached `Fin`, wrote 362 RAIJU frames, passed longrun/summary/mapping
+validators, and had exact `Pavg/Davg/Pstd/Dstd` formula checks with no
+non-finite checked restart physics fields.  The tiote hook validator passed
+with runtime alphas `[0.0, 0.05, 0.0, 0.0, 1.0]` and 8100 valid mask cells.
+
+This closes the current runtime-adapter validation target for the conservative
+exclude-Lmax product.  It remains prototype physics because the source-domain
+L scan still shows nearly all positive active Voltron bVol outside the current
+RAIJU target L range.  The next physics decision is target-domain extension
+versus a different source subset versus keeping this path diagnostic-only.

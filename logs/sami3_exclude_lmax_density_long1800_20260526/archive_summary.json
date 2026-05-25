@@ -1,0 +1,62 @@
+{
+  "archive_dir": "logs/sami3_exclude_lmax_density_long1800_20260526",
+  "copied_files": [
+    {
+      "archive": "logs/sami3_exclude_lmax_density_long1800_20260526/base_control_long1800_exclude_lmax_dens005.log",
+      "bytes": 529426,
+      "source": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvol_overlap_exclude_lmax_tiote_long1800_20260526/base_control_long1800_exclude_lmax_dens005.log"
+    },
+    {
+      "archive": "logs/sami3_exclude_lmax_density_long1800_20260526/dsB_lmlt_recommended_long1800_exclude_lmax_dens005.log",
+      "bytes": 530945,
+      "source": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvol_overlap_exclude_lmax_tiote_long1800_20260526/dsB_lmlt_recommended_long1800_exclude_lmax_dens005.log"
+    },
+    {
+      "archive": "logs/sami3_exclude_lmax_density_long1800_20260526/tinyCase_base_control_long1800_exclude_lmax_dens005.xml",
+      "bytes": 1897,
+      "source": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvol_overlap_exclude_lmax_tiote_long1800_20260526/tinyCase_base_control_long1800_exclude_lmax_dens005.xml"
+    },
+    {
+      "archive": "logs/sami3_exclude_lmax_density_long1800_20260526/tinyCase_sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.xml",
+      "bytes": 2264,
+      "source": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvol_overlap_exclude_lmax_tiote_long1800_20260526/tinyCase_sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.xml"
+    },
+    {
+      "archive": "logs/sami3_exclude_lmax_density_long1800_20260526/slurm-7678667.out",
+      "bytes": 11434,
+      "source": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvol_overlap_exclude_lmax_tiote_long1800_20260526/slurm-7678667.out"
+    }
+  ],
+  "job_id": "7678667",
+  "label": "long1800_exclude_lmax_dens005",
+  "mapping_product": {
+    "expect_mapping_mode": "weights",
+    "json": "logs/sami3_exclude_lmax_density_long1800_20260526/validate_sami3_raiju_mapping_product.json",
+    "min_valid_fraction": 0.95,
+    "product_h5": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_voltron_tubeshell_l_mlt_lon0_bin_bvol_overlap_exclude_lmax_20260526.h5",
+    "python": "/home/jiaoy_group/jiaoy/.venvs/mage-vis/bin/python",
+    "returncode": 0,
+    "text": "logs/sami3_exclude_lmax_density_long1800_20260526/validate_sami3_raiju_mapping_product.txt"
+  },
+  "ok": true,
+  "run_dir": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvol_overlap_exclude_lmax_tiote_long1800_20260526",
+  "sacct": {
+    "path": "logs/sami3_exclude_lmax_density_long1800_20260526/sacct_7678667.txt",
+    "returncode": 0
+  },
+  "summary": {
+    "json": "logs/sami3_exclude_lmax_density_long1800_20260526/recommended_long1800_exclude_lmax_dens005_summary.json",
+    "python": "/home/jiaoy_group/jiaoy/.venvs/mage-vis/bin/python",
+    "returncode": 0,
+    "stdout": "logs/sami3_exclude_lmax_density_long1800_20260526/summarize_sami3_raiju_longrun.stdout.txt",
+    "text": "logs/sami3_exclude_lmax_density_long1800_20260526/recommended_long1800_exclude_lmax_dens005_summary.txt",
+    "validation_json": "logs/sami3_exclude_lmax_density_long1800_20260526/validate_sami3_raiju_summary.json",
+    "validation_returncode": 0,
+    "validation_text": "logs/sami3_exclude_lmax_density_long1800_20260526/validate_sami3_raiju_summary.txt"
+  },
+  "validator": {
+    "json": "logs/sami3_exclude_lmax_density_long1800_20260526/validate_sami3_raiju_longrun.json",
+    "returncode": 0,
+    "text": "logs/sami3_exclude_lmax_density_long1800_20260526/validate_sami3_raiju_longrun.txt"
+  }
+}

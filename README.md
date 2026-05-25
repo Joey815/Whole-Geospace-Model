@@ -115,6 +115,15 @@ RAIJU/GAMERA restart fields (`State/Pavg_in`, `State/Davg_in`, `State/eta`,
 `alphaDavg=0.05` density-only case passes formula checks for Pavg/Davg/Pstd/Dstd
 with no non-finite checked physics fields and a finite response in
 `State/Davg_in`, `State/Density`, and `Gas0`.
+The same schema v7 exclude-Lmax product now passes 1800s runtime checks for
+both `alphaDavg=0.05` density-only and `alphaDavg=0.05 + alphaTiote=1.0`
+density/tiote prototype cases.  Job 7678667 completed 0:0 on qhcn176; both
+cases reached `Fin` with 362 RAIJU writes, exact Pavg/Davg/Pstd/Dstd blend
+formula checks, no non-finite checked RAIJU/GAMERA restart physics fields, and
+the mapping-product gate still reports `runtime_valid_fraction=0.9574468085106383`.
+The tiote hook gate passed with runtime alphas `[0.0, 0.05, 0.0, 0.0, 1.0]`,
+8100 valid mask cells, and product tiote range
+`0.8749623894691467 / 1.0004475116729736`.
 A source-domain L scan now quantifies why simply extending the current RAIJU
 target grid is not a small follow-up fix.  The active Voltron source bVol has
 weighted-mean `L=354.10948435454907` and max `L=553.77520751953125`, while the

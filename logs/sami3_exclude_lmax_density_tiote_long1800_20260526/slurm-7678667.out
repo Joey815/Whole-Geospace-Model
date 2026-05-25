@@ -1,0 +1,101 @@
+job_id=7678667
+partition=intel
+node_list=qhcn176
+start_time=2026-05-26 02:44:43 +0800
+run_dir=/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvol_overlap_exclude_lmax_tiote_long1800_20260526
+voltron_exe=/home/jiaoy_group/jiaoy/data/MAGE1.25/build_gr_sami3_moments_20260523/bin/voltron.x
+mode=tubeshell_bin_bvol_overlap_exclude_lmax_density_then_tiote_long1800
+baseline_reused_from=/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_conservative_long1800_20260525
+density_label=long1800_exclude_lmax_dens005
+tiote_label=long1800_exclude_lmax_dens005_tiote
+alphaDavg=0.05
+alphaPavg=0.0
+alphaPstd=0.0
+alphaDstd=0.0
+density_alphaTiote=0.0
+tiote_alphaTiote=1.0
+tiote_useStateTioteForIngest=T
+hostname=qhcn176
+python=/apps/support/intel_spr_rocky8.9/anaconda/2024.10/bin/python
+omp_threads=8
+kmp_stacksize=512M
+omp_stacksize=512M
+ldd_missing=0
+
+===== BASELINE LONG1800 REUSED =====
+-rw-r--r-- 1 jiaoy jiaoy_group 518K May 25 16:26 base_control_long1800_exclude_lmax_dens005.log
+-rw-r--r-- 1 jiaoy jiaoy_group 3.6M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005.raiCpl.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 518K May 25 16:26 base_control_long1800_exclude_lmax_dens005_tiote.log
+-rw-r--r-- 1 jiaoy jiaoy_group 3.6M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005_tiote.raiCpl.Res.00000.h5
+===== SAMI3 EXCLUDE-LMAX DENSITY-ONLY LONG1800 =====
+===== SAMI3 EXCLUDE-LMAX DENSITY+TIOTE LONG1800 =====
+run_complete=1
+end_time=2026-05-26 04:07:24 +0800
+-rw-r--r-- 1 jiaoy jiaoy_group  63M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005.gam.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  63M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005.gam.Res.XXXXX.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 4.7G May 25 16:26 sami3_moments_base_control_long1800_exclude_lmax_dens005.gam.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  19M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005.gamCpl.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  19M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005.gamCpl.Res.XXXXX.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 150M May 25 16:26 sami3_moments_base_control_long1800_exclude_lmax_dens005.gamCpl.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 6.3M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005.mix.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 6.3M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005.mix.Res.XXXXX.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 2.9G May 25 16:26 sami3_moments_base_control_long1800_exclude_lmax_dens005.mix.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 3.6M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005.raiCpl.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 3.6M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005.raiCpl.Res.XXXXX.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 129M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005.raiju.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 129M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005.raiju.Res.XXXXX.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 3.3G May 25 16:26 sami3_moments_base_control_long1800_exclude_lmax_dens005.raiju.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  27M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005.volt.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  27M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005.volt.Res.XXXXX.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 1.6G May 25 16:26 sami3_moments_base_control_long1800_exclude_lmax_dens005.volt.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  63M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005_tiote.gam.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  63M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005_tiote.gam.Res.XXXXX.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 4.7G May 25 16:26 sami3_moments_base_control_long1800_exclude_lmax_dens005_tiote.gam.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  19M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005_tiote.gamCpl.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  19M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005_tiote.gamCpl.Res.XXXXX.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 150M May 25 16:26 sami3_moments_base_control_long1800_exclude_lmax_dens005_tiote.gamCpl.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 6.3M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005_tiote.mix.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 6.3M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005_tiote.mix.Res.XXXXX.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 2.9G May 25 16:26 sami3_moments_base_control_long1800_exclude_lmax_dens005_tiote.mix.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 3.6M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005_tiote.raiCpl.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 3.6M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005_tiote.raiCpl.Res.XXXXX.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 129M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005_tiote.raiju.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 129M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005_tiote.raiju.Res.XXXXX.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 3.3G May 25 16:26 sami3_moments_base_control_long1800_exclude_lmax_dens005_tiote.raiju.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  27M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005_tiote.volt.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  27M May 25 15:44 sami3_moments_base_control_long1800_exclude_lmax_dens005_tiote.volt.Res.XXXXX.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 1.6G May 25 16:26 sami3_moments_base_control_long1800_exclude_lmax_dens005_tiote.volt.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  63M May 26 02:45 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.gam.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   81 May 26 02:45 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.gam.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.gam.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 4.7G May 26 03:25 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.gam.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  19M May 26 02:45 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.gamCpl.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   84 May 26 02:45 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.gamCpl.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.gamCpl.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 150M May 26 03:25 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.gamCpl.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 6.3M May 26 02:45 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.mix.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   81 May 26 02:45 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.mix.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.mix.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 2.9G May 26 03:25 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.mix.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 3.6M May 26 02:45 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.raiCpl.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   84 May 26 02:45 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.raiCpl.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.raiCpl.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 129M May 26 02:45 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.raiju.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   83 May 26 02:45 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.raiju.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.raiju.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 3.3G May 26 03:25 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.raiju.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  28M May 26 02:45 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.volt.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   82 May 26 02:45 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.volt.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.volt.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 1.6G May 26 03:25 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005.volt.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  63M May 26 03:26 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.gam.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   87 May 26 03:26 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.gam.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.gam.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 4.7G May 26 04:07 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.gam.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  19M May 26 03:26 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.gamCpl.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   90 May 26 03:26 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.gamCpl.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.gamCpl.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 150M May 26 04:07 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.gamCpl.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 6.3M May 26 03:26 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.mix.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   87 May 26 03:26 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.mix.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.mix.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 2.9G May 26 04:07 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.mix.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 3.6M May 26 03:26 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.raiCpl.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   90 May 26 03:26 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.raiCpl.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.raiCpl.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 129M May 26 03:26 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.raiju.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   89 May 26 03:26 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.raiju.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.raiju.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 3.3G May 26 04:07 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.raiju.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  28M May 26 03:26 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.volt.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   88 May 26 03:26 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.volt.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.volt.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 1.6G May 26 04:07 sami3_moments_dsB_lmlt_recommended_long1800_exclude_lmax_dens005_tiote.volt.h5
