@@ -529,3 +529,69 @@ Immediate next work is to merge this OpenMPI direct Voltron phi route into the
 existing live WACCM-X/CESM `phys_state(:)` neutral launcher.  That will replace
 the current file-backed append/direct-wait phi handoff with a same-stack direct
 Voltron -> SAMI3 MPI handoff.
+
+## 2026-05-25 09:30 CST Update
+
+The same-stack live WACCM-X/CESM + SAMI3 + OpenMPI Voltron direct-phi smoke now
+passes:
+
+```text
+jobid = 7668385
+jobname = wxsami3_dmpi
+state = COMPLETED
+exit = 0:0
+elapsed = 00:07:10
+node = qhcn005
+batch MaxRSS = 63585144K
+launcher = slurm/run_waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525.sbatch
+archive = logs/waccmx_live_directmpi_20260525/
+doc = docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_DIRECTMPI_RESULT_20260525.md
+```
+
+This is the first completed integrated smoke where CESM/WACCM-X sends live
+neutral forcing from CAM `phys_state(:)` while phi is sent by runtime OpenMPI
+Voltron directly into the SAMI3 phi MPI port.  The old CESM file-backed phi
+forwarding path is disabled in this launcher:
+
+```text
+WXSAMI3 phi payload enabled: F
+```
+
+Key markers:
+
+```text
+WXSAMI3 sent live neutral packet
+WXSAMI3 sent done signal to SAMI3
+END OF MODEL RUN
+WACCMX_SAMI3_PHI_DIRECT sent frame 0 and frame 1
+WACCMX_SAMI3_PHI_DIRECT sent done=2
+SAMI3 received WACCMX_PHI_RECV frame 0 and frame 1
+MASTER: All Done!
+WACCMX online done signal received: 1
+SAMI3 direct phi done signal received: 2
+```
+
+Strict gates:
+
+```text
+validate_remix_sami3_phi_payload = overall=ok
+validate_sami3_direct_phi_run_strict = overall=ok
+validate_wxsami3_live_packet_contract = overall=ok
+validate_wxsami3_source_flag_balance = overall=ok
+validate_wxsami3_time_axis = overall=ok
+validate_wxsami3_topblend_policy = overall=ok
+validate_wxsami3_runtime_map = overall=ok
+```
+
+This closes the current online control-path milestone.  It remains a prototype
+physics coupling because the smoke still uses final-frame cache/stop controls:
+
+```text
+SAMI3_PHI_SKIP_MADALA_AFTER_FINAL=1
+WACCMX_SAMI3_PHI_STOP_AFTER_DONE=1
+```
+
+Next work should move from online handoff validation to production hardening:
+multi-cycle REMIX/SAMI3 cadence, f09/distributed live-neutral remap,
+production top-blend/fallback policy, and the SAMI3 -> RAIJU/GAMERA traced
+flux-tube weighting plus L/MLT mapping.

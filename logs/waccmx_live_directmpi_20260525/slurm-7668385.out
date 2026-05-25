@@ -1,0 +1,835 @@
+RUN_DIR=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000
+VOLTRON_RUN=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/voltron_runtime_direct_phi
+VOLTRON_EXE=/home/jiaoy_group/jiaoy/data/MAGE1.25/build_gr_sami3_phi_direct_openmpi_20260525/bin/voltron.x
+PHI_PAYLOAD=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/voltron_runtime_direct_phi/remix_sami3_phi_payload_runtime_direct_openmpi.bin
+NEUTRAL_PORT=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_sami3_online_port.txt
+PHI_PORT=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/sami3_direct_phi_port.txt
+CASE=/home/jiaoy_group/jiaoy/data/CESM/cases/mage_qpx2000_f19_sami3_live_neutral_20260523
+CESM_EXE=/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/bld/cesm.exe
+CESM_RUNDIR=/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run
+START=Mon May 25 09:22:12 CST 2026
+HOST=qhcn005
+DIRECT_PHI_MODE=1
+PAYLOAD_MODE=live
+LIVE_DUMP_MAX=1
+MAX_PACKETS=1
+SEND_EVERY_NSTEPS=1
+PHI_DIRECT_PORT=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/sami3_direct_phi_port.txt
+PHI_PAYLOAD_FILE_FOR_VOLTRON_ONLY=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/voltron_runtime_direct_phi/remix_sami3_phi_payload_runtime_direct_openmpi.bin
+N2_NEGATIVE_MODE=invalid
+TOP_BLEND_MODE=linear
+BLEND_BOTTOM_KM=600
+BLEND_TOP_KM=720
+SAMI3_USE_ONLINE_PHI_WEIMER=1
+SAMI3_PHI_SKIP_MADALA_AFTER_FINAL=1
+PRTE=/apps/support/intel_spr_rocky8.9/openmpi/5.0.3/gcc8.5.0/bin/prte
+PRUN=/apps/support/intel_spr_rocky8.9/openmpi/5.0.3/gcc8.5.0/bin/prun
+ldd_missing_voltron=0
+path=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/voltron_runtime_direct_phi/remix_sami3_phi_payload_runtime_direct_openmpi.bin
+size=97044
+header=[20260524, 1, 125, 97, 2]
+frame=0 frame_index=0 hour=0 valid_until=0.0013888889 min=-36.972878 max=31.504816 finite=True nonzero=3492
+frame=1 frame_index=1 hour=0.0013888889 valid_until=1e+30 min=-37.706364 max=31.759037 finite=True nonzero=3492
+frame1_minus_frame0_max_abs=3.4961066
+frame1_minus_frame0_rms=0.62902843
+--- Direct phi validator
+ok   receiver_log_exists: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/sami3_online_receiver.out
+ok   phi_sender_log_exists: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/voltron_runtime_direct.out
+ok   recv_qc_compare_exists: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/recv_qc_compare_pkt000000.txt
+ok   no_fatal_markers: none
+ok   direct_phi_port_ready: marker
+ok   direct_phi_connected: marker
+ok   master_done: marker
+ok   neutral_done_received: marker
+ok   direct_phi_done_received: marker
+ok   phi_recv_frame_count: observed=2 expected=2
+ok   phi_recv_frame_indices: [0, 1]
+ok   phi_recv_total_frames: [2, 2]
+ok   phi_recv_finite_range: [(-36.9728775, 31.5048161), (-37.7063637, 31.759037)]
+ok   phi_recv_frames_change: [{'frame': 0, 'nframes': 2, 'hrut': 0.0, 'hour': 0.0, 'valid_until': 0.00138888892, 'min': -36.9728775, 'max': 31.5048161}, {'frame': 1, 'nframes': 2, 'hrut': 0.00222222228, 'hour': 0.00138888892, 'valid_until': 1.00000002e+30, 'min': -37.7063637, 'max': 31.759037}]
+ok   phi_sender_sent_frames: count=2
+ok   phi_sender_sent_done: marker
+ok   recv_qc_compare_ok: WACCMX_RECV_QC compare ok: ranks=32 occurrence=0 step_set=[0] packet_hour_set=[0.0] max_abs=2.08794e+06 max_rel=4.83248e-13
+overall=ok
+--- Phi payload validator
+ok   phi_payload_exists: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/voltron_runtime_direct_phi/remix_sami3_phi_payload_runtime_direct_openmpi.bin
+ok   phi_payload_header: {'magic': 20260524, 'version': 1, 'nlat': 125, 'nlon': 97, 'nframes': 2}
+ok   phi_payload_frame_count: nframes=2 expected=2
+ok   phi_payload_exact_size: size=97044 expected=97044 trailing=0
+ok   phi_payload_frame_indices: indices=[0, 1]
+ok   phi_payload_frames_finite: finite_counts=[12125, 12125]
+ok   phi_payload_hours_strictly_increasing: hours=[0.0, 0.0013888889225199819]
+ok   phi_payload_valid_until_after_hour: hours=[0.0, 0.0013888889225199819] valid_until=[0.0013888889225199819, 1.0000000150474662e+30]
+ok   phi_payload_frame_change: max_abs_diff=3.4961066246032715 min=1e-06
+overall=ok
+--- Live packet validator
+ok   run_dir_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000
+ok   live_meta_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/wxsami3_live_meta.json
+ok   meta_payload_version: wxsami3-live-payload-v2
+ok   meta_runtime_source: CAM phys_state(:)
+ok   meta_actual_transport: runtime_live_packet
+ok   meta_last_packet_index: packet_index=0 expected=0
+ok   meta_dtime_phys_positive: 300.0
+ok   meta_send_every_nsteps_positive: 1
+ok   meta_packet_hour_matches_nstep_dtime: packet_hour=0.0 expected=0.0
+ok   meta_payload_header_magic: 20260522 expected=20260522
+ok   meta_payload_header_nz: 304 expected=304
+ok   meta_payload_header_nf: 124 expected=124
+ok   meta_payload_header_nl: 5 expected=5
+ok   meta_payload_header_nneut: 7 expected=7
+ok   meta_runtime_map_source_columns: source_columns=13824 expected=13824
+ok   meta_runtime_map_npoints: npoints=3618816
+ok   meta_source_unit_temperature: K expected=K
+ok   meta_source_unit_wind: m/s expected=m/s
+ok   meta_source_unit_pressure: Pa expected=Pa
+ok   meta_source_unit_height: m expected=m
+ok   meta_source_unit_composition: mass_mixing_ratio expected=mass_mixing_ratio
+ok   meta_payload_unit_density: cm^-3 expected=cm^-3
+ok   meta_payload_unit_temperature: K expected=K
+ok   meta_payload_unit_wind: cm/s expected=cm/s
+ok   meta_density_conversion: q*mbarv/species_mw*pmid/(kB*T)*1e-6 -> cm^-3
+ok   meta_source_species_order: ['O', 'O2', 'H', 'N', 'NO', 'N2', 'He']
+ok   meta_payload_species_order: ['H', 'O', 'NO', 'O2', 'He', 'N2', 'N']
+ok   meta_source_flag_mpi_tag: 212
+ok   meta_source_flag_values: {'WACCMX_VALID': 1, 'SAMI3_NATIVE_ABOVE_TOP': 2, 'SAMI3_NATIVE_N2_INVALID': 3, 'SAMI3_NATIVE_OTHER_INVALID': 4}
+ok   meta_species_index_O: 57
+ok   meta_species_index_O2: 58
+ok   meta_species_index_H: 37
+ok   meta_species_index_N: 51
+ok   meta_species_index_NO: 54
+ok   meta_species_index_N2_residual: -1
+ok   meta_species_index_He_native: -1
+ok   meta_n2_negative_mode: invalid
+ok   meta_he_policy: payload value -1 so SAMI3 native/MSIS He is retained
+ok   meta_w_policy: payload value 0; CAM omega diagnostic only
+ok   meta_source_flags_sum: flag_total=6031360 samples=6031360
+ok   meta_invalid_sum: invalid=1819595 above+n2+other=1819595
+ok   meta_above_top_flag_count: above_live_top=1641376 source_flag=1641376
+ok   meta_n2_invalid_flag_count: n2_residual_negative=178219 source_flag=178219
+ok   meta_other_invalid_zero: 0
+ok   meta_checksum_valid_counts: valid_i=4211765 valid_f=4211765 source_valid=4211765
+ok   meta_checksum_invalid_counts: invalid_i=1819595 invalid_f=1819595 runtime_invalid=1819595
+ok   packet0_summary_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/live_dump_summary_pkt000000.txt
+ok   packet0_replay_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/replay_builder_pkt000000.out
+ok   packet0_recv_compare_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/recv_qc_compare_pkt000000.txt
+ok   packet0_summary_source_columns: total_cols=13824 expected=13824
+ok   packet0_summary_packet_index: packets=[0]
+ok   packet0_summary_no_bad_size_files: bad_size_files_present=False
+ok   packet0_summary_lat_deg_bad: bad=0
+ok   packet0_summary_lon_deg_bad: bad=0
+ok   packet0_summary_T_K_bad: bad=0
+ok   packet0_summary_U_m_s_bad: bad=0
+ok   packet0_summary_V_m_s_bad: bad=0
+ok   packet0_summary_PMID_Pa_bad: bad=0
+ok   packet0_summary_ZM_m_bad: bad=0
+ok   packet0_summary_MBARV_kg_mol_bad: bad=0
+ok   packet0_summary_q_O_bad: bad=0
+ok   packet0_summary_q_O2_bad: bad=0
+ok   packet0_summary_q_H_bad: bad=0
+ok   packet0_summary_q_N_bad: bad=0
+ok   packet0_summary_q_NO_bad: bad=0
+ok   packet0_summary_cid_coverage: missing=0 unique=13824 expected=13824
+ok   packet0_summary_lat_deg_range: min=-90.0 max=90.0 allowed=[-90.0,90.0]
+ok   packet0_summary_lon_deg_range: min=0.0 max=357.5 allowed=[0.0,360.0]
+ok   packet0_summary_T_K_range: min=113.19272490765026 max=1522.7628810979916 allowed=[50.0,5000.0]
+ok   packet0_summary_U_m_s_range: min=-925.7242161594645 max=769.7344197674036 allowed=[-5000.0,5000.0]
+ok   packet0_summary_V_m_s_range: min=-845.8062460574145 max=736.3650929706123 allowed=[-5000.0,5000.0]
+ok   packet0_summary_PMID_Pa_range: min=4.055140885992663e-08 max=107321.3890267048 allowed=[0.0,200000.0]
+ok   packet0_summary_ZM_m_range: min=48.56266690499009 max=720507.7580399793 allowed=[-1000.0,2000000.0]
+ok   packet0_summary_MBARV_kg_mol_range: min=14.895337165442252 max=28.874522993878628 allowed=[1.0,60.0]
+ok   packet0_summary_q_O_range: min=2.20521131163437e-25 max=0.9999399874408939 allowed=[-1e-12,1.1]
+ok   packet0_summary_q_O2_range: min=9.229295650411587e-06 max=0.23732970847615611 allowed=[-1e-12,1.1]
+ok   packet0_summary_q_H_range: min=2.913249081948255e-28 max=0.0050683000424878695 allowed=[-1e-12,1.1]
+ok   packet0_summary_q_N_range: min=1.885260804240404e-23 max=0.060584943671142005 allowed=[-1e-12,1.1]
+ok   packet0_summary_q_NO_range: min=9.01142764707503e-19 max=0.0014346353422642934 allowed=[-1e-12,1.1]
+ok   packet0_replay_source_coverage: source_cols=13824 filled=13824 expected=13824
+ok   packet0_replay_n2_mode: invalid
+ok   packet0_replay_bad_weighted_z: bad_weighted_z=0
+ok   packet0_replay_samples_positive: samples=6031360
+ok   packet0_replay_initial_final_samples: initial=6031360 final=6031360
+ok   packet0_replay_initial_final_invalid: initial=1819595 final=1819595
+ok   packet0_replay_initial_final_above_live_top: initial=1641376 final=1641376
+ok   packet0_replay_initial_final_n2_residual_used: initial=4389984 final=4389984
+ok   packet0_replay_initial_final_n2_residual_negative: initial=178219 final=178219
+ok   packet0_replay_n2_residual_used_positive: n2_residual_used=4389984
+ok   packet0_replay_n2_residual_bounds: min=-0.053314608006139914 max=0.8129786925378699
+ok   packet0_recv_compare_ok: ok_marker=True
+ok   packet0_recv_compare_ranks: ranks=32 expected=32
+ok   packet0_recv_compare_occurrence: occurrence=0 expected=0
+ok   packet0_recv_compare_max_rel: max_rel=4.83248e-13 limit=1e-06
+ok   sender_live_packet_count: sent_packets=1 expected=1
+ok   receiver_qc_line_count: qc_lines=32 expected_min=32
+ok   sami3_done: present=True
+ok   waccmx_done: present=True
+ok   fatal_markers_absent: matches=0
+overall=ok
+--- Source flag validator
+ok   receiver_log_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/sami3_online_receiver.out
+ok   live_meta_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/wxsami3_live_meta.json
+ok   recv_source_flag_lines: lines=32 expected_min=32
+ok   apply_source_flag_lines: lines=160 expected=160
+ok   apply_qc_lines: lines=160 expected=160
+ok   apply_blend_lines: lines=160 expected=160
+ok   recv_samples_match_meta: actual=6031360 expected=6031360
+ok   recv_valid_match_meta: actual=4211765 expected=4211765
+ok   recv_above_top_match_meta: actual=1641376 expected=1641376
+ok   recv_n2_invalid_match_meta: actual=178219 expected=178219
+ok   recv_other_invalid_match_meta: actual=0 expected=0
+ok   recv_unknown_zero: unknown=0
+ok   recv_valid_i_match_checksum: actual=4211765 expected=4211765
+ok   recv_invalid_i_match_checksum: actual=1819595 expected=1819595
+ok   recv_valid_f_match_checksum: actual=4211765 expected=4211765
+ok   recv_invalid_f_match_checksum: actual=1819595 expected=1819595
+ok   recv_he_native_matches_valid: he_i=4211765 he_f=4211765 valid=4211765
+ok   recv_w_zero_matches_valid: w_i=4211765 w_f=4211765 valid=4211765
+ok   apply_samples_match_meta: actual=6031360 expected=6031360
+ok   apply_valid_match_meta: actual=4211765 expected=4211765
+ok   apply_above_top_match_meta: actual=1641376 expected=1641376
+ok   apply_n2_invalid_match_meta: actual=178219 expected=178219
+ok   apply_other_invalid_match_meta: actual=0 expected=0
+ok   apply_unknown_zero: unknown=0
+ok   apply_qc_valid_i_match_meta: actual=4211765 expected=4211765
+ok   apply_qc_invalid_i_match_meta: actual=1819595 expected=1819595
+ok   apply_qc_valid_f_match_meta: actual=4211765 expected=4211765
+ok   apply_qc_invalid_f_match_meta: actual=1819595 expected=1819595
+ok   apply_qc_he_native_matches_valid: he_i=4211765 he_f=4211765 valid=4211765
+ok   apply_qc_w_zero_matches_valid: w_i=4211765 w_f=4211765 valid=4211765
+ok   blend_i_partition_valid: full+blend+native=4211765 valid=4211765
+ok   blend_f_partition_valid: full+blend+native=4211765 valid=4211765
+ok   blend_cells_min: blend_i+blend_f=2708 min=1
+overall=ok
+--- Time axis validator
+ok   run_dir_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000
+ok   sender_neutral_packet_count: sender_packets=1 expected=1
+ok   receiver_neutral_packet_count: receiver_packets=1 expected=1
+ok   receiver_packet_hours_consistent: {0: {'count': 32, 'unique_tasks': 32, 'hour_min': 0.0, 'hour_max': 0.0}}
+ok   receiver_packet_hours_monotonic: receiver_hours=[0.0]
+ok   receiver_worker_coverage: unique_tasks=[32] expected=32
+ok   sender_receiver_neutral_hours_match: matched=1 sender_hours=[0.0] receiver_hours=[0.0]
+ok   phi_payload_frame_count: frames=2 expected=2
+ok   phi_payload_hours_strictly_increasing: hours=[0.0, 0.0013888889225199819]
+ok   phi_payload_valid_until_links: hours=[0.0, 0.0013888889225199819] valid_until=[0.0013888889225199819, 1.0000000150474662e+30]
+ok   phi_payload_covers_neutral_packets: uncovered_neutral_hours=[]
+ok   receiver_phi_frame_count: receiver_phi_records=2 expected_min=2
+ok   receiver_phi_records_within_validity: records=2
+overall=ok
+--- Topblend validator
+ok   logs_present: ['/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/sami3_online_receiver.out', '/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/slurm-7668263.out', '/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/slurm-7668385.out']
+ok   topblend_policy_logged: {'mode': 'linear', 'bottom_km': 600.0, 'top_km': 720.0}
+ok   topblend_mode: actual=linear expected=linear
+ok   topblend_bottom_km: actual=600.0 expected=600.0 tol=0.0001
+ok   topblend_top_km: actual=720.0 expected=720.0 tol=0.0001
+ok   apply_blend_line_count: count=160 min=0
+ok   apply_blend_parseable: 160 of 160
+ok   blend_cell_total: total=2708 min=1
+ok   blend_enabled: [1]
+ok   apply_blend_bottom_km: min=600.0 max=600.0 expected=600.0
+ok   apply_blend_top_km: min=720.0 max=720.0 expected=720.0
+ok   apply_source_unknown_zero: total=0
+ok   recv_source_unknown_zero: total=0
+ok   he_native_matches_valid: checked_lines=160
+ok   w_zero_matches_valid: checked_lines=160
+overall=ok
+--- Runtime map validator
+ok   runtime_map_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/wxsami3_runtime_map_f19_20260523.bin
+ok   runtime_map_not_empty: bytes=217128992
+ok   header_magic: 20260524
+ok   header_version: 1
+ok   header_npoints: npoints=3618816 nz*nf*nlt=3618816
+ok   header_expected_nsource: nsource=13824 expected=13824
+ok   runtime_map_size: actual=217128992 expected=217128992
+ok   zalt_count: got=3618816 expected=3618816
+ok   row_start_count: got=3618816 expected=3618816
+ok   row_count_count: got=3618816 expected=3618816
+ok   col_count: got=14475264 expected=14475264
+ok   weight_count: got=14475264 expected=14475264
+ok   zalt_finite: min=81.54248046875 max=6046060.0
+ok   row_count_nonnegative: min=4
+ok   row_count_sum: sum=14475264 n_s=14475264
+ok   row_start_positive_for_covered: min=1
+ok   row_end_within_ns: max_end=14475264 n_s=14475264
+ok   row_start_zero_for_uncovered: uncovered=0
+ok   col_source_range: min=1 max=13824 nsource=13824
+ok   weights_finite: min=0.0 max=0.9995620663524324
+ok   weights_nc_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/weights_bilinear_f19_live.nc
+ok   weights_dim_n_a_matches_nsource: n_a=13824 nsource=13824
+ok   weights_dim_n_b_matches_npoints: n_b=3618816 npoints=3618816
+ok   weights_dim_n_s_matches_ns: dim_n_s=14475264 header_n_s=14475264
+overall=ok
+--- WACCM-X sender markers
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 online sender enabled
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 port file: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_sami3_online_port.txt
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 payload mode: live
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 payload prefix: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_payload_esmf_msis_top_20231013_0000/waccmx_neutral_rank
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live map file: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/wxsami3_runtime_map_f19_20260523.bin
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 SAMI3 workers:           32
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 send cadence nsteps:            1
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 max packets (-1 unlimited):            1
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 N2 negative residual mode: invalid
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live phys_state diagnostics:  T
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 metadata file: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/wxsami3_live_meta.json
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 phi payload enabled:  F
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live state dump enabled:  T
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live state dump prefix: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/live_dump/wxsami3_physstate_
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live state dump max packets:            1
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live neutral constituent registry begin
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live species,index,name,type,mw,sent=O          57 Odry   15.999400000000000      T
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live species,index,name,type,mw,sent=O2          58 O2dry   31.998799999999999      T
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live species,index,name,type,mw,sent=H          37 Hdry   1.0074000000000001      T
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live species,index,name,type,mw,sent=N          51 Ndry   14.006740000000001      T
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live species,index,name,type,mw,sent=NO          54 NOdry   30.006139999999998      T
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live species,index,name,type,mw,sent=N2          -1 MISSINGnone   28.000000000000000      F
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live species,index,name,type,mw,sent=He          -1 MISSINGnone   4.0000000000000000      F
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live neutral constituent registry end
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live neutral diagnostic packet nstep,dtime=           0   300.00000000000000     
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live units: lat/lon=deg T=K U/V=m/s omega=Pa/s pmid=Pa zm/zi=m q=mass_mixing_ratio
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live density conversion: q*mbarv/species_mw*pmid/(kB*T)*1e-6 -> cm^-3
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live physics columns global=       13824
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live coord,min,max,bad,units=LAT  -90.000000000000000        90.000000000000000                0 deg
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live coord,min,max,bad,units=LON   0.0000000000000000        357.50000000000000                0 deg
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live column id min,max,bad=           1       13824           0
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live field,min,max,bad,units=T   113.19272490765026        1522.7628810979916                0 K
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live field,min,max,bad,units=U  -925.72421615946450        769.73441976740355                0 m/s
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live field,min,max,bad,units=V  -845.80624605741446        736.36509297061230                0 m/s
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live field,min,max,bad,units=OMEGA  -8.2581548028160903        8.0479049504611275                0 Pa/s
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live field,min,max,bad,units=PMID   4.0551408859926630E-008   107321.38902670480                0 Pa
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live field,min,max,bad,units=ZM   48.562666904990088        720507.75803997926                0 m
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live q species,index,min,max,bad=O          57   2.2052113116343699E-025  0.99993998744089385                0
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live ndens_cm3 species,min,max,bad=O   1.2084661643773829E-005   1245416442119.8696                0
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live q species,index,min,max,bad=O2          58   9.2292956504115868E-006  0.23732970847615611                0
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live ndens_cm3 species,min,max,bad=O2   12.656349992086984        7.2238760756717558E+018           0
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live q species,index,min,max,bad=H          37   2.9132490819482548E-028   5.0683000424878695E-003           0
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live ndens_cm3 species,min,max,bad=H   2.2485930900058927E-007   687846935.90896702                0
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live q species,index,min,max,bad=N          51   1.8852608042404040E-023   6.0584943671142005E-002           0
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live ndens_cm3 species,min,max,bad=N   9.5076107499545977E-004   57550723.732449487                0
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live q species,index,min,max,bad=NO          54   9.0114276470750297E-019   1.4346353422642934E-003           0
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live ndens_cm3 species,min,max,bad=NO  0.29699954540102086        2128027266445.5793                0
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live N2 residual major min,max,negative,bad=  -5.5064293290950861E-002  0.81318365337398735            89098           0
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live state dump packet written:            0
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 connecting to SAMI3 online port
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 connected to SAMI3
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live runtime map loaded: npoints,n_s,nsource=     3618816    14475264       13824
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live runtime packet QC samples,invalid,above_top=     6031360     1819595     1641376
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 live runtime N2 residual used,negative,min,max=     4389984      178219  -5.3314608006139914E-002  0.81297869253786992     
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 sent live neutral packet: nstep,packet_hour,count=           0   0.00000000               0
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 sent done signal to SAMI3
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: WXSAMI3 disconnected from SAMI3
+/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_cesm.out: ******* END OF MODEL RUN *******
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 online sender enabled
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 port file: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/waccmx_sami3_online_port.txt
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 payload mode: live
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 payload prefix: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_payload_esmf_msis_top_20231013_0000/waccmx_neutral_rank
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live map file: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/wxsami3_runtime_map_f19_20260523.bin
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 SAMI3 workers:           32
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 send cadence nsteps:            1
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 max packets (-1 unlimited):            1
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 N2 negative residual mode: invalid
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live phys_state diagnostics:  T
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 metadata file: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/wxsami3_live_meta.json
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 phi payload enabled:  F
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live state dump enabled:  T
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live state dump prefix: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/live_dump/wxsami3_physstate_
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live state dump max packets:            1
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live neutral constituent registry begin
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live species,index,name,type,mw,sent=O          57 Odry   15.999400000000000      T
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live species,index,name,type,mw,sent=O2          58 O2dry   31.998799999999999      T
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live species,index,name,type,mw,sent=H          37 Hdry   1.0074000000000001      T
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live species,index,name,type,mw,sent=N          51 Ndry   14.006740000000001      T
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live species,index,name,type,mw,sent=NO          54 NOdry   30.006139999999998      T
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live species,index,name,type,mw,sent=N2          -1 MISSINGnone   28.000000000000000      F
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live species,index,name,type,mw,sent=He          -1 MISSINGnone   4.0000000000000000      F
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live neutral constituent registry end
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live neutral diagnostic packet nstep,dtime=           0   300.00000000000000     
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live units: lat/lon=deg T=K U/V=m/s omega=Pa/s pmid=Pa zm/zi=m q=mass_mixing_ratio
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live density conversion: q*mbarv/species_mw*pmid/(kB*T)*1e-6 -> cm^-3
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live physics columns global=       13824
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live coord,min,max,bad,units=LAT  -90.000000000000000        90.000000000000000                0 deg
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live coord,min,max,bad,units=LON   0.0000000000000000        357.50000000000000                0 deg
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live column id min,max,bad=           1       13824           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live field,min,max,bad,units=T   113.19272490765026        1522.7628810979916                0 K
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live field,min,max,bad,units=U  -925.72421615946450        769.73441976740355                0 m/s
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live field,min,max,bad,units=V  -845.80624605741446        736.36509297061230                0 m/s
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live field,min,max,bad,units=OMEGA  -8.2581548028160903        8.0479049504611275                0 Pa/s
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live field,min,max,bad,units=PMID   4.0551408859926630E-008   107321.38902670480                0 Pa
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live field,min,max,bad,units=ZM   48.562666904990088        720507.75803997926                0 m
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live q species,index,min,max,bad=O          57   2.2052113116343699E-025  0.99993998744089385                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live ndens_cm3 species,min,max,bad=O   1.2084661643773829E-005   1245416442119.8696                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live q species,index,min,max,bad=O2          58   9.2292956504115868E-006  0.23732970847615611                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live ndens_cm3 species,min,max,bad=O2   12.656349992086984        7.2238760756717558E+018           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live q species,index,min,max,bad=H          37   2.9132490819482548E-028   5.0683000424878695E-003           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live ndens_cm3 species,min,max,bad=H   2.2485930900058927E-007   687846935.90896702                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live q species,index,min,max,bad=N          51   1.8852608042404040E-023   6.0584943671142005E-002           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live ndens_cm3 species,min,max,bad=N   9.5076107499545977E-004   57550723.732449487                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live q species,index,min,max,bad=NO          54   9.0114276470750297E-019   1.4346353422642934E-003           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live ndens_cm3 species,min,max,bad=NO  0.29699954540102086        2128027266445.5793                0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live N2 residual major min,max,negative,bad=  -5.5064293290950861E-002  0.81318365337398735            89098           0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live state dump packet written:            0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 connecting to SAMI3 online port
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 connected to SAMI3
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live runtime map loaded: npoints,n_s,nsource=     3618816    14475264       13824
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live runtime packet QC samples,invalid,above_top=     6031360     1819595     1641376
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 live runtime N2 residual used,negative,min,max=     4389984      178219  -5.3314608006139914E-002  0.81297869253786992     
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 sent live neutral packet: nstep,packet_hour,count=           0   0.00000000               0
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 sent done signal to SAMI3
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: WXSAMI3 disconnected from SAMI3
+/home/jiaoy_group/jiaoy/data/CESM/case_output_root_online_live_neutral_20260523/mage_qpx2000_f19_sami3_live_neutral_20260523/run/atm.log.260525-050017: ******* END OF MODEL RUN *******
+--- Voltron direct phi markers
+[0m  WACCMX_SAMI3_PHI_DIRECT connected /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/sami3_direct_phi_port.txt
+ WACCMX_SAMI3_PHI_DIRECT sent frame=           0  nframes=           2  hour=   0.00000000      valid_until=   1.38888892E-03  min/max=  -36.9728775       31.5048161    
+ WACCMX_SAMI3_PHI prepared payload_file=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/voltron_runtime_direct_phi/remix_sami3_phi_payload_runtime_direct_openmpi.bin direct_port_file=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/sami3_direct_phi_port.txt hemi=           1  hour=   0.0000000000000000       valid_until=   1.0000000000000000E+030  source_min/max=  -11.130034448503366        9.5845211632481995       payload_min/max=  -36.9728775       31.5048161    
+ WACCMX_SAMI3_PHI_DIRECT sent frame=           1  nframes=           2  hour=   1.38888892E-03  valid_until=   1.00000002E+30  min/max=  -37.7063637       31.7590370    
+ WACCMX_SAMI3_PHI_DIRECT sent done=           2
+ WACCMX_SAMI3_PHI_DIRECT stop after done requested
+--- SAMI3 receiver markers
+ WACCMX_APPLY_QC          10           3   0.00000000           37696       26261       11435       26261       11435       26261       26261       26261       26261
+ WACCMX_APPLY_SOURCE_FLAGS          10           3   0.00000000           37696       26261       10718         717           0           0
+ WACCMX_APPLY_BLEND          10           3   0.00000000           37696           1   600.000000       720.000000           26254           7           0       26254           7           0
+ WACCMX_APPLY_QC           8           4   0.00000000           37696       26222       11474       26222       11474       26222       26222       26222       26222
+ WACCMX_APPLY_SOURCE_FLAGS           8           4   0.00000000           37696       26222       10637         837           0           0
+ WACCMX_APPLY_BLEND           8           4   0.00000000           37696           1   600.000000       720.000000           26220           2           0       26220           2           0
+ WACCMX online neutral received: taskid,step,packet_hr=          15           0   0.00000000    
+ WACCMX_RECV_QC          15           0   0.00000000          132064       56416      132064       56416   4.2759938387864238E+018   74689544.287673950        37640272.094782218       -205075.13766242936        0.0000000000000000        4.2759938387864238E+018   74689544.287673950        37640272.094782218       -205075.13766242936        0.0000000000000000     
+ WACCMX_RECV_SOURCE_FLAGS          15           0   0.00000000          188480      132064       53554        2862           0           0      132064       56416      132064       56416      132064      132064      132064      132064
+ WACCMX_APPLY_QC          15           1   0.00000000           37696       26344       11352       26344       11352       26344       26344       26344       26344
+ WACCMX_APPLY_SOURCE_FLAGS          15           1   0.00000000           37696       26344       10804         548           0           0
+ WACCMX_APPLY_BLEND          15           1   0.00000000           37696           1   600.000000       720.000000           26328          16           0       26328          16           0
+ WACCMX_APPLY_QC           6           5   0.00000000           37696       26153       11543       26153       11543       26153       26153       26153       26153
+ WACCMX_APPLY_SOURCE_FLAGS           6           5   0.00000000           37696       26153       10506        1037           0           0
+ WACCMX_APPLY_BLEND           6           5   0.00000000           37696           1   600.000000       720.000000           26153           0           0       26153           0           0
+ WACCMX_APPLY_QC          13           2   0.00000000           37696       26263       11433       26263       11433       26263       26263       26263       26263
+ WACCMX_APPLY_SOURCE_FLAGS          13           2   0.00000000           37696       26263       10884         549           0           0
+ WACCMX_APPLY_BLEND          13           2   0.00000000           37696           1   600.000000       720.000000           26249          14           0       26249          14           0
+ WACCMX_APPLY_QC          11           3   0.00000000           37696       26274       11422       26274       11422       26274       26274       26274       26274
+ WACCMX_APPLY_SOURCE_FLAGS          11           3   0.00000000           37696       26274       10777         645           0           0
+ WACCMX_APPLY_BLEND          11           3   0.00000000           37696           1   600.000000       720.000000           26267           7           0       26267           7           0
+ WACCMX_APPLY_QC           9           4   0.00000000           37696       26249       11447       26249       11447       26249       26249       26249       26249
+ WACCMX_APPLY_SOURCE_FLAGS           9           4   0.00000000           37696       26249       10685         762           0           0
+ WACCMX_APPLY_BLEND           9           4   0.00000000           37696           1   600.000000       720.000000           26245           4           0       26245           4           0
+ WACCMX online neutral received: taskid,step,packet_hr=          16           0   0.00000000    
+ WACCMX_RECV_QC          16           0   0.00000000          132357       56123      132357       56123   4.2588428436148035E+018   76020526.200607300       -64804720.001701772        36351812.077450350        0.0000000000000000        4.2588428436148035E+018   76020526.200607300       -64804720.001701772        36351812.077450350        0.0000000000000000     
+ WACCMX_RECV_SOURCE_FLAGS          16           0   0.00000000          188480      132357       52945        3178           0           0      132357       56123      132357       56123      132357      132357      132357      132357
+ WACCMX_APPLY_QC          16           1   0.00000000           37696       26453       11243       26453       11243       26453       26453       26453       26453
+ WACCMX_APPLY_SOURCE_FLAGS          16           1   0.00000000           37696       26453       10669         574           0           0
+ WACCMX_APPLY_BLEND          16           1   0.00000000           37696           1   600.000000       720.000000           26433          20           0       26433          20           0
+ WACCMX_APPLY_QC           7           5   0.00000000           37696       26193       11503       26193       11503       26193       26193       26193       26193
+ WACCMX_APPLY_SOURCE_FLAGS           7           5   0.00000000           37696       26193       10585         918           0           0
+ WACCMX_APPLY_BLEND           7           5   0.00000000           37696           1   600.000000       720.000000           26193           0           0       26193           0           0
+ WACCMX_APPLY_QC          14           2   0.00000000           37696       26304       11392       26304       11392       26304       26304       26304       26304
+ WACCMX_APPLY_SOURCE_FLAGS          14           2   0.00000000           37696       26304       10850         542           0           0
+ WACCMX_APPLY_BLEND          14           2   0.00000000           37696           1   600.000000       720.000000           26287          17           0       26287          17           0
+ WACCMX_APPLY_QC          12           3   0.00000000           37696       26270       11426       26270       11426       26270       26270       26270       26270
+ WACCMX_APPLY_SOURCE_FLAGS          12           3   0.00000000           37696       26270       10864         562           0           0
+ WACCMX_APPLY_BLEND          12           3   0.00000000           37696           1   600.000000       720.000000           26258          12           0       26258          12           0
+ WACCMX_APPLY_QC          10           4   0.00000000           37696       26271       11425       26271       11425       26271       26271       26271       26271
+ WACCMX_APPLY_SOURCE_FLAGS          10           4   0.00000000           37696       26271       10738         687           0           0
+ WACCMX_APPLY_BLEND          10           4   0.00000000           37696           1   600.000000       720.000000           26264           7           0       26264           7           0
+ WACCMX online neutral received: taskid,step,packet_hr=          17           0   0.00000000    
+ WACCMX_RECV_QC          17           0   0.00000000          132512       55968      132512       55968   4.2812137686131548E+018   77079453.392578125       -155326667.31738749        64445468.164722010        0.0000000000000000        4.2812137686131548E+018   77079453.392578125       -155326667.31738749        64445468.164722010        0.0000000000000000     
+ WACCMX_RECV_SOURCE_FLAGS          17           0   0.00000000          188480      132512       52369        3599           0           0      132512       55968      132512       55968      132512      132512      132512      132512
+ WACCMX_APPLY_QC          17           1   0.00000000           37696       26476       11220       26476       11220       26476       26476       26476       26476
+ WACCMX_APPLY_SOURCE_FLAGS          17           1   0.00000000           37696       26476       10551         669           0           0
+ WACCMX_APPLY_BLEND          17           1   0.00000000           37696           1   600.000000       720.000000           26455          21           0       26455          21           0
+ WACCMX_APPLY_QC           8           5   0.00000000           37696       26233       11463       26233       11463       26233       26233       26233       26233
+ WACCMX_APPLY_SOURCE_FLAGS           8           5   0.00000000           37696       26233       10649         814           0           0
+ WACCMX_APPLY_BLEND           8           5   0.00000000           37696           1   600.000000       720.000000           26231           2           0       26231           2           0
+ WACCMX_APPLY_QC          15           2   0.00000000           37696       26377       11319       26377       11319       26377       26377       26377       26377
+ WACCMX_APPLY_SOURCE_FLAGS          15           2   0.00000000           37696       26377       10758         561           0           0
+ WACCMX_APPLY_BLEND          15           2   0.00000000           37696           1   600.000000       720.000000           26358          19           0       26358          19           0
+ WACCMX_APPLY_QC          13           3   0.00000000           37696       26271       11425       26271       11425       26271       26271       26271       26271
+ WACCMX_APPLY_SOURCE_FLAGS          13           3   0.00000000           37696       26271       10877         548           0           0
+ WACCMX_APPLY_BLEND          13           3   0.00000000           37696           1   600.000000       720.000000           26257          14           0       26257          14           0
+ WACCMX_APPLY_QC          11           4   0.00000000           37696       26275       11421       26275       11421       26275       26275       26275       26275
+ WACCMX_APPLY_SOURCE_FLAGS          11           4   0.00000000           37696       26275       10808         613           0           0
+ WACCMX_APPLY_BLEND          11           4   0.00000000           37696           1   600.000000       720.000000           26267           8           0       26267           8           0
+ WACCMX online neutral received: taskid,step,packet_hr=          18           0   0.00000000    
+ WACCMX_RECV_QC          18           0   0.00000000          132615       55865      132615       55865   4.3616732438036214E+018   78163213.360809326       -238237423.70636544        99019908.958011419        0.0000000000000000        4.3616732438036214E+018   78163213.360809326       -238237423.70636544        99019908.958011419        0.0000000000000000     
+ WACCMX_RECV_SOURCE_FLAGS          18           0   0.00000000          188480      132615       51708        4157           0           0      132615       55865      132615       55865      132615      132615      132615      132615
+ WACCMX_APPLY_QC          18           1   0.00000000           37696       26515       11181       26515       11181       26515       26515       26515       26515
+ WACCMX_APPLY_SOURCE_FLAGS          18           1   0.00000000           37696       26515       10438         743           0           0
+ WACCMX_APPLY_BLEND          18           1   0.00000000           37696           1   600.000000       720.000000           26485          30           0       26485          30           0
+ WACCMX_APPLY_QC           9           5   0.00000000           37696       26254       11442       26254       11442       26254       26254       26254       26254
+ WACCMX_APPLY_SOURCE_FLAGS           9           5   0.00000000           37696       26254       10703         739           0           0
+ WACCMX_APPLY_BLEND           9           5   0.00000000           37696           1   600.000000       720.000000           26249           5           0       26249           5           0
+ WACCMX_APPLY_QC          16           2   0.00000000           37696       26465       11231       26465       11231       26465       26465       26465       26465
+ WACCMX_APPLY_SOURCE_FLAGS          16           2   0.00000000           37696       26465       10622         609           0           0
+ WACCMX_APPLY_BLEND          16           2   0.00000000           37696           1   600.000000       720.000000           26445          20           0       26445          20           0
+ WACCMX_APPLY_QC          14           3   0.00000000           37696       26324       11372       26324       11372       26324       26324       26324       26324
+ WACCMX_APPLY_SOURCE_FLAGS          14           3   0.00000000           37696       26324       10836         536           0           0
+ WACCMX_APPLY_BLEND          14           3   0.00000000           37696           1   600.000000       720.000000           26307          17           0       26307          17           0
+ WACCMX_APPLY_QC          12           4   0.00000000           37696       26263       11433       26263       11433       26263       26263       26263       26263
+ WACCMX_APPLY_SOURCE_FLAGS          12           4   0.00000000           37696       26263       10882         551           0           0
+ WACCMX_APPLY_BLEND          12           4   0.00000000           37696           1   600.000000       720.000000           26249          14           0       26249          14           0
+ WACCMX online neutral received: taskid,step,packet_hr=          19           0   0.00000000    
+ WACCMX_RECV_QC          19           0   0.00000000          132574       55906      132574       55906   4.3547244705106647E+018   79289291.615875244       -258833658.97475579        172821791.63330665        0.0000000000000000        4.3547244705106647E+018   79289291.615875244       -258833658.97475579        172821791.63330665        0.0000000000000000     
+ WACCMX_RECV_SOURCE_FLAGS          19           0   0.00000000          188480      132574       51067        4839           0           0      132574       55906      132574       55906      132574      132574      132574      132574
+ WACCMX_APPLY_QC          19           1   0.00000000           37696       26527       11169       26527       11169       26527       26527       26527       26527
+ WACCMX_APPLY_SOURCE_FLAGS          19           1   0.00000000           37696       26527       10296         873           0           0
+ WACCMX_APPLY_BLEND          19           1   0.00000000           37696           1   600.000000       720.000000           26492          35           0       26492          35           0
+ WACCMX_APPLY_QC          10           5   0.00000000           37696       26269       11427       26269       11427       26269       26269       26269       26269
+ WACCMX_APPLY_SOURCE_FLAGS          10           5   0.00000000           37696       26269       10748         679           0           0
+ WACCMX_APPLY_BLEND          10           5   0.00000000           37696           1   600.000000       720.000000           26262           7           0       26262           7           0
+ WACCMX_APPLY_QC          17           2   0.00000000           37696       26496       11200       26496       11200       26496       26496       26496       26496
+ WACCMX_APPLY_SOURCE_FLAGS          17           2   0.00000000           37696       26496       10514         686           0           0
+ WACCMX_APPLY_BLEND          17           2   0.00000000           37696           1   600.000000       720.000000           26470          26           0       26470          26           0
+ WACCMX_APPLY_QC          15           3   0.00000000           37696       26425       11271       26425       11271       26425       26425       26425       26425
+ WACCMX_APPLY_SOURCE_FLAGS          15           3   0.00000000           37696       26425       10701         570           0           0
+ WACCMX_APPLY_BLEND          15           3   0.00000000           37696           1   600.000000       720.000000           26405          20           0       26405          20           0
+ WACCMX_APPLY_QC          13           4   0.00000000           37696       26293       11403       26293       11403       26293       26293       26293       26293
+ WACCMX_APPLY_SOURCE_FLAGS          13           4   0.00000000           37696       26293       10866         537           0           0
+ WACCMX_APPLY_BLEND          13           4   0.00000000           37696           1   600.000000       720.000000           26279          14           0       26279          14           0
+ WACCMX online neutral received: taskid,step,packet_hr=          20           0   0.00000000    
+ WACCMX_RECV_QC          20           0   0.00000000          132408       56072      132408       56072   4.3419007714753464E+018   80325844.777999878       -258842777.53185505        264495239.14343658        0.0000000000000000        4.3419007714753464E+018   80325844.777999878       -258842777.53185505        264495239.14343658        0.0000000000000000     
+ WACCMX_RECV_SOURCE_FLAGS          20           0   0.00000000          188480      132408       50448        5624           0           0      132408       56072      132408       56072      132408      132408      132408      132408
+ WACCMX_APPLY_QC          20           1   0.00000000           37696       26510       11186       26510       11186       26510       26510       26510       26510
+ WACCMX_APPLY_SOURCE_FLAGS          20           1   0.00000000           37696       26510       10164        1022           0           0
+ WACCMX_APPLY_BLEND          20           1   0.00000000           37696           1   600.000000       720.000000           26477          33           0       26477          33           0
+ WACCMX_APPLY_QC          11           5   0.00000000           37696       26271       11425       26271       11425       26271       26271       26271       26271
+ WACCMX_APPLY_SOURCE_FLAGS          11           5   0.00000000           37696       26271       10834         591           0           0
+ WACCMX_APPLY_BLEND          11           5   0.00000000           37696           1   600.000000       720.000000           26259          12           0       26259          12           0
+ WACCMX_APPLY_QC          18           2   0.00000000           37696       26522       11174       26522       11174       26522       26522       26522       26522
+ WACCMX_APPLY_SOURCE_FLAGS          18           2   0.00000000           37696       26522       10390         784           0           0
+ WACCMX_APPLY_BLEND          18           2   0.00000000           37696           1   600.000000       720.000000           26488          34           0       26488          34           0
+ WACCMX_APPLY_QC          16           3   0.00000000           37696       26467       11229       26467       11229       26467       26467       26467       26467
+ WACCMX_APPLY_SOURCE_FLAGS          16           3   0.00000000           37696       26467       10589         640           0           0
+ WACCMX_APPLY_BLEND          16           3   0.00000000           37696           1   600.000000       720.000000           26446          21           0       26446          21           0
+ WACCMX_APPLY_QC          14           4   0.00000000           37696       26344       11352       26344       11352       26344       26344       26344       26344
+ WACCMX_APPLY_SOURCE_FLAGS          14           4   0.00000000           37696       26344       10804         548           0           0
+ WACCMX_APPLY_BLEND          14           4   0.00000000           37696           1   600.000000       720.000000           26328          16           0       26328          16           0
+ WACCMX online neutral received: taskid,step,packet_hr=          21           0   0.00000000    
+ WACCMX_RECV_QC          21           0   0.00000000          132178       56302      132178       56302   4.4080167971784125E+018   81279893.701583862       -330745170.99207425        282402606.13747883        0.0000000000000000        4.4080167971784125E+018   81279893.701583862       -330745170.99207425        282402606.13747883        0.0000000000000000     
+ WACCMX_RECV_SOURCE_FLAGS          21           0   0.00000000          188480      132178       49870        6432           0           0      132178       56302      132178       56302      132178      132178      132178      132178
+ WACCMX_APPLY_QC          21           1   0.00000000           37696       26471       11225       26471       11225       26471       26471       26471       26471
+ WACCMX_APPLY_SOURCE_FLAGS          21           1   0.00000000           37696       26471       10051        1174           0           0
+ WACCMX_APPLY_BLEND          21           1   0.00000000           37696           1   600.000000       720.000000           26450          21           0       26450          21           0
+ WACCMX_APPLY_QC          12           5   0.00000000           37696       26263       11433       26263       11433       26263       26263       26263       26263
+ WACCMX_APPLY_SOURCE_FLAGS          12           5   0.00000000           37696       26263       10884         549           0           0
+ WACCMX_APPLY_BLEND          12           5   0.00000000           37696           1   600.000000       720.000000           26249          14           0       26249          14           0
+ WACCMX_APPLY_QC          19           2   0.00000000           37696       26526       11170       26526       11170       26526       26526       26526       26526
+ WACCMX_APPLY_SOURCE_FLAGS          19           2   0.00000000           37696       26526       10257         913           0           0
+ WACCMX_APPLY_BLEND          19           2   0.00000000           37696           1   600.000000       720.000000           26491          35           0       26491          35           0
+ WACCMX_APPLY_QC          17           3   0.00000000           37696       26503       11193       26503       11193       26503       26503       26503       26503
+ WACCMX_APPLY_SOURCE_FLAGS          17           3   0.00000000           37696       26503       10476         717           0           0
+ WACCMX_APPLY_BLEND          17           3   0.00000000           37696           1   600.000000       720.000000           26476          27           0       26476          27           0
+ WACCMX_APPLY_QC          15           4   0.00000000           37696       26453       11243       26453       11243       26453       26453       26453       26453
+ WACCMX_APPLY_SOURCE_FLAGS          15           4   0.00000000           37696       26453       10669         574           0           0
+ WACCMX_APPLY_BLEND          15           4   0.00000000           37696           1   600.000000       720.000000           26433          20           0       26433          20           0
+ WACCMX online neutral received: taskid,step,packet_hr=          22           0   0.00000000    
+ WACCMX_RECV_QC          22           0   0.00000000          132017       56463      132017       56463   4.4948253281048929E+018   82339653.505828857       -421923994.08965963        229040412.57954898        0.0000000000000000        4.4948253281048929E+018   82339653.505828857       -421923994.08965963        229040412.57954898        0.0000000000000000     
+ WACCMX_RECV_SOURCE_FLAGS          22           0   0.00000000          188480      132017       49405        7058           0           0      132017       56463      132017       56463      132017      132017      132017      132017
+ WACCMX_APPLY_QC          22           1   0.00000000           37696       26418       11278       26418       11278       26418       26418       26418       26418
+ WACCMX_APPLY_SOURCE_FLAGS          22           1   0.00000000           37696       26418        9934        1344           0           0
+ WACCMX_APPLY_BLEND          22           1   0.00000000           37696           1   600.000000       720.000000           26402          16           0       26402          16           0
+ WACCMX_APPLY_QC          13           5   0.00000000           37696       26304       11392       26304       11392       26304       26304       26304       26304
+ WACCMX_APPLY_SOURCE_FLAGS          13           5   0.00000000           37696       26304       10850         542           0           0
+ WACCMX_APPLY_BLEND          13           5   0.00000000           37696           1   600.000000       720.000000           26287          17           0       26287          17           0
+ WACCMX_APPLY_QC          20           2   0.00000000           37696       26496       11200       26496       11200       26496       26496       26496       26496
+ WACCMX_APPLY_SOURCE_FLAGS          20           2   0.00000000           37696       26496       10134        1066           0           0
+ WACCMX_APPLY_BLEND          20           2   0.00000000           37696           1   600.000000       720.000000           26471          25           0       26471          25           0
+ WACCMX_APPLY_QC          18           3   0.00000000           37696       26525       11171       26525       11171       26525       26525       26525       26525
+ WACCMX_APPLY_SOURCE_FLAGS          18           3   0.00000000           37696       26525       10327         844           0           0
+ WACCMX_APPLY_BLEND          18           3   0.00000000           37696           1   600.000000       720.000000           26489          36           0       26489          36           0
+ WACCMX_APPLY_QC          16           4   0.00000000           37696       26476       11220       26476       11220       26476       26476       26476       26476
+ WACCMX_APPLY_SOURCE_FLAGS          16           4   0.00000000           37696       26476       10551         669           0           0
+ WACCMX_APPLY_BLEND          16           4   0.00000000           37696           1   600.000000       720.000000           26455          21           0       26455          21           0
+ WACCMX online neutral received: taskid,step,packet_hr=          23           0   0.00000000    
+ WACCMX_RECV_QC          23           0   0.00000000          132023       56457      132023       56457   4.5859622575002988E+018   83447504.104064941       -486929039.27850693        191580207.38358954        0.0000000000000000        4.5859622575002988E+018   83447504.104064941       -486929039.27850693        191580207.38358954        0.0000000000000000     
+ WACCMX_RECV_SOURCE_FLAGS          23           0   0.00000000          188480      132023       49045        7412           0           0      132023       56457      132023       56457      132023      132023      132023      132023
+ WACCMX_APPLY_QC          23           1   0.00000000           37696       26399       11297       26399       11297       26399       26399       26399       26399
+ WACCMX_APPLY_SOURCE_FLAGS          23           1   0.00000000           37696       26399        9854        1443           0           0
+ WACCMX_APPLY_BLEND          23           1   0.00000000           37696           1   600.000000       720.000000           26387          12           0       26387          12           0
+ WACCMX_APPLY_QC          14           5   0.00000000           37696       26377       11319       26377       11319       26377       26377       26377       26377
+ WACCMX_APPLY_SOURCE_FLAGS          14           5   0.00000000           37696       26377       10758         561           0           0
+ WACCMX_APPLY_BLEND          14           5   0.00000000           37696           1   600.000000       720.000000           26358          19           0       26358          19           0
+ WACCMX_APPLY_QC          21           2   0.00000000           37696       26449       11247       26449       11247       26449       26449       26449       26449
+ WACCMX_APPLY_SOURCE_FLAGS          21           2   0.00000000           37696       26449       10010        1237           0           0
+ WACCMX_APPLY_BLEND          21           2   0.00000000           37696           1   600.000000       720.000000           26430          19           0       26430          19           0
+ WACCMX_APPLY_QC          19           3   0.00000000           37696       26515       11181       26515       11181       26515       26515       26515       26515
+ WACCMX_APPLY_SOURCE_FLAGS          19           3   0.00000000           37696       26515       10216         965           0           0
+ WACCMX_APPLY_BLEND          19           3   0.00000000           37696           1   600.000000       720.000000           26481          34           0       26481          34           0
+ WACCMX online neutral received: taskid,step,packet_hr=          24           0   0.00000000    
+ WACCMX_RECV_QC          24           0   0.00000000          132146       56334      132146       56334   4.7252397125544786E+018   84417308.290390015       -514930606.27756292        149474821.65101960        0.0000000000000000        4.7252397125544786E+018   84417308.290390015       -514930606.27756292        149474821.65101960        0.0000000000000000     
+ WACCMX_RECV_SOURCE_FLAGS          24           0   0.00000000          188480      132146       48748        7586           0           0      132146       56334      132146       56334      132146      132146      132146      132146
+ WACCMX_APPLY_QC          24           1   0.00000000           37696       26409       11287       26409       11287       26409       26409       26409       26409
+ WACCMX_APPLY_SOURCE_FLAGS          24           1   0.00000000           37696       26409        9790        1497           0           0
+ WACCMX_APPLY_BLEND          24           1   0.00000000           37696           1   600.000000       720.000000           26400           9           0       26400           9           0
+ WACCMX_APPLY_QC          17           4   0.00000000           37696       26515       11181       26515       11181       26515       26515       26515       26515
+ WACCMX_APPLY_SOURCE_FLAGS          17           4   0.00000000           37696       26515       10438         743           0           0
+ WACCMX_APPLY_BLEND          17           4   0.00000000           37696           1   600.000000       720.000000           26485          30           0       26485          30           0
+ WACCMX_APPLY_QC          15           5   0.00000000           37696       26465       11231       26465       11231       26465       26465       26465       26465
+ WACCMX_APPLY_SOURCE_FLAGS          15           5   0.00000000           37696       26465       10622         609           0           0
+ WACCMX_APPLY_BLEND          15           5   0.00000000           37696           1   600.000000       720.000000           26445          20           0       26445          20           0
+ WACCMX_APPLY_QC          22           2   0.00000000           37696       26404       11292       26404       11292       26404       26404       26404       26404
+ WACCMX_APPLY_SOURCE_FLAGS          22           2   0.00000000           37696       26404        9911        1381           0           0
+ WACCMX_APPLY_BLEND          22           2   0.00000000           37696           1   600.000000       720.000000           26388          16           0       26388          16           0
+ WACCMX_APPLY_QC          20           3   0.00000000           37696       26482       11214       26482       11214       26482       26482       26482       26482
+ WACCMX_APPLY_SOURCE_FLAGS          20           3   0.00000000           37696       26482       10089        1125           0           0
+ WACCMX_APPLY_BLEND          20           3   0.00000000           37696           1   600.000000       720.000000           26459          23           0       26459          23           0
+ WACCMX online neutral received: taskid,step,packet_hr=          25           0   0.00000000    
+ WACCMX_RECV_QC          25           0   0.00000000          132200       56280      132200       56280   4.9140158019463383E+018   84881246.917785645       -464632012.55382884        150698865.56594986        0.0000000000000000        4.9140158019463383E+018   84881246.917785645       -464632012.55382884        150698865.56594986        0.0000000000000000     
+ WACCMX_RECV_SOURCE_FLAGS          25           0   0.00000000          188480      132200       48541        7739           0           0      132200       56280      132200       56280      132200      132200      132200      132200
+ WACCMX_APPLY_QC          25           1   0.00000000           37696       26438       11258       26438       11258       26438       26438       26438       26438
+ WACCMX_APPLY_SOURCE_FLAGS          25           1   0.00000000           37696       26438        9732        1526           0           0
+ WACCMX_APPLY_BLEND          25           1   0.00000000           37696           1   600.000000       720.000000           26432           6           0       26432           6           0
+ WACCMX_APPLY_QC          18           4   0.00000000           37696       26527       11169       26527       11169       26527       26527       26527       26527
+ WACCMX_APPLY_SOURCE_FLAGS          18           4   0.00000000           37696       26527       10296         873           0           0
+ WACCMX_APPLY_BLEND          18           4   0.00000000           37696           1   600.000000       720.000000           26492          35           0       26492          35           0
+ WACCMX_APPLY_QC          16           5   0.00000000           37696       26496       11200       26496       11200       26496       26496       26496       26496
+ WACCMX_APPLY_SOURCE_FLAGS          16           5   0.00000000           37696       26496       10514         686           0           0
+ WACCMX_APPLY_BLEND          16           5   0.00000000           37696           1   600.000000       720.000000           26470          26           0       26470          26           0
+ WACCMX_APPLY_QC          23           2   0.00000000           37696       26394       11302       26394       11302       26394       26394       26394       26394
+ WACCMX_APPLY_SOURCE_FLAGS          23           2   0.00000000           37696       26394        9832        1470           0           0
+ WACCMX_APPLY_BLEND          23           2   0.00000000           37696           1   600.000000       720.000000           26383          11           0       26383          11           0
+ WACCMX_APPLY_QC          21           3   0.00000000           37696       26436       11260       26436       11260       26436       26436       26436       26436
+ WACCMX_APPLY_SOURCE_FLAGS          21           3   0.00000000           37696       26436        9964        1296           0           0
+ WACCMX_APPLY_BLEND          21           3   0.00000000           37696           1   600.000000       720.000000           26418          18           0       26418          18           0
+ WACCMX online neutral received: taskid,step,packet_hr=          26           0   0.00000000    
+ WACCMX_RECV_QC          26           0   0.00000000          132176       56304      132176       56304   4.9549598855123907E+018   85013631.232147217       -357339999.54635084        182499304.70897684        0.0000000000000000        4.9549598855123907E+018   85013631.232147217       -357339999.54635084        182499304.70897684        0.0000000000000000     
+ WACCMX_RECV_SOURCE_FLAGS          26           0   0.00000000          188480      132176       48487        7817           0           0      132176       56304      132176       56304      132176      132176      132176      132176
+ WACCMX_APPLY_QC          26           1   0.00000000           37696       26436       11260       26436       11260       26436       26436       26436       26436
+ WACCMX_APPLY_SOURCE_FLAGS          26           1   0.00000000           37696       26436        9695        1565           0           0
+ WACCMX_APPLY_BLEND          26           1   0.00000000           37696           1   600.000000       720.000000           26435           1           0       26435           1           0
+ WACCMX_APPLY_QC          19           4   0.00000000           37696       26510       11186       26510       11186       26510       26510       26510       26510
+ WACCMX_APPLY_SOURCE_FLAGS          19           4   0.00000000           37696       26510       10164        1022           0           0
+ WACCMX_APPLY_BLEND          19           4   0.00000000           37696           1   600.000000       720.000000           26477          33           0       26477          33           0
+ WACCMX_APPLY_QC          17           5   0.00000000           37696       26522       11174       26522       11174       26522       26522       26522       26522
+ WACCMX_APPLY_SOURCE_FLAGS          17           5   0.00000000           37696       26522       10390         784           0           0
+ WACCMX_APPLY_BLEND          17           5   0.00000000           37696           1   600.000000       720.000000           26488          34           0       26488          34           0
+ WACCMX_APPLY_QC          24           2   0.00000000           37696       26423       11273       26423       11273       26423       26423       26423       26423
+ WACCMX_APPLY_SOURCE_FLAGS          24           2   0.00000000           37696       26423        9764        1509           0           0
+ WACCMX_APPLY_BLEND          24           2   0.00000000           37696           1   600.000000       720.000000           26415           8           0       26415           8           0
+ WACCMX_APPLY_QC          22           3   0.00000000           37696       26402       11294       26402       11294       26402       26402       26402       26402
+ WACCMX_APPLY_SOURCE_FLAGS          22           3   0.00000000           37696       26402        9874        1420           0           0
+ WACCMX_APPLY_BLEND          22           3   0.00000000           37696           1   600.000000       720.000000           26389          13           0       26389          13           0
+ WACCMX online neutral received: taskid,step,packet_hr=          27           0   0.00000000    
+ WACCMX_RECV_QC          27           0   0.00000000          132098       56382      132098       56382   4.8396436840911094E+018   84957795.634506226       -246250401.19603893        175008703.79512480        0.0000000000000000        4.8396436840911094E+018   84957795.634506226       -246250401.19603893        175008703.79512480        0.0000000000000000     
+ WACCMX_RECV_SOURCE_FLAGS          27           0   0.00000000          188480      132098       48567        7815           0           0      132098       56382      132098       56382      132098      132098      132098      132098
+ WACCMX_APPLY_QC          27           1   0.00000000           37696       26436       11260       26436       11260       26436       26436       26436       26436
+ WACCMX_APPLY_SOURCE_FLAGS          27           1   0.00000000           37696       26436        9700        1560           0           0
+ WACCMX_APPLY_BLEND          27           1   0.00000000           37696           1   600.000000       720.000000           26436           0           0       26436           0           0
+ WACCMX_APPLY_QC          20           4   0.00000000           37696       26471       11225       26471       11225       26471       26471       26471       26471
+ WACCMX_APPLY_SOURCE_FLAGS          20           4   0.00000000           37696       26471       10051        1174           0           0
+ WACCMX_APPLY_BLEND          20           4   0.00000000           37696           1   600.000000       720.000000           26450          21           0       26450          21           0
+ WACCMX_APPLY_QC          25           2   0.00000000           37696       26443       11253       26443       11253       26443       26443       26443       26443
+ WACCMX_APPLY_SOURCE_FLAGS          25           2   0.00000000           37696       26443        9718        1535           0           0
+ WACCMX_APPLY_BLEND          25           2   0.00000000           37696           1   600.000000       720.000000           26441           2           0       26441           2           0
+ WACCMX_APPLY_QC          18           5   0.00000000           37696       26526       11170       26526       11170       26526       26526       26526       26526
+ WACCMX_APPLY_SOURCE_FLAGS          18           5   0.00000000           37696       26526       10257         913           0           0
+ WACCMX_APPLY_BLEND          18           5   0.00000000           37696           1   600.000000       720.000000           26491          35           0       26491          35           0
+ WACCMX_APPLY_QC          23           3   0.00000000           37696       26398       11298       26398       11298       26398       26398       26398       26398
+ WACCMX_APPLY_SOURCE_FLAGS          23           3   0.00000000           37696       26398        9805        1493           0           0
+ WACCMX_APPLY_BLEND          23           3   0.00000000           37696           1   600.000000       720.000000           26388          10           0       26388          10           0
+ WACCMX online neutral received: taskid,step,packet_hr=          28           0   0.00000000    
+ WACCMX_RECV_QC          28           0   0.00000000          131990       56490      131990       56490   4.7027429624349850E+018   84777629.370910645       -176585515.22822982        127869204.66586268        0.0000000000000000        4.7027429624349850E+018   84777629.370910645       -176585515.22822982        127869204.66586268        0.0000000000000000     
+ WACCMX_RECV_SOURCE_FLAGS          28           0   0.00000000          188480      131990       48645        7845           0           0      131990       56490      131990       56490      131990      131990      131990      131990
+ WACCMX_APPLY_QC          28           1   0.00000000           37696       26411       11285       26411       11285       26411       26411       26411       26411
+ WACCMX_APPLY_SOURCE_FLAGS          28           1   0.00000000           37696       26411        9722        1563           0           0
+ WACCMX_APPLY_BLEND          28           1   0.00000000           37696           1   600.000000       720.000000           26411           0           0       26411           0           0
+ WACCMX_APPLY_QC          21           4   0.00000000           37696       26418       11278       26418       11278       26418       26418       26418       26418
+ WACCMX_APPLY_SOURCE_FLAGS          21           4   0.00000000           37696       26418        9934        1344           0           0
+ WACCMX_APPLY_BLEND          21           4   0.00000000           37696           1   600.000000       720.000000           26402          16           0       26402          16           0
+ WACCMX_APPLY_QC          26           2   0.00000000           37696       26441       11255       26441       11255       26441       26441       26441       26441
+ WACCMX_APPLY_SOURCE_FLAGS          26           2   0.00000000           37696       26441        9691        1564           0           0
+ WACCMX_APPLY_BLEND          26           2   0.00000000           37696           1   600.000000       720.000000           26440           1           0       26440           1           0
+ WACCMX_APPLY_QC          19           5   0.00000000           37696       26496       11200       26496       11200       26496       26496       26496       26496
+ WACCMX_APPLY_SOURCE_FLAGS          19           5   0.00000000           37696       26496       10134        1066           0           0
+ WACCMX_APPLY_BLEND          19           5   0.00000000           37696           1   600.000000       720.000000           26471          25           0       26471          25           0
+ WACCMX_APPLY_QC          24           3   0.00000000           37696       26433       11263       26433       11263       26433       26433       26433       26433
+ WACCMX_APPLY_SOURCE_FLAGS          24           3   0.00000000           37696       26433        9744        1519           0           0
+ WACCMX_APPLY_BLEND          24           3   0.00000000           37696           1   600.000000       720.000000           26427           6           0       26427           6           0
+ WACCMX online neutral received: taskid,step,packet_hr=          29           0   0.00000000    
+ WACCMX_RECV_QC          29           0   0.00000000          131876       56604      131876       56604   4.6285136122899384E+018   84368935.517852783       -113053757.44369864        118283009.26334774        0.0000000000000000        4.6285136122899384E+018   84368935.517852783       -113053757.44369864        118283009.26334774        0.0000000000000000     
+ WACCMX_RECV_SOURCE_FLAGS          29           0   0.00000000          188480      131876       48779        7825           0           0      131876       56604      131876       56604      131876      131876      131876      131876
+ WACCMX_APPLY_QC          29           1   0.00000000           37696       26388       11308       26388       11308       26388       26388       26388       26388
+ WACCMX_APPLY_SOURCE_FLAGS          29           1   0.00000000           37696       26388        9730        1578           0           0
+ WACCMX_APPLY_BLEND          29           1   0.00000000           37696           1   600.000000       720.000000           26388           0           0       26388           0           0
+ WACCMX_APPLY_QC          22           4   0.00000000           37696       26399       11297       26399       11297       26399       26399       26399       26399
+ WACCMX_APPLY_SOURCE_FLAGS          22           4   0.00000000           37696       26399        9854        1443           0           0
+ WACCMX_APPLY_BLEND          22           4   0.00000000           37696           1   600.000000       720.000000           26387          12           0       26387          12           0
+ WACCMX_APPLY_QC          27           2   0.00000000           37696       26426       11270       26426       11270       26426       26426       26426       26426
+ WACCMX_APPLY_SOURCE_FLAGS          27           2   0.00000000           37696       26426        9707        1563           0           0
+ WACCMX_APPLY_BLEND          27           2   0.00000000           37696           1   600.000000       720.000000           26426           0           0       26426           0           0
+ WACCMX_APPLY_QC          20           5   0.00000000           37696       26449       11247       26449       11247       26449       26449       26449       26449
+ WACCMX_APPLY_SOURCE_FLAGS          20           5   0.00000000           37696       26449       10010        1237           0           0
+ WACCMX_APPLY_BLEND          20           5   0.00000000           37696           1   600.000000       720.000000           26430          19           0       26430          19           0
+ WACCMX_APPLY_QC          25           3   0.00000000           37696       26442       11254       26442       11254       26442       26442       26442       26442
+ WACCMX_APPLY_SOURCE_FLAGS          25           3   0.00000000           37696       26442        9705        1549           0           0
+ WACCMX_APPLY_BLEND          25           3   0.00000000           37696           1   600.000000       720.000000           26441           1           0       26441           1           0
+ WACCMX online neutral received: taskid,step,packet_hr=          30           0   0.00000000    
+ WACCMX_RECV_QC          30           0   0.00000000          131752       56728      131752       56728   4.6041406336185283E+018   83633779.090850830       -47990134.160436347        141871025.64502406        0.0000000000000000        4.6041406336185283E+018   83633779.090850830       -47990134.160436347        141871025.64502406        0.0000000000000000     
+ WACCMX_RECV_SOURCE_FLAGS          30           0   0.00000000          188480      131752       49108        7620           0           0      131752       56728      131752       56728      131752      131752      131752      131752
+ WACCMX_APPLY_QC          30           1   0.00000000           37696       26367       11329       26367       11329       26367       26367       26367       26367
+ WACCMX_APPLY_SOURCE_FLAGS          30           1   0.00000000           37696       26367        9764        1565           0           0
+ WACCMX_APPLY_BLEND          30           1   0.00000000           37696           1   600.000000       720.000000           26367           0           0       26367           0           0
+ WACCMX_APPLY_QC          23           4   0.00000000           37696       26409       11287       26409       11287       26409       26409       26409       26409
+ WACCMX_APPLY_SOURCE_FLAGS          23           4   0.00000000           37696       26409        9790        1497           0           0
+ WACCMX_APPLY_BLEND          23           4   0.00000000           37696           1   600.000000       720.000000           26400           9           0       26400           9           0
+ WACCMX_APPLY_QC          28           2   0.00000000           37696       26407       11289       26407       11289       26407       26407       26407       26407
+ WACCMX_APPLY_SOURCE_FLAGS          28           2   0.00000000           37696       26407        9724        1565           0           0
+ WACCMX_APPLY_BLEND          28           2   0.00000000           37696           1   600.000000       720.000000           26407           0           0       26407           0           0
+ WACCMX_APPLY_QC          21           5   0.00000000           37696       26404       11292       26404       11292       26404       26404       26404       26404
+ WACCMX_APPLY_SOURCE_FLAGS          21           5   0.00000000           37696       26404        9911        1381           0           0
+ WACCMX_APPLY_BLEND          21           5   0.00000000           37696           1   600.000000       720.000000           26388          16           0       26388          16           0
+ WACCMX_APPLY_QC          26           3   0.00000000           37696       26437       11259       26437       11259       26437       26437       26437       26437
+ WACCMX_APPLY_SOURCE_FLAGS          26           3   0.00000000           37696       26437        9694        1565           0           0
+ WACCMX_APPLY_BLEND          26           3   0.00000000           37696           1   600.000000       720.000000           26437           0           0       26437           0           0
+ WACCMX online neutral received: taskid,step,packet_hr=          31           0   0.00000000    
+ WACCMX_RECV_QC          31           0   0.00000000          131613       56867      131613       56867   4.6077042402223846E+018   82553600.741043091        22738110.563808508        187591501.34927028        0.0000000000000000        4.6077042402223846E+018   82553600.741043091        22738110.563808508        187591501.34927028        0.0000000000000000     
+ WACCMX_RECV_SOURCE_FLAGS          31           0   0.00000000          188480      131613       49603        7264           0           0      131613       56867      131613       56867      131613      131613      131613      131613
+ WACCMX_APPLY_QC          31           1   0.00000000           37696       26339       11357       26339       11357       26339       26339       26339       26339
+ WACCMX_APPLY_SOURCE_FLAGS          31           1   0.00000000           37696       26339        9847        1510           0           0
+ WACCMX_APPLY_BLEND          31           1   0.00000000           37696           1   600.000000       720.000000           26339           0           0       26339           0           0
+ WACCMX_APPLY_QC          24           4   0.00000000           37696       26438       11258       26438       11258       26438       26438       26438       26438
+ WACCMX_APPLY_SOURCE_FLAGS          24           4   0.00000000           37696       26438        9732        1526           0           0
+ WACCMX_APPLY_BLEND          24           4   0.00000000           37696           1   600.000000       720.000000           26432           6           0       26432           6           0
+ WACCMX_APPLY_QC          29           2   0.00000000           37696       26384       11312       26384       11312       26384       26384       26384       26384
+ WACCMX_APPLY_SOURCE_FLAGS          29           2   0.00000000           37696       26384        9743        1569           0           0
+ WACCMX_APPLY_BLEND          29           2   0.00000000           37696           1   600.000000       720.000000           26384           0           0       26384           0           0
+ WACCMX_APPLY_QC          22           5   0.00000000           37696       26394       11302       26394       11302       26394       26394       26394       26394
+ WACCMX_APPLY_SOURCE_FLAGS          22           5   0.00000000           37696       26394        9832        1470           0           0
+ WACCMX_APPLY_BLEND          22           5   0.00000000           37696           1   600.000000       720.000000           26383          11           0       26383          11           0
+ WACCMX_APPLY_QC          27           3   0.00000000           37696       26418       11278       26418       11278       26418       26418       26418       26418
+ WACCMX_APPLY_SOURCE_FLAGS          27           3   0.00000000           37696       26418        9714        1564           0           0
+ WACCMX_APPLY_BLEND          27           3   0.00000000           37696           1   600.000000       720.000000           26418           0           0       26418           0           0
+ WACCMX online neutral received: taskid,step,packet_hr=          32           0   0.00000000    
+ WACCMX_RECV_QC          32           0   0.00000000          131394       57086      131394       57086   4.3292573411499663E+018   81108974.984603882        86349207.969750166        250184799.56216529        0.0000000000000000        4.3292573411499663E+018   81108974.984603882        86349207.969750166        250184799.56216529        0.0000000000000000     
+ WACCMX_RECV_SOURCE_FLAGS          32           0   0.00000000          188480      131394       50282        6804           0           0      131394       57086      131394       57086      131394      131394      131394      131394
+ WACCMX_APPLY_QC          32           1   0.00000000           37696       26316       11380       26316       11380       26316       26316       26316       26316
+ WACCMX_APPLY_SOURCE_FLAGS          32           1   0.00000000           37696       26316        9956        1424           0           0
+ WACCMX_APPLY_BLEND          32           1   0.00000000           37696           1   600.000000       720.000000           26316           0           0       26316           0           0
+ WACCMX_APPLY_QC          25           4   0.00000000           37696       26436       11260       26436       11260       26436       26436       26436       26436
+ WACCMX_APPLY_SOURCE_FLAGS          25           4   0.00000000           37696       26436        9695        1565           0           0
+ WACCMX_APPLY_BLEND          25           4   0.00000000           37696           1   600.000000       720.000000           26435           1           0       26435           1           0
+ WACCMX_APPLY_QC          30           2   0.00000000           37696       26361       11335       26361       11335       26361       26361       26361       26361
+ WACCMX_APPLY_SOURCE_FLAGS          30           2   0.00000000           37696       26361        9793        1542           0           0
+ WACCMX_APPLY_BLEND          30           2   0.00000000           37696           1   600.000000       720.000000           26361           0           0       26361           0           0
+ WACCMX_APPLY_QC          23           5   0.00000000           37696       26423       11273       26423       11273       26423       26423       26423       26423
+ WACCMX_APPLY_SOURCE_FLAGS          23           5   0.00000000           37696       26423        9764        1509           0           0
+ WACCMX_APPLY_BLEND          23           5   0.00000000           37696           1   600.000000       720.000000           26415           8           0       26415           8           0
+ WACCMX_APPLY_QC          28           3   0.00000000           37696       26400       11296       26400       11296       26400       26400       26400       26400
+ WACCMX_APPLY_SOURCE_FLAGS          28           3   0.00000000           37696       26400        9726        1570           0           0
+ WACCMX_APPLY_BLEND          28           3   0.00000000           37696           1   600.000000       720.000000           26400           0           0       26400           0           0
+ WACCMX_APPLY_QC          26           4   0.00000000           37696       26436       11260       26436       11260       26436       26436       26436       26436
+ WACCMX_APPLY_SOURCE_FLAGS          26           4   0.00000000           37696       26436        9700        1560           0           0
+ WACCMX_APPLY_BLEND          26           4   0.00000000           37696           1   600.000000       720.000000           26436           0           0       26436           0           0
+ WACCMX_APPLY_QC          31           2   0.00000000           37696       26335       11361       26335       11361       26335       26335       26335       26335
+ WACCMX_APPLY_SOURCE_FLAGS          31           2   0.00000000           37696       26335        9879        1482           0           0
+ WACCMX_APPLY_BLEND          31           2   0.00000000           37696           1   600.000000       720.000000           26335           0           0       26335           0           0
+ WACCMX_APPLY_QC          24           5   0.00000000           37696       26443       11253       26443       11253       26443       26443       26443       26443
+ WACCMX_APPLY_SOURCE_FLAGS          24           5   0.00000000           37696       26443        9718        1535           0           0
+ WACCMX_APPLY_BLEND          24           5   0.00000000           37696           1   600.000000       720.000000           26441           2           0       26441           2           0
+ WACCMX_APPLY_QC          29           3   0.00000000           37696       26376       11320       26376       11320       26376       26376       26376       26376
+ WACCMX_APPLY_SOURCE_FLAGS          29           3   0.00000000           37696       26376        9749        1571           0           0
+ WACCMX_APPLY_BLEND          29           3   0.00000000           37696           1   600.000000       720.000000           26376           0           0       26376           0           0
+ WACCMX_APPLY_QC          27           4   0.00000000           37696       26411       11285       26411       11285       26411       26411       26411       26411
+ WACCMX_APPLY_SOURCE_FLAGS          27           4   0.00000000           37696       26411        9722        1563           0           0
+ WACCMX_APPLY_BLEND          27           4   0.00000000           37696           1   600.000000       720.000000           26411           0           0       26411           0           0
+ WACCMX_APPLY_QC          32           2   0.00000000           37696       26298       11398       26298       11398       26298       26298       26298       26298
+ WACCMX_APPLY_SOURCE_FLAGS          32           2   0.00000000           37696       26298        9999        1399           0           0
+ WACCMX_APPLY_BLEND          32           2   0.00000000           37696           1   600.000000       720.000000           26298           0           0       26298           0           0
+ WACCMX_APPLY_QC          25           5   0.00000000           37696       26441       11255       26441       11255       26441       26441       26441       26441
+ WACCMX_APPLY_SOURCE_FLAGS          25           5   0.00000000           37696       26441        9691        1564           0           0
+ WACCMX_APPLY_BLEND          25           5   0.00000000           37696           1   600.000000       720.000000           26440           1           0       26440           1           0
+ WACCMX_APPLY_QC          30           3   0.00000000           37696       26350       11346       26350       11346       26350       26350       26350       26350
+ WACCMX_APPLY_SOURCE_FLAGS          30           3   0.00000000           37696       26350        9825        1521           0           0
+ WACCMX_APPLY_BLEND          30           3   0.00000000           37696           1   600.000000       720.000000           26350           0           0       26350           0           0
+ WACCMX_APPLY_QC          28           4   0.00000000           37696       26388       11308       26388       11308       26388       26388       26388       26388
+ WACCMX_APPLY_SOURCE_FLAGS          28           4   0.00000000           37696       26388        9730        1578           0           0
+ WACCMX_APPLY_BLEND          28           4   0.00000000           37696           1   600.000000       720.000000           26388           0           0       26388           0           0
+ WACCMX_APPLY_QC          26           5   0.00000000           37696       26426       11270       26426       11270       26426       26426       26426       26426
+ WACCMX_APPLY_SOURCE_FLAGS          26           5   0.00000000           37696       26426        9707        1563           0           0
+ WACCMX_APPLY_BLEND          26           5   0.00000000           37696           1   600.000000       720.000000           26426           0           0       26426           0           0
+ WACCMX_APPLY_QC          31           3   0.00000000           37696       26325       11371       26325       11371       26325       26325       26325       26325
+ WACCMX_APPLY_SOURCE_FLAGS          31           3   0.00000000           37696       26325        9922        1449           0           0
+ WACCMX_APPLY_BLEND          31           3   0.00000000           37696           1   600.000000       720.000000           26325           0           0       26325           0           0
+ WACCMX_APPLY_QC          29           4   0.00000000           37696       26367       11329       26367       11329       26367       26367       26367       26367
+ WACCMX_APPLY_SOURCE_FLAGS          29           4   0.00000000           37696       26367        9764        1565           0           0
+ WACCMX_APPLY_BLEND          29           4   0.00000000           37696           1   600.000000       720.000000           26367           0           0       26367           0           0
+ WACCMX_APPLY_QC          27           5   0.00000000           37696       26407       11289       26407       11289       26407       26407       26407       26407
+ WACCMX_APPLY_SOURCE_FLAGS          27           5   0.00000000           37696       26407        9724        1565           0           0
+ WACCMX_APPLY_BLEND          27           5   0.00000000           37696           1   600.000000       720.000000           26407           0           0       26407           0           0
+ WACCMX_APPLY_QC          32           3   0.00000000           37696       26281       11415       26281       11415       26281       26281       26281       26281
+ WACCMX_APPLY_SOURCE_FLAGS          32           3   0.00000000           37696       26281       10055        1360           0           0
+ WACCMX_APPLY_BLEND          32           3   0.00000000           37696           1   600.000000       720.000000           26281           0           0       26281           0           0
+ WACCMX_APPLY_QC          30           4   0.00000000           37696       26339       11357       26339       11357       26339       26339       26339       26339
+ WACCMX_APPLY_SOURCE_FLAGS          30           4   0.00000000           37696       26339        9847        1510           0           0
+ WACCMX_APPLY_BLEND          30           4   0.00000000           37696           1   600.000000       720.000000           26339           0           0       26339           0           0
+ WACCMX_APPLY_QC          28           5   0.00000000           37696       26384       11312       26384       11312       26384       26384       26384       26384
+ WACCMX_APPLY_SOURCE_FLAGS          28           5   0.00000000           37696       26384        9743        1569           0           0
+ WACCMX_APPLY_BLEND          28           5   0.00000000           37696           1   600.000000       720.000000           26384           0           0       26384           0           0
+ WACCMX_APPLY_QC          31           4   0.00000000           37696       26316       11380       26316       11380       26316       26316       26316       26316
+ WACCMX_APPLY_SOURCE_FLAGS          31           4   0.00000000           37696       26316        9956        1424           0           0
+ WACCMX_APPLY_BLEND          31           4   0.00000000           37696           1   600.000000       720.000000           26316           0           0       26316           0           0
+ WACCMX_APPLY_QC          29           5   0.00000000           37696       26361       11335       26361       11335       26361       26361       26361       26361
+ WACCMX_APPLY_SOURCE_FLAGS          29           5   0.00000000           37696       26361        9793        1542           0           0
+ WACCMX_APPLY_BLEND          29           5   0.00000000           37696           1   600.000000       720.000000           26361           0           0       26361           0           0
+ WACCMX_APPLY_QC          32           4   0.00000000           37696       26260       11436       26260       11436       26260       26260       26260       26260
+ WACCMX_APPLY_SOURCE_FLAGS          32           4   0.00000000           37696       26260       10111        1325           0           0
+ WACCMX_APPLY_BLEND          32           4   0.00000000           37696           1   600.000000       720.000000           26260           0           0       26260           0           0
+ WACCMX_APPLY_QC          30           5   0.00000000           37696       26335       11361       26335       11361       26335       26335       26335       26335
+ WACCMX_APPLY_SOURCE_FLAGS          30           5   0.00000000           37696       26335        9879        1482           0           0
+ WACCMX_APPLY_BLEND          30           5   0.00000000           37696           1   600.000000       720.000000           26335           0           0       26335           0           0
+ WACCMX_APPLY_QC          31           5   0.00000000           37696       26298       11398       26298       11398       26298       26298       26298       26298
+ WACCMX_APPLY_SOURCE_FLAGS          31           5   0.00000000           37696       26298        9999        1399           0           0
+ WACCMX_APPLY_BLEND          31           5   0.00000000           37696           1   600.000000       720.000000           26298           0           0       26298           0           0
+ WACCMX_APPLY_QC          32           5   0.00000000           37696       26239       11457       26239       11457       26239       26239       26239       26239
+ WACCMX_APPLY_SOURCE_FLAGS          32           5   0.00000000           37696       26239       10161        1296           0           0
+ WACCMX_APPLY_BLEND          32           5   0.00000000           37696           1   600.000000       720.000000           26239           0           0       26239           0           0
+ SAMI3 direct phi port ready: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/sami3_direct_phi_port.txt
+ SAMI3 direct phi sender connected
+ WACCMX_PHI_RECV           0           2   0.00000000       0.00000000       1.38888892E-03  -36.9728775       31.5048161    
+ hrutw2 =    0.00000000       1.38888892E-03
+ nweimer           1
+ WACCMX_PHI_RECV           1           2   2.22222228E-03   1.38888892E-03   1.00000002E+30  -37.7063637       31.7590370    
+ hrutw2 =    2.22222228E-03   1.00000002E+30
+ SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning cached phi
+ SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning cached phi
+ SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning cached phi
+ SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning cached phi
+ SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning cached phi
+ SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning cached phi
+ SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning cached phi
+ SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning cached phi
+ SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning cached phi
+ SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning cached phi
+ SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning cached phi
+ SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning cached phi
+ SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning cached phi
+ SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning cached phi
+ SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning cached phi
+ SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning cached phi
+ SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning cached phi
+ MASTER: All Done!
+ WACCMX online done signal received:           1
+ SAMI3 direct phi done signal received:           2
+--- Packet summaries and compares
+### pkt000000 summary
+files=16 ranks=16 total_cols=13824
+packets=[0] nsteps=[0]
+lat_deg={'min': -90.0, 'max': 90.0, 'bad': 0} lon_deg={'min': 0.0, 'max': 357.5, 'bad': 0}
+cid={'min': 1, 'max': 13824, 'missing': 0, 'unique': 13824}
+T_K={'min': 113.19272490765026, 'max': 1522.7628810979916, 'bad': 0}
+U_m_s={'min': -925.7242161594645, 'max': 769.7344197674036, 'bad': 0}
+V_m_s={'min': -845.8062460574145, 'max': 736.3650929706123, 'bad': 0}
+PMID_Pa={'min': 4.055140885992663e-08, 'max': 107321.3890267048, 'bad': 0}
+ZM_m={'min': 48.56266690499009, 'max': 720507.7580399793, 'bad': 0}
+MBARV_kg_mol={'min': 14.895337165442252, 'max': 28.874522993878628, 'bad': 0}
+q_O={'min': 2.20521131163437e-25, 'max': 0.9999399874408939, 'bad': 0}
+q_O2={'min': 9.229295650411587e-06, 'max': 0.23732970847615611, 'bad': 0}
+q_H={'min': 2.913249081948255e-28, 'max': 0.0050683000424878695, 'bad': 0}
+q_N={'min': 1.885260804240404e-23, 'max': 0.060584943671142005, 'bad': 0}
+q_NO={'min': 9.01142764707503e-19, 'max': 0.0014346353422642934, 'bad': 0}
+q_N2={'min': None, 'max': None, 'bad': 1741824}
+q_He={'min': None, 'max': None, 'bad': 1741824}
+### pkt000000 replay builder
+N2 negative residual mode: invalid
+loaded ESMF weights: npoints=3618816 n_s=14475264
+loaded live dump: source_cols=13824 filled=13824 pver=126
+sample QC initial: n2_negative_mode=invalid samples=6031360 invalid=1819595 bad_weighted_z=0 above_live_top=1641376 n2_residual_used=4389984 n2_residual_negative=178219 n2_residual_min=-0.053314608006139914 n2_residual_max=0.81297869253786992 n2_residual_negative_min=-0.053314608006139914
+sample QC final: n2_negative_mode=invalid samples=6031360 invalid=1819595 bad_weighted_z=0 above_live_top=1641376 n2_residual_used=4389984 n2_residual_negative=178219 n2_residual_min=-0.053314608006139914 n2_residual_max=0.81297869253786992 n2_residual_negative_min=-0.053314608006139914
+wrote live-dump replay payload prefix: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525_0000/replay_pkt000000/waccmx_neutral_rank
+### pkt000000 receiver QC compare
+WACCMX_RECV_QC compare ok: ranks=32 occurrence=0 step_set=[0] packet_hour_set=[0.0] max_abs=2.08794e+06 max_rel=4.83248e-13
+### pkt000001 summary
+### pkt000001 replay builder
+### pkt000001 receiver QC compare
+END=Mon May 25 09:29:21 CST 2026
