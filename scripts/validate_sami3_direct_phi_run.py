@@ -107,6 +107,20 @@ def validate(args):
         "SAMI3 direct phi done signal received:" in receiver,
         "marker",
     )
+    meta["cache_after_done_count"] = count_re(r"WACCMX_PHI_CACHE_AFTER_DONE", receiver)
+    if args.require_cache_after_done:
+        add(
+            checks,
+            "cache_after_done_used",
+            "WACCMX_PHI_CACHE_AFTER_DONE" in receiver,
+            "count={}".format(meta["cache_after_done_count"]),
+        )
+        add(
+            checks,
+            "direct_phi_done_received_during_phi",
+            "SAMI3 direct phi done signal received during phi receive:" in receiver,
+            "marker",
+        )
 
     frames = parse_phi_recv(receiver)
     meta["phi_recv_frames"] = frames
@@ -187,6 +201,7 @@ def main():
     parser.add_argument("--recv-qc-compare", default=None)
     parser.add_argument("--expected-frames", type=int, default=2)
     parser.add_argument("--require-changing-phi", action="store_true")
+    parser.add_argument("--require-cache-after-done", action="store_true")
     parser.add_argument(
         "--allow-incomplete-run",
         action="store_true",
