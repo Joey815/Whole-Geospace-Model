@@ -1,0 +1,20 @@
+ok   summary_json_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/sami3_tubeshell_bin_bvolcc_tiote_long1800_20260525/recommended_long1800_bvolcc_tiote_summary.json
+ok   Pavg_formula_abs: max_abs=0.0 tol=1e-12
+ok   Pavg_formula_rel: max_rel=0.0 tol=1e-12
+ok   Pavg_positive_actual: mean=0.00043784124116159 max=0.0045781374009727024
+ok   Davg_formula_abs: max_abs=0.0 tol=1e-12
+ok   Davg_formula_rel: max_rel=0.0 tol=1e-12
+ok   Davg_positive_actual: mean=88.62593804380671 max=887.7487304687501
+ok   Pstd_formula_abs: max_abs=0.0 tol=1e-12
+ok   Pstd_formula_rel: max_rel=0.0 tol=1e-12
+ok   Dstd_formula_abs: max_abs=0.0 tol=1e-12
+ok   Dstd_formula_rel: max_rel=0.0 tol=1e-12
+ok   nonfinite_base_raiju_res_empty: []
+ok   nonfinite_proto_raiju_res_empty: []
+ok   nonfinite_base_gam_res_empty: []
+ok   nonfinite_proto_gam_res_empty: []
+ok   history_last_steps_exist: {'gam': 'Step#361', 'raiju': 'Step#361'}
+ok   history_last_steps_match: {'gam': 'Step#361', 'raiju': 'Step#361'}
+ok   comparison_fields_present: []
+ok   comparison_stats_finite: []
+overall=ok

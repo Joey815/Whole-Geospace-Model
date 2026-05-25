@@ -1,0 +1,123 @@
+{
+  "checks": [
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_tiote_long1800_20260525",
+      "name": "run_dir_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_tiote_long1800_20260525/base_control_long1800_bvolcc_tiote.log",
+      "name": "baseline_log_exists",
+      "ok": true
+    },
+    {
+      "detail": "Fin line",
+      "name": "baseline_fin",
+      "ok": true
+    },
+    {
+      "detail": "raiju_writes=362, min=10",
+      "name": "baseline_raiju_write_count",
+      "ok": true
+    },
+    {
+      "detail": "gamera_writes=364, min=10",
+      "name": "baseline_gamera_write_count",
+      "ok": true
+    },
+    {
+      "detail": "matches=0",
+      "name": "baseline_fatal_markers_absent",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_tiote_long1800_20260525/dsB_lmlt_recommended_long1800_bvolcc_tiote.log",
+      "name": "prototype_log_exists",
+      "ok": true
+    },
+    {
+      "detail": "Fin line",
+      "name": "prototype_fin",
+      "ok": true
+    },
+    {
+      "detail": "raiju_writes=362, min=10",
+      "name": "prototype_raiju_write_count",
+      "ok": true
+    },
+    {
+      "detail": "gamera_writes=364, min=10",
+      "name": "prototype_gamera_write_count",
+      "ok": true
+    },
+    {
+      "detail": "matches=0",
+      "name": "prototype_fatal_markers_absent",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_tiote_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_tiote.gam.h5",
+      "name": "baseline_gam_h5_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_tiote_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_tiote.raiju.h5",
+      "name": "baseline_raiju_h5_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_tiote_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_tiote.raiCpl.Res.00000.h5",
+      "name": "baseline_raiCpl_Res_00000_h5_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_tiote_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_tiote.gam.Res.00000.h5",
+      "name": "baseline_gam_Res_00000_h5_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_tiote_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_tiote.raiju.Res.00000.h5",
+      "name": "baseline_raiju_Res_00000_h5_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_tiote_long1800_20260525/sami3_moments_dsB_lmlt_recommended_long1800_bvolcc_tiote.gam.h5",
+      "name": "prototype_gam_h5_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_tiote_long1800_20260525/sami3_moments_dsB_lmlt_recommended_long1800_bvolcc_tiote.raiju.h5",
+      "name": "prototype_raiju_h5_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_tiote_long1800_20260525/sami3_moments_dsB_lmlt_recommended_long1800_bvolcc_tiote.raiCpl.Res.00000.h5",
+      "name": "prototype_raiCpl_Res_00000_h5_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_tiote_long1800_20260525/sami3_moments_dsB_lmlt_recommended_long1800_bvolcc_tiote.gam.Res.00000.h5",
+      "name": "prototype_gam_Res_00000_h5_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_tiote_long1800_20260525/sami3_moments_dsB_lmlt_recommended_long1800_bvolcc_tiote.raiju.Res.00000.h5",
+      "name": "prototype_raiju_Res_00000_h5_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_tiote_long1800_20260525/slurm-7673207.out",
+      "name": "slurm_log_exists",
+      "ok": true
+    },
+    {
+      "detail": "run_complete=1",
+      "name": "slurm_run_complete",
+      "ok": true
+    }
+  ],
+  "meta": {
+    "run_dir": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_tiote_long1800_20260525"
+  },
+  "ok": true
+}

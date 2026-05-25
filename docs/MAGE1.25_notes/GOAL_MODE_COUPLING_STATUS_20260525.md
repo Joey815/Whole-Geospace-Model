@@ -20,9 +20,86 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-25 17:08:17 CST.
+Status refreshed: 2026-05-25 18:00:22 CST.
 
-### Latest Completed Gate: SAMI3 -> RAIJU Conservative bin_bvolcc Long1800
+### Latest Completed Gate: SAMI3 -> RAIJU bin_bvolcc tiote Long1800
+
+The current SAMI3 -> RAIJU/GAMERA scalar-moment gate is complete for the
+tiote-enabled traced TubeShell bVol-binned mapping path:
+
+```text
+jobid = 7673207
+jobname = sami3_bvcc_tiote
+state = COMPLETED
+exit = 0:0
+elapsed = 00:39:24
+node = qhcn075
+batch MaxRSS = 1182664K
+archive = logs/sami3_tubeshell_bin_bvolcc_tiote_long1800_20260525/
+doc = docs/MAGE1.25_notes/SAMI3_RAIJU_TUBESHELL_BIN_BVOLCC_TIOTE_LONG1800_RESULT_20260525.md
+```
+
+Runtime settings:
+
+```text
+mapping product = ds_over_B + voltron_tubeshell_l_mlt + lon0 + bin_bvol_cc
+runtime mapping = weights
+alphaDavg = 0.05
+alphaPavg = 0.0
+alphaPstd = 0.0
+alphaDstd = 0.0
+alphaTiote = 1.0
+moments/useStateTioteForIngest = T
+```
+
+Validated runtime facts:
+
+```text
+prototype reached Fin
+prototype_raiju_writes = 362
+prototype_gamera_writes = 364
+fatal marker matches = 0
+slurm_run_complete = 1
+Pavg/Davg/Pstd/Dstd final formula checks = exact
+checked RAIJU/GAMERA restart physics arrays contain no non-finite values
+```
+
+Dedicated tiote hook validation also passed:
+
+```text
+alpha values = [0.0, 0.05, 0.0, 0.0, 1.0]
+runtime tiote min/max = 0.873951375484467 / 4.0
+runtime valid mask counts Pavg/Davg/Pstd/Dstd/tiote = 5940 each
+product tiote_mask count = 5940
+product tiote masked min/max = 0.8739513754844666 / 1.0004502534866333
+```
+
+Direct final coupler inputs relative to the density-only run:
+
+```text
+State/Pavg_in max_abs = 0.0
+State/Davg_in max_abs = 0.0
+```
+
+Downstream response relative to the density-only run:
+
+```text
+final State/Density mean_abs = 0.045968829418640946
+final State/Pressure mean_abs = 6.635173480042011e-05
+final GAMERA/Gas0 mean_abs = 0.0036967272713272883
+```
+
+Next work order after this gate:
+
+```text
+1. Keep pressure disabled until Pavg production semantics are settled.
+2. Add output/validator support for State%tiote or equivalent direct tiote
+   diagnostics, since current evidence is log/product based.
+3. Start replacing lon0 cell-center binning with a true traced-tube
+   flux-volume map.
+```
+
+### Previous Completed Gate: SAMI3 -> RAIJU Conservative bin_bvolcc Long1800
 
 The current SAMI3 -> RAIJU/GAMERA scalar-moment gate is complete for the
 conservative traced TubeShell bVol-binned mapping path:
