@@ -93,14 +93,14 @@ The `hrmax=.020000` setting is needed for this short smoke to produce
 
 ## Completed Smoke Run
 
-Final validated job:
+Latest validated job:
 
 ```text
-jobid = 7667116
+jobid = 7667186
 jobname = sami3_vrtd
 state = COMPLETED
 exit = 0:0
-elapsed = 00:04:40
+elapsed = 00:04:38
 node = qhcn012
 run dir = /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_runtime_direct_phi_20260525_0000
 ```
@@ -113,9 +113,10 @@ WACCMX_SAMI3_PHI_STOP_AFTER_DONE=1
 ```
 
 They are runtime/finalize controls, not production physics.  After SAMI3 has
-already consumed the final direct-phi frame, later `potpphi` calls return a zero
-potential immediately so the receiver can finalize.  Voltron also exits after
-sending the direct done tag, so the Slurm job can complete cleanly.
+already consumed the final direct-phi frame, later `potpphi` calls return the
+cached last phi immediately so the receiver can finalize without reverting to a
+zero-potential field.  Voltron also exits after sending the direct done tag, so
+the Slurm job can complete cleanly.
 
 ## Runtime Markers
 
@@ -136,7 +137,7 @@ SAMI3 direct phi port ready
 SAMI3 direct phi sender connected
 WACCMX_PHI_RECV 0 2 hour=0.0 valid_until=1.3888889E-03 min=-36.93061 max=31.48382
 WACCMX_PHI_RECV 1 2 hour=1.3888889E-03 valid_until=1.0000000E+30 min=-37.68302 max=31.89119
-SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning zero phi
+SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning cached phi
 MASTER: All Done!
 WACCMX online done signal received: 1
 SAMI3 direct phi done signal received: 2
@@ -221,6 +222,7 @@ cadence policy:
 
 ```text
 1. Decide when SAMI3 should solve potential after a final available REMIX frame.
-2. Keep direct done/finalize clean without forcing zero-phi after the final frame.
+2. Keep direct done/finalize clean while holding the latest valid phi after the
+   final available frame.
 3. Run a multi-cycle REMIX/Voltron direct-phi test with more than two frames.
 ```

@@ -1,22 +1,22 @@
 {
   "checks": [
     {
-      "detail": "logs/sami3_intelmpi_voltron_runtime_direct_phi_20260525/sami3_online_receiver.out",
+      "detail": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_runtime_direct_phi_20260525_0000/sami3_online_receiver.out",
       "name": "receiver_log_exists",
       "ok": true
     },
     {
-      "detail": "logs/sami3_intelmpi_voltron_runtime_direct_phi_20260525/voltron_runtime_direct.out",
+      "detail": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_runtime_direct_phi_20260525_0000/voltron_runtime_direct.out",
       "name": "phi_sender_log_exists",
       "ok": true
     },
     {
-      "detail": "logs/sami3_intelmpi_voltron_runtime_direct_phi_20260525/neutral_sender.out",
+      "detail": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_runtime_direct_phi_20260525_0000/neutral_sender.out",
       "name": "neutral_sender_log_exists",
       "ok": true
     },
     {
-      "detail": "logs/sami3_intelmpi_voltron_runtime_direct_phi_20260525/recv_qc_compare.txt",
+      "detail": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_runtime_direct_phi_20260525_0000/recv_qc_compare.txt",
       "name": "recv_qc_compare_exists",
       "ok": true
     },

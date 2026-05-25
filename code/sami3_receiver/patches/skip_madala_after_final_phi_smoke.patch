@@ -9,6 +9,8 @@
 @@
      real :: phi_weimer(nnx,nny)
 +    logical :: skip_madala_after_final
++    real, save :: last_phi(nnx,nny)
++    logical, save :: last_phi_valid = .false.
 @@
      data idpinter / 1 /
      data ipcrit   / 1 /
@@ -16,12 +18,17 @@
 +    skip_madala_after_final = waccmx_phi_final_frame_seen() .and. &
 +        waccmx_phi_skip_madala_after_final_enabled()
 +    if (skip_madala_after_final) then
-+        print *, 'SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning zero phi'
-+        do j = 1,nny
-+            do i = 1,nnx
-+                phi(i,j) = 0.
++        if (last_phi_valid) then
++            phi = last_phi
++            print *, 'SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning cached phi'
++        else
++            print *, 'SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning zero phi'
++            do j = 1,nny
++                do i = 1,nnx
++                    phi(i,j) = 0.
++                enddo
 +            enddo
-+        enddo
++        endif
 +        return
 +    endif
 @@
@@ -37,3 +44,12 @@
          else
              do j = 1,nnyt
                  do i = 1,nnx+1
+@@
+             phi(i,jj)   = dphi(i,j) + phicorot + phivs(i,jj) + &
+             phi_weimer(i,jj)
+         enddo
+     enddo
++
++    last_phi = phi
++    last_phi_valid = .true.
+ 
