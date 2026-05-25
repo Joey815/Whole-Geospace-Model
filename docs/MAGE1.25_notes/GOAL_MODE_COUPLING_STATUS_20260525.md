@@ -20,9 +20,74 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-25 20:04:00 CST.
+Status refreshed: 2026-05-25 20:25:20 CST.
 
-### Latest Completed Gate: SAMI3 -> RAIJU bVol-overlap Conservative Long1800
+### Latest Completed Gate: SAMI3 -> RAIJU Flux-Volume Geometry Audit
+
+The bVol-overlap mapping is now independently auditable from its own HDF5
+artifact:
+
+```text
+archive = logs/sami3_flux_volume_geometry_audit_20260525/
+doc = docs/MAGE1.25_notes/SAMI3_RAIJU_FLUX_VOLUME_GEOMETRY_AUDIT_20260525.md
+mapping product = ds_over_B + voltron_tubeshell_l_mlt + lon0 + bin_bvol_overlap
+schema_version = 6
+```
+
+The schema v6 weight writer adds float64 TubeShell corner geometry and RAIJU
+target bin edges:
+
+```text
+/intermediate/lon0_corner_rad
+/intermediate/lonc_corner_rad
+/intermediate/lat0_corner_rad
+/intermediate/latc_corner_rad
+/dst/L_edge
+/dst/MLT_edge_deg_unwrapped
+/dst/MLT_edge_deg
+```
+
+The runtime sparse map is unchanged from the previous bVol-overlap gate:
+
+```text
+map/weight max_abs_diff = 0
+intermediate/voltron_to_raiju/weight max_abs_diff = 0
+quality/coverage_count = identical
+```
+
+Independent audit result:
+
+```text
+stored_count = 39853
+recomputed_count = 39853
+missing_stored_terms = 0
+extra_recomputed_terms = 0
+max_abs_diff = 1.4889254773553517e-08
+target_positive_fraction = 0.9574468085106383
+source_mapped_bvol_fraction_of_valid = 0.00034417894730482345
+```
+
+Interpretation:
+
+```text
+The current bVol-overlap mapping is reproducible and suitable as the current
+diagnostic/conservative prototype.  It is still not production physics: the
+next geometry task is target-domain flux-volume closure plus true traced-tube
+flux-volume quadrature, not further tuning of the approximate corner-footprint
+overlap weights.
+```
+
+Next work order after this gate:
+
+```text
+1. Define the target-domain volume accounting contract for SAMI3->RAIJU.
+2. Implement traced-tube flux-volume quadrature on top of the schema v6
+   geometry/audit infrastructure.
+3. Keep the conservative density-only runtime branch on bVol-overlap until
+   the quadrature path passes the same audit and runtime gates.
+```
+
+### Previous Completed Gate: SAMI3 -> RAIJU bVol-overlap Conservative Long1800
 
 The 1800 s conservative bVol-overlap runtime gate is complete:
 

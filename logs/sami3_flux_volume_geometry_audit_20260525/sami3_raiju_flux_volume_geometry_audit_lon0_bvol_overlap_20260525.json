@@ -1,0 +1,183 @@
+{
+  "mapped_fraction_stats": {
+    "finite_count": 15040,
+    "max": 1.0000000000000004,
+    "mean": 0.9837498883031306,
+    "median": 1.0,
+    "min": 0.5417668362199105,
+    "nonfinite_count": 0,
+    "p01": 0.5583825234645026,
+    "p05": 0.9895550305473576,
+    "p95": 1.0,
+    "p99": 1.0,
+    "shape": [
+      15040
+    ],
+    "total_count": 15040
+  },
+  "output_hdf5": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_raiju_flux_volume_geometry_audit_lon0_bvol_overlap_20260525.h5",
+  "product": "sami3_raiju_flux_volume_geometry_audit",
+  "skipped": {
+    "bad_bvol": 164,
+    "bad_geometry": 0,
+    "large_footprint": 1392,
+    "no_terms": 0,
+    "outside_target": 17244,
+    "used": 15040
+  },
+  "source_l_span_stats_used": {
+    "finite_count": 15040,
+    "max": 4.1430025303357425,
+    "mean": 0.8391085669490577,
+    "median": 0.4366807851408345,
+    "min": 0.0360040721018422,
+    "nonfinite_count": 0,
+    "p01": 0.03600407210184242,
+    "p05": 0.040621153642344386,
+    "p95": 3.239489082515441,
+    "p99": 4.127381032848412,
+    "shape": [
+      15040
+    ],
+    "total_count": 15040
+  },
+  "source_lon_span_stats_used": {
+    "finite_count": 15040,
+    "max": 2.0000000000001137,
+    "mean": 2.000000000000004,
+    "median": 2.0,
+    "min": 1.9999999999999432,
+    "nonfinite_count": 0,
+    "p01": 1.9999999999999432,
+    "p05": 2.0,
+    "p95": 2.000000000000057,
+    "p99": 2.000000000000057,
+    "shape": [
+      15040
+    ],
+    "total_count": 15040
+  },
+  "source_mapped_bvol_fraction_of_valid": 0.00034417894730482345,
+  "source_mapped_bvol_sum": 780.7575498798901,
+  "source_shape_j_i": [
+    188,
+    180
+  ],
+  "source_status_counts": {
+    "0": 15040,
+    "1": 164,
+    "2": 0,
+    "3": 1392,
+    "4": 17244,
+    "5": 0
+  },
+  "source_status_legend": {
+    "0": "used",
+    "1": "bad_bvol",
+    "2": "bad_geometry",
+    "3": "large_footprint",
+    "4": "outside_target",
+    "5": "no_terms"
+  },
+  "source_terms_stats_used": {
+    "finite_count": 15040,
+    "max": 39.0,
+    "mean": 2.6498005319148934,
+    "median": 2.0,
+    "min": 1.0,
+    "nonfinite_count": 0,
+    "p01": 1.0,
+    "p05": 1.0,
+    "p95": 4.0,
+    "p99": 13.0,
+    "shape": [
+      15040
+    ],
+    "total_count": 15040
+  },
+  "source_valid_bvol_sum": 2268463.9952379456,
+  "target_bvol_cc_stats_positive": {
+    "finite_count": 8460,
+    "max": 32.672893056940694,
+    "mean": 0.9921398059024972,
+    "median": 0.004853129884558216,
+    "min": 0.00016075602010707862,
+    "nonfinite_count": 0,
+    "p01": 0.0001607560201070787,
+    "p05": 0.00020096151062467025,
+    "p95": 4.176028238992841,
+    "p99": 29.759898706838364,
+    "shape": [
+      8460
+    ],
+    "total_count": 8460
+  },
+  "target_normalized_sum_stats_positive": {
+    "finite_count": 8100,
+    "max": 1.0000000000000007,
+    "mean": 1.0,
+    "median": 1.0,
+    "min": 0.9999999999999993,
+    "nonfinite_count": 0,
+    "p01": 0.9999999999999998,
+    "p05": 0.9999999999999998,
+    "p95": 1.0000000000000002,
+    "p99": 1.0000000000000002,
+    "shape": [
+      8100
+    ],
+    "total_count": 8100
+  },
+  "target_positive_count": 8100,
+  "target_positive_fraction": 0.9574468085106383,
+  "target_raw_bvol_sum_stats_positive": {
+    "finite_count": 8100,
+    "max": 3.859789814574195,
+    "mean": 0.09638982097282596,
+    "median": 0.0010629626799688562,
+    "min": 0.00019097899791923245,
+    "nonfinite_count": 0,
+    "p01": 0.0001915673181413811,
+    "p05": 0.0002283552169881914,
+    "p95": 0.514986185878678,
+    "p99": 1.9234190514037104,
+    "shape": [
+      8100
+    ],
+    "total_count": 8100
+  },
+  "target_raw_to_raiju_bvol_ratio_stats_positive": {
+    "finite_count": 8100,
+    "max": 3.78549415244694,
+    "mean": 0.8533872887822489,
+    "median": 0.11244339677746451,
+    "min": 0.01639128323644509,
+    "nonfinite_count": 0,
+    "p01": 0.017962979717485287,
+    "p05": 0.02141693598718251,
+    "p95": 1.891740786414295,
+    "p99": 3.766495333939528,
+    "shape": [
+      8100
+    ],
+    "total_count": 8100
+  },
+  "target_shape_j_i": [
+    188,
+    45
+  ],
+  "target_zero_count": 360,
+  "voltron_bvol_floor": 0.0,
+  "voltron_overlap_max_l_span": null,
+  "voltron_overlap_max_lon_span": null,
+  "voltron_tube_longitude": "lon0",
+  "weight_compare": {
+    "extra_recomputed_terms": 0,
+    "max_abs_diff": 1.4889254773553517e-08,
+    "mean_abs_diff": 2.8356879694924742e-09,
+    "missing_stored_terms": 0,
+    "recomputed_count": 39853,
+    "stored_count": 39853
+  },
+  "weight_file": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_voltron_tubeshell_l_mlt_lon0_bin_bvol_overlap_geomdiag_20260525.h5"
+}

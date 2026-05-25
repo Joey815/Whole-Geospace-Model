@@ -1030,28 +1030,32 @@ def write_intermediate_group(handle, intermediate):
         return
     group = handle.create_group("intermediate")
     group.attrs["description"] = "Voltron TubeShell intermediate grid and sparse submaps."
-    create_dataset(group, "L", intermediate["target_l"].astype(np.float32), "Re", "Voltron ShellGrid cell-center L by i index.")
-    create_dataset(group, "MLT_deg", intermediate["target_lon_deg"].astype(np.float32), "degrees", "Voltron ShellGrid cell-center periodic MLT by j index.")
-    create_dataset(group, "bvol_corner", intermediate["bvol"].astype(np.float32), "Rp/nT", "Voltron TubeShell corner bVol.")
-    create_dataset(group, "bvol_cc", intermediate["bvol_cc"].astype(np.float32), "Rp/nT", "Voltron TubeShell cell-centered bVol.")
+    create_dataset(group, "L", intermediate["target_l"].astype(np.float64), "Re", "Voltron ShellGrid cell-center L by i index.")
+    create_dataset(group, "MLT_deg", intermediate["target_lon_deg"].astype(np.float64), "degrees", "Voltron ShellGrid cell-center periodic MLT by j index.")
+    create_dataset(group, "bvol_corner", intermediate["bvol"].astype(np.float64), "Rp/nT", "Voltron TubeShell corner bVol.")
+    create_dataset(group, "bvol_cc", intermediate["bvol_cc"].astype(np.float64), "Rp/nT", "Voltron TubeShell cell-centered bVol.")
     create_dataset(group, "topo_corner", intermediate["topo"].astype(np.int16), "enum", "Voltron TubeShell corner topology; TUBE_CLOSED=2.")
     create_dataset(group, "closed_cell_mask", intermediate["closed_cell_mask"].astype(np.uint8), "logical", "Voltron cell mask, 1 where all four TubeShell topo corners are TUBE_CLOSED.")
-    create_dataset(group, "Lb_corner", intermediate["Lb"].astype(np.float32), "Rp", "Voltron TubeShell corner Lb.")
-    create_dataset(group, "Lb_cc", intermediate["Lb_cc"].astype(np.float32), "Rp", "Voltron TubeShell cell-centered Lb.")
-    create_dataset(group, "lon0_cc_deg", intermediate["lon0_cc_deg"].astype(np.float32), "degrees", "Voltron TubeShell cell-centered lon0.")
-    create_dataset(group, "lonc_cc_deg", intermediate["lonc_cc_deg"].astype(np.float32), "degrees", "Voltron TubeShell cell-centered lonc.")
-    create_dataset(group, "lat0_cc_rad", intermediate["lat0_cc"].astype(np.float32), "radian", "Voltron TubeShell cell-centered lat0.")
-    create_dataset(group, "latc_cc_rad", intermediate["latc_cc"].astype(np.float32), "radian", "Voltron TubeShell cell-centered latc.")
-    create_dataset(group, "bmin_corner", intermediate["bmin"].astype(np.float32), "nT", "Voltron TubeShell corner bmin.")
-    create_dataset(group, "bmin_cc", intermediate["bmin_cc"].astype(np.float32), "nT", "Voltron TubeShell cell-centered bmin.")
-    create_dataset(group, "nTrc_corner", intermediate["nTrc"].astype(np.float32), "count", "Voltron TubeShell corner nTrc.")
-    create_dataset(group, "nTrc_cc", intermediate["nTrc_cc"].astype(np.float32), "count", "Voltron TubeShell cell-centered nTrc.")
+    create_dataset(group, "Lb_corner", intermediate["Lb"].astype(np.float64), "Rp", "Voltron TubeShell corner Lb.")
+    create_dataset(group, "Lb_cc", intermediate["Lb_cc"].astype(np.float64), "Rp", "Voltron TubeShell cell-centered Lb.")
+    create_dataset(group, "lon0_cc_deg", intermediate["lon0_cc_deg"].astype(np.float64), "degrees", "Voltron TubeShell cell-centered lon0.")
+    create_dataset(group, "lonc_cc_deg", intermediate["lonc_cc_deg"].astype(np.float64), "degrees", "Voltron TubeShell cell-centered lonc.")
+    create_dataset(group, "lon0_corner_rad", intermediate["lon0"].astype(np.float64), "radian", "Voltron TubeShell corner lon0.")
+    create_dataset(group, "lonc_corner_rad", intermediate["lonc"].astype(np.float64), "radian", "Voltron TubeShell corner lonc.")
+    create_dataset(group, "lat0_corner_rad", intermediate["lat0"].astype(np.float64), "radian", "Voltron TubeShell corner lat0.")
+    create_dataset(group, "latc_corner_rad", intermediate["latc"].astype(np.float64), "radian", "Voltron TubeShell corner latc.")
+    create_dataset(group, "lat0_cc_rad", intermediate["lat0_cc"].astype(np.float64), "radian", "Voltron TubeShell cell-centered lat0.")
+    create_dataset(group, "latc_cc_rad", intermediate["latc_cc"].astype(np.float64), "radian", "Voltron TubeShell cell-centered latc.")
+    create_dataset(group, "bmin_corner", intermediate["bmin"].astype(np.float64), "nT", "Voltron TubeShell corner bmin.")
+    create_dataset(group, "bmin_cc", intermediate["bmin_cc"].astype(np.float64), "nT", "Voltron TubeShell cell-centered bmin.")
+    create_dataset(group, "nTrc_corner", intermediate["nTrc"].astype(np.float64), "count", "Voltron TubeShell corner nTrc.")
+    create_dataset(group, "nTrc_cc", intermediate["nTrc_cc"].astype(np.float64), "count", "Voltron TubeShell cell-centered nTrc.")
     for optional_name, units, description in (
         ("wMAG", "normalized", "Voltron TubeShell corner wMAG."),
         ("Tb", "s", "Voltron TubeShell corner Tb."),
     ):
         if intermediate.get(optional_name) is not None:
-            create_dataset(group, optional_name, intermediate[optional_name].astype(np.float32), units, description)
+            create_dataset(group, optional_name, intermediate[optional_name].astype(np.float64), units, description)
     if intermediate.get("sami3_to_voltron") is not None:
         sub = group.create_group("sami3_to_voltron")
         item = intermediate["sami3_to_voltron"]
@@ -1132,40 +1136,55 @@ def write_weight_file(path, metadata, source_grid, target_grid, target_geometry,
         create_dataset(src, "nlt_index", np.arange(metadata["source_shape_nf_nlt"][1], dtype=np.int32), "index", "SAMI3 nlt index.")
 
         dst = handle.create_group("dst")
-        create_dataset(dst, "L", target_grid["target_l"].astype(np.float32), "Re", "RAIJU target L by i index.")
+        create_dataset(dst, "L", target_grid["target_l"].astype(np.float64), "Re", "RAIJU target L by i index.")
+        create_dataset(dst, "L_edge", target_grid["target_l_edge"].astype(np.float64), "Re", "RAIJU target L-bin edges by i node index.")
         create_dataset(
             dst,
             "MLT_deg",
-            target_grid["target_lon_deg"].astype(np.float32),
+            target_grid["target_lon_deg"].astype(np.float64),
             "degrees",
             "RAIJU target periodic longitude/MLT by j index.",
+        )
+        create_dataset(
+            dst,
+            "MLT_edge_deg_unwrapped",
+            target_grid["target_lon_edge_deg_unwrapped"].astype(np.float64),
+            "degrees",
+            "RAIJU target unwrapped periodic longitude/MLT edges by j node index.",
+        )
+        create_dataset(
+            dst,
+            "MLT_edge_deg",
+            target_grid["target_lon_edge_deg"].astype(np.float64),
+            "degrees",
+            "RAIJU target periodic longitude/MLT edges modulo 360 degrees by j node index.",
         )
         create_dataset(dst, "shell_index", np.arange(metadata["target_shape_ni_nj"][0], dtype=np.int32), "index", "RAIJU i/shell index.")
         create_dataset(dst, "mlt_index", np.arange(metadata["target_shape_ni_nj"][1], dtype=np.int32), "index", "RAIJU j/MLT index.")
         if target_geometry["bvol"] is not None:
-            create_dataset(dst, "bvol_corner", target_geometry["bvol"].astype(np.float32), "Rx/nT", "RAIJU target corner flux-tube volume from raiCpl%bvol.")
+            create_dataset(dst, "bvol_corner", target_geometry["bvol"].astype(np.float64), "Rx/nT", "RAIJU target corner flux-tube volume from raiCpl%bvol.")
         if target_geometry["bvol_cc"] is not None:
-            create_dataset(dst, "bvol_cc", target_geometry["bvol_cc"].astype(np.float32), "Rx/nT", "RAIJU target cell-centered flux-tube volume from raiCpl%bvol_cc.")
+            create_dataset(dst, "bvol_cc", target_geometry["bvol_cc"].astype(np.float64), "Rx/nT", "RAIJU target cell-centered flux-tube volume from raiCpl%bvol_cc.")
         if target_geometry["topo"] is not None:
             create_dataset(dst, "topo_corner", target_geometry["topo"].astype(np.int16), "0=open,1=closed", "RAIJU target corner topology from raiCpl%topo.")
         if target_geometry["topo_mask"] is not None:
             create_dataset(dst, "topo_mask", target_geometry["topo_mask"].astype(np.uint8), "logical", "RAIJU target topology data mask from raiCpl restart.")
         if target_geometry["bmin"] is not None:
-            create_dataset(dst, "Bmin_corner", target_geometry["bmin"].astype(np.float32), "nT", "RAIJU target corner Bmin vector from raiCpl%Bmin.")
+            create_dataset(dst, "Bmin_corner", target_geometry["bmin"].astype(np.float64), "nT", "RAIJU target corner Bmin vector from raiCpl%Bmin.")
         if target_geometry["bmin_mag"] is not None:
-            create_dataset(dst, "Bmin_mag_corner", target_geometry["bmin_mag"].astype(np.float32), "nT", "Magnitude of RAIJU target corner Bmin vector.")
+            create_dataset(dst, "Bmin_mag_corner", target_geometry["bmin_mag"].astype(np.float64), "nT", "Magnitude of RAIJU target corner Bmin vector.")
         if target_geometry["bmin_mag_cc"] is not None:
-            create_dataset(dst, "Bmin_mag_cc", target_geometry["bmin_mag_cc"].astype(np.float32), "nT", "Cell-centered average of Bmin magnitude.")
+            create_dataset(dst, "Bmin_mag_cc", target_geometry["bmin_mag_cc"].astype(np.float64), "nT", "Cell-centered average of Bmin magnitude.")
         if target_geometry["xyzMincc"] is not None:
-            create_dataset(dst, "xyzMincc", target_geometry["xyzMincc"].astype(np.float32), "Re", "RAIJU target cell-centered minimum-B location.")
+            create_dataset(dst, "xyzMincc", target_geometry["xyzMincc"].astype(np.float64), "Re", "RAIJU target cell-centered minimum-B location.")
         if target_geometry["thcon"] is not None:
-            create_dataset(dst, "thcon_corner", target_geometry["thcon"].astype(np.float32), "rad", "RAIJU target corner conjugate theta.")
+            create_dataset(dst, "thcon_corner", target_geometry["thcon"].astype(np.float64), "rad", "RAIJU target corner conjugate theta.")
         if target_geometry["phcon"] is not None:
-            create_dataset(dst, "phcon_corner", target_geometry["phcon"].astype(np.float32), "rad", "RAIJU target corner conjugate phi.")
+            create_dataset(dst, "phcon_corner", target_geometry["phcon"].astype(np.float64), "rad", "RAIJU target corner conjugate phi.")
         if target_geometry["vaFrac"] is not None:
-            create_dataset(dst, "vaFrac_corner", target_geometry["vaFrac"].astype(np.float32), "normalized", "RAIJU target corner Alfven-speed fraction.")
+            create_dataset(dst, "vaFrac_corner", target_geometry["vaFrac"].astype(np.float64), "normalized", "RAIJU target corner Alfven-speed fraction.")
         if target_geometry["Tb"] is not None:
-            create_dataset(dst, "Tb", target_geometry["Tb"].astype(np.float32), "unknown", "RAIJU target cell-centered Tb diagnostic from raiCpl.")
+            create_dataset(dst, "Tb", target_geometry["Tb"].astype(np.float64), "unknown", "RAIJU target cell-centered Tb diagnostic from raiCpl.")
 
         mapping = handle.create_group("map")
         create_dataset(mapping, "dst_index", sparse["dst_index"], "index", "Sparse destination runtime indices; columns are j,i.")
@@ -1314,7 +1333,7 @@ def main():
             schema_version = 4
         elif args.voltron_compose_weight_mode == "bin_bvol_overlap":
             physical_note += " with Voltron TubeShell bVol_cc target-cell L/longitude overlap binning"
-            schema_version = 5
+            schema_version = 6
         else:
             schema_version = 3
         voltron_template = os.path.abspath(args.voltron_template)
