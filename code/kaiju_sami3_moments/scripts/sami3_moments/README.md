@@ -369,11 +369,18 @@ cell-centered TubeShell `bVol` as a prototype volume weight:
 --voltron-compose-weight-mode interp    # default shell-grid interpolation only
 --voltron-compose-weight-mode bvol_cc   # multiply interpolation terms by bVol_cc
 --voltron-compose-weight-mode bin_bvol_cc
+--voltron-compose-weight-mode bin_bvol_overlap
 ```
 
 `bin_bvol_cc` bins Voltron TubeShell cell centers into the coarser RAIJU target
-cells and normalizes by the summed cell-centered `bVol`.  The bVol-aware modes
-write `schema_version=4`.  They are still prototypes; they do not yet derive a
+cells and normalizes by the summed cell-centered `bVol`.  `bin_bvol_overlap`
+uses TubeShell cell-corner `Lb` and `lon0/lonc` to estimate each source-cell
+footprint, then distributes `bVol_cc` over every overlapped RAIJU L/longitude
+bin before per-target normalization.  The overlap mode applies a geometry QC
+gate by default (`--voltron-overlap-max-l-span 20`,
+`--voltron-overlap-max-lon-span 10`) so cells with pathological corner
+footprints do not dominate unrelated target bins.  `bin_bvol_overlap` writes
+`schema_version=5`.  These modes remain prototypes; they do not yet derive a
 full SAMI3 cell-volume-to-RAIJU flux-tube quadrature.
 
 When a runtime layout is requested, the product also writes explicit

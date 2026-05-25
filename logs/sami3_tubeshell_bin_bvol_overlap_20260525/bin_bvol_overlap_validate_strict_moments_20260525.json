@@ -1,0 +1,300 @@
+{
+  "checks": [
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_voltron_tubeshell_l_mlt_lon0_bin_bvol_overlap_20260525.h5",
+      "name": "product_exists",
+      "ok": true
+    },
+    {
+      "detail": "RaiCplMomentsOnly",
+      "name": "raicpl_group_exists",
+      "ok": true
+    },
+    {
+      "detail": "MappingQuality",
+      "name": "mapping_quality_group_exists",
+      "ok": true
+    },
+    {
+      "detail": "actual=weights expected=weights",
+      "name": "mapping_mode",
+      "ok": true
+    },
+    {
+      "detail": "Pavg",
+      "name": "Pavg_exists",
+      "ok": true
+    },
+    {
+      "detail": "Pavg_mask",
+      "name": "Pavg_mask_exists",
+      "ok": true
+    },
+    {
+      "detail": "nonfinite=0",
+      "name": "Pavg_finite",
+      "ok": true
+    },
+    {
+      "detail": "(2, 188, 45) vs (2, 188, 45)",
+      "name": "Pavg_mask_shape",
+      "ok": true
+    },
+    {
+      "detail": "(2, 188, 45) expected suffix (188, 45)",
+      "name": "Pavg_runtime_shape",
+      "ok": true
+    },
+    {
+      "detail": "masked_min=3.3509713830426335e-05",
+      "name": "Pavg_masked_nonnegative",
+      "ok": true
+    },
+    {
+      "detail": "Davg",
+      "name": "Davg_exists",
+      "ok": true
+    },
+    {
+      "detail": "Davg_mask",
+      "name": "Davg_mask_exists",
+      "ok": true
+    },
+    {
+      "detail": "nonfinite=0",
+      "name": "Davg_finite",
+      "ok": true
+    },
+    {
+      "detail": "(2, 188, 45) vs (2, 188, 45)",
+      "name": "Davg_mask_shape",
+      "ok": true
+    },
+    {
+      "detail": "(2, 188, 45) expected suffix (188, 45)",
+      "name": "Davg_runtime_shape",
+      "ok": true
+    },
+    {
+      "detail": "masked_min=3.418818950653076",
+      "name": "Davg_masked_nonnegative",
+      "ok": true
+    },
+    {
+      "detail": "Pstd",
+      "name": "Pstd_exists",
+      "ok": true
+    },
+    {
+      "detail": "Pstd_mask",
+      "name": "Pstd_mask_exists",
+      "ok": true
+    },
+    {
+      "detail": "nonfinite=0",
+      "name": "Pstd_finite",
+      "ok": true
+    },
+    {
+      "detail": "(2, 188, 45) vs (2, 188, 45)",
+      "name": "Pstd_mask_shape",
+      "ok": true
+    },
+    {
+      "detail": "(2, 188, 45) expected suffix (188, 45)",
+      "name": "Pstd_runtime_shape",
+      "ok": true
+    },
+    {
+      "detail": "masked_min=0.0026794997975230217",
+      "name": "Pstd_masked_nonnegative",
+      "ok": true
+    },
+    {
+      "detail": "Dstd",
+      "name": "Dstd_exists",
+      "ok": true
+    },
+    {
+      "detail": "Dstd_mask",
+      "name": "Dstd_mask_exists",
+      "ok": true
+    },
+    {
+      "detail": "nonfinite=0",
+      "name": "Dstd_finite",
+      "ok": true
+    },
+    {
+      "detail": "(2, 188, 45) vs (2, 188, 45)",
+      "name": "Dstd_mask_shape",
+      "ok": true
+    },
+    {
+      "detail": "(2, 188, 45) expected suffix (188, 45)",
+      "name": "Dstd_runtime_shape",
+      "ok": true
+    },
+    {
+      "detail": "masked_min=157.95993041992188",
+      "name": "Dstd_masked_nonnegative",
+      "ok": true
+    },
+    {
+      "detail": "tiote",
+      "name": "tiote_exists",
+      "ok": true
+    },
+    {
+      "detail": "tiote_mask",
+      "name": "tiote_mask_exists",
+      "ok": true
+    },
+    {
+      "detail": "nonfinite=0",
+      "name": "tiote_finite",
+      "ok": true
+    },
+    {
+      "detail": "(188, 45) vs (188, 45)",
+      "name": "tiote_mask_shape",
+      "ok": true
+    },
+    {
+      "detail": "masked_min=0.8749623894691467 masked_max=1.0004475116729736 allowed=[0.1,4.0]",
+      "name": "tiote_masked_range",
+      "ok": true
+    },
+    {
+      "detail": "fraction=1.0 min=1.0",
+      "name": "finite_all_fraction",
+      "ok": true
+    },
+    {
+      "detail": "fraction=0.9574468085106383 min=0.95",
+      "name": "runtime_valid_fraction",
+      "ok": true
+    },
+    {
+      "detail": "mask_shape=(2, 188, 45) valid_shape=(188, 45)",
+      "name": "Pavg_mask_matches_runtime_valid",
+      "ok": true
+    },
+    {
+      "detail": "mask_shape=(2, 188, 45) valid_shape=(188, 45)",
+      "name": "Davg_mask_matches_runtime_valid",
+      "ok": true
+    },
+    {
+      "detail": "mask_shape=(2, 188, 45) valid_shape=(188, 45)",
+      "name": "Pstd_mask_matches_runtime_valid",
+      "ok": true
+    },
+    {
+      "detail": "mask_shape=(2, 188, 45) valid_shape=(188, 45)",
+      "name": "Dstd_mask_matches_runtime_valid",
+      "ok": true
+    },
+    {
+      "detail": "mask_shape=(188, 45) valid_shape=(188, 45)",
+      "name": "tiote_mask_matches_runtime_valid",
+      "ok": true
+    },
+    {
+      "detail": "fraction=0.0 max=0.0",
+      "name": "extrapolated_fraction",
+      "ok": true
+    },
+    {
+      "detail": "min=0",
+      "name": "coverage_count_nonnegative",
+      "ok": true
+    },
+    {
+      "detail": "valid_min=4",
+      "name": "coverage_valid_positive",
+      "ok": true
+    },
+    {
+      "detail": "max_dev=1.1920928955078125e-07 tol=1e-05",
+      "name": "weight_sum_valid_near_one",
+      "ok": true
+    },
+    {
+      "detail": "nonfinite=0",
+      "name": "source_l_finite",
+      "ok": true
+    },
+    {
+      "detail": "min=1.0141534805297852 max=1058.5191650390625",
+      "name": "source_l_positive",
+      "ok": true
+    },
+    {
+      "detail": "min=1.0141534805297852 max=1058.5191650390625",
+      "name": "source_l_monotonic",
+      "ok": true
+    },
+    {
+      "detail": "nonfinite=0",
+      "name": "target_l_finite",
+      "ok": true
+    },
+    {
+      "detail": "min=1.5087870359420776 max=30.111604690551758",
+      "name": "target_l_positive",
+      "ok": true
+    },
+    {
+      "detail": "nonfinite=0",
+      "name": "source_mlt_deg_finite",
+      "ok": true
+    },
+    {
+      "detail": "min=1.8750001192092896 max=358.1249694824219",
+      "name": "source_mlt_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=1.8750001192092896 max=358.1249694824219",
+      "name": "source_mlt_deg_monotonic",
+      "ok": true
+    },
+    {
+      "detail": "nonfinite=0",
+      "name": "target_mlt_deg_finite",
+      "ok": true
+    },
+    {
+      "detail": "min=1.0 max=359.0",
+      "name": "target_mlt_deg_range",
+      "ok": true
+    }
+  ],
+  "meta": {
+    "bulk_channel": 0,
+    "coverage_count_max": 12,
+    "coverage_count_min": 0,
+    "extrapolated_fraction": 0.0,
+    "finite_all_fraction": 1.0,
+    "mapping_attrs": {
+      "mapping_mode": "weights",
+      "runtime_layout": "j,i for 2-D mapping-quality masks",
+      "runtime_mask_policy": "coverage_closed_no_extrap",
+      "weight_file": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_voltron_tubeshell_l_mlt_lon0_bin_bvol_overlap_20260525.h5",
+      "weight_file_mapping_mode": "voltron_tubeshell_l_mlt",
+      "weight_file_physical_validity": "prototype",
+      "weight_file_voltron_compose_weight_mode": "bin_bvol_overlap"
+    },
+    "product_h5": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_voltron_raiju_diag_stubpayload_nfluid1_ds_over_B_voltron_tubeshell_l_mlt_lon0_bin_bvol_overlap_20260525.h5",
+    "root_attrs": {
+      "note": "Field-name and unit diagnostic product only; a production restart requires ShellGrid, topology, magnetic geometry, potentials, masks, and timing.",
+      "product": "sami3_voltron_raiju_moments_diagnostic",
+      "schema_version": "1",
+      "source_moments_h5": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_moments_stubpayload_ds_over_B_20260524.h5"
+    },
+    "runtime_valid_fraction": 0.9574468085106383,
+    "weight_sum_valid_max_deviation": 1.1920928955078125e-07
+  },
+  "ok": true
+}

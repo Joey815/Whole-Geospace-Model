@@ -83,7 +83,7 @@ def parse_args():
     )
     parser.add_argument(
         "--voltron-compose-weight-mode",
-        choices=("interp", "bvol_cc", "bin_bvol_cc"),
+        choices=("interp", "bvol_cc", "bin_bvol_cc", "bin_bvol_overlap"),
         default="interp",
         help=(
             "For Voltron intermediate mappings, choose how Voltron-to-RAIJU "
@@ -91,7 +91,9 @@ def parse_args():
             "interp uses only the existing shell-grid interpolation weights. "
             "bvol_cc multiplies those weights by Voltron TubeShell cell-centered "
             "bVol. bin_bvol_cc bins Voltron TubeShell cell centers into RAIJU "
-            "target cells and uses bVol_cc as the bin weight. Default: interp."
+            "target cells and uses bVol_cc as the bin weight. bin_bvol_overlap "
+            "distributes each TubeShell cell bVol_cc over overlapped RAIJU "
+            "target L/longitude bins. Default: interp."
         ),
     )
     parser.add_argument(
@@ -102,6 +104,26 @@ def parse_args():
             "Minimum positive Voltron bVol_cc allowed when "
             "--voltron-compose-weight-mode=bvol_cc. Terms with non-finite or "
             "non-positive bVol at or below this floor are skipped. Default: 0.0."
+        ),
+    )
+    parser.add_argument(
+        "--voltron-overlap-max-l-span",
+        type=float,
+        default=20.0,
+        help=(
+            "For --voltron-compose-weight-mode=bin_bvol_overlap, skip TubeShell "
+            "cells whose corner Lb span exceeds this value. Set <=0 to disable. "
+            "Default: 20.0 Re."
+        ),
+    )
+    parser.add_argument(
+        "--voltron-overlap-max-lon-span",
+        type=float,
+        default=10.0,
+        help=(
+            "For --voltron-compose-weight-mode=bin_bvol_overlap, skip TubeShell "
+            "cells whose corner longitude span exceeds this value after periodic "
+            "unwrapping. Set <=0 to disable. Default: 10.0 degrees."
         ),
     )
     parser.add_argument(
@@ -326,7 +348,7 @@ def compose_sami3_voltron_raiju_weights(
         voltron_extrapolated_mask = np.asarray(voltron_extrapolated_mask, dtype=bool)
     if voltron_compose_weight is not None:
         voltron_compose_weight = np.asarray(voltron_compose_weight, dtype=np.float64)
-    if voltron_compose_weight_mode not in ("interp", "bvol_cc", "bin_bvol_cc"):
+    if voltron_compose_weight_mode not in ("interp", "bvol_cc", "bin_bvol_cc", "bin_bvol_overlap"):
         raise ValueError("unsupported Voltron compose weight mode: {0}".format(voltron_compose_weight_mode))
     if voltron_compose_weight_mode == "bvol_cc" and voltron_compose_weight is None:
         raise ValueError("bvol_cc Voltron compose weight mode requires voltron_compose_weight")
@@ -456,6 +478,69 @@ def find_periodic_target_index(lon_deg, edge_deg):
     return idx
 
 
+def circular_mean_rad_1d(values_rad):
+    values = np.asarray(values_rad, dtype=np.float64)
+    return np.arctan2(np.nanmean(np.sin(values)), np.nanmean(np.cos(values)))
+
+
+def unwrap_deg_near(values_deg, center_deg):
+    values = np.asarray(values_deg, dtype=np.float64)
+    return center_deg + np.mod(values - center_deg + 180.0, 360.0) - 180.0
+
+
+def linear_bin_overlaps(src_min, src_max, target_low, target_high):
+    if not np.isfinite(src_min) or not np.isfinite(src_max):
+        return []
+    low = float(min(src_min, src_max))
+    high = float(max(src_min, src_max))
+    if high - low <= TINY:
+        center = 0.5 * (low + high)
+        matches = np.where((center >= target_low) & (center <= target_high))[0]
+        if matches.size == 0:
+            return []
+        return [(int(matches[0]), 1.0)]
+    span = high - low
+    overlaps = []
+    for idx in np.where((target_high > low) & (target_low < high))[0]:
+        overlap = min(high, float(target_high[idx])) - max(low, float(target_low[idx]))
+        if overlap > 0.0:
+            overlaps.append((int(idx), overlap / span))
+    return overlaps
+
+
+def periodic_bin_overlaps(src_min, src_max, target_edges):
+    edges = np.asarray(target_edges, dtype=np.float64)
+    if edges.ndim != 1 or edges.size < 2:
+        return []
+    if not np.isfinite(src_min) or not np.isfinite(src_max):
+        return []
+    low = float(min(src_min, src_max))
+    high = float(max(src_min, src_max))
+    if high - low <= TINY:
+        idx = find_periodic_target_index(0.5 * (low + high), edges)
+        return [] if idx is None else [(idx, 1.0)]
+    span = high - low
+    if span > 360.0:
+        span = 360.0
+    center = 0.5 * (low + high)
+    edge_start = float(edges[0])
+    edge_stop = float(edges[-1])
+    while center < edge_start:
+        low += 360.0
+        high += 360.0
+        center += 360.0
+    while center >= edge_stop:
+        low -= 360.0
+        high -= 360.0
+        center -= 360.0
+    overlaps = []
+    for idx in np.where((edges[1:] > low) & (edges[:-1] < high))[0]:
+        overlap = min(high, float(edges[idx + 1])) - max(low, float(edges[idx]))
+        if overlap > 0.0:
+            overlaps.append((int(idx), overlap / span))
+    return overlaps
+
+
 def build_sparse_voltron_to_raiju_bvol_bins(voltron_geometry, target_grid, longitude_key, bvol_floor=0.0):
     target_l_edge = np.asarray(target_grid["target_l_edge"], dtype=np.float64)
     target_lon_edge = np.asarray(
@@ -529,6 +614,166 @@ def build_sparse_voltron_to_raiju_bvol_bins(voltron_geometry, target_grid, longi
         "weight_sum": weight_sum,
         "skipped_outside_target_bins": int(skipped_outside),
         "skipped_bad_bvol": int(skipped_bad_bvol),
+        "raw_bvol_sum_min": float(np.min(raw_weight_sum[raw_weight_sum > 0.0]))
+        if np.any(raw_weight_sum > 0.0)
+        else None,
+        "raw_bvol_sum_max": float(np.max(raw_weight_sum)) if raw_weight_sum.size else None,
+    }
+
+
+def build_sparse_voltron_to_raiju_bvol_overlap(
+    voltron_geometry,
+    target_grid,
+    longitude_key,
+    bvol_floor=0.0,
+    max_l_span=20.0,
+    max_lon_span=10.0,
+):
+    target_l_edge = np.asarray(target_grid["target_l_edge"], dtype=np.float64)
+    target_lon_edge = np.asarray(
+        target_grid["target_lon_edge_deg_unwrapped"], dtype=np.float64
+    )
+    if target_l_edge.ndim != 1 or target_lon_edge.ndim != 1:
+        raise ValueError("target L/longitude edges must be 1-D")
+    ni = target_l_edge.size - 1
+    nj = target_lon_edge.size - 1
+    if ni <= 0 or nj <= 0:
+        raise ValueError("target grid edges imply an empty target grid")
+
+    src_l_corner = np.asarray(voltron_geometry["Lb"], dtype=np.float64)
+    src_lon_corner = np.asarray(voltron_geometry[longitude_key], dtype=np.float64)
+    src_bvol = np.asarray(voltron_geometry["bvol_cc"], dtype=np.float64)
+    if src_l_corner.shape != src_lon_corner.shape:
+        raise ValueError("Voltron TubeShell L/longitude corner arrays differ in shape")
+    if src_bvol.shape != (src_l_corner.shape[0] - 1, src_l_corner.shape[1] - 1):
+        raise ValueError(
+            "Voltron TubeShell bVol center shape {0} is not one less than corner shape {1}".format(
+                src_bvol.shape, src_l_corner.shape
+            )
+        )
+
+    l_low = np.minimum(target_l_edge[:-1], target_l_edge[1:])
+    l_high = np.maximum(target_l_edge[:-1], target_l_edge[1:])
+    dst_rows = []
+    src_rows = []
+    weight_rows = []
+    raw_weight_sum = np.zeros((nj, ni), dtype=np.float64)
+    coverage_count = np.zeros((nj, ni), dtype=np.int16)
+    skipped_outside = 0
+    skipped_bad_bvol = 0
+    skipped_bad_geometry = 0
+    skipped_large_footprint = 0
+    split_term_count = 0
+    max_terms_per_source_cell = 0
+    source_fraction_sums = []
+    used_l_spans = []
+    used_lon_spans = []
+
+    for jv in range(src_bvol.shape[0]):
+        for iv in range(src_bvol.shape[1]):
+            bvol = float(src_bvol[jv, iv])
+            if (not np.isfinite(bvol)) or bvol <= bvol_floor:
+                skipped_bad_bvol += 1
+                continue
+            l_corners = src_l_corner[jv : jv + 2, iv : iv + 2]
+            lon_corners_rad = src_lon_corner[jv : jv + 2, iv : iv + 2]
+            if np.count_nonzero(np.isfinite(l_corners)) != 4 or np.count_nonzero(np.isfinite(lon_corners_rad)) != 4:
+                skipped_bad_geometry += 1
+                continue
+
+            l_overlaps = linear_bin_overlaps(
+                float(np.min(l_corners)),
+                float(np.max(l_corners)),
+                l_low,
+                l_high,
+            )
+            l_span = float(np.max(l_corners) - np.min(l_corners))
+            lon_center_rad = circular_mean_rad_1d(lon_corners_rad)
+            lon_center_deg = float(np.mod(np.degrees(lon_center_rad), 360.0))
+            lon_unwrapped = unwrap_deg_near(
+                np.mod(np.degrees(lon_corners_rad), 360.0),
+                lon_center_deg,
+            )
+            lon_span = float(np.max(lon_unwrapped) - np.min(lon_unwrapped))
+            if lon_span > 180.0:
+                skipped_bad_geometry += 1
+                continue
+            if (max_l_span is not None and max_l_span > 0.0 and l_span > max_l_span) or (
+                max_lon_span is not None and max_lon_span > 0.0 and lon_span > max_lon_span
+            ):
+                skipped_large_footprint += 1
+                continue
+            lon_overlaps = periodic_bin_overlaps(
+                float(np.min(lon_unwrapped)),
+                float(np.max(lon_unwrapped)),
+                target_lon_edge,
+            )
+            if not l_overlaps or not lon_overlaps:
+                skipped_outside += 1
+                continue
+
+            terms_for_source = 0
+            fraction_sum = 0.0
+            for i, l_fraction in l_overlaps:
+                for j, lon_fraction in lon_overlaps:
+                    fraction = l_fraction * lon_fraction
+                    if fraction <= 0.0:
+                        continue
+                    term_weight = bvol * fraction
+                    dst_rows.append((j, i))
+                    src_rows.append((jv, iv))
+                    weight_rows.append(term_weight)
+                    raw_weight_sum[j, i] += term_weight
+                    coverage_count[j, i] += 1
+                    terms_for_source += 1
+                    fraction_sum += fraction
+            if terms_for_source == 0:
+                skipped_outside += 1
+                continue
+            split_term_count += terms_for_source
+            max_terms_per_source_cell = max(max_terms_per_source_cell, terms_for_source)
+            source_fraction_sums.append(fraction_sum)
+            used_l_spans.append(l_span)
+            used_lon_spans.append(lon_span)
+
+    if len(weight_rows) == 0:
+        raise ValueError("Voltron bvol overlap binning produced no nonzero weights")
+    weights = np.asarray(weight_rows, dtype=np.float64)
+    dst_arr = np.asarray(dst_rows, dtype=np.int32)
+    src_arr = np.asarray(src_rows, dtype=np.int32)
+    norm = raw_weight_sum[dst_arr[:, 0], dst_arr[:, 1]]
+    weights = weights / np.maximum(norm, TINY)
+    weight_sum = np.zeros((nj, ni), dtype=np.float64)
+    np.add.at(weight_sum, (dst_arr[:, 0], dst_arr[:, 1]), weights)
+    source_fraction_sums = np.asarray(source_fraction_sums, dtype=np.float64)
+    used_l_spans = np.asarray(used_l_spans, dtype=np.float64)
+    used_lon_spans = np.asarray(used_lon_spans, dtype=np.float64)
+
+    return {
+        "dst_index": dst_arr,
+        "src_index": src_arr,
+        "weight": weights.astype(np.float64),
+        "corner": np.zeros(weights.shape, dtype=np.int8),
+        "coverage_count": coverage_count,
+        "weight_sum": weight_sum,
+        "skipped_outside_target_bins": int(skipped_outside),
+        "skipped_bad_bvol": int(skipped_bad_bvol),
+        "skipped_bad_geometry": int(skipped_bad_geometry),
+        "skipped_large_footprint": int(skipped_large_footprint),
+        "overlap_split_term_count": int(split_term_count),
+        "overlap_max_terms_per_source_cell": int(max_terms_per_source_cell),
+        "overlap_source_fraction_sum_min": float(np.min(source_fraction_sums))
+        if source_fraction_sums.size
+        else None,
+        "overlap_source_fraction_sum_max": float(np.max(source_fraction_sums))
+        if source_fraction_sums.size
+        else None,
+        "overlap_used_l_span_max": float(np.max(used_l_spans))
+        if used_l_spans.size
+        else None,
+        "overlap_used_lon_span_max": float(np.max(used_lon_spans))
+        if used_lon_spans.size
+        else None,
         "raw_bvol_sum_min": float(np.min(raw_weight_sum[raw_weight_sum > 0.0]))
         if np.any(raw_weight_sum > 0.0)
         else None,
@@ -846,6 +1091,16 @@ def write_weight_file(path, metadata, source_grid, target_grid, target_geometry,
             if metadata["voltron_bvol_floor"] is not None
             else -1.0
         )
+        handle.attrs["voltron_overlap_max_l_span"] = (
+            metadata["voltron_overlap_max_l_span"]
+            if metadata.get("voltron_overlap_max_l_span") is not None
+            else -1.0
+        )
+        handle.attrs["voltron_overlap_max_lon_span"] = (
+            metadata["voltron_overlap_max_lon_span"]
+            if metadata.get("voltron_overlap_max_lon_span") is not None
+            else -1.0
+        )
         if metadata["voltron_template"] is not None:
             handle.attrs["voltron_template"] = metadata["voltron_template"]
         if metadata["voltron_tube_longitude"] is not None:
@@ -1001,19 +1256,31 @@ def main():
                 )
             )
             voltron_tube_longitude = args.voltron_tube_longitude
-        if args.voltron_compose_weight_mode == "bin_bvol_cc":
+        if args.voltron_compose_weight_mode in ("bin_bvol_cc", "bin_bvol_overlap"):
             if args.mapping_mode != "voltron_tubeshell_l_mlt":
                 raise ValueError(
-                    "--voltron-compose-weight-mode bin_bvol_cc requires "
-                    "--mapping-mode voltron_tubeshell_l_mlt"
+                    (
+                        "--voltron-compose-weight-mode {0} requires "
+                        "--mapping-mode voltron_tubeshell_l_mlt"
+                    ).format(args.voltron_compose_weight_mode)
                 )
-            longitude_key = args.voltron_tube_longitude + "_cc_deg"
-            voltron_to_raiju = build_sparse_voltron_to_raiju_bvol_bins(
-                voltron_geometry,
-                target_grid,
-                longitude_key,
-                args.voltron_bvol_floor,
-            )
+            if args.voltron_compose_weight_mode == "bin_bvol_cc":
+                longitude_key = args.voltron_tube_longitude + "_cc_deg"
+                voltron_to_raiju = build_sparse_voltron_to_raiju_bvol_bins(
+                    voltron_geometry,
+                    target_grid,
+                    longitude_key,
+                    args.voltron_bvol_floor,
+                )
+            else:
+                voltron_to_raiju = build_sparse_voltron_to_raiju_bvol_overlap(
+                    voltron_geometry,
+                    target_grid,
+                    args.voltron_tube_longitude,
+                    args.voltron_bvol_floor,
+                    args.voltron_overlap_max_l_span,
+                    args.voltron_overlap_max_lon_span,
+                )
         else:
             voltron_to_raiju = build_sparse_grid_to_grid(
                 voltron_geometry["target_l"],
@@ -1045,6 +1312,9 @@ def main():
         elif args.voltron_compose_weight_mode == "bin_bvol_cc":
             physical_note += " with Voltron TubeShell bVol_cc target-cell binning"
             schema_version = 4
+        elif args.voltron_compose_weight_mode == "bin_bvol_overlap":
+            physical_note += " with Voltron TubeShell bVol_cc target-cell L/longitude overlap binning"
+            schema_version = 5
         else:
             schema_version = 3
         voltron_template = os.path.abspath(args.voltron_template)
@@ -1073,6 +1343,16 @@ def main():
         ),
         "voltron_bvol_floor": (
             float(args.voltron_bvol_floor) if args.mapping_mode != "l_mlt_separable" else None
+        ),
+        "voltron_overlap_max_l_span": (
+            float(args.voltron_overlap_max_l_span)
+            if args.voltron_compose_weight_mode == "bin_bvol_overlap"
+            else None
+        ),
+        "voltron_overlap_max_lon_span": (
+            float(args.voltron_overlap_max_lon_span)
+            if args.voltron_compose_weight_mode == "bin_bvol_overlap"
+            else None
         ),
         "output_hdf5": out_h5,
         "source_shape_nf_nlt": [int(shape2[0]), int(shape2[1])],
@@ -1127,6 +1407,46 @@ def main():
         ),
         "voltron_to_raiju_bvol_bin_raw_bvol_sum_max": (
             voltron_to_raiju.get("raw_bvol_sum_max")
+            if args.mapping_mode != "l_mlt_separable"
+            else None
+        ),
+        "voltron_to_raiju_bvol_bin_skipped_bad_geometry": (
+            voltron_to_raiju.get("skipped_bad_geometry")
+            if args.mapping_mode != "l_mlt_separable"
+            else None
+        ),
+        "voltron_to_raiju_bvol_overlap_skipped_large_footprint": (
+            voltron_to_raiju.get("skipped_large_footprint")
+            if args.mapping_mode != "l_mlt_separable"
+            else None
+        ),
+        "voltron_to_raiju_bvol_overlap_split_term_count": (
+            voltron_to_raiju.get("overlap_split_term_count")
+            if args.mapping_mode != "l_mlt_separable"
+            else None
+        ),
+        "voltron_to_raiju_bvol_overlap_max_terms_per_source_cell": (
+            voltron_to_raiju.get("overlap_max_terms_per_source_cell")
+            if args.mapping_mode != "l_mlt_separable"
+            else None
+        ),
+        "voltron_to_raiju_bvol_overlap_source_fraction_sum_min": (
+            voltron_to_raiju.get("overlap_source_fraction_sum_min")
+            if args.mapping_mode != "l_mlt_separable"
+            else None
+        ),
+        "voltron_to_raiju_bvol_overlap_source_fraction_sum_max": (
+            voltron_to_raiju.get("overlap_source_fraction_sum_max")
+            if args.mapping_mode != "l_mlt_separable"
+            else None
+        ),
+        "voltron_to_raiju_bvol_overlap_used_l_span_max": (
+            voltron_to_raiju.get("overlap_used_l_span_max")
+            if args.mapping_mode != "l_mlt_separable"
+            else None
+        ),
+        "voltron_to_raiju_bvol_overlap_used_lon_span_max": (
+            voltron_to_raiju.get("overlap_used_lon_span_max")
             if args.mapping_mode != "l_mlt_separable"
             else None
         ),

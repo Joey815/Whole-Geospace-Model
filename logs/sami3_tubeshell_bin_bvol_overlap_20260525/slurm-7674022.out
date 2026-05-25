@@ -1,0 +1,40 @@
+job_id=7674022
+partition=intel
+node_list=qhcn049
+start_time=2026-05-25 19:07:05 +0800
+run_dir=/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvol_overlap_smoke_20260525
+voltron_exe=/home/jiaoy_group/jiaoy/data/MAGE1.25/build_gr_sami3_moments_20260523/bin/voltron.x
+label=bvol_overlap_smoke
+mode=tubeshell_bin_bvol_overlap_conservative_density_only
+alphaDavg=0.05
+alphaPavg=0.0
+alphaPstd=0.0
+alphaDstd=0.0
+alphaTiote=0.0
+hostname=qhcn049
+python=/apps/support/intel_spr_rocky8.9/anaconda/2024.10/bin/python
+omp_threads=8
+kmp_stacksize=512M
+omp_stacksize=512M
+ldd_missing=0
+
+===== SAMI3 TUBESHELL BIN-BVOL-OVERLAP SMOKE =====
+run_complete=1
+end_time=2026-05-25 19:08:07 +0800
+-rw-r--r-- 1 jiaoy jiaoy_group  63M May 25 19:07 sami3_moments_dsB_lmlt_bvol_overlap_smoke.gam.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   58 May 25 19:07 sami3_moments_dsB_lmlt_bvol_overlap_smoke.gam.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_bvol_overlap_smoke.gam.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  59M May 25 19:08 sami3_moments_dsB_lmlt_bvol_overlap_smoke.gam.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  19M May 25 19:07 sami3_moments_dsB_lmlt_bvol_overlap_smoke.gamCpl.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   61 May 25 19:07 sami3_moments_dsB_lmlt_bvol_overlap_smoke.gamCpl.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_bvol_overlap_smoke.gamCpl.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 1.7M May 25 19:08 sami3_moments_dsB_lmlt_bvol_overlap_smoke.gamCpl.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 6.3M May 25 19:07 sami3_moments_dsB_lmlt_bvol_overlap_smoke.mix.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   58 May 25 19:07 sami3_moments_dsB_lmlt_bvol_overlap_smoke.mix.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_bvol_overlap_smoke.mix.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  33M May 25 19:08 sami3_moments_dsB_lmlt_bvol_overlap_smoke.mix.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 3.6M May 25 19:07 sami3_moments_dsB_lmlt_bvol_overlap_smoke.raiCpl.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   61 May 25 19:07 sami3_moments_dsB_lmlt_bvol_overlap_smoke.raiCpl.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_bvol_overlap_smoke.raiCpl.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 129M May 25 19:07 sami3_moments_dsB_lmlt_bvol_overlap_smoke.raiju.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   60 May 25 19:07 sami3_moments_dsB_lmlt_bvol_overlap_smoke.raiju.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_bvol_overlap_smoke.raiju.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  38M May 25 19:08 sami3_moments_dsB_lmlt_bvol_overlap_smoke.raiju.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  27M May 25 19:07 sami3_moments_dsB_lmlt_bvol_overlap_smoke.volt.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   59 May 25 19:07 sami3_moments_dsB_lmlt_bvol_overlap_smoke.volt.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_bvol_overlap_smoke.volt.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  19M May 25 19:08 sami3_moments_dsB_lmlt_bvol_overlap_smoke.volt.h5

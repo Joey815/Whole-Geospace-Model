@@ -1,0 +1,20 @@
+ok   summary_json_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvol_overlap_smoke_20260525/bvol_overlap_smoke_summary.json
+ok   Pavg_formula_abs: max_abs=0.0 tol=1e-05
+ok   Pavg_formula_rel: max_rel=0.0 tol=1e-05
+ok   Pavg_positive_actual: mean=0.00043784124116159 max=0.0045781374009727024
+ok   Davg_formula_abs: max_abs=0.0 tol=1e-05
+ok   Davg_formula_rel: max_rel=0.0 tol=1e-05
+ok   Davg_positive_actual: mean=91.86063199144719 max=870.2447265625001
+ok   Pstd_formula_abs: max_abs=0.0 tol=1e-05
+ok   Pstd_formula_rel: max_rel=0.0 tol=1e-05
+ok   Dstd_formula_abs: max_abs=0.0 tol=1e-05
+ok   Dstd_formula_rel: max_rel=0.0 tol=1e-05
+ok   nonfinite_base_raiju_res_empty: []
+ok   nonfinite_proto_raiju_res_empty: []
+ok   nonfinite_base_gam_res_empty: []
+ok   nonfinite_proto_gam_res_empty: []
+ok   history_last_steps_exist: {'gam': 'Step#3', 'raiju': 'Step#3'}
+ok   history_last_steps_match: {'gam': 'Step#3', 'raiju': 'Step#3'}
+ok   comparison_fields_present: []
+ok   comparison_stats_finite: []
+overall=ok

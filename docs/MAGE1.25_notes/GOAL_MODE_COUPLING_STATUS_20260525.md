@@ -20,9 +20,82 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-25 18:06:58 CST.
+Status refreshed: 2026-05-25 19:13:00 CST.
 
-### Latest Completed Gate: RAIJU direct tiote debug output
+### Latest Completed Gate: SAMI3 -> RAIJU TubeShell bVol-overlap smoke
+
+The first TubeShell bVol-overlap mapping/runtime gate is complete:
+
+```text
+mapping product = ds_over_B + voltron_tubeshell_l_mlt + lon0 + bin_bvol_overlap
+archive = logs/sami3_tubeshell_bin_bvol_overlap_20260525/
+doc = docs/MAGE1.25_notes/SAMI3_RAIJU_TUBESHELL_BIN_BVOL_OVERLAP_RESULT_20260525.md
+schema_version = 5
+runtime_valid_fraction = 0.9574468085106383
+weight_sum_valid max deviation = 1.1920928955078125e-07
+```
+
+Runtime smoke:
+
+```text
+prototype jobid = 7674022
+prototype jobname = sami3_bvol_ov_smk
+prototype state = COMPLETED
+prototype exit = 0:0
+prototype elapsed = 00:01:02
+prototype node = qhcn049
+prototype batch MaxRSS = 1018724K
+
+baseline jobid = 7674051
+baseline jobname = base_bvol_ov_smk
+baseline state = COMPLETED
+baseline exit = 0:0
+baseline elapsed = 00:01:02
+baseline node = qhcn287
+baseline batch MaxRSS = 1018648K
+```
+
+Runtime settings:
+
+```text
+tFin = 11.5 s
+alphaDavg = 0.05
+alphaPavg = 0.0
+alphaPstd = 0.0
+alphaDstd = 0.0
+alphaTiote = 0.0
+```
+
+Validated facts:
+
+```text
+mapping validator overall = ok
+paired runtime validator overall = ok
+summary validator overall = ok
+Pavg/Davg/Pstd/Dstd formula max_abs = 0
+nonfinite physics restart checks = clean
+```
+
+Interpretation:
+
+```text
+The center-binning mapping has been superseded by a geometry-QC bVol-overlap
+prototype for the next conservative run.  This is still prototype mapping,
+not production traced-tube quadrature, but it improves target coverage from
+5940/8460 to 8100/8460 and removes the pathological broad-footprint source
+cells before runtime ingest.
+```
+
+Next work order after this gate:
+
+```text
+1. Run a conservative 1800 s density-only bVol-overlap case:
+   alphaDavg=0.05, alphaPavg=0, alphaPstd=0, alphaDstd=0, alphaTiote=0.
+2. Compare against the previous conservative bin_bvol_cc long1800 gate.
+3. Keep pressure disabled until Pavg production semantics are settled.
+```
+
+### Previous Completed Gate: RAIJU direct tiote debug output
 
 The direct tiote diagnostic gate is complete:
 

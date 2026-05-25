@@ -1,0 +1,163 @@
+{
+  "Davg": {
+    "new_only_max_abs": 3449.125244140625,
+    "new_only_mean_diff": 798.890625,
+    "new_only_new_mean": 798.890625,
+    "new_only_old_mean": 0.0,
+    "new_only_rms": 1104.877685546875,
+    "new_valid_max_abs": 3449.125244140625,
+    "new_valid_mean_diff": 135.18052673339844,
+    "new_valid_new_mean": 3835.57177734375,
+    "new_valid_old_mean": 3700.391357421875,
+    "new_valid_rms": 599.5948486328125,
+    "old_valid_max_abs": 367.6640625,
+    "old_valid_mean_diff": -106.16862487792969,
+    "old_valid_new_mean": 4939.8193359375,
+    "old_valid_old_mean": 5045.98828125,
+    "old_valid_rms": 215.2569580078125,
+    "shared_max_abs": 367.6640625,
+    "shared_mean_diff": -106.16862487792969,
+    "shared_new_mean": 4939.8193359375,
+    "shared_old_mean": 5045.98828125,
+    "shared_rms": 215.2569580078125
+  },
+  "Dstd": {
+    "new_only_max_abs": 10087.654296875,
+    "new_only_mean_diff": 4052.531494140625,
+    "new_only_new_mean": 4052.531494140625,
+    "new_only_old_mean": 0.0,
+    "new_only_rms": 4339.1875,
+    "new_valid_max_abs": 10087.654296875,
+    "new_valid_mean_diff": 920.6572875976562,
+    "new_valid_new_mean": 10039.0849609375,
+    "new_valid_old_mean": 9118.4296875,
+    "new_valid_rms": 2273.32958984375,
+    "old_valid_max_abs": 747.208984375,
+    "old_valid_mean_diff": -218.2058563232422,
+    "old_valid_new_mean": 12216.0146484375,
+    "old_valid_old_mean": 12434.22265625,
+    "old_valid_rms": 447.8452453613281,
+    "shared_max_abs": 747.208984375,
+    "shared_mean_diff": -218.2058563232422,
+    "shared_new_mean": 12216.0146484375,
+    "shared_old_mean": 12434.22265625,
+    "shared_rms": 447.8452453613281
+  },
+  "Pavg": {
+    "new_only_max_abs": 0.04049431160092354,
+    "new_only_mean_diff": 0.008674603886902332,
+    "new_only_new_mean": 0.008674603886902332,
+    "new_only_old_mean": 0.0,
+    "new_only_rms": 0.012067066505551338,
+    "new_valid_max_abs": 0.04049431160092354,
+    "new_valid_mean_diff": 0.0012378250248730183,
+    "new_valid_new_mean": 0.04578284174203873,
+    "new_valid_old_mean": 0.044545017182826996,
+    "new_valid_rms": 0.006704261992126703,
+    "old_valid_max_abs": 0.005818545818328857,
+    "old_valid_mean_diff": -0.001466458197683096,
+    "old_valid_new_mean": 0.05927674099802971,
+    "old_valid_old_mean": 0.06074320524930954,
+    "old_valid_rms": 0.0028880704194307327,
+    "shared_max_abs": 0.005818545818328857,
+    "shared_mean_diff": -0.001466458197683096,
+    "shared_new_mean": 0.05927674099802971,
+    "shared_old_mean": 0.06074320524930954,
+    "shared_rms": 0.0028880704194307327
+  },
+  "Pstd": {
+    "new_only_max_abs": 0.16348996758460999,
+    "new_only_mean_diff": 0.06835374981164932,
+    "new_only_new_mean": 0.06835374981164932,
+    "new_only_old_mean": 0.0,
+    "new_only_rms": 0.0732913687825203,
+    "new_valid_max_abs": 0.16348996758460999,
+    "new_valid_mean_diff": 0.015490998513996601,
+    "new_valid_new_mean": 0.17056246101856232,
+    "new_valid_old_mean": 0.1550714671611786,
+    "new_valid_rms": 0.03841530531644821,
+    "old_valid_max_abs": 0.013997077941894531,
+    "old_valid_mean_diff": -0.0037318214308470488,
+    "old_valid_new_mean": 0.2077292650938034,
+    "old_valid_old_mean": 0.21146108210086823,
+    "old_valid_rms": 0.007684329524636269,
+    "shared_max_abs": 0.013997077941894531,
+    "shared_mean_diff": -0.0037318214308470488,
+    "shared_new_mean": 0.2077292650938034,
+    "shared_old_mean": 0.21146108210086823,
+    "shared_rms": 0.007684329524636269
+  },
+  "new_coverage_unique": [
+    [
+      0,
+      360
+    ],
+    [
+      4,
+      2416
+    ],
+    [
+      6,
+      4514
+    ],
+    [
+      8,
+      521
+    ],
+    [
+      9,
+      571
+    ],
+    [
+      10,
+      11
+    ],
+    [
+      12,
+      67
+    ]
+  ],
+  "new_only_valid_count": 2160,
+  "new_valid_count": 8100,
+  "new_valid_fraction": 0.9574468085106383,
+  "old_coverage_unique": [
+    [
+      0,
+      2520
+    ],
+    [
+      4,
+      4860
+    ],
+    [
+      6,
+      1080
+    ]
+  ],
+  "old_only_valid_count": 0,
+  "old_valid_count": 5940,
+  "old_valid_fraction": 0.7021276595744681,
+  "shared_valid_count": 5940,
+  "tiote": {
+    "new_only_max_abs": 1.000177264213562,
+    "new_only_mean_diff": 0.9835625290870667,
+    "new_only_new_mean": 0.9835625290870667,
+    "new_only_old_mean": 0.0,
+    "new_only_rms": 0.9836451411247253,
+    "new_valid_max_abs": 1.000177264213562,
+    "new_valid_mean_diff": 0.26247069239616394,
+    "new_valid_new_mean": 0.9781273007392883,
+    "new_valid_old_mean": 0.715656578540802,
+    "new_valid_rms": 0.5079526305198669,
+    "old_valid_max_abs": 0.002676069736480713,
+    "old_valid_mean_diff": 0.0002554277307353914,
+    "old_valid_new_mean": 0.9761508107185364,
+    "old_valid_old_mean": 0.975895345211029,
+    "old_valid_rms": 0.0008081955020315945,
+    "shared_max_abs": 0.002676069736480713,
+    "shared_mean_diff": 0.0002554277307353914,
+    "shared_new_mean": 0.9761508107185364,
+    "shared_old_mean": 0.975895345211029,
+    "shared_rms": 0.0008081955020315945
+  }
+}

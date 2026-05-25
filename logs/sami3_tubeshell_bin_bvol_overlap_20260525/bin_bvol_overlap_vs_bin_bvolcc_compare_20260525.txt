@@ -1,0 +1,77 @@
+old_valid_count = 5940
+new_valid_count = 8100
+shared_valid_count = 5940
+new_only_valid_count = 2160
+old_only_valid_count = 0
+old_valid_fraction = 0.7021276595744681
+new_valid_fraction = 0.9574468085106383
+
+Pavg
+  shared_max_abs = 0.005818545818328857
+  shared_rms = 0.0028880704194307327
+  shared_old_mean = 0.06074320524930954
+  shared_new_mean = 0.05927674099802971
+  new_only_max_abs = 0.04049431160092354
+  new_only_rms = 0.012067066505551338
+  new_only_old_mean = 0.0
+  new_only_new_mean = 0.008674603886902332
+  new_valid_max_abs = 0.04049431160092354
+  new_valid_rms = 0.006704261992126703
+  new_valid_old_mean = 0.044545017182826996
+  new_valid_new_mean = 0.04578284174203873
+
+Davg
+  shared_max_abs = 367.6640625
+  shared_rms = 215.2569580078125
+  shared_old_mean = 5045.98828125
+  shared_new_mean = 4939.8193359375
+  new_only_max_abs = 3449.125244140625
+  new_only_rms = 1104.877685546875
+  new_only_old_mean = 0.0
+  new_only_new_mean = 798.890625
+  new_valid_max_abs = 3449.125244140625
+  new_valid_rms = 599.5948486328125
+  new_valid_old_mean = 3700.391357421875
+  new_valid_new_mean = 3835.57177734375
+
+Pstd
+  shared_max_abs = 0.013997077941894531
+  shared_rms = 0.007684329524636269
+  shared_old_mean = 0.21146108210086823
+  shared_new_mean = 0.2077292650938034
+  new_only_max_abs = 0.16348996758460999
+  new_only_rms = 0.0732913687825203
+  new_only_old_mean = 0.0
+  new_only_new_mean = 0.06835374981164932
+  new_valid_max_abs = 0.16348996758460999
+  new_valid_rms = 0.03841530531644821
+  new_valid_old_mean = 0.1550714671611786
+  new_valid_new_mean = 0.17056246101856232
+
+Dstd
+  shared_max_abs = 747.208984375
+  shared_rms = 447.8452453613281
+  shared_old_mean = 12434.22265625
+  shared_new_mean = 12216.0146484375
+  new_only_max_abs = 10087.654296875
+  new_only_rms = 4339.1875
+  new_only_old_mean = 0.0
+  new_only_new_mean = 4052.531494140625
+  new_valid_max_abs = 10087.654296875
+  new_valid_rms = 2273.32958984375
+  new_valid_old_mean = 9118.4296875
+  new_valid_new_mean = 10039.0849609375
+
+tiote
+  shared_max_abs = 0.002676069736480713
+  shared_rms = 0.0008081955020315945
+  shared_old_mean = 0.975895345211029
+  shared_new_mean = 0.9761508107185364
+  new_only_max_abs = 1.000177264213562
+  new_only_rms = 0.9836451411247253
+  new_only_old_mean = 0.0
+  new_only_new_mean = 0.9835625290870667
+  new_valid_max_abs = 1.000177264213562
+  new_valid_rms = 0.5079526305198669
+  new_valid_old_mean = 0.715656578540802
+  new_valid_new_mean = 0.9781273007392883
