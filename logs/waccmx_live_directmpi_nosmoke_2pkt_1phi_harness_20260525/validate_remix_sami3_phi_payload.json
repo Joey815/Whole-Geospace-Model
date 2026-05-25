@@ -1,0 +1,73 @@
+{
+  "checks": [
+    {
+      "detail": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_neutral_nosmoke_dt300_2pkt_1phi_harness_20260525_0000/voltron_runtime_direct_phi/remix_sami3_phi_payload_runtime_direct_openmpi.bin",
+      "name": "phi_payload_exists",
+      "ok": true
+    },
+    {
+      "detail": "{'magic': 20260524, 'version': 1, 'nlat': 125, 'nlon': 97, 'nframes': 1}",
+      "name": "phi_payload_header",
+      "ok": true
+    },
+    {
+      "detail": "nframes=1 expected=1",
+      "name": "phi_payload_frame_count",
+      "ok": true
+    },
+    {
+      "detail": "size=48532 expected=48532 trailing=0",
+      "name": "phi_payload_exact_size",
+      "ok": true
+    },
+    {
+      "detail": "indices=[0]",
+      "name": "phi_payload_frame_indices",
+      "ok": true
+    },
+    {
+      "detail": "finite_counts=[12125]",
+      "name": "phi_payload_frames_finite",
+      "ok": true
+    },
+    {
+      "detail": "hours=[0.0]",
+      "name": "phi_payload_hours_strictly_increasing",
+      "ok": true
+    },
+    {
+      "detail": "hours=[0.0] valid_until=[1.0000000150474662e+30]",
+      "name": "phi_payload_valid_until_after_hour",
+      "ok": true
+    }
+  ],
+  "meta": {
+    "phi_payload": {
+      "expected_size": 48532,
+      "frame_diffs": [],
+      "frames": [
+        {
+          "finite_count": 12125,
+          "frame_index": 0,
+          "hour": 0.0,
+          "max": 31.50481605529785,
+          "mean": -0.21076431384213634,
+          "min": -36.972877502441406,
+          "nonzero_count": 3492,
+          "valid_until": 1.0000000150474662e+30
+        }
+      ],
+      "header": {
+        "magic": 20260524,
+        "nframes": 1,
+        "nlat": 125,
+        "nlon": 97,
+        "version": 1
+      },
+      "path": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_neutral_nosmoke_dt300_2pkt_1phi_harness_20260525_0000/voltron_runtime_direct_phi/remix_sami3_phi_payload_runtime_direct_openmpi.bin",
+      "size": 48532,
+      "trailing_bytes": 0
+    }
+  },
+  "ok": true
+}

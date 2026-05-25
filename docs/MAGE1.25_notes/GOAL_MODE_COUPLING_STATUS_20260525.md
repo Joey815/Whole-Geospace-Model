@@ -20,11 +20,81 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-25 12:36:36 CST.
+Status refreshed: 2026-05-25 14:44:16 CST.
 
-### Latest Completed Gate: Live Neutral Cadence + Direct Voltron Phi
+### Latest Completed Gate: No-Smoke Direct-MPI Phi Harness
 
 The current same-stack WACCM-X/CESM + SAMI3 + OpenMPI Voltron direct-MPI
+no-smoke harness gate is complete:
+
+```text
+jobid = 7671470
+jobname = wxsami3_nc1h
+state = COMPLETED
+exit = 0:0
+elapsed = 00:14:55
+node = qhcn660
+batch MaxRSS = 64873580K
+archive = logs/waccmx_live_directmpi_nosmoke_2pkt_1phi_harness_20260525/
+doc = docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_DIRECTMPI_NOSMOKE_2PKT_1PHI_HARNESS_RESULT_20260525.md
+```
+
+This run validated the direct-MPI path without the previous final-frame smoke
+controls:
+
+```text
+SAMI3_PHI_SKIP_MADALA_AFTER_FINAL = 0
+WACCMX_SAMI3_PHI_STOP_AFTER_DONE = 0
+```
+
+Validated runtime facts:
+
+```text
+two WACCM-X/CESM live neutral packets from CAM phys_state(:)
+packet 0 received by 32/32 SAMI3 workers
+packet 1 received by 32/32 SAMI3 workers
+one Voltron direct-MPI phi frame received by SAMI3
+Voltron direct-MPI phi done sent and consumed during SAMI3 finalize
+SAMI3 reached MASTER: All Done!
+WACCM-X reached END OF MODEL RUN
+skip_count = 0
+bad_marker_count = 0
+```
+
+All archived validators returned `ok=True` / `overall=ok`:
+
+```text
+validate_remix_sami3_phi_payload
+validate_sami3_direct_phi_run_strict
+validate_wxsami3_live_packet_contract
+validate_wxsami3_source_flag_balance
+validate_wxsami3_time_axis
+validate_wxsami3_topblend_policy
+validate_wxsami3_runtime_map
+```
+
+Harness note: with `WACCMX_SAMI3_PHI_STOP_AFTER_DONE=0`, Voltron continues
+after the SAMI3 consumer is done.  The launcher now accepts a Voltron timeout
+only after both `WACCMX_SAMI3_PHI_DIRECT sent done=` and `MASTER: All Done!`
+are present.  This is a test-harness completion policy, not a production
+physics stop policy.
+
+Next work order after this gate:
+
+```text
+1. Force a second SAMI3 phi request after direct done to validate the
+   WACCMX_PHI_CACHE_AFTER_DONE branch.
+2. Run a longer f19 direct-MPI cadence case with more than two neutral packets
+   and continued phi cadence.
+3. Keep f19 as the validated development grid; defer f09/distributed remap
+   until continued cadence is stable.
+4. Return to SAMI3 -> RAIJU/GAMERA physics blockers: traced flux-tube weighting,
+   L/MLT mapping, and runtime blending/floors for scalar moments.
+```
+
+### Previous Completed Gate: Live Neutral Cadence + Direct Voltron Phi
+
+The earlier same-stack WACCM-X/CESM + SAMI3 + OpenMPI Voltron direct-MPI
 cadence gate is complete:
 
 ```text
@@ -79,7 +149,7 @@ The neutral receiver is also done-aware: workers probe the next MPI tag before
 expecting a neutral header, so a done tag arriving after the final packet is
 stored and consumed during finalize instead of stranding the worker.
 
-Next work order after this gate:
+Next work order after this gate was:
 
 ```text
 1. Replace SAMI3_PHI_SKIP_MADALA_AFTER_FINAL / WACCMX_SAMI3_PHI_STOP_AFTER_DONE
@@ -196,12 +266,11 @@ Strict validation and HDF5 summary artifacts have been committed and pushed.
 
 ## Next Work Order
 
-1. Remove the smoke final-frame controls from the direct-MPI phi path and
-   replace them with a continued cadence/cache policy:
-   - `SAMI3_PHI_SKIP_MADALA_AFTER_FINAL`
-   - `WACCMX_SAMI3_PHI_STOP_AFTER_DONE`
+1. Force a second SAMI3 phi request after direct done to validate the
+   `WACCMX_PHI_CACHE_AFTER_DONE` branch that is now implemented in
+   `waccmx_neutral_mod.f90`.
 2. Run a longer f19 direct-MPI cadence case with more than two neutral packets
-   and more than three phi frames, keeping the same validator set.
+   and continued phi cadence, keeping the same validator set.
 3. Keep f19 as the development grid for now.  Design f09/distributed live
    neutral remap only after the continued cadence path is stable.
 4. Resume the SAMI3 -> RAIJU/GAMERA physical-moment blockers:

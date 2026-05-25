@@ -54,12 +54,17 @@ module waccmx_neutral_mod
     character(len=512) :: waccmx_phi_direct_port_file = ''
     logical :: waccmx_phi_direct_connected = .false.
     logical :: waccmx_phi_direct_final_seen = .false.
+    logical :: waccmx_phi_direct_done_received = .false.
+    logical :: waccmx_phi_direct_cache_valid = .false.
+    integer :: waccmx_phi_direct_done_value = -1
+    real :: waccmx_phi_direct_cache_valid_until = 1.0e30
 
     real, allocatable :: w_denni(:,:,:,:), w_dennf(:,:,:,:)
     real, allocatable :: w_tni(:,:,:), w_tnf(:,:,:)
     real, allocatable :: w_ui(:,:,:), w_uf(:,:,:)
     real, allocatable :: w_vi(:,:,:), w_vf(:,:,:)
     real, allocatable :: w_wi(:,:,:), w_wf(:,:,:)
+    real, allocatable :: w_phi_direct_cache(:,:)
     integer, allocatable :: w_source_flag(:,:,:)
 
 contains
@@ -256,17 +261,30 @@ contains
         integer :: done_value
 
         if (taskid /= 0) return
-        if (.not. waccmx_phi_direct_connected) return
+        if (.not. waccmx_phi_direct_connected .and. &
+            .not. waccmx_phi_direct_done_received) return
 
-        call MPI_Recv(done_value, 1, MPI_INTEGER, 0, waccmx_tag_done, &
-                      waccmx_phi_peer_comm, MPI_STATUS_IGNORE, ierr)
-        if (ierr /= MPI_SUCCESS) then
-            print *, 'SAMI3 direct phi done receive failed ierr=', ierr
-            call MPI_Abort(sami3_comm, ierr, ierr)
+        if (waccmx_phi_direct_done_received) then
+            done_value = waccmx_phi_direct_done_value
+        else
+            call MPI_Recv(done_value, 1, MPI_INTEGER, 0, waccmx_tag_done, &
+                          waccmx_phi_peer_comm, MPI_STATUS_IGNORE, ierr)
+            if (ierr /= MPI_SUCCESS) then
+                print *, 'SAMI3 direct phi done receive failed ierr=', ierr
+                call MPI_Abort(sami3_comm, ierr, ierr)
+            endif
+            waccmx_phi_direct_done_received = .true.
+            waccmx_phi_direct_done_value = done_value
         endif
         print *, 'SAMI3 direct phi done signal received:', done_value
 
-        call MPI_Comm_disconnect(waccmx_phi_peer_comm, ierr)
+        if (waccmx_phi_direct_connected) then
+            call MPI_Comm_disconnect(waccmx_phi_peer_comm, ierr)
+            if (ierr /= MPI_SUCCESS) then
+                print *, 'SAMI3 direct phi MPI_Comm_disconnect failed ierr=', ierr
+                call MPI_Abort(sami3_comm, ierr, ierr)
+            endif
+        endif
         if (len_trim(waccmx_phi_direct_port_name) > 0) then
             call MPI_Close_port(waccmx_phi_direct_port_name, ierr)
         endif
@@ -285,6 +303,8 @@ contains
         integer :: header(6)
         integer :: nphi
         integer :: phi_comm
+        integer :: status(MPI_STATUS_SIZE)
+        integer :: msg_tag
         real :: frame_hour
         logical :: use_direct_phi
 
@@ -302,6 +322,67 @@ contains
         endif
 
         nphi = nfp1*(nlt+1)
+
+        if (.not. allocated(w_phi_direct_cache)) then
+            allocate(w_phi_direct_cache(nfp1,nlt+1))
+        endif
+
+        if (use_direct_phi .and. waccmx_phi_direct_done_received) then
+            if (.not. waccmx_phi_direct_cache_valid) then
+                print *, 'SAMI3 direct phi done already seen but no cache is available'
+                call MPI_Abort(sami3_comm, 9204, ierr)
+            endif
+            phi_weimer_real = w_phi_direct_cache
+            hrutw2 = 1.0e30
+            print *, 'WACCMX_PHI_CACHE_AFTER_DONE', hrut, hrutw2, &
+                     minval(phi_weimer_real), maxval(phi_weimer_real)
+            return
+        endif
+
+        call MPI_Probe(0, MPI_ANY_TAG, phi_comm, status, ierr)
+        if (ierr /= MPI_SUCCESS) then
+            print *, 'WACCMX online phi probe failed ierr=', ierr
+            call MPI_Abort(sami3_comm, ierr, ierr)
+        endif
+
+        msg_tag = status(MPI_TAG)
+        if (msg_tag == waccmx_tag_done) then
+            if (use_direct_phi) then
+                call MPI_Recv(waccmx_phi_direct_done_value, 1, MPI_INTEGER, 0, &
+                              waccmx_tag_done, phi_comm, MPI_STATUS_IGNORE, ierr)
+                if (ierr /= MPI_SUCCESS) then
+                    print *, 'SAMI3 direct phi done receive during phi failed ierr=', ierr
+                    call MPI_Abort(sami3_comm, ierr, ierr)
+                endif
+                waccmx_phi_direct_done_received = .true.
+                waccmx_phi_direct_final_seen = .true.
+                print *, 'SAMI3 direct phi done signal received during phi receive:', &
+                         waccmx_phi_direct_done_value
+            else
+                call MPI_Recv(waccmx_online_done_value, 1, MPI_INTEGER, 0, &
+                              waccmx_tag_done, phi_comm, MPI_STATUS_IGNORE, ierr)
+                if (ierr /= MPI_SUCCESS) then
+                    print *, 'WACCMX online done receive during phi failed ierr=', ierr
+                    call MPI_Abort(sami3_comm, ierr, ierr)
+                endif
+                waccmx_online_done_received = .true.
+                print *, 'WACCMX online done signal received during phi receive:', &
+                         waccmx_online_done_value
+            endif
+            if (.not. waccmx_phi_direct_cache_valid) then
+                print *, 'WACCMX online phi done received but no cached phi is available'
+                call MPI_Abort(sami3_comm, 9205, ierr)
+            endif
+            phi_weimer_real = w_phi_direct_cache
+            hrutw2 = 1.0e30
+            print *, 'WACCMX_PHI_CACHE_AFTER_DONE', hrut, hrutw2, &
+                     minval(phi_weimer_real), maxval(phi_weimer_real)
+            return
+        else if (msg_tag /= waccmx_tag_phi_header) then
+            print *, 'WACCMX online phi unexpected tag while waiting header tag=', &
+                     msg_tag
+            call MPI_Abort(sami3_comm, 9206, ierr)
+        endif
 
         call MPI_Recv(header, 6, MPI_INTEGER, 0, waccmx_tag_phi_header, &
                       phi_comm, MPI_STATUS_IGNORE, ierr)
@@ -323,6 +404,9 @@ contains
                       phi_comm, MPI_STATUS_IGNORE, ierr)
         call MPI_Recv(phi_weimer_real, nphi, MPI_REAL, 0, waccmx_tag_phi_data, &
                       phi_comm, MPI_STATUS_IGNORE, ierr)
+        w_phi_direct_cache = phi_weimer_real
+        waccmx_phi_direct_cache_valid = .true.
+        waccmx_phi_direct_cache_valid_until = hrutw2
         if (header(5) + 1 >= header(6)) waccmx_phi_direct_final_seen = .true.
 
         print *, 'WACCMX_PHI_RECV', header(5), header(6), hrut, frame_hour, &
