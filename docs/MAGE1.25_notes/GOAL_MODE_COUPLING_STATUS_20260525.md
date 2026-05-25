@@ -20,9 +20,54 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-25 23:58:00 CST.
+Status refreshed: 2026-05-26 00:18:00 CST.
 
-### Latest Completed Gate: Active bVol Helper MPI Datatype Fix
+### Latest Completed Gate: Voltron Trace-Line Debug Export Smoke
+
+The next geometry diagnostic is now implemented and smoke-tested:
+
+```text
+patch = code/kaiju_sami3_moments/patches/voltron_trace_debug_export_20260525.patch
+doc = docs/MAGE1.25_notes/SAMI3_VOLTRON_TRACE_DEBUG_EXPORT_20260525.md
+archive = logs/sami3_trace_debug_export_smoke_20260525/
+```
+
+The export is default-off and controlled by:
+
+```text
+VOLTRON_TRACE_DEBUG_FILE
+VOLTRON_TRACE_DEBUG_MAX_TUBES
+```
+
+Runtime smoke:
+
+```text
+jobid = 7677855
+state = COMPLETED
+exit = 0:0
+elapsed = 00:01:00
+node = qhcn349
+trace_count = 8
+run_complete = 1
+```
+
+The HDF5 diagnostic writes `/TraceLineDebug` with traced nodes, magnetic-field
+vectors, `dl_over_B_edge`, active-edge mask, and source tube indices.  The
+smoke file has no NaN/Inf in checked datasets.  The current export rewrites the
+same HDF5 group on each `genVoltTubes` call, so it is a final-update debug
+snapshot, not a time-series format.
+
+Next work order after this gate:
+
+```text
+1. Add source_i/source_j filtering so the export targets closure-failing source
+   cells instead of the first eligible tubes.
+2. Compare trace-edge ds/B quadrature with the active bVol ledger.
+3. Build the next sparse SAMI3 -> Voltron -> RAIJU product from trace edges.
+4. Re-run the target-domain closure validator as the acceptance gate.
+```
+
+### Previous Completed Gate: Active bVol Helper MPI Datatype Fix
 
 The active bVol ledger patch added two real fields to `Tube_T`.  The serial
 Voltron smoke already passed, but the helper MPI path sends `Tube_T` using a

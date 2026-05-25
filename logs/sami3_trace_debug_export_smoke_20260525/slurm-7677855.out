@@ -1,0 +1,28 @@
+job_id=7677855
+node_list=qhcn349
+start_time=2026-05-25 23:34:28 +0800
+voltron_exe=/home/jiaoy_group/jiaoy/data/MAGE1.25/build_gr_sami3_moments_20260523/bin/voltron.x
+trace_debug_file=/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_trace_debug_smoke_20260525/sami3_trace_debug_smoke.traceDebug.h5
+trace_debug_max_tubes=8
+ldd_missing=0
+===== TRACE DEBUG SMOKE =====
+run_complete=1
+end_time=2026-05-25 23:35:28 +0800
+-rw-r--r-- 1 jiaoy jiaoy_group  63M May 25 23:35 sami3_moments_active_bvol_ledger_smoke2.gam.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   56 May 25 23:35 sami3_moments_active_bvol_ledger_smoke2.gam.Res.XXXXX.h5 -> sami3_moments_active_bvol_ledger_smoke2.gam.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  59M May 25 23:35 sami3_moments_active_bvol_ledger_smoke2.gam.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  19M May 25 23:35 sami3_moments_active_bvol_ledger_smoke2.gamCpl.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   59 May 25 23:35 sami3_moments_active_bvol_ledger_smoke2.gamCpl.Res.XXXXX.h5 -> sami3_moments_active_bvol_ledger_smoke2.gamCpl.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 1.7M May 25 23:35 sami3_moments_active_bvol_ledger_smoke2.gamCpl.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 6.3M May 25 23:35 sami3_moments_active_bvol_ledger_smoke2.mix.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   56 May 25 23:35 sami3_moments_active_bvol_ledger_smoke2.mix.Res.XXXXX.h5 -> sami3_moments_active_bvol_ledger_smoke2.mix.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  33M May 25 23:35 sami3_moments_active_bvol_ledger_smoke2.mix.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 3.6M May 25 23:35 sami3_moments_active_bvol_ledger_smoke2.raiCpl.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   59 May 25 23:35 sami3_moments_active_bvol_ledger_smoke2.raiCpl.Res.XXXXX.h5 -> sami3_moments_active_bvol_ledger_smoke2.raiCpl.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 129M May 25 23:35 sami3_moments_active_bvol_ledger_smoke2.raiju.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   58 May 25 23:35 sami3_moments_active_bvol_ledger_smoke2.raiju.Res.XXXXX.h5 -> sami3_moments_active_bvol_ledger_smoke2.raiju.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  38M May 25 23:35 sami3_moments_active_bvol_ledger_smoke2.raiju.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  28M May 25 23:35 sami3_moments_active_bvol_ledger_smoke2.volt.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   57 May 25 23:35 sami3_moments_active_bvol_ledger_smoke2.volt.Res.XXXXX.h5 -> sami3_moments_active_bvol_ledger_smoke2.volt.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  19M May 25 23:35 sami3_moments_active_bvol_ledger_smoke2.volt.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 9.8M May 25 23:35 sami3_trace_debug_smoke.traceDebug.h5

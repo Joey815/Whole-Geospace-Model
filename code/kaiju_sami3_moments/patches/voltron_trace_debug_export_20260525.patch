@@ -1,0 +1,179 @@
+diff --git a/src/voltron/voltCplHelper.F90 b/src/voltron/voltCplHelper.F90
+index 4a685b6..29b96c5 100644
+--- a/src/voltron/voltCplHelper.F90
++++ b/src/voltron/voltCplHelper.F90
+@@ -4,6 +4,7 @@ module voltCplHelper
+     use voltTypes
+     use voltCplTypes
+     use tubehelper
++    use ioH5
+ 
+     implicit none
+ 
+@@ -19,6 +20,8 @@ module voltCplHelper
+         ! Now pack into tubeShell
+         call tubes2Shell(vApp%shGrid, vApp%State%ijTubes, vApp%State%tubeShell)
+ 
++        call writeTraceDebug(vApp)
++
+     end subroutine genVoltTubes
+ 
+     subroutine calcTubes(vApp)
+@@ -75,4 +78,157 @@ module voltCplHelper
+ 
+     end subroutine calcTubes
+ 
++    subroutine getTraceDebugConfig(doDebug, outFile, maxTubes)
++        logical, intent(out) :: doDebug
++        character(len=strLen), intent(out) :: outFile
++        integer, intent(out) :: maxTubes
++
++        character(len=strLen) :: envValue
++        integer :: envLen, envStatus, ios
++
++        doDebug = .false.
++        outFile = "NONE"
++        maxTubes = 16
++
++        call get_environment_variable("VOLTRON_TRACE_DEBUG_FILE", envValue, &
++                                      length=envLen, status=envStatus)
++        if (envStatus /= 0 .or. envLen <= 0) return
++        outFile = adjustl(envValue(1:envLen))
++        if (trim(outFile) == "" .or. trim(outFile) == "NONE") return
++        doDebug = .true.
++
++        call get_environment_variable("VOLTRON_TRACE_DEBUG_MAX_TUBES", envValue, &
++                                      length=envLen, status=envStatus)
++        if (envStatus == 0 .and. envLen > 0) then
++            read(envValue(1:envLen), *, iostat=ios) maxTubes
++            if (ios /= 0) maxTubes = 16
++        endif
++        maxTubes = max(1, min(maxTubes, 256))
++
++    end subroutine getTraceDebugConfig
++
++    subroutine writeTraceDebug(vApp)
++        class(voltApp_T), intent(inout) :: vApp
++
++        character(len=strLen) :: outFile
++        logical :: doDebug, doSH, doNH
++        integer :: maxTubes, maxNodes, maxEdges
++        integer :: i, j, k, n, node, edge, nNode, nEdge
++        real(rp) :: seedR, eqR, mhd_Rin, dl, bMag
++        real(rp), dimension(NDIM) :: xyz0
++        type(magLine_T) :: magLine
++        type(IOVAR_T), dimension(30) :: IOVars
++        real(rp), allocatable :: source_i(:), source_j(:), source_topo(:)
++        real(rp), allocatable :: source_nm(:), source_np(:), node_count(:), edge_count(:)
++        real(rp), allocatable :: node_s_index(:,:), edge_left_s_index(:,:), edge_right_s_index(:,:)
++        real(rp), allocatable :: xyz_node(:,:,:), bxyz_node(:,:,:), ijk_node(:,:,:)
++        real(rp), allocatable :: magb_node(:,:), dl_over_b_edge(:,:), active_edge_mask(:,:)
++
++        call getTraceDebugConfig(doDebug, outFile, maxTubes)
++        if (.not. doDebug) return
++
++        maxNodes = 2*MaxFL + 1
++        maxEdges = maxNodes - 1
++        allocate(source_i(maxTubes), source_j(maxTubes), source_topo(maxTubes))
++        allocate(source_nm(maxTubes), source_np(maxTubes), node_count(maxTubes), edge_count(maxTubes))
++        allocate(node_s_index(maxNodes, maxTubes))
++        allocate(edge_left_s_index(maxEdges, maxTubes), edge_right_s_index(maxEdges, maxTubes))
++        allocate(xyz_node(maxNodes, maxTubes, NDIM), bxyz_node(maxNodes, maxTubes, NDIM))
++        allocate(ijk_node(maxNodes, maxTubes, NDIM))
++        allocate(magb_node(maxNodes, maxTubes), dl_over_b_edge(maxEdges, maxTubes))
++        allocate(active_edge_mask(maxEdges, maxTubes))
++
++        source_i = 0.0; source_j = 0.0; source_topo = 0.0
++        source_nm = 0.0; source_np = 0.0; node_count = 0.0; edge_count = 0.0
++        node_s_index = 0.0; edge_left_s_index = 0.0; edge_right_s_index = 0.0
++        xyz_node = 0.0; bxyz_node = 0.0; ijk_node = 0.0; magb_node = 0.0
++        dl_over_b_edge = 0.0; active_edge_mask = 0.0
++
++        associate(sh=>vApp%shGrid, ebApp=>vApp%ebTrcApp, ebGr=>vApp%ebTrcApp%ebState%ebGr)
++            mhd_Rin = norm2(ebGr%xyz(ebGr%is+2,ebGr%js,ebGr%ks,:))
++            seedR = sh%radius
++            n = 0
++            do j=sh%js,sh%je+1
++                do i=sh%is,sh%ie+1
++                    if (n >= maxTubes) exit
++                    xyz0 = seedR*[sin(sh%th(i))*cos(sh%ph(j)), &
++                                  sin(sh%th(i))*sin(sh%ph(j)), &
++                                  cos(sh%th(i))]
++                    eqR = DipColat2L(sh%thRp(i))
++                    if (eqR .le. mhd_Rin) cycle
++
++                    xyz0 = DipoleShift(xyz0, seedR + TINY)
++                    if (xyz0(ZDIR) < 0) then
++                        doNH = .false.
++                        doSH = .true.
++                    else
++                        doNH = .true.
++                        doSH = .false.
++                    endif
++
++                    call CleanLine(magLine)
++                    call genLine(ebApp%ebModel, ebApp%ebState, xyz0, ebApp%ebState%eb1%time, magLine, &
++                                 doNHO=doNH, doSHO=doSH)
++                    if (.not. magLine%isGood) cycle
++
++                    n = n + 1
++                    source_i(n) = real(i, rp)
++                    source_j(n) = real(j, rp)
++                    source_topo(n) = real(vApp%State%ijTubes(i,j)%topo, rp)
++                    source_nm(n) = real(magLine%Nm, rp)
++                    source_np(n) = real(magLine%Np, rp)
++                    nNode = magLine%Nm + magLine%Np + 1
++                    nEdge = max(0, nNode - 1)
++                    node_count(n) = real(nNode, rp)
++                    edge_count(n) = real(nEdge, rp)
++
++                    do k=-magLine%Nm,magLine%Np
++                        node = k + magLine%Nm + 1
++                        node_s_index(node,n) = real(k, rp)
++                        xyz_node(node,n,:) = magLine%xyz(k,:)
++                        bxyz_node(node,n,:) = magLine%Bxyz(k,:)
++                        ijk_node(node,n,:) = real(magLine%ijk(k,:), rp)
++                        magb_node(node,n) = magLine%magB(k)
++                    enddo
++                    do k=-magLine%Nm,magLine%Np-1
++                        edge = k + magLine%Nm + 1
++                        edge_left_s_index(edge,n) = real(k, rp)
++                        edge_right_s_index(edge,n) = real(k+1, rp)
++                        dl = norm2(magLine%xyz(k+1,:) - magLine%xyz(k,:))
++                        bMag = 0.5*(magLine%magB(k+1) + magLine%magB(k))
++                        dl_over_b_edge(edge,n) = dl/max(bMag, TINY)
++                        if (magLine%ijk(k,XDIR) >= ebGr%is .and. magLine%ijk(k+1,XDIR) >= ebGr%is) then
++                            active_edge_mask(edge,n) = 1.0
++                        endif
++                    enddo
++                enddo
++                if (n >= maxTubes) exit
++            enddo
++        end associate
++
++        call ClearIO(IOVars)
++        call AddOutVar(IOVars, "trace_count", real(n, rp))
++        call AddOutVar(IOVars, "max_nodes", real(maxNodes, rp))
++        call AddOutVar(IOVars, "max_edges", real(maxEdges, rp))
++        call AddOutVar(IOVars, "source_i", source_i, uStr="index", dStr="Voltron TubeShell i index.")
++        call AddOutVar(IOVars, "source_j", source_j, uStr="index", dStr="Voltron TubeShell j index.")
++        call AddOutVar(IOVars, "source_topo", source_topo, uStr="enum", dStr="Tube topology from ijTubes.")
++        call AddOutVar(IOVars, "source_Nm", source_nm, uStr="count", dStr="Number of negative-direction trace nodes.")
++        call AddOutVar(IOVars, "source_Np", source_np, uStr="count", dStr="Number of positive-direction trace nodes.")
++        call AddOutVar(IOVars, "node_count", node_count, uStr="count", dStr="Valid node count per exported trace.")
++        call AddOutVar(IOVars, "edge_count", edge_count, uStr="count", dStr="Valid edge count per exported trace.")
++        call AddOutVar(IOVars, "node_s_index", node_s_index, uStr="index", dStr="Original magLine node index k.")
++        call AddOutVar(IOVars, "edge_left_s_index", edge_left_s_index, uStr="index", dStr="Left node index for each edge.")
++        call AddOutVar(IOVars, "edge_right_s_index", edge_right_s_index, uStr="index", dStr="Right node index for each edge.")
++        call AddOutVar(IOVars, "xyz_node", xyz_node, uStr="Rp", dStr="Traced field-line node coordinates.")
++        call AddOutVar(IOVars, "Bxyz_node", bxyz_node, uStr="code", dStr="Traced field-line magnetic-field vector.")
++        call AddOutVar(IOVars, "ijk_node", ijk_node, uStr="index", dStr="CHIMP ebGrid localization index for each node.")
++        call AddOutVar(IOVars, "magB_node", magb_node, uStr="code", dStr="Magnitude of Bxyz_node.")
++        call AddOutVar(IOVars, "dl_over_B_edge", dl_over_b_edge, uStr="Rp/codeB", dStr="Edge quadrature weight dl / B.")
++        call AddOutVar(IOVars, "active_edge_mask", active_edge_mask, uStr="logical", dStr="1 where both edge endpoints are inside the active ebGrid radial domain.")
++        call WriteVars(IOVars, .false., trim(outFile), "/TraceLineDebug")
++        write(*,*) "VOLTRON_TRACE_DEBUG wrote ", n, " traces to ", trim(outFile)
++
++    end subroutine writeTraceDebug
++
+ end module voltCplHelper

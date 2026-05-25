@@ -1,0 +1,346 @@
+{
+  "datasets": {
+    "Bxyz_node": {
+      "dtype": "float64",
+      "finite_count": 240024,
+      "inf_count": 0,
+      "max": 35929.55209123773,
+      "mean": -232.64325140412677,
+      "min": -209412.3866438486,
+      "nan_count": 0,
+      "shape": [
+        3,
+        8,
+        10001
+      ],
+      "total_count": 240024
+    },
+    "active_edge_mask": {
+      "dtype": "float64",
+      "finite_count": 80000,
+      "inf_count": 0,
+      "max": 1.0,
+      "mean": 0.067325,
+      "min": 0.0,
+      "nan_count": 0,
+      "shape": [
+        8,
+        10000
+      ],
+      "total_count": 80000
+    },
+    "dl_over_B_edge": {
+      "dtype": "float64",
+      "finite_count": 80000,
+      "inf_count": 0,
+      "max": 23.647877137659812,
+      "mean": 0.005324857600300784,
+      "min": 0.0,
+      "nan_count": 0,
+      "shape": [
+        8,
+        10000
+      ],
+      "total_count": 80000
+    },
+    "edge_count": {
+      "dtype": "float64",
+      "finite_count": 8,
+      "inf_count": 0,
+      "max": 894.0,
+      "mean": 673.25,
+      "min": 360.0,
+      "nan_count": 0,
+      "shape": [
+        8
+      ],
+      "total_count": 8
+    },
+    "edge_left_s_index": {
+      "dtype": "float64",
+      "finite_count": 80000,
+      "inf_count": 0,
+      "max": 0.0,
+      "mean": -24.2202,
+      "min": -894.0,
+      "nan_count": 0,
+      "shape": [
+        8,
+        10000
+      ],
+      "total_count": 80000
+    },
+    "edge_right_s_index": {
+      "dtype": "float64",
+      "finite_count": 80000,
+      "inf_count": 0,
+      "max": 0.0,
+      "mean": -24.152875,
+      "min": -893.0,
+      "nan_count": 0,
+      "shape": [
+        8,
+        10000
+      ],
+      "total_count": 80000
+    },
+    "ijk_node": {
+      "dtype": "float64",
+      "finite_count": 240024,
+      "inf_count": 0,
+      "max": 48.0,
+      "mean": 1.5516656667666566,
+      "min": 0.0,
+      "nan_count": 0,
+      "shape": [
+        3,
+        8,
+        10001
+      ],
+      "total_count": 240024
+    },
+    "magB_node": {
+      "dtype": "float64",
+      "finite_count": 80008,
+      "inf_count": 0,
+      "max": 209412.3866438486,
+      "mean": 701.8160459663817,
+      "min": 0.0,
+      "nan_count": 0,
+      "shape": [
+        8,
+        10001
+      ],
+      "total_count": 80008
+    },
+    "node_count": {
+      "dtype": "float64",
+      "finite_count": 8,
+      "inf_count": 0,
+      "max": 895.0,
+      "mean": 674.25,
+      "min": 361.0,
+      "nan_count": 0,
+      "shape": [
+        8
+      ],
+      "total_count": 8
+    },
+    "node_s_index": {
+      "dtype": "float64",
+      "finite_count": 80008,
+      "inf_count": 0,
+      "max": 0.0,
+      "mean": -24.21777822217778,
+      "min": -894.0,
+      "nan_count": 0,
+      "shape": [
+        8,
+        10001
+      ],
+      "total_count": 80008
+    },
+    "source_Nm": {
+      "dtype": "float64",
+      "finite_count": 8,
+      "inf_count": 0,
+      "max": 894.0,
+      "mean": 673.25,
+      "min": 360.0,
+      "nan_count": 0,
+      "shape": [
+        8
+      ],
+      "total_count": 8
+    },
+    "source_Np": {
+      "dtype": "float64",
+      "finite_count": 8,
+      "inf_count": 0,
+      "max": 0.0,
+      "mean": 0.0,
+      "min": 0.0,
+      "nan_count": 0,
+      "shape": [
+        8
+      ],
+      "total_count": 8
+    },
+    "source_i": {
+      "dtype": "float64",
+      "finite_count": 8,
+      "inf_count": 0,
+      "max": 8.0,
+      "mean": 4.5,
+      "min": 1.0,
+      "nan_count": 0,
+      "shape": [
+        8
+      ],
+      "total_count": 8
+    },
+    "source_j": {
+      "dtype": "float64",
+      "finite_count": 8,
+      "inf_count": 0,
+      "max": 1.0,
+      "mean": 1.0,
+      "min": 1.0,
+      "nan_count": 0,
+      "shape": [
+        8
+      ],
+      "total_count": 8
+    },
+    "source_topo": {
+      "dtype": "float64",
+      "finite_count": 8,
+      "inf_count": 0,
+      "max": 2.0,
+      "mean": 1.75,
+      "min": 1.0,
+      "nan_count": 0,
+      "shape": [
+        8
+      ],
+      "total_count": 8
+    },
+    "xyz_node": {
+      "dtype": "float64",
+      "finite_count": 240024,
+      "inf_count": 0,
+      "max": 79.79423094914584,
+      "mean": 0.21965693158642322,
+      "min": -68.27483793243334,
+      "nan_count": 0,
+      "shape": [
+        3,
+        8,
+        10001
+      ],
+      "total_count": 240024
+    }
+  },
+  "exists": true,
+  "file": "/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_trace_debug_smoke_20260525/sami3_trace_debug_smoke.traceDebug.h5",
+  "group_attrs": {
+    "max_edges": 10000.0,
+    "max_nodes": 10001.0,
+    "trace_count": 8.0
+  },
+  "per_trace": [
+    {
+      "active_edge_count": 360,
+      "active_edge_fraction": 1.0,
+      "dl_over_B_sum_active": 392.8164093150435,
+      "dl_over_B_sum_all": 392.8164093150435,
+      "edge_count": 360,
+      "magB_max": 209412.3866438486,
+      "magB_min": 0.06400789828169873,
+      "node_count": 361,
+      "source_i": 1,
+      "source_j": 1,
+      "source_topo": 1,
+      "trace_index": 0
+    },
+    {
+      "active_edge_count": 533,
+      "active_edge_fraction": 1.0,
+      "dl_over_B_sum_active": 14.533539827719867,
+      "dl_over_B_sum_all": 14.533539827719867,
+      "edge_count": 533,
+      "magB_max": 209388.46620871074,
+      "magB_min": 1.316690977427391,
+      "node_count": 534,
+      "source_i": 2,
+      "source_j": 1,
+      "source_topo": 1,
+      "trace_index": 1
+    },
+    {
+      "active_edge_count": 894,
+      "active_edge_fraction": 1.0,
+      "dl_over_B_sum_active": 6.929064546404496,
+      "dl_over_B_sum_all": 6.929064546404496,
+      "edge_count": 894,
+      "magB_max": 209316.717656746,
+      "magB_min": 5.728072737265135,
+      "node_count": 895,
+      "source_i": 3,
+      "source_j": 1,
+      "source_topo": 2,
+      "trace_index": 2
+    },
+    {
+      "active_edge_count": 862,
+      "active_edge_fraction": 1.0,
+      "dl_over_B_sum_active": 4.066445940981238,
+      "dl_over_B_sum_all": 4.066445940981238,
+      "edge_count": 862,
+      "magB_max": 209197.1792564951,
+      "magB_min": 8.102918139060387,
+      "node_count": 863,
+      "source_i": 4,
+      "source_j": 1,
+      "source_topo": 2,
+      "trace_index": 3
+    },
+    {
+      "active_edge_count": 835,
+      "active_edge_fraction": 1.0,
+      "dl_over_B_sum_active": 2.6870521933477396,
+      "dl_over_B_sum_all": 2.6870521933477396,
+      "edge_count": 835,
+      "magB_max": 209029.91481621846,
+      "magB_min": 10.587533119800804,
+      "node_count": 836,
+      "source_i": 5,
+      "source_j": 1,
+      "source_topo": 2,
+      "trace_index": 4
+    },
+    {
+      "active_edge_count": 718,
+      "active_edge_fraction": 1.0,
+      "dl_over_B_sum_active": 2.011066574124194,
+      "dl_over_B_sum_all": 2.011066574124194,
+      "edge_count": 718,
+      "magB_max": 208815.01372508192,
+      "magB_min": 13.332464097095103,
+      "node_count": 719,
+      "source_i": 6,
+      "source_j": 1,
+      "source_topo": 2,
+      "trace_index": 5
+    },
+    {
+      "active_edge_count": 602,
+      "active_edge_fraction": 1.0,
+      "dl_over_B_sum_active": 1.6177995106558576,
+      "dl_over_B_sum_all": 1.6177995106558576,
+      "edge_count": 602,
+      "magB_max": 208552.59101110444,
+      "magB_min": 16.4375502173897,
+      "node_count": 603,
+      "source_i": 7,
+      "source_j": 1,
+      "source_topo": 2,
+      "trace_index": 6
+    },
+    {
+      "active_edge_count": 582,
+      "active_edge_fraction": 1.0,
+      "dl_over_B_sum_active": 1.3272301157856767,
+      "dl_over_B_sum_all": 1.3272301157856767,
+      "edge_count": 582,
+      "magB_max": 208242.7874161622,
+      "magB_min": 19.790583499882562,
+      "node_count": 583,
+      "source_i": 8,
+      "source_j": 1,
+      "source_topo": 2,
+      "trace_index": 7
+    }
+  ],
+  "size_bytes": 10254208
+}

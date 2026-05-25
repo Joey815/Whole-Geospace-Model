@@ -75,6 +75,12 @@ active bVol used and 0.8878074062968169 outside the RAIJU target domain.
 The active-bVol patch also updates the helper MPI `Tube_T` datatype for the two
 new real fields; the OpenMPI `voltron_mpi.x` target rebuilds cleanly after that
 fix.
+A default-off Voltron traced-line debug export is now implemented and
+smoke-tested.  The smoke job 7677855 completed 0:0 and wrote
+`/TraceLineDebug` with 8 sampled field lines, `xyz(s)`, `B(s)`, `dl/B`, active
+edge masks, and source indices.  The checked HDF5 datasets are finite.  The
+next geometry step is to target the closure-failing source cells and rebuild
+the sparse product from trace-edge quadrature.
 The stage-2 mapping products now have a repeatable HDF5 QC gate:
 `scripts/validate_sami3_raiju_mapping_product.py` validates
 `/RaiCplMomentsOnly` and `/MappingQuality` finite values, masks, coverage,

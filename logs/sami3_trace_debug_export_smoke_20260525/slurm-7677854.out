@@ -1,0 +1,12 @@
+job_id=7677854
+node_list=qhcn349
+start_time=2026-05-25 23:33:41 +0800
+voltron_exe=/home/jiaoy_group/jiaoy/data/MAGE1.25/build_gr_sami3_moments_20260523/bin/voltron.x
+trace_debug_file=/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_trace_debug_smoke_20260525/sami3_trace_debug_smoke.traceDebug.h5
+trace_debug_max_tubes=8
+ldd_missing=0
+===== TRACE DEBUG SMOKE =====
+run_complete=1
+end_time=2026-05-25 23:33:41 +0800
+ls: cannot access 'sami3_trace_debug_smoke.traceDebug.h5': No such file or directory
+ls: cannot access 'sami3_moments_active_bvol_ledger_smoke2*.h5': No such file or directory

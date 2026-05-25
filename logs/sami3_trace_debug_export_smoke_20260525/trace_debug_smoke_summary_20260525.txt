@@ -1,0 +1,29 @@
+trace_debug_file=/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_trace_debug_smoke_20260525/sami3_trace_debug_smoke.traceDebug.h5
+size_bytes=10254208
+group_attrs={'max_edges': 10000.0, 'max_nodes': 10001.0, 'trace_count': 8.0}
+datasets:
+  Bxyz_node: shape=[3, 8, 10001] dtype=float64 finite=240024/240024 nan=0 inf=0
+  active_edge_mask: shape=[8, 10000] dtype=float64 finite=80000/80000 nan=0 inf=0
+  dl_over_B_edge: shape=[8, 10000] dtype=float64 finite=80000/80000 nan=0 inf=0
+  edge_count: shape=[8] dtype=float64 finite=8/8 nan=0 inf=0
+  edge_left_s_index: shape=[8, 10000] dtype=float64 finite=80000/80000 nan=0 inf=0
+  edge_right_s_index: shape=[8, 10000] dtype=float64 finite=80000/80000 nan=0 inf=0
+  ijk_node: shape=[3, 8, 10001] dtype=float64 finite=240024/240024 nan=0 inf=0
+  magB_node: shape=[8, 10001] dtype=float64 finite=80008/80008 nan=0 inf=0
+  node_count: shape=[8] dtype=float64 finite=8/8 nan=0 inf=0
+  node_s_index: shape=[8, 10001] dtype=float64 finite=80008/80008 nan=0 inf=0
+  source_Nm: shape=[8] dtype=float64 finite=8/8 nan=0 inf=0
+  source_Np: shape=[8] dtype=float64 finite=8/8 nan=0 inf=0
+  source_i: shape=[8] dtype=float64 finite=8/8 nan=0 inf=0
+  source_j: shape=[8] dtype=float64 finite=8/8 nan=0 inf=0
+  source_topo: shape=[8] dtype=float64 finite=8/8 nan=0 inf=0
+  xyz_node: shape=[3, 8, 10001] dtype=float64 finite=240024/240024 nan=0 inf=0
+per_trace:
+  trace=0 src=(1,1) topo=1 nodes=361 edges=360 active=360 active_frac=1.000000 dlB_all=392.816409 dlB_active=392.816409 B=[0.0640078983,209412.387]
+  trace=1 src=(2,1) topo=1 nodes=534 edges=533 active=533 active_frac=1.000000 dlB_all=14.5335398 dlB_active=14.5335398 B=[1.31669098,209388.466]
+  trace=2 src=(3,1) topo=2 nodes=895 edges=894 active=894 active_frac=1.000000 dlB_all=6.92906455 dlB_active=6.92906455 B=[5.72807274,209316.718]
+  trace=3 src=(4,1) topo=2 nodes=863 edges=862 active=862 active_frac=1.000000 dlB_all=4.06644594 dlB_active=4.06644594 B=[8.10291814,209197.179]
+  trace=4 src=(5,1) topo=2 nodes=836 edges=835 active=835 active_frac=1.000000 dlB_all=2.68705219 dlB_active=2.68705219 B=[10.5875331,209029.915]
+  trace=5 src=(6,1) topo=2 nodes=719 edges=718 active=718 active_frac=1.000000 dlB_all=2.01106657 dlB_active=2.01106657 B=[13.3324641,208815.014]
+  trace=6 src=(7,1) topo=2 nodes=603 edges=602 active=602 active_frac=1.000000 dlB_all=1.61779951 dlB_active=1.61779951 B=[16.4375502,208552.591]
+  trace=7 src=(8,1) topo=2 nodes=583 edges=582 active=582 active_frac=1.000000 dlB_all=1.32723012 dlB_active=1.32723012 B=[19.7905835,208242.787]
