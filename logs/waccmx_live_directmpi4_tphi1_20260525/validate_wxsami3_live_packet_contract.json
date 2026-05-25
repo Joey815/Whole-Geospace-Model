@@ -1,0 +1,786 @@
+{
+  "checks": [
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi4_tphi1_20260525_0000",
+      "name": "run_dir_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi4_tphi1_20260525_0000/wxsami3_live_meta.json",
+      "name": "live_meta_exists",
+      "ok": true
+    },
+    {
+      "detail": "wxsami3-live-payload-v2",
+      "name": "meta_payload_version",
+      "ok": true
+    },
+    {
+      "detail": "CAM phys_state(:)",
+      "name": "meta_runtime_source",
+      "ok": true
+    },
+    {
+      "detail": "runtime_live_packet",
+      "name": "meta_actual_transport",
+      "ok": true
+    },
+    {
+      "detail": "packet_index=0 expected=0",
+      "name": "meta_last_packet_index",
+      "ok": true
+    },
+    {
+      "detail": "300.0",
+      "name": "meta_dtime_phys_positive",
+      "ok": true
+    },
+    {
+      "detail": "1",
+      "name": "meta_send_every_nsteps_positive",
+      "ok": true
+    },
+    {
+      "detail": "packet_hour=0.0 expected=0.0",
+      "name": "meta_packet_hour_matches_nstep_dtime",
+      "ok": true
+    },
+    {
+      "detail": "20260522 expected=20260522",
+      "name": "meta_payload_header_magic",
+      "ok": true
+    },
+    {
+      "detail": "304 expected=304",
+      "name": "meta_payload_header_nz",
+      "ok": true
+    },
+    {
+      "detail": "124 expected=124",
+      "name": "meta_payload_header_nf",
+      "ok": true
+    },
+    {
+      "detail": "5 expected=5",
+      "name": "meta_payload_header_nl",
+      "ok": true
+    },
+    {
+      "detail": "7 expected=7",
+      "name": "meta_payload_header_nneut",
+      "ok": true
+    },
+    {
+      "detail": "source_columns=13824 expected=13824",
+      "name": "meta_runtime_map_source_columns",
+      "ok": true
+    },
+    {
+      "detail": "npoints=3618816",
+      "name": "meta_runtime_map_npoints",
+      "ok": true
+    },
+    {
+      "detail": "K expected=K",
+      "name": "meta_source_unit_temperature",
+      "ok": true
+    },
+    {
+      "detail": "m/s expected=m/s",
+      "name": "meta_source_unit_wind",
+      "ok": true
+    },
+    {
+      "detail": "Pa expected=Pa",
+      "name": "meta_source_unit_pressure",
+      "ok": true
+    },
+    {
+      "detail": "m expected=m",
+      "name": "meta_source_unit_height",
+      "ok": true
+    },
+    {
+      "detail": "mass_mixing_ratio expected=mass_mixing_ratio",
+      "name": "meta_source_unit_composition",
+      "ok": true
+    },
+    {
+      "detail": "cm^-3 expected=cm^-3",
+      "name": "meta_payload_unit_density",
+      "ok": true
+    },
+    {
+      "detail": "K expected=K",
+      "name": "meta_payload_unit_temperature",
+      "ok": true
+    },
+    {
+      "detail": "cm/s expected=cm/s",
+      "name": "meta_payload_unit_wind",
+      "ok": true
+    },
+    {
+      "detail": "q*mbarv/species_mw*pmid/(kB*T)*1e-6 -> cm^-3",
+      "name": "meta_density_conversion",
+      "ok": true
+    },
+    {
+      "detail": "['O', 'O2', 'H', 'N', 'NO', 'N2', 'He']",
+      "name": "meta_source_species_order",
+      "ok": true
+    },
+    {
+      "detail": "['H', 'O', 'NO', 'O2', 'He', 'N2', 'N']",
+      "name": "meta_payload_species_order",
+      "ok": true
+    },
+    {
+      "detail": "212",
+      "name": "meta_source_flag_mpi_tag",
+      "ok": true
+    },
+    {
+      "detail": "{'WACCMX_VALID': 1, 'SAMI3_NATIVE_ABOVE_TOP': 2, 'SAMI3_NATIVE_N2_INVALID': 3, 'SAMI3_NATIVE_OTHER_INVALID': 4}",
+      "name": "meta_source_flag_values",
+      "ok": true
+    },
+    {
+      "detail": "57",
+      "name": "meta_species_index_O",
+      "ok": true
+    },
+    {
+      "detail": "58",
+      "name": "meta_species_index_O2",
+      "ok": true
+    },
+    {
+      "detail": "37",
+      "name": "meta_species_index_H",
+      "ok": true
+    },
+    {
+      "detail": "51",
+      "name": "meta_species_index_N",
+      "ok": true
+    },
+    {
+      "detail": "54",
+      "name": "meta_species_index_NO",
+      "ok": true
+    },
+    {
+      "detail": "-1",
+      "name": "meta_species_index_N2_residual",
+      "ok": true
+    },
+    {
+      "detail": "-1",
+      "name": "meta_species_index_He_native",
+      "ok": true
+    },
+    {
+      "detail": "invalid",
+      "name": "meta_n2_negative_mode",
+      "ok": true
+    },
+    {
+      "detail": "payload value -1 so SAMI3 native/MSIS He is retained",
+      "name": "meta_he_policy",
+      "ok": true
+    },
+    {
+      "detail": "payload value 0; CAM omega diagnostic only",
+      "name": "meta_w_policy",
+      "ok": true
+    },
+    {
+      "detail": "flag_total=6031360 samples=6031360",
+      "name": "meta_source_flags_sum",
+      "ok": true
+    },
+    {
+      "detail": "invalid=1819595 above+n2+other=1819595",
+      "name": "meta_invalid_sum",
+      "ok": true
+    },
+    {
+      "detail": "above_live_top=1641376 source_flag=1641376",
+      "name": "meta_above_top_flag_count",
+      "ok": true
+    },
+    {
+      "detail": "n2_residual_negative=178219 source_flag=178219",
+      "name": "meta_n2_invalid_flag_count",
+      "ok": true
+    },
+    {
+      "detail": "0",
+      "name": "meta_other_invalid_zero",
+      "ok": true
+    },
+    {
+      "detail": "valid_i=4211765 valid_f=4211765 source_valid=4211765",
+      "name": "meta_checksum_valid_counts",
+      "ok": true
+    },
+    {
+      "detail": "invalid_i=1819595 invalid_f=1819595 runtime_invalid=1819595",
+      "name": "meta_checksum_invalid_counts",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi4_tphi1_20260525_0000/live_dump_summary_pkt000000.txt",
+      "name": "packet0_summary_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi4_tphi1_20260525_0000/replay_builder_pkt000000.out",
+      "name": "packet0_replay_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi4_tphi1_20260525_0000/recv_qc_compare_pkt000000.txt",
+      "name": "packet0_recv_compare_exists",
+      "ok": true
+    },
+    {
+      "detail": "total_cols=13824 expected=13824",
+      "name": "packet0_summary_source_columns",
+      "ok": true
+    },
+    {
+      "detail": "packets=[0]",
+      "name": "packet0_summary_packet_index",
+      "ok": true
+    },
+    {
+      "detail": "bad_size_files_present=False",
+      "name": "packet0_summary_no_bad_size_files",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_lat_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_lon_deg_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_T_K_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_U_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_V_m_s_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_PMID_Pa_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_ZM_m_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_MBARV_kg_mol_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_q_O_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_q_O2_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_q_H_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_q_N_bad",
+      "ok": true
+    },
+    {
+      "detail": "bad=0",
+      "name": "packet0_summary_q_NO_bad",
+      "ok": true
+    },
+    {
+      "detail": "missing=0 unique=13824 expected=13824",
+      "name": "packet0_summary_cid_coverage",
+      "ok": true
+    },
+    {
+      "detail": "min=-90.0 max=90.0 allowed=[-90.0,90.0]",
+      "name": "packet0_summary_lat_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=0.0 max=357.5 allowed=[0.0,360.0]",
+      "name": "packet0_summary_lon_deg_range",
+      "ok": true
+    },
+    {
+      "detail": "min=113.19272490765026 max=1522.7628810979916 allowed=[50.0,5000.0]",
+      "name": "packet0_summary_T_K_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-925.7242161594645 max=769.7344197674036 allowed=[-5000.0,5000.0]",
+      "name": "packet0_summary_U_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=-845.8062460574145 max=736.3650929706123 allowed=[-5000.0,5000.0]",
+      "name": "packet0_summary_V_m_s_range",
+      "ok": true
+    },
+    {
+      "detail": "min=4.055140885992663e-08 max=107321.3890267048 allowed=[0.0,200000.0]",
+      "name": "packet0_summary_PMID_Pa_range",
+      "ok": true
+    },
+    {
+      "detail": "min=48.56266690499009 max=720507.7580399793 allowed=[-1000.0,2000000.0]",
+      "name": "packet0_summary_ZM_m_range",
+      "ok": true
+    },
+    {
+      "detail": "min=14.895337165442252 max=28.874522993878628 allowed=[1.0,60.0]",
+      "name": "packet0_summary_MBARV_kg_mol_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.20521131163437e-25 max=0.9999399874408939 allowed=[-1e-12,1.1]",
+      "name": "packet0_summary_q_O_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.229295650411587e-06 max=0.23732970847615611 allowed=[-1e-12,1.1]",
+      "name": "packet0_summary_q_O2_range",
+      "ok": true
+    },
+    {
+      "detail": "min=2.913249081948255e-28 max=0.0050683000424878695 allowed=[-1e-12,1.1]",
+      "name": "packet0_summary_q_H_range",
+      "ok": true
+    },
+    {
+      "detail": "min=1.885260804240404e-23 max=0.060584943671142005 allowed=[-1e-12,1.1]",
+      "name": "packet0_summary_q_N_range",
+      "ok": true
+    },
+    {
+      "detail": "min=9.01142764707503e-19 max=0.0014346353422642934 allowed=[-1e-12,1.1]",
+      "name": "packet0_summary_q_NO_range",
+      "ok": true
+    },
+    {
+      "detail": "source_cols=13824 filled=13824 expected=13824",
+      "name": "packet0_replay_source_coverage",
+      "ok": true
+    },
+    {
+      "detail": "invalid",
+      "name": "packet0_replay_n2_mode",
+      "ok": true
+    },
+    {
+      "detail": "bad_weighted_z=0",
+      "name": "packet0_replay_bad_weighted_z",
+      "ok": true
+    },
+    {
+      "detail": "samples=6031360",
+      "name": "packet0_replay_samples_positive",
+      "ok": true
+    },
+    {
+      "detail": "initial=6031360 final=6031360",
+      "name": "packet0_replay_initial_final_samples",
+      "ok": true
+    },
+    {
+      "detail": "initial=1819595 final=1819595",
+      "name": "packet0_replay_initial_final_invalid",
+      "ok": true
+    },
+    {
+      "detail": "initial=1641376 final=1641376",
+      "name": "packet0_replay_initial_final_above_live_top",
+      "ok": true
+    },
+    {
+      "detail": "initial=4389984 final=4389984",
+      "name": "packet0_replay_initial_final_n2_residual_used",
+      "ok": true
+    },
+    {
+      "detail": "initial=178219 final=178219",
+      "name": "packet0_replay_initial_final_n2_residual_negative",
+      "ok": true
+    },
+    {
+      "detail": "n2_residual_used=4389984",
+      "name": "packet0_replay_n2_residual_used_positive",
+      "ok": true
+    },
+    {
+      "detail": "min=-0.053314608006139914 max=0.8129786925378699",
+      "name": "packet0_replay_n2_residual_bounds",
+      "ok": true
+    },
+    {
+      "detail": "ok_marker=True",
+      "name": "packet0_recv_compare_ok",
+      "ok": true
+    },
+    {
+      "detail": "ranks=32 expected=32",
+      "name": "packet0_recv_compare_ranks",
+      "ok": true
+    },
+    {
+      "detail": "occurrence=0 expected=0",
+      "name": "packet0_recv_compare_occurrence",
+      "ok": true
+    },
+    {
+      "detail": "max_rel=4.83248e-13 limit=1e-06",
+      "name": "packet0_recv_compare_max_rel",
+      "ok": true
+    },
+    {
+      "detail": "sent_packets=1 expected=1",
+      "name": "sender_live_packet_count",
+      "ok": true
+    },
+    {
+      "detail": "qc_lines=32 expected_min=32",
+      "name": "receiver_qc_line_count",
+      "ok": true
+    },
+    {
+      "detail": "present=True",
+      "name": "sami3_done",
+      "ok": true
+    },
+    {
+      "detail": "present=True",
+      "name": "waccmx_done",
+      "ok": true
+    },
+    {
+      "detail": "matches=0",
+      "name": "fatal_markers_absent",
+      "ok": true
+    }
+  ],
+  "meta": {
+    "live_meta": {
+      "actual_transport": "runtime_live_packet",
+      "density_conversion": "q*mbarv/species_mw*pmid/(kB*T)*1e-6 -> cm^-3",
+      "dtime_phys_s": 300.0,
+      "fallback_policy": {
+        "He": "payload value -1 so SAMI3 native/MSIS He is retained",
+        "N2": "CAM N2 if finite, otherwise residual closure from major species",
+        "N2_negative_mode": "invalid",
+        "W": "payload value 0; CAM omega diagnostic only",
+        "above_live_top": "payload sample marked invalid so SAMI3 native neutral state is retained",
+        "remap_scaling": "gather-to-root prototype; runtime_map_source_columns=13824; f09 production still needs distributed remap"
+      },
+      "max_packets": 1,
+      "nstep": 0,
+      "packet_hour": 0.0,
+      "packet_index": 0,
+      "payload_header": {
+        "magic": 20260522,
+        "nf": 124,
+        "nl": 5,
+        "nneut": 7,
+        "nz": 304
+      },
+      "payload_mode": "live",
+      "payload_species_order": [
+        "H",
+        "O",
+        "NO",
+        "O2",
+        "He",
+        "N2",
+        "N"
+      ],
+      "payload_units": {
+        "density": "cm^-3",
+        "temperature": "K",
+        "wind": "cm/s"
+      },
+      "payload_version": "wxsami3-live-payload-v2",
+      "runtime_map": {
+        "file": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/wxsami3_runtime_map_f19_20260523.bin",
+        "magic": 20260524,
+        "n_s": 14475264,
+        "npoints": 3618816,
+        "source_columns": 13824
+      },
+      "runtime_qc": {
+        "above_live_top": 1641376,
+        "invalid": 1819595,
+        "n2_residual_max": 0.8129786925378699,
+        "n2_residual_min": -0.053314608006139914,
+        "n2_residual_negative": 178219,
+        "n2_residual_used": 4389984,
+        "samples": 6031360
+      },
+      "runtime_source": "CAM phys_state(:)",
+      "send_every_nsteps": 1,
+      "sender_checksum": {
+        "invalid_f": 1819595,
+        "invalid_i": 1819595,
+        "scope": "sum over all runtime-sent worker payload arrays",
+        "sum_dennf": 1.4035374508155344e+20,
+        "sum_denni": 1.4035374508155344e+20,
+        "sum_tnf": 2517919366.776947,
+        "sum_tni": 2517919366.776947,
+        "sum_uf": -3705616575.653117,
+        "sum_ui": -3705616575.653117,
+        "sum_vf": 2991409860.6004586,
+        "sum_vi": 2991409860.6004586,
+        "sum_wf": 0.0,
+        "sum_wi": 0.0,
+        "valid_f": 4211765,
+        "valid_i": 4211765
+      },
+      "source_flag_mpi_tag": 212,
+      "source_flag_values": {
+        "SAMI3_NATIVE_ABOVE_TOP": 2,
+        "SAMI3_NATIVE_N2_INVALID": 3,
+        "SAMI3_NATIVE_OTHER_INVALID": 4,
+        "WACCMX_VALID": 1
+      },
+      "source_flags": {
+        "SAMI3_NATIVE_ABOVE_TOP": 1641376,
+        "SAMI3_NATIVE_HE": "policy: He payload value -1",
+        "SAMI3_NATIVE_N2_INVALID": 178219,
+        "SAMI3_NATIVE_OTHER_INVALID": 0,
+        "SAMI3_NATIVE_W": "policy: W payload value 0",
+        "WACCMX_VALID": 4211765
+      },
+      "source_species_indices": [
+        {
+          "index": 57,
+          "name": "O"
+        },
+        {
+          "index": 58,
+          "name": "O2"
+        },
+        {
+          "index": 37,
+          "name": "H"
+        },
+        {
+          "index": 51,
+          "name": "N"
+        },
+        {
+          "index": 54,
+          "name": "NO"
+        },
+        {
+          "index": -1,
+          "name": "N2"
+        },
+        {
+          "index": -1,
+          "name": "He"
+        }
+      ],
+      "source_species_order": [
+        "O",
+        "O2",
+        "H",
+        "N",
+        "NO",
+        "N2",
+        "He"
+      ],
+      "source_units": {
+        "composition": "mass_mixing_ratio",
+        "height": "m",
+        "omega": "Pa/s diagnostic only",
+        "pressure": "Pa",
+        "temperature": "K",
+        "wind": "m/s"
+      }
+    },
+    "logs": {
+      "sami3_online_receiver": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi4_tphi1_20260525_0000/sami3_online_receiver.out",
+      "waccmx_cesm": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi4_tphi1_20260525_0000/waccmx_cesm.out"
+    },
+    "packets": {
+      "0": {
+        "recv_compare": {
+          "max_abs": 2087940.0,
+          "max_rel": 4.83248e-13,
+          "occurrence": 0,
+          "ok_marker": true,
+          "packet_hour_set": [
+            0.0
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi4_tphi1_20260525_0000/recv_qc_compare_pkt000000.txt",
+          "ranks": 32,
+          "step_set": [
+            0
+          ]
+        },
+        "replay": {
+          "filled": 13824,
+          "final": {
+            "above_live_top": 1641376,
+            "bad_weighted_z": 0,
+            "invalid": 1819595,
+            "n2_residual_max": 0.8129786925378699,
+            "n2_residual_min": -0.053314608006139914,
+            "n2_residual_negative": 178219,
+            "n2_residual_used": 4389984,
+            "samples": 6031360
+          },
+          "initial": {
+            "above_live_top": 1641376,
+            "bad_weighted_z": 0,
+            "invalid": 1819595,
+            "n2_residual_max": 0.8129786925378699,
+            "n2_residual_min": -0.053314608006139914,
+            "n2_residual_negative": 178219,
+            "n2_residual_used": 4389984,
+            "samples": 6031360
+          },
+          "n2_mode": "invalid",
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi4_tphi1_20260525_0000/replay_builder_pkt000000.out",
+          "payload_prefix": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi4_tphi1_20260525_0000/replay_pkt000000/waccmx_neutral_rank",
+          "pver": 126,
+          "source_cols": 13824
+        },
+        "summary": {
+          "field_stats": {
+            "MBARV_kg_mol": {
+              "bad": 0,
+              "max": 28.874522993878628,
+              "min": 14.895337165442252
+            },
+            "PMID_Pa": {
+              "bad": 0,
+              "max": 107321.3890267048,
+              "min": 4.055140885992663e-08
+            },
+            "T_K": {
+              "bad": 0,
+              "max": 1522.7628810979916,
+              "min": 113.19272490765026
+            },
+            "U_m_s": {
+              "bad": 0,
+              "max": 769.7344197674036,
+              "min": -925.7242161594645
+            },
+            "V_m_s": {
+              "bad": 0,
+              "max": 736.3650929706123,
+              "min": -845.8062460574145
+            },
+            "ZM_m": {
+              "bad": 0,
+              "max": 720507.7580399793,
+              "min": 48.56266690499009
+            },
+            "cid": {
+              "max": 13824,
+              "min": 1,
+              "missing": 0,
+              "unique": 13824
+            },
+            "lat_deg": {
+              "bad": 0,
+              "max": 90.0,
+              "min": -90.0
+            },
+            "lon_deg": {
+              "bad": 0,
+              "max": 357.5,
+              "min": 0.0
+            },
+            "q_H": {
+              "bad": 0,
+              "max": 0.0050683000424878695,
+              "min": 2.913249081948255e-28
+            },
+            "q_He": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_N": {
+              "bad": 0,
+              "max": 0.060584943671142005,
+              "min": 1.885260804240404e-23
+            },
+            "q_N2": {
+              "bad": 1741824,
+              "max": null,
+              "min": null
+            },
+            "q_NO": {
+              "bad": 0,
+              "max": 0.0014346353422642934,
+              "min": 9.01142764707503e-19
+            },
+            "q_O": {
+              "bad": 0,
+              "max": 0.9999399874408939,
+              "min": 2.20521131163437e-25
+            },
+            "q_O2": {
+              "bad": 0,
+              "max": 0.23732970847615611,
+              "min": 9.229295650411587e-06
+            }
+          },
+          "files": 16,
+          "has_bad_size_files": false,
+          "nsteps": [
+            0
+          ],
+          "packets": [
+            0
+          ],
+          "path": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi4_tphi1_20260525_0000/live_dump_summary_pkt000000.txt",
+          "ranks": 16,
+          "total_cols": 13824
+        }
+      }
+    },
+    "run_dir": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi4_tphi1_20260525_0000"
+  },
+  "ok": true
+}

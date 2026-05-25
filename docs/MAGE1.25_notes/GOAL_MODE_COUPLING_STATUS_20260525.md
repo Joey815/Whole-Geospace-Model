@@ -20,7 +20,64 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-25 04:42:02 CST.
+Status refreshed: 2026-05-25 10:28:11 CST.
+
+### Latest Completed Gate: Live Neutral + Direct Voltron Phi, Four Frames
+
+The current same-stack WACCM-X/CESM + SAMI3 + OpenMPI Voltron direct-MPI gate is
+complete:
+
+```text
+jobid = 7668967
+jobname = wxsami3_dm4t1
+state = COMPLETED
+exit = 0:0
+elapsed = 00:10:06
+node = qhcn182
+batch MaxRSS = 63607068K
+archive = logs/waccmx_live_directmpi4_tphi1_20260525/
+doc = docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_DIRECTMPI4_RESULT_20260525.md
+```
+
+This run validated the integrated online path:
+
+```text
+WACCM-X/CESM live neutral packet from CAM phys_state(:)
+OpenMPI Voltron direct-MPI REMIX phi sender
+SAMI3 online neutral receiver
+SAMI3 direct phi receiver
+four changing phi frames
+neutral/phi time-axis consistency
+```
+
+All seven validators returned `overall=ok`:
+
+```text
+validate_remix_sami3_phi_payload
+validate_sami3_direct_phi_run_strict
+validate_wxsami3_live_packet_contract
+validate_wxsami3_source_flag_balance
+validate_wxsami3_time_axis
+validate_wxsami3_topblend_policy
+validate_wxsami3_runtime_map
+```
+
+Cadence conclusion: for the current five-second Voltron direct-phi frame
+spacing, `SAMI3_TPHI=1.` is required.  The earlier four-frame attempts with
+`SAMI3_TPHI=7.` completed the communication chain but failed the time-axis
+validator because SAMI3 pulled frame 1/2 after their validity windows.
+
+Next work order after this gate:
+
+```text
+1. Turn the direct-MPI smoke into a multi-neutral-packet cadence test.
+2. Replace SAMI3_PHI_SKIP_MADALA_AFTER_FINAL / WACCMX_SAMI3_PHI_STOP_AFTER_DONE
+   with a continued production cadence policy.
+3. Keep f19 as the validated development grid, then design the f09/distributed
+   live-neutral remap once cadence is stable.
+4. Return to SAMI3 -> RAIJU/GAMERA physics blockers: traced flux-tube weighting,
+   L/MLT mapping, and runtime blending/floors for scalar moments.
+```
 
 ### WACCM-X/CESM -> SAMI3 Direct-Wait Phi Integration
 
