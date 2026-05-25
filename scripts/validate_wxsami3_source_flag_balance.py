@@ -57,8 +57,25 @@ def close_int(actual, expected):
     return int(round(actual)) == int(expected)
 
 
+def close_float(actual, expected, tol):
+    return abs(float(actual) - float(expected)) <= tol
+
+
 def int_detail(actual, expected):
     return "actual={} expected={}".format(int(round(actual)), int(expected))
+
+
+def filter_packet_rows(rows, packet_index=None, packet_col=None, packet_hour=None, hour_col=None, hour_tol=1.0e-6):
+    filtered = []
+    for row in rows:
+        keep = True
+        if packet_index is not None and packet_col is not None:
+            keep = keep and len(row) > packet_col and int(round(row[packet_col])) == int(packet_index)
+        if packet_hour is not None and hour_col is not None:
+            keep = keep and len(row) > hour_col and close_float(row[hour_col], packet_hour, hour_tol)
+        if keep:
+            filtered.append(row)
+    return filtered
 
 
 def validate(args):
@@ -81,6 +98,12 @@ def validate(args):
     source_flags = sender_meta.get("source_flags", {})
     checksum = sender_meta.get("sender_checksum", {})
     runtime_qc = sender_meta.get("runtime_qc", {})
+    selected_packet_index = args.packet_index
+    if selected_packet_index is None and sender_meta and sender_meta.get("packet_index") is not None:
+        selected_packet_index = int(sender_meta["packet_index"])
+    selected_packet_hour = args.packet_hour
+    if selected_packet_hour is None and sender_meta and sender_meta.get("packet_hour") is not None:
+        selected_packet_hour = float(sender_meta["packet_hour"])
     expected_samples = int(runtime_qc.get("samples", 0))
     expected_valid = int(source_flags.get("WACCMX_VALID", 0))
     expected_above = int(source_flags.get("SAMI3_NATIVE_ABOVE_TOP", 0))
@@ -88,10 +111,42 @@ def validate(args):
     expected_other = int(source_flags.get("SAMI3_NATIVE_OTHER_INVALID", 0))
     expected_invalid = int(runtime_qc.get("invalid", expected_above + expected_n2 + expected_other))
 
-    recv_rows, recv_sum = sum_columns(parse_numeric_lines(text, "WACCMX_RECV_SOURCE_FLAGS"), 17)
-    apply_rows, apply_sum = sum_columns(parse_numeric_lines(text, "WACCMX_APPLY_SOURCE_FLAGS"), 9)
-    qc_rows, qc_sum = sum_columns(parse_numeric_lines(text, "WACCMX_APPLY_QC"), 12)
-    blend_rows, blend_sum = sum_columns(parse_numeric_lines(text, "WACCMX_APPLY_BLEND"), 13)
+    recv_source_rows = parse_numeric_lines(text, "WACCMX_RECV_SOURCE_FLAGS")
+    apply_source_rows = parse_numeric_lines(text, "WACCMX_APPLY_SOURCE_FLAGS")
+    apply_qc_rows = parse_numeric_lines(text, "WACCMX_APPLY_QC")
+    apply_blend_rows = parse_numeric_lines(text, "WACCMX_APPLY_BLEND")
+
+    recv_source_rows = filter_packet_rows(
+        recv_source_rows,
+        packet_index=selected_packet_index,
+        packet_col=1,
+        packet_hour=selected_packet_hour,
+        hour_col=2,
+        hour_tol=args.packet_hour_tol,
+    )
+    apply_source_rows = filter_packet_rows(
+        apply_source_rows,
+        packet_hour=selected_packet_hour,
+        hour_col=2,
+        hour_tol=args.packet_hour_tol,
+    )
+    apply_qc_rows = filter_packet_rows(
+        apply_qc_rows,
+        packet_hour=selected_packet_hour,
+        hour_col=2,
+        hour_tol=args.packet_hour_tol,
+    )
+    apply_blend_rows = filter_packet_rows(
+        apply_blend_rows,
+        packet_hour=selected_packet_hour,
+        hour_col=2,
+        hour_tol=args.packet_hour_tol,
+    )
+
+    recv_rows, recv_sum = sum_columns(recv_source_rows, 17)
+    apply_rows, apply_sum = sum_columns(apply_source_rows, 9)
+    qc_rows, qc_sum = sum_columns(apply_qc_rows, 12)
+    blend_rows, blend_sum = sum_columns(apply_blend_rows, 13)
 
     meta["line_counts"] = {
         "recv_source_flags": len(recv_rows),
@@ -99,6 +154,8 @@ def validate(args):
         "apply_qc": len(qc_rows),
         "apply_blend": len(blend_rows),
     }
+    meta["selected_packet_index"] = selected_packet_index
+    meta["selected_packet_hour"] = selected_packet_hour
     add(
         checks,
         "recv_source_flag_lines",
@@ -186,6 +243,9 @@ def main():
     parser.add_argument("--expected-sami3-workers", type=int, default=32)
     parser.add_argument("--expected-nl", type=int, default=5)
     parser.add_argument("--min-total-blend-cells", type=int, default=0)
+    parser.add_argument("--packet-index", type=int, default=None)
+    parser.add_argument("--packet-hour", type=float, default=None)
+    parser.add_argument("--packet-hour-tol", type=float, default=1.0e-6)
     parser.add_argument("--allow-incomplete", action="store_true")
     parser.add_argument("--json-output", default=None)
     args = parser.parse_args()

@@ -53,6 +53,10 @@ VOLTRON_TFIN=${WXSAMI3_DIRECTMPI_VOLTRON_TFIN:-10.25}
 PHI_MAX_FRAMES=${WXSAMI3_DIRECTMPI_PHI_MAX_FRAMES:-2}
 PHI_FRAME_HOUR_OFFSET=${WXSAMI3_DIRECTMPI_PHI_FRAME_HOUR_OFFSET:-0.0013888889}
 PHI_VALID_HOURS=${WXSAMI3_DIRECTMPI_PHI_VALID_HOURS:-0.0013888889}
+MAX_PACKETS=${WXSAMI3_DIRECTMPI_MAX_PACKETS:-1}
+LIVE_DUMP_MAX=${WXSAMI3_DIRECTMPI_LIVE_DUMP_MAX:-$MAX_PACKETS}
+SEND_EVERY_NSTEPS=${WXSAMI3_DIRECTMPI_SEND_EVERY_NSTEPS:-1}
+CESM_STOP_N=${WXSAMI3_DIRECTMPI_STOP_N:-300}
 
 mkdir -p "$RUN" "$LIVE_DUMP_DIR" "$VOLTRON_RUN"
 
@@ -84,6 +88,7 @@ echo "VOLTRON_TFIN=$VOLTRON_TFIN"
 echo "PHI_MAX_FRAMES=$PHI_MAX_FRAMES"
 echo "PHI_FRAME_HOUR_OFFSET=$PHI_FRAME_HOUR_OFFSET"
 echo "PHI_VALID_HOURS=$PHI_VALID_HOURS"
+echo "CESM_STOP_N=$CESM_STOP_N"
 
 source /etc/profile.d/modules.sh >/dev/null 2>&1 || true
 module purge >/dev/null 2>&1 || true
@@ -104,9 +109,9 @@ export WXSAMI3_SKIP_DISCONNECT=0
 export WXSAMI3_LIVE_DIAG=1
 export WXSAMI3_META_FILE="$RUN/wxsami3_live_meta.json"
 export WXSAMI3_LIVE_DUMP_PREFIX="$LIVE_DUMP_PREFIX"
-export WXSAMI3_LIVE_DUMP_MAX=1
-export WXSAMI3_MAX_PACKETS=1
-export WXSAMI3_SEND_EVERY_NSTEPS=1
+export WXSAMI3_LIVE_DUMP_MAX="$LIVE_DUMP_MAX"
+export WXSAMI3_MAX_PACKETS="$MAX_PACKETS"
+export WXSAMI3_SEND_EVERY_NSTEPS="$SEND_EVERY_NSTEPS"
 export WXSAMI3_N2_NEGATIVE_MODE=invalid
 export WXSAMI3_RECV_QC=1
 export SAMI3_USE_ONLINE_PHI_WEIMER=1
@@ -196,7 +201,7 @@ from pathlib import Path
 import re
 p = Path('$RUNCONFIG')
 s = p.read_text()
-s = re.sub(r'(\\s*stop_n\\s*=\\s*)\\d+', r'\\g<1>300', s)
+s = re.sub(r'(\\s*stop_n\\s*=\\s*)\\d+', r'\\g<1>$CESM_STOP_N', s)
 p.write_text(s)
 PY
 
@@ -218,9 +223,9 @@ export WXSAMI3_SKIP_DISCONNECT=0
 export WXSAMI3_LIVE_DIAG=1
 export WXSAMI3_META_FILE="$RUN/wxsami3_live_meta.json"
 export WXSAMI3_LIVE_DUMP_PREFIX="$LIVE_DUMP_PREFIX"
-export WXSAMI3_LIVE_DUMP_MAX=1
-export WXSAMI3_MAX_PACKETS=1
-export WXSAMI3_SEND_EVERY_NSTEPS=1
+export WXSAMI3_LIVE_DUMP_MAX="$LIVE_DUMP_MAX"
+export WXSAMI3_MAX_PACKETS="$MAX_PACKETS"
+export WXSAMI3_SEND_EVERY_NSTEPS="$SEND_EVERY_NSTEPS"
 export WXSAMI3_N2_NEGATIVE_MODE=invalid
 export WXSAMI3_TOP_BLEND_MODE="$WXSAMI3_TOP_BLEND_MODE"
 export WXSAMI3_BLEND_BOTTOM_KM="$WXSAMI3_BLEND_BOTTOM_KM"
@@ -240,7 +245,7 @@ rm -f "$NEUTRAL_PORT" "$PHI_PORT" "$DVM_URI" "$DVM_PID" \
   validate_wxsami3_live_packet_contract.* validate_wxsami3_source_flag_balance.* \
   validate_wxsami3_topblend_policy.* validate_wxsami3_runtime_map.*
 rm -f "$RUN"/live_dump_summary_pkt*.txt "$RUN"/replay_builder_pkt*.out "$RUN"/recv_qc_compare_pkt*.txt
-rm -rf "$RUN"/replay_pkt000000 "$RUN"/replay_pkt000001
+rm -rf "$RUN"/replay_pkt*
 rm -f "$LIVE_DUMP_DIR"/wxsami3_physstate_* "$RUN/wxsami3_live_meta.json"
 rm -f "$CESM_RUNDIR"/cesm.log.* "$CESM_RUNDIR"/atm.log.* "$CESM_RUNDIR"/cpl.log.* 2>/dev/null || true
 
@@ -374,7 +379,8 @@ for iframe in range(nframes):
 PY
 cat "$RUN/phi_payload_summary.txt"
 
-for pkt in 000000 000001; do
+for pkt_idx in $(seq 0 $((MAX_PACKETS - 1))); do
+  pkt=$(printf "%06d" "$pkt_idx")
   pattern="$LIVE_DUMP_DIR/wxsami3_physstate_rank*_pkt${pkt}.bin"
   replay_dir="$RUN/replay_pkt${pkt}"
   replay_prefix="$replay_dir/waccmx_neutral_rank"
@@ -388,12 +394,10 @@ for pkt in 000000 000001; do
       "$WEIGHTS" \
       "$replay_prefix" \
       > "$RUN/replay_builder_pkt${pkt}.out" 2>&1
-    occurrence=0
-    [ "$pkt" = "000001" ] && occurrence=1
     /usr/bin/python3 "$BASE/scripts/compare_wxsami3_recv_qc.py" \
       --payload-prefix "$replay_prefix" \
       --receiver-log "$RUN/sami3_online_receiver.out" \
-      --packet-occurrence "$occurrence" \
+      --packet-occurrence "$pkt_idx" \
       > "$RUN/recv_qc_compare_pkt${pkt}.txt"
   fi
 done
@@ -416,7 +420,7 @@ done
 
 /usr/bin/python3 "$COLLAB/scripts/validate_wxsami3_live_packet_contract.py" \
   --run-dir "$RUN" \
-  --expected-packets 1 \
+  --expected-packets "$MAX_PACKETS" \
   --expected-source-columns 13824 \
   --expected-receiver-ranks 32 \
   --expected-payload-nz 304 \
@@ -441,7 +445,7 @@ done
 /usr/bin/python3 "$COLLAB/scripts/validate_wxsami3_time_axis.py" \
   --run-dir "$RUN" \
   --phi-payload "$PHI_PAYLOAD" \
-  --expected-neutral-packets 1 \
+  --expected-neutral-packets "$MAX_PACKETS" \
   --expected-phi-frames "$PHI_MAX_FRAMES" \
   --expected-sami3-workers 32 \
   --allow-overlap-phi-validity \
