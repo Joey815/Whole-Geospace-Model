@@ -20,9 +20,77 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-25 19:13:00 CST.
+Status refreshed: 2026-05-25 20:04:00 CST.
 
-### Latest Completed Gate: SAMI3 -> RAIJU TubeShell bVol-overlap smoke
+### Latest Completed Gate: SAMI3 -> RAIJU bVol-overlap Conservative Long1800
+
+The 1800 s conservative bVol-overlap runtime gate is complete:
+
+```text
+mapping product = ds_over_B + voltron_tubeshell_l_mlt + lon0 + bin_bvol_overlap
+archive = logs/sami3_tubeshell_bin_bvol_overlap_conservative_long1800_20260525/
+doc = docs/MAGE1.25_notes/SAMI3_RAIJU_TUBESHELL_BIN_BVOL_OVERLAP_CONSERVATIVE_LONG1800_RESULT_20260525.md
+alphaDavg = 0.05
+alphaPavg = 0.0
+alphaPstd = 0.0
+alphaDstd = 0.0
+alphaTiote = 0.0
+```
+
+Runtime:
+
+```text
+jobid = 7674095
+jobname = sami3_bvolov_l1800
+state = COMPLETED
+exit = 0:0
+elapsed = 00:41:34
+node = qhcn075
+batch MaxRSS = 1157928K
+prototype raiju_writes = 362
+prototype gamera_writes = 364
+final history step = Step#361
+```
+
+Validated facts:
+
+```text
+runtime validator overall = ok
+summary validator overall = ok
+Pavg/Davg/Pstd/Dstd formula max_abs = 0
+nonfinite physics restart checks = clean
+```
+
+Compared with previous conservative `bin_bvol_cc` long1800:
+
+```text
+raiCpl/Davg mean old/new = 88.62593804380671 / 91.86063199144719
+raiCpl/Davg mean_abs diff = 7.765713378082814
+State/Density mean_abs diff = 0.030174562468009765
+GAMERA/Gas0 mean_abs diff = 0.002248990458541432
+```
+
+Interpretation:
+
+```text
+The bVol-overlap mapping is now the preferred conservative density-only
+prototype for SAMI3->RAIJU/GAMERA.  Pressure/std/tiote runtime blending remains
+disabled until their downstream semantics are settled.
+```
+
+Next work order after this gate:
+
+```text
+1. Keep bVol-overlap as the default prototype mapping for density-only tests.
+2. Start the next physics-mapping upgrade: true traced-tube flux-volume
+   quadrature, replacing the current corner-footprint overlap approximation.
+3. In parallel, return to WACCM-X live neutral extraction and REMIX->SAMI3
+   potential forcing for the full online chain.
+```
+
+### Previous Completed Gate: SAMI3 -> RAIJU TubeShell bVol-overlap smoke
+
+The first TubeShell bVol-overlap mapping/runtime gate is complete:
 
 The first TubeShell bVol-overlap mapping/runtime gate is complete:
 

@@ -1,0 +1,58 @@
+job_id=7674095
+partition=intel
+node_list=qhcn075
+start_time=2026-05-25 19:18:03 +0800
+run_dir=/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvol_overlap_conservative_long1800_20260525
+voltron_exe=/home/jiaoy_group/jiaoy/data/MAGE1.25/build_gr_sami3_moments_20260523/bin/voltron.x
+label=long1800_bvol_overlap_cons
+mode=tubeshell_bin_bvol_overlap_conservative_density_only
+baseline=reused_from_bin_bvolcc_conservative_long1800
+alphaDavg=0.05
+alphaPavg=0.0
+alphaPstd=0.0
+alphaDstd=0.0
+alphaTiote=0.0
+hostname=qhcn075
+python=/apps/support/intel_spr_rocky8.9/anaconda/2024.10/bin/python
+omp_threads=8
+kmp_stacksize=512M
+omp_stacksize=512M
+ldd_missing=0
+
+===== SAMI3 TUBESHELL BIN-BVOL-OVERLAP CONSERVATIVE LONG1800 =====
+run_complete=1
+end_time=2026-05-25 19:59:37 +0800
+lrwxrwxrwx 1 jiaoy jiaoy_group  215 May 25 19:17 sami3_moments_base_control_long1800_bvol_overlap_cons.gam.Res.00000.h5 -> /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_conservative_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_cons.gam.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group  215 May 25 19:17 sami3_moments_base_control_long1800_bvol_overlap_cons.gam.Res.XXXXX.h5 -> /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_conservative_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_cons.gam.Res.XXXXX.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group  205 May 25 19:17 sami3_moments_base_control_long1800_bvol_overlap_cons.gam.h5 -> /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_conservative_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_cons.gam.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group  218 May 25 19:17 sami3_moments_base_control_long1800_bvol_overlap_cons.gamCpl.Res.00000.h5 -> /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_conservative_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_cons.gamCpl.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group  218 May 25 19:17 sami3_moments_base_control_long1800_bvol_overlap_cons.gamCpl.Res.XXXXX.h5 -> /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_conservative_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_cons.gamCpl.Res.XXXXX.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group  208 May 25 19:17 sami3_moments_base_control_long1800_bvol_overlap_cons.gamCpl.h5 -> /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_conservative_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_cons.gamCpl.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group  215 May 25 19:17 sami3_moments_base_control_long1800_bvol_overlap_cons.mix.Res.00000.h5 -> /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_conservative_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_cons.mix.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group  215 May 25 19:17 sami3_moments_base_control_long1800_bvol_overlap_cons.mix.Res.XXXXX.h5 -> /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_conservative_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_cons.mix.Res.XXXXX.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group  205 May 25 19:17 sami3_moments_base_control_long1800_bvol_overlap_cons.mix.h5 -> /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_conservative_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_cons.mix.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group  218 May 25 19:17 sami3_moments_base_control_long1800_bvol_overlap_cons.raiCpl.Res.00000.h5 -> /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_conservative_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_cons.raiCpl.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group  218 May 25 19:17 sami3_moments_base_control_long1800_bvol_overlap_cons.raiCpl.Res.XXXXX.h5 -> /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_conservative_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_cons.raiCpl.Res.XXXXX.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group  217 May 25 19:17 sami3_moments_base_control_long1800_bvol_overlap_cons.raiju.Res.00000.h5 -> /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_conservative_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_cons.raiju.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group  217 May 25 19:17 sami3_moments_base_control_long1800_bvol_overlap_cons.raiju.Res.XXXXX.h5 -> /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_conservative_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_cons.raiju.Res.XXXXX.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group  207 May 25 19:17 sami3_moments_base_control_long1800_bvol_overlap_cons.raiju.h5 -> /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_conservative_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_cons.raiju.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group  216 May 25 19:17 sami3_moments_base_control_long1800_bvol_overlap_cons.volt.Res.00000.h5 -> /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_conservative_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_cons.volt.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group  216 May 25 19:17 sami3_moments_base_control_long1800_bvol_overlap_cons.volt.Res.XXXXX.h5 -> /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_conservative_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_cons.volt.Res.XXXXX.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group  206 May 25 19:17 sami3_moments_base_control_long1800_bvol_overlap_cons.volt.h5 -> /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvolcc_conservative_long1800_20260525/sami3_moments_base_control_long1800_bvolcc_cons.volt.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  63M May 25 19:18 sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.gam.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   78 May 25 19:18 sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.gam.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.gam.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 4.7G May 25 19:59 sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.gam.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  19M May 25 19:18 sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.gamCpl.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   81 May 25 19:18 sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.gamCpl.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.gamCpl.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 150M May 25 19:59 sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.gamCpl.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 6.3M May 25 19:18 sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.mix.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   78 May 25 19:18 sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.mix.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.mix.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 2.9G May 25 19:59 sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.mix.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 3.6M May 25 19:18 sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.raiCpl.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   81 May 25 19:18 sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.raiCpl.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.raiCpl.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 129M May 25 19:18 sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.raiju.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   80 May 25 19:18 sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.raiju.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.raiju.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 3.3G May 25 19:59 sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.raiju.h5
+-rw-r--r-- 1 jiaoy jiaoy_group  27M May 25 19:18 sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.volt.Res.00000.h5
+lrwxrwxrwx 1 jiaoy jiaoy_group   79 May 25 19:18 sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.volt.Res.XXXXX.h5 -> sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.volt.Res.00000.h5
+-rw-r--r-- 1 jiaoy jiaoy_group 1.6G May 25 19:59 sami3_moments_dsB_lmlt_recommended_long1800_bvol_overlap_cons.volt.h5
