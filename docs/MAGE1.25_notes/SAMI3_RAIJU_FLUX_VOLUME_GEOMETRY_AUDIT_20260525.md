@@ -126,6 +126,28 @@ max terms per source cell = 39
 target normalized sum min/max = 0.9999999999999993 / 1.0000000000000007
 ```
 
+The audit now also writes a source-status bVol ledger:
+
+```text
+used count/bVol/fraction = 15040 / 915.9958391445339 / 0.00040379562605685195
+bad_bvol count/bVol/fraction = 164 / 0.0 / 0.0
+bad_geometry count/bVol/fraction = 0 / 0.0 / 0.0
+large_footprint count/bVol/fraction = 1392 / 2128789.047317451 / 0.9384275226700948
+outside_target count/bVol/fraction = 17244 / 138758.95208135032 / 0.06116868170384847
+no_terms count/bVol/fraction = 0 / 0.0 / 0.0
+```
+
+Target-domain proxy closure:
+
+```text
+raw_bvol_sum_total = 780.7575498798902
+target_bvol_sum_positive = 8393.502757935126
+raw_sum_over_positive_target_bvol_sum = 0.09301927602773116
+```
+
+This closure ratio is only a proxy because the Voltron and RAIJU bVol arrays
+may use different native normalizations.
+
 The raw Voltron-to-RAIJU bVol ratio remains broad:
 
 ```text
@@ -142,8 +164,8 @@ a standalone script to reconstruct the same sparse map.
 This does not make the mapping production physics.  The audit shows that only a
 small fraction of total valid Voltron TubeShell bVol lies inside the current
 RAIJU target domain after footprint-QC rejection.  Most valid source bVol is
-outside the current target bins, and a smaller number of broad-footprint cells
-are intentionally rejected.
+carried by broad-footprint cells that are intentionally rejected by the current
+QC gate; the next largest contribution is outside the current target bins.
 
 Therefore the next physics-mapping task is not to tune the existing overlap
 weights.  The next task is to define target-domain flux-volume closure and then

@@ -67,6 +67,15 @@ target_positive_fraction = 0.9574468085106383
 source_mapped_bvol_fraction_of_valid = 0.00034417894730482345
 ```
 
+Source bVol accounting:
+
+```text
+used fraction_of_valid_bvol = 0.00040379562605685195
+large_footprint fraction_of_valid_bvol = 0.9384275226700948
+outside_target fraction_of_valid_bvol = 0.06116868170384847
+target_domain_proxy raw_sum_over_positive_target_bvol_sum = 0.09301927602773116
+```
+
 Interpretation:
 
 ```text

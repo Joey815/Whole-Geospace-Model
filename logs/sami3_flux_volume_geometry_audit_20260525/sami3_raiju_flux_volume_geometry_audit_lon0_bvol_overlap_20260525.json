@@ -25,6 +25,44 @@
     "outside_target": 17244,
     "used": 15040
   },
+  "source_bvol_by_status": {
+    "0": {
+      "count": 15040,
+      "fraction_of_valid_bvol": 0.00040379562605685195,
+      "label": "used",
+      "positive_bvol_sum": 915.9958391445339
+    },
+    "1": {
+      "count": 164,
+      "fraction_of_valid_bvol": 0.0,
+      "label": "bad_bvol",
+      "positive_bvol_sum": 0.0
+    },
+    "2": {
+      "count": 0,
+      "fraction_of_valid_bvol": 0.0,
+      "label": "bad_geometry",
+      "positive_bvol_sum": 0.0
+    },
+    "3": {
+      "count": 1392,
+      "fraction_of_valid_bvol": 0.9384275226700948,
+      "label": "large_footprint",
+      "positive_bvol_sum": 2128789.047317451
+    },
+    "4": {
+      "count": 17244,
+      "fraction_of_valid_bvol": 0.06116868170384847,
+      "label": "outside_target",
+      "positive_bvol_sum": 138758.95208135032
+    },
+    "5": {
+      "count": 0,
+      "fraction_of_valid_bvol": 0.0,
+      "label": "no_terms",
+      "positive_bvol_sum": 0.0
+    }
+  },
   "source_l_span_stats_used": {
     "finite_count": 15040,
     "max": 4.1430025303357425,
@@ -111,6 +149,14 @@
       8460
     ],
     "total_count": 8460
+  },
+  "target_domain_proxy_closure": {
+    "note": "Proxy only: Voltron and RAIJU bVol arrays may use different native normalization.",
+    "raw_bvol_sum_total": 780.7575498798902,
+    "raw_sum_over_closed_positive_target_bvol_sum": 0.09301927602773116,
+    "raw_sum_over_positive_target_bvol_sum": 0.09301927602773116,
+    "target_bvol_sum_closed_positive": 8393.502757935126,
+    "target_bvol_sum_positive": 8393.502757935126
   },
   "target_normalized_sum_stats_positive": {
     "finite_count": 8100,

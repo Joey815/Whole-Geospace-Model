@@ -279,10 +279,33 @@ def build_summary(data, audit, weight_compare, args, longitude_key, out_h5):
     target_positive = audit["raw_bvol_sum"] > 0.0
     source_used = audit["source_status"] == STATUS_USED
     source_valid_bvol = np.isfinite(data["voltron_bvol_cc"]) & (data["voltron_bvol_cc"] > args.voltron_bvol_floor)
+    source_positive_bvol = np.where(source_valid_bvol, data["voltron_bvol_cc"], 0.0)
     mapped_bvol = np.sum(audit["source_mapped_bvol"][source_used])
     total_valid_bvol = np.sum(data["voltron_bvol_cc"][source_valid_bvol])
     mapped_fraction_values = audit["source_mapped_fraction"][source_used]
     ratio_values = audit["raw_to_target_bvol_ratio"][target_positive]
+    target_bvol_positive = np.isfinite(data["target_bvol_cc"]) & (data["target_bvol_cc"] > 0.0)
+    target_closed_positive = target_bvol_positive & (data["target_closed_mask"] > 0)
+    raw_bvol_sum_total = float(np.sum(audit["raw_bvol_sum"][target_positive]))
+    target_bvol_sum_positive = float(np.sum(data["target_bvol_cc"][target_bvol_positive]))
+    target_bvol_sum_closed_positive = float(np.sum(data["target_bvol_cc"][target_closed_positive]))
+    source_bvol_by_status = {}
+    for code, label in (
+        (STATUS_USED, "used"),
+        (STATUS_BAD_BVOL, "bad_bvol"),
+        (STATUS_BAD_GEOMETRY, "bad_geometry"),
+        (STATUS_LARGE_FOOTPRINT, "large_footprint"),
+        (STATUS_OUTSIDE_TARGET, "outside_target"),
+        (STATUS_NO_TERMS, "no_terms"),
+    ):
+        mask = audit["source_status"] == code
+        bvol_sum = float(np.sum(source_positive_bvol[mask]))
+        source_bvol_by_status[str(code)] = {
+            "label": label,
+            "count": int(np.count_nonzero(mask)),
+            "positive_bvol_sum": bvol_sum,
+            "fraction_of_valid_bvol": float(bvol_sum / total_valid_bvol) if total_valid_bvol > 0.0 else None,
+        }
     return {
         "product": "sami3_raiju_flux_volume_geometry_audit",
         "weight_file": os.path.abspath(args.weight_file),
@@ -309,6 +332,21 @@ def build_summary(data, audit, weight_compare, args, longitude_key, out_h5):
         "source_valid_bvol_sum": float(total_valid_bvol),
         "source_mapped_bvol_sum": float(mapped_bvol),
         "source_mapped_bvol_fraction_of_valid": float(mapped_bvol / total_valid_bvol) if total_valid_bvol > 0.0 else None,
+        "source_bvol_by_status": source_bvol_by_status,
+        "target_domain_proxy_closure": {
+            "raw_bvol_sum_total": raw_bvol_sum_total,
+            "target_bvol_sum_positive": target_bvol_sum_positive,
+            "target_bvol_sum_closed_positive": target_bvol_sum_closed_positive,
+            "raw_sum_over_positive_target_bvol_sum": (
+                float(raw_bvol_sum_total / target_bvol_sum_positive) if target_bvol_sum_positive > 0.0 else None
+            ),
+            "raw_sum_over_closed_positive_target_bvol_sum": (
+                float(raw_bvol_sum_total / target_bvol_sum_closed_positive)
+                if target_bvol_sum_closed_positive > 0.0
+                else None
+            ),
+            "note": "Proxy only: Voltron and RAIJU bVol arrays may use different native normalization.",
+        },
         "mapped_fraction_stats": finite_summary(mapped_fraction_values),
         "source_l_span_stats_used": finite_summary(audit["source_l_span"][source_used]),
         "source_lon_span_stats_used": finite_summary(audit["source_lon_span"][source_used]),
@@ -363,6 +401,12 @@ def write_audit(path, summary, data, audit):
         create_dataset(source, "Lb_cc", data["voltron_l_cc"].astype(np.float32), "Re", "Voltron TubeShell cell-centered Lb.")
         create_dataset(source, "lon0_cc_deg", data["voltron_lon0_cc"].astype(np.float32), "degrees", "Voltron TubeShell cell-centered lon0.")
         create_dataset(source, "lonc_cc_deg", data["voltron_lonc_cc"].astype(np.float32), "degrees", "Voltron TubeShell cell-centered lonc.")
+        status_items = [
+            summary["source_bvol_by_status"][str(code)]
+            for code in range(6)
+        ]
+        create_dataset(source, "status_bvol_sum", np.asarray([item["positive_bvol_sum"] for item in status_items], dtype=np.float64), "Voltron bVol units", "Positive source bVol sum by audit status code.")
+        create_dataset(source, "status_bvol_fraction_of_valid", np.asarray([item["fraction_of_valid_bvol"] or 0.0 for item in status_items], dtype=np.float64), "fraction", "Positive source bVol fraction by audit status code, normalized by valid positive source bVol.")
 
         sparse = handle.create_group("sparse")
         create_dataset(sparse, "dst_index", audit["dst_index"], "index", "Recomputed sparse destination indices, columns are j,i.")
