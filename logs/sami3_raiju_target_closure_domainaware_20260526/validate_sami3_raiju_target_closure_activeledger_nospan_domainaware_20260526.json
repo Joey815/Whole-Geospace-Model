@@ -1,0 +1,149 @@
+{
+  "checks": [
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/sami3_raiju_target_closure_nospan_20260525/sami3_raiju_flux_volume_geometry_audit_lon0_bvol_overlap_activeledger_nospan_20260525.json",
+      "name": "audit_json_exists",
+      "ok": true
+    },
+    {
+      "detail": "sami3_raiju_flux_volume_geometry_audit",
+      "name": "product_kind",
+      "ok": true
+    },
+    {
+      "detail": "225658 vs 225658",
+      "name": "weight_count_match",
+      "ok": true
+    },
+    {
+      "detail": "0",
+      "name": "weight_no_missing_terms",
+      "ok": true
+    },
+    {
+      "detail": "0",
+      "name": "weight_no_extra_terms",
+      "ok": true
+    },
+    {
+      "detail": "max_abs=2.9787811772763462e-08 max=1e-06",
+      "name": "weight_max_abs_diff",
+      "ok": true
+    },
+    {
+      "detail": "fraction=0.9574468085106383 min=0.9",
+      "name": "target_positive_fraction",
+      "ok": true
+    },
+    {
+      "detail": "active",
+      "name": "source_status_group_exists",
+      "ok": true
+    },
+    {
+      "detail": "[]",
+      "name": "status_fractions_present",
+      "ok": true
+    },
+    {
+      "detail": "sum=0.9999999999999999 tol=1e-06",
+      "name": "status_fraction_sum",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/sami3_trace_debug_target_i005_j095_20260525/trace_debug_outside_target_lrange_classification_20260525.json",
+      "name": "domain_classification_json_exists",
+      "ok": true
+    },
+    {
+      "detail": "sami3_raiju_target_domain_classification",
+      "name": "domain_classification_product",
+      "ok": true
+    },
+    {
+      "detail": "915.995849609375",
+      "name": "target_admissible_bvol_positive",
+      "ok": true
+    },
+    {
+      "detail": "sum=1.0 tol=1e-06",
+      "name": "target_admissible_fraction_sum",
+      "ok": true
+    },
+    {
+      "detail": "fraction=1.0 min=0.5",
+      "name": "target_admissible_used_fraction",
+      "ok": true
+    },
+    {
+      "detail": "fraction=0.0 max=0.05",
+      "name": "target_admissible_large_footprint_fraction",
+      "ok": true
+    },
+    {
+      "detail": "fraction=0.0 max=0.05",
+      "name": "target_admissible_outside_target_fraction",
+      "ok": true
+    },
+    {
+      "detail": "fraction=0.0 max=0.01",
+      "name": "target_admissible_bad_bvol_fraction",
+      "ok": true
+    },
+    {
+      "detail": "fraction=0.0 max=0.01",
+      "name": "target_admissible_bad_geometry_fraction",
+      "ok": true
+    },
+    {
+      "detail": "fraction=0.0 max=0.01",
+      "name": "target_admissible_no_terms_fraction",
+      "ok": true
+    },
+    {
+      "detail": "2268463.9952379456",
+      "name": "active_valid_bvol_sum",
+      "ok": true
+    },
+    {
+      "detail": "{'finite_count': 33676, 'max': 1.0, 'mean': 0.994061052381518, 'median': 1.0, 'min': 0.25, 'nonfinite_count': 0, 'p01': 0.5, 'p05': 1.0, 'p95': 1.0, 'p99': 1.0, 'shape': [33676], 'total_count': 33676}",
+      "name": "active_frac_all_finite",
+      "ok": true
+    },
+    {
+      "detail": "min=0.25 required=0.0",
+      "name": "active_frac_min",
+      "ok": true
+    }
+  ],
+  "meta": {
+    "audit_json": "/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/sami3_raiju_target_closure_nospan_20260525/sami3_raiju_flux_volume_geometry_audit_lon0_bvol_overlap_activeledger_nospan_20260525.json",
+    "bvol_source_used": "active",
+    "closure_denominator": "target-admissible-lrange",
+    "domain_classification_json": "/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/sami3_trace_debug_target_i005_j095_20260525/trace_debug_outside_target_lrange_classification_20260525.json",
+    "positive_active_bvol_sum": 2268464.0,
+    "proxy_closure_ratio": 2.4210228457595306,
+    "source_above_target_Lmax_fraction": 0.9995959821271133,
+    "source_inside_target_Lrange_fraction": 0.000403795629822371,
+    "status_fractions": {
+      "bad_bvol": 0.0,
+      "bad_geometry": 0.0,
+      "large_footprint": 0.0,
+      "no_terms": 0.0,
+      "outside_target": 0.8878074062968169,
+      "used": 0.112192593703183
+    },
+    "target_L_edge_max": 33.16343747752636,
+    "target_L_edge_min": 1.4902905965657023,
+    "target_admissible_bvol_sum": 915.995849609375,
+    "target_admissible_status_fractions": {
+      "bad_bvol": 0.0,
+      "bad_geometry": 0.0,
+      "large_footprint": 0.0,
+      "no_terms": 0.0,
+      "outside_target": 0.0,
+      "used": 1.0
+    }
+  },
+  "ok": true
+}

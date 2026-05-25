@@ -20,11 +20,64 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-25 23:49:00 CST.
+Status refreshed: 2026-05-26 00:04:00 CST.
 
-### Latest Completed Gate: Voltron Trace-Line Debug Export Smoke
+### Latest Completed Gate: Domain-Aware Target Closure Gate
 
-The next geometry diagnostic is now implemented and smoke-tested:
+The target-domain closure validator now separates all-source closure from
+target-admissible L-range closure:
+
+```text
+validator = scripts/validate_sami3_raiju_target_closure.py
+classifier = scripts/classify_sami3_raiju_target_domain.py
+archive = logs/sami3_raiju_target_closure_domainaware_20260526/
+closure-denominator = target-admissible-lrange
+```
+
+Domain-aware no-span result:
+
+```text
+overall = ok
+target_admissible_bvol_positive = 915.995849609375
+target_admissible_fraction_sum = 1.0
+target_admissible_used_fraction = 1.0
+target_admissible_large_footprint_fraction = 0.0
+target_admissible_outside_target_fraction = 0.0
+target_admissible_bad_bvol_fraction = 0.0
+target_admissible_bad_geometry_fraction = 0.0
+target_admissible_no_terms_fraction = 0.0
+```
+
+Strict source-domain policy result:
+
+```text
+overall = FAIL
+source_above_target_Lmax_fraction = 0.9995959821271133 > 0.05
+```
+
+Interpretation:
+
+```text
+The current no-span geometry closes within the RAIJU target L range, but it is
+not a production coupling because almost all positive active source bVol lies
+above the RAIJU target outer L edge.  The next implementation step must encode
+the outside-domain policy explicitly instead of forcing that volume into the
+target grid.
+```
+
+Next work order after this gate:
+
+```text
+1. Implement an explicit source-domain policy in the stage-2 sparse product:
+   start with exclude_above_target_lmax as the conservative option.
+2. Record excluded source bVol fractions in /MappingQuality and metadata.
+3. Validate target-admissible closure and strict source-domain diagnostics on
+   the generated product.
+```
+
+### Previous Completed Gate: Voltron Trace-Line Debug Export Smoke
+
+The geometry diagnostic is implemented and smoke-tested:
 
 ```text
 patch = code/kaiju_sami3_moments/patches/voltron_trace_debug_export_20260525.patch

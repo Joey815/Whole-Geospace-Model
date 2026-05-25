@@ -47,6 +47,37 @@ def choose_status_group(audit, source):
     return audit.get("source_bvol_by_status"), "total", "fraction_of_valid_bvol"
 
 
+def load_domain_classification(path):
+    if path is None:
+        return None, None
+    domain_path = Path(path).expanduser().resolve()
+    if not domain_path.is_file():
+        return domain_path, None
+    return domain_path, json.loads(domain_path.read_text())
+
+
+def class_value(domain, class_name, key):
+    if not isinstance(domain, dict):
+        return None
+    classes = domain.get("classes")
+    if not isinstance(classes, dict):
+        return None
+    item = classes.get(class_name)
+    if not isinstance(item, dict):
+        return None
+    value = item.get(key)
+    if finite_number(value):
+        return float(value)
+    return None
+
+
+def admissible_fraction(domain, class_name, denominator):
+    numerator = class_value(domain, class_name, "inside_target_Lrange_bvol_sum")
+    if not finite_number(numerator) or not finite_number(denominator) or denominator <= 0.0:
+        return None
+    return float(numerator) / float(denominator)
+
+
 def validate(args):
     path = Path(args.audit_json).expanduser().resolve()
     checks = []
@@ -119,42 +150,138 @@ def validate(args):
     bad_bvol = fractions.get("bad_bvol")
     bad_geometry = fractions.get("bad_geometry")
     no_terms = fractions.get("no_terms")
-    add(
-        checks,
-        "used_fraction",
-        finite_number(used) and used >= args.min_used_fraction,
-        "fraction={} min={}".format(used, args.min_used_fraction),
-    )
-    add(
-        checks,
-        "large_footprint_fraction",
-        finite_number(large) and large <= args.max_large_footprint_fraction,
-        "fraction={} max={}".format(large, args.max_large_footprint_fraction),
-    )
-    add(
-        checks,
-        "outside_target_fraction",
-        finite_number(outside) and outside <= args.max_outside_target_fraction,
-        "fraction={} max={}".format(outside, args.max_outside_target_fraction),
-    )
-    add(
-        checks,
-        "bad_bvol_fraction",
-        finite_number(bad_bvol) and bad_bvol <= args.max_bad_bvol_fraction,
-        "fraction={} max={}".format(bad_bvol, args.max_bad_bvol_fraction),
-    )
-    add(
-        checks,
-        "bad_geometry_fraction",
-        finite_number(bad_geometry) and bad_geometry <= args.max_bad_geometry_fraction,
-        "fraction={} max={}".format(bad_geometry, args.max_bad_geometry_fraction),
-    )
-    add(
-        checks,
-        "no_terms_fraction",
-        finite_number(no_terms) and no_terms <= args.max_no_terms_fraction,
-        "fraction={} max={}".format(no_terms, args.max_no_terms_fraction),
-    )
+    meta["closure_denominator"] = args.closure_denominator
+    if args.closure_denominator == "all-source":
+        add(
+            checks,
+            "used_fraction",
+            finite_number(used) and used >= args.min_used_fraction,
+            "fraction={} min={}".format(used, args.min_used_fraction),
+        )
+        add(
+            checks,
+            "large_footprint_fraction",
+            finite_number(large) and large <= args.max_large_footprint_fraction,
+            "fraction={} max={}".format(large, args.max_large_footprint_fraction),
+        )
+        add(
+            checks,
+            "outside_target_fraction",
+            finite_number(outside) and outside <= args.max_outside_target_fraction,
+            "fraction={} max={}".format(outside, args.max_outside_target_fraction),
+        )
+        add(
+            checks,
+            "bad_bvol_fraction",
+            finite_number(bad_bvol) and bad_bvol <= args.max_bad_bvol_fraction,
+            "fraction={} max={}".format(bad_bvol, args.max_bad_bvol_fraction),
+        )
+        add(
+            checks,
+            "bad_geometry_fraction",
+            finite_number(bad_geometry) and bad_geometry <= args.max_bad_geometry_fraction,
+            "fraction={} max={}".format(bad_geometry, args.max_bad_geometry_fraction),
+        )
+        add(
+            checks,
+            "no_terms_fraction",
+            finite_number(no_terms) and no_terms <= args.max_no_terms_fraction,
+            "fraction={} max={}".format(no_terms, args.max_no_terms_fraction),
+        )
+    else:
+        domain_path, domain = load_domain_classification(args.domain_classification_json)
+        meta["domain_classification_json"] = str(domain_path) if domain_path is not None else None
+        add(checks, "domain_classification_json_exists", domain is not None, domain_path)
+        if isinstance(domain, dict):
+            add(
+                checks,
+                "domain_classification_product",
+                domain.get("product") == "sami3_raiju_target_domain_classification",
+                domain.get("product"),
+            )
+            positive_inside = class_value(domain, "positive_all", "inside_target_Lrange_bvol_sum")
+            positive_total = class_value(domain, "positive_all", "active_bvol_sum")
+            above_lmax = class_value(domain, "positive_all", "above_target_Lmax_bvol_fraction")
+            inside_fraction = class_value(domain, "positive_all", "inside_target_Lrange_bvol_fraction")
+            meta["target_L_edge_min"] = domain.get("target_L_edge_min")
+            meta["target_L_edge_max"] = domain.get("target_L_edge_max")
+            meta["positive_active_bvol_sum"] = positive_total
+            meta["target_admissible_bvol_sum"] = positive_inside
+            meta["source_above_target_Lmax_fraction"] = above_lmax
+            meta["source_inside_target_Lrange_fraction"] = inside_fraction
+
+            add(
+                checks,
+                "target_admissible_bvol_positive",
+                finite_number(positive_inside) and positive_inside > 0.0,
+                positive_inside,
+            )
+
+            admissible = {
+                "used": admissible_fraction(domain, "status_used", positive_inside),
+                "large_footprint": admissible_fraction(domain, "status_large_footprint", positive_inside),
+                "outside_target": admissible_fraction(domain, "status_outside_target", positive_inside),
+                "bad_bvol": admissible_fraction(domain, "status_bad_bvol", positive_inside),
+                "bad_geometry": admissible_fraction(domain, "status_bad_geometry", positive_inside),
+                "no_terms": admissible_fraction(domain, "status_no_terms", positive_inside),
+            }
+            meta["target_admissible_status_fractions"] = admissible
+            admissible_sum = sum(value for value in admissible.values() if finite_number(value))
+            add(
+                checks,
+                "target_admissible_fraction_sum",
+                abs(admissible_sum - 1.0) <= args.status_fraction_sum_tol,
+                "sum={} tol={}".format(admissible_sum, args.status_fraction_sum_tol),
+            )
+            add(
+                checks,
+                "target_admissible_used_fraction",
+                finite_number(admissible["used"]) and admissible["used"] >= args.min_used_fraction,
+                "fraction={} min={}".format(admissible["used"], args.min_used_fraction),
+            )
+            add(
+                checks,
+                "target_admissible_large_footprint_fraction",
+                finite_number(admissible["large_footprint"])
+                and admissible["large_footprint"] <= args.max_large_footprint_fraction,
+                "fraction={} max={}".format(admissible["large_footprint"], args.max_large_footprint_fraction),
+            )
+            add(
+                checks,
+                "target_admissible_outside_target_fraction",
+                finite_number(admissible["outside_target"])
+                and admissible["outside_target"] <= args.max_outside_target_fraction,
+                "fraction={} max={}".format(admissible["outside_target"], args.max_outside_target_fraction),
+            )
+            add(
+                checks,
+                "target_admissible_bad_bvol_fraction",
+                finite_number(admissible["bad_bvol"]) and admissible["bad_bvol"] <= args.max_bad_bvol_fraction,
+                "fraction={} max={}".format(admissible["bad_bvol"], args.max_bad_bvol_fraction),
+            )
+            add(
+                checks,
+                "target_admissible_bad_geometry_fraction",
+                finite_number(admissible["bad_geometry"])
+                and admissible["bad_geometry"] <= args.max_bad_geometry_fraction,
+                "fraction={} max={}".format(admissible["bad_geometry"], args.max_bad_geometry_fraction),
+            )
+            add(
+                checks,
+                "target_admissible_no_terms_fraction",
+                finite_number(admissible["no_terms"]) and admissible["no_terms"] <= args.max_no_terms_fraction,
+                "fraction={} max={}".format(admissible["no_terms"], args.max_no_terms_fraction),
+            )
+
+            if args.max_source_above_target_lmax_fraction is not None:
+                add(
+                    checks,
+                    "source_above_target_Lmax_fraction",
+                    finite_number(above_lmax) and above_lmax <= args.max_source_above_target_lmax_fraction,
+                    "fraction={} max={}".format(above_lmax, args.max_source_above_target_lmax_fraction),
+                )
+        else:
+            add(checks, "domain_classification_required", False, args.domain_classification_json)
 
     if args.require_active_ledger:
         active_sum = audit.get("source_valid_bvol_active_sum")
@@ -194,6 +321,13 @@ def main():
     parser.add_argument("--max-weight-abs-diff", type=float, default=1.0e-6)
     parser.add_argument("--min-target-positive-fraction", type=float, default=0.90)
     parser.add_argument("--status-fraction-sum-tol", type=float, default=1.0e-6)
+    parser.add_argument(
+        "--closure-denominator",
+        choices=["all-source", "target-admissible-lrange"],
+        default="all-source",
+        help="Use all source bVol fractions, or only source bVol with Lb inside the RAIJU target L range.",
+    )
+    parser.add_argument("--domain-classification-json", default=None)
     parser.add_argument("--min-used-fraction", type=float, default=0.50)
     parser.add_argument("--max-large-footprint-fraction", type=float, default=0.05)
     parser.add_argument("--max-outside-target-fraction", type=float, default=0.05)
@@ -202,6 +336,7 @@ def main():
     parser.add_argument("--max-no-terms-fraction", type=float, default=0.01)
     parser.add_argument("--min-active-frac", type=float, default=0.0)
     parser.add_argument("--min-proxy-closure-ratio", type=float, default=None)
+    parser.add_argument("--max-source-above-target-lmax-fraction", type=float, default=None)
     parser.add_argument("--json-output", default=None)
     args = parser.parse_args()
 

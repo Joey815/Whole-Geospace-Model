@@ -89,6 +89,11 @@ volume outside the current RAIJU target L domain: the target outer L edge is
 `0.9995959821271133` lies above the target L max.  The next geometry step is
 to define the physical policy for that outside-domain source volume before
 rebuilding a trace-edge sparse product.
+The target-closure gate is now domain-aware: with
+`--closure-denominator target-admissible-lrange`, the no-span product passes
+for the small amount of source bVol inside the current RAIJU target L range
+(`target_admissible_used_fraction=1.0`), while a strict source-domain policy
+still fails because `source_above_target_Lmax_fraction=0.9995959821271133`.
 The stage-2 mapping products now have a repeatable HDF5 QC gate:
 `scripts/validate_sami3_raiju_mapping_product.py` validates
 `/RaiCplMomentsOnly` and `/MappingQuality` finite values, masks, coverage,

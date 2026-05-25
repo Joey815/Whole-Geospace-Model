@@ -257,6 +257,22 @@ the overlap threshold cannot make that volume physically close inside a
 target grid whose outer L edge is about 33.16.
 ```
 
+The same classification is now consumed by the domain-aware closure validator:
+
+```text
+scripts/validate_sami3_raiju_target_closure.py \
+  --closure-denominator target-admissible-lrange \
+  --domain-classification-json <classification.json>
+```
+
+Archived gate:
+
+```text
+logs/sami3_raiju_target_closure_domainaware_20260526/
+target_admissible_used_fraction = 1.0
+source_above_target_Lmax_fraction = 0.9995959821271133
+```
+
 ## Validation Commands
 
 Serial Voltron build:
