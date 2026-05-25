@@ -1,0 +1,10 @@
+path=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_nosmoke_dt300_3pkt_3phi_20260525_0000/voltron_runtime_direct_phi/remix_sami3_phi_payload_runtime_direct_openmpi.bin
+size=145556
+header=[20260524, 1, 125, 97, 3]
+frame=0 frame_index=0 hour=0 valid_until=0.083333336 min=-36.972878 max=31.504816 finite=True nonzero=3492
+frame=1 frame_index=1 hour=0.083333336 valid_until=0.16666667 min=-37.706364 max=31.759037 finite=True nonzero=3492
+frame1_minus_frame0_max_abs=3.4961066
+frame1_minus_frame0_rms=0.62902843
+frame=2 frame_index=2 hour=0.16666667 valid_until=1e+30 min=-38.223293 max=32.193001 finite=True nonzero=3492
+frame2_minus_frame1_max_abs=2.5031015
+frame2_minus_frame1_rms=0.34662387

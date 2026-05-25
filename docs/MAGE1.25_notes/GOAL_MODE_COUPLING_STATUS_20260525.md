@@ -20,11 +20,66 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-25 15:04:54 CST.
+Status refreshed: 2026-05-25 15:27:47 CST.
 
-### Latest Completed Gate: Direct-MPI Cache After Done
+### Latest Completed Gate: No-Smoke 3pkt/3phi Direct-MPI Cadence
 
 The current same-stack WACCM-X/CESM + SAMI3 + OpenMPI Voltron direct-MPI
+no-smoke continued-cadence gate is complete:
+
+```text
+jobid = 7671766
+jobname = wxsami3_3p3f
+state = COMPLETED
+exit = 0:0
+elapsed = 00:15:39
+node = qhcn169
+batch MaxRSS = 64920656K
+archive = logs/waccmx_live_directmpi_nosmoke_dt300_3pkt_3phi_20260525/
+doc = docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_DIRECTMPI_NOSMOKE_3PKT_3PHI_RESULT_20260525.md
+```
+
+Validated runtime facts:
+
+```text
+three WACCM-X/CESM live neutral packets from CAM phys_state(:)
+packet 0 received by 32/32 SAMI3 workers
+packet 1 received by 32/32 SAMI3 workers
+packet 2 received by 32/32 SAMI3 workers
+three Voltron direct-MPI phi frames received by SAMI3
+phi validity windows cover the neutral packet hours
+SAMI3 reached MASTER: All Done!
+WACCM-X reached END OF MODEL RUN
+SAMI3 direct phi done signal received: 3
+skip_count = 0
+bad_marker_count = 0
+```
+
+All standard validators returned `overall=ok`:
+
+```text
+validate_remix_sami3_phi_payload
+validate_sami3_direct_phi_run_strict
+validate_wxsami3_live_packet_contract
+validate_wxsami3_source_flag_balance
+validate_wxsami3_time_axis
+validate_wxsami3_topblend_policy
+validate_wxsami3_runtime_map
+```
+
+Next work order after this gate:
+
+```text
+1. Return to SAMI3 -> RAIJU/GAMERA scalar-moment physics blockers:
+   traced flux-tube-volume weighting, L/MLT/tube mapping, and runtime
+   blending/floors for Pavg/Davg/Pstd/Dstd/tiote.
+2. Keep f19 as the validated online-control grid for now; design f09 and
+   distributed live-neutral remap after the scalar-moment path is hardened.
+```
+
+### Previous Completed Gate: Direct-MPI Cache After Done
+
+The previous same-stack WACCM-X/CESM + SAMI3 + OpenMPI Voltron direct-MPI
 cache-after-done gate is complete:
 
 ```text
@@ -321,16 +376,14 @@ Strict validation and HDF5 summary artifacts have been committed and pushed.
 
 ## Next Work Order
 
-1. Run a longer f19 direct-MPI cadence case with more than two neutral packets
-   and continued phi cadence, keeping the same validator set.
-2. Keep f19 as the development grid for now.  Design f09/distributed live
-   neutral remap only after the continued cadence path is stable.
-3. Resume the SAMI3 -> RAIJU/GAMERA physical-moment blockers:
+1. Resume the SAMI3 -> RAIJU/GAMERA physical-moment blockers:
    - traced flux-tube volume weighting instead of simple/index weighting,
    - L/MLT or magnetic-tube geometry mapping instead of index resize,
    - explicit scalar-moment semantics for `Pavg/Davg/Pstd/Dstd/tiote`,
    - runtime blending/floors so density, pressure, std, and tiote can be staged
      independently.
+2. Keep f19 as the validated online-control grid for now.  Design
+   f09/distributed live neutral remap after the scalar-moment path is hardened.
 
 `intel_expr` fallback note: the previous append2 expr job failed because
 `module load` returned nonzero on a non-fatal `.modulerc` `module-hide` warning.
