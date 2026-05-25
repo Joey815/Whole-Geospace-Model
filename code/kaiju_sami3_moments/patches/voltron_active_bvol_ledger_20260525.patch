@@ -61,6 +61,33 @@ index 4126ed7..6f5240c 100644
  
          end associate
      end subroutine FLThermo
+diff --git a/src/voltron/mpi/volthelpers_mpi.F90 b/src/voltron/mpi/volthelpers_mpi.F90
+index 66bf147..5dd7f38 100644
+--- a/src/voltron/mpi/volthelpers_mpi.F90
++++ b/src/voltron/mpi/volthelpers_mpi.F90
+@@ -795,7 +795,7 @@ module volthelpers_mpi
+         call MPI_GET_ADDRESS(dummyTube%nTrc,endLoc, ierr)
+         call checkAndHandleMpiErrorCode(ierr)
+         typeSize = MPI_Aint_diff(endLoc,baseLoc)
+-        expectedSize = 392 ! determined when code was written
++        expectedSize = 408 ! determined when code was written, updated for bVolActive diagnostics
+         if(typeSize /= expectedSize) then
+             write (*,*) 'Tube_T object has changed, helpers cannot be used. Exitting.'
+             call mpi_Abort(MPI_COMM_WORLD, 1, ierr)
+@@ -805,7 +805,7 @@ module volthelpers_mpi
+         ! this, again, assumes that Tube_T is largely unchanged from when the code was written
+         blockLengths(1) = 5+NDIM
+         blockLengths(2) = 1
+-        blockLengths(3) = 13+NDIM+4*(1+MAXTUBEFLUIDS)
++        blockLengths(3) = 15+NDIM+4*(1+MAXTUBEFLUIDS)
+         blockLengths(4) = 1
+         blockDisps(1) = 0
+         blockDisps(2) = blockLengths(1)*8
+@@ -823,4 +823,3 @@ module volthelpers_mpi
+     end subroutine
+ 
+ end module
+-
 diff --git a/src/voltron/tubehelper.F90 b/src/voltron/tubehelper.F90
 index 9bf0347..676df5d 100644
 --- a/src/voltron/tubehelper.F90

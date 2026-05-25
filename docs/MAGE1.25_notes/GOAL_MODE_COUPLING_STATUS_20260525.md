@@ -20,9 +20,38 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-25 23:45:00 CST.
+Status refreshed: 2026-05-25 23:58:00 CST.
 
-### Latest Completed Gate: SAMI3 -> RAIJU No-Span Closure Diagnostic
+### Latest Completed Gate: Active bVol Helper MPI Datatype Fix
+
+The active bVol ledger patch added two real fields to `Tube_T`.  The serial
+Voltron smoke already passed, but the helper MPI path sends `Tube_T` using a
+hand-written datatype in `src/voltron/mpi/volthelpers_mpi.F90`.  That datatype
+still used the old layout.
+
+Fix:
+
+```text
+expectedSize = 392 -> 408
+blockLengths(3) = 13+NDIM+4*(1+MAXTUBEFLUIDS)
+               -> 15+NDIM+4*(1+MAXTUBEFLUIDS)
+patch = code/kaiju_sami3_moments/patches/voltron_active_bvol_ledger_20260525.patch
+archive = logs/sami3_active_bvol_helper_mpi_build_20260525/
+```
+
+Validation:
+
+```text
+build_dir = /home/jiaoy_group/jiaoy/data/MAGE1.25/build_gr_sami3_phi_direct_openmpi_20260525
+target = voltron_mpi.x
+result = [100%] Built target voltron_mpi.x
+```
+
+This keeps helper-enabled Voltron layouts compatible with the active bVol
+ledger diagnostics.  The next geometry step still remains traced-line export;
+this was a required consistency fix before adding more data to the tube path.
+
+### Previous Completed Gate: SAMI3 -> RAIJU No-Span Closure Diagnostic
 
 The target-domain closure validator was rerun after disabling both conservative
 Voltron footprint span gates:

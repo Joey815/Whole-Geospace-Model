@@ -1,0 +1,11 @@
+[ 27%] Built target baselib
+[ 30%] Built target basempilib
+[ 34%] Built target dragonkinglib
+[ 64%] Built target remixlib
+[ 77%] Built target raijulib
+[ 78%] Built target gamlib
+[ 82%] Built target gammpilib
+[ 82%] Built target chimplib
+[ 94%] Built target voltlib
+[ 98%] Built target voltmpilib
+[100%] Built target voltron_mpi.x

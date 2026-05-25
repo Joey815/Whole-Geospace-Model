@@ -74,6 +74,16 @@ The Voltron TubeShell restart writer now emits:
 /TubeShell/bVolActiveFrac
 ```
 
+Because `Tube_T` is transferred by a hand-written helper MPI datatype, the
+patch also updates the helper-side layout constants:
+
+```text
+src/voltron/mpi/volthelpers_mpi.F90
+  expectedSize: 392 -> 408
+  blockLengths(3): 13+NDIM+4*(1+MAXTUBEFLUIDS)
+                   -> 15+NDIM+4*(1+MAXTUBEFLUIDS)
+```
+
 This is intentionally compact.  It does not write full traced-line arrays yet;
 it only exposes the active-domain volume ledger that Voltron already uses for
 field-line plasma averages.
@@ -121,6 +131,7 @@ Old-template optional-reader smoke = pass
 Kaiju rebuild = pass, [100%] Built target voltron.x
 Runtime Voltron smoke = pass, job 7677534 COMPLETED 0:0
 Regenerated active-ledger weight/audit artifact = pass
+OpenMPI helper build = pass, [100%] Built target voltron_mpi.x
 ```
 
 Runtime note:
@@ -202,6 +213,7 @@ Evidence archive:
 
 ```text
 logs/sami3_active_bvol_ledger_runtime_smoke_20260525/
+logs/sami3_active_bvol_helper_mpi_build_20260525/
 ```
 
 ## Next Gate

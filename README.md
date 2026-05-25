@@ -72,6 +72,9 @@ active-ledger audit as production physics because only
 A no-span diagnostic that disables both footprint thresholds increases sparse
 terms to 238146 but still fails closure, with only 0.112192593703183 of valid
 active bVol used and 0.8878074062968169 outside the RAIJU target domain.
+The active-bVol patch also updates the helper MPI `Tube_T` datatype for the two
+new real fields; the OpenMPI `voltron_mpi.x` target rebuilds cleanly after that
+fix.
 The stage-2 mapping products now have a repeatable HDF5 QC gate:
 `scripts/validate_sami3_raiju_mapping_product.py` validates
 `/RaiCplMomentsOnly` and `/MappingQuality` finite values, masks, coverage,
