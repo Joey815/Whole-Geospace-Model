@@ -474,3 +474,58 @@ The QC parser was also hardened against interleaved Fortran stdout lines in
 multi-frame runs.  It now accepts only the expected `WACCMX_RECV_QC`
 continuation widths and skips unrelated `d = ...` or `WACCMX_APPLY_*`
 diagnostic lines.
+
+## 2026-05-25 09:03 CST Update
+
+The direct REMIX/Voltron -> SAMI3 online phi route now also passes with the
+OpenMPI/PRTE stack used by the WACCM-X/CESM live-neutral branch:
+
+```text
+jobid = 7668135
+jobname = sami3_ovrtd
+state = COMPLETED
+exit = 0:0
+elapsed = 00:05:23
+node = qhcn012
+archive = logs/sami3_openmpi_voltron_runtime_direct_phi_20260525/
+doc = docs/MAGE1.25_notes/SAMI3_OPENMPI_VOLTRON_RUNTIME_DIRECT_PHI_RESULT_20260525.md
+```
+
+This run used:
+
+```text
+OpenMPI/PRTE SAMI3 receiver
+OpenMPI neutral replay sender
+OpenMPI-enabled serial voltron.x
+one PRTE DVM
+```
+
+Key markers:
+
+```text
+SAMI3 direct phi port ready
+SAMI3 direct phi sender connected
+Voltron sent WACCMX_SAMI3_PHI_DIRECT frame 0 and frame 1
+SAMI3 received WACCMX_PHI_RECV frame 0 and frame 1
+SAMI3_PHI_SKIP_MADALA_AFTER_FINAL active; returning cached phi
+MASTER: All Done!
+WACCMX online done signal received: 1
+SAMI3 direct phi done signal received: 2
+```
+
+Strict gates:
+
+```text
+validate_sami3_direct_phi_run = overall=ok
+validate_remix_sami3_phi_payload = overall=ok
+recv_qc_compare = ok
+```
+
+Important implementation note: OpenMPI `prun` did not reliably propagate the
+Voltron direct-phi environment from the launcher subshell.  The working launcher
+therefore exports every `WACCMX_SAMI3_PHI_*` variable explicitly with `prun -x`.
+
+Immediate next work is to merge this OpenMPI direct Voltron phi route into the
+existing live WACCM-X/CESM `phys_state(:)` neutral launcher.  That will replace
+the current file-backed append/direct-wait phi handoff with a same-stack direct
+Voltron -> SAMI3 MPI handoff.

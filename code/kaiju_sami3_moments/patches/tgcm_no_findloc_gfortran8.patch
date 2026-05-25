@@ -1,0 +1,14 @@
+--- a/src/remix/tgcm.F90
++++ b/src/remix/tgcm.F90
+@@
+-      integer :: Np, Nt, Nh, i,j,h,v
++      integer :: Np, Nt, Nh, i,j,h,v,ilon0
+@@
+-      grid%lonshift = findloc(grid%inlon(:grid%nlon-1),0.,1)-1
++      grid%lonshift = 0
++      do ilon0=1,grid%nlon-1
++        if (grid%inlon(ilon0) == 0.) then
++          grid%lonshift = ilon0 - 1
++          exit
++        endif
++      enddo

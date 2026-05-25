@@ -1,0 +1,96 @@
+{
+  "checks": [
+    {
+      "detail": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_openmpi_voltron_runtime_direct_phi_20260525_0000/voltron_runtime_direct_phi/remix_sami3_phi_payload_runtime_direct_openmpi.bin",
+      "name": "phi_payload_exists",
+      "ok": true
+    },
+    {
+      "detail": "{'magic': 20260524, 'version': 1, 'nlat': 125, 'nlon': 97, 'nframes': 2}",
+      "name": "phi_payload_header",
+      "ok": true
+    },
+    {
+      "detail": "nframes=2 expected=2",
+      "name": "phi_payload_frame_count",
+      "ok": true
+    },
+    {
+      "detail": "size=97044 expected=97044 trailing=0",
+      "name": "phi_payload_exact_size",
+      "ok": true
+    },
+    {
+      "detail": "indices=[0, 1]",
+      "name": "phi_payload_frame_indices",
+      "ok": true
+    },
+    {
+      "detail": "finite_counts=[12125, 12125]",
+      "name": "phi_payload_frames_finite",
+      "ok": true
+    },
+    {
+      "detail": "hours=[0.0, 0.0013888889225199819]",
+      "name": "phi_payload_hours_strictly_increasing",
+      "ok": true
+    },
+    {
+      "detail": "hours=[0.0, 0.0013888889225199819] valid_until=[0.0013888889225199819, 1.0000000150474662e+30]",
+      "name": "phi_payload_valid_until_after_hour",
+      "ok": true
+    },
+    {
+      "detail": "max_abs_diff=3.4961066246032715 min=1e-06",
+      "name": "phi_payload_frame_change",
+      "ok": true
+    }
+  ],
+  "meta": {
+    "phi_payload": {
+      "expected_size": 97044,
+      "frame_diffs": [
+        {
+          "finite_pairs": 12125,
+          "from_frame": 0,
+          "max_abs": 3.4961066246032715,
+          "rms": 0.6290284291170928,
+          "to_frame": 1
+        }
+      ],
+      "frames": [
+        {
+          "finite_count": 12125,
+          "frame_index": 0,
+          "hour": 0.0,
+          "max": 31.50481605529785,
+          "mean": -0.21076431384213634,
+          "min": -36.972877502441406,
+          "nonzero_count": 3492,
+          "valid_until": 0.0013888889225199819
+        },
+        {
+          "finite_count": 12125,
+          "frame_index": 1,
+          "hour": 0.0013888889225199819,
+          "max": 31.759037017822266,
+          "mean": -0.2430780580266383,
+          "min": -37.706363677978516,
+          "nonzero_count": 3492,
+          "valid_until": 1.0000000150474662e+30
+        }
+      ],
+      "header": {
+        "magic": 20260524,
+        "nframes": 2,
+        "nlat": 125,
+        "nlon": 97,
+        "version": 1
+      },
+      "path": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_openmpi_voltron_runtime_direct_phi_20260525_0000/voltron_runtime_direct_phi/remix_sami3_phi_payload_runtime_direct_openmpi.bin",
+      "size": 97044,
+      "trailing_bytes": 0
+    }
+  },
+  "ok": true
+}

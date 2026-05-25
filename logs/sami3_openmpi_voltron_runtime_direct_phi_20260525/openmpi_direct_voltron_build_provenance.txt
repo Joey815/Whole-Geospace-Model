@@ -1,0 +1,8 @@
+build_dir=/home/jiaoy_group/jiaoy/data/MAGE1.25/build_gr_sami3_phi_direct_openmpi_20260525
+source_dir=/home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523
+voltron_exe=/home/jiaoy_group/jiaoy/data/MAGE1.25/build_gr_sami3_phi_direct_openmpi_20260525/bin/voltron.x
+toolchain=openmpi-5.0.3-gcc8.5.0 + netcdf/hdf5 gcc8.5.0_ompi5.0.3
+cmake_flag=-DENABLE_MPI=ON -DENABLE_OMP=ON -DENABLE_MKL=OFF -DCMAKE_Fortran_COMPILER=mpifort -DMPI_Fortran_COMPILER=mpifort
+source_patch=code/kaiju_sami3_moments/patches/tgcm_no_findloc_gfortran8.patch
+runtime_env_fix=Voltron prun uses explicit -x WACCMX_SAMI3_PHI_* exports
+validated_job=7668135
