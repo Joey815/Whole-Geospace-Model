@@ -1,0 +1,211 @@
+{
+  "audit_h5": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_raiju_flux_volume_geometry_audit_lon0_bvol_overlap_exclude_lmax_20260526.h5",
+  "current_target_Lmax": 33.16343747752636,
+  "current_target_dipole_lat_deg": 10.0,
+  "product": "sami3_raiju_source_domain_lscan",
+  "required_Lmax_by_bvol_quantile": [
+    {
+      "Lmax_required": 42.96409606933594,
+      "dipole_lat_deg": 8.775443546378964,
+      "included_bvol_at_Lmax": 2268.9260754839706,
+      "included_fraction_at_Lmax": 0.0010002036974314477,
+      "quantile": 0.001,
+      "source_count_at_Lmax": 28408
+    },
+    {
+      "Lmax_required": 71.1298599243164,
+      "dipole_lat_deg": 6.809567854096231,
+      "included_bvol_at_Lmax": 11347.344261552505,
+      "included_fraction_at_Lmax": 0.005002214840345299,
+      "quantile": 0.005,
+      "source_count_at_Lmax": 29971
+    },
+    {
+      "Lmax_required": 83.38025665283203,
+      "dipole_lat_deg": 6.287282314667387,
+      "included_bvol_at_Lmax": 22694.299558068924,
+      "included_fraction_at_Lmax": 0.01000425821443109,
+      "quantile": 0.01,
+      "source_count_at_Lmax": 30558
+    },
+    {
+      "Lmax_required": 145.15077209472656,
+      "dipole_lat_deg": 4.761161271733054,
+      "included_bvol_at_Lmax": 113467.37163677375,
+      "included_fraction_at_Lmax": 0.05001947215257832,
+      "quantile": 0.05,
+      "source_count_at_Lmax": 32334
+    },
+    {
+      "Lmax_required": 180.75912475585938,
+      "dipole_lat_deg": 4.265537535897799,
+      "included_bvol_at_Lmax": 227551.35878887336,
+      "included_fraction_at_Lmax": 0.10031076502465318,
+      "quantile": 0.1,
+      "source_count_at_Lmax": 32802
+    },
+    {
+      "Lmax_required": 275.260986328125,
+      "dipole_lat_deg": 3.4555215977447857,
+      "included_bvol_at_Lmax": 567416.7958539978,
+      "included_fraction_at_Lmax": 0.25013259943994287,
+      "quantile": 0.25,
+      "source_count_at_Lmax": 33304
+    },
+    {
+      "Lmax_required": 317.8695983886719,
+      "dipole_lat_deg": 3.2153341262063364,
+      "included_bvol_at_Lmax": 1140915.0610517517,
+      "included_fraction_at_Lmax": 0.502946074290136,
+      "quantile": 0.5,
+      "source_count_at_Lmax": 33484
+    },
+    {
+      "Lmax_required": 448.2437744140625,
+      "dipole_lat_deg": 2.7072422022041667,
+      "included_bvol_at_Lmax": 1710789.5867475525,
+      "included_fraction_at_Lmax": 0.754162107210623,
+      "quantile": 0.75,
+      "source_count_at_Lmax": 33617
+    },
+    {
+      "Lmax_required": 530.341796875,
+      "dipole_lat_deg": 2.488750048928651,
+      "included_bvol_at_Lmax": 2051036.2666791931,
+      "included_fraction_at_Lmax": 0.9041520037451809,
+      "quantile": 0.9,
+      "source_count_at_Lmax": 33658
+    },
+    {
+      "Lmax_required": 545.7605590820312,
+      "dipole_lat_deg": 2.4533204264640536,
+      "included_bvol_at_Lmax": 2162410.467851068,
+      "included_fraction_at_Lmax": 0.9532487500051143,
+      "quantile": 0.95,
+      "source_count_at_Lmax": 33668
+    },
+    {
+      "Lmax_required": 553.7748413085938,
+      "dipole_lat_deg": 2.43549260747978,
+      "included_bvol_at_Lmax": 2254905.696366693,
+      "included_fraction_at_Lmax": 0.9940231368640433,
+      "quantile": 0.99,
+      "source_count_at_Lmax": 33675
+    },
+    {
+      "Lmax_required": 553.7752075195312,
+      "dipole_lat_deg": 2.4354918016999787,
+      "included_bvol_at_Lmax": 2268463.995194818,
+      "included_fraction_at_Lmax": 1.0,
+      "quantile": 0.999,
+      "source_count_at_Lmax": 33676
+    }
+  ],
+  "source_L_bvol_weighted_mean": 354.10948435454907,
+  "source_L_max": 553.7752075195312,
+  "source_L_min": 1.0192675590515137,
+  "source_bvol_dataset": "source/bvol_active_cc",
+  "source_l_dataset": "source/Lb_cc",
+  "source_positive_bvol_sum": 2268463.995194818,
+  "source_positive_cell_count": 33676,
+  "target_l_edge_dataset": "dst/L_edge",
+  "threshold_scan": [
+    {
+      "Lmax": 33.16343747752636,
+      "dipole_lat_deg": 10.0,
+      "excluded_fraction": 0.9995959651040351,
+      "included_bvol": 916.5386142985153,
+      "included_fraction": 0.00040403489596483634,
+      "included_source_count": 27824
+    },
+    {
+      "Lmax": 50.0,
+      "dipole_lat_deg": 8.130102354155978,
+      "excluded_fraction": 0.9982529691785251,
+      "included_bvol": 3963.0765170113373,
+      "included_fraction": 0.0017470308214748563,
+      "included_source_count": 28968
+    },
+    {
+      "Lmax": 100.0,
+      "dipole_lat_deg": 5.739170477266787,
+      "excluded_fraction": 0.9829349098251938,
+      "included_bvol": 38711.542636300735,
+      "included_fraction": 0.017065090174806213,
+      "included_source_count": 31088
+    },
+    {
+      "Lmax": 150.0,
+      "dipole_lat_deg": 4.683394442175811,
+      "excluded_fraction": 0.9470871422508856,
+      "included_bvol": 120030.91268673103,
+      "included_fraction": 0.052912857749114355,
+      "included_source_count": 32404
+    },
+    {
+      "Lmax": 200.0,
+      "dipole_lat_deg": 4.054807227997089,
+      "excluded_fraction": 0.8912176338002689,
+      "included_bvol": 246768.8810361878,
+      "included_fraction": 0.10878236619973114,
+      "included_source_count": 32912
+    },
+    {
+      "Lmax": 250.0,
+      "dipole_lat_deg": 3.626123432529713,
+      "excluded_fraction": 0.7880969343086713,
+      "included_bvol": 480694.4749921814,
+      "included_fraction": 0.2119030656913287,
+      "included_source_count": 33224
+    },
+    {
+      "Lmax": 300.0,
+      "dipole_lat_deg": 3.3098138976419396,
+      "excluded_fraction": 0.6903883345326552,
+      "included_bvol": 702342.9156049744,
+      "included_fraction": 0.30961166546734475,
+      "included_source_count": 33380
+    },
+    {
+      "Lmax": 350.0,
+      "dipole_lat_deg": 3.064048491401803,
+      "excluded_fraction": 0.4769770468546911,
+      "included_bvol": 1186458.7378705994,
+      "included_fraction": 0.5230229531453089,
+      "included_source_count": 33520
+    },
+    {
+      "Lmax": 400.0,
+      "dipole_lat_deg": 2.8659839825988622,
+      "excluded_fraction": 0.4340872726932504,
+      "included_bvol": 1283752.6463178648,
+      "included_fraction": 0.5659127273067496,
+      "included_source_count": 33560
+    },
+    {
+      "Lmax": 450.0,
+      "dipole_lat_deg": 2.7019503016103985,
+      "excluded_fraction": 0.2035252365127035,
+      "included_bvol": 1806774.3240522402,
+      "included_fraction": 0.7964747634872965,
+      "included_source_count": 33624
+    },
+    {
+      "Lmax": 500.0,
+      "dipole_lat_deg": 2.563200040973856,
+      "excluded_fraction": 0.1332856283221786,
+      "included_bvol": 1966110.346269037,
+      "included_fraction": 0.8667143716778214,
+      "included_source_count": 33648
+    },
+    {
+      "Lmax": 553.7752075195312,
+      "dipole_lat_deg": 2.4354918016999787,
+      "excluded_fraction": -4.440892098500626e-16,
+      "included_bvol": 2268463.995194819,
+      "included_fraction": 1.0000000000000004,
+      "included_source_count": 33676
+    }
+  ],
+  "weights_h5": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_voltron_tubeshell_l_mlt_lon0_bin_bvol_overlap_exclude_lmax_20260526.h5"
+}

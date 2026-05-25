@@ -20,9 +20,70 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-26 00:29:00 CST.
+Status refreshed: 2026-05-26 00:42:00 CST.
 
-### Latest Completed Gate: Exclude-Lmax Runtime Smoke
+### Latest Completed Gate: Source-Domain L Scan
+
+The post-smoke source-domain scan quantifies whether extending the RAIJU target
+L domain is a plausible fix for excluded Voltron active bVol:
+
+```text
+script = scripts/analyze_sami3_raiju_source_domain_lscan.py
+archive = logs/sami3_raiju_source_domain_lscan_20260526/
+doc = docs/MAGE1.25_notes/SAMI3_RAIJU_SOURCE_DOMAIN_LSCAN_20260526.md
+```
+
+Current source and target facts:
+
+```text
+source_positive_bvol_sum = 2268463.9951948179
+source_L_bvol_weighted_mean = 354.10948435454907
+source_L_max = 553.77520751953125
+current_target_Lmax = 33.163437477526358
+current_target_dipole_lat_deg = 10.0
+```
+
+Active bVol captured by hypothetical target Lmax:
+
+```text
+Lmax=33.16  included_fraction=0.000404035
+Lmax=100    included_fraction=0.017065090
+Lmax=200    included_fraction=0.108782366
+Lmax=300    included_fraction=0.309611665
+Lmax=350    included_fraction=0.523022953
+Lmax=450    included_fraction=0.796474763
+Lmax=500    included_fraction=0.866714372
+```
+
+Lmax required by active-bVol quantile:
+
+```text
+50% active bVol: Lmax=317.8696, dipole-equivalent lat=3.2153 deg
+90% active bVol: Lmax=530.3418, dipole-equivalent lat=2.4888 deg
+99% active bVol: Lmax=553.7748, dipole-equivalent lat=2.4355 deg
+```
+
+Interpretation:
+
+```text
+The outside-domain failure is not a small RAIJU grid tuning issue.  Capturing
+meaningful fractions of active Voltron bVol would push the target boundary to
+L~300-550, equivalent to only ~2.5-3.2 deg dipole latitude.
+```
+
+Next work order after this gate:
+
+```text
+1. Freeze the current schema v7 exclude-Lmax SAMI3 -> RAIJU path as the safe
+   diagnostic/runtime adapter for target-domain density-only tests.
+2. Do not force the current RAIJU target grid outward without a separate RAIJU
+   grid/physics review.
+3. Move the main goal-mode path back to WACCM-X/SAMI3 continued neutral/phi
+   cadence and production-cadence policy, while keeping the RAIJU adapter as
+   validated downstream feedback smoke.
+```
+
+### Previous Completed Gate: Exclude-Lmax Runtime Smoke
 
 The schema v7 `exclude_above_target_lmax` stage-2 product now has a runtime
 ingest smoke:
@@ -84,19 +145,6 @@ RAIJU ingest hook for baseline recovery and density-only response.  It remains
 diagnostic/prototype physics because the source-domain accounting still excludes
 about 99.96% of positive active Voltron source bVol above the current RAIJU
 target Lmax.
-```
-
-Next work order after this gate:
-
-```text
-1. Decide the physical policy for excluded high-L source volume:
-   extend the RAIJU target domain, derive an inner-domain source subset, or keep
-   this product diagnostic-only.
-2. If staying diagnostic-only, freeze this adapter as the current safe runtime
-   path and move back to WACCM-X live neutral extraction / REMIX potential
-   completion.
-3. If extending the domain, regenerate the target grid and rerun the full
-   offline plus runtime closure gates.
 ```
 
 ### Previous Completed Gate: Explicit Source-Domain Policy Product

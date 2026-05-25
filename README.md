@@ -115,6 +115,15 @@ RAIJU/GAMERA restart fields (`State/Pavg_in`, `State/Davg_in`, `State/eta`,
 `alphaDavg=0.05` density-only case passes formula checks for Pavg/Davg/Pstd/Dstd
 with no non-finite checked physics fields and a finite response in
 `State/Davg_in`, `State/Density`, and `Gas0`.
+A source-domain L scan now quantifies why simply extending the current RAIJU
+target grid is not a small follow-up fix.  The active Voltron source bVol has
+weighted-mean `L=354.10948435454907` and max `L=553.77520751953125`, while the
+current RAIJU target edge is only `L=33.16343747752636` near 10 degrees
+dipole-equivalent latitude.  Capturing 50% of the positive active source bVol
+would require `Lmax=317.8696` near 3.2 degrees; capturing 90% would require
+`Lmax=530.3418` near 2.5 degrees.  The current safe decision is to freeze the
+schema v7 exclude-Lmax path as a diagnostic/runtime adapter rather than forcing
+the RAIJU target grid to L~300-550 without a separate grid physics review.
 The stage-2 mapping products now have a repeatable HDF5 QC gate:
 `scripts/validate_sami3_raiju_mapping_product.py` validates
 `/RaiCplMomentsOnly` and `/MappingQuality` finite values, masks, coverage,
