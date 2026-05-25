@@ -1,0 +1,21 @@
+ok   runtime_map_exists: /online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/wxsami3_runtime_map_f19_20260523.bin
+ok   runtime_map_not_empty: bytes=217128992
+ok   header_magic: 20260524
+ok   header_version: 1
+ok   header_npoints: npoints=3618816 nz*nf*nlt=3618816
+ok   header_expected_nsource: nsource=13824 expected=13824
+ok   runtime_map_size: actual=217128992 expected=217128992
+ok   zalt_count: got=3618816 expected=3618816
+ok   row_start_count: got=3618816 expected=3618816
+ok   row_count_count: got=3618816 expected=3618816
+ok   col_count: got=14475264 expected=14475264
+ok   weight_count: got=14475264 expected=14475264
+ok   zalt_finite: min=81.54248046875 max=6046060.0
+ok   row_count_nonnegative: min=4
+ok   row_count_sum: sum=14475264 n_s=14475264
+ok   row_start_positive_for_covered: min=1
+ok   row_end_within_ns: max_end=14475264 n_s=14475264
+ok   row_start_zero_for_uncovered: uncovered=0
+ok   col_source_range: min=1 max=13824 nsource=13824
+ok   weights_finite: min=0.0 max=0.9995620663524324
+overall=ok

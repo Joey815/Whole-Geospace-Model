@@ -164,7 +164,8 @@ def validate(args):
         add(
             checks,
             "neutral_sender_sent_done",
-            "NEUTRAL_SENDER sent done signal" in neutral_sender,
+            "NEUTRAL_SENDER sent done signal" in neutral_sender
+            or "WXSAMI3 sent done signal to SAMI3" in neutral_sender,
             "marker",
         )
     if qc_path:

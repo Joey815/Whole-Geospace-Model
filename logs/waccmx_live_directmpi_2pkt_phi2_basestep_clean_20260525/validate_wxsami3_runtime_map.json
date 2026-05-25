@@ -1,0 +1,129 @@
+{
+  "checks": [
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/wxsami3_runtime_map_f19_20260523.bin",
+      "name": "runtime_map_exists",
+      "ok": true
+    },
+    {
+      "detail": "bytes=217128992",
+      "name": "runtime_map_not_empty",
+      "ok": true
+    },
+    {
+      "detail": "20260524",
+      "name": "header_magic",
+      "ok": true
+    },
+    {
+      "detail": "1",
+      "name": "header_version",
+      "ok": true
+    },
+    {
+      "detail": "npoints=3618816 nz*nf*nlt=3618816",
+      "name": "header_npoints",
+      "ok": true
+    },
+    {
+      "detail": "nsource=13824 expected=13824",
+      "name": "header_expected_nsource",
+      "ok": true
+    },
+    {
+      "detail": "actual=217128992 expected=217128992",
+      "name": "runtime_map_size",
+      "ok": true
+    },
+    {
+      "detail": "got=3618816 expected=3618816",
+      "name": "zalt_count",
+      "ok": true
+    },
+    {
+      "detail": "got=3618816 expected=3618816",
+      "name": "row_start_count",
+      "ok": true
+    },
+    {
+      "detail": "got=3618816 expected=3618816",
+      "name": "row_count_count",
+      "ok": true
+    },
+    {
+      "detail": "got=14475264 expected=14475264",
+      "name": "col_count",
+      "ok": true
+    },
+    {
+      "detail": "got=14475264 expected=14475264",
+      "name": "weight_count",
+      "ok": true
+    },
+    {
+      "detail": "min=81.54248046875 max=6046060.0",
+      "name": "zalt_finite",
+      "ok": true
+    },
+    {
+      "detail": "min=4",
+      "name": "row_count_nonnegative",
+      "ok": true
+    },
+    {
+      "detail": "sum=14475264 n_s=14475264",
+      "name": "row_count_sum",
+      "ok": true
+    },
+    {
+      "detail": "min=1",
+      "name": "row_start_positive_for_covered",
+      "ok": true
+    },
+    {
+      "detail": "max_end=14475264 n_s=14475264",
+      "name": "row_end_within_ns",
+      "ok": true
+    },
+    {
+      "detail": "uncovered=0",
+      "name": "row_start_zero_for_uncovered",
+      "ok": true
+    },
+    {
+      "detail": "min=1 max=13824 nsource=13824",
+      "name": "col_source_range",
+      "ok": true
+    },
+    {
+      "detail": "min=0.0 max=0.9995620663524324",
+      "name": "weights_finite",
+      "ok": true
+    }
+  ],
+  "meta": {
+    "actual_bytes": 217128992,
+    "col_max": 13824,
+    "col_min": 1,
+    "covered_rows": 3618816,
+    "expected_bytes": 217128992,
+    "header": {
+      "magic": 20260524,
+      "n_s": 14475264,
+      "nf": 124,
+      "nlt": 96,
+      "npoints": 3618816,
+      "nsource": 13824,
+      "nz": 304,
+      "version": 1
+    },
+    "row_count_sum": 14475264,
+    "runtime_map": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/wxsami3_runtime_map_f19_20260523.bin",
+    "weight_max": 0.9995620663524324,
+    "weight_min": 0.0,
+    "weights_nc": null,
+    "zalt_max": 6046060.0,
+    "zalt_min": 81.54248046875
+  },
+  "ok": true
+}

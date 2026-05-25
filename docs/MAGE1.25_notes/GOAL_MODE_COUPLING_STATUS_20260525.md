@@ -813,3 +813,90 @@ WACCMX_SAMI3_PHI_FRAME_HOUR_STEP
 
 so controlled cadence tests can emit `frame_hour = base + frame_index * step`
 without changing the existing runtime-time based path.
+
+## 2026-05-25 11:50 CST Update
+
+The controlled 2-packet + 2-direct-phi cadence rerun now passes cleanly after
+adding explicit Voltron direct-phi frame-hour base/step controls:
+
+```text
+jobid = 7669815
+jobname = wxsami3_p2p2b
+state = COMPLETED
+exit = 0:0
+elapsed = 00:07:42
+node = qhcn005
+archive = logs/waccmx_live_directmpi_2pkt_phi2_basestep_clean_20260525/
+doc = docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_DIRECTMPI_2PKT_2PHI_BASESTEP_CLEAN_RESULT_20260525.md
+```
+
+New direct-phi sender controls:
+
+```text
+WACCMX_SAMI3_PHI_FRAME_HOUR_BASE
+WACCMX_SAMI3_PHI_FRAME_HOUR_STEP
+frame_hour = base + frame_index * step
+```
+
+The successful run used:
+
+```text
+PHI_FRAME_HOUR_BASE = 0.0
+PHI_FRAME_HOUR_STEP = 0.25
+PHI_FRAME_HOUR_OFFSET = 0.0
+PHI_MAX_FRAMES = 2
+PHI_VALID_HOURS = 0.25
+PHI_FINAL_VALID_UNTIL_HOUR = 1.0e30
+MAX_PACKETS = 2
+```
+
+Key markers:
+
+```text
+WXSAMI3 sent live neutral packet 0 at hour 0.00000000
+WXSAMI3 sent live neutral packet 1 at hour 0.0833333358
+WACCMX_SAMI3_PHI_DIRECT sent frame 0 hour=0.0 valid_until=0.25
+WACCMX_SAMI3_PHI_DIRECT sent frame 1 hour=0.25 valid_until=1.0e30
+WACCMX_SAMI3_PHI_DIRECT sent done=2
+MASTER: All Done!
+WACCMX online done signal received: 2
+SAMI3 direct phi done signal received: 2
+```
+
+All archived gates returned `overall=ok`:
+
+```text
+validate_remix_sami3_phi_payload
+validate_sami3_direct_phi_run
+validate_wxsami3_live_packet_contract
+validate_wxsami3_source_flag_balance_packet0
+validate_wxsami3_source_flag_balance_packet1
+validate_wxsami3_time_axis
+validate_wxsami3_topblend_policy
+validate_wxsami3_runtime_map
+```
+
+Current grid contract for this branch:
+
+```text
+WACCM-X source grid = f19 = 144 x 96 = 13824 CAM columns
+SAMI3 neutral payload header = nz=304, nf=124, nl=5, nneut=7
+```
+
+Validator hardening in this update:
+
+```text
+validate_sami3_direct_phi_run.py now accepts the live CESM marker:
+  WXSAMI3 sent done signal to SAMI3
+
+validate_wxsami3_source_flag_balance.py now only applies wxsami3_live_meta.json
+numeric closure when the selected packet index matches the metadata packet.
+This keeps packet0 line/count validation from being compared against packet1
+metadata in multi-packet runs where the live meta file records the latest packet.
+```
+
+Next work should use this clean two-stream gate as the baseline for longer
+production-cadence hardening: more than one SAMI3 dynamic step, repeated
+Voltron/REMIX phi frames without final-frame cache dependence, and then the
+f09/distributed neutral remap plus SAMI3 -> RAIJU/GAMERA physical weighting and
+geometry mapping blockers.

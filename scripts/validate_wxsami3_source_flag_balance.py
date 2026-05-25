@@ -127,20 +127,30 @@ def validate(args):
     if not text:
         return checks, meta
 
-    sender_meta = {}
+    raw_sender_meta = {}
     if meta_path.is_file():
-        sender_meta = read_json(meta_path)
-    add(checks, "live_meta_exists", bool(sender_meta) or args.allow_incomplete, meta_path)
+        raw_sender_meta = read_json(meta_path)
+    add(checks, "live_meta_exists", bool(raw_sender_meta) or args.allow_incomplete, meta_path)
 
+    selected_packet_index = args.packet_index
+    meta_packet_index = raw_sender_meta.get("packet_index")
+    if selected_packet_index is None and raw_sender_meta and meta_packet_index is not None:
+        selected_packet_index = int(meta_packet_index)
+    selected_packet_hour = args.packet_hour
+    meta_matches_selected_packet = bool(raw_sender_meta)
+    if selected_packet_index is not None and meta_packet_index is not None:
+        meta_matches_selected_packet = int(meta_packet_index) == int(selected_packet_index)
+    if (
+        selected_packet_hour is None
+        and raw_sender_meta
+        and raw_sender_meta.get("packet_hour") is not None
+        and meta_matches_selected_packet
+    ):
+        selected_packet_hour = float(raw_sender_meta["packet_hour"])
+    sender_meta = raw_sender_meta if meta_matches_selected_packet else {}
     source_flags = sender_meta.get("source_flags", {})
     checksum = sender_meta.get("sender_checksum", {})
     runtime_qc = sender_meta.get("runtime_qc", {})
-    selected_packet_index = args.packet_index
-    if selected_packet_index is None and sender_meta and sender_meta.get("packet_index") is not None:
-        selected_packet_index = int(sender_meta["packet_index"])
-    selected_packet_hour = args.packet_hour
-    if selected_packet_hour is None and sender_meta and sender_meta.get("packet_hour") is not None:
-        selected_packet_hour = float(sender_meta["packet_hour"])
     expected_samples = int(runtime_qc.get("samples", 0))
     expected_valid = int(source_flags.get("WACCMX_VALID", 0))
     expected_above = int(source_flags.get("SAMI3_NATIVE_ABOVE_TOP", 0))

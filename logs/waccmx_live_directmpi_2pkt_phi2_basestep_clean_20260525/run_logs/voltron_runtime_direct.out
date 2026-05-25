@@ -1,0 +1,581 @@
+voltron_exe=/home/jiaoy_group/jiaoy/data/MAGE1.25/build_gr_sami3_phi_direct_openmpi_20260525/bin/voltron.x
+weimer_grid=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_20260523_0000/weimer_grid.dat
+phi_payload=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_2pkt_phi2_base_step_20260525_0000/voltron_runtime_direct_phi/remix_sami3_phi_payload_runtime_direct_openmpi.bin
+direct_phi_port=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_2pkt_phi2_base_step_20260525_0000/sami3_direct_phi_port.txt
+phi_max_frames=2
+phi_frame_hour_base=0.0
+phi_frame_hour_step=0.25
+ldd_missing=0
+ Voltron Reading input deck from gtrd_20211204_0500_0510-waccmxfile-smoke.xml
+  KAIJU/VOLTRON/threading/NumTh           :             8[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/debug/writeGhosts          :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/debug/writeMagFlux         :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/threading/NumTh            :             8[32m (DEFAULT)[0m 
+ KAIJU/GAMERA running threaded ...
+    # Threads =            8
+    # Cores   =            1
+ Checking stacksize, if the code crashes here fix your stack ...
+  KAIJU/GAMERA/physics/doMHD              :             T[34m     (XML)[0m 
+  KAIJU/GAMERA/physics/do25D              :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/physics/doResistive        :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/sim/pdmb                   :   7.50000E-01[34m     (XML)[0m 
+  KAIJU/GAMERA/floors/dFloor              :   1.00000E-04[34m     (XML)[0m 
+  KAIJU/GAMERA/floors/pFloor              :   1.00000E-06[34m     (XML)[0m 
+  KAIJU/GAMERA/sim/CFL                    :   3.00000E-01[32m (DEFAULT)[0m 
+ CFL # =   0.30000001192092896     
+  KAIJU/GAMERA/sim/Vd0                    :   5.00000E-01[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/physics/gamma              :   1.66667E+00[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/physics/doHogs             :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/physics/cHogH              :   2.50000E-01[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/physics/cHogM              :   2.50000E-01[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/sim/doAB3                  :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/time/tFin                  :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/time/fixedTimestep         :  -1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/timestep/limDT0            :   1.00000E-03[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/timestep/doCPR             :             T[34m     (XML)[0m 
+  KAIJU/GAMERA/timestep/limCPR            :   2.00000E-01[34m     (XML)[0m 
+  KAIJU/GAMERA/output/dtCon               :   5.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/dtOut               :   1.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/restart/dtRes              :   1.00000E+02[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/doTimer             :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/doFat               :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/doSlim              :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/slimTimers          :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/DivB                :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/doFatIO             :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/doHighPrecOut       :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/restart/doRes              :             T[34m     (XML)[0m 
+  KAIJU/GAMERA/physics/doBoris            :             T[34m     (XML)[0m 
+  KAIJU/GAMERA/physics/Ca                 :   1.00000E+01[34m     (XML)[0m 
+  KAIJU/GAMERA/multifluid/doMF            :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/source/doSource            :             T[34m     (XML)[0m 
+  KAIJU/GAMERA/source/nvSrc               :            10[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/sim/runid                  :  gtrd_2021120[34m     (XML)[0m 
+  KAIJU/GAMERA/sim/rmeth                  :            8C[34m     (XML)[0m 
+ Using 8CENT Reconstruction
+  KAIJU/GAMERA/sim/lfmlim                 :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ring/rngrec                :           PPM[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/random/seed                :         31337[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/sim/doH5g                  :             T[34m     (XML)[0m 
+  KAIJU/GAMERA/sim/H5Grid                 :       lfmD.h5[34m     (XML)[0m 
+  KAIJU/GAMERA/restart/resID              :  gtrd_2021120[34m     (XML)[0m 
+  KAIJU/GAMERA/restart/nRes               :             0[34m     (XML)[0m 
+ Assigned restart file: gtrd_20211204_0500_0510.gam.Res.00000.h5
+ Reading grid from file: gtrd_20211204_0500_0510.gam.Res.00000.h5
+  KAIJU/GAMERA/ring/doRing                :             T[34m     (XML)[0m 
+  KAIJU/GAMERA/ring/gid                   :           lfm[34m     (XML)[0m 
+  KAIJU/GAMERA/ringknobs/doMassRA         :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ringknobs/doClean          :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ringknobs/doFastClean      :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ringknobs/doShift          :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ringknobs/NMag             :             1[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ringknobs/doVClean         :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ring/doAggressive          :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ring/Nr                    :             4[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ring/Nc1                   :             8[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ring/Nc2                   :            16[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ring/Nc3                   :            32[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ring/Nc4                   :            32[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/sim/doH5ic                 :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/sim/icType                 :          user[34m     (XML)[0m 
+  KAIJU/GAMERA/prob/Rho0                  :   2.00000E-01[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/prob/P0                    :   1.00000E-03[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/prob/doPP0                 :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/prob/writeBC               :             T[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/prob/planet               :         Earth[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/prob/M0                   :   2.96174E-01[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/prob/period               :   8.64000E+04[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/prob/doCorot              :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/floors/dFloor              :   1.00000E-04[34m     (XML)[0m 
+  KAIJU/GAMERA/floors/pFloor              :   1.00000E-06[34m     (XML)[0m 
+  KAIJU/GAMERA/timestep/doCPR             :             T[34m     (XML)[0m 
+  KAIJU/GAMERA/timestep/limCPR            :   2.00000E-01[34m     (XML)[0m 
+  KAIJU/GAMERA/chill/doGAMChill           :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/chill/doLFMChill           :             F[32m (DEFAULT)[0m 
+ ---------------
+ Magnetosphere normalization
+ T0   [s]    =    63.781000000000006     
+ x0   [m]    =    6378100.0000000000     
+ v0   [m/s]  =    100000.00000000000     
+ P0   [nPa]  =    1.6605390665999999E-002
+ B0   [nT]   =    4.5680356095938714     
+ g    [m/s2] =    9.8070001602172852     
+ psi0 [kV]   =    87.618393412098456     
+ ---------------
+ doGrav      =  T
+  KAIJU/GAMERA/source/doIngest            :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/source/doIngestCold        :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/source/coldDMax            :  -1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/source/coldPMax            :  -1.00000E+00[32m (DEFAULT)[0m 
+  /Kaiju/voltron/imag/doInit              :             T[34m     (XML)[0m 
+  KAIJU/GAMERA/wind/tsfile                :     bcwind.h5[34m     (XML)[0m 
+  KAIJU/GAMERA/source0/dz                 :   5.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/source0/dt0                :   3.00000E+02[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/prob/xMax                  :   2.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/prob/yMax                  :   7.50000E+01[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/prob/xMin                  :  -2.25000E+02[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/prob/sIn                   :   9.60000E-01[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/background/rCut            :   1.60000E+01[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/background/lCut            :   8.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/background/dcScl           :   4.00000E+00[32m (DEFAULT)[0m 
+  /Kaiju/voltron/coupling/dt              :   5.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ibc/doIonPush              :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/ibc/nIonP                  :             1[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/wind/tsfile                :     bcwind.h5[34m     (XML)[0m 
+ ---------------
+ Solar wind data
+ Reading wind data from bcwind.h5
+ Assuming input units: t,D,V,T,B = [s],[#/cm3],[m/s],[K],[nT]
+ SW Coefficients (Bx0,ByC,BzC) =    0.000   0.000   0.000
+ Min solar wind Alfvenic Mach number =    7.587
+ Finished reading solar wind data
+ ---------------
+  /Kaiju/voltron/spinup/doSeq             :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/restart/resID              :  gtrd_2021120[34m     (XML)[0m 
+  KAIJU/GAMERA/restart/nRes               :             0[34m     (XML)[0m 
+ Assigned restart file: gtrd_20211204_0500_0510.gam.Res.00000.h5
+ Reading restart from gtrd_20211204_0500_0510.gam.Res.00000.h5
+ [36m
+ GAMERA
+      Time =  7.64E-02 [sec]
+        ts =     5048
+        dt =  1.19E-01 [sec]
+    dt/dt0 =   99.655%
+    Spent     0.0% of time waiting for Voltron
+[0m   KAIJU/GAMERA/output/dtCon               :   5.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/dtOut               :   1.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/restart/dtRes              :   1.00000E+02[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/doTimer             :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/doFat               :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/doSlim              :             F[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/slimTimers          :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/DivB                :             T[32m (DEFAULT)[0m 
+  KAIJU/GAMERA/output/doFatIO             :             F[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/prob/planet               :         Earth[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/prob/M0                   :   2.96174E-01[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/prob/period               :   8.64000E+04[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/prob/doCorot              :             T[32m (DEFAULT)[0m 
+ -------------
+ Planet params
+ Name             : EARTH
+ Planet Radius [m]:    6378100.0000000000     
+ Iono Radius   [m]:    6500000.0000000000     
+ Gravity    [m/s2]:    9.8070001602172852     
+ Use gravity      :  T
+ Mag. Moment   [G]:   0.29617369999999998     
+ Corot Pot.   [kV]:    87.618393412098456     
+ -------------
+  /Kaiju/Gamera/prob/doGeoCorot           :             F[32m (DEFAULT)[0m 
+ Going into geospace mode ...
+  /Kaiju/Gamera/wind/tsfile               :     bcwind.h5[34m     (XML)[0m 
+  KAIJU/VOLTRON/time/tFin                 :   1.02500E+01[34m     (XML)[0m 
+  KAIJU/VOLTRON/output/dtCon              :   3.00000E+02[34m     (XML)[0m 
+  KAIJU/VOLTRON/output/dtOut              :   3.00000E+02[34m     (XML)[0m 
+  KAIJU/VOLTRON/restart/dtRes             :   6.00000E+02[34m     (XML)[0m 
+  KAIJU/VOLTRON/output/doTimer            :             F[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/output/doFat              :             F[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/output/doSlim             :             F[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/output/slimTimers         :             T[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/coupling/dtCouple         :   5.00000E+00[34m     (XML)[0m 
+  KAIJU/VOLTRON/coupling/rTrc             :   4.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/coupling/doDeep           :             T[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/coupling/doGCM            :             T[34m     (XML)[0m 
+  KAIJU/VOLTRON/coupling/dtAvgB0          :   9.00000E+02[32m (DEFAULT)[0m 
+  /Kaiju/gamera/restart/doRes             :             T[34m     (XML)[0m 
+  /Kaiju/gamera/restart/resID             :  gtrd_2021120[34m     (XML)[0m 
+  /Kaiju/gamera/restart/nRes              :             0[34m     (XML)[0m 
+ Reading Voltron restart from gtrd_20211204_0500_0510.volt.Res.00000.h5
+  KAIJU/VOLTRON/coupling/doQkSquish       :             T[34m     (XML)[0m 
+  KAIJU/VOLTRON/coupling/qkSquishStride   :             2[34m     (XML)[0m 
+  KAIJU/VOLTRON/ebsquish/epsSquish        :   5.00000E-02[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/coupling/imType           :         RAIJU[34m     (XML)[0m 
+  /Kaiju/voltron/imag/doInit              :             T[34m     (XML)[0m 
+ raijuInitModel is starting
+  KAIJU/RAIJU/driver/isSA                 :             F[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/sim/runid                 :  gtrd_2021120[34m     (XML)[0m 
+  KAIJU/RAIJU/time/T0                     :   0.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/time/tFin                   :   6.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/time/dt                     :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/config/fname                :  raijuconfig.[34m     (XML)[0m 
+  /Kaiju/Gamera/wind/tsFile               :     bcwind.h5[34m     (XML)[0m 
+  KAIJU/RAIJU/mpi/isMPI                   :             F[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/restart/doRes             :             T[34m     (XML)[0m 
+  /Kaiju/Gamera/restart/nRes              :             0[34m     (XML)[0m 
+  /Kaiju/Gamera/restart/resId             :  gtrd_2021120[34m     (XML)[0m 
+  KAIJU/RAIJU/plasmasphere/doPsphere      :             T[34m     (XML)[0m 
+  KAIJU/RAIJU/plasmasphere/doEvol         :             T[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/plasmasphere/evolRad        :   2.25000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/plasmasphere/initKp         :   3.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/prob/doExcessMap            :             T[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/prob/nSpc                   :             3[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/domain/bndLim               :             3[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/domain/tail_buffer          :   1.50000E+01[34m     (XML)[0m 
+  KAIJU/RAIJU/domain/sun_buffer           :   1.50000E+01[34m     (XML)[0m 
+  KAIJU/RAIJU/domain/tail_active          :   1.20000E+01[34m     (XML)[0m 
+  KAIJU/RAIJU/domain/sun_active           :   1.20000E+01[34m     (XML)[0m 
+  KAIJU/RAIJU/domain/activeRad            :   3.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sim/doSmoothGrads           :             T[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sim/useVelLRs               :             T[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sim/maxIter                 :          1000[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sim/maxOrder                :             7[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sim/pdmb                    :   7.50000E-01[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sim/cfl                     :   3.00000E-01[32m (DEFAULT)[0m 
+ CFL # =   0.30000001192092896     
+  KAIJU/RAIJU/prob/tiote                  :   4.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/moments/useStateTioteForInge:             F[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/activeShell/doAS            :             F[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/activeShell/worthyFrac      :   1.00000E-03[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/prob/doCorot                :             F[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/lambdas/dynamicRanges       :             F[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/moments/DP2EtaMap           :       MAXWELL[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/losses/doLosses             :             T[34m     (XML)[0m 
+  KAIJU/RAIJU/losses/doCC                 :             T[34m     (XML)[0m 
+  KAIJU/RAIJU/losses/doCX                 :             T[34m     (XML)[0m 
+  KAIJU/RAIJU/losses/doEWM                :             T[34m     (XML)[0m 
+  KAIJU/RAIJU/losses/ewmType              :            SS[34m     (XML)[0m 
+  KAIJU/RAIJU/output/loudConsole          :             F[34m     (XML)[0m 
+  KAIJU/RAIJU/output/writeGhosts          :             F[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/output/doLossExtras         :             F[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/output/doDebug              :             F[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/hax/rcmEtaPush              :             F[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/domain/vaFrac_soft          :   6.00000E-01[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/domain/vaFrac_hard          :   4.00000E-01[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/domain/bmin_soft            :   5.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/domain/bmin_hard            :   2.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/cpl/nBounce                 :   3.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/cpl/nFluidsIn               :             1[34m     (XML)[0m 
+  KAIJU/RAIJU/fluidIn1/imhd               :             0[34m     (XML)[0m 
+  KAIJU/RAIJU/fluidIn1/flav               :             2[34m     (XML)[0m 
+  KAIJU/RAIJU/fluidIn1/excessToPsph       :             T[34m     (XML)[0m 
+  /Kaiju/Gamera/prob/planet               :         Earth[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/prob/M0                   :   2.96174E-01[32m (DEFAULT)[0m 
+  /Kaiju/Gamera/prob/period               :   8.64000E+04[32m (DEFAULT)[0m 
+  Calculated corotation potential [kV]:    87.618393412098456     
+  /Kaiju/Gamera/prob/doCorot              :             T[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/grid/Nbnd                   :             4[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/hax/doConstB                :             F[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/config/ignoreMismatch       :             F[32m (DEFAULT)[0m 
+ Found spc group Species/0
+  Flav:                    0
+  N:                       1
+  # nuc_p:                 1
+  # nuc_n:                 0
+  q:                       1
+  spcType:                 2
+  Fudge:           0.0000000000000000     
+  kStart:                  1
+  kEnd:                    1
+ Found spc group Species/1
+  Flav:                    1
+  N:                      39
+  # nuc_p:                 0
+  # nuc_n:                 0
+  q:                      -1
+  spcType:                 1
+  Fudge:          0.33333333333333331     
+  kStart:                  2
+  kEnd:                   40
+ Found spc group Species/2
+  Flav:                    2
+  N:                     120
+  # nuc_p:                 1
+  # nuc_n:                 0
+  q:                       1
+  spcType:                 2
+  Fudge:           0.0000000000000000     
+  kStart:                 41
+  kEnd:                  160
+           0 T
+           1 F
+           2 T
+ ---------------
+ Creating time series for Kp
+ Reading data from bcwind.h5
+ Finished reading data for Kp
+ ---------------
+  KAIJU/RAIJU/prob/IC                     :           DIP[32m (DEFAULT)[0m 
+ Initializing a dipole field with XML-determined electrostatic potential and eta distribution
+  KAIJU/RAIJU/prob/espotPreset            :         TOFFO[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/prob/cpcp                   :   5.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/prob/etaPreset              :          RING[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/prob/D                      :   1.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/prob/T                      :   3.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/prob/tiote                  :   4.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/prob/L                      :   4.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/prob/dL                     :   6.25000E-01[32m (DEFAULT)[0m 
+ RAIJU initializing plasmasphere with Kp =   3.0000000000000000     
+  /Kaiju/RAIJU/losses/ssMult              :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/output/dtCon              :   3.00000E+02[34m     (XML)[0m 
+  KAIJU/VOLTRON/output/dtOut              :   3.00000E+02[34m     (XML)[0m 
+  KAIJU/VOLTRON/restart/dtRes             :   6.00000E+02[34m     (XML)[0m 
+  KAIJU/VOLTRON/output/doTimer            :             F[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/output/doFat              :             F[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/output/doSlim             :             F[32m (DEFAULT)[0m 
+  KAIJU/VOLTRON/output/slimTimers         :             T[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/cpl/startupTscl             :   7.20000E+03[34m     (XML)[0m 
+  KAIJU/RAIJU/cpl/tsclSm_dL               :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/cpl/tsclSm_dMLT             :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/doIngest       :             F[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/file           :          NONE[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/group          :  /RaiCplMomen[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/alphaPavg      :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/alphaDavg      :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/alphaPstd      :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/alphaDstd      :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/alphaTiote     :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/densityFloor   :   0.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/pressureFloor  :   0.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/tioteMin       :   0.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/tioteMax       :   1.00000E+30[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/sami3Moments/abortOnNonfinit:             T[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/coldStarter/doCX            :             T[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/coldStarter/doUpdate        :             F[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/coldStarter/evalCadence     :   3.00000E+02[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/coldStarter/tEnd            :   7.20000E+03[32m (DEFAULT)[0m 
+  KAIJU/RAIJU/grid/ThetaL                 :   1.50000E+01[34m     (XML)[0m 
+ RAIJU theta range =    15.000000000000000        49.106605350869074     
+  KAIJU/RAIJU/grid/Ng                     :             4[32m (DEFAULT)[0m 
+ RAIJU outputting to gtrd_20211204_0500_0510.raiju.h5
+  KAIJU/VOLTRON/coupling/doDynDT          :             F[32m (DEFAULT)[0m 
+ Voltron outputting to gtrd_20211204_0500_0510.volt.h5
+  KAIJU/REMIX/conductance/euv_model_type  :         LOMPE[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/et_model_type   :          NONE[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/sigma_model_type:         KAE23[32m (DEFAULT)[0m 
+  KAIJU/REMIX/precipitation/aurora_model_t:        LINMRG[34m     (XML)[0m 
+  KAIJU/REMIX/precipitation/alpha         :   1.03325E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/precipitation/beta          :   2.00000E-01[34m     (XML)[0m 
+  KAIJU/REMIX/precipitation/R             :   8.00000E-02[32m (DEFAULT)[0m 
+  KAIJU/REMIX/precipitation/doAuroralSmoot:             F[34m     (XML)[0m 
+  KAIJU/REMIX/conductance/F107            :   1.20000E+02[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/pedmin          :   2.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/hallmin         :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/sigma_ratio     :   6.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/ped0            :   1.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/const_sigma     :             F[34m     (XML)[0m 
+  KAIJU/REMIX/conductance/doRamp          :             T[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/doChill         :             F[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/doStarlight     :             T[34m     (XML)[0m 
+  KAIJU/REMIX/conductance/doMR            :             F[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/apply_cap       :             T[34m     (XML)[0m 
+  KAIJU/REMIX/precipitation/gamma         :   1.66667E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/doEMA           :             T[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/doET            :             F[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/doSWF107        :             T[32m (DEFAULT)[0m 
+  KAIJU/REMIX/solver/maxitr               :           400[32m (DEFAULT)[0m 
+  KAIJU/REMIX/solver/mr                   :            30[32m (DEFAULT)[0m 
+  KAIJU/REMIX/solver/tol_abs              :   1.00000E-06[32m (DEFAULT)[0m 
+  KAIJU/REMIX/solver/tol_rel              :   1.00000E-06[32m (DEFAULT)[0m 
+  KAIJU/REMIX/solver/llbc_value           :   0.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/grid/Np                     :           360[32m (DEFAULT)[0m 
+  KAIJU/REMIX/grid/Nt                     :            45[32m (DEFAULT)[0m 
+  KAIJU/REMIX/grid/LowLatBoundary         :   4.50000E+01[32m (DEFAULT)[0m 
+  KAIJU/REMIX/grid/init_from_file         :             F[32m (DEFAULT)[0m 
+  KAIJU/REMIX/output/dtOut                :   1.00000E+00[32m (DEFAULT)[0m 
+  /Kaiju/gamera/restart/nRes              :             0[34m     (XML)[0m 
+  KAIJU/REMIX/debug/mklmsglvl             :             0[32m (DEFAULT)[0m 
+ [31m
+ [0m 
+ WARNING for ShellGrid with name: REMIX
+ No radius provided, assuming Earth's ionosphere according to kdefs:
+   1.0191122748153838       Rp
+  KAIJU/REMIX/conductance/euv_model_type  :         LOMPE[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/et_model_type   :          NONE[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/sigma_model_type:         KAE23[32m (DEFAULT)[0m 
+  KAIJU/REMIX/precipitation/aurora_model_t:        LINMRG[34m     (XML)[0m 
+  KAIJU/REMIX/precipitation/alpha         :   1.03325E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/precipitation/beta          :   2.00000E-01[34m     (XML)[0m 
+  KAIJU/REMIX/precipitation/R             :   8.00000E-02[32m (DEFAULT)[0m 
+  KAIJU/REMIX/precipitation/doAuroralSmoot:             F[34m     (XML)[0m 
+  KAIJU/REMIX/conductance/F107            :   1.20000E+02[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/pedmin          :   2.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/hallmin         :   1.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/sigma_ratio     :   6.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/ped0            :   1.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/const_sigma     :             F[34m     (XML)[0m 
+  KAIJU/REMIX/conductance/doRamp          :             T[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/doChill         :             F[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/doStarlight     :             T[34m     (XML)[0m 
+  KAIJU/REMIX/conductance/doMR            :             F[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/apply_cap       :             T[34m     (XML)[0m 
+  KAIJU/REMIX/precipitation/gamma         :   1.66667E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/doEMA           :             T[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/doET            :             F[32m (DEFAULT)[0m 
+  KAIJU/REMIX/conductance/doSWF107        :             T[32m (DEFAULT)[0m 
+  KAIJU/REMIX/solver/maxitr               :           400[32m (DEFAULT)[0m 
+  KAIJU/REMIX/solver/mr                   :            30[32m (DEFAULT)[0m 
+  KAIJU/REMIX/solver/tol_abs              :   1.00000E-06[32m (DEFAULT)[0m 
+  KAIJU/REMIX/solver/tol_rel              :   1.00000E-06[32m (DEFAULT)[0m 
+  KAIJU/REMIX/solver/llbc_value           :   0.00000E+00[32m (DEFAULT)[0m 
+  KAIJU/REMIX/grid/Np                     :           360[32m (DEFAULT)[0m 
+  KAIJU/REMIX/grid/Nt                     :            45[32m (DEFAULT)[0m 
+  KAIJU/REMIX/grid/LowLatBoundary         :   4.50000E+01[32m (DEFAULT)[0m 
+  KAIJU/REMIX/grid/init_from_file         :             F[32m (DEFAULT)[0m 
+  KAIJU/REMIX/output/dtOut                :   1.00000E+00[32m (DEFAULT)[0m 
+  /Kaiju/gamera/restart/nRes              :             0[34m     (XML)[0m 
+  KAIJU/REMIX/debug/mklmsglvl             :             0[32m (DEFAULT)[0m 
+ [31m
+ [0m 
+ WARNING for ShellGrid with name: REMIX
+ No radius provided, assuming Earth's ionosphere according to kdefs:
+   1.0191122748153838       Rp
+ Restarting from: gtrd_20211204_0500_0510.mix.Res.00000.h5
+ Potential NORTH   8.0159239136159517       -9.5946741805099851     
+ Field-aligned current NORTH  0.69698881900345644      -0.74228724095633669     
+ Pedersen conductance NORTH   10.000000000000000        10.000000000000000     
+ Hall conductance NORTH   0.0000000000000000        0.0000000000000000     
+ Sound speed NORTH   63320048.701519005        7078375.6531625651     
+ Density NORTH   2.5923018330824695E-024   6.4042548354744803E-026
+ Average energy NORTH   20.199098460752761        1.0000000000000000E-008
+ Number flux NORTH   463299256.18521649        0.0000000000000000     
+ Variable not found in restart, skipping: Neutral wind NORTH
+ Variable not found in restart, skipping: Electric field NORTH
+ IM average energy NORTH   0.0000000000000000        0.0000000000000000     
+ IM Energy flux NORTH   0.0000000000000000        0.0000000000000000     
+ IM average energy proton NORTH   0.0000000000000000        0.0000000000000000     
+ IM Energy flux proton NORTH   0.0000000000000000        0.0000000000000000     
+ MHD average energy NORTH   20.199098460752761        1.4562094558803182E-002
+ MHD number flux NORTH   463299256.18521649        298030.36645242223     
+ Variable not found in restart, skipping: Corotation Potential NORTH
+ Variable not found in restart, skipping: Total Potential NORTH
+ RCM grid type NORTH   0.0000000000000000        0.0000000000000000     
+ Auroral model type NORTH   3.0000000000000000        0.0000000000000000     
+ RCM beta NORTH  0.20000000000000001       0.19999999999999996     
+ RCM electron density NORTH   0.0000000000000000        0.0000000000000000     
+ RCM electron pressure NORTH   0.0000000000000000        0.0000000000000000     
+ IM Number flux NORTH   0.0000000000000000        0.0000000000000000     
+ IM Number flux proton NORTH   0.0000000000000000        0.0000000000000000     
+ Mono potential drop NORTH   22.763805681460830        0.0000000000000000     
+ RCM plasmasphere density NORTH   0.0000000000000000        0.0000000000000000     
+ Conjugate Colatitude NORTH   0.0000000000000000        0.0000000000000000     
+ Conjugate Longitude NORTH   0.0000000000000000        0.0000000000000000     
+ Potential SOUTH   9.6897952340807887       -11.165899880819561     
+ Field-aligned current SOUTH  0.75322925628523540      -0.70726252474215345     
+ Pedersen conductance SOUTH   10.000000000000000        10.000000000000000     
+ Hall conductance SOUTH   0.0000000000000000        0.0000000000000000     
+ Sound speed SOUTH   56629254.150266998        6979650.6487380164     
+ Density SOUTH   2.5739691463088134E-024   3.2612327524755247E-026
+ Average energy SOUTH   7.7025442146269354        1.0000000000000000E-008
+ Number flux SOUTH   470128724.99908787        0.0000000000000000     
+ Variable not found in restart, skipping: Neutral wind SOUTH
+ Variable not found in restart, skipping: Electric field SOUTH
+ IM average energy SOUTH   0.0000000000000000        0.0000000000000000     
+ IM Energy flux SOUTH   0.0000000000000000        0.0000000000000000     
+ IM average energy proton SOUTH   0.0000000000000000        0.0000000000000000     
+ IM Energy flux proton SOUTH   0.0000000000000000        0.0000000000000000     
+ MHD average energy SOUTH   7.7025442146269354        1.4158720332039678E-002
+ MHD number flux SOUTH   470128724.99908787        149648.98844607821     
+ Variable not found in restart, skipping: Corotation Potential SOUTH
+ Variable not found in restart, skipping: Total Potential SOUTH
+ RCM grid type SOUTH   0.0000000000000000        0.0000000000000000     
+ Auroral model type SOUTH   3.0000000000000000        0.0000000000000000     
+ RCM beta SOUTH  0.20000000000000001       0.19999999999999996     
+ RCM electron density SOUTH   0.0000000000000000        0.0000000000000000     
+ RCM electron pressure SOUTH   0.0000000000000000        0.0000000000000000     
+ IM Number flux SOUTH   0.0000000000000000        0.0000000000000000     
+ IM Number flux proton SOUTH   0.0000000000000000        0.0000000000000000     
+ Mono potential drop SOUTH   7.5484725695100137        0.0000000000000000     
+ RCM plasmasphere density SOUTH   0.0000000000000000        0.0000000000000000     
+ Conjugate Colatitude SOUTH   0.0000000000000000        0.0000000000000000     
+ Conjugate Longitude SOUTH   0.0000000000000000        0.0000000000000000     
+ Done readMIXrestart
+ Using F10.7 =    100.00000000000000     
+ Using MJD0  =    0.0000000000000000     
+ mapRemixToGamera
+  /Kaiju/gamera/restart/resID             :  gtrd_2021120[34m     (XML)[0m 
+  /Kaiju/gamera/restart/nRes              :             0[34m     (XML)[0m 
+  KAIJU/VOLTRON/coupling/gcmBackend       :   WACCMX_FILE[34m     (XML)[0m 
+  KAIJU/VOLTRON/waccmxFile/contractFile   :  waccmx_voltr[34m     (XML)[0m 
+  KAIJU/VOLTRON/waccmxFile/exchangeFile   :  waccmx_voltr[34m     (XML)[0m 
+  KAIJU/VOLTRON/waccmxFile/packageFile    :  waccmx_voltr[34m     (XML)[0m 
+  KAIJU/VOLTRON/waccmxFile/feedbackFile   :  waccmx_voltr[34m     (XML)[0m 
+  KAIJU/VOLTRON/waccmxFile/sigmap_floor   :   5.00000E+00[34m     (XML)[0m 
+  KAIJU/VOLTRON/waccmxFile/sigmah_floor   :   2.00000E+00[34m     (XML)[0m 
+  KAIJU/VOLTRON/waccmxFile/sigmap_oval    :   1.00000E+01[34m     (XML)[0m 
+  KAIJU/VOLTRON/waccmxFile/sigmah_oval    :   6.00000E+00[34m     (XML)[0m 
+[31m<waccmx_voltron_contract.txt already exists, deleting ...>[0m 
+[31m<waccmx_voltron_exchange.md already exists, deleting ...>[0m 
+  KAIJU/CHIMP/domain/rClosed              :   2.25000E+00[32m (DEFAULT)[0m 
+ ------------
+ CHIMP Units
+ inTScl =    2997.9245799999999     
+ inBScl =    17.093124591884845     
+ inVScl =    3.3356409519815205E-004
+ ------------
+  KAIJU/CHIMP/interp/wgt                  :           TSC[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/tracer/epsds                :   5.00000E-02[34m     (XML)[0m 
+  KAIJU/CHIMP/tracer/doDip                :             F[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/streamline/steptype         :          MAGE[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/streamline/bMin_C           :   1.00000E-12[32m (DEFAULT)[0m 
+<Grid size = (48,48,64)>
+  KAIJU/CHIMP/fields/grType               :           lfm[34m     (XML)[0m 
+ <Grid type = LFM>
+ Doing grid calculations ...
+ Finished grid calculations
+ Initializing LFM locator
+  KAIJU/CHIMP/domain/rmin                 :   1.01911E+00[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/domain/rmax                 :   2.88340E+01[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/domain/dtype                :          MAGE[34m     (XML)[0m 
+ Using MAGE inDomain
+  KAIJU/CHIMP/domain/xSun                 :   2.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/domain/xTail                :  -5.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/domain/yzMax                :   4.00000E+01[32m (DEFAULT)[0m 
+  KAIJU/CHIMP/domain/gtype                :           LFM[32m (DEFAULT)[0m 
+ Using spherical inGap
+  KAIJU/CHIMP/domain/rgap                 :   2.82447E+00[32m (DEFAULT)[0m 
+ MAXTUBESIZE =         5000
+ [32m
+ ---------------
+ Kaiju configuration
+Git branch = HEAD
+Git hash   = 9e19bfc
+Compiler   = GCC version 8.5.0 20210514 (Red Hat 8.5.0-20)
+Run starting on: Mon May 25 11:42:06 2026
+ ---------------
+[0m  [36m
+ GAMERA
+      Time =  7.64E-02 [sec]
+        ts =     5048
+        dt =  1.19E-01 [sec]
+    dt/dt0 =   99.655%
+    Spent     0.0% of time waiting for Voltron
+[0m       CPCP =   14.882  18.189 [kV, N/S]
+ [34m
+ VOLTRON
+      UT   = 2021-12-04 05:00:00
+      tilt =    0.000 [deg]
+    Sym-H  =   -5.000 [nT]
+    BSDst  ~   16.916 [nT]
+           dSMRs  ~     1.43   -0.09   -1.22   -0.12 [nT, 12/18/00/06]
+   DPSDst  ~  -14.215 [nT]
+   Spent     0.0% of time waiting for Gamera
+             0.0% of time processing Chimp(Helpers)
+             0.0% of time processing IMAG
+             0.0% of time processing Remix
+             0.0% of time processing Tubes(Helpers)
+             0.0% of time writing files
+[0m  [35m
+ RAIJU
+      UT   = 2021-12-04 05:00:05
+      Time =  5.00E+00 [sec]
+     dtCpl =  5.00E+00 [sec]
+     Max/Min dt @ k:
+        Max 4.70E+01 [sec] @ 56
+        Min 1.38E-01 [sec] @ 160
+     Flav : max Press/Den @ L,MLT; DPS-dst
+        0: P =   0.00, D =9075.91 @  1.54 Rp,12.07 MLT; DPS:   0.00
+        1: P =   1.62, D =   0.81 @  3.96 Rp,15.13 MLT; DPS:  -2.88
+        2: P =   8.36, D =   1.08 @  3.96 Rp,15.00 MLT; DPS: -14.30
+[0m  WACCMX_SAMI3_PHI_DIRECT connected /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_2pkt_phi2_base_step_20260525_0000/sami3_direct_phi_port.txt
+ WACCMX_SAMI3_PHI_DIRECT sent frame=           0  nframes=           2  hour=   0.00000000      valid_until=  0.250000000      min/max=  -36.9728775       31.5048161    
+ WACCMX_SAMI3_PHI prepared payload_file=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_2pkt_phi2_base_step_20260525_0000/voltron_runtime_direct_phi/remix_sami3_phi_payload_runtime_direct_openmpi.bin direct_port_file=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_2pkt_phi2_base_step_20260525_0000/sami3_direct_phi_port.txt hemi=           1  hour=   0.0000000000000000       valid_until=   1.0000000000000000E+030  source_min/max=  -11.130034448503366        9.5845211632481995       payload_min/max=  -36.9728775       31.5048161    
+ Overwriting group waccmx_voltron_forward_package.h5//Meta
+ Overwriting group waccmx_voltron_forward_package.h5//NORTH_GRID
+ Overwriting group waccmx_voltron_forward_package.h5//NORTH_GEO
+ Overwriting group waccmx_voltron_forward_package.h5//NORTH_APEX
+ Overwriting group waccmx_voltron_forward_package.h5//SOUTH_GRID
+ Overwriting group waccmx_voltron_forward_package.h5//SOUTH_GEO
+ Overwriting group waccmx_voltron_forward_package.h5//SOUTH_APEX
+ WACCMX_SAMI3_PHI_DIRECT sent frame=           1  nframes=           2  hour=  0.250000000      valid_until=   1.00000002E+30  min/max=  -37.7063637       31.7590370    
+ WACCMX_SAMI3_PHI_DIRECT sent done=           2
+ WACCMX_SAMI3_PHI_DIRECT stop after done requested
+Note: The following floating-point exceptions are signalling: IEEE_INVALID_FLAG IEEE_DIVIDE_BY_ZERO IEEE_UNDERFLOW_FLAG

@@ -32,6 +32,7 @@ module waccmx_stub_backend
   logical, save :: sami3_phi_direct_connected = .false.
   logical, save :: sami3_phi_direct_done_sent = .false.
   integer, save :: sami3_phi_direct_sent_frames = 0
+  integer, save :: sami3_phi_payload_written_frames = 0
 #ifdef KAIJU_ENABLE_MPI
   type(MPI_Comm), save :: sami3_phi_direct_comm = MPI_COMM_NULL
   logical, save :: sami3_phi_direct_mpi_started = .false.
@@ -373,8 +374,8 @@ contains
     real(rp), intent(in) :: time
 
     character(len=strLen) :: payload_file, direct_port_file, grid_file, hemi_env, value
-    integer :: stat, lenval, hemi, ios
-    real(rp) :: frame_hour, frame_hour_offset, valid_until
+    integer :: stat, lenval, hemi, ios, frame_index
+    real(rp) :: frame_hour, valid_until
     real(rp) :: target_mlat(sami3_phi_nlat), target_mlon(sami3_phi_nlon)
     real(real32) :: phi_statv(sami3_phi_nlat, sami3_phi_nlon)
     logical :: payload_enabled, direct_enabled
@@ -421,19 +422,12 @@ contains
       stop 'WACCMX_SAMI3_PHI_PAYLOAD requested before APEX POT capture.'
     end if
 
-    frame_hour = time/3600.0_rp
-    value = ''
-    call get_environment_variable('WACCMX_SAMI3_PHI_FRAME_HOUR', value, &
-      length=lenval, status=stat)
-    if (stat == 0 .and. len_trim(value) > 0) read(value,*,iostat=ios) frame_hour
-
-    frame_hour_offset = 0.0_rp
-    value = ''
-    call get_environment_variable('WACCMX_SAMI3_PHI_FRAME_HOUR_OFFSET', value, &
-      length=lenval, status=stat)
-    if (stat == 0 .and. len_trim(value) > 0) read(value,*,iostat=ios) frame_hour_offset
-    frame_hour = frame_hour - frame_hour_offset
-    if (frame_hour < 0.0_rp .and. abs(frame_hour) < 1.0e-9_rp) frame_hour = 0.0_rp
+    if (direct_enabled) then
+      frame_index = sami3_phi_direct_sent_frames
+    else
+      frame_index = sami3_phi_payload_written_frames
+    end if
+    call get_sami3_phi_frame_hour(time, frame_index, frame_hour)
 
     valid_until = 1.0e30_rp
     value = ''
@@ -446,6 +440,8 @@ contains
       gcm%APEX%gcmOutput(hemi,1)%var, target_mlat, target_mlon, phi_statv)
     if (payload_enabled) then
       call write_sami3_phi_payload(trim(payload_file), phi_statv, frame_hour, valid_until)
+      if (.not. direct_enabled) sami3_phi_payload_written_frames = &
+        sami3_phi_payload_written_frames + 1
     end if
     if (direct_enabled) then
       call send_sami3_phi_direct(trim(direct_port_file), phi_statv, frame_hour, valid_until)
@@ -458,6 +454,56 @@ contains
       maxval(gcm%APEX%gcmOutput(hemi,1)%var), &
       ' payload_min/max=', minval(phi_statv), maxval(phi_statv)
   end subroutine write_waccmx_sami3_phi_payload_if_enabled
+
+  subroutine get_sami3_phi_frame_hour(time, frame_index, frame_hour)
+    real(rp), intent(in) :: time
+    integer, intent(in) :: frame_index
+    real(rp), intent(out) :: frame_hour
+
+    character(len=strLen) :: value
+    integer :: stat, lenval, ios
+    real(rp) :: frame_hour_base, frame_hour_step, frame_hour_offset
+    logical :: have_base, have_step
+
+    frame_hour = time/3600.0_rp
+    value = ''
+    call get_environment_variable('WACCMX_SAMI3_PHI_FRAME_HOUR', value, &
+      length=lenval, status=stat)
+    if (stat == 0 .and. len_trim(value) > 0) read(value,*,iostat=ios) frame_hour
+
+    have_base = .false.
+    frame_hour_base = 0.0_rp
+    value = ''
+    call get_environment_variable('WACCMX_SAMI3_PHI_FRAME_HOUR_BASE', value, &
+      length=lenval, status=stat)
+    if (stat == 0 .and. len_trim(value) > 0) then
+      read(value,*,iostat=ios) frame_hour_base
+      have_base = (ios == 0)
+    end if
+
+    have_step = .false.
+    frame_hour_step = 0.0_rp
+    value = ''
+    call get_environment_variable('WACCMX_SAMI3_PHI_FRAME_HOUR_STEP', value, &
+      length=lenval, status=stat)
+    if (stat == 0 .and. len_trim(value) > 0) then
+      read(value,*,iostat=ios) frame_hour_step
+      have_step = (ios == 0)
+    end if
+
+    if (have_base .neqv. have_step) then
+      stop 'WACCMX_SAMI3_PHI_FRAME_HOUR_BASE and _STEP must be set together.'
+    end if
+    if (have_base) frame_hour = frame_hour_base + real(frame_index, rp) * frame_hour_step
+
+    frame_hour_offset = 0.0_rp
+    value = ''
+    call get_environment_variable('WACCMX_SAMI3_PHI_FRAME_HOUR_OFFSET', value, &
+      length=lenval, status=stat)
+    if (stat == 0 .and. len_trim(value) > 0) read(value,*,iostat=ios) frame_hour_offset
+    frame_hour = frame_hour - frame_hour_offset
+    if (frame_hour < 0.0_rp .and. abs(frame_hour) < 1.0e-9_rp) frame_hour = 0.0_rp
+  end subroutine get_sami3_phi_frame_hour
 
   subroutine connect_sami3_phi_direct(port_file)
     character(len=*), intent(in) :: port_file

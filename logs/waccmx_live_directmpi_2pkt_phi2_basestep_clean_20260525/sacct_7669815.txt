@@ -1,0 +1,4 @@
+JobID|JobName|State|ExitCode|Elapsed|MaxRSS|NodeList
+7669815|wxsami3_p2p2b|COMPLETED|0:0|00:07:42||qhcn005
+7669815.batch|batch|COMPLETED|0:0|00:07:42|64922812K|qhcn005
+7669815.extern|extern|COMPLETED|0:0|00:07:42|0|qhcn005
