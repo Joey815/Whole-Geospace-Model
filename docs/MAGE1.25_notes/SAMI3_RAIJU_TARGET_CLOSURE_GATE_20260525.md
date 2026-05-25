@@ -123,6 +123,49 @@ Therefore the current SAMI3 -> RAIJU path remains a conservative
 density-only diagnostic/runtime adapter.  It should not be labeled production
 physics coupling.
 
+## No-Span Diagnostic
+
+To test whether the failure is just caused by the conservative footprint-span
+gate, a second offline diagnostic disabled both span limits:
+
+```text
+--voltron-overlap-max-l-span 0
+--voltron-overlap-max-lon-span 0
+```
+
+Archived output:
+
+```text
+logs/sami3_raiju_target_closure_nospan_20260525/
+```
+
+Weight/audit summary:
+
+```text
+sparse_weight_count = 238146
+overlap_split_term_count = 225658
+overlap_max_terms_per_source_cell = 4050
+coverage_count_max = 52
+source_status_counts = used 15440, bad_bvol 164, large_footprint 0,
+                       outside_target 18236
+source_mapped_bvol_fraction_of_valid = 0.008957983012102013
+```
+
+Target-closure validator result:
+
+```text
+overall = FAIL
+used_fraction = 0.112192593703183 < 0.5
+large_footprint_fraction = 0.0 <= 0.05
+outside_target_fraction = 0.8878074062968169 > 0.05
+weight_max_abs_diff = 2.9787811772763462e-08 <= 1e-06
+```
+
+This rules out a simple threshold relaxation as the fix.  Disabling the
+large-footprint gate increases sparse terms by about 5x and creates source
+cells with thousands of overlap terms, but it still does not close the target
+domain in active bVol.
+
 ## Next Gate
 
 The next implementation step should not tune scalar moment blending.  It should

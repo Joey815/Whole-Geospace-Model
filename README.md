@@ -69,6 +69,9 @@ The new target-domain closure validator intentionally fails the current
 active-ledger audit as production physics because only
 0.00040379562605685195 of valid active bVol is used while
 0.9384275226700948 is rejected as large-footprint volume.
+A no-span diagnostic that disables both footprint thresholds increases sparse
+terms to 238146 but still fails closure, with only 0.112192593703183 of valid
+active bVol used and 0.8878074062968169 outside the RAIJU target domain.
 The stage-2 mapping products now have a repeatable HDF5 QC gate:
 `scripts/validate_sami3_raiju_mapping_product.py` validates
 `/RaiCplMomentsOnly` and `/MappingQuality` finite values, masks, coverage,

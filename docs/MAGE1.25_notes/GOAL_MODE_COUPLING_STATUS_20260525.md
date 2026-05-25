@@ -20,9 +20,65 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-25 23:28:00 CST.
+Status refreshed: 2026-05-25 23:45:00 CST.
 
-### Latest Completed Gate: SAMI3 -> RAIJU Target-Domain Closure Gate
+### Latest Completed Gate: SAMI3 -> RAIJU No-Span Closure Diagnostic
+
+The target-domain closure validator was rerun after disabling both conservative
+Voltron footprint span gates:
+
+```text
+archive = logs/sami3_raiju_target_closure_nospan_20260525/
+voltron_overlap_max_l_span = 0
+voltron_overlap_max_lon_span = 0
+sparse_weight_count = 238146
+overlap_split_term_count = 225658
+overlap_max_terms_per_source_cell = 4050
+coverage_count_max = 52
+```
+
+The no-span product remains an offline diagnostic, not a runtime candidate.
+It recomputes the sparse geometry consistently:
+
+```text
+weight_count_match = 225658 vs 225658
+weight_no_missing_terms = 0
+weight_no_extra_terms = 0
+weight_max_abs_diff = 2.9787811772763462e-08 <= 1e-06
+```
+
+But target-domain closure still fails:
+
+```text
+overall = FAIL
+used_fraction = 0.112192593703183 < 0.5
+large_footprint_fraction = 0.0 <= 0.05
+outside_target_fraction = 0.8878074062968169 > 0.05
+source_mapped_bvol_fraction_of_valid = 0.008957983012102013
+```
+
+Interpretation:
+
+```text
+The blocker is not just the conservative large-footprint threshold.  Disabling
+that gate increases sparse terms by about 5x and allows individual source cells
+to split into as many as 4050 target terms, but valid active bVol still does not
+close into the RAIJU target domain.  The next fix must improve the traced-tube
+geometry representation, not just tune overlap thresholds.
+```
+
+Next work order after this gate:
+
+```text
+1. Design the optional traced-line debug export needed for true ds/B
+   quadrature: source tube id, s index, xyz(s), B(s), dl/B, active-domain flag.
+2. Use the target-domain closure validator as the acceptance gate for the next
+   geometry product.
+3. Keep current bVol-overlap density-only runtime branch diagnostic until the
+   closure validator passes.
+```
+
+### Previous Completed Gate: SAMI3 -> RAIJU Target-Domain Closure Gate
 
 The active bVol ledger has now been turned into an explicit target-domain
 closure validator:
