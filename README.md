@@ -65,6 +65,10 @@ ledger patch now exposes Voltron's `dvB_active` as compact
 `/TubeShell/bVolActive` and `/TubeShell/bVolActiveFrac` diagnostics; the
 patched Voltron smoke job 7677534 completed 0:0 and the active-ledger audit
 recomputes all 39853 sparse terms with no missing/extra terms.
+The new target-domain closure validator intentionally fails the current
+active-ledger audit as production physics because only
+0.00040379562605685195 of valid active bVol is used while
+0.9384275226700948 is rejected as large-footprint volume.
 The stage-2 mapping products now have a repeatable HDF5 QC gate:
 `scripts/validate_sami3_raiju_mapping_product.py` validates
 `/RaiCplMomentsOnly` and `/MappingQuality` finite values, masks, coverage,

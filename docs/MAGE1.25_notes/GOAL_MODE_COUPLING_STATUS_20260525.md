@@ -20,9 +20,64 @@ The target remains a validated prototype, not a production physics coupling.
 
 ## Active Acceptance Gates
 
-Status refreshed: 2026-05-25 23:09:00 CST.
+Status refreshed: 2026-05-25 23:28:00 CST.
 
-### Latest Completed Gate: Voltron Active bVol Ledger Runtime Smoke
+### Latest Completed Gate: SAMI3 -> RAIJU Target-Domain Closure Gate
+
+The active bVol ledger has now been turned into an explicit target-domain
+closure validator:
+
+```text
+validator = scripts/validate_sami3_raiju_target_closure.py
+doc = docs/MAGE1.25_notes/SAMI3_RAIJU_TARGET_CLOSURE_GATE_20260525.md
+archive = logs/sami3_raiju_target_closure_gate_20260525/
+input = logs/sami3_active_bvol_ledger_runtime_smoke_20260525/sami3_raiju_flux_volume_geometry_audit_lon0_bvol_overlap_activeledger_20260525.json
+bvol_source = active
+require_active_ledger = true
+```
+
+Technical closure checks passed:
+
+```text
+weight_count_match = 39853 vs 39853
+weight_no_missing_terms = 0
+weight_no_extra_terms = 0
+weight_max_abs_diff = 1.4889254773553517e-08 <= 1e-06
+target_positive_fraction = 0.9574468085106383 >= 0.9
+status_fraction_sum = 1.0
+active_frac_all_finite = 33676/33676
+active_valid_bvol_sum = 2268463.9952379456
+```
+
+Physical target-domain closure intentionally fails:
+
+```text
+overall = FAIL
+used_fraction = 0.00040379562605685195 < 0.5
+large_footprint_fraction = 0.9384275226700948 > 0.05
+outside_target_fraction = 0.061168681703848454 > 0.05
+```
+
+Interpretation:
+
+```text
+The current bVol-overlap mapping is reproducible and the active-domain ledger
+is finite, but the target-domain mapping captures far too little valid source
+volume.  This remains a diagnostic/runtime adapter, not production physical
+SAMI3->RAIJU coupling.
+```
+
+Next work order after this gate:
+
+```text
+1. Keep this validator as the acceptance gate for any new geometry product.
+2. Export or reconstruct traced-tube geometry well enough to split the current
+   large-footprint source cells into acceptable target-domain quadrature terms.
+3. Do not promote pressure/std/tiote physical interpretation until the closure
+   gate passes.
+```
+
+### Previous Completed Gate: Voltron Active bVol Ledger Runtime Smoke
 
 The target-domain volume-accounting step is now built, smoke-tested, and
 audited:

@@ -1,0 +1,20 @@
+ok   audit_json_exists: /online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/sami3_active_bvol_ledger_runtime_smoke_20260525/sami3_raiju_flux_volume_geometry_audit_lon0_bvol_overlap_activeledger_20260525.json
+ok   product_kind: sami3_raiju_flux_volume_geometry_audit
+ok   weight_count_match: 39853 vs 39853
+ok   weight_no_missing_terms: 0
+ok   weight_no_extra_terms: 0
+ok   weight_max_abs_diff: max_abs=1.4889254773553517e-08 max=1e-06
+ok   target_positive_fraction: fraction=0.9574468085106383 min=0.9
+ok   source_status_group_exists: active
+ok   status_fractions_present: []
+ok   status_fraction_sum: sum=1.0 tol=1e-06
+FAIL used_fraction: fraction=0.00040379562605685195 min=0.5
+FAIL large_footprint_fraction: fraction=0.9384275226700948 max=0.05
+FAIL outside_target_fraction: fraction=0.061168681703848454 max=0.05
+ok   bad_bvol_fraction: fraction=0.0 max=0.01
+ok   bad_geometry_fraction: fraction=0.0 max=0.01
+ok   no_terms_fraction: fraction=0.0 max=0.01
+ok   active_valid_bvol_sum: 2268463.9952379456
+ok   active_frac_all_finite: {'finite_count': 33676, 'max': 1.0, 'mean': 0.994061052381518, 'median': 1.0, 'min': 0.25, 'nonfinite_count': 0, 'p01': 0.5, 'p05': 1.0, 'p95': 1.0, 'p99': 1.0, 'shape': [33676], 'total_count': 33676}
+ok   active_frac_min: min=0.25 required=0.0
+overall=FAIL

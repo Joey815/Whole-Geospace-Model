@@ -213,9 +213,9 @@ trace export:
 ```text
 1. Keep /TubeShell/bVolActive and /TubeShell/bVolActiveFrac as the low-cost
    active-domain volume ledger in all new TubeShell mapping audits.
-2. Define the target-domain closure rule that compares used, large_footprint,
-   outside_target, and active-domain volume before accepting a SAMI3->RAIJU
-   mapping as physically meaningful.
+2. Use the target-domain closure validator documented in
+   docs/MAGE1.25_notes/SAMI3_RAIJU_TARGET_CLOSURE_GATE_20260525.md before
+   accepting a SAMI3->RAIJU mapping as physically meaningful.
 3. If the compact ledger is still insufficient, add an optional debug export of
    traced-line quadrature inputs: xyz(s), B(s), dl/B, and active-domain flags.
 ```
