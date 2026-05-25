@@ -1,0 +1,10 @@
+ok   phi_payload_exists: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_runtime_direct_phi_4frame_20260525_0000/voltron_runtime_direct_phi/remix_sami3_phi_payload_runtime_direct.bin
+ok   phi_payload_header: {'magic': 20260524, 'version': 1, 'nlat': 125, 'nlon': 97, 'nframes': 4}
+ok   phi_payload_frame_count: nframes=4 expected=4
+ok   phi_payload_exact_size: size=194068 expected=194068 trailing=0
+ok   phi_payload_frame_indices: indices=[0, 1, 2, 3]
+ok   phi_payload_frames_finite: finite_counts=[12125, 12125, 12125, 12125]
+ok   phi_payload_hours_strictly_increasing: hours=[0.0, 0.0013888889225199819, 0.0027777778450399637, 0.004166666883975267]
+ok   phi_payload_valid_until_after_hour: hours=[0.0, 0.0013888889225199819, 0.0027777778450399637, 0.004166666883975267] valid_until=[0.0013888889225199819, 0.0027777778450399637, 0.004166666883975267, 1.0000000150474662e+30]
+ok   phi_payload_frame_change: max_abs_diff=3.5858945846557617 min=1e-06
+overall=ok

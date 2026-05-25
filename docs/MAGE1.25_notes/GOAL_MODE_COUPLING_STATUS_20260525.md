@@ -442,3 +442,35 @@ received; it now returns cached last phi for subsequent `potpphi` calls so the
 short online MPI smoke can finalize without dropping to a zero-potential field.
 The production next step is a real cadence policy for post-final-frame
 potential solves and multi-frame REMIX timing.
+
+## 2026-05-25 08:27 CST Update
+
+The runtime Voltron -> SAMI3 direct-phi path now has a clean four-frame cadence
+smoke:
+
+```text
+jobid = 7667369
+jobname = sami3_vrtd4
+state = COMPLETED
+exit = 0:0
+elapsed = 00:07:13
+launcher = slurm/run_sami3_intelmpi_voltron_runtime_direct_phi_4frame_20260525.sbatch
+archive = logs/sami3_intelmpi_voltron_runtime_direct_phi_4frame_20260525/
+```
+
+Key markers:
+
+```text
+SAMI3 ntmmax = 5
+Voltron sent frame 0, 1, 2, 3 and done=4
+SAMI3 received WACCMX_PHI_RECV frame 0, 1, 2, 3
+SAMI3 reached MASTER: All Done!
+recv_qc_compare = ok
+validate_sami3_direct_phi_run strict = overall=ok
+validate_remix_sami3_phi_payload = overall=ok
+```
+
+The QC parser was also hardened against interleaved Fortran stdout lines in
+multi-frame runs.  It now accepts only the expected `WACCMX_RECV_QC`
+continuation widths and skips unrelated `d = ...` or `WACCMX_APPLY_*`
+diagnostic lines.

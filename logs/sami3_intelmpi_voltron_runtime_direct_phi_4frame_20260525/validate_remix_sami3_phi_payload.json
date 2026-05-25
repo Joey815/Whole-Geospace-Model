@@ -1,0 +1,130 @@
+{
+  "checks": [
+    {
+      "detail": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_runtime_direct_phi_4frame_20260525_0000/voltron_runtime_direct_phi/remix_sami3_phi_payload_runtime_direct.bin",
+      "name": "phi_payload_exists",
+      "ok": true
+    },
+    {
+      "detail": "{'magic': 20260524, 'version': 1, 'nlat': 125, 'nlon': 97, 'nframes': 4}",
+      "name": "phi_payload_header",
+      "ok": true
+    },
+    {
+      "detail": "nframes=4 expected=4",
+      "name": "phi_payload_frame_count",
+      "ok": true
+    },
+    {
+      "detail": "size=194068 expected=194068 trailing=0",
+      "name": "phi_payload_exact_size",
+      "ok": true
+    },
+    {
+      "detail": "indices=[0, 1, 2, 3]",
+      "name": "phi_payload_frame_indices",
+      "ok": true
+    },
+    {
+      "detail": "finite_counts=[12125, 12125, 12125, 12125]",
+      "name": "phi_payload_frames_finite",
+      "ok": true
+    },
+    {
+      "detail": "hours=[0.0, 0.0013888889225199819, 0.0027777778450399637, 0.004166666883975267]",
+      "name": "phi_payload_hours_strictly_increasing",
+      "ok": true
+    },
+    {
+      "detail": "hours=[0.0, 0.0013888889225199819, 0.0027777778450399637, 0.004166666883975267] valid_until=[0.0013888889225199819, 0.0027777778450399637, 0.004166666883975267, 1.0000000150474662e+30]",
+      "name": "phi_payload_valid_until_after_hour",
+      "ok": true
+    },
+    {
+      "detail": "max_abs_diff=3.5858945846557617 min=1e-06",
+      "name": "phi_payload_frame_change",
+      "ok": true
+    }
+  ],
+  "meta": {
+    "phi_payload": {
+      "expected_size": 194068,
+      "frame_diffs": [
+        {
+          "finite_pairs": 12125,
+          "from_frame": 0,
+          "max_abs": 3.5858945846557617,
+          "rms": 0.687325617779858,
+          "to_frame": 1
+        },
+        {
+          "finite_pairs": 12125,
+          "from_frame": 1,
+          "max_abs": 2.652254343032837,
+          "rms": 0.38259453826202094,
+          "to_frame": 2
+        },
+        {
+          "finite_pairs": 12125,
+          "from_frame": 2,
+          "max_abs": 2.631126880645752,
+          "rms": 0.4155644450097942,
+          "to_frame": 3
+        }
+      ],
+      "frames": [
+        {
+          "finite_count": 12125,
+          "frame_index": 0,
+          "hour": 0.0,
+          "max": 31.483816146850586,
+          "mean": -0.20725942691636887,
+          "min": -36.93061447143555,
+          "nonzero_count": 3492,
+          "valid_until": 0.0013888889225199819
+        },
+        {
+          "finite_count": 12125,
+          "frame_index": 1,
+          "hour": 0.0013888889225199819,
+          "max": 31.891191482543945,
+          "mean": -0.23144256678969208,
+          "min": -37.68301773071289,
+          "nonzero_count": 3492,
+          "valid_until": 0.0027777778450399637
+        },
+        {
+          "finite_count": 12125,
+          "frame_index": 2,
+          "hour": 0.0027777778450399637,
+          "max": 32.21345520019531,
+          "mean": -0.24384112683522993,
+          "min": -38.30136489868164,
+          "nonzero_count": 3492,
+          "valid_until": 0.004166666883975267
+        },
+        {
+          "finite_count": 12125,
+          "frame_index": 3,
+          "hour": 0.004166666883975267,
+          "max": 31.555980682373047,
+          "mean": -0.2542156450930664,
+          "min": -37.710899353027344,
+          "nonzero_count": 3492,
+          "valid_until": 1.0000000150474662e+30
+        }
+      ],
+      "header": {
+        "magic": 20260524,
+        "nframes": 4,
+        "nlat": 125,
+        "nlon": 97,
+        "version": 1
+      },
+      "path": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_runtime_direct_phi_4frame_20260525_0000/voltron_runtime_direct_phi/remix_sami3_phi_payload_runtime_direct.bin",
+      "size": 194068,
+      "trailing_bytes": 0
+    }
+  },
+  "ok": true
+}

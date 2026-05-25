@@ -191,6 +191,37 @@ WACCMX_RECV_QC compare ok: ranks=32 occurrence=0 step_set=[0] packet_hour_set=[0
 The `no_fatal_markers` check has been tightened so configuration keys such as
 `abortOnNonfinit` are not counted as fatal aborts.
 
+## Four-Frame Cadence Smoke
+
+The direct runtime path was extended from two frames to four frames:
+
+```text
+launcher = slurm/run_sami3_intelmpi_voltron_runtime_direct_phi_4frame_20260525.sbatch
+jobid = 7667369
+state = COMPLETED
+exit = 0:0
+elapsed = 00:07:13
+archive = logs/sami3_intelmpi_voltron_runtime_direct_phi_4frame_20260525/
+SAMI3 maxstep = 80
+SAMI3 hrmax = .070000
+Voltron tFin = 28.0
+WACCMX_SAMI3_PHI_MAX_FRAMES = 4
+```
+
+Key validation:
+
+```text
+WACCMX_PHI_RECV frames = 0, 1, 2, 3
+SAMI3 direct phi done signal received = 4
+validate_remix_sami3_phi_payload = overall=ok
+validate_sami3_direct_phi_run = overall=ok
+recv_qc_compare = ok
+```
+
+This proves the runtime direct path is not limited to a single update or a
+two-frame append artifact.  It still uses the same smoke-only final-frame cache
+policy after the sender has sent done.
+
 ## Current Interpretation
 
 Validated now:
@@ -200,9 +231,10 @@ Validated now:
 2. MPI-enabled serial voltron.x can connect directly to SAMI3.
 3. Voltron runtime REMIX potential is remapped into the SAMI3 phi payload grid.
 4. Two physically different runtime phi frames are transmitted and consumed.
-5. The neutral replay channel still sends the expected WACCM-X packet and done tag.
-6. SAMI3 finalize consumes both neutral done and direct-phi done.
-7. Voltron exits after direct done when the smoke-only stop-after-done switch is set.
+5. Four sequential runtime phi frames can also be transmitted and consumed.
+6. The neutral replay channel still sends the expected WACCM-X packet and done tag.
+7. SAMI3 finalize consumes both neutral done and direct-phi done.
+8. Voltron exits after direct done when the smoke-only stop-after-done switch is set.
 ```
 
 Still unresolved:

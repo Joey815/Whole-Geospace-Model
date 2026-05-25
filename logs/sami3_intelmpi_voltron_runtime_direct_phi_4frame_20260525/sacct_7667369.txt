@@ -1,0 +1,6 @@
+7667369      sami3_vrt+  COMPLETED      0:0   00:07:13                         qhcn012 
+7667369.bat+      batch  COMPLETED      0:0   00:07:13     11128K              qhcn012 
+7667369.ext+     extern  COMPLETED      0:0   00:07:13          0              qhcn012 
+7667369.0    hydra_bst+  COMPLETED      0:0   00:07:11  34058780K              qhcn012 
+7667369.1    hydra_bst+  COMPLETED      0:0   00:00:27          0              qhcn012 
+7667369.2    hydra_bst+  COMPLETED      0:0   00:05:59   1017176K              qhcn012 

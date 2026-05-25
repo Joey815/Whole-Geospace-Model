@@ -1,0 +1,20 @@
+ok   receiver_log_exists: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_runtime_direct_phi_4frame_20260525_0000/sami3_online_receiver.out
+ok   phi_sender_log_exists: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_runtime_direct_phi_4frame_20260525_0000/voltron_runtime_direct.out
+ok   neutral_sender_log_exists: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_runtime_direct_phi_4frame_20260525_0000/neutral_sender.out
+ok   recv_qc_compare_exists: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/sami3_intelmpi_voltron_runtime_direct_phi_4frame_20260525_0000/recv_qc_compare.txt
+ok   no_fatal_markers: none
+ok   direct_phi_port_ready: marker
+ok   direct_phi_connected: marker
+ok   master_done: marker
+ok   neutral_done_received: marker
+ok   direct_phi_done_received: marker
+ok   phi_recv_frame_count: observed=4 expected=4
+ok   phi_recv_frame_indices: [0, 1, 2, 3]
+ok   phi_recv_total_frames: [4, 4, 4, 4]
+ok   phi_recv_finite_range: [(-36.93061, 31.48382), (-37.68302, 31.89119), (-38.30136, 32.21346), (-37.7109, 31.55598)]
+ok   phi_recv_frames_change: [{'frame': 0, 'nframes': 4, 'hrut': 0.0, 'hour': 0.0, 'valid_until': 0.0013888889, 'min': -36.93061, 'max': 31.48382}, {'frame': 1, 'nframes': 4, 'hrut': 0.0022222223, 'hour': 0.0013888889, 'valid_until': 0.0027777778, 'min': -37.68302, 'max': 31.89119}, {'frame': 2, 'nframes': 4, 'hrut': 0.0046806787, 'hour': 0.0027777778, 'valid_until': 0.0041666669, 'min': -38.30136, 'max': 32.21346}, {'frame': 3, 'nframes': 4, 'hrut': 0.0071391352, 'hour': 0.0041666669, 'valid_until': 1e+30, 'min': -37.7109, 'max': 31.55598}]
+ok   phi_sender_sent_frames: count=4
+ok   phi_sender_sent_done: marker
+ok   neutral_sender_sent_done: marker
+ok   recv_qc_compare_ok: WACCMX_RECV_QC compare ok: ranks=32 occurrence=0 step_set=[0] packet_hour_set=[0.0] max_abs=633856 max_rel=1.63445e-13
+overall=ok

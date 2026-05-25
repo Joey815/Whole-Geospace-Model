@@ -36,6 +36,18 @@ FIELDS = [
 ]
 
 
+def parse_float_token(token):
+    try:
+        return float(token.replace("D", "E"))
+    except ValueError:
+        return None
+
+
+def looks_like_real_token(token):
+    upper = token.upper()
+    return "." in token or "E" in upper or "D" in upper
+
+
 def read_payload(prefix, rank):
     path = "{}{:04d}.bin".format(prefix, rank)
     if not os.path.exists(path):
@@ -90,9 +102,25 @@ def parse_qc(log_path):
             parts = line.split()
             idx = parts.index("WACCMX_RECV_QC")
             vals = parts[idx + 1:]
+            expected_continuation_width = {
+                5: 4,
+                9: 3,
+                12: 3,
+                15: 2,
+            }
             while len(vals) < 17 and idx_line < len(lines):
-                vals.extend(lines[idx_line].split())
+                continuation = lines[idx_line].split()
                 idx_line += 1
+                numeric = [tok for tok in continuation
+                           if parse_float_token(tok) is not None]
+                expected_width = expected_continuation_width.get(len(vals))
+                if expected_width is None:
+                    break
+                if len(numeric) != expected_width:
+                    continue
+                if not any(looks_like_real_token(tok) for tok in numeric):
+                    continue
+                vals.extend(numeric)
             if len(vals) < 17:
                 raise RuntimeError("short WACCMX_RECV_QC line: {}".format(line.rstrip()))
             task = int(vals[0])
@@ -105,7 +133,7 @@ def parse_qc(log_path):
                 "invalid_f": int(vals[6]),
             }
             for name, value in zip(FIELDS, vals[7:17]):
-                entry[name] = float(value.replace("D", "E"))
+                entry[name] = parse_float_token(value)
             qc.setdefault(task, []).append(entry)
     return qc
 
