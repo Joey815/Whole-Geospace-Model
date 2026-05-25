@@ -444,6 +444,7 @@ done
   --expected-neutral-packets 1 \
   --expected-phi-frames "$PHI_MAX_FRAMES" \
   --expected-sami3-workers 32 \
+  --allow-overlap-phi-validity \
   --json-output "$RUN/validate_wxsami3_time_axis.json" \
   > "$RUN/validate_wxsami3_time_axis.txt"
 

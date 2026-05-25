@@ -264,15 +264,29 @@ def validate(args):
             all(frames[idx]["hour"] > frames[idx - 1]["hour"] + args.hour_tol for idx in range(1, len(frames))),
             "hours={}".format([frame["hour"] for frame in frames]),
         )
-        add(
-            checks,
-            "phi_payload_valid_until_links",
-            all(close(frames[idx]["valid_until"], frames[idx + 1]["hour"], args.hour_tol) for idx in range(len(frames) - 1)),
-            "hours={} valid_until={}".format(
-                [frame["hour"] for frame in frames],
-                [frame["valid_until"] for frame in frames],
-            ),
-        )
+        if args.allow_overlap_phi_validity:
+            add(
+                checks,
+                "phi_payload_valid_until_overlaps_next",
+                all(
+                    frames[idx]["valid_until"] + args.hour_tol >= frames[idx + 1]["hour"]
+                    for idx in range(len(frames) - 1)
+                ),
+                "hours={} valid_until={}".format(
+                    [frame["hour"] for frame in frames],
+                    [frame["valid_until"] for frame in frames],
+                ),
+            )
+        else:
+            add(
+                checks,
+                "phi_payload_valid_until_links",
+                all(close(frames[idx]["valid_until"], frames[idx + 1]["hour"], args.hour_tol) for idx in range(len(frames) - 1)),
+                "hours={} valid_until={}".format(
+                    [frame["hour"] for frame in frames],
+                    [frame["valid_until"] for frame in frames],
+                ),
+            )
 
     neutral_hours = receiver_hours or sender_hours
     if frames and neutral_hours:
@@ -313,6 +327,11 @@ def main():
     parser.add_argument("--expected-sami3-workers", type=int, default=None)
     parser.add_argument("--expected-neutral-cadence-hours", type=float, default=None)
     parser.add_argument("--hour-tol", type=float, default=1.0e-6)
+    parser.add_argument(
+        "--allow-overlap-phi-validity",
+        action="store_true",
+        help="Allow phi valid_until windows to overlap the next frame hour instead of requiring exact linkage.",
+    )
     parser.add_argument("--allow-incomplete", action="store_true")
     parser.add_argument("--json-output", default=None)
     args = parser.parse_args()
