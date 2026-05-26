@@ -2268,3 +2268,46 @@ Interpretation: the current target-admissible subset is geometrically clean, but
 it is not representative of the active Voltron source volume.  This strengthens
 the diagnostic-only decision: another runtime smoke cannot turn this into
 production plasma feedback; the next real decision is source-domain physics.
+
+## 2026-05-26 10:55 CST Update
+
+Connected the target-admissible subset diagnostic to the executable production
+contract:
+
+```text
+script = scripts/validate_sami3_raiju_production_contract.py
+new_archive = logs/sami3_raiju_production_contract_target_subset_20260526/
+doc = docs/MAGE1.25_notes/SAMI3_RAIJU_PRODUCTION_CONTRACT_TARGET_SUBSET_20260526.md
+```
+
+New validator options:
+
+```text
+--target-admissible-json
+--require-target-admissible-json
+--min-production-target-admissible-bvol-fraction 0.05
+```
+
+The current schema v7 exclude-Lmax product still passes diagnostic-contract
+mode:
+
+```text
+target_admissible_bvol_fraction = 0.0004037956259340399
+low_target_admissible_fraction_is_not_labeled_production = ok
+classification = diagnostic_only
+overall = ok
+```
+
+Production-readiness now has a third explicit failure:
+
+```text
+FAIL production_source_domain_skip_threshold: fraction=0.999595965103914 max=0.05
+FAIL production_label: product=unknown weight=prototype
+FAIL production_target_admissible_bvol_fraction: fraction=0.0004037956259340399 min=0.05
+classification = diagnostic_only
+overall = FAIL
+```
+
+This makes the current physics blocker harder to miss: the product is
+runtime-valid and target-domain-clean, but the target-admissible source subset is
+too small to represent production plasma feedback.

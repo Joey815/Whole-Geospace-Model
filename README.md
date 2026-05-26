@@ -147,6 +147,11 @@ The target-admissible subset diagnostic adds the operational reason: the
 current RAIJU target L range contains 15040 clean `used` source cells, but only
 `0.0004037956259340399` of the positive active source bVol.  The subset is
 geometrically valid, not physically representative.
+The production-contract validator can now ingest that target-subset JSON.  With
+`--require-target-admissible-json`, diagnostic-contract mode still passes, while
+production-readiness also fails the explicit
+`production_target_admissible_bvol_fraction` gate because
+`0.0004037956259340399 < 0.05`.
 The stage-2 mapping products now have a repeatable HDF5 QC gate:
 `scripts/validate_sami3_raiju_mapping_product.py` validates
 `/RaiCplMomentsOnly` and `/MappingQuality` finite values, masks, coverage,

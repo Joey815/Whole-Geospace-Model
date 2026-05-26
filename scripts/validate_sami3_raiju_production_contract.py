@@ -113,6 +113,45 @@ def read_weight_file(path):
     return attrs, meta
 
 
+def read_target_admissible_subset(path):
+    if path is None:
+        return None
+    subset_path = Path(path).expanduser().resolve()
+    summary = {
+        "path": str(subset_path),
+        "exists": subset_path.is_file(),
+        "parsable": False,
+        "target_admissible_bvol_fraction": None,
+        "target_admissible_is_representative": None,
+    }
+    if not subset_path.is_file():
+        return summary
+    try:
+        data = json.loads(subset_path.read_text())
+    except json.JSONDecodeError:
+        return summary
+
+    fraction = first_present(
+        nested_get(data, ["interpretation", "target_admissible_bvol_fraction"]),
+        nested_get(data, ["subsets", "target_admissible_lrange", "fraction_of_total_positive_bvol"]),
+    )
+    representative = nested_get(data, ["interpretation", "target_admissible_is_representative"])
+    if fraction is not None:
+        fraction = float(fraction)
+
+    summary.update(
+        {
+            "parsable": True,
+            "target_L_edge_min": data.get("target_L_edge_min"),
+            "target_L_edge_max": data.get("target_L_edge_max"),
+            "positive_source_bvol_sum": data.get("positive_source_bvol_sum"),
+            "target_admissible_bvol_fraction": fraction,
+            "target_admissible_is_representative": representative,
+        }
+    )
+    return summary
+
+
 def source_domain_summary(weight_attrs, weight_meta):
     return {
         "policy": first_present(
@@ -146,6 +185,9 @@ def validate(args):
         "product_h5": str(product_path),
         "mode": args.mode,
         "max_production_source_above_lmax_fraction": args.max_production_source_above_lmax_fraction,
+        "min_production_target_admissible_bvol_fraction": (
+            args.min_production_target_admissible_bvol_fraction
+        ),
     }
     add(checks, "product_exists", product_path.is_file(), product_path)
     if not product_path.is_file():
@@ -205,8 +247,36 @@ def validate(args):
     )
 
     high_skip = finite_number(skipped_above) and skipped_above > args.max_production_source_above_lmax_fraction
+    subset = read_target_admissible_subset(args.target_admissible_json)
+    low_target_admissible = False
+    if subset is not None:
+        meta["target_admissible_subset"] = subset
+        admissible_fraction = subset["target_admissible_bvol_fraction"]
+        add(checks, "target_admissible_json_exists", subset["exists"], subset["path"])
+        add(checks, "target_admissible_json_parsable", subset["parsable"], subset["path"])
+        add(
+            checks,
+            "target_admissible_bvol_fraction_finite",
+            finite_number(admissible_fraction),
+            admissible_fraction,
+        )
+        low_target_admissible = (
+            finite_number(admissible_fraction)
+            and admissible_fraction < args.min_production_target_admissible_bvol_fraction
+        )
+    elif args.require_target_admissible_json:
+        add(
+            checks,
+            "target_admissible_json_required",
+            False,
+            "--require-target-admissible-json set but --target-admissible-json not supplied",
+        )
+
     meta["high_source_domain_skip"] = bool(high_skip)
-    meta["classification"] = "diagnostic_only" if high_skip else "production_candidate"
+    meta["low_target_admissible_bvol_fraction"] = bool(low_target_admissible)
+    meta["classification"] = (
+        "diagnostic_only" if (high_skip or low_target_admissible) else "production_candidate"
+    )
 
     if args.mode == "diagnostic-contract":
         if high_skip:
@@ -218,6 +288,19 @@ def validate(args):
                     product_label, weight_label, skipped_above
                 ),
             )
+        if low_target_admissible:
+            add(
+                checks,
+                "low_target_admissible_fraction_is_not_labeled_production",
+                product_label in NONPRODUCTION_LABELS and weight_label in NONPRODUCTION_LABELS,
+                "product={} weight={} target_admissible_bvol_fraction={} min={}".format(
+                    product_label,
+                    weight_label,
+                    subset["target_admissible_bvol_fraction"],
+                    args.min_production_target_admissible_bvol_fraction,
+                ),
+            )
+        if high_skip or low_target_admissible:
             add(
                 checks,
                 "diagnostic_note_present",
@@ -254,6 +337,18 @@ def validate(args):
             >= args.min_runtime_valid_fraction,
             nested_get(product_meta, ["raicpl_runtime_mapping_quality", "runtime_valid_fraction"], None),
         )
+        if subset is not None:
+            add(
+                checks,
+                "production_target_admissible_bvol_fraction",
+                finite_number(subset["target_admissible_bvol_fraction"])
+                and subset["target_admissible_bvol_fraction"]
+                >= args.min_production_target_admissible_bvol_fraction,
+                "fraction={} min={}".format(
+                    subset["target_admissible_bvol_fraction"],
+                    args.min_production_target_admissible_bvol_fraction,
+                ),
+            )
 
     return checks, meta
 
@@ -267,7 +362,18 @@ def main():
         default="diagnostic-contract",
     )
     parser.add_argument("--max-production-source-above-lmax-fraction", type=float, default=0.05)
+    parser.add_argument("--min-production-target-admissible-bvol-fraction", type=float, default=0.05)
     parser.add_argument("--min-runtime-valid-fraction", type=float, default=0.95)
+    parser.add_argument(
+        "--target-admissible-json",
+        default=None,
+        help="Optional output from analyze_sami3_raiju_target_admissible_subset.py.",
+    )
+    parser.add_argument(
+        "--require-target-admissible-json",
+        action="store_true",
+        help="Fail if --target-admissible-json is not supplied.",
+    )
     parser.add_argument("--json-output", default=None)
     args = parser.parse_args()
 
