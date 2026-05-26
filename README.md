@@ -25,6 +25,10 @@ top-blend policy, and runtime-map gates.
 The archived 12pkt/12phi result is
 logs/waccmx_live_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_20260526/.
 File-mode fallback regression remains validated.
+The f19 direct-MPI launcher now exposes
+`WXSAMI3_DIRECTMPI_COMPONENT_TIMEOUT_SECONDS` so cadence runs longer than the
+current 12pkt/12phi baseline are not capped by the old hard-coded 2400 second
+SAMI3/CESM component timeout.
 Not production live WACCM-X neutral forcing yet.
 ```
 

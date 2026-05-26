@@ -2311,3 +2311,34 @@ overall = FAIL
 This makes the current physics blocker harder to miss: the product is
 runtime-valid and target-domain-clean, but the target-admissible source subset is
 too small to represent production plasma feedback.
+
+## 2026-05-26 11:12 CST Update
+
+Prepared the WACCM-X/SAMI3 direct-MPI launcher for cadence runs longer than the
+current 12pkt/12phi baseline:
+
+```text
+script = slurm/run_waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525.sbatch
+new env = WXSAMI3_DIRECTMPI_COMPONENT_TIMEOUT_SECONDS
+default = 2400
+```
+
+The previous launcher hard-coded `timeout 2400s` around the SAMI3 and CESM
+`prun` commands.  That was adequate for the 12pkt/12phi run because the
+component runtime was still under the 40 minute component timeout, even though
+the whole Slurm job elapsed 48:27 including setup and validation.  A 24pkt/24phi
+run should not inherit that hard limit, so the component timeout is now
+configurable while preserving the old default.
+
+Planned long-cadence submission settings:
+
+```text
+MAX_PACKETS = 24
+PHI_MAX_FRAMES = 24
+SAMI3_DT0 = 300.
+SAMI3_HRMAX = 8.000000
+SAMI3_MAXSTEP = 2800
+CESM_STOP_N = 7500
+COMPONENT_TIMEOUT_SECONDS = 7200
+VOLTRON_TIMEOUT_SECONDS = 7200
+```
