@@ -2237,3 +2237,34 @@ This turns the current physics caveat into an executable gate.  The adapter can
 continue to be used for runtime diagnostics and controlled alpha/blending tests,
 but it cannot be accidentally promoted to production plasma feedback without
 passing a source-domain closure policy.
+
+## 2026-05-26 07:45 CST Update
+
+Added a target-admissible source-subset analyzer:
+
+```text
+script = scripts/analyze_sami3_raiju_target_admissible_subset.py
+archive = logs/sami3_raiju_target_admissible_subset_20260526/
+doc = docs/MAGE1.25_notes/SAMI3_RAIJU_TARGET_ADMISSIBLE_SUBSET_20260526.md
+```
+
+Result for the current schema v7 exclude-Lmax audit:
+
+```text
+target_L_edge_min = 1.4902905965657023
+target_L_edge_max = 33.163437477526358
+positive_source_bvol_sum = 2268463.9951948188
+
+target_admissible_lrange count = 15040
+target_admissible_lrange bvol_sum = 915.9958388485247
+target_admissible_lrange fraction_of_total_positive_bvol = 0.0004037956259340399
+target_admissible_lrange status = 100% used
+
+above_target_lrange bvol_sum = 2267547.4565805197
+above_target_lrange fraction_of_total_positive_bvol = 0.9995959651040349
+```
+
+Interpretation: the current target-admissible subset is geometrically clean, but
+it is not representative of the active Voltron source volume.  This strengthens
+the diagnostic-only decision: another runtime smoke cannot turn this into
+production plasma feedback; the next real decision is source-domain physics.

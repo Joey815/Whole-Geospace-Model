@@ -1,0 +1,1018 @@
+{
+  "audit_h5": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_raiju_flux_volume_geometry_audit_lon0_bvol_overlap_exclude_lmax_20260526.h5",
+  "interpretation": {
+    "diagnostic_only_if_target_admissible_fraction_below": 0.05,
+    "target_admissible_bvol_fraction": 0.0004037956259340399,
+    "target_admissible_is_representative": false
+  },
+  "positive_source_bvol_sum": 2268463.995194819,
+  "positive_source_cell_count": 33676,
+  "product": "sami3_raiju_target_admissible_source_subset",
+  "source_bvol_dataset": "bvol_active_cc",
+  "source_l_dataset": "Lb_cc",
+  "source_lon_dataset": "lon0_cc_deg",
+  "subsets": {
+    "above_target_lrange": {
+      "Lb_max": 553.7752075195312,
+      "Lb_min": 35.38717269897461,
+      "Lb_weighted_mean": 354.24188507800744,
+      "Lb_weighted_quantiles": {
+        "0.1": 180.7925262451172,
+        "0.5": 317.8695983886719,
+        "0.9": 530.341796875
+      },
+      "bvol_sum": 2267547.4565805197,
+      "count": 5852,
+      "fraction_of_positive_cells": 0.17377360731678346,
+      "fraction_of_total_positive_bvol": 0.9995959651040349,
+      "lon_max_deg": 359.0,
+      "lon_min_deg": 1.0,
+      "lon_weighted_circular_mean_deg": 180.00720857094305,
+      "mapped_fraction_max": 0.0,
+      "mapped_fraction_min": 0.0,
+      "name": "above_target_lrange",
+      "status": [
+        {
+          "bvol_sum": 0.0,
+          "code": 0,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "used"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 1,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "bad_bvol"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 2,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "bad_geometry"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 3,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "large_footprint"
+        },
+        {
+          "bvol_sum": 2267547.4565805197,
+          "code": 4,
+          "count": 5852,
+          "fraction_of_subset_bvol": 1.0,
+          "fraction_of_total_positive_bvol": 0.9995959651040349,
+          "label": "outside_target"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 5,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "no_terms"
+        }
+      ],
+      "term_count_max": 0,
+      "term_count_min": 0
+    },
+    "below_target_lrange": {
+      "Lb_max": 1.4658360481262207,
+      "Lb_min": 1.0192675590515137,
+      "Lb_weighted_mean": 1.2623636638484115,
+      "Lb_weighted_quantiles": {
+        "0.1": 1.061387062072754,
+        "0.5": 1.2726160287857056,
+        "0.9": 1.4329696893692017
+      },
+      "bvol_sum": 0.5427754499905859,
+      "count": 12784,
+      "fraction_of_positive_cells": 0.37961753177336977,
+      "fraction_of_total_positive_bvol": 2.3927003079631055e-07,
+      "lon_max_deg": 359.0,
+      "lon_min_deg": 1.0,
+      "lon_weighted_circular_mean_deg": 359.99999999999994,
+      "mapped_fraction_max": 0.0,
+      "mapped_fraction_min": 0.0,
+      "name": "below_target_lrange",
+      "status": [
+        {
+          "bvol_sum": 0.0,
+          "code": 0,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "used"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 1,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "bad_bvol"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 2,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "bad_geometry"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 3,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "large_footprint"
+        },
+        {
+          "bvol_sum": 0.5427754499905859,
+          "code": 4,
+          "count": 12784,
+          "fraction_of_subset_bvol": 1.0,
+          "fraction_of_total_positive_bvol": 2.3927003079631055e-07,
+          "label": "outside_target"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 5,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "no_terms"
+        }
+      ],
+      "term_count_max": 0,
+      "term_count_min": 0
+    },
+    "positive_all": {
+      "Lb_max": 553.7752075195312,
+      "Lb_min": 1.0192675590515137,
+      "Lb_weighted_mean": 354.1094843545489,
+      "Lb_weighted_quantiles": {
+        "0.1": 180.75912475585938,
+        "0.5": 317.8695983886719,
+        "0.9": 530.341796875
+      },
+      "bvol_sum": 2268463.995194819,
+      "count": 33676,
+      "fraction_of_positive_cells": 1.0,
+      "fraction_of_total_positive_bvol": 1.0,
+      "lon_max_deg": 359.0,
+      "lon_min_deg": 1.0,
+      "lon_weighted_circular_mean_deg": 180.00720872264293,
+      "mapped_fraction_max": 1.0,
+      "mapped_fraction_min": 0.0,
+      "name": "positive_all",
+      "status": [
+        {
+          "bvol_sum": 915.9958388485247,
+          "code": 0,
+          "count": 15040,
+          "fraction_of_subset_bvol": 0.0004037956259340399,
+          "fraction_of_total_positive_bvol": 0.0004037956259340399,
+          "label": "used"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 1,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "bad_bvol"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 2,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "bad_geometry"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 3,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "large_footprint"
+        },
+        {
+          "bvol_sum": 2267547.9993559695,
+          "code": 4,
+          "count": 18636,
+          "fraction_of_subset_bvol": 0.9995962043740656,
+          "fraction_of_total_positive_bvol": 0.9995962043740656,
+          "label": "outside_target"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 5,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "no_terms"
+        }
+      ],
+      "term_count_max": 39,
+      "term_count_min": 0
+    },
+    "target_admissible_lrange": {
+      "Lb_max": 32.98798370361328,
+      "Lb_min": 1.500771403312683,
+      "Lb_weighted_mean": 26.56060885963173,
+      "Lb_weighted_quantiles": {
+        "0.1": 17.159761428833008,
+        "0.5": 29.111295700073242,
+        "0.9": 32.93452453613281
+      },
+      "bvol_sum": 915.9958388485247,
+      "count": 15040,
+      "fraction_of_positive_cells": 0.44660886090984675,
+      "fraction_of_total_positive_bvol": 0.0004037956259340399,
+      "lon_max_deg": 359.0,
+      "lon_min_deg": 1.0,
+      "lon_weighted_circular_mean_deg": 359.99969661310325,
+      "mapped_fraction_max": 1.0,
+      "mapped_fraction_min": 0.5417668223381042,
+      "name": "target_admissible_lrange",
+      "status": [
+        {
+          "bvol_sum": 915.9958388485247,
+          "code": 0,
+          "count": 15040,
+          "fraction_of_subset_bvol": 1.0,
+          "fraction_of_total_positive_bvol": 0.0004037956259340399,
+          "label": "used"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 1,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "bad_bvol"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 2,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "bad_geometry"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 3,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "large_footprint"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 4,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "outside_target"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 5,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "no_terms"
+        }
+      ],
+      "term_count_max": 39,
+      "term_count_min": 1
+    },
+    "target_admissible_used": {
+      "Lb_max": 32.98798370361328,
+      "Lb_min": 1.500771403312683,
+      "Lb_weighted_mean": 26.56060885963173,
+      "Lb_weighted_quantiles": {
+        "0.1": 17.159761428833008,
+        "0.5": 29.111295700073242,
+        "0.9": 32.93452453613281
+      },
+      "bvol_sum": 915.9958388485247,
+      "count": 15040,
+      "fraction_of_positive_cells": 0.44660886090984675,
+      "fraction_of_total_positive_bvol": 0.0004037956259340399,
+      "lon_max_deg": 359.0,
+      "lon_min_deg": 1.0,
+      "lon_weighted_circular_mean_deg": 359.99969661310325,
+      "mapped_fraction_max": 1.0,
+      "mapped_fraction_min": 0.5417668223381042,
+      "name": "target_admissible_used",
+      "status": [
+        {
+          "bvol_sum": 915.9958388485247,
+          "code": 0,
+          "count": 15040,
+          "fraction_of_subset_bvol": 1.0,
+          "fraction_of_total_positive_bvol": 0.0004037956259340399,
+          "label": "used"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 1,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "bad_bvol"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 2,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "bad_geometry"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 3,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "large_footprint"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 4,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "outside_target"
+        },
+        {
+          "bvol_sum": 0.0,
+          "code": 5,
+          "count": 0,
+          "fraction_of_subset_bvol": 0.0,
+          "fraction_of_total_positive_bvol": 0.0,
+          "label": "no_terms"
+        }
+      ],
+      "term_count_max": 39,
+      "term_count_min": 1
+    }
+  },
+  "target_L_edge_max": 33.16343747752636,
+  "target_L_edge_min": 1.4902905965657023,
+  "target_admissible_mlt_histogram": [
+    {
+      "bin": 0,
+      "bvol_sum": 53.94521952883224,
+      "count": 880,
+      "fraction_of_subset_bvol": 0.05889242859077331,
+      "lon_max_deg": 15.0,
+      "lon_min_deg": 0.0
+    },
+    {
+      "bin": 1,
+      "bvol_sum": 39.05059339967556,
+      "count": 640,
+      "fraction_of_subset_bvol": 0.042631845848519444,
+      "lon_max_deg": 30.0,
+      "lon_min_deg": 15.0
+    },
+    {
+      "bin": 2,
+      "bvol_sum": 34.0882319494558,
+      "count": 560,
+      "fraction_of_subset_bvol": 0.03721439607444861,
+      "lon_max_deg": 45.0,
+      "lon_min_deg": 30.0
+    },
+    {
+      "bin": 3,
+      "bvol_sum": 38.93176128459163,
+      "count": 640,
+      "fraction_of_subset_bvol": 0.042502115875910275,
+      "lon_max_deg": 60.0,
+      "lon_min_deg": 45.0
+    },
+    {
+      "bin": 4,
+      "bvol_sum": 34.06532684629201,
+      "count": 560,
+      "fraction_of_subset_bvol": 0.03718939038971473,
+      "lon_max_deg": 75.0,
+      "lon_min_deg": 60.0
+    },
+    {
+      "bin": 5,
+      "bvol_sum": 38.93104531546123,
+      "count": 640,
+      "fraction_of_subset_bvol": 0.042501334246671324,
+      "lon_max_deg": 90.0,
+      "lon_min_deg": 75.0
+    },
+    {
+      "bin": 6,
+      "bvol_sum": 34.0474614755658,
+      "count": 560,
+      "fraction_of_subset_bvol": 0.03716988662128204,
+      "lon_max_deg": 105.0,
+      "lon_min_deg": 90.0
+    },
+    {
+      "bin": 7,
+      "bvol_sum": 38.87723798654042,
+      "count": 640,
+      "fraction_of_subset_bvol": 0.04244259235436268,
+      "lon_max_deg": 120.0,
+      "lon_min_deg": 105.0
+    },
+    {
+      "bin": 8,
+      "bvol_sum": 33.99439685451216,
+      "count": 560,
+      "fraction_of_subset_bvol": 0.03711195554910562,
+      "lon_max_deg": 135.0,
+      "lon_min_deg": 120.0
+    },
+    {
+      "bin": 9,
+      "bvol_sum": 38.864928054157645,
+      "count": 640,
+      "fraction_of_subset_bvol": 0.04242915350250255,
+      "lon_max_deg": 150.0,
+      "lon_min_deg": 135.0
+    },
+    {
+      "bin": 10,
+      "bvol_sum": 34.08195684928796,
+      "count": 560,
+      "fraction_of_subset_bvol": 0.03720754549729345,
+      "lon_max_deg": 165.0,
+      "lon_min_deg": 150.0
+    },
+    {
+      "bin": 11,
+      "bvol_sum": 39.119691010564566,
+      "count": 640,
+      "fraction_of_subset_bvol": 0.042707280264221444,
+      "lon_max_deg": 180.0,
+      "lon_min_deg": 165.0
+    },
+    {
+      "bin": 12,
+      "bvol_sum": 34.24092825836851,
+      "count": 560,
+      "fraction_of_subset_bvol": 0.03738109585891997,
+      "lon_max_deg": 195.0,
+      "lon_min_deg": 180.0
+    },
+    {
+      "bin": 13,
+      "bvol_sum": 38.960823718691245,
+      "count": 640,
+      "fraction_of_subset_bvol": 0.04253384356818467,
+      "lon_max_deg": 210.0,
+      "lon_min_deg": 195.0
+    },
+    {
+      "bin": 14,
+      "bvol_sum": 34.0088330929575,
+      "count": 560,
+      "fraction_of_subset_bvol": 0.03712771570633896,
+      "lon_max_deg": 225.0,
+      "lon_min_deg": 210.0
+    },
+    {
+      "bin": 15,
+      "bvol_sum": 38.850444237468764,
+      "count": 640,
+      "fraction_of_subset_bvol": 0.04241334140371934,
+      "lon_max_deg": 240.0,
+      "lon_min_deg": 225.0
+    },
+    {
+      "bin": 16,
+      "bvol_sum": 34.015572521224385,
+      "count": 560,
+      "fraction_of_subset_bvol": 0.03713507319420196,
+      "lon_max_deg": 255.0,
+      "lon_min_deg": 240.0
+    },
+    {
+      "bin": 17,
+      "bvol_sum": 38.90916922385804,
+      "count": 640,
+      "fraction_of_subset_bvol": 0.04247745194210683,
+      "lon_max_deg": 270.0,
+      "lon_min_deg": 255.0
+    },
+    {
+      "bin": 18,
+      "bvol_sum": 34.0641571537999,
+      "count": 560,
+      "fraction_of_subset_bvol": 0.0371881134270447,
+      "lon_max_deg": 285.0,
+      "lon_min_deg": 270.0
+    },
+    {
+      "bin": 19,
+      "bvol_sum": 38.93234083405696,
+      "count": 640,
+      "fraction_of_subset_bvol": 0.04250274857470731,
+      "lon_max_deg": 300.0,
+      "lon_min_deg": 285.0
+    },
+    {
+      "bin": 20,
+      "bvol_sum": 34.06486580739147,
+      "count": 560,
+      "fraction_of_subset_bvol": 0.037188887069851274,
+      "lon_max_deg": 315.0,
+      "lon_min_deg": 300.0
+    },
+    {
+      "bin": 21,
+      "bvol_sum": 38.95525463367812,
+      "count": 640,
+      "fraction_of_subset_bvol": 0.042527763753433416,
+      "lon_max_deg": 330.0,
+      "lon_min_deg": 315.0
+    },
+    {
+      "bin": 22,
+      "bvol_sum": 34.16085195969208,
+      "count": 560,
+      "fraction_of_subset_bvol": 0.037293675921754,
+      "lon_max_deg": 345.0,
+      "lon_min_deg": 330.0
+    },
+    {
+      "bin": 23,
+      "bvol_sum": 58.83474685240071,
+      "count": 960,
+      "fraction_of_subset_bvol": 0.0642303647649321,
+      "lon_max_deg": 360.0,
+      "lon_min_deg": 345.0
+    }
+  ],
+  "target_l_edge_dataset": "/dst/L_edge",
+  "top_above_target_by_bvol": [
+    {
+      "Lb_cc": 450.2276916503906,
+      "bvol_active": 14539.833984375,
+      "lon_deg": 181.0,
+      "mapped_fraction": 0.0,
+      "source_i": 5,
+      "source_j": 95,
+      "status_code": 4,
+      "status_label": "outside_target",
+      "term_count": 0
+    },
+    {
+      "Lb_cc": 450.2274169921875,
+      "bvol_active": 14539.708984375,
+      "lon_deg": 181.0,
+      "mapped_fraction": 0.0,
+      "source_i": 176,
+      "source_j": 95,
+      "status_code": 4,
+      "status_label": "outside_target",
+      "term_count": 0
+    },
+    {
+      "Lb_cc": 450.22235107421875,
+      "bvol_active": 14537.8427734375,
+      "lon_deg": 179.0,
+      "mapped_fraction": 0.0,
+      "source_i": 5,
+      "source_j": 94,
+      "status_code": 4,
+      "status_label": "outside_target",
+      "term_count": 0
+    },
+    {
+      "Lb_cc": 450.2220764160156,
+      "bvol_active": 14537.71875,
+      "lon_deg": 179.0,
+      "mapped_fraction": 0.0,
+      "source_i": 176,
+      "source_j": 94,
+      "status_code": 4,
+      "status_label": "outside_target",
+      "term_count": 0
+    },
+    {
+      "Lb_cc": 449.6728515625,
+      "bvol_active": 14037.6787109375,
+      "lon_deg": 183.0,
+      "mapped_fraction": 0.0,
+      "source_i": 5,
+      "source_j": 96,
+      "status_code": 4,
+      "status_label": "outside_target",
+      "term_count": 0
+    },
+    {
+      "Lb_cc": 449.672607421875,
+      "bvol_active": 14037.5625,
+      "lon_deg": 183.0,
+      "mapped_fraction": 0.0,
+      "source_i": 176,
+      "source_j": 96,
+      "status_code": 4,
+      "status_label": "outside_target",
+      "term_count": 0
+    },
+    {
+      "Lb_cc": 449.6604309082031,
+      "bvol_active": 14033.1650390625,
+      "lon_deg": 177.0,
+      "mapped_fraction": 0.0,
+      "source_i": 5,
+      "source_j": 93,
+      "status_code": 4,
+      "status_label": "outside_target",
+      "term_count": 0
+    },
+    {
+      "Lb_cc": 449.66015625,
+      "bvol_active": 14033.048828125,
+      "lon_deg": 177.0,
+      "mapped_fraction": 0.0,
+      "source_i": 176,
+      "source_j": 93,
+      "status_code": 4,
+      "status_label": "outside_target",
+      "term_count": 0
+    },
+    {
+      "Lb_cc": 553.7748413085938,
+      "bvol_active": 13558.365234375,
+      "lon_deg": 181.0,
+      "mapped_fraction": 0.0,
+      "source_i": 4,
+      "source_j": 95,
+      "status_code": 4,
+      "status_label": "outside_target",
+      "term_count": 0
+    },
+    {
+      "Lb_cc": 553.7752075195312,
+      "bvol_active": 13558.298828125,
+      "lon_deg": 181.0,
+      "mapped_fraction": 0.0,
+      "source_i": 177,
+      "source_j": 95,
+      "status_code": 4,
+      "status_label": "outside_target",
+      "term_count": 0
+    },
+    {
+      "Lb_cc": 553.7552490234375,
+      "bvol_active": 13556.4150390625,
+      "lon_deg": 179.0,
+      "mapped_fraction": 0.0,
+      "source_i": 4,
+      "source_j": 94,
+      "status_code": 4,
+      "status_label": "outside_target",
+      "term_count": 0
+    },
+    {
+      "Lb_cc": 553.755615234375,
+      "bvol_active": 13556.349609375,
+      "lon_deg": 179.0,
+      "mapped_fraction": 0.0,
+      "source_i": 177,
+      "source_j": 94,
+      "status_code": 4,
+      "status_label": "outside_target",
+      "term_count": 0
+    },
+    {
+      "Lb_cc": 448.257080078125,
+      "bvol_active": 13282.9619140625,
+      "lon_deg": 185.0,
+      "mapped_fraction": 0.0,
+      "source_i": 5,
+      "source_j": 97,
+      "status_code": 4,
+      "status_label": "outside_target",
+      "term_count": 0
+    },
+    {
+      "Lb_cc": 448.2568359375,
+      "bvol_active": 13282.853515625,
+      "lon_deg": 185.0,
+      "mapped_fraction": 0.0,
+      "source_i": 176,
+      "source_j": 97,
+      "status_code": 4,
+      "status_label": "outside_target",
+      "term_count": 0
+    },
+    {
+      "Lb_cc": 448.2440185546875,
+      "bvol_active": 13277.466796875,
+      "lon_deg": 175.0,
+      "mapped_fraction": 0.0,
+      "source_i": 5,
+      "source_j": 92,
+      "status_code": 4,
+      "status_label": "outside_target",
+      "term_count": 0
+    },
+    {
+      "Lb_cc": 448.2437744140625,
+      "bvol_active": 13277.357421875,
+      "lon_deg": 175.0,
+      "mapped_fraction": 0.0,
+      "source_i": 176,
+      "source_j": 92,
+      "status_code": 4,
+      "status_label": "outside_target",
+      "term_count": 0
+    },
+    {
+      "Lb_cc": 551.0234375,
+      "bvol_active": 12958.5625,
+      "lon_deg": 183.0,
+      "mapped_fraction": 0.0,
+      "source_i": 4,
+      "source_j": 96,
+      "status_code": 4,
+      "status_label": "outside_target",
+      "term_count": 0
+    },
+    {
+      "Lb_cc": 551.0237426757812,
+      "bvol_active": 12958.5,
+      "lon_deg": 183.0,
+      "mapped_fraction": 0.0,
+      "source_i": 177,
+      "source_j": 96,
+      "status_code": 4,
+      "status_label": "outside_target",
+      "term_count": 0
+    },
+    {
+      "Lb_cc": 550.9854125976562,
+      "bvol_active": 12953.548828125,
+      "lon_deg": 177.0,
+      "mapped_fraction": 0.0,
+      "source_i": 4,
+      "source_j": 93,
+      "status_code": 4,
+      "status_label": "outside_target",
+      "term_count": 0
+    },
+    {
+      "Lb_cc": 550.9857177734375,
+      "bvol_active": 12953.4873046875,
+      "lon_deg": 177.0,
+      "mapped_fraction": 0.0,
+      "source_i": 177,
+      "source_j": 93,
+      "status_code": 4,
+      "status_label": "outside_target",
+      "term_count": 0
+    }
+  ],
+  "top_target_admissible_by_bvol": [
+    {
+      "Lb_cc": 32.98798370361328,
+      "bvol_active": 0.8225220441818237,
+      "lon_deg": 1.0,
+      "mapped_fraction": 0.5420212149620056,
+      "source_i": 164,
+      "source_j": 185,
+      "status_code": 0,
+      "status_label": "used",
+      "term_count": 1
+    },
+    {
+      "Lb_cc": 32.98798370361328,
+      "bvol_active": 0.8225220441818237,
+      "lon_deg": 1.0,
+      "mapped_fraction": 0.5420212149620056,
+      "source_i": 164,
+      "source_j": 5,
+      "status_code": 0,
+      "status_label": "used",
+      "term_count": 1
+    },
+    {
+      "Lb_cc": 32.98798370361328,
+      "bvol_active": 0.8225201368331909,
+      "lon_deg": 359.0,
+      "mapped_fraction": 0.5420210957527161,
+      "source_i": 164,
+      "source_j": 4,
+      "status_code": 0,
+      "status_label": "used",
+      "term_count": 1
+    },
+    {
+      "Lb_cc": 32.98798370361328,
+      "bvol_active": 0.8225201368331909,
+      "lon_deg": 359.0,
+      "mapped_fraction": 0.5420210957527161,
+      "source_i": 164,
+      "source_j": 184,
+      "status_code": 0,
+      "status_label": "used",
+      "term_count": 1
+    },
+    {
+      "Lb_cc": 32.98796081542969,
+      "bvol_active": 0.8225184082984924,
+      "lon_deg": 1.0,
+      "mapped_fraction": 0.5420279502868652,
+      "source_i": 17,
+      "source_j": 185,
+      "status_code": 0,
+      "status_label": "used",
+      "term_count": 1
+    },
+    {
+      "Lb_cc": 32.98796081542969,
+      "bvol_active": 0.8225184082984924,
+      "lon_deg": 1.0,
+      "mapped_fraction": 0.5420279502868652,
+      "source_i": 17,
+      "source_j": 5,
+      "status_code": 0,
+      "status_label": "used",
+      "term_count": 1
+    },
+    {
+      "Lb_cc": 32.98796081542969,
+      "bvol_active": 0.8225165009498596,
+      "lon_deg": 359.0,
+      "mapped_fraction": 0.5420278310775757,
+      "source_i": 17,
+      "source_j": 4,
+      "status_code": 0,
+      "status_label": "used",
+      "term_count": 1
+    },
+    {
+      "Lb_cc": 32.98796081542969,
+      "bvol_active": 0.8225165009498596,
+      "lon_deg": 359.0,
+      "mapped_fraction": 0.5420278310775757,
+      "source_i": 17,
+      "source_j": 184,
+      "status_code": 0,
+      "status_label": "used",
+      "term_count": 1
+    },
+    {
+      "Lb_cc": 32.98702621459961,
+      "bvol_active": 0.8222048878669739,
+      "lon_deg": 3.0,
+      "mapped_fraction": 0.5417668223381042,
+      "source_i": 164,
+      "source_j": 6,
+      "status_code": 0,
+      "status_label": "used",
+      "term_count": 2
+    },
+    {
+      "Lb_cc": 32.98702621459961,
+      "bvol_active": 0.8222048878669739,
+      "lon_deg": 3.0,
+      "mapped_fraction": 0.5417668223381042,
+      "source_i": 164,
+      "source_j": 186,
+      "status_code": 0,
+      "status_label": "used",
+      "term_count": 2
+    },
+    {
+      "Lb_cc": 32.986995697021484,
+      "bvol_active": 0.8222010731697083,
+      "lon_deg": 3.0,
+      "mapped_fraction": 0.5417757034301758,
+      "source_i": 17,
+      "source_j": 186,
+      "status_code": 0,
+      "status_label": "used",
+      "term_count": 2
+    },
+    {
+      "Lb_cc": 32.986995697021484,
+      "bvol_active": 0.8222010731697083,
+      "lon_deg": 3.0,
+      "mapped_fraction": 0.5417757034301758,
+      "source_i": 17,
+      "source_j": 6,
+      "status_code": 0,
+      "status_label": "used",
+      "term_count": 2
+    },
+    {
+      "Lb_cc": 32.98701858520508,
+      "bvol_active": 0.8221979141235352,
+      "lon_deg": 357.0,
+      "mapped_fraction": 0.5417685508728027,
+      "source_i": 164,
+      "source_j": 3,
+      "status_code": 0,
+      "status_label": "used",
+      "term_count": 1
+    },
+    {
+      "Lb_cc": 32.98701858520508,
+      "bvol_active": 0.8221979141235352,
+      "lon_deg": 357.0,
+      "mapped_fraction": 0.5417685508728027,
+      "source_i": 164,
+      "source_j": 183,
+      "status_code": 0,
+      "status_label": "used",
+      "term_count": 1
+    },
+    {
+      "Lb_cc": 32.98698806762695,
+      "bvol_active": 0.8221940398216248,
+      "lon_deg": 357.0,
+      "mapped_fraction": 0.541777491569519,
+      "source_i": 17,
+      "source_j": 3,
+      "status_code": 0,
+      "status_label": "used",
+      "term_count": 1
+    },
+    {
+      "Lb_cc": 32.98698806762695,
+      "bvol_active": 0.8221940398216248,
+      "lon_deg": 357.0,
+      "mapped_fraction": 0.541777491569519,
+      "source_i": 17,
+      "source_j": 183,
+      "status_code": 0,
+      "status_label": "used",
+      "term_count": 1
+    },
+    {
+      "Lb_cc": 32.978267669677734,
+      "bvol_active": 0.8216411471366882,
+      "lon_deg": 5.0,
+      "mapped_fraction": 0.5453655123710632,
+      "source_i": 164,
+      "source_j": 7,
+      "status_code": 0,
+      "status_label": "used",
+      "term_count": 1
+    },
+    {
+      "Lb_cc": 32.978267669677734,
+      "bvol_active": 0.8216411471366882,
+      "lon_deg": 5.0,
+      "mapped_fraction": 0.5453655123710632,
+      "source_i": 164,
+      "source_j": 187,
+      "status_code": 0,
+      "status_label": "used",
+      "term_count": 1
+    },
+    {
+      "Lb_cc": 32.978248596191406,
+      "bvol_active": 0.8216383457183838,
+      "lon_deg": 5.0,
+      "mapped_fraction": 0.5453717112541199,
+      "source_i": 17,
+      "source_j": 187,
+      "status_code": 0,
+      "status_label": "used",
+      "term_count": 1
+    },
+    {
+      "Lb_cc": 32.978248596191406,
+      "bvol_active": 0.8216383457183838,
+      "lon_deg": 5.0,
+      "mapped_fraction": 0.5453717112541199,
+      "source_i": 17,
+      "source_j": 7,
+      "status_code": 0,
+      "status_label": "used",
+      "term_count": 1
+    }
+  ],
+  "weights_h5": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_voltron_tubeshell_l_mlt_lon0_bin_bvol_overlap_exclude_lmax_20260526.h5"
+}

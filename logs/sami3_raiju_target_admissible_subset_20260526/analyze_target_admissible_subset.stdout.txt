@@ -1,0 +1,144 @@
+SAMI3 -> RAIJU target-admissible source subset
+audit_h5 /online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_raiju_flux_volume_geometry_audit_lon0_bvol_overlap_exclude_lmax_20260526.h5
+weights_h5 /online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_voltron_tubeshell_l_mlt_lon0_bin_bvol_overlap_exclude_lmax_20260526.h5
+target_L_edge_min 1.4902905965657023
+target_L_edge_max 33.163437477526358
+positive_source_cell_count 33676
+positive_source_bvol_sum 2268463.9951948188
+
+[target_admissible_lrange]
+count=15040
+fraction_of_positive_cells=0.44660886090984675
+bvol_sum=915.9958388485247
+fraction_of_total_positive_bvol=0.0004037956259340399
+Lb_min=1.500771403312683
+Lb_max=32.98798370361328
+Lb_weighted_mean=26.56060885963173
+lon_weighted_circular_mean_deg=359.99969661310325
+term_count_min=1
+term_count_max=39
+mapped_fraction_min=0.5417668223381042
+mapped_fraction_max=1.0
+status_code label count bvol_sum fraction_of_subset_bvol
+0 used 15040 915.99583884852473 1.0
+1 bad_bvol 0 0 0.0
+2 bad_geometry 0 0 0.0
+3 large_footprint 0 0 0.0
+4 outside_target 0 0 0.0
+5 no_terms 0 0 0.0
+
+[target_admissible_used]
+count=15040
+fraction_of_positive_cells=0.44660886090984675
+bvol_sum=915.9958388485247
+fraction_of_total_positive_bvol=0.0004037956259340399
+Lb_min=1.500771403312683
+Lb_max=32.98798370361328
+Lb_weighted_mean=26.56060885963173
+lon_weighted_circular_mean_deg=359.99969661310325
+term_count_min=1
+term_count_max=39
+mapped_fraction_min=0.5417668223381042
+mapped_fraction_max=1.0
+status_code label count bvol_sum fraction_of_subset_bvol
+0 used 15040 915.99583884852473 1.0
+1 bad_bvol 0 0 0.0
+2 bad_geometry 0 0 0.0
+3 large_footprint 0 0 0.0
+4 outside_target 0 0 0.0
+5 no_terms 0 0 0.0
+
+[above_target_lrange]
+count=5852
+fraction_of_positive_cells=0.17377360731678346
+bvol_sum=2267547.4565805197
+fraction_of_total_positive_bvol=0.9995959651040349
+Lb_min=35.38717269897461
+Lb_max=553.7752075195312
+Lb_weighted_mean=354.24188507800744
+lon_weighted_circular_mean_deg=180.00720857094305
+term_count_min=0
+term_count_max=0
+mapped_fraction_min=0.0
+mapped_fraction_max=0.0
+status_code label count bvol_sum fraction_of_subset_bvol
+0 used 0 0 0.0
+1 bad_bvol 0 0 0.0
+2 bad_geometry 0 0 0.0
+3 large_footprint 0 0 0.0
+4 outside_target 5852 2267547.4565805197 1.0
+5 no_terms 0 0 0.0
+
+[below_target_lrange]
+count=12784
+fraction_of_positive_cells=0.37961753177336977
+bvol_sum=0.5427754499905859
+fraction_of_total_positive_bvol=2.3927003079631055e-07
+Lb_min=1.0192675590515137
+Lb_max=1.4658360481262207
+Lb_weighted_mean=1.2623636638484115
+lon_weighted_circular_mean_deg=359.99999999999994
+term_count_min=0
+term_count_max=0
+mapped_fraction_min=0.0
+mapped_fraction_max=0.0
+status_code label count bvol_sum fraction_of_subset_bvol
+0 used 0 0 0.0
+1 bad_bvol 0 0 0.0
+2 bad_geometry 0 0 0.0
+3 large_footprint 0 0 0.0
+4 outside_target 12784 0.54277544999058591 1.0
+5 no_terms 0 0 0.0
+
+[target_admissible_mlt_histogram]
+bin lon_min lon_max count bvol_sum fraction_of_subset_bvol
+0 0 15 880 53.94521952883224 0.05889242859077331
+1 15 30 640 39.050593399675563 0.042631845848519444
+2 30 45 560 34.088231949455803 0.03721439607444861
+3 45 60 640 38.93176128459163 0.042502115875910275
+4 60 75 560 34.06532684629201 0.03718939038971473
+5 75 90 640 38.931045315461233 0.042501334246671324
+6 90 105 560 34.047461475565797 0.03716988662128204
+7 105 120 640 38.877237986540422 0.04244259235436268
+8 120 135 560 33.994396854512161 0.03711195554910562
+9 135 150 640 38.864928054157645 0.04242915350250255
+10 150 165 560 34.081956849287963 0.03720754549729345
+11 165 180 640 39.119691010564566 0.042707280264221444
+12 180 195 560 34.240928258368513 0.03738109585891997
+13 195 210 640 38.960823718691245 0.04253384356818467
+14 210 225 560 34.008833092957502 0.03712771570633896
+15 225 240 640 38.850444237468764 0.04241334140371934
+16 240 255 560 34.015572521224385 0.03713507319420196
+17 255 270 640 38.909169223858044 0.04247745194210683
+18 270 285 560 34.064157153799897 0.0371881134270447
+19 285 300 640 38.932340834056959 0.04250274857470731
+20 300 315 560 34.06486580739147 0.037188887069851274
+21 315 330 640 38.955254633678123 0.042527763753433416
+22 330 345 560 34.160851959692081 0.037293675921754
+23 345 360 960 58.834746852400713 0.0642303647649321
+
+[top_target_admissible_by_bvol]
+source_i=164 source_j=185 bvol_active=0.822522044 Lb_cc=32.9879837 lon_deg=1 status=used term_count=1 mapped_fraction=0.542021215
+source_i=164 source_j=5 bvol_active=0.822522044 Lb_cc=32.9879837 lon_deg=1 status=used term_count=1 mapped_fraction=0.542021215
+source_i=164 source_j=4 bvol_active=0.822520137 Lb_cc=32.9879837 lon_deg=359 status=used term_count=1 mapped_fraction=0.542021096
+source_i=164 source_j=184 bvol_active=0.822520137 Lb_cc=32.9879837 lon_deg=359 status=used term_count=1 mapped_fraction=0.542021096
+source_i=17 source_j=185 bvol_active=0.822518408 Lb_cc=32.9879608 lon_deg=1 status=used term_count=1 mapped_fraction=0.54202795
+source_i=17 source_j=5 bvol_active=0.822518408 Lb_cc=32.9879608 lon_deg=1 status=used term_count=1 mapped_fraction=0.54202795
+source_i=17 source_j=4 bvol_active=0.822516501 Lb_cc=32.9879608 lon_deg=359 status=used term_count=1 mapped_fraction=0.542027831
+source_i=17 source_j=184 bvol_active=0.822516501 Lb_cc=32.9879608 lon_deg=359 status=used term_count=1 mapped_fraction=0.542027831
+source_i=164 source_j=6 bvol_active=0.822204888 Lb_cc=32.9870262 lon_deg=3 status=used term_count=2 mapped_fraction=0.541766822
+source_i=164 source_j=186 bvol_active=0.822204888 Lb_cc=32.9870262 lon_deg=3 status=used term_count=2 mapped_fraction=0.541766822
+source_i=17 source_j=186 bvol_active=0.822201073 Lb_cc=32.9869957 lon_deg=3 status=used term_count=2 mapped_fraction=0.541775703
+source_i=17 source_j=6 bvol_active=0.822201073 Lb_cc=32.9869957 lon_deg=3 status=used term_count=2 mapped_fraction=0.541775703
+source_i=164 source_j=3 bvol_active=0.822197914 Lb_cc=32.9870186 lon_deg=357 status=used term_count=1 mapped_fraction=0.541768551
+source_i=164 source_j=183 bvol_active=0.822197914 Lb_cc=32.9870186 lon_deg=357 status=used term_count=1 mapped_fraction=0.541768551
+source_i=17 source_j=3 bvol_active=0.82219404 Lb_cc=32.9869881 lon_deg=357 status=used term_count=1 mapped_fraction=0.541777492
+source_i=17 source_j=183 bvol_active=0.82219404 Lb_cc=32.9869881 lon_deg=357 status=used term_count=1 mapped_fraction=0.541777492
+source_i=164 source_j=7 bvol_active=0.821641147 Lb_cc=32.9782677 lon_deg=5 status=used term_count=1 mapped_fraction=0.545365512
+source_i=164 source_j=187 bvol_active=0.821641147 Lb_cc=32.9782677 lon_deg=5 status=used term_count=1 mapped_fraction=0.545365512
+source_i=17 source_j=187 bvol_active=0.821638346 Lb_cc=32.9782486 lon_deg=5 status=used term_count=1 mapped_fraction=0.545371711
+source_i=17 source_j=7 bvol_active=0.821638346 Lb_cc=32.9782486 lon_deg=5 status=used term_count=1 mapped_fraction=0.545371711
+
+[interpretation]
+target_admissible_bvol_fraction=0.0004037956259340399
+target_admissible_is_representative=False

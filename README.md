@@ -143,6 +143,10 @@ that decision executable: diagnostic-contract mode passes for the current
 exclude-Lmax product, while production-readiness mode intentionally fails on
 `source_domain_skipped_above_lmax_bvol_fraction=0.999595965103914` and the
 non-production product labels.
+The target-admissible subset diagnostic adds the operational reason: the
+current RAIJU target L range contains 15040 clean `used` source cells, but only
+`0.0004037956259340399` of the positive active source bVol.  The subset is
+geometrically valid, not physically representative.
 The stage-2 mapping products now have a repeatable HDF5 QC gate:
 `scripts/validate_sami3_raiju_mapping_product.py` validates
 `/RaiCplMomentsOnly` and `/MappingQuality` finite values, masks, coverage,
