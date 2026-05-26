@@ -1,0 +1,6 @@
+N2 negative residual mode: invalid
+loaded ESMF weights: npoints=3618816 n_s=14475264
+loaded live dump: source_cols=13824 filled=13824 pver=126
+sample QC initial: n2_negative_mode=invalid samples=6031360 invalid=1826880 bad_weighted_z=0 above_live_top=1654209 n2_residual_used=4377151 n2_residual_negative=172671 n2_residual_min=-0.056705988222870519 n2_residual_max=0.81305954605855124 n2_residual_negative_min=-0.056705988222870519
+sample QC final: n2_negative_mode=invalid samples=6031360 invalid=1826880 bad_weighted_z=0 above_live_top=1654209 n2_residual_used=4377151 n2_residual_negative=172671 n2_residual_min=-0.056705988222870519 n2_residual_max=0.81305954605855124 n2_residual_negative_min=-0.056705988222870519
+wrote live-dump replay payload prefix: /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_pkt000016/waccmx_neutral_rank

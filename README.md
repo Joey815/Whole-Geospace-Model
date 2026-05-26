@@ -17,18 +17,21 @@ The current verified WACCM-X -> SAMI3 status is:
 f19 online runtime live neutral-packet plus REMIX/Voltron direct-phi prototype.
 Runtime map packing no longer hard-codes f19 source columns; nsource is read
 from the ESMF weight-file n_a dimension.
-The current strongest no-smoke validation is a 12-cadence run:
-12 CAM phys_state(:) live-neutral packets and 12 changing direct-MPI phi frames.
-All seven strict validators pass for that 12pkt/12phi run, including live
+The current strongest no-smoke validation is a 24-cadence run:
+24 CAM phys_state(:) live-neutral packets and 24 changing direct-MPI phi frames.
+All seven strict validators pass for that 24pkt/24phi run, including live
 packet contract, direct phi, phi payload, source-flag balance, time axis,
 top-blend policy, and runtime-map gates.
-The archived 12pkt/12phi result is
-logs/waccmx_live_directmpi_nosmoke_dt300_12pkt_12phi_hrmax4_20260526/.
+The archived 24pkt/24phi result is
+logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/.
 File-mode fallback regression remains validated.
 The f19 direct-MPI launcher now exposes
 `WXSAMI3_DIRECTMPI_COMPONENT_TIMEOUT_SECONDS` so cadence runs longer than the
-current 12pkt/12phi baseline are not capped by the old hard-coded 2400 second
+current 24pkt/24phi baseline are not capped by the old hard-coded 2400 second
 SAMI3/CESM component timeout.
+The 24pkt/24phi run reached all done markers cleanly, but Voltron had to be
+terminated after done because `PHI_STOP_AFTER_DONE=0`; this is a launcher
+post-done management caveat, not a failed physics chain.
 Not production live WACCM-X neutral forcing yet.
 ```
 
@@ -512,8 +515,8 @@ Latest WACCM-X/CAM -> SAMI3 live-neutral plus Voltron/REMIX direct-phi
 online MPI evidence:
 
 ```text
-docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_DIRECTMPI_NOSMOKE_6PKT_6PHI_RESULT_20260526.md
-logs/waccmx_live_directmpi_nosmoke_dt300_6pkt_6phi_hrmax2_20260526/
+docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_DIRECTMPI_NOSMOKE_24PKT_24PHI_RESULT_20260526.md
+logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/
 ```
 
 Latest SAMI3 -> RAIJU/GAMERA mapping quality evidence:
@@ -542,8 +545,8 @@ Do not describe this snapshot as production live WACCM-X neutral forcing until
 these are handled:
 
 ```text
-production cadence/f09 live source-state validation beyond the current f19 12pkt/12phi gate
-longer-than-6-packet production cadence and restart/stability testing
+production cadence/f09 live source-state validation beyond the current f19 24pkt/24phi gate
+restart/stability testing beyond the current 24-cadence prototype
 production choice of WACCM-X-top blending heights and per-variable policy
 He native/MSIS fallback policy review beyond the current enforced native fallback
 W-off / vertical-wind policy review beyond the current enforced zero-W payload

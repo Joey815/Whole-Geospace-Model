@@ -20,6 +20,9 @@ COPY_PATTERNS = [
     "replay_builder_pkt*.out",
     "recv_qc_compare_pkt*.txt",
     "wxsami3_live_meta.json",
+]
+
+RUN_VALIDATE_PATTERNS = [
     "validate_*.txt",
     "validate_*.json",
 ]
@@ -39,6 +42,7 @@ def run_checked(cmd, stdout_path):
 
 
 def copy_files(files, archive_dir):
+    archive_dir.mkdir(parents=True, exist_ok=True)
     copied = []
     for src in files:
         dst = archive_dir / src.name
@@ -47,10 +51,11 @@ def copy_files(files, archive_dir):
     return copied
 
 
-def collect_files(run_dir, job_id=None):
+def collect_files(run_dir, job_id=None, patterns=None):
     files = []
     seen = set()
-    for pattern in COPY_PATTERNS:
+    selected_patterns = patterns if patterns is not None else COPY_PATTERNS
+    for pattern in selected_patterns:
         for path in sorted(run_dir.glob(pattern)):
             if not path.is_file():
                 continue
@@ -198,6 +203,7 @@ def main():
         "--expect-n2-residual",
         "--expect-he-native",
         "--require-zero-unknown-source-flags",
+        "--exclude-slurm-logs",
         "--json-output",
         str(contract_json),
     ]
@@ -302,7 +308,8 @@ def main():
         runtime_map_txt.write_text("runtime map not found\n")
         runtime_map_json.write_text(json.dumps({"ok": False, "error": "runtime map not found"}, indent=2) + "\n")
 
-    copied = copy_files(collect_files(run_dir, args.job_id), archive_dir)
+    copied = copy_files(collect_files(run_dir, args.job_id, COPY_PATTERNS), archive_dir)
+    copied.extend(copy_files(collect_files(run_dir, args.job_id, RUN_VALIDATE_PATTERNS), archive_dir / "run_validators"))
     sacct = write_sacct(args.job_id, archive_dir)
     checks = {
         "direct_phi": direct_rc,

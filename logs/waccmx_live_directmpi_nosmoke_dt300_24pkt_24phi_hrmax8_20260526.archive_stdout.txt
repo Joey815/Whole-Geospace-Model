@@ -1,0 +1,489 @@
+{
+  "archive_dir": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526",
+  "copied_files": [
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/slurm-7697673.out",
+      "bytes": 325037,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/slurm-7697673.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/slurm-7697673.err",
+      "bytes": 23,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/slurm-7697673.err"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/waccmx_cesm.out",
+      "bytes": 3396563,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/waccmx_cesm.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/sami3_online_receiver.out",
+      "bytes": 2846229,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/sami3_online_receiver.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/voltron_runtime_direct.out",
+      "bytes": 76989,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/voltron_runtime_direct.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/phi_payload_summary.txt",
+      "bytes": 4677,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/phi_payload_summary.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000000.txt",
+      "bytes": 1104,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000000.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000001.txt",
+      "bytes": 1108,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000001.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000002.txt",
+      "bytes": 1105,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000002.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000003.txt",
+      "bytes": 1106,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000003.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000004.txt",
+      "bytes": 1105,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000004.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000005.txt",
+      "bytes": 1105,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000005.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000006.txt",
+      "bytes": 1101,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000006.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000007.txt",
+      "bytes": 1104,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000007.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000008.txt",
+      "bytes": 1101,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000008.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000009.txt",
+      "bytes": 1101,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000009.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000010.txt",
+      "bytes": 1106,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000010.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000011.txt",
+      "bytes": 1105,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000011.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000012.txt",
+      "bytes": 1109,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000012.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000013.txt",
+      "bytes": 1105,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000013.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000014.txt",
+      "bytes": 1102,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000014.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000015.txt",
+      "bytes": 1107,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000015.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000016.txt",
+      "bytes": 1108,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000016.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000017.txt",
+      "bytes": 1107,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000017.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000018.txt",
+      "bytes": 1105,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000018.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000019.txt",
+      "bytes": 1104,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000019.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000020.txt",
+      "bytes": 1101,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000020.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000021.txt",
+      "bytes": 1104,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000021.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000022.txt",
+      "bytes": 1107,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000022.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/live_dump_summary_pkt000023.txt",
+      "bytes": 1105,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/live_dump_summary_pkt000023.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000000.out",
+      "bytes": 956,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000000.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000001.out",
+      "bytes": 956,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000001.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000002.out",
+      "bytes": 956,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000002.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000003.out",
+      "bytes": 956,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000003.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000004.out",
+      "bytes": 956,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000004.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000005.out",
+      "bytes": 956,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000005.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000006.out",
+      "bytes": 952,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000006.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000007.out",
+      "bytes": 956,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000007.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000008.out",
+      "bytes": 956,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000008.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000009.out",
+      "bytes": 956,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000009.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000010.out",
+      "bytes": 954,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000010.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000011.out",
+      "bytes": 952,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000011.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000012.out",
+      "bytes": 948,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000012.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000013.out",
+      "bytes": 954,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000013.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000014.out",
+      "bytes": 956,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000014.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000015.out",
+      "bytes": 954,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000015.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000016.out",
+      "bytes": 956,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000016.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000017.out",
+      "bytes": 956,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000017.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000018.out",
+      "bytes": 956,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000018.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000019.out",
+      "bytes": 954,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000019.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000020.out",
+      "bytes": 956,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000020.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000021.out",
+      "bytes": 952,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000021.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000022.out",
+      "bytes": 954,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000022.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/replay_builder_pkt000023.out",
+      "bytes": 956,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/replay_builder_pkt000023.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000000.txt",
+      "bytes": 124,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000000.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000001.txt",
+      "bytes": 133,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000001.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000002.txt",
+      "bytes": 132,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000002.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000003.txt",
+      "bytes": 125,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000003.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000004.txt",
+      "bytes": 132,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000004.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000005.txt",
+      "bytes": 132,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000005.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000006.txt",
+      "bytes": 124,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000006.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000007.txt",
+      "bytes": 132,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000007.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000008.txt",
+      "bytes": 130,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000008.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000009.txt",
+      "bytes": 125,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000009.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000010.txt",
+      "bytes": 134,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000010.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000011.txt",
+      "bytes": 134,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000011.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000012.txt",
+      "bytes": 126,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000012.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000013.txt",
+      "bytes": 133,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000013.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000014.txt",
+      "bytes": 133,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000014.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000015.txt",
+      "bytes": 127,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000015.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000016.txt",
+      "bytes": 133,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000016.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000017.txt",
+      "bytes": 133,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000017.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000018.txt",
+      "bytes": 126,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000018.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000019.txt",
+      "bytes": 132,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000019.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000020.txt",
+      "bytes": 132,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000020.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000021.txt",
+      "bytes": 127,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000021.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000022.txt",
+      "bytes": 133,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000022.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/recv_qc_compare_pkt000023.txt",
+      "bytes": 133,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/recv_qc_compare_pkt000023.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/wxsami3_live_meta.json",
+      "bytes": 3195,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/wxsami3_live_meta.json"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/run_validators/validate_remix_sami3_phi_payload.txt",
+      "bytes": 2133,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/validate_remix_sami3_phi_payload.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/run_validators/validate_sami3_direct_phi_run_strict.txt",
+      "bytes": 5241,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/validate_sami3_direct_phi_run_strict.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/run_validators/validate_wxsami3_live_packet_contract.txt",
+      "bytes": 92763,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/validate_wxsami3_live_packet_contract.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/run_validators/validate_wxsami3_runtime_map.txt",
+      "bytes": 1385,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/validate_wxsami3_runtime_map.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/run_validators/validate_wxsami3_source_flag_balance.txt",
+      "bytes": 2392,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/validate_wxsami3_source_flag_balance.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/run_validators/validate_wxsami3_time_axis.txt",
+      "bytes": 4849,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/validate_wxsami3_time_axis.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/run_validators/validate_wxsami3_topblend_policy.txt",
+      "bytes": 1104,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/validate_wxsami3_topblend_policy.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/run_validators/validate_remix_sami3_phi_payload.json",
+      "bytes": 14769,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/validate_remix_sami3_phi_payload.json"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/run_validators/validate_sami3_direct_phi_run_strict.json",
+      "bytes": 11222,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/validate_sami3_direct_phi_run_strict.json"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/run_validators/validate_wxsami3_live_packet_contract.json",
+      "bytes": 278262,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/validate_wxsami3_live_packet_contract.json"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/run_validators/validate_wxsami3_runtime_map.json",
+      "bytes": 3710,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/validate_wxsami3_runtime_map.json"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/run_validators/validate_wxsami3_source_flag_balance.json",
+      "bytes": 6222,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/validate_wxsami3_source_flag_balance.json"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/run_validators/validate_wxsami3_time_axis.json",
+      "bytes": 29414,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/validate_wxsami3_time_axis.json"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/run_validators/validate_wxsami3_topblend_policy.json",
+      "bytes": 3023,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/validate_wxsami3_topblend_policy.json"
+    }
+  ],
+  "expected_packets": 24,
+  "expected_phi_frames": 24,
+  "job_id": "7697673",
+  "ok": true,
+  "run_dir": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000",
+  "runtime_map": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/wxsami3_runtime_map_f19_20260523.bin",
+  "sacct": {
+    "path": "logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/sacct_7697673.txt",
+    "returncode": 0
+  },
+  "validator_returncodes": {
+    "direct_phi": 0,
+    "live_packet_contract": 0,
+    "phi_payload": 0,
+    "runtime_map": 0,
+    "source_flag_balance": 0,
+    "time_axis": 0,
+    "topblend_policy": 0
+  }
+}

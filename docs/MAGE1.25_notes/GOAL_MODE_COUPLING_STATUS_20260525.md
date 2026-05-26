@@ -2359,3 +2359,128 @@ validators =
 
 This removes the need to adapt the append2 archiver for direct-MPI runs after a
 long cadence job finishes.
+
+## 2026-05-26 12:15 CST Update
+
+Completed and archived the planned f19 WACCM-X/SAMI3 direct-MPI no-smoke
+24-cadence run:
+
+```text
+jobid = 7697673
+jobname = wxsami3_24p24f_h8
+state = COMPLETED
+exit = 0:0
+elapsed = 01:08:04
+node = qhcn198
+batch MaxRSS = 65297928K
+run_dir = /home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000
+archive = logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/
+doc = docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_DIRECTMPI_NOSMOKE_24PKT_24PHI_RESULT_20260526.md
+```
+
+Validated settings:
+
+```text
+MAX_PACKETS = 24
+LIVE_DUMP_MAX = 24
+PHI_MAX_FRAMES = 24
+SAMI3_DT0 = 300.
+SAMI3_HRMAX = 8.000000
+SAMI3_MAXSTEP = 2800
+CESM_STOP_N = 7500
+COMPONENT_TIMEOUT_SECONDS = 7200
+VOLTRON_TIMEOUT_SECONDS = 7200
+```
+
+All seven archived validators returned `overall=ok`:
+
+```text
+validate_sami3_direct_phi_run_strict
+validate_remix_sami3_phi_payload
+validate_wxsami3_live_packet_contract
+validate_wxsami3_source_flag_balance
+validate_wxsami3_time_axis
+validate_wxsami3_topblend_policy
+validate_wxsami3_runtime_map
+```
+
+The run consumed all 24 CAM `phys_state(:)` live neutral packets and all 24
+changing REMIX/Voltron direct-phi frames.  The time-axis validator confirmed
+24 sender packets, 24 receiver packets, 32-worker SAMI3 coverage for every
+packet, 24 phi payload frames, 24 receiver phi records, and full phi coverage
+for the neutral packet hours `0.0` through `1.91666663` h.  The last replay/QC
+comparison remained roundoff-level:
+
+```text
+packet23_recv_compare_max_rel = 1.20189e-12
+limit = 1e-6
+```
+
+The f19 runtime-map/top-blend gates stayed consistent:
+
+```text
+nsource = 13824
+npoints = 3618816
+weights_dim_n_s = 14475264
+topblend_mode = linear
+bottom_km = 600
+top_km = 720
+unknown_source_flags = 0
+he_native_matches_valid = true
+w_zero_matches_valid = true
+```
+
+Run-management caveat: the model chain had already reached the direct-phi done
+marker, SAMI3 `MASTER: All Done!`, and CESM `END OF MODEL RUN`, but Voltron
+remained inside the `timeout 7200s prun ... ./voltron.x` wrapper because
+`PHI_STOP_AFTER_DONE=0`.  After the done markers were verified, only the
+Voltron wrapper was terminated.  The launcher accepted this as:
+
+```text
+INFO: accepting Voltron nonzero exit after direct phi done and SAMI3 completion: status=143
+```
+
+This is not a failed physics/control-chain result; it is a post-done launcher
+management issue for long cadence runs.  Future runs should use a shorter
+post-done Voltron timeout, validate `PHI_STOP_AFTER_DONE=1`, or add explicit
+post-done wrapper termination.
+
+The archive driver and live packet validator were also hardened for this
+completed-run workflow:
+
+```text
+script = scripts/validate_wxsami3_live_packet_contract.py
+new option = --exclude-slurm-logs
+script = scripts/archive_wxsami3_directmpi_result.py
+behavior = re-run live packet contract without Slurm summary logs and copy
+           original run validators into archive/run_validators/
+```
+
+Reason: after Slurm prints validator excerpts into `slurm-*.out`, post-run
+revalidation can otherwise double-count sender packets or match validator text
+as fatal markers.  With `--exclude-slurm-logs`, the 24-packet live packet
+contract revalidates cleanly:
+
+```text
+sender_live_packet_count = 24
+receiver_qc_line_count = 768
+sami3_done = true
+waccmx_done = true
+fatal_markers_absent = true
+overall = ok
+```
+
+Current goal-mode baseline:
+
+```text
+WACCM-X/CAM live phys_state(:) extraction: validated at f19 for 24 packets
+SAMI3 online receiver and worker distribution: validated for 24 packets
+Voltron/REMIX direct-MPI phi producer: validated for 24 changing frames
+Top-blend/source-flag/time-axis/runtime-map gates: validated
+Done/finalize path: validated, with Voltron post-done wrapper caveat
+```
+
+Next target returns to the SAMI3 -> Voltron/RAIJU/GAMERA adapter line.  The
+WACCM-X/SAMI3 online control path now has a stronger f19 24-cadence baseline;
+the main remaining physics blocker is still the SAMI3 scalar-moment
+source-domain policy before any production RAIJU/GAMERA plasma feedback claim.

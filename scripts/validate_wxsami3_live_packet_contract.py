@@ -53,11 +53,13 @@ def find_first(run_dir, names):
     return None
 
 
-def collect_run_text(run_dir, paths):
+def collect_run_text(run_dir, paths, include_slurm_logs=True):
     chunks = []
     for path in paths:
         if path is not None:
             chunks.append(read_text(path))
+    if not include_slurm_logs:
+        return "\n".join(chunk for chunk in chunks if chunk)
     for pattern in ("slurm-*.out", "slurm-*.err", "slurm_*.out", "slurm_*.err"):
         for path in sorted(run_dir.glob(pattern)):
             chunks.append(read_text(path))
@@ -636,10 +638,11 @@ def validate(args):
 
     waccmx_log = find_first(run_dir, ["waccmx_cesm.out"])
     sami3_log = find_first(run_dir, ["sami3_online_receiver.out"])
-    text = collect_run_text(run_dir, [waccmx_log, sami3_log])
+    text = collect_run_text(run_dir, [waccmx_log, sami3_log], include_slurm_logs=not args.exclude_slurm_logs)
     meta_out["logs"] = {
         "waccmx_cesm": str(waccmx_log) if waccmx_log else None,
         "sami3_online_receiver": str(sami3_log) if sami3_log else None,
+        "include_slurm_logs": not args.exclude_slurm_logs,
     }
 
     meta_path = run_dir / "wxsami3_live_meta.json"
@@ -705,6 +708,11 @@ def main():
     parser.add_argument("--packet-hour-rtol", type=float, default=1.0e-7)
     parser.add_argument("--packet-hour-atol", type=float, default=1.0e-7)
     parser.add_argument("--allow-incomplete", action="store_true")
+    parser.add_argument(
+        "--exclude-slurm-logs",
+        action="store_true",
+        help="Only scan component logs; useful for post-run archive revalidation when Slurm logs contain validator excerpts.",
+    )
     parser.add_argument("--json-output", default=None)
     args = parser.parse_args()
 
