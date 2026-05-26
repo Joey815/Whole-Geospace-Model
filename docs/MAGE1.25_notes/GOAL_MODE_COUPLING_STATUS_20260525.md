@@ -2342,3 +2342,20 @@ CESM_STOP_N = 7500
 COMPONENT_TIMEOUT_SECONDS = 7200
 VOLTRON_TIMEOUT_SECONDS = 7200
 ```
+
+Added a dedicated direct-MPI archive driver for this run family:
+
+```text
+script = scripts/archive_wxsami3_directmpi_result.py
+validators =
+  validate_sami3_direct_phi_run.py
+  validate_remix_sami3_phi_payload.py
+  validate_wxsami3_live_packet_contract.py
+  validate_wxsami3_source_flag_balance.py
+  validate_wxsami3_time_axis.py
+  validate_wxsami3_topblend_policy.py
+  validate_wxsami3_runtime_map.py
+```
+
+This removes the need to adapt the append2 archiver for direct-MPI runs after a
+long cadence job finishes.

@@ -419,6 +419,7 @@ scripts/validate_wxsami3_append2_run.py
 scripts/validate_remix_sami3_phi_payload.py
 scripts/validate_wxsami3_time_axis.py
 scripts/archive_wxsami3_append2_result.py
+scripts/archive_wxsami3_directmpi_result.py
 scripts/compare_wxsami3_recv_qc.py
 ```
 
