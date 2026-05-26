@@ -1,0 +1,330 @@
+{
+  "L_histogram": [
+    {
+      "L_max": 1.4902905965657023,
+      "L_min": 1.0,
+      "bin": 0,
+      "bvol_sum": 0.5427754499905859,
+      "count": 12784,
+      "fraction_of_positive_bvol": 2.3927003079631055e-07
+    },
+    {
+      "L_max": 2.0,
+      "L_min": 1.4902905965657023,
+      "bin": 1,
+      "bvol_sum": 0.9670368226943538,
+      "count": 3760,
+      "fraction_of_positive_bvol": 4.262958657235833e-07
+    },
+    {
+      "L_max": 5.0,
+      "L_min": 2.0,
+      "bin": 2,
+      "bvol_sum": 4.134432693710551,
+      "count": 3760,
+      "fraction_of_positive_bvol": 1.822569237364281e-06
+    },
+    {
+      "L_max": 10.0,
+      "L_min": 5.0,
+      "bin": 3,
+      "bvol_sum": 14.215251348912716,
+      "count": 2632,
+      "fraction_of_positive_bvol": 6.266465493401799e-06
+    },
+    {
+      "L_max": 20.0,
+      "L_min": 10.0,
+      "bin": 4,
+      "bvol_sum": 131.25815244577825,
+      "count": 3008,
+      "fraction_of_positive_bvol": 5.786212729133734e-05
+    },
+    {
+      "L_max": 33.16343747752636,
+      "L_min": 20.0,
+      "bin": 5,
+      "bvol_sum": 765.4209655374289,
+      "count": 1880,
+      "fraction_of_positive_bvol": 0.0003374181680462129
+    },
+    {
+      "L_max": 50.0,
+      "L_min": 33.16343747752636,
+      "bin": 6,
+      "bvol_sum": 3046.537902712822,
+      "count": 1144,
+      "fraction_of_positive_bvol": 0.0013429959255100194
+    },
+    {
+      "L_max": 75.0,
+      "L_min": 50.0,
+      "bin": 7,
+      "bvol_sum": 9997.698662519455,
+      "count": 1176,
+      "fraction_of_positive_bvol": 0.0044072547255310695
+    },
+    {
+      "L_max": 100.0,
+      "L_min": 75.0,
+      "bin": 8,
+      "bvol_sum": 24750.767456769943,
+      "count": 944,
+      "fraction_of_positive_bvol": 0.01091080462780028
+    },
+    {
+      "L_max": 150.0,
+      "L_min": 100.0,
+      "bin": 9,
+      "bvol_sum": 81319.3700504303,
+      "count": 1316,
+      "fraction_of_positive_bvol": 0.03584776757430813
+    },
+    {
+      "L_max": 200.0,
+      "L_min": 150.0,
+      "bin": 10,
+      "bvol_sum": 126737.96834945679,
+      "count": 508,
+      "fraction_of_positive_bvol": 0.05586950845061676
+    },
+    {
+      "L_max": 250.0,
+      "L_min": 200.0,
+      "bin": 11,
+      "bvol_sum": 233925.59395599365,
+      "count": 312,
+      "fraction_of_positive_bvol": 0.10312069949159752
+    },
+    {
+      "L_max": 300.0,
+      "L_min": 250.0,
+      "bin": 12,
+      "bvol_sum": 221648.44061279297,
+      "count": 156,
+      "fraction_of_positive_bvol": 0.09770859977601606
+    },
+    {
+      "L_max": 350.0,
+      "L_min": 300.0,
+      "bin": 13,
+      "bvol_sum": 484115.822265625,
+      "count": 140,
+      "fraction_of_positive_bvol": 0.213411287677964
+    },
+    {
+      "L_max": 400.0,
+      "L_min": 350.0,
+      "bin": 14,
+      "bvol_sum": 97293.90844726562,
+      "count": 40,
+      "fraction_of_positive_bvol": 0.04288977416144085
+    },
+    {
+      "L_max": 450.0,
+      "L_min": 400.0,
+      "bin": 15,
+      "bvol_sum": 523021.677734375,
+      "count": 64,
+      "fraction_of_positive_bvol": 0.23056203618054655
+    },
+    {
+      "L_max": 500.0,
+      "L_min": 450.0,
+      "bin": 16,
+      "bvol_sum": 159336.02221679688,
+      "count": 24,
+      "fraction_of_positive_bvol": 0.07023960819052492
+    },
+    {
+      "L_max": 550.0,
+      "L_min": 500.0,
+      "bin": 17,
+      "bvol_sum": 196300.12158203125,
+      "count": 20,
+      "fraction_of_positive_bvol": 0.0865343783272931
+    },
+    {
+      "L_max": 600.0,
+      "L_min": 550.0,
+      "bin": 18,
+      "bvol_sum": 106053.52734375,
+      "count": 8,
+      "fraction_of_positive_bvol": 0.04675124999488563
+    }
+  ],
+  "above_target_L": {
+    "bvol_sum": 2267547.4565805197,
+    "count": 5852,
+    "fraction_of_positive_bvol": 0.9995959651040349
+  },
+  "audit_h5": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_raiju_flux_volume_geometry_audit_lon0_bvol_overlap_exclude_lmax_20260526.h5",
+  "below_target_L": {
+    "bvol_sum": 0.5427754499905859,
+    "count": 12784,
+    "fraction_of_positive_bvol": 2.3927003079631055e-07
+  },
+  "bvol_floor": 0.0,
+  "coverage_by_L_threshold": [
+    {
+      "L_threshold": 1.4902905965657023,
+      "bvol_sum": 0.5427754499905859,
+      "count": 12784,
+      "fraction_of_positive_bvol": 2.3927003079631055e-07
+    },
+    {
+      "L_threshold": 2.0,
+      "bvol_sum": 1.5098122726849397,
+      "count": 16544,
+      "fraction_of_positive_bvol": 6.655658965198938e-07
+    },
+    {
+      "L_threshold": 5.0,
+      "bvol_sum": 5.64424496639549,
+      "count": 20304,
+      "fraction_of_positive_bvol": 2.4881351338841747e-06
+    },
+    {
+      "L_threshold": 10.0,
+      "bvol_sum": 19.859496315308206,
+      "count": 22936,
+      "fraction_of_positive_bvol": 8.754600627285973e-06
+    },
+    {
+      "L_threshold": 20.0,
+      "bvol_sum": 151.11764876108646,
+      "count": 25944,
+      "fraction_of_positive_bvol": 6.661672791862331e-05
+    },
+    {
+      "L_threshold": 33.16343747752636,
+      "bvol_sum": 916.5386142985153,
+      "count": 27824,
+      "fraction_of_positive_bvol": 0.0004040348959648362
+    },
+    {
+      "L_threshold": 50.0,
+      "bvol_sum": 3963.0765170113373,
+      "count": 28968,
+      "fraction_of_positive_bvol": 0.0017470308214748557
+    },
+    {
+      "L_threshold": 75.0,
+      "bvol_sum": 13960.775179530792,
+      "count": 30144,
+      "fraction_of_positive_bvol": 0.006154285547005926
+    },
+    {
+      "L_threshold": 100.0,
+      "bvol_sum": 38711.542636300735,
+      "count": 31088,
+      "fraction_of_positive_bvol": 0.017065090174806206
+    },
+    {
+      "L_threshold": 150.0,
+      "bvol_sum": 120030.91268673103,
+      "count": 32404,
+      "fraction_of_positive_bvol": 0.052912857749114334
+    },
+    {
+      "L_threshold": 200.0,
+      "bvol_sum": 246768.8810361878,
+      "count": 32912,
+      "fraction_of_positive_bvol": 0.1087823661997311
+    },
+    {
+      "L_threshold": 250.0,
+      "bvol_sum": 480694.4749921814,
+      "count": 33224,
+      "fraction_of_positive_bvol": 0.2119030656913286
+    },
+    {
+      "L_threshold": 300.0,
+      "bvol_sum": 702342.9156049744,
+      "count": 33380,
+      "fraction_of_positive_bvol": 0.30961166546734464
+    },
+    {
+      "L_threshold": 350.0,
+      "bvol_sum": 1186458.7378705994,
+      "count": 33520,
+      "fraction_of_positive_bvol": 0.5230229531453087
+    },
+    {
+      "L_threshold": 400.0,
+      "bvol_sum": 1283752.6463178648,
+      "count": 33560,
+      "fraction_of_positive_bvol": 0.5659127273067494
+    },
+    {
+      "L_threshold": 450.0,
+      "bvol_sum": 1806774.3240522402,
+      "count": 33624,
+      "fraction_of_positive_bvol": 0.7964747634872962
+    },
+    {
+      "L_threshold": 500.0,
+      "bvol_sum": 1966110.346269037,
+      "count": 33648,
+      "fraction_of_positive_bvol": 0.8667143716778211
+    },
+    {
+      "L_threshold": 550.0,
+      "bvol_sum": 2162410.467851069,
+      "count": 33668,
+      "fraction_of_positive_bvol": 0.9532487500051143
+    },
+    {
+      "L_threshold": 600.0,
+      "bvol_sum": 2268463.995194819,
+      "count": 33676,
+      "fraction_of_positive_bvol": 1.0
+    }
+  ],
+  "positive_source_L_max": 553.7752075195312,
+  "positive_source_L_min": 1.0192675590515137,
+  "positive_source_bvol_sum": 2268463.995194819,
+  "positive_source_cell_count": 33676,
+  "product": "sami3_raiju_source_l_coverage",
+  "production_assessment": {
+    "L_required_for_min_fraction": 145.15077209472656,
+    "current_target_bvol_fraction": 0.0004037956259340399,
+    "current_target_meets_min_fraction": false,
+    "min_target_bvol_fraction": 0.05
+  },
+  "source_bvol_dataset": "bvol_active_cc",
+  "source_l_dataset": "Lb_cc",
+  "status_breakdown": [
+    {
+      "bvol_sum": 915.9958388485247,
+      "code": 0,
+      "count": 15040,
+      "fraction_of_positive_bvol": 0.0004037956259340399
+    },
+    {
+      "bvol_sum": 2267547.9993559695,
+      "code": 4,
+      "count": 18636,
+      "fraction_of_positive_bvol": 0.9995962043740656
+    }
+  ],
+  "target_L_edge_max": 33.16343747752636,
+  "target_L_edge_min": 1.4902905965657023,
+  "target_l_edge_dataset": "/dst/L_edge",
+  "weighted_L_quantiles": {
+    "0.001": 42.96409606933594,
+    "0.01": 83.38025665283203,
+    "0.05": 145.15077209472656,
+    "0.1": 180.75912475585938,
+    "0.5": 317.8695983886719,
+    "0.9": 530.341796875,
+    "0.95": 545.7605590820312,
+    "0.99": 553.7748413085938
+  },
+  "weights_h5": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_voltron_tubeshell_l_mlt_lon0_bin_bvol_overlap_exclude_lmax_20260526.h5",
+  "within_target_L": {
+    "bvol_sum": 915.9958388485247,
+    "count": 15040,
+    "fraction_of_positive_bvol": 0.0004037956259340399
+  }
+}

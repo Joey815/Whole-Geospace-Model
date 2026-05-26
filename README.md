@@ -159,6 +159,11 @@ The production-contract validator can now ingest that target-subset JSON.  With
 production-readiness also fails the explicit
 `production_target_admissible_bvol_fraction` gate because
 `0.0004037956259340399 < 0.05`.
+A repeatable source L-coverage analyzer now quantifies the minimum extension
+problem directly: the current RAIJU target range captures only
+`0.0004037956259340399` of positive active source bVol, while even a 5% bVol
+coverage threshold requires `L=145.15077209472656`.  The active-bVol median is
+`L=317.8695983886719`, and 90% coverage is `L=530.341796875`.
 The stage-2 mapping products now have a repeatable HDF5 QC gate:
 `scripts/validate_sami3_raiju_mapping_product.py` validates
 `/RaiCplMomentsOnly` and `/MappingQuality` finite values, masks, coverage,
@@ -537,6 +542,8 @@ logs/sami3_voltron_tubeshell_weightfile_20260524/
 logs/sami3_tubeshell_bin_bvolcc_20260524/
 logs/sami3_tubeshell_bin_bvolcc_massEq_total_20260524/
 logs/sami3_mapping_product_validation_20260525/
+logs/sami3_raiju_target_admissible_subset_20260526/
+logs/sami3_raiju_source_l_coverage_20260526/
 ```
 
 ## Known Physical Blockers

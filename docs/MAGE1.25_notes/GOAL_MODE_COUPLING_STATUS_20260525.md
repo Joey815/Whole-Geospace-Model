@@ -2484,3 +2484,64 @@ Next target returns to the SAMI3 -> Voltron/RAIJU/GAMERA adapter line.  The
 WACCM-X/SAMI3 online control path now has a stronger f19 24-cadence baseline;
 the main remaining physics blocker is still the SAMI3 scalar-moment
 source-domain policy before any production RAIJU/GAMERA plasma feedback claim.
+
+## 2026-05-26 12:20 CST Update
+
+Returned to the SAMI3 -> Voltron/RAIJU/GAMERA source-domain blocker and added a
+repeatable source L-coverage diagnostic:
+
+```text
+script = scripts/analyze_sami3_raiju_source_l_coverage.py
+archive = logs/sami3_raiju_source_l_coverage_20260526/
+doc = docs/MAGE1.25_notes/SAMI3_RAIJU_SOURCE_L_COVERAGE_20260526.md
+```
+
+Inputs are the current schema v7 `bin_bvol_overlap_exclude_lmax` geometry audit
+and weight file:
+
+```text
+audit_h5 = /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_raiju_flux_volume_geometry_audit_lon0_bvol_overlap_exclude_lmax_20260526.h5
+weights_h5 = /home/jiaoy_group/jiaoy/data/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/sami3_to_raiju_weights_voltron_tubeshell_l_mlt_lon0_bin_bvol_overlap_exclude_lmax_20260526.h5
+```
+
+Key result:
+
+```text
+target_L_edge_min = 1.4902905965657023
+target_L_edge_max = 33.163437477526358
+positive_source_cell_count = 33676
+positive_source_bvol_sum = 2268463.9951948188
+
+within_target_L fraction_of_positive_bvol = 0.0004037956259340399
+above_target_L fraction_of_positive_bvol = 0.9995959651040349
+```
+
+Active-bVol weighted L quantiles:
+
+```text
+0.001 = 42.96409606933594
+0.01  = 83.38025665283203
+0.05  = 145.15077209472656
+0.10  = 180.75912475585938
+0.50  = 317.8695983886719
+0.90  = 530.341796875
+0.95  = 545.7605590820312
+0.99  = 553.7748413085938
+```
+
+The executable production assessment for a minimal 5% active-bVol coverage gate
+is:
+
+```text
+min_target_bvol_fraction = 0.05
+current_target_bvol_fraction = 0.0004037956259340399
+current_target_meets_min_fraction = false
+L_required_for_min_fraction = 145.15077209472656
+```
+
+This makes the current source-domain decision sharper: the conservative
+exclude-Lmax adapter is runtime-valid, target-domain-clean, and useful for
+controlled diagnostics, but it is not close to production plasma feedback.  A
+production path now needs either a redefined Voltron source subset for the
+current inner RAIJU grid, a separate treatment for high-L source bVol, or an
+explicit decision to keep this path diagnostic-only.
