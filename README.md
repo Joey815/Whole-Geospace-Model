@@ -32,6 +32,10 @@ SAMI3/CESM component timeout.
 The 24pkt/24phi run reached all done markers cleanly, but Voltron had to be
 terminated after done because `PHI_STOP_AFTER_DONE=0`; this is a launcher
 post-done management caveat, not a failed physics chain.
+The direct-MPI launcher now has default-on post-done cleanup via
+`WXSAMI3_DIRECTMPI_STOP_VOLTRON_AFTER_DONE=1`, with
+`WXSAMI3_DIRECTMPI_VOLTRON_POST_DONE_TERM_GRACE_SECONDS` controlling the grace
+period before forcing the already-done Voltron wrapper to exit.
 Not production live WACCM-X neutral forcing yet.
 ```
 
@@ -521,7 +525,9 @@ online MPI evidence:
 
 ```text
 docs/MAGE1.25_notes/WACCMX_SAMI3_LIVE_DIRECTMPI_NOSMOKE_24PKT_24PHI_RESULT_20260526.md
+docs/MAGE1.25_notes/WACCMX_SAMI3_DIRECTMPI_POSTDONE_CLEANUP_RESULT_20260526.md
 logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526/
+logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/
 ```
 
 Latest SAMI3 -> RAIJU/GAMERA mapping quality evidence:

@@ -1,0 +1,144 @@
+{
+  "archive_dir": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526",
+  "copied_files": [
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/slurm-7702222.out",
+      "bytes": 120555,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/slurm-7702222.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/slurm-7702222.err",
+      "bytes": 23,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/slurm-7702222.err"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/waccmx_cesm.out",
+      "bytes": 505909,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/waccmx_cesm.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/sami3_online_receiver.out",
+      "bytes": 295389,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/sami3_online_receiver.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/voltron_runtime_direct.out",
+      "bytes": 38847,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/voltron_runtime_direct.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/phi_payload_summary.txt",
+      "bytes": 369,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/phi_payload_summary.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/live_dump_summary_pkt000000.txt",
+      "bytes": 1104,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/live_dump_summary_pkt000000.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/replay_builder_pkt000000.out",
+      "bytes": 938,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/replay_builder_pkt000000.out"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/recv_qc_compare_pkt000000.txt",
+      "bytes": 124,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/recv_qc_compare_pkt000000.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/wxsami3_live_meta.json",
+      "bytes": 3192,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/wxsami3_live_meta.json"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/run_validators/validate_remix_sami3_phi_payload.txt",
+      "bytes": 714,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/validate_remix_sami3_phi_payload.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/run_validators/validate_sami3_direct_phi_run_strict.txt",
+      "bytes": 1185,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/validate_sami3_direct_phi_run_strict.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/run_validators/validate_wxsami3_live_packet_contract.txt",
+      "bytes": 6636,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/validate_wxsami3_live_packet_contract.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/run_validators/validate_wxsami3_runtime_map.txt",
+      "bytes": 1385,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/validate_wxsami3_runtime_map.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/run_validators/validate_wxsami3_source_flag_balance.txt",
+      "bytes": 2348,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/validate_wxsami3_source_flag_balance.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/run_validators/validate_wxsami3_time_axis.txt",
+      "bytes": 1012,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/validate_wxsami3_time_axis.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/run_validators/validate_wxsami3_topblend_policy.txt",
+      "bytes": 1062,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/validate_wxsami3_topblend_policy.txt"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/run_validators/validate_remix_sami3_phi_payload.json",
+      "bytes": 2064,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/validate_remix_sami3_phi_payload.json"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/run_validators/validate_sami3_direct_phi_run_strict.json",
+      "bytes": 2443,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/validate_sami3_direct_phi_run_strict.json"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/run_validators/validate_wxsami3_live_packet_contract.json",
+      "bytes": 21558,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/validate_wxsami3_live_packet_contract.json"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/run_validators/validate_wxsami3_runtime_map.json",
+      "bytes": 3710,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/validate_wxsami3_runtime_map.json"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/run_validators/validate_wxsami3_source_flag_balance.json",
+      "bytes": 6102,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/validate_wxsami3_source_flag_balance.json"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/run_validators/validate_wxsami3_time_axis.json",
+      "bytes": 4052,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/validate_wxsami3_time_axis.json"
+    },
+    {
+      "archive": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/run_validators/validate_wxsami3_topblend_policy.json",
+      "bytes": 2935,
+      "source": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/validate_wxsami3_topblend_policy.json"
+    }
+  ],
+  "expected_packets": 1,
+  "expected_phi_frames": 1,
+  "job_id": "7702222",
+  "ok": true,
+  "run_dir": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000",
+  "runtime_map": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/wxsami3_runtime_map_f19_20260523.bin",
+  "sacct": {
+    "path": "logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/sacct_7702222.txt",
+    "returncode": 0
+  },
+  "validator_returncodes": {
+    "direct_phi": 0,
+    "live_packet_contract": 0,
+    "phi_payload": 0,
+    "runtime_map": 0,
+    "source_flag_balance": 0,
+    "time_axis": 0,
+    "topblend_policy": 0
+  }
+}

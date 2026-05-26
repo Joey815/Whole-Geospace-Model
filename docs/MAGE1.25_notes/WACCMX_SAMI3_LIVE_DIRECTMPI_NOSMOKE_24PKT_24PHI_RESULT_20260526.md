@@ -153,10 +153,18 @@ accepted this as:
 INFO: accepting Voltron nonzero exit after direct phi done and SAMI3 completion: status=143
 ```
 
-This is a run-management caveat, not a physics-chain failure.  Future long
-cadence runs should either use a shorter post-done Voltron timeout, validate
-`PHI_STOP_AFTER_DONE=1` for this mode, or add explicit post-done wrapper
-termination.
+This is a run-management caveat, not a physics-chain failure.  After this run,
+the launcher was updated to add default-on post-done cleanup:
+
+```text
+WXSAMI3_DIRECTMPI_STOP_VOLTRON_AFTER_DONE = 1
+WXSAMI3_DIRECTMPI_VOLTRON_POST_DONE_TERM_GRACE_SECONDS = 30
+```
+
+Future long cadence runs should now terminate the Voltron timeout wrapper after
+the direct-phi done marker and SAMI3 `MASTER: All Done!` are both verified.
+`PHI_STOP_AFTER_DONE=1` can still be validated later as a cleaner producer-side
+exit mode.
 
 ## Archive Tooling Fix
 

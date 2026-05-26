@@ -2545,3 +2545,63 @@ controlled diagnostics, but it is not close to production plasma feedback.  A
 production path now needs either a redefined Voltron source subset for the
 current inner RAIJU grid, a separate treatment for high-L source bVol, or an
 explicit decision to keep this path diagnostic-only.
+
+## 2026-05-26 12:22 CST Update
+
+Hardened the WACCM-X/SAMI3 direct-MPI launcher for long cadence runs that reach
+all done markers while Voltron continues running because `PHI_STOP_AFTER_DONE=0`:
+
+```text
+script = slurm/run_waccmx_cam_sami3_live_payload_f19_topblend_voltron_phi_directmpi_20260525.sbatch
+new env = WXSAMI3_DIRECTMPI_STOP_VOLTRON_AFTER_DONE
+default = 1
+new env = WXSAMI3_DIRECTMPI_VOLTRON_POST_DONE_TERM_GRACE_SECONDS
+default = 30
+```
+
+The launcher now records the Voltron timeout wrapper PID, waits for CESM and
+SAMI3, then checks for both:
+
+```text
+WACCMX_SAMI3_PHI_DIRECT sent done=
+MASTER: All Done!
+```
+
+If both markers exist and Voltron is still running, the launcher sends TERM to
+the timeout wrapper, waits the configured grace period, and then enters the
+existing nonzero-exit acceptance gate.  This automates the manual intervention
+needed for job `7697673` without weakening the physics/control-chain checks:
+Voltron is only cleaned up after direct-phi done and SAMI3 completion are both
+present.
+
+Validation smoke:
+
+```text
+jobid = 7702222
+jobname = wxsami3_pdclean
+state = COMPLETED
+exit = 0:0
+elapsed = 00:06:26
+node = qhcn301
+archive = logs/waccmx_live_directmpi_postdone_cleanup_1pkt_1phi_20260526/
+doc = docs/MAGE1.25_notes/WACCMX_SAMI3_DIRECTMPI_POSTDONE_CLEANUP_RESULT_20260526.md
+```
+
+The smoke used `MAX_PACKETS=1`, `PHI_MAX_FRAMES=1`, `PHI_STOP_AFTER_DONE=0`,
+`STOP_VOLTRON_AFTER_DONE=1`, and a 5 second post-done grace period.  Slurm
+captured the intended cleanup path:
+
+```text
+INFO: terminating Voltron after verified direct phi/SAMI3 done markers: pid=797490
+INFO: accepting Voltron nonzero exit after direct phi done and SAMI3 completion: status=143
+```
+
+All archived validators returned `overall=ok`, including direct phi, live
+packet contract, time axis, top-blend, source-flag, phi payload, and runtime
+map gates.  The model markers were present:
+
+```text
+WACCMX_SAMI3_PHI_DIRECT sent done=1
+MASTER: All Done!
+END OF MODEL RUN
+```

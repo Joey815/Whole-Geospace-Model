@@ -1,0 +1,5 @@
+JobID|JobName|State|ExitCode|Elapsed|Timelimit|NodeList|MaxRSS
+7702222|wxsami3_pdclean|COMPLETED|0:0|00:06:26|00:30:00|qhcn301|
+7702222.batch|batch|COMPLETED|0:0|00:06:26||qhcn301|63532504K
+7702222.extern|extern|COMPLETED|0:0|00:06:26||qhcn301|0
+7702222.0|bash|COMPLETED|0:0|00:00:00||qhcn301|0

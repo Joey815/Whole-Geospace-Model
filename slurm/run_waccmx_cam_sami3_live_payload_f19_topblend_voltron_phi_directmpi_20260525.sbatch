@@ -57,6 +57,8 @@ VOLTRON_DTCOUPLE=${WXSAMI3_DIRECTMPI_VOLTRON_DTCOUPLE:-5.0}
 COMPONENT_TIMEOUT_SECONDS=${WXSAMI3_DIRECTMPI_COMPONENT_TIMEOUT_SECONDS:-2400}
 VOLTRON_TIMEOUT_SECONDS=${WXSAMI3_DIRECTMPI_VOLTRON_TIMEOUT_SECONDS:-1200}
 ALLOW_VOLTRON_TIMEOUT_AFTER_DONE=${WXSAMI3_DIRECTMPI_ALLOW_VOLTRON_TIMEOUT_AFTER_DONE:-1}
+STOP_VOLTRON_AFTER_DONE=${WXSAMI3_DIRECTMPI_STOP_VOLTRON_AFTER_DONE:-1}
+VOLTRON_POST_DONE_TERM_GRACE_SECONDS=${WXSAMI3_DIRECTMPI_VOLTRON_POST_DONE_TERM_GRACE_SECONDS:-30}
 REQUIRE_CACHE_AFTER_DONE=${WXSAMI3_DIRECTMPI_REQUIRE_CACHE_AFTER_DONE:-0}
 PHI_MAX_FRAMES=${WXSAMI3_DIRECTMPI_PHI_MAX_FRAMES:-2}
 PHI_FRAME_HOUR_BASE=${WXSAMI3_DIRECTMPI_PHI_FRAME_HOUR_BASE:-}
@@ -112,6 +114,8 @@ echo "VOLTRON_DTCOUPLE=$VOLTRON_DTCOUPLE"
 echo "COMPONENT_TIMEOUT_SECONDS=$COMPONENT_TIMEOUT_SECONDS"
 echo "VOLTRON_TIMEOUT_SECONDS=$VOLTRON_TIMEOUT_SECONDS"
 echo "ALLOW_VOLTRON_TIMEOUT_AFTER_DONE=$ALLOW_VOLTRON_TIMEOUT_AFTER_DONE"
+echo "STOP_VOLTRON_AFTER_DONE=$STOP_VOLTRON_AFTER_DONE"
+echo "VOLTRON_POST_DONE_TERM_GRACE_SECONDS=$VOLTRON_POST_DONE_TERM_GRACE_SECONDS"
 echo "REQUIRE_CACHE_AFTER_DONE=$REQUIRE_CACHE_AFTER_DONE"
 echo "PHI_MAX_FRAMES=$PHI_MAX_FRAMES"
 echo "PHI_FRAME_HOUR_BASE=${PHI_FRAME_HOUR_BASE:-<runtime>}"
@@ -279,6 +283,7 @@ EOF
 chmod +x "$CESM_WRAPPER"
 
 rm -f "$NEUTRAL_PORT" "$PHI_PORT" "$DVM_URI" "$DVM_PID" \
+  "$RUN/voltron_timeout.pid" "$RUN/voltron_wrapper.pid" \
   sami3_online_receiver.out waccmx_cesm.out voltron_runtime_direct.out \
   phi_payload_summary.txt validate_remix_sami3_phi_payload.* \
   validate_sami3_direct_phi_run_strict.* validate_wxsami3_time_axis.* \
@@ -362,6 +367,7 @@ fi
   echo "phi_frame_hour_base=${WACCMX_SAMI3_PHI_FRAME_HOUR_BASE:-<runtime>}"
   echo "phi_frame_hour_step=${WACCMX_SAMI3_PHI_FRAME_HOUR_STEP:-<runtime>}"
   echo "ldd_missing=$(ldd ./voltron.x | grep -c 'not found' || true)"
+  echo "$BASHPID" > "$RUN/voltron_wrapper.pid"
   timeout "${VOLTRON_TIMEOUT_SECONDS}s" prun --dvm-uri "file:$DVM_URI" \
     -x "WACCMX_SAMI3_PHI_PAYLOAD_FILE=$WACCMX_SAMI3_PHI_PAYLOAD_FILE" \
     -x "WACCMX_SAMI3_PHI_DIRECT_PORT_FILE=$WACCMX_SAMI3_PHI_DIRECT_PORT_FILE" \
@@ -375,7 +381,10 @@ fi
     -x "WACCMX_SAMI3_PHI_FINAL_VALID_UNTIL_HOUR=$WACCMX_SAMI3_PHI_FINAL_VALID_UNTIL_HOUR" \
     -x "WACCMX_SAMI3_PHI_STOP_AFTER_DONE=$WACCMX_SAMI3_PHI_STOP_AFTER_DONE" \
     -x "OMP_NUM_THREADS=$OMP_NUM_THREADS" \
-    -n "$VOLTRON_RANKS" ./voltron.x "$VOLTRON_XML"
+    -n "$VOLTRON_RANKS" ./voltron.x "$VOLTRON_XML" &
+  voltron_timeout_pid=$!
+  echo "$voltron_timeout_pid" > "$RUN/voltron_timeout.pid"
+  wait "$voltron_timeout_pid"
 ) > "$RUN/voltron_runtime_direct.out" 2>&1 &
 voltron_pid=$!
 
@@ -383,6 +392,26 @@ wait "$cesm_pid"
 cesm_pid=
 wait "$sami3_pid"
 sami3_pid=
+if [ "$STOP_VOLTRON_AFTER_DONE" != "0" ] && \
+   [ -n "${voltron_pid:-}" ] && kill -0 "$voltron_pid" 2>/dev/null && \
+   grep -q 'WACCMX_SAMI3_PHI_DIRECT sent done=' "$RUN/voltron_runtime_direct.out" && \
+   grep -q 'MASTER: All Done!' "$RUN/sami3_online_receiver.out"; then
+  voltron_term_pid=$voltron_pid
+  if [ -s "$RUN/voltron_timeout.pid" ]; then
+    voltron_term_pid=$(cat "$RUN/voltron_timeout.pid")
+  fi
+  echo "INFO: terminating Voltron after verified direct phi/SAMI3 done markers: pid=$voltron_term_pid"
+  kill -TERM "$voltron_term_pid" 2>/dev/null || true
+  for i in $(seq 1 "$VOLTRON_POST_DONE_TERM_GRACE_SECONDS"); do
+    kill -0 "$voltron_pid" 2>/dev/null || break
+    sleep 1
+  done
+  if kill -0 "$voltron_pid" 2>/dev/null; then
+    echo "INFO: forcing Voltron wrapper exit after post-done grace: pid=$voltron_term_pid"
+    kill -KILL "$voltron_term_pid" 2>/dev/null || true
+    kill -KILL "$voltron_pid" 2>/dev/null || true
+  fi
+fi
 voltron_status=0
 wait "$voltron_pid" || voltron_status=$?
 voltron_pid=

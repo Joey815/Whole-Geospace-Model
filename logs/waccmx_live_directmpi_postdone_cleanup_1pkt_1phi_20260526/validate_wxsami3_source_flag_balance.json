@@ -1,0 +1,250 @@
+{
+  "checks": [
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/sami3_online_receiver.out",
+      "name": "receiver_log_exists",
+      "ok": true
+    },
+    {
+      "detail": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/wxsami3_live_meta.json",
+      "name": "live_meta_exists",
+      "ok": true
+    },
+    {
+      "detail": "packet_index=0 apply_hour=0.0",
+      "name": "apply_hour_selected",
+      "ok": true
+    },
+    {
+      "detail": "lines=32 expected_min=32",
+      "name": "recv_source_flag_lines",
+      "ok": true
+    },
+    {
+      "detail": "lines=160 expected=160",
+      "name": "apply_source_flag_lines",
+      "ok": true
+    },
+    {
+      "detail": "lines=160 expected=160",
+      "name": "apply_qc_lines",
+      "ok": true
+    },
+    {
+      "detail": "lines=160 expected=160",
+      "name": "apply_blend_lines",
+      "ok": true
+    },
+    {
+      "detail": "actual=6031360 expected=6031360",
+      "name": "recv_samples_match_meta",
+      "ok": true
+    },
+    {
+      "detail": "actual=4211765 expected=4211765",
+      "name": "recv_valid_match_meta",
+      "ok": true
+    },
+    {
+      "detail": "actual=1641376 expected=1641376",
+      "name": "recv_above_top_match_meta",
+      "ok": true
+    },
+    {
+      "detail": "actual=178219 expected=178219",
+      "name": "recv_n2_invalid_match_meta",
+      "ok": true
+    },
+    {
+      "detail": "actual=0 expected=0",
+      "name": "recv_other_invalid_match_meta",
+      "ok": true
+    },
+    {
+      "detail": "unknown=0",
+      "name": "recv_unknown_zero",
+      "ok": true
+    },
+    {
+      "detail": "actual=4211765 expected=4211765",
+      "name": "recv_valid_i_match_checksum",
+      "ok": true
+    },
+    {
+      "detail": "actual=1819595 expected=1819595",
+      "name": "recv_invalid_i_match_checksum",
+      "ok": true
+    },
+    {
+      "detail": "actual=4211765 expected=4211765",
+      "name": "recv_valid_f_match_checksum",
+      "ok": true
+    },
+    {
+      "detail": "actual=1819595 expected=1819595",
+      "name": "recv_invalid_f_match_checksum",
+      "ok": true
+    },
+    {
+      "detail": "he_i=4211765 he_f=4211765 valid=4211765",
+      "name": "recv_he_native_matches_valid",
+      "ok": true
+    },
+    {
+      "detail": "w_i=4211765 w_f=4211765 valid=4211765",
+      "name": "recv_w_zero_matches_valid",
+      "ok": true
+    },
+    {
+      "detail": "actual=6031360 expected=6031360",
+      "name": "apply_samples_match_meta",
+      "ok": true
+    },
+    {
+      "detail": "actual=4211765 expected=4211765",
+      "name": "apply_valid_match_meta",
+      "ok": true
+    },
+    {
+      "detail": "actual=1641376 expected=1641376",
+      "name": "apply_above_top_match_meta",
+      "ok": true
+    },
+    {
+      "detail": "actual=178219 expected=178219",
+      "name": "apply_n2_invalid_match_meta",
+      "ok": true
+    },
+    {
+      "detail": "actual=0 expected=0",
+      "name": "apply_other_invalid_match_meta",
+      "ok": true
+    },
+    {
+      "detail": "unknown=0",
+      "name": "apply_unknown_zero",
+      "ok": true
+    },
+    {
+      "detail": "actual=4211765 expected=4211765",
+      "name": "apply_qc_valid_i_match_meta",
+      "ok": true
+    },
+    {
+      "detail": "actual=1819595 expected=1819595",
+      "name": "apply_qc_invalid_i_match_meta",
+      "ok": true
+    },
+    {
+      "detail": "actual=4211765 expected=4211765",
+      "name": "apply_qc_valid_f_match_meta",
+      "ok": true
+    },
+    {
+      "detail": "actual=1819595 expected=1819595",
+      "name": "apply_qc_invalid_f_match_meta",
+      "ok": true
+    },
+    {
+      "detail": "he_i=4211765 he_f=4211765 valid=4211765",
+      "name": "apply_qc_he_native_matches_valid",
+      "ok": true
+    },
+    {
+      "detail": "w_i=4211765 w_f=4211765 valid=4211765",
+      "name": "apply_qc_w_zero_matches_valid",
+      "ok": true
+    },
+    {
+      "detail": "full+blend+native=4211765 valid=4211765",
+      "name": "blend_i_partition_valid",
+      "ok": true
+    },
+    {
+      "detail": "full+blend+native=4211765 valid=4211765",
+      "name": "blend_f_partition_valid",
+      "ok": true
+    },
+    {
+      "detail": "blend_i+blend_f=2708 min=1",
+      "name": "blend_cells_min",
+      "ok": true
+    }
+  ],
+  "meta": {
+    "line_counts": {
+      "apply_blend": 160,
+      "apply_qc": 160,
+      "apply_source_flags": 160,
+      "recv_source_flags": 32
+    },
+    "meta": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/wxsami3_live_meta.json",
+    "receiver_log": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000/sami3_online_receiver.out",
+    "run_dir": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_postdone_cleanup_1pkt_1phi_20260526_0000",
+    "selected_apply_hour": 0.0,
+    "selected_packet_hour": 0.0,
+    "selected_packet_index": 0,
+    "sums": {
+      "apply_blend": [
+        2640,
+        480,
+        0,
+        6031360,
+        160,
+        96000,
+        115200,
+        4210411,
+        1354,
+        0,
+        4210411,
+        1354,
+        0
+      ],
+      "apply_qc": [
+        2640,
+        480,
+        0,
+        6031360,
+        4211765,
+        1819595,
+        4211765,
+        1819595,
+        4211765,
+        4211765,
+        4211765,
+        4211765
+      ],
+      "apply_source_flags": [
+        2640,
+        480,
+        0,
+        6031360,
+        4211765,
+        1641376,
+        178219,
+        0,
+        0
+      ],
+      "recv_source_flags": [
+        528,
+        0,
+        0,
+        6031360,
+        4211765,
+        1641376,
+        178219,
+        0,
+        0,
+        4211765,
+        1819595,
+        4211765,
+        1819595,
+        4211765,
+        4211765,
+        4211765,
+        4211765
+      ]
+    }
+  },
+  "ok": true
+}
