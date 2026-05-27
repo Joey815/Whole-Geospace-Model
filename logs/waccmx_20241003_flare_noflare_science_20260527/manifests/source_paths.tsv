@@ -1,0 +1,7 @@
+label	path
+flare_case_root	/home/jiaoy_group/jiaoy/data/WACCMX/cases/waccmx_fism2_flare_f09_20241003_x9_r5_5min
+noflare_case_root	/home/jiaoy_group/jiaoy/data/WACCMX/cases/waccmx_fism2_noflare_f09_20241003_x9_r5_5min
+flare_run_output	/home/jiaoy_group/jiaoy/data/WACCMX/output/cesm_2.2.0_result/intel/waccmx_fism2_flare_f09_20241003_x9_r5_5min/run
+noflare_run_output	/home/jiaoy_group/jiaoy/data/WACCMX/output/cesm_2.2.0_result/intel/waccmx_fism2_noflare_f09_20241003_x9_r5_5min/run
+solar_forcing_root	/home/jiaoy_group/jiaoy/data/WACCMX/inputdata/solar/fism2_20241003_x9
+full_quicklook_root	/home/jiaoy_group/jiaoy/data/WACCMX/quicklook

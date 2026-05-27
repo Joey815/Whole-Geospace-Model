@@ -1,0 +1,135 @@
+{
+  "analysis_window_utc": "2024-10-03T12:00:00Z/2024-10-03T13:00:00Z",
+  "classification": "waccmx_flare_noflare_science_pair_evidence",
+  "event": "NOAA AR3842 X9.0 flare",
+  "event_peak_utc": "2024-10-03T12:18:00Z",
+  "flare_case": "waccmx_fism2_flare_f09_20241003_x9_r5_5min",
+  "flare_solar_euv_data_file": "/home/jiaoy_group/jiaoy/data/WACCMX/inputdata/solar/fism2_20241003_x9/fism2_flare_bands_20241003_x9_waccmx.nc",
+  "generated_at": "2026-05-27T13:23:00+08:00",
+  "hist_inventory": [
+    {
+      "case": "waccmx_fism2_flare_f09_20241003_x9_r5_5min",
+      "mtime": "2026-05-25T00:24:32",
+      "path": "/home/jiaoy_group/jiaoy/data/WACCMX/output/cesm_2.2.0_result/intel/waccmx_fism2_flare_f09_20241003_x9_r5_5min/run/waccmx_fism2_flare_f09_20241003_x9_r5_5min.cam.h1.2024-10-04-00000.nc",
+      "size_bytes": 402573732,
+      "stream": "h1"
+    },
+    {
+      "case": "waccmx_fism2_flare_f09_20241003_x9_r5_5min",
+      "mtime": "2026-05-25T00:24:32",
+      "path": "/home/jiaoy_group/jiaoy/data/WACCMX/output/cesm_2.2.0_result/intel/waccmx_fism2_flare_f09_20241003_x9_r5_5min/run/waccmx_fism2_flare_f09_20241003_x9_r5_5min.cam.h2.2024-10-03-00000.nc",
+      "size_bytes": 1841470416,
+      "stream": "h2"
+    },
+    {
+      "case": "waccmx_fism2_flare_f09_20241003_x9_r5_5min",
+      "mtime": "2026-05-25T00:24:32",
+      "path": "/home/jiaoy_group/jiaoy/data/WACCMX/output/cesm_2.2.0_result/intel/waccmx_fism2_flare_f09_20241003_x9_r5_5min/run/waccmx_fism2_flare_f09_20241003_x9_r5_5min.cam.h3.2024-10-03-00000.nc",
+      "size_bytes": 1784406204,
+      "stream": "h3"
+    },
+    {
+      "case": "waccmx_fism2_flare_f09_20241003_x9_r5_5min",
+      "mtime": "2026-05-25T00:24:32",
+      "path": "/home/jiaoy_group/jiaoy/data/WACCMX/output/cesm_2.2.0_result/intel/waccmx_fism2_flare_f09_20241003_x9_r5_5min/run/waccmx_fism2_flare_f09_20241003_x9_r5_5min.cam.h4.2024-10-03-00000.nc",
+      "size_bytes": 690115536,
+      "stream": "h4"
+    },
+    {
+      "case": "waccmx_fism2_flare_f09_20241003_x9_r5_5min",
+      "mtime": "2026-05-25T00:24:32",
+      "path": "/home/jiaoy_group/jiaoy/data/WACCMX/output/cesm_2.2.0_result/intel/waccmx_fism2_flare_f09_20241003_x9_r5_5min/run/waccmx_fism2_flare_f09_20241003_x9_r5_5min.cam.h6.2024-10-03-00000.nc",
+      "size_bytes": 3197264,
+      "stream": "h6"
+    },
+    {
+      "case": "waccmx_fism2_noflare_f09_20241003_x9_r5_5min",
+      "mtime": "2026-05-25T00:24:27",
+      "path": "/home/jiaoy_group/jiaoy/data/WACCMX/output/cesm_2.2.0_result/intel/waccmx_fism2_noflare_f09_20241003_x9_r5_5min/run/waccmx_fism2_noflare_f09_20241003_x9_r5_5min.cam.h1.2024-10-04-00000.nc",
+      "size_bytes": 402573732,
+      "stream": "h1"
+    },
+    {
+      "case": "waccmx_fism2_noflare_f09_20241003_x9_r5_5min",
+      "mtime": "2026-05-25T00:24:27",
+      "path": "/home/jiaoy_group/jiaoy/data/WACCMX/output/cesm_2.2.0_result/intel/waccmx_fism2_noflare_f09_20241003_x9_r5_5min/run/waccmx_fism2_noflare_f09_20241003_x9_r5_5min.cam.h2.2024-10-03-00000.nc",
+      "size_bytes": 1841470416,
+      "stream": "h2"
+    },
+    {
+      "case": "waccmx_fism2_noflare_f09_20241003_x9_r5_5min",
+      "mtime": "2026-05-25T00:24:27",
+      "path": "/home/jiaoy_group/jiaoy/data/WACCMX/output/cesm_2.2.0_result/intel/waccmx_fism2_noflare_f09_20241003_x9_r5_5min/run/waccmx_fism2_noflare_f09_20241003_x9_r5_5min.cam.h3.2024-10-03-00000.nc",
+      "size_bytes": 1784406204,
+      "stream": "h3"
+    },
+    {
+      "case": "waccmx_fism2_noflare_f09_20241003_x9_r5_5min",
+      "mtime": "2026-05-25T00:24:27",
+      "path": "/home/jiaoy_group/jiaoy/data/WACCMX/output/cesm_2.2.0_result/intel/waccmx_fism2_noflare_f09_20241003_x9_r5_5min/run/waccmx_fism2_noflare_f09_20241003_x9_r5_5min.cam.h4.2024-10-03-00000.nc",
+      "size_bytes": 690115536,
+      "stream": "h4"
+    },
+    {
+      "case": "waccmx_fism2_noflare_f09_20241003_x9_r5_5min",
+      "mtime": "2026-05-25T00:24:27",
+      "path": "/home/jiaoy_group/jiaoy/data/WACCMX/output/cesm_2.2.0_result/intel/waccmx_fism2_noflare_f09_20241003_x9_r5_5min/run/waccmx_fism2_noflare_f09_20241003_x9_r5_5min.cam.h6.2024-10-03-00000.nc",
+      "size_bytes": 3197264,
+      "stream": "h6"
+    }
+  ],
+  "hist_streams_present": [
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h6"
+  ],
+  "limitations": [
+    "This package is WACCM-X flare/no-flare science evidence, not a new full WACCM-X/SAMI3/RAIJU/GAMERA run.",
+    "NetCDF history products are not copied because the paired h1-h4 products are multi-GB.",
+    "The current shell environment lacks ncdump/netCDF4/xarray; validation uses existing generated quicklooks and file inventories."
+  ],
+  "noflare_case": "waccmx_fism2_noflare_f09_20241003_x9_r5_5min",
+  "noflare_solar_euv_data_file": "/home/jiaoy_group/jiaoy/data/WACCMX/inputdata/solar/fism2_20241003_x9/fism2_noflare_bands_20241003_x9_removed_waccmx.nc",
+  "quicklook_key_times_utc": [
+    "1230"
+  ],
+  "quicklook_keyframes": [
+    {
+      "archive": "quicklook_keyframes/window_mean/global_T_TEC_flare_noflare_diff_windowmean_1210_1305UT.png",
+      "label": "window_mean",
+      "source": "/home/jiaoy_group/jiaoy/data/WACCMX/quicklook/fism2_20241003_x9_r5_5min_global_maps/global_T_TEC_flare_noflare_diff_windowmean_1210_1305UT.png"
+    },
+    {
+      "archive": "quicklook_keyframes/window_mean/global_T_flare_noflare_diff_windowmean_1210_1305UT.png",
+      "label": "window_mean",
+      "source": "/home/jiaoy_group/jiaoy/data/WACCMX/quicklook/fism2_20241003_x9_r5_5min_global_maps/global_T_flare_noflare_diff_windowmean_1210_1305UT.png"
+    },
+    {
+      "archive": "quicklook_keyframes/window_mean/global_TEC_flare_noflare_diff_windowmean_1210_1305UT.png",
+      "label": "window_mean",
+      "source": "/home/jiaoy_group/jiaoy/data/WACCMX/quicklook/fism2_20241003_x9_r5_5min_global_maps/global_TEC_flare_noflare_diff_windowmean_1210_1305UT.png"
+    },
+    {
+      "archive": "quicklook_keyframes/global_T_TEC_with_fism/global_T_TEC_flare_noflare_diff_20241003_1230UT.png",
+      "label": "global_T_TEC_with_fism",
+      "source": "/home/jiaoy_group/jiaoy/data/WACCMX/quicklook/fism2_20241003_x9_r5_5min_global_maps/all_times_with_fism/global_T_TEC_flare_noflare_diff_20241003_1230UT.png"
+    },
+    {
+      "archive": "quicklook_keyframes/electron_density_altitudes/electron_density_30_60_90_150_250km_flare_noflare_logratio_20241003_1230UT.png",
+      "label": "electron_density_altitudes",
+      "source": "/home/jiaoy_group/jiaoy/data/WACCMX/quicklook/fism2_20241003_x9_r5_5min_electron_density_altitudes/1000_1400_with_fism_nature/electron_density_30_60_90_150_250km_flare_noflare_logratio_20241003_1230UT.png"
+    },
+    {
+      "archive": "quicklook_keyframes/temperature_altitudes/temperature_60_90_150_250km_flare_noflare_diff_20241003_1230UT.png",
+      "label": "temperature_altitudes",
+      "source": "/home/jiaoy_group/jiaoy/data/WACCMX/quicklook/fism2_20241003_x9_r5_5min_temperature_altitudes/all_times_with_fism_nature/temperature_60_90_150_250km_flare_noflare_diff_20241003_1230UT.png"
+    },
+    {
+      "archive": "quicklook_keyframes/T250_TEC/global_T250km_TEC_flare_noflare_diff_20241003_1230UT.png",
+      "label": "T250_TEC",
+      "source": "/home/jiaoy_group/jiaoy/data/WACCMX/quicklook/fism2_20241003_x9_r5_5min_250km_T_TEC/all_times_with_fism_nature/global_T250km_TEC_flare_noflare_diff_20241003_1230UT.png"
+    }
+  ]
+}

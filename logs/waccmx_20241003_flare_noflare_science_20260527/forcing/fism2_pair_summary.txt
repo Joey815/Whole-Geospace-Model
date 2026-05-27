@@ -1,0 +1,20 @@
+NOAA AR3842 X9.0 flare, peak 2024-10-03 12:18 UTC
+
+Records: 577 at 5-minute cadence from 2024-10-03 00:00 to 2024-10-05 00:00 UTC
+Flare forcing: /home/jiaoy_group/jiaoy/data/WACCMX/inputdata/solar/fism2_20241003_x9/fism2_flare_bands_20241003_x9_waccmx.nc
+No-flare forcing: /home/jiaoy_group/jiaoy/data/WACCMX/inputdata/solar/fism2_20241003_x9/fism2_noflare_bands_20241003_x9_removed_waccmx.nc
+Solar parms forcing: /home/jiaoy_group/jiaoy/data/WACCMX/inputdata/solar/fism2_20241003_x9/wax_solar_3hr_20241001-20241005_gfz_c260524.nc
+
+No-flare method: replace the observed 12:08-13:08 UTC flare window with per-band linear interpolation.
+At FISM2 5-minute cadence, replaced samples are 12:10-13:05 UTC, bracketed by 12:05 and 13:10 UTC.
+Peak proxy time from first FISM2 band: 12:20 UTC
+
+Selected peak flare/no-flare ratios at the first-band peak:
+  E0_05_0_4 (photons/cm^2/s): 70.3737
+  E0_4_0_8 (photons/cm^2/s): 48.2553
+  E0_8_1_8 (photons/cm^2/s): 5.09509
+  E1_8_3_2 (photons/cm^2/s): 1.71325
+  E3_2_7_0 (photons/cm^2/s): 1.30675
+  E32_0_54_0 (photons/cm^2/s): 1.14355
+  E97_5_98_7 (photons/cm^2/s): 1.58266
+  E105_0_121_0 (photons/cm^2/s): 1.32433
