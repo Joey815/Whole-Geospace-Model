@@ -140,6 +140,26 @@ def parse_args():
         ),
     )
     parser.add_argument(
+        "--sami3-overlap-max-l",
+        type=float,
+        default=16.0,
+        help=(
+            "Maximum dipole-like SAMI3 L coordinate allowed for source overlap "
+            "queries. This is an overlap gate, not a claim about SAMI3 radial "
+            "extent. Set <=0 to disable. Default: 16.0."
+        ),
+    )
+    parser.add_argument(
+        "--allow-l-extrapolation",
+        action="store_true",
+        help=(
+            "Allow legacy clamped L extrapolation outside the accepted SAMI3 "
+            "source-overlap range. By default, out-of-range source queries "
+            "produce zero coverage so runtime masks can leave baseline RAIJU "
+            "values untouched."
+        ),
+    )
+    parser.add_argument(
         "--sami3-grid-dir",
         default=None,
         help="SAMI3 run directory containing baltu/blatu/blonu.dat. Defaults to stage-1 metadata run_dir.",
@@ -167,8 +187,60 @@ def read_stage1_grid_metadata(path):
     return shape2, int(dims["nz"]), metadata
 
 
-def build_sparse_l_mlt_weights(source_grid, target_grid):
-    source_l = source_grid["source_l"]
+def apply_sami3_source_overlap_policy(source_grid, max_l):
+    """Attach an explicit SAMI3 source-overlap mask to the diagnostic L grid."""
+    source_l = np.asarray(source_grid["source_l"], dtype=np.float64)
+    valid = np.isfinite(source_l) & (source_l > 0.0)
+    if max_l is not None and max_l > 0.0:
+        valid &= source_l <= float(max_l)
+        max_l_value = float(max_l)
+        policy = "diagnostic_dipole_l_le_{0:g}".format(max_l_value)
+    else:
+        max_l_value = None
+        policy = "all_positive_finite_diagnostic_dipole_l"
+    valid_index = np.flatnonzero(valid).astype(np.int32)
+    if valid_index.size < 2:
+        raise ValueError(
+            "SAMI3 source-overlap mask leaves fewer than two nf shells; "
+            "sami3_overlap_max_l={0}".format(max_l_value)
+        )
+    query_l = source_l[valid_index]
+    if np.any(np.diff(query_l) <= 0.0):
+        raise ValueError("accepted SAMI3 source-overlap L coordinates are not strictly increasing")
+
+    out = dict(source_grid)
+    out["source_l_overlap_valid_mask"] = valid.astype(np.uint8)
+    out["source_l_overlap_valid_index"] = valid_index
+    out["source_l_overlap_max"] = max_l_value
+    out["source_l_overlap_policy"] = policy
+    out["source_l_overlap_valid_count"] = int(valid_index.size)
+    out["source_l_overlap_fraction"] = float(valid_index.size) / float(source_l.size)
+    out["source_l_query_min"] = float(np.min(query_l))
+    out["source_l_query_max"] = float(np.max(query_l))
+    out["stats"] = list(source_grid.get("stats", [])) + [
+        finite_stats("sami3_source_l_overlap_valid_mask", valid.astype(np.float64)),
+        finite_stats("sami3_source_l_query", query_l),
+    ]
+    return out
+
+
+def source_l_query_arrays(source_grid):
+    source_l = np.asarray(source_grid["source_l"], dtype=np.float64)
+    if "source_l_overlap_valid_mask" in source_grid:
+        valid = np.asarray(source_grid["source_l_overlap_valid_mask"], dtype=bool)
+    else:
+        valid = np.isfinite(source_l) & (source_l > 0.0)
+    source_index = np.flatnonzero(valid).astype(np.int32)
+    if source_index.size < 2:
+        raise ValueError("SAMI3 source-overlap query has fewer than two accepted nf shells")
+    query_l = source_l[source_index]
+    if np.any(np.diff(query_l) <= 0.0):
+        raise ValueError("SAMI3 source-overlap query L is not strictly increasing")
+    return query_l, source_index
+
+
+def build_sparse_l_mlt_weights(source_grid, target_grid, allow_l_extrapolation=True):
+    source_l, source_l_index = source_l_query_arrays(source_grid)
     source_mlt = source_grid["source_lon_deg"]
     target_l = target_grid["target_l"]
     target_mlt = target_grid["target_lon_deg"]
@@ -177,8 +249,8 @@ def build_sparse_l_mlt_weights(source_grid, target_grid):
 
     lq = linear_interp_brackets(source_l, target_l)
     mltq = periodic_interp_brackets_deg(source_mlt, target_mlt)
-    l_left = lq["left_source_index"].astype(np.int32)
-    l_right = lq["right_source_index"].astype(np.int32)
+    l_left = source_l_index[lq["left_source_index"].astype(np.int32)]
+    l_right = source_l_index[lq["right_source_index"].astype(np.int32)]
     l_weight = lq["interp_weight"].astype(np.float64)
     mlt_left = mltq["left_source_index"].astype(np.int32)
     mlt_right = mltq["right_source_index"].astype(np.int32)
@@ -193,6 +265,8 @@ def build_sparse_l_mlt_weights(source_grid, target_grid):
 
     for j in range(nj):
         for i in range(ni):
+            if (not allow_l_extrapolation) and bool(lq["outside"][i]):
+                continue
             corners = (
                 (l_left[i], mlt_left[j], (1.0 - l_weight[i]) * (1.0 - mlt_weight[j]), 0),
                 (l_right[i], mlt_left[j], l_weight[i] * (1.0 - mlt_weight[j]), 1),
@@ -211,7 +285,7 @@ def build_sparse_l_mlt_weights(source_grid, target_grid):
 
     if len(weight_rows) == 0:
         raise ValueError("generated mapping contains no nonzero weights")
-    if np.any(weight_sum <= 0.0):
+    if allow_l_extrapolation and np.any(weight_sum <= 0.0):
         raise ValueError("generated mapping contains target cells with zero weight sum")
 
     l_extrap_i = lq["outside"].astype(np.uint8)
@@ -230,14 +304,17 @@ def build_sparse_l_mlt_weights(source_grid, target_grid):
         "l_right_source_index": l_right,
         "l_interp_weight": l_weight.astype(np.float32),
         "l_extrapolated_i": l_extrap_i,
+        "l_extrapolation_allowed": bool(allow_l_extrapolation),
         "mlt_left_source_index": mlt_left,
         "mlt_right_source_index": mlt_right,
         "mlt_interp_weight": mlt_weight.astype(np.float32),
     }
 
 
-def build_sparse_l_mlt_weights_2d(source_grid, target_l_2d, target_mlt_2d):
-    source_l = source_grid["source_l"]
+def build_sparse_l_mlt_weights_2d(
+    source_grid, target_l_2d, target_mlt_2d, allow_l_extrapolation=True
+):
+    source_l, source_l_index = source_l_query_arrays(source_grid)
     source_mlt = source_grid["source_lon_deg"]
     target_l_2d = np.asarray(target_l_2d, dtype=np.float64)
     target_mlt_2d = np.asarray(target_mlt_2d, dtype=np.float64)
@@ -265,11 +342,13 @@ def build_sparse_l_mlt_weights_2d(source_grid, target_l_2d, target_mlt_2d):
             wm = float(flat_mq["interp_weight"][flat])
             if bool(flat_lq["outside"][flat]):
                 l_extrapolated[j, i] = 1
+                if not allow_l_extrapolation:
+                    continue
             corners = (
-                (int(flat_lq["left_source_index"][flat]), int(flat_mq["left_source_index"][flat]), (1.0 - wl) * (1.0 - wm), 0),
-                (int(flat_lq["right_source_index"][flat]), int(flat_mq["left_source_index"][flat]), wl * (1.0 - wm), 1),
-                (int(flat_lq["left_source_index"][flat]), int(flat_mq["right_source_index"][flat]), (1.0 - wl) * wm, 2),
-                (int(flat_lq["right_source_index"][flat]), int(flat_mq["right_source_index"][flat]), wl * wm, 3),
+                (int(source_l_index[int(flat_lq["left_source_index"][flat])]), int(flat_mq["left_source_index"][flat]), (1.0 - wl) * (1.0 - wm), 0),
+                (int(source_l_index[int(flat_lq["right_source_index"][flat])]), int(flat_mq["left_source_index"][flat]), wl * (1.0 - wm), 1),
+                (int(source_l_index[int(flat_lq["left_source_index"][flat])]), int(flat_mq["right_source_index"][flat]), (1.0 - wl) * wm, 2),
+                (int(source_l_index[int(flat_lq["right_source_index"][flat])]), int(flat_mq["right_source_index"][flat]), wl * wm, 3),
             )
             for src_i, src_j, weight, corner in corners:
                 if weight <= 0.0:
@@ -283,7 +362,7 @@ def build_sparse_l_mlt_weights_2d(source_grid, target_l_2d, target_mlt_2d):
 
     if len(weight_rows) == 0:
         raise ValueError("generated 2-D L/MLT mapping contains no nonzero weights")
-    if np.any(weight_sum <= 0.0):
+    if allow_l_extrapolation and np.any(weight_sum <= 0.0):
         raise ValueError("generated 2-D L/MLT mapping contains target cells with zero weight sum")
 
     return {
@@ -295,6 +374,7 @@ def build_sparse_l_mlt_weights_2d(source_grid, target_l_2d, target_mlt_2d):
         "weight_sum": weight_sum.astype(np.float32),
         "l_extrapolated_mask": l_extrapolated,
         "l_extrapolated_count": int(np.count_nonzero(l_extrapolated)),
+        "l_extrapolation_allowed": bool(allow_l_extrapolation),
     }
 
 
@@ -1181,8 +1261,10 @@ def write_weight_file(path, metadata, source_grid, target_grid, target_geometry,
         handle.attrs["product"] = "sami3_to_raiju_mapping_weights"
         handle.attrs["schema_version"] = metadata["schema_version"]
         handle.attrs["mapping_mode"] = metadata["mapping_mode"]
-        handle.attrs["physical_validity"] = "prototype"
+        handle.attrs["physical_validity"] = metadata["physical_validity"]
         handle.attrs["physical_note"] = metadata["physical_note"]
+        handle.attrs["sami3_source_overlap_policy"] = metadata["sami3_source_overlap_policy"]
+        handle.attrs["allow_l_extrapolation"] = int(metadata["allow_l_extrapolation"])
         handle.attrs["source_shape_nf_nlt"] = metadata["source_shape_nf_nlt"]
         handle.attrs["target_shape_ni_nj"] = metadata["target_shape_ni_nj"]
         handle.attrs["target_geometry_source"] = metadata["target_template"]
@@ -1220,7 +1302,36 @@ def write_weight_file(path, metadata, source_grid, target_grid, target_geometry,
         )
 
         src = handle.create_group("src")
-        create_dataset(src, "L", source_grid["source_l"].astype(np.float32), "Re", "SAMI3 source L by nf index.")
+        create_dataset(
+            src,
+            "L",
+            source_grid["source_l"].astype(np.float32),
+            "Re",
+            "Diagnostic dipole-like SAMI3 source L by nf index; not a radial extent claim.",
+        )
+        create_dataset(
+            src,
+            "L_overlap_valid_mask",
+            source_grid["source_l_overlap_valid_mask"].astype(np.uint8),
+            "logical",
+            "1 where this nf shell is accepted for SAMI3 overlap queries.",
+        )
+        create_dataset(
+            src,
+            "L_overlap_valid_nf_index",
+            source_grid["source_l_overlap_valid_index"].astype(np.int32),
+            "index",
+            "Original SAMI3 nf indices accepted for overlap queries.",
+        )
+        create_dataset(
+            src,
+            "L_query",
+            source_grid["source_l"][source_grid["source_l_overlap_valid_index"]].astype(
+                np.float32
+            ),
+            "Re",
+            "Accepted diagnostic L coordinates used for interpolation queries.",
+        )
         create_dataset(
             src,
             "MLT_deg",
@@ -1343,6 +1454,8 @@ def main():
     source_grid = read_sami3_l_mlt_grid(
         os.path.abspath(grid_dir), (int(nz), int(shape2[0]), int(shape2[1]))
     )
+    source_grid = apply_sami3_source_overlap_policy(source_grid, args.sami3_overlap_max_l)
+    allow_l_extrapolation = bool(args.allow_l_extrapolation)
     target_grid = read_raicpl_target_l_mlt(os.path.abspath(args.raicpl_template), None)
     target_geometry = read_raicpl_target_geometry(
         os.path.abspath(args.raicpl_template),
@@ -1350,9 +1463,14 @@ def main():
     )
     intermediate = None
     if args.mapping_mode == "l_mlt_separable":
-        sparse = build_sparse_l_mlt_weights(source_grid, target_grid)
+        sparse = build_sparse_l_mlt_weights(
+            source_grid, target_grid, allow_l_extrapolation=allow_l_extrapolation
+        )
         schema_version = 2
-        physical_note = "direct SAMI3-to-RAIJU separable L/MLT sparse weights"
+        physical_note = (
+            "direct SAMI3-to-RAIJU separable L/MLT sparse weights with "
+            "explicit SAMI3 source-overlap gate"
+        )
         voltron_template = None
         apply_voltron_mask = False
     else:
@@ -1360,9 +1478,14 @@ def main():
             raise ValueError("--mapping-mode {0} requires --voltron-template".format(args.mapping_mode))
         voltron_geometry = read_voltron_tubeshell_geometry(os.path.abspath(args.voltron_template))
         if args.mapping_mode == "voltron_shell_l_mlt":
-            sami3_to_voltron = build_sparse_l_mlt_weights(source_grid, voltron_geometry)
+            sami3_to_voltron = build_sparse_l_mlt_weights(
+                source_grid,
+                voltron_geometry,
+                allow_l_extrapolation=allow_l_extrapolation,
+            )
             physical_note = (
-                "SAMI3-to-Voltron-shell then Voltron-shell-to-RAIJU composed sparse weights"
+                "SAMI3-to-Voltron-shell then Voltron-shell-to-RAIJU composed "
+                "sparse weights with explicit SAMI3 source-overlap gate"
             )
             voltron_tube_longitude = None
         else:
@@ -1371,9 +1494,11 @@ def main():
                 source_grid,
                 voltron_geometry["Lb_cc"],
                 voltron_geometry[longitude_key],
+                allow_l_extrapolation=allow_l_extrapolation,
             )
             physical_note = (
-                "SAMI3-to-Voltron-TubeShell Lb/{0} then Voltron-shell-to-RAIJU composed sparse weights".format(
+                "SAMI3-to-Voltron-TubeShell Lb/{0} then Voltron-shell-to-RAIJU "
+                "composed sparse weights with explicit SAMI3 source-overlap gate".format(
                     args.voltron_tube_longitude
                 )
             )
@@ -1457,8 +1582,22 @@ def main():
         "product": "sami3_to_raiju_mapping_weights",
         "schema_version": schema_version,
         "mapping_mode": args.mapping_mode,
-        "physical_validity": "prototype",
+        "physical_validity": "diagnostic_overlap_only_prototype",
         "physical_note": physical_note,
+        "sami3_source_overlap_policy": source_grid["source_l_overlap_policy"],
+        "sami3_overlap_max_l": source_grid["source_l_overlap_max"],
+        "sami3_source_l_overlap_valid_count": source_grid[
+            "source_l_overlap_valid_count"
+        ],
+        "sami3_source_l_overlap_fraction": source_grid["source_l_overlap_fraction"],
+        "sami3_source_l_query_min": source_grid["source_l_query_min"],
+        "sami3_source_l_query_max": source_grid["source_l_query_max"],
+        "sami3_source_l_diagnostic_min": float(np.min(source_grid["source_l"])),
+        "sami3_source_l_diagnostic_max": float(np.max(source_grid["source_l"])),
+        "allow_l_extrapolation": allow_l_extrapolation,
+        "l_extrapolation_policy": (
+            "legacy_clamped" if allow_l_extrapolation else "drop_outside_overlap"
+        ),
         "source_moments_h5": moments_h5,
         "source_grid_dir": os.path.abspath(grid_dir),
         "target_template": os.path.abspath(args.raicpl_template),
@@ -1637,7 +1776,7 @@ def main():
         "intermediate_extrapolated_target_count": sparse.get(
             "intermediate_extrapolated_target_count"
         ),
-        "source_l_formula": "median_nz_nlt((baltu/Re)/cos(blatu)^2)",
+        "source_l_formula": "median_nz_nlt((baltu/Re)/cos(blatu)^2) diagnostic only",
         "source_mlt_formula": "circular_mean_nz_nf(blonu) degrees",
         "target_l_formula": "1/sin(theta_cell_center)^2 from ShellGrid/theta",
         "target_mlt_formula": "ShellGrid/phi cell centers modulo 360 degrees",

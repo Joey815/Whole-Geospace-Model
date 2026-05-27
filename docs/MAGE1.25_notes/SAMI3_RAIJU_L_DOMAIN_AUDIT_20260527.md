@@ -140,3 +140,39 @@ source-domain coverage denominator.
 4. Mark existing `l_mlt`, `voltron_shell_l_mlt`, and `voltron_tubeshell_l_mlt`
    products as `diagnostic_only` unless a physical source-domain mask is present.
 5. Update the stale notes so future plans do not repeat the `L500` interpretation.
+
+## Immediate Code Fix, 2026-05-27
+
+The sparse-weight generator now defaults to an explicit overlap gate:
+
+```text
+--sami3-overlap-max-l 16.0
+--allow-l-extrapolation is off by default
+```
+
+This does not claim that SAMI3 physically extends to 16 Re.  It is a conservative
+overlap cutoff for the current dipole-like diagnostic L coordinate.  Source
+queries above the accepted SAMI3 overlap range now produce zero sparse coverage
+instead of being clamped to the nearest SAMI3 shell.  Runtime products generated
+from weight files now default to:
+
+```text
+--runtime-mask-policy auto
+auto -> coverage_closed_no_extrap for --mapping-mode weights
+```
+
+The intended runtime behavior is therefore:
+
+```text
+overlap target cells: receive SAMI3-derived scalar moments
+non-overlap target cells: masks are zero, so RAIJU/MAGE baseline values are kept
+```
+
+New weight files are labeled:
+
+```text
+physical_validity = diagnostic_overlap_only_prototype
+```
+
+That label is deliberate.  The current fix removes the obvious L500 failure
+mode, but it is still not a traced production flux-tube mapping.

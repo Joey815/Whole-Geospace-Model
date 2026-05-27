@@ -362,6 +362,13 @@ footpoint longitude before composing the same Voltron->RAIJU shell-grid step.
 It is useful for testing traced-tube coordinate plumbing, but the longitude
 choice and flux-tube volume weighting remain prototype assumptions.
 
+The generator now treats the SAMI3 dipole-like L coordinate as diagnostic only.
+By default it uses `--sami3-overlap-max-l 16.0` and drops L-extrapolated source
+queries instead of clamping them to the nearest SAMI3 shell.  This makes
+non-overlap RAIJU cells receive zero sparse coverage so runtime masks can keep
+baseline MAGE/RAIJU values.  Use `--allow-l-extrapolation` only for legacy
+comparison products.
+
 For Voltron intermediate mappings, the Voltron->RAIJU composition can also use
 cell-centered TubeShell `bVol` as a prototype volume weight:
 
@@ -493,7 +500,7 @@ The stage-1 adapter now exposes an explicit weighting contract:
 
 ```text
 --weight-mode simple      # unit weights over nz, physical_validity=smoke_only
---weight-mode external    # requires --weight-file, physical_validity=prototype
+--weight-mode external    # requires --weight-file, physical_validity is inherited
 --weight-mode ds_over_B   # uses xsu/ysu/zsu center spacing divided by bmstu
 ```
 

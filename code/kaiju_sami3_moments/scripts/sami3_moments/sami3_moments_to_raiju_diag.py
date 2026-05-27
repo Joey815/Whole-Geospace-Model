@@ -120,16 +120,17 @@ def parse_args():
     )
     parser.add_argument(
         "--runtime-mask-policy",
-        choices=("finite", "coverage", "coverage_closed", "coverage_closed_no_extrap"),
-        default="finite",
+        choices=("auto", "finite", "coverage", "coverage_closed", "coverage_closed_no_extrap"),
+        default="auto",
         help=(
-            "Coverage policy used for /RaiCplMomentsOnly runtime masks. finite "
-            "keeps the historical behavior and masks only non-finite mapped "
-            "values. coverage additionally requires positive sparse mapping "
+            "Coverage policy used for /RaiCplMomentsOnly runtime masks. auto "
+            "uses finite for index/l_mlt and coverage_closed_no_extrap for "
+            "weight files. finite keeps the historical behavior and masks only "
+            "non-finite mapped values. coverage additionally requires positive sparse mapping "
             "coverage and weight sum. coverage_closed also requires the "
             "mapping-file closed_field_mask. coverage_closed_no_extrap also "
             "rejects extrapolated cells. Non-finite policies other than finite "
-            "require --mapping-mode weights. Default: finite."
+            "require --mapping-mode weights. Default: auto."
         ),
     )
     parser.add_argument(
@@ -786,6 +787,7 @@ def build_mapping_quality_from_weights(
 
 
 def build_runtime_valid_mask_j_i(policy, mapping_mode, target_shape, weight_info=None):
+    policy = resolve_runtime_mask_policy(policy, mapping_mode)
     ni, nj = target_shape
     if policy == "finite":
         return np.ones((nj, ni), dtype=bool)
@@ -803,6 +805,12 @@ def build_runtime_valid_mask_j_i(policy, mapping_mode, target_shape, weight_info
     return valid
 
 
+def resolve_runtime_mask_policy(policy, mapping_mode):
+    if policy == "auto":
+        return "coverage_closed_no_extrap" if mapping_mode == "weights" else "finite"
+    return policy
+
+
 def build_mapping_metadata_from_weights(target_shape, weight_info):
     return {
         "mode": "weights",
@@ -815,11 +823,11 @@ def build_mapping_metadata_from_weights(target_shape, weight_info):
         ],
         "source_shape_nf_nlt": weight_info["summary"]["source_shape_nf_nlt"],
         "target_shape_ni_nj": weight_info["summary"]["target_shape_ni_nj"],
-        "physical_validity": "prototype",
+        "physical_validity": weight_info["summary"]["weight_file_physical_validity"],
         "note": (
             "Sparse mapping-weight application.  The current generated weight "
-            "file can encode the prototype separable L/MLT interpolation; later "
-            "files should replace it with Voltron traced-tube or bvol-aligned weights."
+            "file may encode diagnostic overlap-only L/MLT interpolation; later "
+            "files should replace it with traced physical overlap weights."
         ),
         "quality_summary": weight_info["summary"],
     }
@@ -965,7 +973,7 @@ def build_mapping_metadata(mode, target_shape, source_grid=None, target_grid=Non
         "source_grid_dir": source_grid["run_dir"],
         "target_template": target_grid["template"],
         "target_shape": [int(target_shape[0]), int(target_shape[1])],
-        "source_l_formula": "median_nz_nlt((baltu/Re)/cos(blatu)^2)",
+        "source_l_formula": "median_nz_nlt((baltu/Re)/cos(blatu)^2) diagnostic only",
         "source_mlt_formula": "circular_mean_nz_nf(blonu) degrees",
         "target_l_formula": "1/sin(theta_cell_center)^2 from ShellGrid/theta",
         "target_mlt_formula": "ShellGrid/phi cell centers modulo 360 degrees",
@@ -977,11 +985,12 @@ def build_mapping_metadata(mode, target_shape, source_grid=None, target_grid=Non
             if target_l.size
             else 0.0
         ),
-        "physical_validity": "prototype",
+        "physical_validity": "diagnostic_only",
         "note": (
             "Prototype separable L/MLT interpolation.  L outside the source range "
             "is clamped to the nearest SAMI3 shell and counted as extrapolated. "
-            "This is not yet a full Voltron traced-tube bvol mapping."
+            "The dipole-like L coordinate is diagnostic and must not be used as "
+            "a production SAMI3 coverage claim."
         ),
         "stats": source_grid["stats"] + target_grid["stats"],
     }
@@ -1024,6 +1033,8 @@ def build_raicpl_runtime_layout(
     runtime_mask_policy,
 ):
     weight_info = None
+    requested_runtime_mask_policy = runtime_mask_policy
+    runtime_mask_policy = resolve_runtime_mask_policy(runtime_mask_policy, mapping_mode)
     if mapping_mode == "index":
         mapped = {name: resize_2d(arrays[name], target_shape) for name in MOMENTS}
         mapping_metadata = build_mapping_metadata("index", target_shape)
@@ -1091,6 +1102,7 @@ def build_raicpl_runtime_layout(
     out["tiote"] = mapped["tiote"].T.astype(np.float32)
     masks["tiote"] = (np.isfinite(mapped["tiote"]).T & runtime_valid_mask).astype(np.float32)
     mapping_metadata["runtime_mask_policy"] = runtime_mask_policy
+    mapping_metadata["requested_runtime_mask_policy"] = requested_runtime_mask_policy
     mapping_metadata["runtime_valid_cell_count"] = int(np.count_nonzero(runtime_valid_mask))
     mapping_metadata["runtime_valid_fraction"] = (
         float(np.count_nonzero(runtime_valid_mask)) / float(runtime_valid_mask.size)

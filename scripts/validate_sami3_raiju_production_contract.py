@@ -22,6 +22,7 @@ NONPRODUCTION_LABELS = {
     "prototype",
     "diagnostic",
     "diagnostic_only",
+    "diagnostic_overlap_only_prototype",
     "diagnostic_runtime_adapter",
 }
 
