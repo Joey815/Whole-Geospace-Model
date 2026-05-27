@@ -1,0 +1,1 @@
+WACCMX_RECV_QC compare ok: ranks=32 occurrence=14 step_set=[14] packet_hour_set=[1.16666663] max_abs=5.48762e+06 max_rel=1.12612e-12

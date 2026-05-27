@@ -1,0 +1,6 @@
+JobID|JobName|State|ExitCode|Elapsed|Timelimit|NodeList|MaxRSS
+7697673|wxsami3_24p24f_h8|COMPLETED|0:0|01:08:04|04:00:00|qhcn198|
+7697673.batch|batch|COMPLETED|0:0|01:08:04||qhcn198|65297928K
+7697673.extern|extern|COMPLETED|0:0|01:08:04||qhcn198|0
+7697673.0|bash|COMPLETED|0:0|00:00:01||qhcn198|0
+7697673.1|bash|COMPLETED|0:0|00:00:02||qhcn198|0

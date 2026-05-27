@@ -1,0 +1,73 @@
+path=/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000/voltron_runtime_direct_phi/remix_sami3_phi_payload_runtime_direct_openmpi.bin
+size=1164308
+header=[20260524, 1, 125, 97, 24]
+frame=0 frame_index=0 hour=0 valid_until=0.083333336 min=-36.972878 max=31.504816 finite=True nonzero=3492
+frame=1 frame_index=1 hour=0.083333336 valid_until=0.16666667 min=-37.706364 max=31.759037 finite=True nonzero=3492
+frame1_minus_frame0_max_abs=3.4961066
+frame1_minus_frame0_rms=0.62902843
+frame=2 frame_index=2 hour=0.16666667 valid_until=0.25 min=-38.223293 max=32.193001 finite=True nonzero=3492
+frame2_minus_frame1_max_abs=2.5031015
+frame2_minus_frame1_rms=0.34662387
+frame=3 frame_index=3 hour=0.25 valid_until=0.33333334 min=-37.708565 max=31.654135 finite=True nonzero=3492
+frame3_minus_frame2_max_abs=2.3759155
+frame3_minus_frame2_rms=0.38385824
+frame=4 frame_index=4 hour=0.33333334 valid_until=0.41666666 min=-36.465134 max=30.384998 finite=True nonzero=3492
+frame4_minus_frame3_max_abs=2.2896986
+frame4_minus_frame3_rms=0.36793558
+frame=5 frame_index=5 hour=0.41666666 valid_until=0.5 min=-34.597935 max=28.135185 finite=True nonzero=3492
+frame5_minus_frame4_max_abs=2.882493
+frame5_minus_frame4_rms=0.49043323
+frame=6 frame_index=6 hour=0.5 valid_until=0.58333331 min=-32.726856 max=25.937504 finite=True nonzero=3492
+frame6_minus_frame5_max_abs=2.8593616
+frame6_minus_frame5_rms=0.4718168
+frame=7 frame_index=7 hour=0.58333331 valid_until=0.66666669 min=-31.34271 max=24.158787 finite=True nonzero=3492
+frame7_minus_frame6_max_abs=2.2925377
+frame7_minus_frame6_rms=0.35503951
+frame=8 frame_index=8 hour=0.66666669 valid_until=0.75 min=-29.812246 max=22.915939 finite=True nonzero=3492
+frame8_minus_frame7_max_abs=2.363657
+frame8_minus_frame7_rms=0.38901148
+frame=9 frame_index=9 hour=0.75 valid_until=0.83333331 min=-28.256403 max=23.431906 finite=True nonzero=3492
+frame9_minus_frame8_max_abs=2.2083759
+frame9_minus_frame8_rms=0.34893294
+frame=10 frame_index=10 hour=0.83333331 valid_until=0.91666669 min=-26.669458 max=23.785349 finite=True nonzero=3492
+frame10_minus_frame9_max_abs=2.0082302
+frame10_minus_frame9_rms=0.27586612
+frame=11 frame_index=11 hour=0.91666669 valid_until=1 min=-25.142895 max=24.28746 finite=True nonzero=3492
+frame11_minus_frame10_max_abs=1.8809223
+frame11_minus_frame10_rms=0.2828745
+frame=12 frame_index=12 hour=1 valid_until=1.0833334 min=-23.642 max=25.007166 finite=True nonzero=3492
+frame12_minus_frame11_max_abs=1.8320765
+frame12_minus_frame11_rms=0.2875961
+frame=13 frame_index=13 hour=1.0833334 valid_until=1.1666666 min=-23.637499 max=25.56662 finite=True nonzero=3492
+frame13_minus_frame12_max_abs=1.6295702
+frame13_minus_frame12_rms=0.24175413
+frame=14 frame_index=14 hour=1.1666666 valid_until=1.25 min=-24.10887 max=26.06093 finite=True nonzero=3492
+frame14_minus_frame13_max_abs=1.4039698
+frame14_minus_frame13_rms=0.21770964
+frame=15 frame_index=15 hour=1.25 valid_until=1.3333334 min=-24.681089 max=26.410084 finite=True nonzero=3492
+frame15_minus_frame14_max_abs=1.303875
+frame15_minus_frame14_rms=0.21371754
+frame=16 frame_index=16 hour=1.3333334 valid_until=1.4166666 min=-25.256319 max=26.582037 finite=True nonzero=3492
+frame16_minus_frame15_max_abs=1.402752
+frame16_minus_frame15_rms=0.19443043
+frame=17 frame_index=17 hour=1.4166666 valid_until=1.5 min=-25.59491 max=26.849403 finite=True nonzero=3492
+frame17_minus_frame16_max_abs=1.4086059
+frame17_minus_frame16_rms=0.18560228
+frame=18 frame_index=18 hour=1.5 valid_until=1.5833334 min=-25.930414 max=27.048529 finite=True nonzero=3492
+frame18_minus_frame17_max_abs=1.2695131
+frame18_minus_frame17_rms=0.16469863
+frame=19 frame_index=19 hour=1.5833334 valid_until=1.6666666 min=-26.086184 max=27.184292 finite=True nonzero=3492
+frame19_minus_frame18_max_abs=0.90458107
+frame19_minus_frame18_rms=0.14317626
+frame=20 frame_index=20 hour=1.6666666 valid_until=1.75 min=-26.152884 max=27.011082 finite=True nonzero=3492
+frame20_minus_frame19_max_abs=0.91513634
+frame20_minus_frame19_rms=0.11430226
+frame=21 frame_index=21 hour=1.75 valid_until=1.8333334 min=-26.147419 max=26.630079 finite=True nonzero=3492
+frame21_minus_frame20_max_abs=0.98806381
+frame21_minus_frame20_rms=0.11895422
+frame=22 frame_index=22 hour=1.8333334 valid_until=1.9166666 min=-26.019588 max=26.350042 finite=True nonzero=3492
+frame22_minus_frame21_max_abs=0.65229988
+frame22_minus_frame21_rms=0.10782799
+frame=23 frame_index=23 hour=1.9166666 valid_until=1e+30 min=-25.786467 max=26.119049 finite=True nonzero=3492
+frame23_minus_frame22_max_abs=0.74923463
+frame23_minus_frame22_rms=0.10306612

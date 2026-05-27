@@ -1,0 +1,294 @@
+{
+  "classification": "integrated_prototype_evidence_not_production_full_coupling",
+  "copied_file_count": 172,
+  "generated_at": "2026-05-27T11:59:53+08:00",
+  "output_dir": "/home/jiaoy_group/jiaoy/data/MAGE1.25/waccmx-sami3-collab-20260524/logs/integrated_prototype_20260527",
+  "production_contract": {
+    "diagnostic_contract": "ok",
+    "production_readiness": "FAIL",
+    "runtime_valid_fraction": 0.9574468085106383,
+    "source_domain_skipped_above_lmax_fraction": 0.999595965103914
+  },
+  "sami3_raiju_gamera_density": {
+    "archive_ok": true,
+    "formula_checks": {
+      "Davg": {
+        "alpha": 0.05,
+        "formula_max_abs": 0.0,
+        "formula_max_rel": 0.0,
+        "mask_total": 16920,
+        "mask_true": 8100
+      },
+      "Dstd": {
+        "alpha": 0.0,
+        "formula_max_abs": 0.0,
+        "formula_max_rel": 0.0,
+        "mask_total": 16920,
+        "mask_true": 8100
+      },
+      "Pavg": {
+        "alpha": 0.0,
+        "formula_max_abs": 0.0,
+        "formula_max_rel": 0.0,
+        "mask_total": 16920,
+        "mask_true": 8100
+      },
+      "Pstd": {
+        "alpha": 0.0,
+        "formula_max_abs": 0.0,
+        "formula_max_rel": 0.0,
+        "mask_total": 16920,
+        "mask_true": 8100
+      }
+    },
+    "history_last_steps": {
+      "gam": "Step#361",
+      "raiju": "Step#361"
+    },
+    "job_id": "7678667",
+    "nonfinite": {
+      "base_gam_res": [],
+      "base_raiju_res": [],
+      "proto_gam_res": [],
+      "proto_raiju_res": []
+    },
+    "run_dir": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvol_overlap_exclude_lmax_tiote_long1800_20260526"
+  },
+  "sami3_raiju_gamera_density_tiote": {
+    "archive_ok": true,
+    "formula_checks": {
+      "Davg": {
+        "alpha": 0.05,
+        "formula_max_abs": 0.0,
+        "formula_max_rel": 0.0,
+        "mask_total": 16920,
+        "mask_true": 8100
+      },
+      "Dstd": {
+        "alpha": 0.0,
+        "formula_max_abs": 0.0,
+        "formula_max_rel": 0.0,
+        "mask_total": 16920,
+        "mask_true": 8100
+      },
+      "Pavg": {
+        "alpha": 0.0,
+        "formula_max_abs": 0.0,
+        "formula_max_rel": 0.0,
+        "mask_total": 16920,
+        "mask_true": 8100
+      },
+      "Pstd": {
+        "alpha": 0.0,
+        "formula_max_abs": 0.0,
+        "formula_max_rel": 0.0,
+        "mask_total": 16920,
+        "mask_true": 8100
+      }
+    },
+    "history_last_steps": {
+      "gam": "Step#361",
+      "raiju": "Step#361"
+    },
+    "job_id": "7678667",
+    "nonfinite": {
+      "base_gam_res": [],
+      "base_raiju_res": [],
+      "proto_gam_res": [],
+      "proto_raiju_res": []
+    },
+    "run_dir": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvol_overlap_exclude_lmax_tiote_long1800_20260526",
+    "tiote_vs_density_only": {
+      "a_label": "long1800_exclude_lmax_dens005_tiote",
+      "a_name": "tiote",
+      "b_label": "long1800_exclude_lmax_dens005",
+      "b_name": "density_only",
+      "final_restart_gam": {
+        "Gas0": {
+          "a_mean": 25.054708335285103,
+          "b_mean": 25.058255736669704,
+          "max_abs": 3.440007510394951,
+          "max_rel": 0.9532882776007824,
+          "mean_abs": 0.0036867868848708286
+        }
+      },
+      "final_restart_raiju": {
+        "State/Davg_in": {
+          "a_mean": 91.86063199144719,
+          "b_mean": 91.86063199144719,
+          "max_abs": 0.0,
+          "max_rel": 0.0,
+          "mean_abs": 0.0
+        },
+        "State/Density": {
+          "a_mean": 994.7178068950785,
+          "b_mean": 994.7359889335601,
+          "max_abs": 4.491108985916705,
+          "max_rel": 2.0663862196369602,
+          "mean_abs": 0.049968519636217984
+        },
+        "State/Density_avg": {
+          "a_mean": 994.7178307398722,
+          "b_mean": 994.7360127783537,
+          "max_abs": 4.491108985916707,
+          "max_rel": 2.066376659426748,
+          "mean_abs": 0.049968519636217984
+        },
+        "State/Pavg_in": {
+          "a_mean": 0.00043784124116159,
+          "b_mean": 0.00043784124116159,
+          "max_abs": 0.0,
+          "max_rel": 0.0,
+          "mean_abs": 0.0
+        },
+        "State/Pressure": {
+          "a_mean": 0.2776675776919683,
+          "b_mean": 0.2776734966019171,
+          "max_abs": 0.0035660796287306507,
+          "max_rel": 0.02973760349180192,
+          "mean_abs": 6.768535411748468e-05
+        },
+        "State/Pressure_avg": {
+          "a_mean": 0.27794464967875027,
+          "b_mean": 0.277950568588699,
+          "max_abs": 0.003566079628730623,
+          "max_rel": 0.029735242105669583,
+          "mean_abs": 6.768535411748478e-05
+        },
+        "State/eta": {
+          "a_mean": 10092299.378139395,
+          "b_mean": 10076654.649715021,
+          "max_abs": 452644480.63999283,
+          "max_rel": 216.8676797686255,
+          "mean_abs": 777495.5483858573
+        },
+        "State/eta_avg": {
+          "a_mean": 10092305.952940736,
+          "b_mean": 10076661.224516362,
+          "max_abs": 452644480.63999295,
+          "max_rel": 216.86767976862555,
+          "mean_abs": 777495.5483858573
+        }
+      },
+      "history_gam": {
+        "Step#361/D": {
+          "a_mean": 13.45878411353552,
+          "b_mean": 13.50221388041265,
+          "max_abs": 2.6061458587646484,
+          "max_rel": 0.744243978100738,
+          "mean_abs": 0.07322541544615054
+        },
+        "Step#361/P": {
+          "a_mean": 0.21679431457111736,
+          "b_mean": 0.21721496848817207,
+          "max_abs": 0.10922613739967346,
+          "max_rel": 0.8786546257049487,
+          "mean_abs": 0.0019766984531691557
+        },
+        "Step#361/SrcD_COLD": {
+          "a_mean": 68.60937747732068,
+          "b_mean": 68.60609802165847,
+          "max_abs": 1.44921875,
+          "max_rel": 1.2604373693466187e+300,
+          "mean_abs": 0.010669447877005843
+        },
+        "Step#361/SrcP_COLD": {
+          "a_mean": 0.005201469188671423,
+          "b_mean": 0.005200870636687568,
+          "max_abs": 0.00027270373539067805,
+          "max_rel": 2.7270373539067805e+296,
+          "mean_abs": 1.3733065978806864e-06
+        }
+      },
+      "history_raiju": {
+        "Step#361/Davg_in": {
+          "a_mean": 77.57088995053246,
+          "b_mean": 77.5922197277571,
+          "max_abs": 3.8218207359313965,
+          "max_rel": 3.821820735931396e+300,
+          "mean_abs": 0.026932047464110116
+        },
+        "Step#361/Density": {
+          "a_mean": 798.1191046950233,
+          "b_mean": 798.1412213136861,
+          "max_abs": 64.243896484375,
+          "max_rel": 3.821820735931396e+300,
+          "mean_abs": 0.06496791943939395
+        },
+        "Step#361/Pavg_in": {
+          "a_mean": 0.18169676273566177,
+          "b_mean": 0.18212893802669827,
+          "max_abs": 0.14791320264339447,
+          "max_rel": 1.4791320264339446e+299,
+          "mean_abs": 0.0007442049301780379
+        },
+        "Step#361/Pressure": {
+          "a_mean": 0.256639535813683,
+          "b_mean": 0.25650672756102494,
+          "max_abs": 0.1918436735868454,
+          "max_rel": 1.5060822665691374e+299,
+          "mean_abs": 0.002568324826040811
+        }
+      },
+      "history_steps": {
+        "a_gam": "Step#361",
+        "a_raiju": "Step#361",
+        "b_gam": "Step#361",
+        "b_raiju": "Step#361"
+      },
+      "run_dir": "/online1/jiaoy_group/jiaoy/MAGE1.25/kaiju_sami3_voltron_moments_20260523/analysis/runtime_ingest_tubeshell_bin_bvol_overlap_exclude_lmax_tiote_long1800_20260526"
+    }
+  },
+  "waccmx_sami3_phi": {
+    "actual_transport": "runtime_live_packet",
+    "archive_ok": true,
+    "expected_neutral_packets": 24,
+    "expected_phi_frames": 24,
+    "fallback_policy": {
+      "He": "payload value -1 so SAMI3 native/MSIS He is retained",
+      "N2": "CAM N2 if finite, otherwise residual closure from major species",
+      "N2_negative_mode": "invalid",
+      "W": "payload value 0; CAM omega diagnostic only",
+      "above_live_top": "payload sample marked invalid so SAMI3 native neutral state is retained",
+      "remap_scaling": "gather-to-root prototype; runtime_map_source_columns=13824; f09 production still needs distributed remap"
+    },
+    "job_id": "7697673",
+    "packet_hour_last": 1.91666663,
+    "payload_version": "wxsami3-live-payload-v2",
+    "run_dir": "/online1/jiaoy_group/jiaoy/waccmx-sami3_official/runs/waccmx_cam_sami3_live_payload_f19_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_maxstep2800_20260526_0000",
+    "runtime_map": {
+      "file": "/home/jiaoy_group/jiaoy/data/waccmx-sami3_official/runs/esmf_regrid_f19_live_20260523/wxsami3_runtime_map_f19_20260523.bin",
+      "magic": 20260524,
+      "n_s": 14475264,
+      "npoints": 3618816,
+      "source_columns": 13824
+    },
+    "runtime_qc": {
+      "above_live_top": 1666241,
+      "invalid": 1835635,
+      "n2_residual_max": 0.8130526182293963,
+      "n2_residual_min": -0.05524334151745225,
+      "n2_residual_negative": 169394,
+      "n2_residual_used": 4365119,
+      "samples": 6031360
+    },
+    "runtime_source": "CAM phys_state(:)",
+    "source_flags": {
+      "SAMI3_NATIVE_ABOVE_TOP": 1666241,
+      "SAMI3_NATIVE_HE": "policy: He payload value -1",
+      "SAMI3_NATIVE_N2_INVALID": 169394,
+      "SAMI3_NATIVE_OTHER_INVALID": 0,
+      "SAMI3_NATIVE_W": "policy: W payload value 0",
+      "WACCMX_VALID": 4195725
+    },
+    "validator_returncodes": {
+      "direct_phi": 0,
+      "live_packet_contract": 0,
+      "phi_payload": 0,
+      "runtime_map": 0,
+      "source_flag_balance": 0,
+      "time_axis": 0,
+      "topblend_policy": 0
+    }
+  }
+}

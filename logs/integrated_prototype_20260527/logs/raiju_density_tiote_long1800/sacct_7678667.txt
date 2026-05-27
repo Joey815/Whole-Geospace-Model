@@ -1,0 +1,4 @@
+JobID|JobName|State|ExitCode|Elapsed|NodeList|MaxRSS
+7678667|sami3_exl_tiote|COMPLETED|0:0|01:22:42|qhcn176|
+7678667.batch|batch|COMPLETED|0:0|01:22:42|qhcn176|1176956K
+7678667.extern|extern|COMPLETED|0:0|01:22:42|qhcn176|16K

@@ -1,0 +1,5 @@
+label	path
+collab_root	/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524
+live_waccmx_sami3_phi_archive	/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/waccmx_live_directmpi_nosmoke_dt300_24pkt_24phi_hrmax8_20260526
+raiju_density_archive	/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/sami3_exclude_lmax_density_long1800_20260526
+raiju_density_tiote_archive	/online1/jiaoy_group/jiaoy/MAGE1.25/waccmx-sami3-collab-20260524/logs/sami3_exclude_lmax_density_tiote_long1800_20260526
