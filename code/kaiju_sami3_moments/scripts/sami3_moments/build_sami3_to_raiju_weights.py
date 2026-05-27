@@ -246,6 +246,12 @@ def build_sparse_l_mlt_weights(source_grid, target_grid, allow_l_extrapolation=T
     target_mlt = target_grid["target_lon_deg"]
     ni = target_l.size
     nj = target_mlt.size
+    target_active_mask = np.asarray(
+        target_grid.get("target_active_mask", np.ones((nj, ni), dtype=np.uint8)),
+        dtype=bool,
+    )
+    if target_active_mask.shape != (nj, ni):
+        raise ValueError("target_active_mask must have runtime shape (nj, ni)")
 
     lq = linear_interp_brackets(source_l, target_l)
     mltq = periodic_interp_brackets_deg(source_mlt, target_mlt)
@@ -265,6 +271,8 @@ def build_sparse_l_mlt_weights(source_grid, target_grid, allow_l_extrapolation=T
 
     for j in range(nj):
         for i in range(ni):
+            if not target_active_mask[j, i]:
+                continue
             if (not allow_l_extrapolation) and bool(lq["outside"][i]):
                 continue
             corners = (
@@ -285,11 +293,15 @@ def build_sparse_l_mlt_weights(source_grid, target_grid, allow_l_extrapolation=T
 
     if len(weight_rows) == 0:
         raise ValueError("generated mapping contains no nonzero weights")
-    if allow_l_extrapolation and np.any(weight_sum <= 0.0):
-        raise ValueError("generated mapping contains target cells with zero weight sum")
+    if allow_l_extrapolation and np.any(weight_sum[target_active_mask] <= 0.0):
+        raise ValueError("generated mapping contains active target cells with zero weight sum")
 
-    l_extrap_i = lq["outside"].astype(np.uint8)
-    extrap_runtime = np.tile(l_extrap_i.reshape(1, ni), (nj, 1)).astype(np.uint8)
+    target_active_i = np.any(target_active_mask, axis=0)
+    l_extrap_i = (lq["outside"] & target_active_i).astype(np.uint8)
+    extrap_runtime = (
+        np.tile(l_extrap_i.reshape(1, ni), (nj, 1)).astype(np.uint8)
+        * target_active_mask.astype(np.uint8)
+    )
 
     return {
         "dst_index": np.asarray(dst_rows, dtype=np.int32),
@@ -300,6 +312,7 @@ def build_sparse_l_mlt_weights(source_grid, target_grid, allow_l_extrapolation=T
         "weight_sum": weight_sum.astype(np.float32),
         "extrapolation_flag": extrap_runtime,
         "closed_field_mask": np.ones((nj, ni), dtype=np.uint8),
+        "target_active_mask": target_active_mask.astype(np.uint8),
         "l_left_source_index": l_left,
         "l_right_source_index": l_right,
         "l_interp_weight": l_weight.astype(np.float32),
@@ -378,9 +391,15 @@ def build_sparse_l_mlt_weights_2d(
     }
 
 
-def build_sparse_grid_to_grid(source_l, source_mlt, target_l, target_mlt):
+def build_sparse_grid_to_grid(source_l, source_mlt, target_l, target_mlt, target_active_mask=None):
     ni = target_l.size
     nj = target_mlt.size
+    if target_active_mask is None:
+        target_active_mask = np.ones((nj, ni), dtype=bool)
+    else:
+        target_active_mask = np.asarray(target_active_mask, dtype=bool)
+    if target_active_mask.shape != (nj, ni):
+        raise ValueError("target_active_mask must have runtime shape (nj, ni)")
     lq = linear_interp_brackets(source_l, target_l)
     mltq = periodic_interp_brackets_deg(source_mlt, target_mlt)
     dst_rows = []
@@ -392,6 +411,8 @@ def build_sparse_grid_to_grid(source_l, source_mlt, target_l, target_mlt):
 
     for j in range(nj):
         for i in range(ni):
+            if not target_active_mask[j, i]:
+                continue
             wl = float(lq["interp_weight"][i])
             wm = float(mltq["interp_weight"][j])
             corners = (
@@ -419,6 +440,7 @@ def build_sparse_grid_to_grid(source_l, source_mlt, target_l, target_mlt):
         "corner": np.asarray(corner_rows, dtype=np.int8),
         "coverage_count": coverage_count,
         "weight_sum": weight_sum,
+        "target_active_mask": target_active_mask.astype(np.uint8),
         "l_left_source_index": lq["left_source_index"].astype(np.int32),
         "l_right_source_index": lq["right_source_index"].astype(np.int32),
         "l_interp_weight": lq["interp_weight"].astype(np.float32),
@@ -526,6 +548,10 @@ def compose_sami3_voltron_raiju_weights(
     weight_sum = np.zeros((nj, ni), dtype=np.float32)
     np.add.at(coverage_count, (dst_arr[:, 0], dst_arr[:, 1]), weight_arr > 0.0)
     np.add.at(weight_sum, (dst_arr[:, 0], dst_arr[:, 1]), weight_arr)
+    target_active_mask = np.asarray(
+        voltron_to_raiju.get("target_active_mask", np.ones((nj, ni), dtype=np.uint8)),
+        dtype=np.uint8,
+    )
     extrapolation_flag = np.zeros((nj, ni), dtype=np.uint8)
     for j, i in extrapolated_target_keys:
         extrapolation_flag[j, i] = 1
@@ -536,6 +562,7 @@ def compose_sami3_voltron_raiju_weights(
         "corner": np.zeros(weight_arr.shape, dtype=np.int8),
         "coverage_count": coverage_count,
         "weight_sum": weight_sum,
+        "target_active_mask": target_active_mask,
         "extrapolation_flag": extrapolation_flag,
         "voltron_compose_weight_mode": voltron_compose_weight_mode,
         "skipped_voltron_to_raiju_terms_by_mask": int(skipped_by_mask),
@@ -645,6 +672,16 @@ def build_sparse_voltron_to_raiju_bvol_bins(voltron_geometry, target_grid, longi
     nj = target_lon_edge.size - 1
     if ni <= 0 or nj <= 0:
         raise ValueError("target grid edges imply an empty target grid")
+    target_active_mask = np.asarray(
+        target_grid.get("target_active_mask", np.ones((nj, ni), dtype=np.uint8)),
+        dtype=bool,
+    )
+    target_active_i = np.asarray(
+        target_grid.get("target_active_i_mask", np.ones((ni,), dtype=np.uint8)),
+        dtype=bool,
+    )
+    if target_active_mask.shape != (nj, ni) or target_active_i.shape != (ni,):
+        raise ValueError("target active masks do not match target grid shape")
 
     src_l = np.asarray(voltron_geometry["Lb_cc"], dtype=np.float64)
     src_lon = np.asarray(voltron_geometry[longitude_key], dtype=np.float64)
@@ -673,13 +710,13 @@ def build_sparse_voltron_to_raiju_bvol_bins(voltron_geometry, target_grid, longi
             if (not np.isfinite(bvol)) or bvol <= bvol_floor:
                 skipped_bad_bvol += 1
                 continue
-            imatches = np.where((lval >= l_low) & (lval <= l_high))[0]
+            imatches = np.where((lval >= l_low) & (lval <= l_high) & target_active_i)[0]
             if imatches.size == 0:
                 skipped_outside += 1
                 continue
             i = int(imatches[0])
             j = find_periodic_target_index(lonval, target_lon_edge)
-            if j is None:
+            if j is None or not target_active_mask[j, i]:
                 skipped_outside += 1
                 continue
             dst_rows.append((j, i))
@@ -705,6 +742,7 @@ def build_sparse_voltron_to_raiju_bvol_bins(voltron_geometry, target_grid, longi
         "corner": np.zeros(weights.shape, dtype=np.int8),
         "coverage_count": coverage_count,
         "weight_sum": weight_sum,
+        "target_active_mask": target_active_mask.astype(np.uint8),
         "skipped_outside_target_bins": int(skipped_outside),
         "skipped_bad_bvol": int(skipped_bad_bvol),
         "raw_bvol_sum_min": float(np.min(raw_weight_sum[raw_weight_sum > 0.0]))
@@ -733,6 +771,16 @@ def build_sparse_voltron_to_raiju_bvol_overlap(
     nj = target_lon_edge.size - 1
     if ni <= 0 or nj <= 0:
         raise ValueError("target grid edges imply an empty target grid")
+    target_active_mask = np.asarray(
+        target_grid.get("target_active_mask", np.ones((nj, ni), dtype=np.uint8)),
+        dtype=bool,
+    )
+    target_active_i = np.asarray(
+        target_grid.get("target_active_i_mask", np.ones((ni,), dtype=np.uint8)),
+        dtype=bool,
+    )
+    if target_active_mask.shape != (nj, ni) or target_active_i.shape != (ni,):
+        raise ValueError("target active masks do not match target grid shape")
 
     src_l_corner = np.asarray(voltron_geometry["Lb"], dtype=np.float64)
     src_l_center = np.asarray(voltron_geometry["Lb_cc"], dtype=np.float64)
@@ -755,8 +803,8 @@ def build_sparse_voltron_to_raiju_bvol_overlap(
 
     l_low = np.minimum(target_l_edge[:-1], target_l_edge[1:])
     l_high = np.maximum(target_l_edge[:-1], target_l_edge[1:])
-    target_l_min = float(np.min(l_low))
-    target_l_max = float(np.max(l_high))
+    target_l_min = float(np.min(l_low[target_active_i]))
+    target_l_max = float(np.max(l_high[target_active_i]))
     source_domain_excluded_mask = np.zeros(src_bvol.shape, dtype=np.uint8)
     dst_rows = []
     src_rows = []
@@ -845,6 +893,8 @@ def build_sparse_voltron_to_raiju_bvol_overlap(
             fraction_sum = 0.0
             for i, l_fraction in l_overlaps:
                 for j, lon_fraction in lon_overlaps:
+                    if not target_active_mask[j, i]:
+                        continue
                     fraction = l_fraction * lon_fraction
                     if fraction <= 0.0:
                         continue
@@ -885,6 +935,7 @@ def build_sparse_voltron_to_raiju_bvol_overlap(
         "corner": np.zeros(weights.shape, dtype=np.int8),
         "coverage_count": coverage_count,
         "weight_sum": weight_sum,
+        "target_active_mask": target_active_mask.astype(np.uint8),
         "skipped_outside_target_bins": int(skipped_outside),
         "skipped_bad_bvol": int(skipped_bad_bvol),
         "skipped_bad_geometry": int(skipped_bad_geometry),
@@ -1352,6 +1403,8 @@ def write_weight_file(path, metadata, source_grid, target_grid, target_geometry,
         dst = handle.create_group("dst")
         create_dataset(dst, "L", target_grid["target_l"].astype(np.float64), "Re", "RAIJU target L by i index.")
         create_dataset(dst, "L_edge", target_grid["target_l_edge"].astype(np.float64), "Re", "RAIJU target L-bin edges by i node index.")
+        create_dataset(dst, "L_active", target_grid["target_l_active"].astype(np.float64), "Re", "RAIJU active target L by active i index.")
+        create_dataset(dst, "L_edge_active", target_grid["target_l_edge_active"].astype(np.float64), "Re", "RAIJU active target L-bin edges, excluding ghost nodes.")
         create_dataset(
             dst,
             "MLT_deg",
@@ -1372,6 +1425,27 @@ def write_weight_file(path, metadata, source_grid, target_grid, target_geometry,
             target_grid["target_lon_edge_deg"].astype(np.float64),
             "degrees",
             "RAIJU target periodic longitude/MLT edges modulo 360 degrees by j node index.",
+        )
+        create_dataset(
+            dst,
+            "active_mask",
+            target_grid["target_active_mask"].astype(np.uint8),
+            "logical",
+            "1 where the runtime j,i cell is inside the active RAIJU ShellGrid; ghost cells are excluded from mapping.",
+        )
+        create_dataset(
+            dst,
+            "active_i_mask",
+            target_grid["target_active_i_mask"].astype(np.uint8),
+            "logical",
+            "1 where the target i cell is inside the active RAIJU theta range.",
+        )
+        create_dataset(
+            dst,
+            "active_j_mask",
+            target_grid["target_active_j_mask"].astype(np.uint8),
+            "logical",
+            "1 where the target j cell is inside the active RAIJU phi range.",
         )
         create_dataset(dst, "shell_index", np.arange(metadata["target_shape_ni_nj"][0], dtype=np.int32), "index", "RAIJU i/shell index.")
         create_dataset(dst, "mlt_index", np.arange(metadata["target_shape_ni_nj"][1], dtype=np.int32), "index", "RAIJU j/MLT index.")
@@ -1419,6 +1493,7 @@ def write_weight_file(path, metadata, source_grid, target_grid, target_geometry,
         quality = handle.create_group("quality")
         create_dataset(quality, "coverage_count", sparse["coverage_count"], "count", "Number of nonzero weights at each runtime j,i cell.")
         create_dataset(quality, "weight_sum", sparse["weight_sum"], "normalized", "Sum of sparse weights at each runtime j,i cell.")
+        create_dataset(quality, "target_active_mask", target_grid["target_active_mask"].astype(np.uint8), "logical", "1 where sparse mapping may write SAMI3 moments; ghost cells remain zero coverage.")
         create_dataset(quality, "extrapolation_flag", sparse["extrapolation_flag"], "logical", "1 where the direct target or any contributing Voltron intermediate cell was outside the SAMI3 source L range and clamped.")
         create_dataset(
             quality,
@@ -1535,6 +1610,7 @@ def main():
                 voltron_geometry["target_lon_deg"],
                 target_grid["target_l"],
                 target_grid["target_lon_deg"],
+                target_grid["target_active_mask"],
             )
         sparse = compose_sami3_voltron_raiju_weights(
             sami3_to_voltron,
@@ -1575,6 +1651,7 @@ def main():
         apply_voltron_mask = bool(args.apply_voltron_closed_mask)
 
     sparse["closed_field_mask"] = target_geometry["closed_field_mask"]
+    schema_version = max(schema_version, 8)
     ni = target_grid["target_l"].size
     nj = target_grid["target_lon_deg"].size
 
@@ -1630,11 +1707,32 @@ def main():
         "output_hdf5": out_h5,
         "source_shape_nf_nlt": [int(shape2[0]), int(shape2[1])],
         "target_shape_ni_nj": [int(ni), int(nj)],
+        "target_grid_scope": "runtime arrays keep ghost-inclusive shape, sparse weights are generated for active ShellGrid cells only",
+        "target_ghost_counts": target_grid["target_ghost_counts"],
+        "target_active_cell_count": int(np.count_nonzero(target_grid["target_active_mask"])),
+        "target_active_fraction": float(np.count_nonzero(target_grid["target_active_mask"]))
+        / float(target_grid["target_active_mask"].size),
+        "target_active_l_min": float(np.min(target_grid["target_l_active"])),
+        "target_active_l_max": float(np.max(target_grid["target_l_active"])),
+        "target_active_l_edge_min": float(np.min(target_grid["target_l_edge_active"])),
+        "target_active_l_edge_max": float(np.max(target_grid["target_l_edge_active"])),
         "sparse_weight_count": int(sparse["weight"].size),
         "coverage_count_min": int(np.min(sparse["coverage_count"])),
         "coverage_count_max": int(np.max(sparse["coverage_count"])),
+        "coverage_count_active_min": int(
+            np.min(sparse["coverage_count"][target_grid["target_active_mask"].astype(bool)])
+        ),
+        "coverage_count_active_max": int(
+            np.max(sparse["coverage_count"][target_grid["target_active_mask"].astype(bool)])
+        ),
         "weight_sum_min": float(np.min(sparse["weight_sum"])),
         "weight_sum_max": float(np.max(sparse["weight_sum"])),
+        "weight_sum_active_min": float(
+            np.min(sparse["weight_sum"][target_grid["target_active_mask"].astype(bool)])
+        ),
+        "weight_sum_active_max": float(
+            np.max(sparse["weight_sum"][target_grid["target_active_mask"].astype(bool)])
+        ),
         "l_extrapolated_cell_count": int(np.count_nonzero(sparse["extrapolation_flag"])),
         "closed_field_mask_policy": "RAIJU cell is closed only if all four target topo corners are RAIJUCLOSED",
         "closed_field_cell_count": int(np.count_nonzero(sparse["closed_field_mask"])),
@@ -1778,7 +1876,7 @@ def main():
         ),
         "source_l_formula": "median_nz_nlt((baltu/Re)/cos(blatu)^2) diagnostic only",
         "source_mlt_formula": "circular_mean_nz_nf(blonu) degrees",
-        "target_l_formula": "1/sin(theta_cell_center)^2 from ShellGrid/theta",
+        "target_l_formula": "1/sin(theta_cell_center)^2 from ShellGrid/theta; active range excludes ShellGrid ghost cells",
         "target_mlt_formula": "ShellGrid/phi cell centers modulo 360 degrees",
         "stats": source_grid["stats"]
         + target_grid["stats"]

@@ -340,6 +340,37 @@ def read_sami3_l_mlt_grid(run_dir, shape):
     }
 
 
+def read_h5_int(group, name, default=0):
+    if name in group.attrs:
+        value = group.attrs[name]
+    elif name in group:
+        value = group[name][()]
+    else:
+        return int(default)
+    value = np.asarray(value)
+    if value.shape:
+        value = value.reshape(-1)[0]
+    return int(value)
+
+
+def active_node_slice(node_count, lower_ghosts, upper_ghosts, axis_name):
+    start = int(lower_ghosts)
+    stop = int(node_count) - int(upper_ghosts)
+    if start < 0 or stop > node_count or stop - start < 2:
+        raise ValueError(
+            "invalid active {0} node slice: node_count={1}, lower_ghosts={2}, upper_ghosts={3}".format(
+                axis_name, node_count, lower_ghosts, upper_ghosts
+            )
+        )
+    return start, stop
+
+
+def cell_mask_from_node_slice(node_count, start, stop):
+    mask = np.zeros(int(node_count) - 1, dtype=bool)
+    mask[int(start) : int(stop) - 1] = True
+    return mask
+
+
 def read_raicpl_target_l_mlt(template_path, target_shape):
     h5py = require_moments_h5(template_path)
     with h5py.File(template_path, "r") as handle:
@@ -347,8 +378,13 @@ def read_raicpl_target_l_mlt(template_path, target_shape):
             raise KeyError(
                 "template must contain /ShellGrid/phi and /ShellGrid/theta for l_mlt mapping"
             )
+        shell = handle["ShellGrid"]
         phi = handle["ShellGrid/phi"][:].astype(np.float64)
         theta = handle["ShellGrid/theta"][:].astype(np.float64)
+        n_ghost_n = read_h5_int(shell, "nGhosts_n", 0)
+        n_ghost_s = read_h5_int(shell, "nGhosts_s", 0)
+        n_ghost_w = read_h5_int(shell, "nGhosts_w", 0)
+        n_ghost_e = read_h5_int(shell, "nGhosts_e", 0)
 
     if target_shape is None:
         ni, nj = theta.size - 1, phi.size - 1
@@ -361,12 +397,33 @@ def read_raicpl_target_l_mlt(template_path, target_shape):
                 )
             )
 
+    theta_active_start, theta_active_stop = active_node_slice(
+        theta.size, n_ghost_n, n_ghost_s, "theta"
+    )
+    phi_active_start, phi_active_stop = active_node_slice(
+        phi.size, n_ghost_w, n_ghost_e, "phi"
+    )
+    theta_active_cell_mask = cell_mask_from_node_slice(
+        theta.size, theta_active_start, theta_active_stop
+    )
+    phi_active_cell_mask = cell_mask_from_node_slice(
+        phi.size, phi_active_start, phi_active_stop
+    )
+    target_active_mask = (
+        phi_active_cell_mask.reshape(-1, 1) & theta_active_cell_mask.reshape(1, -1)
+    )
+
     phi_cc = 0.5 * (phi[:-1] + phi[1:])
     theta_cc = 0.5 * (theta[:-1] + theta[1:])
     phi_edge_deg = np.rad2deg(phi)
     theta_edge_l = 1.0 / np.maximum(np.sin(theta) ** 2, TINY)
     target_lon = np.mod(np.rad2deg(phi_cc), 360.0)
     target_l = 1.0 / np.maximum(np.sin(theta_cc) ** 2, TINY)
+    active_theta = theta[theta_active_start:theta_active_stop]
+    active_l_edge = 1.0 / np.maximum(np.sin(active_theta) ** 2, TINY)
+    active_target_l = target_l[theta_active_cell_mask]
+    active_phi_edge_deg = phi_edge_deg[phi_active_start:phi_active_stop]
+    active_target_lon = target_lon[phi_active_cell_mask]
 
     return {
         "target_l": target_l.astype(np.float64),
@@ -374,9 +431,25 @@ def read_raicpl_target_l_mlt(template_path, target_shape):
         "target_l_edge": theta_edge_l.astype(np.float64),
         "target_lon_edge_deg_unwrapped": phi_edge_deg.astype(np.float64),
         "target_lon_edge_deg": np.mod(phi_edge_deg, 360.0).astype(np.float64),
+        "target_active_mask": target_active_mask.astype(np.uint8),
+        "target_active_i_mask": theta_active_cell_mask.astype(np.uint8),
+        "target_active_j_mask": phi_active_cell_mask.astype(np.uint8),
+        "target_l_active": active_target_l.astype(np.float64),
+        "target_l_edge_active": active_l_edge.astype(np.float64),
+        "target_lon_active_deg": active_target_lon.astype(np.float64),
+        "target_lon_edge_active_deg_unwrapped": active_phi_edge_deg.astype(np.float64),
+        "target_lon_edge_active_deg": np.mod(active_phi_edge_deg, 360.0).astype(np.float64),
+        "target_ghost_counts": {
+            "theta_north": int(n_ghost_n),
+            "theta_south": int(n_ghost_s),
+            "phi_west": int(n_ghost_w),
+            "phi_east": int(n_ghost_e),
+        },
         "template": os.path.abspath(template_path),
         "stats": [
             finite_stats("raicpl_target_l", target_l),
+            finite_stats("raicpl_target_active_l", active_target_l),
+            finite_stats("raicpl_target_active_l_edge", active_l_edge),
             finite_stats("raicpl_target_lon_deg", target_lon),
         ],
     }
@@ -516,6 +589,7 @@ def read_mapping_weight_file(path, target_shape, source_shape):
         target_bmin_mag_cc = read_optional_h5_dataset(handle, "dst/Bmin_mag_cc")
         target_bmin_mag_corner = read_optional_h5_dataset(handle, "dst/Bmin_mag_corner")
         target_topo_corner = read_optional_h5_dataset(handle, "dst/topo_corner")
+        target_active_mask = read_optional_h5_dataset(handle, "dst/active_mask")
         corner = read_optional_h5_dataset(handle, "map/corner")
         l_left = read_optional_h5_dataset(handle, "map/l_left_source_index")
         l_right = read_optional_h5_dataset(handle, "map/l_right_source_index")
@@ -574,9 +648,14 @@ def read_mapping_weight_file(path, target_shape, source_shape):
         ("dst/Bmin_mag_cc", target_bmin_mag_cc, (nj, ni)),
         ("dst/Bmin_mag_corner", target_bmin_mag_corner, (nj + 1, ni + 1)),
         ("dst/topo_corner", target_topo_corner, (nj + 1, ni + 1)),
+        ("dst/active_mask", target_active_mask, (nj, ni)),
     ):
         if value is not None and value.shape != shape:
             raise ValueError("{0} shape {1} does not match {2}".format(name, value.shape, shape))
+    if target_active_mask is None:
+        target_active_mask = np.ones((nj, ni), dtype=np.uint8)
+    else:
+        target_active_mask = target_active_mask.astype(np.uint8)
 
     summary = {
         "weight_file": os.path.abspath(path),
@@ -596,6 +675,9 @@ def read_mapping_weight_file(path, target_shape, source_shape):
         "extrapolated_cell_count": int(np.count_nonzero(extrap)),
         "closed_field_mask_zero_count": int(closed.size - np.count_nonzero(closed)),
         "closed_field_fraction": float(np.count_nonzero(closed)) / float(closed.size),
+        "target_active_cell_count": int(np.count_nonzero(target_active_mask)),
+        "target_active_fraction": float(np.count_nonzero(target_active_mask))
+        / float(target_active_mask.size),
         "target_bvol_cc_min": (
             float(np.nanmin(target_bvol_cc)) if target_bvol_cc is not None else None
         ),
@@ -610,6 +692,7 @@ def read_mapping_weight_file(path, target_shape, source_shape):
         "target_bmin_mag_cc": target_bmin_mag_cc,
         "target_bmin_mag_corner": target_bmin_mag_corner,
         "target_topo_corner": target_topo_corner,
+        "target_active_mask": target_active_mask,
         "l_left_source_index": l_left,
         "l_right_source_index": l_right,
         "l_interp_weight": l_weight,
@@ -631,6 +714,7 @@ def read_mapping_weight_file(path, target_shape, source_shape):
         "weight_sum": weight_sum,
         "extrapolation_flag": extrap,
         "closed_field_mask": closed,
+        "target_active_mask": target_active_mask,
         "optional": optional,
         "summary": summary,
     }
@@ -709,6 +793,11 @@ def build_mapping_quality_from_weights(
                 "data": weight_info["closed_field_mask"].astype(np.uint8),
                 "units": "logical",
                 "description": "Closed-field mask from mapping weight file; prototype files may set all cells to 1.",
+            },
+            "target_active_mask": {
+                "data": weight_info["target_active_mask"].astype(np.uint8),
+                "units": "logical",
+                "description": "Active RAIJU ShellGrid mask from mapping weight file; ghost cells are excluded from runtime coupling.",
             },
         }
     )
@@ -797,7 +886,7 @@ def build_runtime_valid_mask_j_i(policy, mapping_mode, target_shape, weight_info
         )
     coverage = weight_info["coverage_count"] > 0
     weight_sum_ok = np.isfinite(weight_info["weight_sum"]) & (weight_info["weight_sum"] > TINY)
-    valid = coverage & weight_sum_ok
+    valid = coverage & weight_sum_ok & weight_info["target_active_mask"].astype(bool)
     if policy in ("coverage_closed", "coverage_closed_no_extrap"):
         valid &= weight_info["closed_field_mask"].astype(bool)
     if policy == "coverage_closed_no_extrap":
@@ -870,8 +959,10 @@ def build_mapping_quality(mode, mapped, target_shape, source_grid=None, target_g
         mltq = periodic_interp_brackets_deg(
             source_grid["source_lon_deg"], target_grid["target_lon_deg"]
         )
-        l_extrap_i = lq["outside"].astype(np.uint8)
+        target_active_i = target_grid["target_active_i_mask"].astype(bool)
+        l_extrap_i = (lq["outside"] & target_active_i).astype(np.uint8)
         l_extrap_runtime = np.tile(l_extrap_i.reshape(1, ni), (nj, 1)).astype(np.uint8)
+        target_active_mask = target_grid["target_active_mask"].astype(np.uint8)
         datasets.update(
             {
                 "source_l": {
@@ -893,6 +984,11 @@ def build_mapping_quality(mode, mapped, target_shape, source_grid=None, target_g
                     "data": target_grid["target_lon_deg"].astype(np.float32),
                     "units": "degrees",
                     "description": "RAIJU target periodic longitude/MLT coordinate by j index.",
+                },
+                "target_active_mask": {
+                    "data": target_active_mask,
+                    "units": "logical",
+                    "description": "1 for active RAIJU target cells; ghost cells are excluded from runtime coupling.",
                 },
                 "l_left_source_index": {
                     "data": lq["left_source_index"],
@@ -947,6 +1043,13 @@ def build_mapping_quality(mode, mapped, target_shape, source_grid=None, target_g
                 "source_l_max": float(np.max(source_grid["source_l"])),
                 "target_l_min": float(np.min(target_grid["target_l"])),
                 "target_l_max": float(np.max(target_grid["target_l"])),
+                "target_active_l_min": float(np.min(target_grid["target_l_active"])),
+                "target_active_l_max": float(np.max(target_grid["target_l_active"])),
+                "target_active_l_edge_min": float(np.min(target_grid["target_l_edge_active"])),
+                "target_active_l_edge_max": float(np.max(target_grid["target_l_edge_active"])),
+                "target_active_cell_count": int(np.count_nonzero(target_active_mask)),
+                "target_active_fraction": float(np.count_nonzero(target_active_mask))
+                / float(target_active_mask.size),
             }
         )
         attrs["periodic_mlt"] = "true"
@@ -965,7 +1068,10 @@ def build_mapping_metadata(mode, target_shape, source_grid=None, target_grid=Non
 
     source_l = source_grid["source_l"]
     target_l = target_grid["target_l"]
-    outside_l = (target_l < np.min(source_l)) | (target_l > np.max(source_l))
+    target_active_i = target_grid["target_active_i_mask"].astype(bool)
+    outside_l = (target_l[target_active_i] < np.min(source_l)) | (
+        target_l[target_active_i] > np.max(source_l)
+    )
     source_lon = source_grid["source_lon_deg"]
     target_lon = target_grid["target_lon_deg"]
     return {
@@ -977,12 +1083,19 @@ def build_mapping_metadata(mode, target_shape, source_grid=None, target_grid=Non
         "source_mlt_formula": "circular_mean_nz_nf(blonu) degrees",
         "target_l_formula": "1/sin(theta_cell_center)^2 from ShellGrid/theta",
         "target_mlt_formula": "ShellGrid/phi cell centers modulo 360 degrees",
+        "target_grid_scope": "runtime arrays keep ghost-inclusive shape, but masks permit active ShellGrid cells only",
+        "target_ghost_counts": target_grid["target_ghost_counts"],
+        "target_active_l_min": float(np.min(target_grid["target_l_active"])),
+        "target_active_l_max": float(np.max(target_grid["target_l_active"])),
+        "target_active_l_edge_min": float(np.min(target_grid["target_l_edge_active"])),
+        "target_active_l_edge_max": float(np.max(target_grid["target_l_edge_active"])),
         "periodic_mlt": True,
         "l_extrapolated_i_count": int(np.count_nonzero(outside_l)),
-        "l_extrapolated_cell_count": int(np.count_nonzero(outside_l)) * int(target_lon.size),
+        "l_extrapolated_cell_count": int(np.count_nonzero(outside_l))
+        * int(np.count_nonzero(target_grid["target_active_j_mask"])),
         "l_extrapolated_fraction": (
-            float(np.count_nonzero(outside_l)) / float(target_l.size)
-            if target_l.size
+            float(np.count_nonzero(outside_l)) / float(np.count_nonzero(target_active_i))
+            if np.count_nonzero(target_active_i)
             else 0.0
         ),
         "physical_validity": "diagnostic_only",
@@ -1033,6 +1146,7 @@ def build_raicpl_runtime_layout(
     runtime_mask_policy,
 ):
     weight_info = None
+    runtime_target_active_mask = None
     requested_runtime_mask_policy = runtime_mask_policy
     runtime_mask_policy = resolve_runtime_mask_policy(runtime_mask_policy, mapping_mode)
     if mapping_mode == "index":
@@ -1053,6 +1167,7 @@ def build_raicpl_runtime_layout(
         shape3 = (int(dims["nz"]), int(arrays["Pavg"].shape[0]), int(arrays["Pavg"].shape[1]))
         source_grid = read_sami3_l_mlt_grid(os.path.abspath(grid_dir), shape3)
         target_grid = read_raicpl_target_l_mlt(os.path.abspath(template_path), target_shape)
+        runtime_target_active_mask = target_grid["target_active_mask"].astype(bool)
         mapped = {
             name: map_l_mlt_2d(arrays[name], source_grid, target_grid)
             for name in MOMENTS
@@ -1090,6 +1205,8 @@ def build_raicpl_runtime_layout(
     runtime_valid_mask = build_runtime_valid_mask_j_i(
         runtime_mask_policy, mapping_mode, target_shape, weight_info
     )
+    if runtime_target_active_mask is not None:
+        runtime_valid_mask &= runtime_target_active_mask
     out = {}
     masks = {}
     for name in ("Pavg", "Davg", "Pstd", "Dstd"):

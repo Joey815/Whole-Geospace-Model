@@ -176,3 +176,41 @@ physical_validity = diagnostic_overlap_only_prototype
 
 That label is deliberate.  The current fix removes the obvious L500 failure
 mode, but it is still not a traced production flux-tube mapping.
+
+## Active-Grid Fix, 2026-05-27
+
+The RAIJU target-grid reader now keeps the runtime HDF5 shape, including ghost
+cells, but builds an explicit active-cell mask from the ShellGrid ghost-count
+metadata:
+
+```text
+nGhosts_n, nGhosts_s, nGhosts_w, nGhosts_e
+```
+
+The output weight file now writes:
+
+```text
+/dst/active_mask
+/dst/active_i_mask
+/dst/active_j_mask
+/dst/L_active
+/dst/L_edge_active
+/quality/target_active_mask
+```
+
+Sparse weights are generated only where `/dst/active_mask == 1`.  Ghost cells
+retain zero sparse coverage, so the runtime mask leaves the original RAIJU/MAGE
+baseline values untouched there.  This preserves compatibility with
+ghost-inclusive RAIJU restart/coupler arrays while preventing the adapter from
+treating ghost cells as physical target bins.
+
+For the current RAIJU configuration, the active poleward boundary should be read
+from `ThetaL = 15 deg`, corresponding to:
+
+```text
+L_active_outer_edge = 1 / sin(15 deg)^2 = 14.928...
+```
+
+The previously reported `L_edge_max = 33.16` is a ghost-inclusive diagnostic
+edge from approximately `theta = 10 deg`; it is not the official or active RAIJU
+outer boundary.

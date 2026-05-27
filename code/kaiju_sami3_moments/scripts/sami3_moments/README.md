@@ -369,6 +369,12 @@ non-overlap RAIJU cells receive zero sparse coverage so runtime masks can keep
 baseline MAGE/RAIJU values.  Use `--allow-l-extrapolation` only for legacy
 comparison products.
 
+The RAIJU target grid is read in the full runtime HDF5 layout, including ghost
+cells, but sparse weights are generated only on the active ShellGrid cells
+derived from `nGhosts_n/s/e/w`.  New weight files write `/dst/active_mask` and
+`/dst/L_edge_active`; ghost cells keep zero coverage and should not be used when
+reporting the physical target L range.
+
 For Voltron intermediate mappings, the Voltron->RAIJU composition can also use
 cell-centered TubeShell `bVol` as a prototype volume weight:
 
